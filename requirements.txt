@@ -1,0 +1,10 @@
+# Runtime dependencies for concrete-fhe-toolkit.
+# These mirror the [project].dependencies section of pyproject.toml.
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# Note: concrete-python 2.11 supports Python 3.9-3.12 on Linux and macOS only.
+
+concrete-python>=2.11,<3
+numpy>=1.23,<2

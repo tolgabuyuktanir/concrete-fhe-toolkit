@@ -1,8 +1,66 @@
-# concrete-fhe-toolkit
+<div align="center">
 
-`concrete-fhe-toolkit` is an unofficial helper package for
-[Zama Concrete](https://docs.zama.ai/concrete). It provides reusable circuit
-builders for common bounded math operations on encrypted Concrete inputs.
+# 🔐 concrete-fhe-toolkit
+
+**Bounded math helpers for compiling common [Zama Concrete](https://docs.zama.ai/concrete) FHE circuits.**
+
+Compare, sort, and run real math — GCD, factorial, `sin`, `sqrt`, division — directly
+on **encrypted** integers, without ever decrypting them.
+
+<!-- Badges -->
+[![PyPI version](https://img.shields.io/pypi/v/concrete-fhe-toolkit?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/concrete-fhe-toolkit/)
+[![Python versions](https://img.shields.io/pypi/pyversions/concrete-fhe-toolkit?logo=python&logoColor=white)](https://pypi.org/project/concrete-fhe-toolkit/)
+[![CI](https://github.com/ErkanIsikB/concrete-fhe-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/ErkanIsikB/concrete-fhe-toolkit/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Concrete](https://img.shields.io/badge/Concrete-2.11-8A2BE2)](https://docs.zama.ai/concrete)
+[![Status](https://img.shields.io/pypi/status/concrete-fhe-toolkit)](https://pypi.org/project/concrete-fhe-toolkit/)
+[![Downloads](https://img.shields.io/pypi/dm/concrete-fhe-toolkit?color=informational)](https://pypi.org/project/concrete-fhe-toolkit/)
+
+[Installation](#installation) ·
+[Quick Start](#quick-start) ·
+[Documentation](https://github.com/ErkanIsikB/concrete-fhe-toolkit/tree/main/docs) ·
+[Examples](#examples) ·
+[Public API](#public-api)
+
+</div>
+
+---
+
+> [!NOTE]
+> `concrete-fhe-toolkit` is an **unofficial** helper package for
+> [Zama Concrete](https://docs.zama.ai/concrete). It provides reusable circuit
+> builders for common bounded math operations on encrypted Concrete inputs.
+> This project is not affiliated with or endorsed by Zama.
+
+## ✨ Highlights
+
+- **Batteries-included math** — arithmetic, comparisons, GCD/LCM, factorial,
+  primality, `isqrt`, and combinatorics on encrypted integers.
+- **Fixed-point transcendentals** — `sin`, `cos`, `log`, `sqrt`, `erf`, `tanh`,
+  and `sigmoid` via lookup tables over a declared domain.
+- **Array circuits** — bitonic sort, min/max, and argmin/argmax with
+  deterministic tie handling.
+- **Real division** — bounded floor division and bit-level restoring division
+  that scales with bit width instead of a giant lookup table.
+- **Friendly, three-layer API** — call `fhe_math.gcd(...)` to compile,
+  `.make(...)` to compose, or `.compile(...)` to be explicit.
+- **Cost guardrails** — static lookup-size estimates warn (or block) before you
+  accidentally compile an enormous, memory-hungry circuit.
+
+## 📑 Table of Contents
+
+- [Installation](#installation)
+- [Important Concept](#important-concept)
+- [Quick Start](#quick-start)
+- [Documentation](#documentation)
+- [Public API](#public-api)
+- [Examples](#examples)
+- [Bounds and Limitations](#bounds-and-limitations)
+- [Notebook provenance and examples](#notebook-provenance-and-examples)
+- [License and Concrete Terms](#license-and-concrete-terms)
+- [Author and Contributors](#author-and-contributors)
+
+## What it does
 
 The package focuses on explicit, bounded FHE circuits:
 
@@ -39,7 +97,30 @@ cd concrete-fhe-toolkit
 pip install .
 ```
 
-Concrete 2.11 supports Python 3.9 through 3.12 on Linux and macOS.
+> [!IMPORTANT]
+> Concrete 2.11 supports **Python 3.9 through 3.12 on Linux and macOS** only.
+> There is no Windows wheel for `concrete-python`; on Windows use WSL2 or a
+> Linux container.
+
+### Development setup
+
+For contributing or running the test suite, install the pinned dependencies and
+the package in editable mode:
+
+```bash
+git clone https://github.com/ErkanIsikB/concrete-fhe-toolkit.git
+cd concrete-fhe-toolkit
+python -m pip install -r requirements-dev.txt
+python -m pip install -e ".[dev]"
+python -m pytest -q
+```
+
+Two convenience requirements files are provided:
+
+| File | Contents |
+| --- | --- |
+| [`requirements.txt`](requirements.txt) | Runtime dependencies (`concrete-python`, `numpy`) |
+| [`requirements-dev.txt`](requirements-dev.txt) | Runtime plus `build`, `pytest`, and `twine` |
 
 ## Important Concept
 
@@ -608,6 +689,18 @@ are the canonical documentation for the current package API. Existing
 `make_*` and `compile_*` package APIs were kept for compatibility, while the
 new `concrete_fhe_toolkit.math` friendly operation names provide the preferred
 high-level interface for new code.
+
+## Contributing
+
+Contributions are welcome! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to
+set up a development environment, run the test suite, and submit changes. In
+short:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pip install -e ".[dev]"
+python -m pytest -q
+```
 
 ## License and Concrete Terms
 

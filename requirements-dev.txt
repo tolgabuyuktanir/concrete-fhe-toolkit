@@ -1,0 +1,12 @@
+# Development dependencies for concrete-fhe-toolkit.
+# These mirror the [project.optional-dependencies].dev section of pyproject.toml.
+#
+# Install the runtime dependencies plus the tooling used for testing,
+# building, and publishing:
+#   pip install -r requirements-dev.txt
+
+-r requirements.txt
+
+build>=1.2
+pytest>=8,<10
+twine>=5

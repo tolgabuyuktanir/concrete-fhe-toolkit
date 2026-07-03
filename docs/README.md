@@ -1,16 +1,29 @@
-# concrete-fhe-toolkit documentation
+<div align="center">
+
+# 📚 concrete-fhe-toolkit documentation
+
+Bounded math helpers for compiling common **Zama Concrete** FHE circuits.
+
+[← Back to project README](../README.md)
+
+</div>
+
+---
 
 This documentation explains how to use `concrete-fhe-toolkit` as a bounded
 math helper library for Zama Concrete.
 
-Start here if you are new to the package:
+## 🧭 Where to go next
 
-- [Bounds and costs](bounds-and-costs.md): how to choose bounds, why bounds are
-  public, and how lookup cost guards work.
-- [API reference](api-reference.md): what each user-facing function family does
-  and how to call it.
-- [Maintainer testing and release checks](testing-and-release.md): verification
-  commands used before publishing.
+| Guide | Read it when you want to… |
+| --- | --- |
+| [**Bounds and costs**](bounds-and-costs.md) | Choose input bounds, understand why bounds are public, and learn how the lookup cost guards work. |
+| [**API reference**](api-reference.md) | Look up exactly what each user-facing function family does and how to call it. |
+| [**Testing and release checks**](testing-and-release.md) | (Maintainers) Run the verification commands used before publishing a release. |
+
+> [!TIP]
+> New to the package? Start with **Bounds and costs**, then keep the **API
+> reference** open as a lookup table while you build your first circuit.
 
 ## The three usage levels
 

@@ -728,6 +728,7 @@ This project is not affiliated with or endorsed by Zama.
 - Didem Civelek
 - Yusuf Emir Alakuş ([@YusufAlakus](https://github.com/YusufAlakus)
 - Ufuktan Alkan ([@AlKaNN01](https://github.com/AlKaNN01))
+- Muharrem Uğurelli
 
 **Organizational contributor**
 

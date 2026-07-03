@@ -59,6 +59,8 @@ on **encrypted** integers, without ever decrypting them.
 - [Notebook provenance and examples](#notebook-provenance-and-examples)
 - [License and Concrete Terms](#license-and-concrete-terms)
 - [Author and Contributors](#author-and-contributors)
+- [Thanks](#thanks)
+- [References](#references)
 
 ## What it does
 
@@ -722,10 +724,42 @@ This project is not affiliated with or endorsed by Zama.
 
 **Contributors**
 
-- Tolga Büyüktanır
+- Tolga Büyüktanır ([@tolgabuyuktanir](https://github.com/tolgabuyuktanir))
 - Didem Civelek
-- Yusuf Emir Alakuş
+- Yusuf Emir Alakuş ([@YusufAlakus](https://github.com/YusufAlakus)
+- Ufuktan Alkan ([@AlKaNN01](https://github.com/AlKaNN01))
 
 **Organizational contributor**
 
 - [AGRA Fintech Yazılım Çözümleri A.Ş.](https://www.agrafintech.com)
+
+## Thanks
+
+- [Zama](https://www.zama.ai) and the [Concrete](https://docs.zama.ai/concrete)
+  team, whose FHE compiler makes this toolkit possible.
+- The wider Zama open-source and FHE research community for tutorials,
+  discussions, and example circuits.
+- Everyone who tested the Kaggle notebooks and reported feedback that shaped the
+  bounded, cost-aware API.
+
+If you use `concrete-fhe-toolkit` in your project, a ⭐ on the
+[GitHub repository](https://github.com/ErkanIsikB/concrete-fhe-toolkit) is always
+appreciated.
+
+## References
+
+Background reading on the tools and techniques this package builds on:
+
+- [Zama Concrete documentation](https://docs.zama.ai/concrete) — the FHE
+  compiler this toolkit targets.
+- [Concrete Python on GitHub](https://github.com/zama-ai/concrete) — source and
+  release notes for `concrete-python`.
+- [Zama blog](https://www.zama.ai/blog) — articles on FHE and TFHE.
+- [TFHE: Fast Fully Homomorphic Encryption over the Torus](https://eprint.iacr.org/2018/421)
+  (Chillotti, Gama, Georgieva, Izabachène) — the scheme underlying Concrete.
+- [Programmable Bootstrapping Enables Efficient Homomorphic Inference of Deep Neural Networks](https://eprint.iacr.org/2021/091)
+  — programmable bootstrapping, the mechanism behind the lookup-table helpers.
+- [Batcher, "Sorting Networks and Their Applications" (1968)](https://doi.org/10.1145/1468075.1468121)
+  — the bitonic sorting network used by `sort`.
+- [Python `math` module](https://docs.python.org/3/library/math.html) — the
+  reference semantics matched by the `concrete_fhe_toolkit.math` helpers.

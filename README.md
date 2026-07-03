@@ -720,7 +720,7 @@ This project is not affiliated with or endorsed by Zama.
 
 **Author and maintainer**
 
-- Erkan Işık Bacak
+- Erkan Işık Bacak ([@ErkanIsikB](https://github.com/ErkanIsikB))
 
 **Contributors**
 
@@ -728,7 +728,7 @@ This project is not affiliated with or endorsed by Zama.
 - Didem Civelek
 - Yusuf Emir Alakuş ([@YusufAlakus](https://github.com/YusufAlakus)
 - Ufuktan Alkan ([@AlKaNN01](https://github.com/AlKaNN01))
-- Muharrem Uğurelli
+- Muharrem Uğurelli ([@mugurelli](https://github.com/mugurelli)) 
 
 **Organizational contributor**
 

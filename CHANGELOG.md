@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.2 - 2026-07-23
+
+- Add the temporary `setuptools<81` runtime compatibility dependency required
+  by `concrete-python`, which still imports `pkg_resources` during startup.
+- Restore clean-environment CI compatibility with current Python and pip
+  releases.
+
 ## 0.2.1 - 2026-07-23
 
 - Promote the package development status from Beta to Production/Stable.

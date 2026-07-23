@@ -8,3 +8,5 @@
 
 concrete-python>=2.11,<3
 numpy>=1.23,<2
+# concrete-python currently imports pkg_resources at runtime.
+setuptools<81

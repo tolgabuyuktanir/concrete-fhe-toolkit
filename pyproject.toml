@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "concrete-fhe-toolkit"
-version = "0.2.1"
+version = "0.2.2"
 description = "Bounded math helpers for compiling common Concrete FHE circuits"
 readme = "README.md"
 requires-python = ">=3.9,<3.13"
@@ -37,6 +37,8 @@ classifiers = [
 dependencies = [
   "concrete-python>=2.11,<3",
   "numpy>=1.23,<2",
+  # concrete-python currently imports pkg_resources at runtime.
+  "setuptools<81",
 ]
 
 [project.urls]

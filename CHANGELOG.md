@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 - 2026-07-23
+
+- Promote the package development status from Beta to Production/Stable.
+
 ## 0.2.0 - 2026-06-23
 
 - Add the `concrete_fhe_toolkit.math` subpackage for Python-math-style bounded

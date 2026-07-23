@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "concrete-fhe-toolkit"
-version = "0.2.0"
+version = "0.2.1"
 description = "Bounded math helpers for compiling common Concrete FHE circuits"
 readme = "README.md"
 requires-python = ">=3.9,<3.13"
@@ -23,7 +23,7 @@ keywords = [
   "fixed-point",
 ]
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
   "Intended Audience :: Science/Research",
   "Programming Language :: Python :: 3",

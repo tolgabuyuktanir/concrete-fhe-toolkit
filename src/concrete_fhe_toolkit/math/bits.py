@@ -67,11 +67,25 @@ def full_subtractor_bit(left: Any, right: Any, borrow_in: Any) -> tuple[Any, Any
 
 
 def bit_or_many(bits: Iterable[Any]) -> Any:
-    """Return the OR-reduction of a bit iterable."""
-    result: Any = 0
-    for bit in bits:
-        result = bit_or(result, bit)
-    return result
+    """Return the OR-reduction of a bit iterable with higher performance"""
+    current_round = list(bits)
+
+    if len(current_round) == 0:
+        return 0
+
+    while len(current_round) > 1:
+        next_round = []
+        for i in range(0,len(current_round)-1,2):
+            bit_result = bit_or(current_round[i],current_round[i+1])
+            next_round.append(bit_result)
+
+        if(len(current_round)%2 == 1): #odd number of element check
+            next_round.append(current_round[-1])
+
+        current_round = next_round    
+
+    result = current_round[0]
+    return result        
 
 
 def integer_to_bits(value: Any, width: int) -> tuple[Any, ...]:

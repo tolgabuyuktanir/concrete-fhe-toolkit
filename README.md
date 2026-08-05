@@ -725,9 +725,7 @@ This project is not affiliated with or endorsed by Zama.
 **Contributors**
 
 - Tolga Büyüktanır ([@tolgabuyuktanir](https://github.com/tolgabuyuktanir))
-- Didem Civelek
 - Yusuf Emir Alakuş ([@YusufAlakus](https://github.com/YusufAlakus)
-- Ufuktan Alkan ([@AlKaNN01](https://github.com/AlKaNN01))
 - Muharrem Uğurelli ([@mugurelli](https://github.com/mugurelli)) 
 
 **Organizational contributor**

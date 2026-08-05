@@ -82,11 +82,12 @@ from .bits import (
     full_adder_bit,
     full_subtractor_bit,
     integer_to_bits,
+    multiply_bits,
     sign_magnitude_to_twos_complement_bits,
     twos_complement_add_bits,
     twos_complement_bits,
     twos_complement_multiply_by_constant_bits,
-    unsigned_to_bits,
+    unsigned_to_bits,  
 )
 from .combinatorics import (
     compile_comb,
@@ -567,6 +568,7 @@ __all__ = [
     "make_trunc",
     "make_unsigned_floor_divide",
     "modulo",
+    "multiply_bits",
     "multiply",
     "negate",
     "not_equal",

@@ -154,7 +154,6 @@ def sign_magnitude_to_twos_complement_bits(
     magnitude_nonzero = bit_or_many(bits)
     return tuple(bit_select(magnitude_nonzero, bit, 0) for bit in output)
 
-
 def twos_complement_add_bits(
     left_bits: Iterable[Any],
     right_bits: Iterable[Any],
@@ -166,13 +165,36 @@ def twos_complement_add_bits(
     right = tuple(right_bits)
     left_sign = left[-1] if left else 0
     right_sign = right[-1] if right else 0
-    result: list[Any] = []
-    carry: Any = 0
+    padded_left_bits = []
+    padded_right_bits = []
+    
     for index in range(normalized_width):
-        left_bit = left[index] if index < len(left) else left_sign
-        right_bit = right[index] if index < len(right) else right_sign
-        result_bit, carry = full_adder_bit(left_bit, right_bit, carry)
-        result.append(result_bit)
+        padded_left_bits.append(left[index] if index < len(left) else left_sign)
+        padded_right_bits.append(right[index] if index < len(right) else right_sign)
+
+    G = [bit_and(padded_left_bits[i],padded_right_bits[i]) for i in range(normalized_width)]
+    P = [bit_xor(padded_left_bits[i],padded_right_bits[i]) for i in range(normalized_width)]
+    original_P = list(P)
+    step = 1
+
+    while step<normalized_width:
+        next_G = []
+        next_P = []
+        for i in range(normalized_width):
+            if(i < step):
+                next_G.append(G[i])
+                next_P.append(P[i])
+            else:
+                next_G.append(bit_or(G[i],bit_and(P[i],G[i-step])))
+                next_P.append(bit_and(P[i],P[i-step]))
+
+        G = next_G
+        P = next_P   
+        step*=2                 
+    
+    result: list[Any] = [original_P[0]]
+    for i in range(1,normalized_width):
+        result.append(bit_xor(original_P[i],G[i-1]))
     return tuple(result)
 
 
@@ -207,6 +229,31 @@ def twos_complement_multiply_by_constant_bits(
 
     return result
 
+def multiply_bits(
+    left_bits: Iterable[Any],
+    right_bits: Iterable[Any],
+    width: int,
+)-> tuple[Any]:
+
+    left = tuple(left_bits)
+    right = tuple(right_bits)
+
+    normalized_width = _bit_width(width)
+    padded_left =  left + (left[-1],) * (normalized_width-len(left)) 
+    padded_right = right + (right[-1],) * (normalized_width-len(right))
+    rows = []
+
+    for index,right_value in enumerate(padded_right):
+        new_padded_left = ((0,)*index + padded_left)[:normalized_width]
+        row = [bit_and(left_value,right_value) for left_value in new_padded_left]
+        rows.append(row)
+
+    product = rows[0]
+    for i in range(1,len(rows)):
+        product = twos_complement_add_bits(rows[i],product,width)
+
+    return product    
+    
 
 # Short aliases for users who prefer classic bit-circuit notation.
 bnot = bit_not

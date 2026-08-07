@@ -76,6 +76,13 @@ def greater_equal(left: Any, right: Any) -> Any:
     return left >= right
 
 
+def maximum(left: Any, right: Any) -> Any:
+    return ((left+right)+abs(left-right))//2
+
+def minimum(left: Any, right: Any) -> Any:
+    return ((left+right)-abs(left-right))//2
+
+
 def make_scalar_multiply(multiplier: int) -> UnaryFunction:
     """Create multiplication by a public integer constant."""
     normalized = validate_integer("multiplier", multiplier)
@@ -582,11 +589,17 @@ def compile_divmod(
         remainder_values,
         allow_large_lookup=allow_large_lookup,
     )
-    inputset = [
-        (numerator, denominator)
-        for numerator in range(numerator_minimum, numerator_maximum + 1)
-        for denominator in range(denominator_minimum, denominator_maximum + 1)
-    ]
+    inputset = _binary_inputset(
+        numerator_minimum,
+        numerator_maximum,
+        denominator_minimum,
+        denominator_maximum,
+    )
+    
+    if denominator_minimum <= 0 <= denominator_maximum:
+        inputset.append((numerator_minimum, 0))
+        inputset.append((numerator_maximum, 0))
+        
     return compile_function(
         function,
         {"numerator": "encrypted", "denominator": "encrypted"},

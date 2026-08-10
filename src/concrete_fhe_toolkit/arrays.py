@@ -6,6 +6,8 @@ from typing import Any, Callable, Literal, Optional,List
 
 from concrete import fhe
 
+from concrete_fhe_toolkit.math import equal,bit_or_many,bit_and_many,absolute,square
+
 from ._utils import (
     array_inputset,
     compile_function,
@@ -49,6 +51,57 @@ def array_sub(array1: List[Any],array2: List[Any]) -> List[Any]:
 def array_multiply(array1: List[Any],array2: List[Any]) -> List[Any]:
     return [x*y for x,y in zip(array1,array2)]
 
+def array_contains(array: List[Any], value: Any) -> Any:
+    item_list = list(array)
+    contain_list = []
+    for item in item_list:
+        contain_list.append(equal(item,value))
+
+    return bit_or_many(contain_list)  
+
+def array_count(array: List[Any], value: Any) -> Any:
+    item_list = list(array)
+    count_list = []
+    for item in item_list:
+        count_list.append(equal(item,value))
+
+    return array_sum(count_list)
+
+def array_all_equal(array1: List[Any], array2: List[Any]) -> Any:
+    list1 = list(array1)
+    list2 = list(array2)
+    if(len(list1) != len(list2)):
+        raise ValueError("The array sizes must be equal")
+    
+    equal_list = [equal(item1,item2) for item1,item2 in zip(list1,list2)]
+    return bit_and_many(equal_list) 
+
+def manhattan_distance(array1: List[Any], array2: List[Any]) -> Any:
+    list1 = list(array1)
+    list2 = list(array2)
+    if(len(list1) != len(list2)):
+        raise ValueError("The array sizes must be equal")
+
+    diffs = [absolute(x-y) for x,y in zip(list1,list2)]
+    return array_sum(diffs)
+
+def euclidian_distance_squarred(array1: List[Any], array2: List[Any]) -> Any:
+    list1 = list(array1)
+    list2 = list(array2)
+    if(len(list1) != len(list2)):
+        raise ValueError("The array sizes must be equal")
+
+    diffs = [square(x-y) for x,y in zip(list1,list2)]
+    return array_sum(diffs)
+
+def mean_squarred_error(array1: List[Any], array2: List[Any]) -> Any:
+    list1 = list(array1)
+    list2 = list(array2)
+    if(len(list1) != len(list2)):
+            raise ValueError("The array sizes must be equal")
+    
+    return euclidian_distance_squarred(list1,list2) // len(list1)
+    
 def dot_product(array1: List[Any], array2: List[Any]) -> Any:
     list1 = list(array1)
     list2 = list(array2)
@@ -61,6 +114,7 @@ def dot_product(array1: List[Any], array2: List[Any]) -> Any:
 
 def matrix_transpose(matrix: List[List[Any]]) -> List[List[Any]]:
     return [list(row) for row in zip(*matrix)]
+
 
 def make_compare_swap(
     min_value: int = 0,

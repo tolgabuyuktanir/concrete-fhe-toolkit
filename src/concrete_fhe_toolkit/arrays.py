@@ -37,6 +37,17 @@ def array_sum(elements: List[Any]) -> Any:
     
     return current_round[0]
 
+def array_scale(array: List[Any],factor: int):
+    return [factor * value for value in array]
+
+def array_add(array1: List[Any],array2: List[Any]) -> List[Any]:
+    return [x+y for x,y in zip(array1,array2)]
+
+def array_sub(array1: List[Any],array2: List[Any]) -> List[Any]:
+    return [x-y for x,y in zip(array1,array2)]
+
+def array_multiply(array1: List[Any],array2: List[Any]) -> List[Any]:
+    return [x*y for x,y in zip(array1,array2)]
 
 def dot_product(array1: List[Any], array2: List[Any]) -> Any:
     list1 = list(array1)
@@ -45,9 +56,11 @@ def dot_product(array1: List[Any], array2: List[Any]) -> Any:
         raise ValueError("Array sizes must be equal to perform dot product")
 
     product_list = [x*y for x,y in zip(list1,list2)]
-    result = sum(product_list)
+    result = array_sum(product_list)
     return result
 
+def matrix_transpose(matrix: List[List[Any]]) -> List[List[Any]]:
+    return [list(row) for row in zip(*matrix)]
 
 def make_compare_swap(
     min_value: int = 0,

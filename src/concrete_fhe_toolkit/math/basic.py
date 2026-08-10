@@ -45,6 +45,10 @@ def square(value: Any) -> Any:
     """Return value squared."""
     return value * value
 
+def cube(value: Any) -> Any:
+    """return cube of a number"""
+    return value * value * value
+
 
 def equal(left: Any, right: Any) -> Any:
     """Return 1 when left equals right, otherwise 0."""

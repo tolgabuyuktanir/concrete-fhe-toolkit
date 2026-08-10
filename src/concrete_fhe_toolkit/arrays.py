@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Callable, Literal, Optional
+from typing import Any, Callable, Literal, Optional,List
 
 from concrete import fhe
 
@@ -17,6 +17,36 @@ from ._utils import (
 TieBreak = Literal["first", "last"]
 UnaryArrayFunction = Callable[[Any], Any]
 BinaryScalarFunction = Callable[[Any, Any], Any]
+    
+def array_sum(elements: List[Any]) -> Any:
+    current_round = list(elements)
+    if(len(current_round) == 0):
+        return 0
+
+    sum_result = 0
+    while len(current_round) > 1:
+        next_round = []
+        for i in range(0,len(current_round)-1,2):
+            sum_result = current_round[i] + current_round[i+1]
+            next_round.append(sum_result)
+
+        if(len(current_round)%2 == 1): #odd number of element check
+            next_round.append(current_round[-1])
+
+        current_round = next_round    
+    
+    return current_round[0]
+
+
+def dot_product(array1: List[Any], array2: List[Any]) -> Any:
+    list1 = list(array1)
+    list2 = list(array2)
+    if(len(list1) != len(list2)):
+        raise ValueError("Array sizes must be equal to perform dot product")
+
+    product_list = [x*y for x,y in zip(list1,list2)]
+    result = sum(product_list)
+    return result
 
 
 def make_compare_swap(

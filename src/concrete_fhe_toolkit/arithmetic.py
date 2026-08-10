@@ -41,7 +41,7 @@ def compile_compare(
     )
 
 def sign(x: Any) -> Any:
-    compare(x,0)
+    return compare(x,0)
 
 def compile_sign(
         min_value: int = -15,
@@ -49,7 +49,7 @@ def compile_sign(
         *,
         configuration: Optional[fhe.Configuration] = None,
 )-> fhe.Circuit:
-    minimum , maximum = validate_bounds(minimum,maximum)
+    minimum , maximum = validate_bounds(min_value,max_value)
     inputset = [
             (minimum, minimum),
             (minimum, maximum),

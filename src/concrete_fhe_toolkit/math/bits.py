@@ -8,7 +8,7 @@ expressions while compiling larger Concrete circuits.
 
 from __future__ import annotations
 
-from typing import Any, Iterable
+from typing import Any, Iterable, Callable
 
 from concrete import fhe
 
@@ -66,17 +66,17 @@ def full_subtractor_bit(left: Any, right: Any, borrow_in: Any) -> tuple[Any, Any
     return FULL_SUBTRACTOR_DIFF_LUT[address], FULL_SUBTRACTOR_BORROW_LUT[address]
 
 
-def bit_or_many(bits: Iterable[Any]) -> Any:
-    """Return the OR-reduction of a bit iterable with higher performance"""
+def bit_op_many(bits: Iterable[Any] , function: Callable[[Any,Any],Any]) -> Any:
+    """Return the bitwise-operation-reduction of a bit iterable with higher performance"""
     current_round = list(bits)
 
     if len(current_round) == 0:
-        return 0
+        raise ValueError(f"{function}_many function needs at least 1 input")
 
     while len(current_round) > 1:
         next_round = []
         for i in range(0,len(current_round)-1,2):
-            bit_result = bit_or(current_round[i],current_round[i+1])
+            bit_result = function(current_round[i],current_round[i+1])
             next_round.append(bit_result)
 
         if(len(current_round)%2 == 1): #odd number of element check
@@ -84,9 +84,23 @@ def bit_or_many(bits: Iterable[Any]) -> Any:
 
         current_round = next_round    
 
-    result = current_round[0]
-    return result        
+    return current_round[0]
 
+def bit_or_many(bits: Iterable[Any]) -> Any:
+    """Return the OR-reduction of a bit iterable with higher performance"""
+    result = bit_op_many(bits,bit_or)
+    return result 
+
+def bit_and_many(bits: Iterable[Any]) -> Any:
+    """Return the AND-reduction of a bit iterable with higher performance"""
+    result = bit_op_many(bits,bit_and)
+    return result  
+
+def bit_xor_many(bits: Iterable[Any]) -> Any:
+    """Return the XOR-reduction of a bit iterable with higher performance"""
+    result = bit_op_many(bits,bit_xor)
+    return result       
+ 
 
 def integer_to_bits(value: Any, width: int) -> tuple[Any, ...]:
     """Return little-endian bits of an unsigned integer expression."""

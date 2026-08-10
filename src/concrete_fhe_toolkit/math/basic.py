@@ -77,10 +77,24 @@ def greater_equal(left: Any, right: Any) -> Any:
 
 
 def maximum(left: Any, right: Any) -> Any:
+    "return the max number of a pair"
     return ((left+right)+abs(left-right))//2
 
 def minimum(left: Any, right: Any) -> Any:
+    "return the min number of a pair"
     return ((left+right)-abs(left-right))//2
+
+def clamp(value: Any, min_val: Any, max_val: Any):
+    "clip a number in an interval"
+    return maximum(min_val,minimum(value,max_val))
+
+def relu(value: Any):
+    "return the relu result of a number"
+    return maximum(0,value)
+
+def absolute(value: Any):
+    "return the absolute value of a number"
+    return maximum(value,-value)   
 
 
 def make_scalar_multiply(multiplier: int) -> UnaryFunction:

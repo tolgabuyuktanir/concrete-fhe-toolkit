@@ -34,8 +34,11 @@ jobs:
       - name: Install the package with test extras
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e ".[test]"
+          python -m pip install -e ".[test]" mypy
           python -m pip check
+
+      - name: Run type checking (mypy)
+        run: python -m mypy src/
 
       - name: Run the fast test suite
         # Expensive encrypted smoke tests stay opt-in via their own env vars.

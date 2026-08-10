@@ -84,13 +84,21 @@ def minimum(left: Any, right: Any) -> Any:
     "return the min number of a pair"
     return ((left+right)-abs(left-right))//2
 
-def clamp(value: Any, min_val: Any, max_val: Any):
+def clamp(value: Any, min_val: Any, max_val: Any) -> Any:
     "clip a number in an interval"
     return maximum(min_val,minimum(value,max_val))
 
 def relu(value: Any):
     "return the relu result of a number"
     return maximum(0,value)
+
+def unit_step(value: Any) -> Any:
+    "return the unit step function result of a number in interval[0-2](2 times the actual interval)"
+    less_zero = less(value,0)
+    greater_zero = greater(value,0)
+
+    result = 1 + (greater_zero * 1) + (less_zero * -1)
+    return result
 
 def absolute(value: Any):
     "return the absolute value of a number"

@@ -51,6 +51,21 @@ def array_sub(array1: List[Any],array2: List[Any]) -> List[Any]:
 def array_multiply(array1: List[Any],array2: List[Any]) -> List[Any]:
     return [x*y for x,y in zip(array1,array2)]
 
+def array_pad(array: List[Any], target_size: Any) -> List[Any]:
+    raw_list = list(array)
+    if(len(raw_list) > target_size):
+        raise ValueError("The target size must be greater then the array size")
+    padded_list = raw_list + [0] * (target_size - len(raw_list))
+    return padded_list  
+
+def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> List[Any]:
+    raw_list = list(array)
+    list_length = len(raw_list)
+    if(list_length < begin_index or list_length < end_index or end_index < begin_index):
+        raise ValueError("The indexes must be less than array size/begin_index cannot be greater then the end_index")
+
+    return raw_list[begin_index:end_index]  
+
 def array_contains(array: List[Any], value: Any) -> Any:
     item_list = list(array)
     contain_list = []

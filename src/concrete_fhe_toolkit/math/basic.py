@@ -79,6 +79,9 @@ def greater_equal(left: Any, right: Any) -> Any:
     """Return 1 when left is greater than or equal to right."""
     return left >= right
 
+def is_zero(value: Any) -> Any:
+    return equal(value,0)    
+
 
 def maximum(left: Any, right: Any) -> Any:
     "return the max number of a pair"

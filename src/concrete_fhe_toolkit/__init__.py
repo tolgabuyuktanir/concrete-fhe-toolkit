@@ -1,6 +1,6 @@
 """Bounded integer helpers for Concrete FHE."""
 
-from . import math
+from . import math, ml
 from .arithmetic import (
     compile_floor_divide,
     compile_floor_divide_by_product,
@@ -10,6 +10,16 @@ from .arithmetic import (
     sign,
 )
 from .arrays import (
+    array_add,
+    array_all_equal,
+    array_contains,
+    array_count,
+    array_multiply,
+    array_pad,
+    array_scale,
+    array_slice,
+    array_sub,
+    array_sum,
     compile_argmax,
     compile_argmin,
     compile_compare_swap,
@@ -25,6 +35,16 @@ from .arrays import (
 )
 
 __all__ = [
+    "array_add",
+    "array_all_equal",
+    "array_contains",
+    "array_count",
+    "array_multiply",
+    "array_pad",
+    "array_scale",
+    "array_slice",
+    "array_sub",
+    "array_sum",
     "compile_argmax",
     "compile_argmin",
     "compile_compare_swap",
@@ -43,6 +63,8 @@ __all__ = [
     "make_maximum",
     "make_minimum",
     "make_sort",
+    "math",
+    "ml",
     "sign",
 ]
 

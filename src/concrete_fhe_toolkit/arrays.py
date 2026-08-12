@@ -100,7 +100,7 @@ def manhattan_distance(array1: List[Any], array2: List[Any]) -> Any:
     diffs = [absolute(x-y) for x,y in zip(list1,list2)]
     return array_sum(diffs)
 
-def euclidian_distance_squarred(array1: List[Any], array2: List[Any]) -> Any:
+def euclidean_distance_squarred(array1: List[Any], array2: List[Any]) -> Any:
     list1 = list(array1)
     list2 = list(array2)
     if(len(list1) != len(list2)):
@@ -109,13 +109,13 @@ def euclidian_distance_squarred(array1: List[Any], array2: List[Any]) -> Any:
     diffs = [square(x-y) for x,y in zip(list1,list2)]
     return array_sum(diffs)
 
-def mean_squarred_error(array1: List[Any], array2: List[Any]) -> Any:
+def mean_squared_error(array1: List[Any], array2: List[Any]) -> Any:
     list1 = list(array1)
     list2 = list(array2)
     if(len(list1) != len(list2)):
             raise ValueError("The array sizes must be equal")
     
-    return euclidian_distance_squarred(list1,list2) // len(list1)
+    return euclidean_distance_squarred(list1,list2) // len(list1)
     
 def dot_product(array1: List[Any], array2: List[Any]) -> Any:
     list1 = list(array1)

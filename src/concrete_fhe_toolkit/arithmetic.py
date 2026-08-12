@@ -50,15 +50,10 @@ def compile_sign(
         configuration: Optional[fhe.Configuration] = None,
 )-> fhe.Circuit:
     minimum , maximum = validate_bounds(min_value,max_value)
-    inputset = [
-            (minimum, minimum),
-            (minimum, maximum),
-            (maximum, minimum),
-            (maximum, maximum),
-    ]
+    inputset = [minimum, 0, maximum]
     return compile_function(
         sign,
-        {"x": "encrypted", "y": "encrypted"},
+        {"x": "encrypted"},
         inputset,
         configuration,
     )

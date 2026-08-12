@@ -256,6 +256,24 @@ def compile_square(
         configuration,
     )
 
+def compile_cube(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted integer squaring."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    inputset = [minimum, maximum]
+    if minimum <= 0 <= maximum:
+        inputset.append(0)
+    return compile_function(
+        cube,
+        {"value": "encrypted"},
+        inputset,
+        configuration,
+    )    
+
 
 def compile_scalar_multiply(
     min_value: int,

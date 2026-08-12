@@ -80,7 +80,7 @@ def greater_equal(left: Any, right: Any) -> Any:
     return left >= right
 
 def is_zero(value: Any) -> Any:
-    return equal(value,0)    
+    return value == 0   
 
 
 def maximum(left: Any, right: Any) -> Any:
@@ -363,6 +363,92 @@ def compile_greater_equal(
     return _compile_predicate(greater_equal, min_value, max_value, configuration)
 
 
+def compile_is_zero(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted integer negation."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    return compile_function(
+        is_zero,
+        {"value": "encrypted"},
+        [minimum, 0, maximum],
+        configuration,
+    )
+
+
+def compile_maximum(
+    min_left: int = 0,
+    max_left: int = 15,
+    min_right: int = 0,
+    max_right: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted integer addition over inclusive bounds."""
+    return _compile_binary_native(
+        maximum,
+        min_left,
+        max_left,
+        min_right,
+        max_right,
+        configuration,
+    )
+
+
+def compile_minimum(
+    min_left: int = 0,
+    max_left: int = 15,
+    min_right: int = 0,
+    max_right: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted integer addition over inclusive bounds."""
+    return _compile_binary_native(
+        minimum,
+        min_left,
+        max_left,
+        min_right,
+        max_right,
+        configuration,
+    )
+
+
+def compile_relu(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted integer negation."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    return compile_function(
+        relu,
+        {"value": "encrypted"},
+        [minimum, maximum],
+        configuration,
+    )
+
+
+def compile_unit_step(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted integer negation."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    return compile_function(
+        unit_step,
+        {"value": "encrypted"},
+        [minimum, maximum],
+        configuration,
+    )
+
+
 def compile_is_close(
     min_value: int,
     max_value: int,
@@ -400,47 +486,25 @@ def compile_absolute(
     )
 
 
-def make_clamp(
-    min_input: int,
-    max_input: int,
-    min_value: int,
-    max_value: int,
-) -> UnaryFunction:
-    """Create a lookup that clamps input into [min_value, max_value]."""
-    input_minimum, input_maximum = validate_bounds(min_input, max_input)
-    clamp_minimum, clamp_maximum = validate_bounds(min_value, max_value)
-    values = unary_values(
-        lambda value: max(clamp_minimum, min(value, clamp_maximum)),
-        input_minimum,
-        input_maximum,
-    )
-    return make_unary_lookup(values, input_minimum)
-
-
 def compile_clamp(
     min_input: int,
     max_input: int,
     min_value: int,
     max_value: int,
     *,
-    allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile clamping of an encrypted integer into public bounds."""
+    """Compile encrypted integer clamp using pure arithmetic."""
     input_minimum, input_maximum = validate_bounds(min_input, max_input)
-    clamp_minimum, clamp_maximum = validate_bounds(min_value, max_value)
-    values = unary_values(
-        lambda value: max(clamp_minimum, min(value, clamp_maximum)),
-        input_minimum,
-        input_maximum,
-    )
-    return compile_unary_lookup(
-        "compile_clamp",
-        values,
-        input_minimum,
-        input_maximum,
-        allow_large_lookup=allow_large_lookup,
-        configuration=configuration,
+    
+    def wrapped_clamp(value: Any) -> Any:
+        return clamp(value, min_value, max_value)
+    
+    return compile_function(
+        wrapped_clamp,
+        {"value": "encrypted"},
+        [input_minimum, input_maximum],
+        configuration,
     )
 
 
@@ -638,6 +702,5 @@ def compile_divmod(
 
 
 compile_abs = compile_absolute
-make_abs = make_absolute
 compile_sub = compile_subtract
 compile_scalar_mul = compile_scalar_multiply

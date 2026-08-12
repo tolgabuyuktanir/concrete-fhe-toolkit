@@ -94,17 +94,6 @@ def minimum(left: Any, right: Any) -> Any:
     return ((left+right)-abs(left-right))//2
 
 
-def relu(value: Any):
-    "return the relu result of a number"
-    return maximum(0,value)
-
-def unit_step(value: Any) -> Any:
-    "return the unit step function result of a number in interval[0-2](2 times the actual interval)"
-    less_zero = less(value,0)
-    greater_zero = greater(value,0)
-
-    result = 1 + (greater_zero * 1) + (less_zero * -1)
-    return result
 
 
 def make_scalar_multiply(multiplier: int) -> UnaryFunction:
@@ -426,38 +415,6 @@ def compile_minimum(
         max_left,
         min_right,
         max_right,
-        configuration,
-    )
-
-
-def compile_relu(
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-) -> fhe.Circuit:
-    """Compile encrypted integer negation."""
-    minimum, maximum = validate_bounds(min_value, max_value)
-    return compile_function(
-        relu,
-        {"value": "encrypted"},
-        [minimum, maximum],
-        configuration,
-    )
-
-
-def compile_unit_step(
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-) -> fhe.Circuit:
-    """Compile encrypted integer negation."""
-    minimum, maximum = validate_bounds(min_value, max_value)
-    return compile_function(
-        unit_step,
-        {"value": "encrypted"},
-        [minimum, maximum],
         configuration,
     )
 

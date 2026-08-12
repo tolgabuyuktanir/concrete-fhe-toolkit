@@ -1,0 +1,29 @@
+"""Machine Learning specific operations for Concrete FHE."""
+
+from .activations import compile_leaky_relu, compile_relu, compile_unit_step, leaky_relu, relu, sigmoid, sign, tanh, unit_step
+from .core import compile_hinge_loss, euclidean_distance_squarred, hinge_loss, manhattan_distance, mean_squared_error
+from .matrix import dot_product, matrix_add, matrix_transpose
+from .stats import array_max, array_mean, array_variance
+
+__all__ = [
+    "array_max",
+    "array_mean",
+    "array_variance",
+    "compile_hinge_loss",
+    "compile_leaky_relu",
+    "compile_relu",
+    "compile_unit_step",
+    "dot_product",
+    "euclidean_distance_squarred",
+    "hinge_loss",
+    "leaky_relu",
+    "manhattan_distance",
+    "matrix_add",
+    "matrix_transpose",
+    "mean_squared_error",
+    "relu",
+    "sigmoid",
+    "sign",
+    "tanh",
+    "unit_step",
+]

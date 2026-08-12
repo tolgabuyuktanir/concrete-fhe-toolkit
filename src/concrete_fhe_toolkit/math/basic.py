@@ -79,6 +79,7 @@ def greater_equal(left: Any, right: Any) -> Any:
     """Return 1 when left is greater than or equal to right."""
     return left >= right
 
+
 def is_zero(value: Any) -> Any:
     return value == 0   
 
@@ -87,13 +88,11 @@ def maximum(left: Any, right: Any) -> Any:
     "return the max number of a pair"
     return ((left+right)+abs(left-right))//2
 
+
 def minimum(left: Any, right: Any) -> Any:
     "return the min number of a pair"
     return ((left+right)-abs(left-right))//2
 
-def clamp(value: Any, min_val: Any, max_val: Any) -> Any:
-    "clip a number in an interval"
-    return maximum(min_val,minimum(value,max_val))
 
 def relu(value: Any):
     "return the relu result of a number"
@@ -106,10 +105,6 @@ def unit_step(value: Any) -> Any:
 
     result = 1 + (greater_zero * 1) + (less_zero * -1)
     return result
-
-def absolute(value: Any):
-    "return the absolute value of a number"
-    return maximum(value,-value)   
 
 
 def make_scalar_multiply(multiplier: int) -> UnaryFunction:
@@ -485,6 +480,21 @@ def compile_absolute(
         configuration=configuration,
     )
 
+def make_clamp(
+    min_input: int,
+    max_input: int,
+    min_value: int,
+    max_value: int,
+) -> UnaryFunction:
+    """Create a lookup that clamps input into [min_value, max_value]."""
+    input_minimum, input_maximum = validate_bounds(min_input, max_input)
+    clamp_minimum, clamp_maximum = validate_bounds(min_value, max_value)
+    values = unary_values(
+        lambda value: max(clamp_minimum, min(value, clamp_maximum)),
+        input_minimum,
+        input_maximum,
+    )
+    return make_unary_lookup(values, input_minimum)
 
 def compile_clamp(
     min_input: int,
@@ -492,21 +502,25 @@ def compile_clamp(
     min_value: int,
     max_value: int,
     *,
+    allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer clamp using pure arithmetic."""
+    """Compile clamping of an encrypted integer into public bounds."""
     input_minimum, input_maximum = validate_bounds(min_input, max_input)
-    
-    def wrapped_clamp(value: Any) -> Any:
-        return clamp(value, min_value, max_value)
-    
-    return compile_function(
-        wrapped_clamp,
-        {"value": "encrypted"},
-        [input_minimum, input_maximum],
-        configuration,
+    clamp_minimum, clamp_maximum = validate_bounds(min_value, max_value)
+    values = unary_values(
+        lambda value: max(clamp_minimum, min(value, clamp_maximum)),
+        input_minimum,
+        input_maximum,
     )
-
+    return compile_unary_lookup(
+        "compile_clamp",
+        values,
+        input_minimum,
+        input_maximum,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
 
 def make_modulo(
     min_numerator: int,
@@ -703,4 +717,5 @@ def compile_divmod(
 
 compile_abs = compile_absolute
 compile_sub = compile_subtract
+make_abs = make_absolute
 compile_scalar_mul = compile_scalar_multiply

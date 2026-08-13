@@ -45,6 +45,10 @@ def square(value: Any) -> Any:
     """Return value squared."""
     return value * value
 
+def cube(value: Any) -> Any:
+    """return cube of a number"""
+    return value * value * value
+
 
 def equal(left: Any, right: Any) -> Any:
     """Return 1 when left equals right, otherwise 0."""
@@ -74,6 +78,22 @@ def greater(left: Any, right: Any) -> Any:
 def greater_equal(left: Any, right: Any) -> Any:
     """Return 1 when left is greater than or equal to right."""
     return left >= right
+
+
+def is_zero(value: Any) -> Any:
+    return value == 0   
+
+
+def maximum(left: Any, right: Any) -> Any:
+    "return the max number of a pair"
+    return ((left+right)+abs(left-right))//2
+
+
+def minimum(left: Any, right: Any) -> Any:
+    "return the min number of a pair"
+    return ((left+right)-abs(left-right))//2
+
+
 
 
 def make_scalar_multiply(multiplier: int) -> UnaryFunction:
@@ -225,6 +245,24 @@ def compile_square(
         configuration,
     )
 
+def compile_cube(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted integer squaring."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    inputset = [minimum, maximum]
+    if minimum <= 0 <= maximum:
+        inputset.append(0)
+    return compile_function(
+        cube,
+        {"value": "encrypted"},
+        inputset,
+        configuration,
+    )    
+
 
 def compile_scalar_multiply(
     min_value: int,
@@ -327,6 +365,60 @@ def compile_greater_equal(
     return _compile_predicate(greater_equal, min_value, max_value, configuration)
 
 
+def compile_is_zero(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted integer negation."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    return compile_function(
+        is_zero,
+        {"value": "encrypted"},
+        [minimum, 0, maximum],
+        configuration,
+    )
+
+
+def compile_maximum(
+    min_left: int = 0,
+    max_left: int = 15,
+    min_right: int = 0,
+    max_right: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted integer addition over inclusive bounds."""
+    return _compile_binary_native(
+        maximum,
+        min_left,
+        max_left,
+        min_right,
+        max_right,
+        configuration,
+    )
+
+
+def compile_minimum(
+    min_left: int = 0,
+    max_left: int = 15,
+    min_right: int = 0,
+    max_right: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted integer addition over inclusive bounds."""
+    return _compile_binary_native(
+        minimum,
+        min_left,
+        max_left,
+        min_right,
+        max_right,
+        configuration,
+    )
+
+
 def compile_is_close(
     min_value: int,
     max_value: int,
@@ -363,7 +455,6 @@ def compile_absolute(
         configuration=configuration,
     )
 
-
 def make_clamp(
     min_input: int,
     max_input: int,
@@ -379,7 +470,6 @@ def make_clamp(
         input_maximum,
     )
     return make_unary_lookup(values, input_minimum)
-
 
 def compile_clamp(
     min_input: int,
@@ -406,7 +496,6 @@ def compile_clamp(
         allow_large_lookup=allow_large_lookup,
         configuration=configuration,
     )
-
 
 def make_modulo(
     min_numerator: int,
@@ -582,11 +671,17 @@ def compile_divmod(
         remainder_values,
         allow_large_lookup=allow_large_lookup,
     )
-    inputset = [
-        (numerator, denominator)
-        for numerator in range(numerator_minimum, numerator_maximum + 1)
-        for denominator in range(denominator_minimum, denominator_maximum + 1)
-    ]
+    inputset = _binary_inputset(
+        numerator_minimum,
+        numerator_maximum,
+        denominator_minimum,
+        denominator_maximum,
+    )
+    
+    if denominator_minimum <= 0 <= denominator_maximum:
+        inputset.append((numerator_minimum, 0))
+        inputset.append((numerator_maximum, 0))
+        
     return compile_function(
         function,
         {"numerator": "encrypted", "denominator": "encrypted"},
@@ -596,6 +691,6 @@ def compile_divmod(
 
 
 compile_abs = compile_absolute
-make_abs = make_absolute
 compile_sub = compile_subtract
+make_abs = make_absolute
 compile_scalar_mul = compile_scalar_multiply

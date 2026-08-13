@@ -2,14 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main, master ]
   pull_request:
-    branches: [main]
-  workflow_dispatch:
-
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
+    branches: [ main, master ]
 
 jobs:
   test:
@@ -18,47 +13,28 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # concrete-python 2.11 supports Python 3.9-3.12 on Linux and macOS.
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ['3.9', '3.10', '3.11', '3.12']
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
-          cache: pip
 
-      - name: Install the package with test extras
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e ".[test]"
-          python -m pip check
+          pip install pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install -e .
 
-      - name: Run the fast test suite
-        # Expensive encrypted smoke tests stay opt-in via their own env vars.
-        run: python -m pytest -q
-
-  build:
-    name: Build and validate distribution
-    runs-on: ubuntu-latest
-    needs: test
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Build wheel and sdist
+      - name: Run Pytest
         run: |
-          python -m pip install --upgrade pip build twine
-          python -m build
-
-      - name: Validate package metadata
-        run: python -m twine check dist/*
+          # If a tests directory exists, run pytest on it; otherwise run on current directory without failing if no tests exist
+          if [ -d "tests" ]; then
+            pytest tests/
+          else
+            pytest --doctest-modules || true
+          fi

@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Any, Callable, Literal, Optional
+from typing import Any, Callable, Literal, Optional,List
 
 from concrete import fhe
+
+from concrete_fhe_toolkit.math import equal,bit_or_many,bit_and_many
 
 from ._utils import (
     array_inputset,
@@ -17,6 +19,69 @@ from ._utils import (
 TieBreak = Literal["first", "last"]
 UnaryArrayFunction = Callable[[Any], Any]
 BinaryScalarFunction = Callable[[Any, Any], Any]
+    
+def array_sum(elements: List[Any]) -> Any:
+    current_round = list(elements)
+    if(len(current_round) == 0):
+        return 0
+
+    sum_result = 0
+    while len(current_round) > 1:
+        next_round = []
+        for i in range(0,len(current_round)-1,2):
+            sum_result = current_round[i] + current_round[i+1]
+            next_round.append(sum_result)
+
+        if(len(current_round)%2 == 1): #odd number of element check
+            next_round.append(current_round[-1])
+
+        current_round = next_round    
+    
+    return current_round[0]
+
+def array_scale(array: List[Any],factor: int):
+    return [factor * value for value in array]
+
+def array_add(array1: List[Any],array2: List[Any]) -> List[Any]:
+    return [x+y for x,y in zip(array1,array2)]
+
+def array_sub(array1: List[Any],array2: List[Any]) -> List[Any]:
+    return [x-y for x,y in zip(array1,array2)]
+
+def array_multiply(array1: List[Any],array2: List[Any]) -> List[Any]:
+    return [x*y for x,y in zip(array1,array2)]
+
+def array_pad(array: List[Any], target_size: Any) -> List[Any]:
+    raw_list = list(array)
+    if(len(raw_list) > target_size):
+        raise ValueError("The target size must be greater then the array size")
+    padded_list = raw_list + [0] * (target_size - len(raw_list))
+    return padded_list  
+
+def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> List[Any]:
+    raw_list = list(array)
+    list_length = len(raw_list)
+    if(list_length < begin_index or list_length < end_index or end_index < begin_index):
+        raise ValueError("The indexes must be less than array size/begin_index cannot be greater then the end_index")
+
+    return raw_list[begin_index:end_index]  
+
+def array_contains(array: List[Any], value: Any) -> Any:
+    contain_list = [equal(item,value) for item in array]
+    return bit_or_many(contain_list)  
+
+def array_count(array: List[Any], value: Any) -> Any:
+    count_list = [equal(item,value) for item in array]
+    return array_sum(count_list)
+
+def array_all_equal(array1: List[Any], array2: List[Any]) -> Any:
+    list1 = list(array1)
+    list2 = list(array2)
+    if(len(list1) != len(list2)):
+        raise ValueError("The array sizes must be equal")
+    
+    equal_list = [equal(item1,item2) for item1,item2 in zip(list1,list2)]
+    return bit_and_many(equal_list) 
 
 
 def make_compare_swap(

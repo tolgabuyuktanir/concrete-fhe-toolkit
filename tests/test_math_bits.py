@@ -147,3 +147,30 @@ def test_friendly_operations_compile_by_default_and_expose_make():
         angle_unit="degrees",
     )
     assert int(sine.simulate(30)) == 50
+
+
+def test_optimized_twos_complement_add_bits():
+    for left in range(-8, 8):
+        for right in range(-8, 8):
+            left_bits = fhe_math.twos_complement_bits(left, 4)
+            right_bits = fhe_math.twos_complement_bits(right, 4)
+            
+            result = fhe_math.twos_complement_add_bits(left_bits, right_bits, 5)
+            expected = left + right
+            assert _bits_to_signed(result) == expected, f"ERROR: {left} + {right} != {expected}"
+
+def test_hardware_binary_multiply():
+    for left in range(-4, 4):
+        for right in range(-4, 4):
+            left_bits = fhe_math.twos_complement_bits(left, 4)
+            right_bits = fhe_math.twos_complement_bits(right, 4)
+            
+            result = fhe_math.multiply_bits(left_bits, right_bits, 6) 
+            
+            expected = left * right
+            assert _bits_to_signed(result) == expected, f"HATA: {left} * {right} != {expected} "
+
+    left_bits = fhe_math.twos_complement_bits(3, 4)
+    right_bits = fhe_math.twos_complement_bits(3, 4)
+    overflow_result = fhe_math.multiply_bits(left_bits, right_bits, 3)
+    assert _bits_to_signed(overflow_result) == 1, "Overflow not working!"

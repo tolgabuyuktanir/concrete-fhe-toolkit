@@ -13,13 +13,13 @@ BinaryFunction = Callable[[Any, Any], Any]
 TernaryFunction = Callable[[Any, Any, Any], Any]
 
 
-def sign(x: Any, y: Any) -> Any:
+def compare(x: Any, y: Any) -> Any:
     """Return 1 when x > y, 0 when equal, and -1 when x < y."""
     difference = x - y
     return 1 * (difference > 0) - 1 * (difference < 0)
 
 
-def compile_sign(
+def compile_compare(
     min_value: int = -15,
     max_value: int = 15,
     *,
@@ -34,12 +34,29 @@ def compile_sign(
         (maximum, maximum),
     ]
     return compile_function(
-        sign,
+        compare,
         {"x": "encrypted", "y": "encrypted"},
         inputset,
         configuration,
     )
 
+def sign(x: Any) -> Any:
+    return compare(x,0)
+
+def compile_sign(
+        min_value: int = -15,
+        max_value: int = 15,
+        *,
+        configuration: Optional[fhe.Configuration] = None,
+)-> fhe.Circuit:
+    minimum , maximum = validate_bounds(min_value,max_value)
+    inputset = [minimum, 0, maximum]
+    return compile_function(
+        sign,
+        {"x": "encrypted"},
+        inputset,
+        configuration,
+    )
 
 def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
     """Create exact encrypted floor division using a multivariate table lookup."""

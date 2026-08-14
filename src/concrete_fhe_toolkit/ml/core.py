@@ -32,6 +32,10 @@ def mean_squared_error(array1: List[Any], array2: List[Any]) -> Any:
     
     return euclidean_distance_squarred(list1,list2) // len(list1)
 
+def mean_absolute_error(y_preds: List[Any], y_trues: List[Any]) -> Any:
+    distance = manhattan_distance(y_preds,y_trues)
+    return distance // len(y_trues)
+
 def hinge_loss(y_pred: Any, y_true: Any) -> Any:
     return maximum(0, 1-(y_true*y_pred))
 

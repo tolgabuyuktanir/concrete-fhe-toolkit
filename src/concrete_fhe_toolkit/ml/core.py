@@ -3,7 +3,7 @@ from concrete import fhe
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
 
 from concrete_fhe_toolkit.arrays import array_sum
-from concrete_fhe_toolkit.math import absolute, square, maximum,equal
+from concrete_fhe_toolkit.math import square, maximum, equal
 
 
 def manhattan_distance(array1: List[Any], array2: List[Any]) -> Any:
@@ -12,7 +12,7 @@ def manhattan_distance(array1: List[Any], array2: List[Any]) -> Any:
     if(len(list1) != len(list2)):
         raise ValueError("The array sizes must be equal")
 
-    diffs = [absolute(x-y) for x,y in zip(list1,list2)]
+    diffs = [abs(x-y) for x,y in zip(list1,list2)]
     return array_sum(diffs)
 
 def euclidean_distance_squarred(array1: List[Any], array2: List[Any]) -> Any:

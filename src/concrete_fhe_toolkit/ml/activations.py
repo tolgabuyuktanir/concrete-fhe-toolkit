@@ -34,7 +34,7 @@ def compile_relu(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer negation."""
+    """Compile encrypted leaky relu"""
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(
         relu,
@@ -50,7 +50,7 @@ def compile_leaky_relu(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer negation."""
+    """Compile encrypted relu"""
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(
         leaky_relu,
@@ -66,7 +66,7 @@ def compile_unit_step(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer negation."""
+    """Compile encrypted unit step."""
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(
         unit_step,
@@ -75,3 +75,17 @@ def compile_unit_step(
         configuration,
     )
 
+def compile_threshold_activation(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile encrypted threshold activation"""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    return compile_function(
+        threshold_activation,
+        {"value": "encrypted"},
+        [minimum, maximum],
+        configuration,
+    )

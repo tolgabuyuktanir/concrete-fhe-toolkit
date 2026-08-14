@@ -52,3 +52,9 @@ def array_min(elements: List[Any]) -> Any:
     
     return current_round[0]
 
+def array_range(array: List[Any]) -> Any:
+    min_val = array_min(array)
+    max_val = array_max(array)
+
+    return max_val - min_val
+

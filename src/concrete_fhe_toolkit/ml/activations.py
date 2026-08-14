@@ -4,7 +4,7 @@ from concrete import fhe
 
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
 from concrete_fhe_toolkit.math.basic import greater, less, maximum
-from concrete_fhe_toolkit.math import sigmoid, tanh
+from concrete_fhe_toolkit.math import sigmoid, tanh,greater_equal
 from concrete_fhe_toolkit.arithmetic import sign
 
 def relu(value: Any):
@@ -23,6 +23,9 @@ def unit_step(value: Any) -> Any:
 
     result = 1 + (greater_zero * 1) + (less_zero * -1)
     return result
+
+def threshold_activation(value: Any, threshold: Any) -> Any:
+    return greater_equal(value,threshold)
 
 
 def compile_relu(

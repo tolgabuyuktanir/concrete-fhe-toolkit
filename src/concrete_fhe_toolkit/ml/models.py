@@ -1,8 +1,9 @@
 from typing import Any, List,Optional
 from concrete import fhe
 from concrete_fhe_toolkit.ml import dot_product
-from concrete_fhe_toolkit.math import bit_select,greater_equal
-from concrete_fhe_toolkit._utils import validate_bounds,compile_function
+from concrete_fhe_toolkit.math import bit_select, greater_equal, equal, greater
+from concrete_fhe_toolkit._utils import validate_bounds, compile_function
+from concrete_fhe_toolkit.arrays import array_sum
 
 def linear_regression_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
     product = dot_product(weights,features)
@@ -11,6 +12,10 @@ def linear_regression_inference(weights: List[Any], bias: Any, features: List[An
 def decision_tree_node(feature_val: Any, threshold: Any, left_branch: Any, right_branch: Any) -> Any:
     control = greater_equal(feature_val,threshold)
     return bit_select(control,left_branch,right_branch)
+
+def majority_votes(predictions: List[Any]) -> Any:
+    sum_predictions = array_sum(predictions)
+    return greater(sum_predictions, len(predictions) // 2)
 
 
 def compile_decision_tree_node(

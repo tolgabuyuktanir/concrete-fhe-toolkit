@@ -1,6 +1,6 @@
 from typing import Any,List
 from concrete_fhe_toolkit.arrays import array_sum
-from concrete_fhe_toolkit.math import maximum,minimum
+from concrete_fhe_toolkit.math import maximum, minimum, greater 
 
 
 def array_mean(array: List[Any]) -> Any:
@@ -58,3 +58,10 @@ def array_range(array: List[Any]) -> Any:
 
     return max_val - min_val
 
+
+def array_count_greater(array: List[Any], threshold: Any) -> Any:
+    num_of_greater = 0
+    for item in array:
+        num_of_greater += greater(item,threshold)
+
+    return num_of_greater

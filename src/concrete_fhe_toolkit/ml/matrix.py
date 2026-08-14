@@ -7,12 +7,10 @@ def matrix_transpose(matrix: List[List[Any]]) -> List[List[Any]]:
     return [list(row) for row in zip(*matrix)]
 
 def dot_product(array1: List[Any], array2: List[Any]) -> Any:
-    list1 = list(array1)
-    list2 = list(array2)
-    if(len(list1) != len(list2)):
+    if(len(array1) != len(array2)):
         raise ValueError("Array sizes must be equal to perform dot product")
 
-    product_list = [x*y for x,y in zip(list1,list2)]
+    product_list = [x*y for x,y in zip(array1,array2)]
     result = array_sum(product_list)
     return result
 

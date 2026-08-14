@@ -7,15 +7,14 @@ from concrete_fhe_toolkit.math import square, maximum, equal,not_equal
 
 
 def manhattan_distance(array1: List[Any], array2: List[Any]) -> Any:
-    list1 = list(array1)
-    list2 = list(array2)
-    if(len(list1) != len(list2)):
+    if(len(array1) != len(array2)):
         raise ValueError("The array sizes must be equal")
-
-    diffs = [abs(x-y) for x,y in zip(list1,list2)]
+    diffs = [abs(x-y) for x,y in zip(array1,array2)]
     return array_sum(diffs)
 
 def hamming_distance(array1: List[Any], array2: List[Any]) -> Any:
+    if(len(array1) != len(array2)):
+        raise ValueError("The array sizes must be equal")
     distance = 0
     for item1,item2 in zip(array1,array2):
         distance += not_equal(item1,item2)
@@ -23,34 +22,65 @@ def hamming_distance(array1: List[Any], array2: List[Any]) -> Any:
     return distance    
 
 def euclidean_distance_squarred(array1: List[Any], array2: List[Any]) -> Any:
-    list1 = list(array1)
-    list2 = list(array2)
-    if(len(list1) != len(list2)):
+    if(len(array1) != len(array2)):
         raise ValueError("The array sizes must be equal")
-
-    diffs = [square(x-y) for x,y in zip(list1,list2)]
+    diffs = [square(x-y) for x,y in zip(array1,array2)]
     return array_sum(diffs)
 
 def mean_squared_error(array1: List[Any], array2: List[Any]) -> Any:
-    list1 = list(array1)
-    list2 = list(array2)
-    if(len(list1) != len(list2)):
+    if(len(array1) != len(array2)):
             raise ValueError("The array sizes must be equal")
-    
-    return euclidean_distance_squarred(list1,list2) // len(list1)
+    return euclidean_distance_squarred(array1,array2) // len(array1)
 
 def mean_absolute_error(y_preds: List[Any], y_trues: List[Any]) -> Any:
     distance = manhattan_distance(y_preds,y_trues)
     return distance // len(y_trues)
 
 def accuracy_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+    if(len(y_preds) != len(y_trues)):
+        raise ValueError("The array sizes must be equal")
     true_predictions = 0
-    num_of_elements = len(y_trues)
 
     for pred,true in zip(y_preds,y_trues):
         true_predictions += equal(pred,true)
 
-    return true_predictions * 100 // num_of_elements        
+    return true_predictions * 100 // len(y_trues)        
+
+def true_positives(y_preds: List[Any], y_trues: List[Any]) -> int:
+    if(len(y_preds) != len(y_trues)):
+        raise ValueError("The array sizes must be equal")
+    num_of_true_positives = 0
+
+    for pred,true in zip(y_preds,y_trues):
+        num_of_true_positives += equal(1,pred*true)
+
+    return num_of_true_positives    
+
+def true_negatives(y_preds: List[Any], y_trues: List[Any]) -> int:
+    if(len(y_preds) != len(y_trues)):
+        raise ValueError("The array sizes must be equal")
+    num_of_true_negatives = 0
+    for pred,true in zip(y_preds,y_trues):
+        num_of_true_negatives += equal(0,pred+true)
+
+    return num_of_true_negatives 
+
+def false_negatives(y_preds: List[Any], y_trues: List[Any]) -> int:
+    num_of_positives = array_sum(y_trues)
+    return num_of_positives - true_positives(y_preds, y_trues)
+
+def false_positives(y_preds: List[Any], y_trues: List[Any]) -> int:
+    num_of_negatives = len(y_trues) - array_sum(y_trues)
+    return num_of_negatives - true_negatives(y_preds, y_trues)
+
+
+def confusion_matrix(y_preds: List[Any], y_trues: List[Any]) -> List[List[Any]]:
+    tp = true_positives(y_preds,y_trues)
+    tn = true_negatives(y_preds,y_trues)
+    fn = false_negatives(y_preds,y_trues)
+    fp = false_positives(y_preds,y_trues)
+    return [[tn,fp],[fn,tp]]
+
 
 def hinge_loss(y_pred: Any, y_true: Any) -> Any:
     return maximum(0, 1-(y_true*y_pred))

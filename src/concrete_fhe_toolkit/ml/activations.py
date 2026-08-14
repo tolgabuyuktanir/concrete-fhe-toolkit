@@ -5,7 +5,7 @@ from concrete import fhe
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
 from concrete_fhe_toolkit.math.basic import greater, less, maximum
 from concrete_fhe_toolkit.math import sigmoid, tanh
-from concrete_fhe_toolkit import sign
+from concrete_fhe_toolkit.arithmetic import sign
 
 def relu(value: Any):
     "return the relu result of a number"

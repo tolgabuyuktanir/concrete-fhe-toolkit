@@ -1,6 +1,6 @@
 from typing import Any,List
 from concrete_fhe_toolkit.arrays import array_sum
-from concrete_fhe_toolkit.math import maximum
+from concrete_fhe_toolkit.math import maximum,minimum
 
 
 def array_mean(array: List[Any]) -> Any:
@@ -33,3 +33,22 @@ def array_max(elements: List[Any]) -> Any:
         current_round = next_round    
     
     return current_round[0]
+
+def array_min(elements: List[Any]) -> Any:
+    current_round = list(elements)
+    if(len(current_round) == 0):
+        return 0
+
+    while len(current_round) > 1:
+        next_round = []
+        for i in range(0,len(current_round)-1,2):
+            comparison_result = minimum(current_round[i], current_round[i+1])
+            next_round.append(comparison_result)
+
+        if(len(current_round)%2 == 1): #odd number of element check
+            next_round.append(current_round[-1])
+
+        current_round = next_round    
+    
+    return current_round[0]
+

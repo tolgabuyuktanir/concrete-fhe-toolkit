@@ -3,7 +3,7 @@ from concrete import fhe
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
 
 from concrete_fhe_toolkit.arrays import array_sum
-from concrete_fhe_toolkit.math import absolute, square, maximum
+from concrete_fhe_toolkit.math import absolute, square, maximum,equal
 
 
 def manhattan_distance(array1: List[Any], array2: List[Any]) -> Any:
@@ -35,6 +35,15 @@ def mean_squared_error(array1: List[Any], array2: List[Any]) -> Any:
 def mean_absolute_error(y_preds: List[Any], y_trues: List[Any]) -> Any:
     distance = manhattan_distance(y_preds,y_trues)
     return distance // len(y_trues)
+
+def accuracy_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+    true_predictions = 0
+    num_of_elements = len(y_trues)
+
+    for pred,true in zip(y_preds,y_trues):
+        true_predictions += equal(pred,true)
+
+    return true_predictions * 100 // num_of_elements        
 
 def hinge_loss(y_pred: Any, y_true: Any) -> Any:
     return maximum(0, 1-(y_true*y_pred))

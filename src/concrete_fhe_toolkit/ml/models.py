@@ -1,9 +1,9 @@
 from typing import Any, List,Optional
 from concrete import fhe
-from concrete_fhe_toolkit.ml import dot_product
+from concrete_fhe_toolkit.ml import dot_product, euclidean_distance_squared
 from concrete_fhe_toolkit.math import bit_select, greater_equal, equal, greater
 from concrete_fhe_toolkit._utils import validate_bounds, compile_function
-from concrete_fhe_toolkit.arrays import array_sum
+from concrete_fhe_toolkit.arrays import array_sum, make_argmin
 
 def linear_regression_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
     product = dot_product(weights,features)
@@ -17,6 +17,19 @@ def majority_votes(predictions: List[Any]) -> Any:
     sum_predictions = array_sum(predictions)
     return greater(sum_predictions, len(predictions) // 2)
 
+def knn_inference(test_sample: List[Any], train_samples: List[List[Any]], train_labels: List[Any]) -> Any:
+    distances = []
+    for row in train_samples:
+        distances.append(euclidean_distance_squared(row,test_sample))
+
+    argmin_func = make_argmin(len(distances))
+    min_index = argmin_func(distances)
+
+    sum = 0
+    for i in range(len(train_labels)):
+        sum += equal(i,min_index) * train_labels[i]
+
+    return sum    
 
 def compile_decision_tree_node(
     min_value: int = -15,

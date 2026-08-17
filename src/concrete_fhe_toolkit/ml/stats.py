@@ -4,19 +4,22 @@ from concrete_fhe_toolkit.math import maximum, minimum, greater
 
 
 def array_mean(array: List[Any]) -> Any:
+    """Calculate the mean of an encrypted array."""
     return array_sum(array) // len(array)
 
 
 def array_variance(array: List[Any]) -> Any:
+    """Calculate the variance of an encrypted array."""
     mean_val = array_mean(array)
     diff_sum = 0
 
     for item in array:
         diff_sum += (item-mean_val)*(item-mean_val)
 
-    return diff_sum // len(array)    
+    return diff_sum // len(array)
 
 def array_max(elements: List[Any]) -> Any:
+    """Find the maximum value in an encrypted array using a tournament reduction."""
     current_round = list(elements)
     if(len(current_round) == 0):
         return 0
@@ -35,6 +38,7 @@ def array_max(elements: List[Any]) -> Any:
     return current_round[0]
 
 def array_min(elements: List[Any]) -> Any:
+    """Find the minimum value in an encrypted array using a tournament reduction."""
     current_round = list(elements)
     if(len(current_round) == 0):
         return 0
@@ -53,6 +57,7 @@ def array_min(elements: List[Any]) -> Any:
     return current_round[0]
 
 def array_range(array: List[Any]) -> Any:
+    """Calculate the range (max - min) of an encrypted array."""
     min_val = array_min(array)
     max_val = array_max(array)
 
@@ -60,6 +65,7 @@ def array_range(array: List[Any]) -> Any:
 
 
 def array_count_greater(array: List[Any], threshold: Any) -> Any:
+    """Count how many elements in an encrypted array are strictly greater than a threshold."""
     num_of_greater = 0
     for item in array:
         num_of_greater += greater(item,threshold)

@@ -4,9 +4,11 @@ from . import math, ml
 from .arithmetic import (
     compile_floor_divide,
     compile_floor_divide_by_product,
+    compile_compare,
     compile_sign,
     make_floor_divide,
     make_floor_divide_by_product,
+    compare,
     sign,
 )
 from .arrays import (
@@ -47,6 +49,7 @@ __all__ = [
     "array_sum",
     "compile_argmax",
     "compile_argmin",
+    "compile_compare",
     "compile_compare_swap",
     "compile_floor_divide",
     "compile_floor_divide_by_product",
@@ -54,6 +57,7 @@ __all__ = [
     "compile_minimum",
     "compile_sign",
     "compile_sort",
+    "compare",
     "math",
     "make_argmax",
     "make_argmin",

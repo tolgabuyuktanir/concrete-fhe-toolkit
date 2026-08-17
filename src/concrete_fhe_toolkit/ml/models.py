@@ -6,18 +6,22 @@ from concrete_fhe_toolkit._utils import validate_bounds, compile_function
 from concrete_fhe_toolkit.arrays import array_sum, make_argmin
 
 def linear_regression_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
+    """Evaluate a linear regression model (dot product of weights and features plus bias)."""
     product = dot_product(weights,features)
     return bias + product
 
 def decision_tree_node(feature_val: Any, threshold: Any, left_branch: Any, right_branch: Any) -> Any:
+    """Evaluate a single decision tree node, selecting left or right branch based on threshold."""
     control = greater_equal(feature_val,threshold)
     return bit_select(control,left_branch,right_branch)
 
 def majority_votes(predictions: List[Any]) -> Any:
+    """Perform majority voting for an ensemble of binary predictions."""
     sum_predictions = array_sum(predictions)
     return greater(sum_predictions, len(predictions) // 2)
 
 def knn_inference(test_sample: List[Any], train_samples: List[List[Any]], train_labels: List[Any]) -> Any:
+    """Evaluate a 1-Nearest Neighbor (KNN) model on an encrypted test sample."""
     distances = []
     for row in train_samples:
         distances.append(euclidean_distance_squared(row,test_sample))

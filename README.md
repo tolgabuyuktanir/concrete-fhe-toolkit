@@ -34,12 +34,14 @@ on **encrypted** integers, without ever decrypting them.
 
 ## ✨ Highlights
 
+- **Privacy-Preserving Machine Learning** — built-in support for encrypted Linear Regression, KNN, Decision Trees, and ML metrics (accuracy, confusion matrix).
 - **Batteries-included math** — arithmetic, comparisons, GCD/LCM, factorial,
   primality, `isqrt`, and combinatorics on encrypted integers.
 - **Fixed-point transcendentals** — `sin`, `cos`, `log`, `sqrt`, `erf`, `tanh`,
   and `sigmoid` via lookup tables over a declared domain.
 - **Array circuits** — bitonic sort, min/max, and argmin/argmax with
   deterministic tie handling.
+- **Array utilities** — native FHE support for standard array manipulations including element-wise math, slicing, scaling, and padding.
 - **Real division** — bounded floor division and bit-level restoring division
   that scales with bit width instead of a giant lookup table.
 - **Friendly, three-layer API** — call `fhe_math.gcd(...)` to compile,
@@ -78,6 +80,8 @@ The package focuses on explicit, bounded FHE circuits:
 - find encrypted-array argmin/argmax indices
 - perform bounded encrypted floor division with a table lookup
 - perform bounded `numerator // (left * right)`
+- run machine learning models (Linear Regression, KNN) and metrics directly on encrypted data
+- perform matrix and array algebra (dot products, matrix multiplication, array addition) on encrypted tensors
 
 ## Installation
 
@@ -237,7 +241,9 @@ program, and choose public bounds that cover all runtime inputs.
 
 Scalar arithmetic:
 
-- `sign(x, y)`
+- `compare(x, y)`
+- `compile_compare(min_value=-15, max_value=15, configuration=None)`
+- `sign(x)`
 - `compile_sign(min_value=-15, max_value=15, configuration=None)`
 - `make_floor_divide(zero_result=0)`
 - `compile_floor_divide(max_numerator, max_denominator, zero_result=0, configuration=None)`
@@ -258,6 +264,18 @@ Array operations:
 - `compile_argmin(size, min_value=0, max_value=15, tie_break="first", configuration=None)`
 - `make_argmax(size, min_value=0, max_value=15, tie_break="first")`
 - `compile_argmax(size, min_value=0, max_value=15, tie_break="first", configuration=None)`
+- Array math: `array_add`, `array_sub`, `array_multiply`, `array_scale`, `array_sum`
+- Array utilities: `array_all_equal`, `array_contains`, `array_count`, `array_pad`, `array_slice`
+
+Machine Learning (ML) subpackage:
+
+```python
+from concrete_fhe_toolkit import ml
+```
+
+- **Metrics & Data**: `accuracy_score`, `confusion_matrix`, `mean_squared_error`, `mean_absolute_error`, `one_hot_encode`, `binarize`
+- **Models**: `linear_regression_inference`, `decision_tree_node`, `knn_inference`, `majority_votes`
+- **Matrix Operations**: `matrix_multiply`, `matrix_vector_multiply`, `matrix_add`, `matrix_subtract`, `matrix_transpose`, `dot_product`
 
 Math subpackage:
 
@@ -342,24 +360,91 @@ Bit-level arithmetic helpers:
 
 ## Examples
 
-### Sign Comparison
+### Privacy-Preserving Breast Cancer Diagnosis (ML Subpackage)
 
-`compile_sign` returns `1` when `x > y`, `0` when `x == y`, and `-1` when
-`x < y`.
+The `concrete_fhe_toolkit.ml` subpackage abstracts away complex FHE cryptography, allowing you to run standard ML models (Linear Regression, KNN, Decision Trees) and metrics directly on encrypted data effortlessly.
+
+In this example, we predict Breast Cancer securely. The server evaluates the Logistic Regression model on encrypted patient features without ever seeing the raw medical data!
 
 ```python
-from concrete_fhe_toolkit import compile_sign
+import numpy as np
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from concrete import fhe
 
-circuit = compile_sign(min_value=-20, max_value=20)
+from concrete_fhe_toolkit.ml import (
+    linear_regression_inference, 
+    threshold_activation,
+    accuracy_score,
+    confusion_matrix
+)
 
-print(circuit.encrypt_run_decrypt(15, 3))
+# 1. Train a standard model (Cleartext)
+data = load_breast_cancer()
+X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
+
+# FHE precision requires scaling. Standardize features to keep them small.
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+clf = LogisticRegression(max_iter=10000)
+clf.fit(X_train_scaled, y_train)
+
+# Scale weights to integers to avoid 16-bit FHE lookup limit
+scale = 10
+weights = np.round(clf.coef_[0] * scale).astype(int).tolist()
+bias = int(np.round(clf.intercept_[0] * scale))
+X_test_int = np.round(X_test_scaled * scale).astype(int).tolist()
+
+# 2. Define the FHE Circuit
+@fhe.compiler({"features": "encrypted"})
+def encrypted_diagnosis(features):
+    # Toolkit handles the encrypted dot product natively
+    raw_pred = linear_regression_inference(weights, bias, features)
+    # Toolkit safely thresholds the encrypted output (val >= 0)
+    return threshold_activation(raw_pred, 0)
+
+# 3. Compile and Run Encrypted Inference
+inputset = [X_test_int[i] for i in range(15)]
+circuit = encrypted_diagnosis.compile(inputset)
+
+encrypted_preds = []
+true_labels = y_test.tolist()[:10]
+
+for i in range(10):
+    # Encrypt -> Predict (Cloud) -> Decrypt
+    prediction = circuit.encrypt_run_decrypt(X_test_int[i])
+    encrypted_preds.append(prediction)
+
+# 4. Evaluate using toolkit metrics
+acc = accuracy_score(encrypted_preds, true_labels)
+cm = confusion_matrix(encrypted_preds, true_labels)
+
+print(f"Encrypted Diagnosis Accuracy: %{acc}")
+print(f"Confusion Matrix [[TN, FP], [FN, TP]]: \n{cm}")
+```
+
+### Compare and Sign
+
+`compile_compare` returns `1` when `x > y`, `0` when `x == y`, and `-1` when `x < y`.
+`compile_sign` does the same but explicitly compares `x` against `0`.
+
+```python
+from concrete_fhe_toolkit import compile_compare, compile_sign
+
+circuit_comp = compile_compare(min_value=-20, max_value=20)
+print(circuit_comp.encrypt_run_decrypt(15, 3))
 # 1
 
-print(circuit.encrypt_run_decrypt(3, 15))
-# -1
-
-print(circuit.encrypt_run_decrypt(7, 7))
+print(circuit_comp.encrypt_run_decrypt(7, 7))
 # 0
+
+circuit_sign = compile_sign(min_value=-20, max_value=20)
+print(circuit_sign.encrypt_run_decrypt(-15))
+# -1
 ```
 
 ### Compare-Swap
@@ -454,6 +539,30 @@ print(first.encrypt_run_decrypt(values))
 last = compile_argmin(size=4, min_value=0, max_value=10, tie_break="last")
 print(last.encrypt_run_decrypt(values))
 # 2
+```
+
+### Array Math and Utilities
+
+The package provides native FHE support for standard array manipulation and element-wise math. 
+
+```python
+import numpy as np
+from concrete_fhe_toolkit import array_add, array_sum, array_scale
+
+encrypted_array1 = np.array([1, 2, 3])
+encrypted_array2 = np.array([10, 20, 30])
+
+# Element-wise addition
+added = array_add(encrypted_array1, encrypted_array2)
+# [11, 22, 33]
+
+# Array summation
+total = array_sum(encrypted_array1)
+# 6
+
+# Scalar multiplication
+scaled = array_scale(encrypted_array1, 5)
+# [5, 10, 15]
 ```
 
 ### Floor Division

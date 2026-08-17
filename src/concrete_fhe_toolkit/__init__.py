@@ -1,6 +1,6 @@
 """Bounded integer helpers for Concrete FHE."""
 
-from . import math, ml
+from . import finance, math, ml
 from .arithmetic import (
     compile_floor_divide,
     compile_floor_divide_by_product,
@@ -58,7 +58,7 @@ __all__ = [
     "compile_sign",
     "compile_sort",
     "compare",
-    "math",
+    "finance",
     "make_argmax",
     "make_argmin",
     "make_compare_swap",

@@ -1,8 +1,9 @@
 name: Publish to PyPI
 
+# Triggered by version tags only. Creating a GitHub Release for an
+# already-pushed tag does NOT retrigger publishing, so tag + release
+# no longer produce duplicate uploads.
 on:
-  release:
-    types: [published]
   push:
     tags:
       - 'v*'

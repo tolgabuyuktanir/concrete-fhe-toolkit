@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 - 2026-08-18
+
+Big capability release: Python-math and C-math parity for the math
+subpackage, a new top-level stats subpackage, oblivious array primitives,
+and a second wave of ML inference models.
 
 ### Added
 
@@ -44,7 +48,6 @@
   (categorical, public log-prob tables), `argmax_inference` (multi-class
   head), and `precision_score` / `recall_score` / `f1_score`. Decision
   trees now build on `math.select`.
-
 - `knn_inference` now supports real k-NN via a `k` parameter (iterated
   argmin with distance masking, majority vote; binary labels for `k > 1`).
 - `logistic_regression_inference`: binary classification from the linear

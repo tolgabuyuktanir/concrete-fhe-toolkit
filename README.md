@@ -226,9 +226,11 @@ print(sin_circuit.encrypt_run_decrypt(30))
 The README is the shared GitHub and PyPI landing page. It gives the core usage
 model, quick examples, and the public API overview.
 
-For the fuller guide, use the GitHub documentation:
+For the fuller guide, use the documentation site — versioned per release and
+generated from the package docstrings:
 
-- [Documentation index](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/tree/main/docs)
+- [Documentation site (latest)](https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/)
+- [Documentation index on GitHub](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/tree/main/docs)
 - [Bounds and costs](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/blob/main/docs/bounds-and-costs.md)
 - [API reference](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/blob/main/docs/api-reference.md)
 - [Maintainer testing and release checks](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/blob/main/docs/testing-and-release.md)

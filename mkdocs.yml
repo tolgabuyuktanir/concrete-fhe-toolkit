@@ -1,0 +1,86 @@
+site_name: concrete-fhe-toolkit
+site_description: Bounded math helpers for compiling common Zama Concrete FHE circuits
+site_url: https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/
+repo_url: https://github.com/tolgabuyuktanir/concrete-fhe-toolkit
+repo_name: tolgabuyuktanir/concrete-fhe-toolkit
+
+theme:
+  name: material
+  icon:
+    logo: material/lock
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            members_order: source
+            filters: ["!^_"]
+            show_signature_annotations: true
+            separate_signature: true
+
+extra:
+  version:
+    provider: mike
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+nav:
+  - Home: README.md
+  - Guides:
+      - API usage guide: api-reference.md
+      - Bounds and costs: bounds-and-costs.md
+      - Testing and release: testing-and-release.md
+  - API reference:
+      - Overview: api/index.md
+      - Core:
+          - Arithmetic: api/arithmetic.md
+          - Arrays: api/arrays.md
+      - Math:
+          - Basic operations: api/math-basic.md
+          - Combinatorics: api/math-combinatorics.md
+          - Number theory: api/math-number-theory.md
+          - Fixed point: api/math-fixed-point.md
+          - Special functions: api/math-special.md
+          - Bit primitives: api/math-bits.md
+          - Binary division: api/math-binary-division.md
+      - Machine learning:
+          - Metrics and losses: api/ml-core.md
+          - Models: api/ml-models.md
+          - Matrix algebra: api/ml-matrix.md
+          - Activations: api/ml-activations.md
+          - Statistics: api/ml-stats.md
+          - Preprocessing: api/ml-utils.md
+      - Finance:
+          - Rates and interest: api/finance-core.md
+          - Transactions: api/finance-transactions.md

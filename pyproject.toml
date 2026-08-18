@@ -48,7 +48,7 @@ dependencies = [
 Company = "https://www.agrafintech.com"
 Homepage = "https://github.com/tolgabuyuktanir/concrete-fhe-toolkit"
 Repository = "https://github.com/tolgabuyuktanir/concrete-fhe-toolkit"
-Documentation = "https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/tree/main/docs"
+Documentation = "https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/"
 "Example notebook" = "https://www.kaggle.com/code/erkankbacak/concrete-fhe-toolkit-test"
 "Math notebook" = "https://www.kaggle.com/code/erkankbacak/concrete-math-library"
 
@@ -60,6 +60,11 @@ dev = [
   "build>=1.2",
   "pytest>=8,<10",
   "twine>=5",
+]
+docs = [
+  "mkdocs-material>=9",
+  "mkdocstrings[python]>=0.26",
+  "mike>=2",
 ]
 
 [tool.setuptools]

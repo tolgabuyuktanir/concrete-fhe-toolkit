@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any, Callable, Optional
 
 import numpy as np
-from concrete import fhe
+from ._compat import fhe
 
 from ._utils import compile_function, validate_bounds, validate_integer
 
@@ -48,9 +48,12 @@ def compile_sign(
         max_value: int = 15,
         *,
         configuration: Optional[fhe.Configuration] = None,
-)-> fhe.Circuit:
-    minimum , maximum = validate_bounds(min_value,max_value)
-    inputset = [minimum, 0, maximum]
+) -> fhe.Circuit:
+    """Compile a circuit returning the sign (-1, 0, or 1) of one encrypted input."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    inputset = [minimum, maximum]
+    if minimum <= 0 <= maximum:
+        inputset.insert(1, 0)
     return compile_function(
         sign,
         {"x": "encrypted"},

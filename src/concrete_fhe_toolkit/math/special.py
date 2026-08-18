@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Callable, Literal, Optional
 import math
 
-from concrete import fhe
+from .._compat import fhe
 
 from .._utils import validate_bounds, validate_integer
 from ._lookup import UnaryFunction, compile_unary_lookup, make_unary_lookup, unary_values

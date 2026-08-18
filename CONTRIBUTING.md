@@ -9,7 +9,7 @@ Concrete 2.11 supports **Python 3.9–3.12 on Linux and macOS**. On Windows, use
 WSL2 or a Linux container.
 
 ```bash
-git clone https://github.com/ErkanIsikB/concrete-fhe-toolkit.git
+git clone https://github.com/tolgabuyuktanir/concrete-fhe-toolkit.git
 cd concrete-fhe-toolkit
 python -m venv .venv
 source .venv/bin/activate

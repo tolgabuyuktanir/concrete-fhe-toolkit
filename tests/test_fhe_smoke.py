@@ -21,7 +21,8 @@ pytestmark = [
 
 def test_real_encrypted_execution():
     sign_circuit = compile_sign(-3, 3)
-    assert int(sign_circuit.encrypt_run_decrypt(3, -1)) == 1
+    assert int(sign_circuit.encrypt_run_decrypt(3)) == 1
+    assert int(sign_circuit.encrypt_run_decrypt(-2)) == -1
 
     sort_circuit = compile_sort(4, 0, 3)
     sample = np.array([3, 0, 2, 1], dtype=np.int64)

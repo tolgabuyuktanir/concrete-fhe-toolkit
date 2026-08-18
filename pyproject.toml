@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "concrete-fhe-toolkit"
-version = "0.2.2"
+version = "0.3.0"
 description = "Bounded math helpers for compiling common Concrete FHE circuits"
 readme = "README.md"
 requires-python = ">=3.9,<3.13"
@@ -12,6 +12,9 @@ license = "MIT"
 license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
 authors = [
   { name = "Erkan Işık Bacak" },
+  { name = "Tolga Büyüktanır" },
+  { name = "Yücel Pehlevan" },
+  { name = "Muharrem Uğurelli" },
 ]
 keywords = [
   "concrete",
@@ -43,9 +46,9 @@ dependencies = [
 
 [project.urls]
 Company = "https://www.agrafintech.com"
-Homepage = "https://github.com/ErkanIsikB/concrete-fhe-toolkit"
-Repository = "https://github.com/ErkanIsikB/concrete-fhe-toolkit"
-Documentation = "https://github.com/ErkanIsikB/concrete-fhe-toolkit/tree/main/docs"
+Homepage = "https://github.com/tolgabuyuktanir/concrete-fhe-toolkit"
+Repository = "https://github.com/tolgabuyuktanir/concrete-fhe-toolkit"
+Documentation = "https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/tree/main/docs"
 "Example notebook" = "https://www.kaggle.com/code/erkankbacak/concrete-fhe-toolkit-test"
 "Math notebook" = "https://www.kaggle.com/code/erkankbacak/concrete-math-library"
 

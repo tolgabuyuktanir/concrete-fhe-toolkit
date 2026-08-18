@@ -10,7 +10,7 @@ on **encrypted** integers, without ever decrypting them.
 <!-- Badges -->
 [![PyPI version](https://img.shields.io/pypi/v/concrete-fhe-toolkit?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/concrete-fhe-toolkit/)
 [![Python versions](https://img.shields.io/pypi/pyversions/concrete-fhe-toolkit?logo=python&logoColor=white)](https://pypi.org/project/concrete-fhe-toolkit/)
-[![CI](https://github.com/ErkanIsikB/concrete-fhe-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/ErkanIsikB/concrete-fhe-toolkit/actions/workflows/ci.yml)
+[![CI](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Concrete](https://img.shields.io/badge/Concrete-2.11-8A2BE2)](https://docs.zama.ai/concrete)
 [![Status](https://img.shields.io/pypi/status/concrete-fhe-toolkit)](https://pypi.org/project/concrete-fhe-toolkit/)
@@ -18,7 +18,7 @@ on **encrypted** integers, without ever decrypting them.
 
 [Installation](#installation) ·
 [Quick Start](#quick-start) ·
-[Documentation](https://github.com/ErkanIsikB/concrete-fhe-toolkit/tree/main/docs) ·
+[Documentation](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/tree/main/docs) ·
 [Examples](#examples) ·
 [Public API](#public-api)
 
@@ -92,13 +92,13 @@ pip install concrete-fhe-toolkit
 To install the latest source directly from GitHub:
 
 ```bash
-pip install git+https://github.com/ErkanIsikB/concrete-fhe-toolkit.git
+pip install git+https://github.com/tolgabuyuktanir/concrete-fhe-toolkit.git
 ```
 
 Or clone the repository and install it locally:
 
 ```bash
-git clone https://github.com/ErkanIsikB/concrete-fhe-toolkit.git
+git clone https://github.com/tolgabuyuktanir/concrete-fhe-toolkit.git
 cd concrete-fhe-toolkit
 pip install .
 ```
@@ -114,7 +114,7 @@ For contributing or running the test suite, install the pinned dependencies and
 the package in editable mode:
 
 ```bash
-git clone https://github.com/ErkanIsikB/concrete-fhe-toolkit.git
+git clone https://github.com/tolgabuyuktanir/concrete-fhe-toolkit.git
 cd concrete-fhe-toolkit
 python -m pip install -r requirements-dev.txt
 python -m pip install -e ".[dev]"
@@ -228,10 +228,10 @@ model, quick examples, and the public API overview.
 
 For the fuller guide, use the GitHub documentation:
 
-- [Documentation index](https://github.com/ErkanIsikB/concrete-fhe-toolkit/tree/main/docs)
-- [Bounds and costs](https://github.com/ErkanIsikB/concrete-fhe-toolkit/blob/main/docs/bounds-and-costs.md)
-- [API reference](https://github.com/ErkanIsikB/concrete-fhe-toolkit/blob/main/docs/api-reference.md)
-- [Maintainer testing and release checks](https://github.com/ErkanIsikB/concrete-fhe-toolkit/blob/main/docs/testing-and-release.md)
+- [Documentation index](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/tree/main/docs)
+- [Bounds and costs](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/blob/main/docs/bounds-and-costs.md)
+- [API reference](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/blob/main/docs/api-reference.md)
+- [Maintainer testing and release checks](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/blob/main/docs/testing-and-release.md)
 
 The short version: use `fhe_math.gcd(...)` or another friendly operation name
 for a ready-to-run circuit, use `.make(...)` when composing a larger Concrete
@@ -795,7 +795,7 @@ Additional usage notebook:
 - [concrete-fhe-toolkit-test](https://www.kaggle.com/code/erkankbacak/concrete-fhe-toolkit-test)
 
 The notebooks are useful background and examples, but the README and
-[`docs/`](https://github.com/ErkanIsikB/concrete-fhe-toolkit/tree/main/docs)
+[`docs/`](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/tree/main/docs)
 are the canonical documentation for the current package API. Existing
 `make_*` and `compile_*` package APIs were kept for compatibility, while the
 new `concrete_fhe_toolkit.math` friendly operation names provide the preferred
@@ -852,7 +852,7 @@ This project is not affiliated with or endorsed by Zama.
   bounded, cost-aware API.
 
 If you use `concrete-fhe-toolkit` in your project, a ⭐ on the
-[GitHub repository](https://github.com/ErkanIsikB/concrete-fhe-toolkit) is always
+[GitHub repository](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit) is always
 appreciated.
 
 ## References

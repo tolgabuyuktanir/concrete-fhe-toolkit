@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Callable, Optional
 
-from concrete import fhe
+from .._compat import fhe
 
 from .._utils import compile_function, validate_bounds, validate_integer
 from ._lookup import (
@@ -251,7 +251,7 @@ def compile_cube(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer squaring."""
+    """Compile encrypted integer cubing."""
     minimum, maximum = validate_bounds(min_value, max_value)
     inputset = [minimum, maximum]
     if minimum <= 0 <= maximum:
@@ -371,7 +371,7 @@ def compile_is_zero(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer negation."""
+    """Compile an encrypted is-zero predicate."""
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(
         is_zero,
@@ -389,7 +389,7 @@ def compile_maximum(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer addition over inclusive bounds."""
+    """Compile the encrypted maximum of two integers over inclusive bounds."""
     return _compile_binary_native(
         maximum,
         min_left,
@@ -408,7 +408,7 @@ def compile_minimum(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer addition over inclusive bounds."""
+    """Compile the encrypted minimum of two integers over inclusive bounds."""
     return _compile_binary_native(
         minimum,
         min_left,

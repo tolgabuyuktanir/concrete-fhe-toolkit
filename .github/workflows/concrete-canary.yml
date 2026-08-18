@@ -1,0 +1,44 @@
+name: Concrete canary
+
+# Early warning: run the test suite against the newest concrete-python
+# (including pre-releases and versions beyond our declared pin) so we notice
+# upstream API changes before users do. Failures here do NOT block merges.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # every Monday 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  canary:
+    name: Test against latest concrete-python
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        concrete: ['latest', 'pre']
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install latest concrete-python (ignoring our pins)
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          if [ "${{ matrix.concrete }}" = "pre" ]; then
+            pip install --upgrade --pre concrete-python
+          else
+            pip install --upgrade concrete-python
+          fi
+          # Install the toolkit without letting our own pins downgrade concrete.
+          pip install -e . --no-deps
+          python -c "import concrete; print('concrete-python:', concrete.__version__ if hasattr(concrete, '__version__') else 'unknown')" || true
+          pip show concrete-python | head -2
+
+      - name: Run test suite
+        run: pytest tests/

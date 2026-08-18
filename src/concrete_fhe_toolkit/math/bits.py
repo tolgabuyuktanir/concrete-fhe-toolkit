@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from typing import Any, Iterable, Callable
 
-from concrete import fhe
+from .._compat import fhe
 
 from .._utils import validate_integer
 

@@ -6,7 +6,7 @@ from numbers import Integral
 from typing import Any, List, Optional, Tuple
 
 import numpy as np
-from concrete import fhe
+from ._compat import fhe
 
 
 def validate_integer(name: str, value: int, minimum: Optional[int] = None) -> int:

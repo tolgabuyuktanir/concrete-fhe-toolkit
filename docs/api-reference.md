@@ -468,3 +468,112 @@ cost = fhe_math.estimate_lookup_cost(
 )
 print(cost.level)
 ```
+
+## Machine learning subpackage
+
+```python
+from concrete_fhe_toolkit import ml
+```
+
+These helpers are traceable building blocks: call them inside your own
+`fhe.compiler` function (or use the provided `compile_*` helpers). Inputs are
+bounded encrypted integers; scale features and weights to integers first.
+
+Metrics and distances:
+
+| Function | Computes |
+| --- | --- |
+| `manhattan_distance(array1, array2)` | L1 distance |
+| `euclidean_distance_squared(array1, array2)` | squared L2 distance |
+| `hamming_distance(array1, array2)` | number of mismatches |
+| `mean_squared_error(array1, array2)` | integer MSE |
+| `mean_absolute_error(y_preds, y_trues)` | integer MAE |
+| `accuracy_score(y_preds, y_trues)` | integer percent accuracy |
+| `confusion_matrix(y_preds, y_trues)` | `[[TN, FP], [FN, TP]]` for binary labels |
+| `true_positives` / `true_negatives` / `false_positives` / `false_negatives` | binary counts |
+| `hinge_loss(y_pred, y_true)` / `compile_hinge_loss(...)` | `max(0, 1 - y_true * y_pred)` |
+
+Matrix and vector algebra:
+
+| Function | Computes |
+| --- | --- |
+| `dot_product(array1, array2)` | vector dot product |
+| `matrix_add` / `matrix_subtract` | element-wise matrix addition/subtraction |
+| `matrix_multiply(matrix1, matrix2)` | matrix product |
+| `matrix_vector_multiply(matrix, array)` | matrix-vector product |
+| `matrix_transpose(matrix)` | transpose |
+
+Models:
+
+| Function | Computes |
+| --- | --- |
+| `linear_regression_inference(weights, bias, features)` | `weights . features + bias` |
+| `decision_tree_node(feature_val, threshold, left_branch, right_branch)` | `left_branch` when `feature_val >= threshold`, else `right_branch` |
+| `compile_decision_tree_node(min_value, max_value, ...)` | compiled single tree node |
+| `knn_inference(test_sample, train_samples, train_labels, max_distance=15)` | 1-nearest-neighbor label; `max_distance` must bound the squared distances |
+| `majority_votes(predictions)` | majority vote over binary predictions |
+
+Activations (with `compile_relu`, `compile_leaky_relu`, `compile_unit_step`,
+and `compile_threshold_activation` counterparts):
+
+| Function | Computes |
+| --- | --- |
+| `relu(value)` | `max(0, value)` |
+| `leaky_relu(value, alpha=0.01)` | negative branch scaled by `alpha` (must be `1/k`), truncated toward zero |
+| `unit_step(value)` | 0 when `value < 0`, otherwise 1 |
+| `threshold_activation(value, threshold)` | 1 when `value >= threshold` |
+
+Array statistics and preprocessing: `array_mean`, `array_variance`,
+`array_min`, `array_max`, `array_range`, `array_count_greater`,
+`one_hot_encode(label, num_classes)`, `binarize(array, threshold)`,
+`clip_array(array, min_val, max_val)`.
+
+Example:
+
+```python
+from concrete import fhe
+from concrete_fhe_toolkit.ml import linear_regression_inference, threshold_activation
+
+weights = [2, -1, 3]
+bias = 1
+
+@fhe.compiler({"features": "encrypted"})
+def classify(features):
+    score = linear_regression_inference(weights, bias, features)
+    return threshold_activation(score, 0)
+
+circuit = classify.compile([[0, 0, 0], [10, 10, 10], [-10, -10, -10]])
+print(circuit.encrypt_run_decrypt([3, 1, 2]))
+# 1
+```
+
+## Finance subpackage
+
+```python
+from concrete_fhe_toolkit import finance
+```
+
+Money convention: encrypted amounts are integers in the smallest currency
+unit you choose. Rates are public floats with at most two decimal digits,
+applied through the fixed `RATE_SCALE = 100` factor. Every rate-scaled result
+is therefore 100x the real value; decode after decryption with
+`return_actual_value`.
+
+| Function | Computes | Output scale |
+| --- | --- | --- |
+| `apply_rate(amount, rate)` | `amount * rate` | `RATE_SCALE` |
+| `calculate_tax(amount, rate)` | tax amount | `RATE_SCALE` |
+| `discount(amount, rate)` | discounted amount | `RATE_SCALE` |
+| `simple_interest(amount, rate, time_period)` | `amount * rate * time` | `RATE_SCALE` |
+| `transfer(sender_balance, receiver_balance, amount)` | balances after a guarded transfer (no-op when the sender balance is insufficient) | integer |
+| `return_actual_value(value)` | decode a `RATE_SCALE`-scaled cleartext result | float |
+
+Example:
+
+```python
+from concrete_fhe_toolkit import finance
+
+tax = finance.calculate_tax(200, 0.18)
+print(finance.return_actual_value(tax))
+# 36.0
+```

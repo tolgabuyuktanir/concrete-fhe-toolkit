@@ -3,6 +3,7 @@ import numpy as np
 from concrete_fhe_toolkit import (
     compile_argmax,
     compile_argmin,
+    compile_compare,
     compile_compare_swap,
     compile_floor_divide,
     compile_floor_divide_by_product,
@@ -13,20 +14,28 @@ from concrete_fhe_toolkit import (
 )
 
 
-def test_sign_compiles_and_simulates():
-    circuit = compile_sign(-7, 7)
+def test_compare_compiles_and_simulates():
+    circuit = compile_compare(-7, 7)
 
     assert int(circuit.simulate(7, -3)) == 1
     assert int(circuit.simulate(-3, 7)) == -1
     assert int(circuit.simulate(4, 4)) == 0
 
 
-def test_sign_bounds_do_not_need_to_include_zero():
-    circuit = compile_sign(10, 20)
+def test_compare_bounds_do_not_need_to_include_zero():
+    circuit = compile_compare(10, 20)
 
     assert int(circuit.simulate(20, 10)) == 1
     assert int(circuit.simulate(10, 20)) == -1
     assert int(circuit.simulate(15, 15)) == 0
+
+
+def test_sign_compiles_and_simulates():
+    circuit = compile_sign(-7, 7)
+
+    assert int(circuit.simulate(5)) == 1
+    assert int(circuit.simulate(0)) == 0
+    assert int(circuit.simulate(-4)) == -1
 
 
 def test_compare_swap_compiles_and_simulates():

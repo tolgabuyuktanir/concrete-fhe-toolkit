@@ -1,5 +1,64 @@
 # Changelog
 
+## 0.3.0 - 2026-08-18
+
+Project home is now
+[tolgabuyuktanir/concrete-fhe-toolkit](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit).
+
+### Added
+
+- Add the `concrete_fhe_toolkit.ml` subpackage: encrypted metrics
+  (accuracy, confusion matrix, MSE/MAE, distances, hinge loss), matrix and
+  vector algebra, model inference helpers (linear regression, decision tree
+  node, 1-NN, majority voting), activations (ReLU, leaky ReLU, unit step,
+  threshold), array statistics, and preprocessing utilities.
+- Add the `concrete_fhe_toolkit.finance` subpackage with a documented
+  `RATE_SCALE` money convention: `apply_rate`, `calculate_tax`, `discount`,
+  `simple_interest`, `transfer`, and `return_actual_value`.
+- Add array utilities: `array_add`, `array_sub`, `array_multiply`,
+  `array_scale`, `array_sum`, `array_pad`, `array_slice`, `array_contains`,
+  `array_count`, `array_all_equal`.
+- Add bit helpers: `bit_op_many`, `bit_and_many`, `bit_or_many`,
+  `bit_xor_many`, `multiply_bits`, `twos_complement_add_bits` (carry-lookahead).
+- Add scalar helpers: unary `sign`, `compile_sign`, `is_zero`,
+  `compile_is_zero`, `cube`, `compile_cube`, pairwise `maximum`/`minimum`
+  with `compile_maximum`/`compile_minimum`.
+- Add an internal `_compat` facade: all Concrete imports flow through one
+  module that verifies the required `concrete-python` API at import time.
+- Add a weekly "Concrete canary" CI workflow that tests against the newest
+  (including pre-release) `concrete-python` for early upstream warnings.
+- Add cleartext and compilation test suites for the ml and finance
+  subpackages.
+
+### Changed
+
+- `sign` is now unary (`sign(x)` returns -1/0/1); the two-input comparison
+  remains available as `compare`. Tests and docs updated accordingly.
+- `unit_step` now returns the plain Heaviside step (0 for negatives,
+  otherwise 1) instead of a doubled 0..2 encoding.
+- `knn_inference` takes an explicit `max_distance` bound for its argmin
+  reduction instead of silently using the default 0..15 range.
+- `leaky_relu` truncates the scaled negative branch toward zero and
+  validates that `alpha` is the reciprocal of a positive integer;
+  `compile_leaky_relu` accepts `alpha`.
+- The publish workflow now uses the protected `pypi` GitHub environment.
+
+### Fixed
+
+- `decision_tree_node` now selects branches arithmetically; the previous
+  `bit_select` implementation was only valid for 0/1 branch values.
+- `compile_threshold_activation` now declares both encrypted inputs and
+  compiles successfully.
+- `finance.apply_rate` computes exact integer rates (for example 0.29 no
+  longer truncates to 28 due to binary floating-point error).
+- Removed empty `finance/potfolio.py` and `finance/scoring.py` stubs.
+- Fixed swapped or incorrect docstrings on `compile_relu`,
+  `compile_leaky_relu`, `compile_maximum`, `compile_minimum`,
+  `compile_is_zero`, and `compile_cube`.
+- Fixed the gated FHE smoke test calling the sign circuit with two inputs.
+- Stabilized the flaky bit-level division simulation test by compiling with
+  a tight `p_error` so simulated TFHE noise cannot flip quotient bits.
+
 ## 0.2.2 - 2026-07-23
 
 - Add the temporary `setuptools<81` runtime compatibility dependency required

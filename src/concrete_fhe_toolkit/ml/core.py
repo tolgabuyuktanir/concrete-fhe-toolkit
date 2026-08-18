@@ -1,5 +1,5 @@
 from typing import Any, List, Optional
-from concrete import fhe
+from .._compat import fhe
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
 
 from concrete_fhe_toolkit.arrays import array_sum

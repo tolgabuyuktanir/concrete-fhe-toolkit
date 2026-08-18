@@ -1,16 +1,23 @@
 from itertools import product
 
 from concrete_fhe_toolkit import (
+    compare,
     make_floor_divide,
     make_floor_divide_by_product,
     sign,
 )
 
 
-def test_sign_exhaustive():
+def test_compare_exhaustive():
     for left, right in product(range(-5, 6), repeat=2):
         expected = (left > right) - (left < right)
-        assert int(sign(left, right)) == expected
+        assert int(compare(left, right)) == expected
+
+
+def test_sign_exhaustive():
+    for value in range(-5, 6):
+        expected = (value > 0) - (value < 0)
+        assert int(sign(value)) == expected
 
 
 def test_floor_divide_exhaustive():

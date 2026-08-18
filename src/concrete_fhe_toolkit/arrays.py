@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Callable, Literal, Optional,List
 
-from concrete import fhe
+from ._compat import fhe
 
 from concrete_fhe_toolkit.math import equal,bit_or_many,bit_and_many
 
@@ -60,7 +60,7 @@ def array_pad(array: List[Any], target_size: Any) -> List[Any]:
     """Pad an encrypted array with zeros up to the specified target size."""
     raw_list = list(array)
     if(len(raw_list) > target_size):
-        raise ValueError("The target size must be greater then the array size")
+        raise ValueError("target_size must be at least the array size")
     padded_list = raw_list + [0] * (target_size - len(raw_list))
     return padded_list
 
@@ -69,7 +69,9 @@ def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> List[Any]
     raw_list = list(array)
     list_length = len(raw_list)
     if(list_length < begin_index or list_length < end_index or end_index < begin_index):
-        raise ValueError("The indexes must be less than array size/begin_index cannot be greater then the end_index")
+        raise ValueError(
+            "indexes must be within the array size and begin_index cannot be greater than end_index"
+        )
 
     return raw_list[begin_index:end_index]
 

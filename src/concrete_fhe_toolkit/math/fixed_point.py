@@ -6,7 +6,7 @@ from fractions import Fraction
 import math
 from typing import Any, Literal, Optional
 
-from concrete import fhe
+from .._compat import fhe
 
 from .._utils import compile_function, validate_bounds, validate_integer
 from ._lookup import (

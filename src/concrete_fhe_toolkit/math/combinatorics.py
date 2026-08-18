@@ -5,7 +5,7 @@ from __future__ import annotations
 import math
 from typing import Optional
 
-from concrete import fhe
+from .._compat import fhe
 
 from .._utils import validate_integer
 from ._lookup import (

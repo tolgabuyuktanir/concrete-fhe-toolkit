@@ -7,7 +7,7 @@ from math import ceil, log2
 from typing import Any, Callable, Iterable, Optional, Sequence
 import warnings
 
-from concrete import fhe
+from .._compat import fhe
 
 from .._utils import compile_function, validate_bounds, validate_integer
 

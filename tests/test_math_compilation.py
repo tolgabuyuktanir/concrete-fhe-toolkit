@@ -3,6 +3,7 @@ from itertools import product
 import math
 
 import pytest
+from concrete import fhe
 
 from concrete_fhe_toolkit import math as fhe_math
 from concrete_fhe_toolkit.math import FHECostWarning, LookupResourceError
@@ -167,15 +168,22 @@ def test_fixed_point_compile_and_simulate():
 
 
 def test_bit_level_division_compiles_and_simulates():
+    # The restoring-division circuit chains many tiny LUTs, so the default
+    # per-lookup error rate occasionally flips a simulated bit across the
+    # 16 * 8 exhaustive checks below. Tighten p_error to keep the test
+    # deterministic in practice.
+    configuration = fhe.Configuration(p_error=2**-40)
     floor_divide = fhe_math.compile_unsigned_floor_divide(
         numerator_width=4,
         denominator_width=3,
         zero_result=15,
+        configuration=configuration,
     )
     fixed_divide = fhe_math.compile_fixed_point_divide(
         numerator_width=4,
         denominator_width=3,
         fractional_bits=3,
+        configuration=configuration,
     )
 
     for numerator in range(16):

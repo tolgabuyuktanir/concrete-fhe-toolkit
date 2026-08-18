@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Iterable, Optional
 
-from concrete import fhe
+from .._compat import fhe
 
 from .._utils import compile_function, validate_integer
 from .bits import (

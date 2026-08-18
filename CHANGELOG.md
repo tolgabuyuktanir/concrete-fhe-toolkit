@@ -18,6 +18,10 @@
   saturating `add`/`subtract`/`multiply`, `round_to_multiple`, `modf`,
   `fixed_point_multiply` (rescaled product), and clear-side
   `encode_fixed_point` / `decode_fixed_point` codecs.
+- Python math-module parity: summation/product group `fsum`, `prod`,
+  `sumprod`, rounded Euclidean `dist` over coordinate lists,
+  encrypted-base `pow` (bounded two-input lookup), and clear-side
+  constants `pi`, `e`, `tau` (pair with `encode_fixed_point`).
 - C math.h parity: `asinh`, `acosh`, `atanh`, `exp2`, `fdim`, `fma`,
   IEEE-style `remainder` (ties-to-even), `ilogb`, `ldexp`/`scalbn`
   (public power-of-two scaling), plus aliases `tgamma`, `fabs`, `fmax`,

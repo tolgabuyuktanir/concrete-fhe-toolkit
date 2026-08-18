@@ -116,3 +116,57 @@ def test_ilogb_and_exp2_compile_and_simulate():
 
     exp2 = fhe_math.exp2.compile(0, 60, input_scale=10, output_scale=10)
     assert int(exp2.simulate(30)) == 80  # 2^3 = 8.0
+
+
+def test_summation_and_product_clear():
+    assert int(fhe_math.fsum([1, 2, 3, 4, 5])) == 15
+    assert int(fhe_math.fsum([])) == 0
+
+    assert int(fhe_math.prod([2, 3, 4])) == 24
+    assert int(fhe_math.prod([2, 3], start=5)) == 30
+    assert int(fhe_math.prod([], start=7)) == 7
+
+    assert int(fhe_math.sumprod([1, 2, 3], [4, 5, 6])) == 32
+    with pytest.raises(ValueError):
+        fhe_math.sumprod([1, 2], [1])
+
+
+def test_dist_clear():
+    dist = fhe_math.make_dist(2, 0, 10)
+    assert int(dist([0, 0], [3, 4])) == 5
+    assert int(dist([1, 1], [2, 2])) == round(math.sqrt(2))
+    assert int(dist([5, 5], [5, 5])) == 0
+
+    dist3 = fhe_math.make_dist(3, 0, 5)
+    assert int(dist3([0, 0, 0], [2, 3, 5])) == round(math.dist([0, 0, 0], [2, 3, 5]))
+
+
+def test_pow_clear():
+    power = fhe_math.make_pow(0, 5, 4)
+    for base in range(6):
+        for exponent in range(5):
+            assert int(power(base, exponent)) == base**exponent
+
+
+def test_math_constants():
+    assert fhe_math.pi == math.pi
+    assert fhe_math.e == math.e
+    assert fhe_math.tau == math.tau
+    assert fhe_math.encode_fixed_point(fhe_math.pi, 100) == 314
+
+
+def test_dist_compiles_and_simulates():
+    import numpy as np
+
+    circuit = fhe_math.dist.compile(2, 0, 10)
+    assert int(circuit.simulate(np.array([0, 0]), np.array([3, 4]))) == 5
+    assert int(circuit.simulate(np.array([10, 0]), np.array([0, 10]))) == round(
+        math.sqrt(200)
+    )
+
+
+def test_pow_compiles_and_simulates():
+    circuit = fhe_math.pow.compile(0, 4, 3)
+    assert int(circuit.simulate(3, 2)) == 9
+    assert int(circuit.simulate(4, 3)) == 64
+    assert int(circuit.simulate(0, 0)) == 1

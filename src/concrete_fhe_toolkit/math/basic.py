@@ -1144,3 +1144,47 @@ def compile_ldexp(
 # C-math-parity aliases.
 make_scalbn = make_ldexp
 compile_scalbn = compile_ldexp
+
+
+def fsum(values: Any) -> Any:
+    """Sum of an iterable of encrypted values (tournament reduction, exact on integers)."""
+    items = list(values)
+    if not items:
+        return 0
+    while len(items) > 1:
+        next_items = []
+        for index in range(0, len(items) - 1, 2):
+            next_items.append(items[index] + items[index + 1])
+        if len(items) % 2 == 1:
+            next_items.append(items[-1])
+        items = next_items
+    return items[0]
+
+
+def prod(values: Any, start: int = 1) -> Any:
+    """Product of an iterable of encrypted values times a public start value.
+
+    Uses a tournament reduction to keep multiplication depth logarithmic.
+    Watch the output bit width: products grow fast under bounded FHE.
+    """
+    normalized_start = validate_integer("start", start)
+    items = list(values)
+    if not items:
+        return normalized_start
+    while len(items) > 1:
+        next_items = []
+        for index in range(0, len(items) - 1, 2):
+            next_items.append(items[index] * items[index + 1])
+        if len(items) % 2 == 1:
+            next_items.append(items[-1])
+        items = next_items
+    return items[0] * normalized_start
+
+
+def sumprod(p: Any, q: Any) -> Any:
+    """Sum of products of paired values from two iterables (dot product)."""
+    left = list(p)
+    right = list(q)
+    if len(left) != len(right):
+        raise ValueError("p and q must have the same length")
+    return fsum(item_p * item_q for item_p, item_q in zip(left, right))

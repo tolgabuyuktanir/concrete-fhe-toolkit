@@ -526,3 +526,138 @@ def compile_ilogb(
         allow_large_lookup=allow_large_lookup,
         configuration=configuration,
     )
+
+
+def make_dist(size: int, min_value: int = 0, max_value: int = 15) -> BinaryFunction:
+    """Create round(Euclidean distance) between two encrypted coordinate lists.
+
+    ``size`` is the (public) number of coordinates; every coordinate must
+    stay in [min_value, max_value]. The square-root lookup is built over the
+    worst-case squared distance for those bounds.
+    """
+    normalized_size = validate_integer("size", size, minimum=1)
+    minimum, maximum = validate_bounds(min_value, max_value)
+    span = maximum - minimum
+    max_squared = normalized_size * span * span
+
+    if max_squared == 0:
+        def zero_dist(p, q):
+            total = 0
+            for index in range(normalized_size):
+                total = total + (p[index] - q[index])
+            return total * 0
+
+        return zero_dist
+
+    values = unary_values(
+        lambda squared: round(math.sqrt(squared)),
+        0,
+        max_squared,
+    )
+    root = make_unary_lookup(values, 0)
+
+    def dist(p, q):
+        squared = 0
+        for index in range(normalized_size):
+            difference = p[index] - q[index]
+            squared = squared + difference * difference
+        return root(squared)
+
+    return dist
+
+
+def compile_dist(
+    size: int,
+    min_value: int = 0,
+    max_value: int = 15,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile round(Euclidean distance) between two encrypted coordinate arrays."""
+    import numpy as np
+
+    from .._utils import compile_function
+
+    normalized_size = validate_integer("size", size, minimum=1)
+    minimum, maximum = validate_bounds(min_value, max_value)
+    span = maximum - minimum
+    if span:
+        from ._lookup import check_lookup_cost
+
+        check_lookup_cost(
+            "compile_dist",
+            unary_values(
+                lambda squared: round(math.sqrt(squared)),
+                0,
+                normalized_size * span * span,
+            ),
+            allow_large_lookup=allow_large_lookup,
+        )
+    function = make_dist(normalized_size, minimum, maximum)
+    lows = np.full(normalized_size, minimum, dtype=np.int64)
+    highs = np.full(normalized_size, maximum, dtype=np.int64)
+    inputset = [
+        (lows, lows),
+        (lows, highs),
+        (highs, lows),
+        (highs, highs),
+    ]
+    return compile_function(
+        function,
+        {"p": "encrypted", "q": "encrypted"},
+        inputset,
+        configuration,
+    )
+
+
+def make_pow(
+    min_base: int,
+    max_base: int,
+    max_exponent: int,
+) -> BinaryFunction:
+    """Create base**exponent for an encrypted base and encrypted exponent.
+
+    Outputs grow extremely fast; the compile-time cost guardrails will
+    require ``allow_large_lookup=True`` beyond small bounds.
+    """
+    base_minimum, base_maximum = validate_bounds(min_base, max_base)
+    exponent_maximum = validate_integer("max_exponent", max_exponent, minimum=0)
+    values = binary_values(
+        lambda base, exponent: base**exponent,
+        base_minimum,
+        base_maximum,
+        0,
+        exponent_maximum,
+    )
+    return make_binary_lookup(values, base_minimum, 0, exponent_maximum + 1)
+
+
+def compile_pow(
+    min_base: int,
+    max_base: int,
+    max_exponent: int,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile base**exponent for an encrypted base and encrypted exponent."""
+    base_minimum, base_maximum = validate_bounds(min_base, max_base)
+    exponent_maximum = validate_integer("max_exponent", max_exponent, minimum=0)
+    values = binary_values(
+        lambda base, exponent: base**exponent,
+        base_minimum,
+        base_maximum,
+        0,
+        exponent_maximum,
+    )
+    return compile_binary_lookup(
+        "compile_pow",
+        values,
+        base_minimum,
+        base_maximum,
+        0,
+        exponent_maximum,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )

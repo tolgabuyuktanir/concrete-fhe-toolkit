@@ -9,6 +9,9 @@ from ._lookup import FHECostWarning, LookupCost, LookupResourceError, estimate_l
 from ._operation import BoundedOperation
 from .basic import (
     add,
+    fsum,
+    prod,
+    sumprod,
     compile_fdim,
     compile_fma,
     compile_ldexp,
@@ -176,7 +179,11 @@ from .fixed_point import (
     make_trunc,
 )
 from .number_theory import (
+    compile_dist,
     compile_gcd,
+    compile_pow,
+    make_dist,
+    make_pow,
     compile_ilogb,
     make_ilogb,
     compile_hypot,
@@ -657,6 +664,24 @@ fabs = absolute
 fmax = maximum
 fmin = minimum
 
+
+# Clear-side constants mirroring Python's math module; use with
+# encode_fixed_point(pi, scale) to feed them into circuits.
+from math import e, pi, tau  # noqa: E402
+
+dist = BoundedOperation(
+    "dist",
+    make_dist,
+    compile_dist,
+    description="Rounded Euclidean distance between two encrypted coordinate lists.",
+)
+pow = BoundedOperation(
+    "pow",
+    make_pow,
+    compile_pow,
+    description="Encrypted base raised to an encrypted exponent (bounded lookup).",
+)
+
 __all__ = [
     "abs",
     "abs_diff",
@@ -717,6 +742,7 @@ __all__ = [
     "compile_cosh",
     "compile_cube",
     "compile_degrees",
+    "compile_dist",
     "compile_divmod",
     "compile_equal",
     "compile_erf",
@@ -767,6 +793,7 @@ __all__ = [
     "compile_not_equal",
     "compile_perm",
     "compile_permutations",
+    "compile_pow",
     "compile_power",
     "compile_powmod",
     "compile_radians",
@@ -800,7 +827,9 @@ __all__ = [
     "cube",
     "decode_fixed_point",
     "degrees",
+    "dist",
     "divmod",
+    "e",
     "encode_fixed_point",
     "equal",
     "erf",
@@ -824,6 +853,7 @@ __all__ = [
     "fmax",
     "fmin",
     "fsub_bit",
+    "fsum",
     "full_adder_bit",
     "FULL_ADDER_CARRY_LUT",
     "FULL_ADDER_SUM_LUT",
@@ -875,6 +905,7 @@ __all__ = [
     "make_cos",
     "make_cosh",
     "make_degrees",
+    "make_dist",
     "make_divmod",
     "make_erf",
     "make_erfc",
@@ -913,6 +944,7 @@ __all__ = [
     "make_next_prime",
     "make_perm",
     "make_permutations",
+    "make_pow",
     "make_power",
     "make_powmod",
     "make_radians",
@@ -948,9 +980,12 @@ __all__ = [
     "parity_bits",
     "perm",
     "permutations",
+    "pi",
     "popcount_bits",
+    "pow",
     "power",
     "powmod",
+    "prod",
     "radians",
     "remainder",
     "rescale",
@@ -972,8 +1007,10 @@ __all__ = [
     "sqrt",
     "square",
     "subtract",
+    "sumprod",
     "tan",
     "tanh",
+    "tau",
     "tgamma",
     "totient",
     "trunc",

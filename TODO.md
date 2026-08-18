@@ -34,6 +34,27 @@ Working list for the team. Check items off in the PR that completes them.
 - [ ] Meaningful typing: replace blanket `Any` with documented aliases
   (e.g. `EncryptedValue`) and add a mypy CI step.
 
+## Candidate modules (ordered by priority)
+
+Growth rule: deepen capability layers (math/arrays/stats/ml) freely; new
+domain modules must clear the acceptance bar in CONTRIBUTING.md.
+
+- [ ] **finance.scoring** — scorecard/credit-score evaluation: weighted sum
+  + clamp + LUT score banding (strategic differentiator).
+- [ ] **finance.portfolio** — encrypted portfolio value, position-limit
+  checks, risk-threshold counts.
+- [ ] **stats** (top-level) — promote `ml.stats` and add private-analytics
+  primitives: median/percentile (reuse the bitonic sort), top-k,
+  histogram/bincount, mode (bincount + argmax).
+- [ ] **ml ensembles** — `random_forest_inference`
+  (decision_tree_inference x N + majority_votes), small `mlp_inference`
+  (matrix_vector_multiply + relu layers); both compose existing pieces.
+- [ ] Later, use-case driven: `sets` (PSI primitives: intersection size,
+  membership), `text` (bounded-alphabet string equality/search),
+  `timeseries` (windowed sums/averages, threshold-crossing counts).
+- Out of scope: model training (Concrete-ML's territory), free-form
+  floating point, protocol-level crypto/key management.
+
 ## Dependencies / upstream tracking
 
 - [ ] Relax the `numpy<2` pin once the weekly `concrete-canary` workflow

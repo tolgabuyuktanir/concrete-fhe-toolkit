@@ -1258,3 +1258,179 @@ def compile_atan2(
         allow_large_lookup=allow_large_lookup,
         configuration=configuration,
     )
+
+
+def make_asinh(
+    min_input: int = -500,
+    max_input: int = 500,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 100,
+) -> UnaryFunction:
+    """Create scaled inverse hyperbolic sine for encrypted fixed-point inputs."""
+    return _make_scaled_unary(
+        "make_asinh",
+        math.asinh,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+    )
+
+
+def compile_asinh(
+    min_input: int = -500,
+    max_input: int = 500,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 100,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled inverse hyperbolic sine for encrypted fixed-point inputs."""
+    return _compile_scaled_unary(
+        "compile_asinh",
+        math.asinh,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=None,
+        domain=None,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_acosh(
+    min_input: int = 100,
+    max_input: int = 1000,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 100,
+    invalid_result: Optional[int] = None,
+) -> UnaryFunction:
+    """Create scaled inverse hyperbolic cosine; invalid_result handles x < 1."""
+    return _make_scaled_unary(
+        "make_acosh",
+        math.acosh,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=lambda value: value >= 1,
+    )
+
+
+def compile_acosh(
+    min_input: int = 100,
+    max_input: int = 1000,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 100,
+    invalid_result: Optional[int] = None,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled inverse hyperbolic cosine; invalid_result handles x < 1."""
+    return _compile_scaled_unary(
+        "compile_acosh",
+        math.acosh,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=lambda value: value >= 1,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_atanh(
+    min_input: int = -99,
+    max_input: int = 99,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 100,
+    invalid_result: Optional[int] = None,
+) -> UnaryFunction:
+    """Create scaled inverse hyperbolic tangent; invalid_result handles |x| >= 1."""
+    return _make_scaled_unary(
+        "make_atanh",
+        math.atanh,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=lambda value: -1 < value < 1,
+    )
+
+
+def compile_atanh(
+    min_input: int = -99,
+    max_input: int = 99,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 100,
+    invalid_result: Optional[int] = None,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled inverse hyperbolic tangent; invalid_result handles |x| >= 1."""
+    return _compile_scaled_unary(
+        "compile_atanh",
+        math.atanh,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=lambda value: -1 < value < 1,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_exp2(
+    min_input: int = -50,
+    max_input: int = 50,
+    *,
+    input_scale: int = 10,
+    output_scale: int = 100,
+) -> UnaryFunction:
+    """Create scaled 2**x for encrypted fixed-point inputs."""
+    return _make_scaled_unary(
+        "make_exp2",
+        lambda value: 2.0**value,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+    )
+
+
+def compile_exp2(
+    min_input: int = -50,
+    max_input: int = 50,
+    *,
+    input_scale: int = 10,
+    output_scale: int = 100,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled 2**x for encrypted fixed-point inputs."""
+    return _compile_scaled_unary(
+        "compile_exp2",
+        lambda value: 2.0**value,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=None,
+        domain=None,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )

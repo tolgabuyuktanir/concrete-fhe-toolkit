@@ -139,6 +139,35 @@ domain modules must clear the acceptance bar in CONTRIBUTING.md.
 - [ ] Migrate ml to the make_/compile_ bounds pattern (tracked above).
   Decision trees already rebuilt on math.select.
 
+### ml — second wave (2026-08-18 review, ordered by value)
+
+- [ ] **`gbdt_inference`** — boosted trees: integer score leaves summed
+  across trees + threshold (decision_tree_inference + add +
+  threshold_activation). The de-facto credit-scoring model; direct synergy
+  with finance.scoring.
+- [ ] **sklearn bridge (clear-side)** — `from_sklearn_linear(model, scale)`
+  and `from_sklearn_tree(model, scale)` converters into our integer
+  weight-list / dict-tree formats; sklearn as an optional import inside
+  the functions. Kills the manual scaling ritual in the README example.
+- [ ] **`linear_multiclass_inference`** — per-class W.x+b scores +
+  argmax_inference (pure composition).
+- [ ] **`logistic_regression_proba`** — scaled probability output via a
+  sigmoid LUT over the known score bounds.
+- [ ] **`svm_rbf_inference`** — kernel trick under FHE: K = exp(-gamma*d^2)
+  is a single LUT over the squared-distance range; weighted sum of kernels
+  + threshold.
+- [ ] **`bin_feature(value, bin_edges)`** — ordinal bucketing as a sum of
+  greater_equal over public edges (scorecard building block).
+- [ ] **Top-k similarity retrieval** — query x corpus dot products +
+  make_top_k (private-search demo in one composition).
+- [ ] **Multi-class confusion matrix** and **scaled R² score** — existing
+  counter + floor_divide patterns.
+- [ ] **Weighted majority vote** — majority_votes with public weights
+  (also a GBDT sub-piece).
+- Deliberately out: ROC/AUC under encryption (sort cost unjustifiable —
+  compute post-decryption), softmax (argmax suffices), deep networks
+  (Concrete-ML's territory).
+
 ### Infrastructure / DX (non-finance)
 
 - [ ] **`deploy` helpers** — thin wrappers over Concrete's client/server

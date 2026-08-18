@@ -483,3 +483,46 @@ def compile_hypot(
         allow_large_lookup=allow_large_lookup,
         configuration=configuration,
     )
+
+
+def make_ilogb(
+    min_value: int,
+    max_value: int,
+    *,
+    invalid_result: int = 0,
+) -> UnaryFunction:
+    """Create floor(log2(|x|)) for encrypted integers; invalid_result handles x == 0."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    invalid = validate_integer("invalid_result", invalid_result)
+    values = unary_values(
+        lambda value: invalid if value == 0 else abs(value).bit_length() - 1,
+        minimum,
+        maximum,
+    )
+    return make_unary_lookup(values, minimum)
+
+
+def compile_ilogb(
+    min_value: int,
+    max_value: int,
+    *,
+    invalid_result: int = 0,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile floor(log2(|x|)) for encrypted integers; invalid_result handles x == 0."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    invalid = validate_integer("invalid_result", invalid_result)
+    values = unary_values(
+        lambda value: invalid if value == 0 else abs(value).bit_length() - 1,
+        minimum,
+        maximum,
+    )
+    return compile_unary_lookup(
+        "compile_ilogb",
+        values,
+        minimum,
+        maximum,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )

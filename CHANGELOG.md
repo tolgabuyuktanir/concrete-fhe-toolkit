@@ -18,6 +18,11 @@
   saturating `add`/`subtract`/`multiply`, `round_to_multiple`, `modf`,
   `fixed_point_multiply` (rescaled product), and clear-side
   `encode_fixed_point` / `decode_fixed_point` codecs.
+- C math.h parity: `asinh`, `acosh`, `atanh`, `exp2`, `fdim`, `fma`,
+  IEEE-style `remainder` (ties-to-even), `ilogb`, `ldexp`/`scalbn`
+  (public power-of-two scaling), plus aliases `tgamma`, `fabs`, `fmax`,
+  `fmin`. NaN/nextafter-style float machinery is intentionally out of
+  scope for integer FHE.
 - Bit level: `shift_left/right_bits` (logical/arithmetic), rotates,
   `popcount_bits`, `parity_bits`, `bit_length_bits`,
   `unsigned_compare_bits`, and the restoring divider's remainder exposed as

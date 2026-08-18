@@ -943,3 +943,204 @@ def compile_saturating_multiply(
     return _compile_saturating(
         "multiply", min_value, max_value, allow_large_lookup, configuration
     )
+
+
+def make_fdim(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
+    """Create fdim(x, y) = max(x - y, 0) for two encrypted bounded integers."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    span = maximum - minimum
+
+    if span == 0:
+        def constant_fdim(left: Any, right: Any) -> Any:
+            return left - right
+
+        return constant_fdim
+
+    values = unary_values(lambda diff: max(diff, 0), -span, span)
+    lookup = make_unary_lookup(values, -span)
+
+    def fdim(left: Any, right: Any) -> Any:
+        return lookup(left - right)
+
+    return fdim
+
+
+def compile_fdim(
+    min_value: int = 0,
+    max_value: int = 15,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile fdim(x, y) = max(x - y, 0) over inclusive bounds."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    span = maximum - minimum
+    if span:
+        check_lookup_cost(
+            "compile_fdim",
+            unary_values(lambda diff: max(diff, 0), -span, span),
+            allow_large_lookup=allow_large_lookup,
+        )
+    function = make_fdim(minimum, maximum)
+    inputset = [
+        (minimum, minimum),
+        (minimum, maximum),
+        (maximum, minimum),
+        (maximum, maximum),
+    ]
+    return compile_function(
+        function,
+        {"left": "encrypted", "right": "encrypted"},
+        inputset,
+        configuration,
+    )
+
+
+def fma(left: Any, right: Any, addend: Any) -> Any:
+    """Return left * right + addend (fused multiply-add, exact on integers)."""
+    return left * right + addend
+
+
+def compile_fma(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile fused multiply-add over three encrypted bounded inputs."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    inputset = [
+        (minimum, minimum, minimum),
+        (minimum, maximum, minimum),
+        (maximum, minimum, maximum),
+        (maximum, maximum, maximum),
+        (minimum, maximum, maximum),
+        (maximum, maximum, minimum),
+    ]
+    return compile_function(
+        fma,
+        {"left": "encrypted", "right": "encrypted", "addend": "encrypted"},
+        inputset,
+        configuration,
+    )
+
+
+def make_remainder(
+    min_numerator: int,
+    max_numerator: int,
+    min_denominator: int,
+    max_denominator: int,
+    *,
+    zero_result: int = 0,
+) -> BinaryFunction:
+    """Create IEEE-style remainder(x, y) = x - round(x / y) * y (ties to even).
+
+    Unlike modulo, the result is centered around zero. ``zero_result`` is
+    returned when the denominator is zero.
+    """
+    from fractions import Fraction
+
+    zero = validate_integer("zero_result", zero_result)
+    denominator_minimum, denominator_maximum = validate_bounds(
+        min_denominator,
+        max_denominator,
+    )
+    values = binary_values(
+        lambda numerator, denominator: (
+            zero
+            if denominator == 0
+            else numerator - round(Fraction(numerator, denominator)) * denominator
+        ),
+        min_numerator,
+        max_numerator,
+        denominator_minimum,
+        denominator_maximum,
+    )
+    return make_binary_lookup(
+        values,
+        min_numerator,
+        denominator_minimum,
+        denominator_maximum - denominator_minimum + 1,
+    )
+
+
+def compile_remainder(
+    min_numerator: int,
+    max_numerator: int,
+    min_denominator: int,
+    max_denominator: int,
+    *,
+    zero_result: int = 0,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile IEEE-style remainder with explicit zero-denominator behavior."""
+    from fractions import Fraction
+
+    zero = validate_integer("zero_result", zero_result)
+    values = binary_values(
+        lambda numerator, denominator: (
+            zero
+            if denominator == 0
+            else numerator - round(Fraction(numerator, denominator)) * denominator
+        ),
+        min_numerator,
+        max_numerator,
+        min_denominator,
+        max_denominator,
+    )
+    return compile_binary_lookup(
+        "compile_remainder",
+        values,
+        min_numerator,
+        max_numerator,
+        min_denominator,
+        max_denominator,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_ldexp(exponent: int) -> UnaryFunction:
+    """Create x * 2**exponent with a public exponent.
+
+    Negative exponents floor-divide (arithmetic shift right).
+    """
+    normalized = validate_integer("exponent", exponent)
+    if normalized >= 0:
+        factor = 1 << normalized
+
+        def scale_up(value: Any) -> Any:
+            return value * factor
+
+        return scale_up
+
+    divisor = 1 << (-normalized)
+
+    def scale_down(value: Any) -> Any:
+        return value // divisor
+
+    return scale_down
+
+
+def compile_ldexp(
+    min_value: int,
+    max_value: int,
+    exponent: int,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile x * 2**exponent with a public exponent."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    function = make_ldexp(exponent)
+    return compile_function(
+        function,
+        {"value": "encrypted"},
+        [minimum, maximum],
+        configuration,
+    )
+
+
+# C-math-parity aliases.
+make_scalbn = make_ldexp
+compile_scalbn = compile_ldexp

@@ -4,6 +4,16 @@
 
 ### Added
 
+- Math, inverse trigonometry and conversions: `asin`, `acos`, `atan` (scaled,
+  with `invalid_result` domain handling for `asin`/`acos`), `cbrt`,
+  `degrees`, `radians`.
+- Math, number theory: `totient` (Euler's phi), `next_prime`,
+  `mod_inverse` (with explicit invalid behavior), and rounded integer
+  `hypot`.
+- Math, basics: `select(control, when_true, when_false)` for oblivious
+  branching over arbitrary bounded integers (plus `compile_select`) and
+  `abs_diff` (|left - right| via a difference-domain lookup).
+
 - `knn_inference` now supports real k-NN via a `k` parameter (iterated
   argmin with distance masking, majority vote; binary labels for `k > 1`).
 - `logistic_regression_inference`: binary classification from the linear

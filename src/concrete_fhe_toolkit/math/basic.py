@@ -694,3 +694,91 @@ compile_abs = compile_absolute
 compile_sub = compile_subtract
 make_abs = make_absolute
 compile_scalar_mul = compile_scalar_multiply
+
+
+def select(control: Any, when_true: Any, when_false: Any) -> Any:
+    """Return when_true when control is 1, otherwise when_false.
+
+    control must be 0 or 1. Unlike `bit_select`, the branches may be any
+    bounded integers, so this is the building block for oblivious branching.
+    """
+    return control * when_true + (1 - control) * when_false
+
+
+def compile_select(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile an oblivious select over two encrypted bounded branches."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    inputset = [
+        (0, minimum, minimum),
+        (0, maximum, maximum),
+        (0, minimum, maximum),
+        (1, minimum, minimum),
+        (1, maximum, maximum),
+        (1, maximum, minimum),
+    ]
+    return compile_function(
+        select,
+        {
+            "control": "encrypted",
+            "when_true": "encrypted",
+            "when_false": "encrypted",
+        },
+        inputset,
+        configuration,
+    )
+
+
+def make_abs_diff(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
+    """Create |left - right| for two encrypted bounded integers."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    span = maximum - minimum
+
+    if span == 0:
+        def constant_abs_diff(left: Any, right: Any) -> Any:
+            return left - right
+
+        return constant_abs_diff
+
+    values = unary_values(abs, -span, span)
+    lookup = make_unary_lookup(values, -span)
+
+    def abs_diff(left: Any, right: Any) -> Any:
+        return lookup(left - right)
+
+    return abs_diff
+
+
+def compile_abs_diff(
+    min_value: int = 0,
+    max_value: int = 15,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile |left - right| for two encrypted bounded integers."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    span = maximum - minimum
+    if span:
+        check_lookup_cost(
+            "compile_abs_diff",
+            unary_values(abs, -span, span),
+            allow_large_lookup=allow_large_lookup,
+        )
+    function = make_abs_diff(minimum, maximum)
+    inputset = [
+        (minimum, minimum),
+        (minimum, maximum),
+        (maximum, minimum),
+        (maximum, maximum),
+    ]
+    return compile_function(
+        function,
+        {"left": "encrypted", "right": "encrypted"},
+        inputset,
+        configuration,
+    )

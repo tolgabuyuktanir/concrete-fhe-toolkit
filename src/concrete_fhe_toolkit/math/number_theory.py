@@ -317,3 +317,169 @@ def compile_is_prime(
         allow_large_lookup=allow_large_lookup,
         configuration=configuration,
     )
+
+
+def _totient(value: int) -> int:
+    if value <= 0:
+        return 0
+    result = value
+    remaining = value
+    divisor = 2
+    while divisor * divisor <= remaining:
+        if remaining % divisor == 0:
+            while remaining % divisor == 0:
+                remaining //= divisor
+            result -= result // divisor
+        divisor += 1
+    if remaining > 1:
+        result -= result // remaining
+    return result
+
+
+def make_totient(min_value: int = 0, max_value: int = 100) -> UnaryFunction:
+    """Create Euler's totient for encrypted bounded integers (0 for n <= 0)."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    values = unary_values(_totient, minimum, maximum)
+    return make_unary_lookup(values, minimum)
+
+
+def compile_totient(
+    min_value: int = 0,
+    max_value: int = 100,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile Euler's totient for encrypted bounded integers."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    values = unary_values(_totient, minimum, maximum)
+    return compile_unary_lookup(
+        "compile_totient",
+        values,
+        minimum,
+        maximum,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def _next_prime(value: int) -> int:
+    candidate = max(value + 1, 2)
+    while not _is_prime(candidate):
+        candidate += 1
+    return candidate
+
+
+def make_next_prime(min_value: int = 0, max_value: int = 100) -> UnaryFunction:
+    """Create the smallest prime strictly greater than an encrypted integer."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    values = unary_values(_next_prime, minimum, maximum)
+    return make_unary_lookup(values, minimum)
+
+
+def compile_next_prime(
+    min_value: int = 0,
+    max_value: int = 100,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile the smallest prime strictly greater than an encrypted integer."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    values = unary_values(_next_prime, minimum, maximum)
+    return compile_unary_lookup(
+        "compile_next_prime",
+        values,
+        minimum,
+        maximum,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def _mod_inverse_value(value: int, modulus: int, invalid_result: int) -> int:
+    if modulus <= 1 or math.gcd(value, modulus) != 1:
+        return invalid_result
+    return pow(value, -1, modulus)
+
+
+def make_mod_inverse(
+    min_value: int = 0,
+    max_value: int = 15,
+    *,
+    invalid_result: int = 0,
+) -> BinaryFunction:
+    """Create the modular inverse of value mod modulus for encrypted inputs.
+
+    Returns ``invalid_result`` when the modulus is smaller than 2 or when
+    the value is not coprime with the modulus.
+    """
+    invalid = validate_integer("invalid_result", invalid_result)
+    return _make_binary_math(
+        lambda value, modulus: _mod_inverse_value(value, modulus, invalid),
+        min_value,
+        max_value,
+    )
+
+
+def compile_mod_inverse(
+    min_value: int = 0,
+    max_value: int = 15,
+    *,
+    invalid_result: int = 0,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile the modular inverse of value mod modulus for encrypted inputs."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    invalid = validate_integer("invalid_result", invalid_result)
+    values = _binary_math_values(
+        lambda value, modulus: _mod_inverse_value(value, modulus, invalid),
+        minimum,
+        maximum,
+    )
+    return compile_binary_lookup(
+        "compile_mod_inverse",
+        values,
+        minimum,
+        maximum,
+        minimum,
+        maximum,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_hypot(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
+    """Create round(hypot(x, y)) for two encrypted bounded integers."""
+    return _make_binary_math(
+        lambda left, right: round(math.hypot(left, right)),
+        min_value,
+        max_value,
+    )
+
+
+def compile_hypot(
+    min_value: int = 0,
+    max_value: int = 15,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile round(hypot(x, y)) for two encrypted bounded integers."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    values = _binary_math_values(
+        lambda left, right: round(math.hypot(left, right)),
+        minimum,
+        maximum,
+    )
+    return compile_binary_lookup(
+        "compile_hypot",
+        values,
+        minimum,
+        maximum,
+        minimum,
+        maximum,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )

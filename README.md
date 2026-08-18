@@ -288,19 +288,21 @@ from concrete_fhe_toolkit import math as fhe_math
 Friendly operation objects compile by default and expose `.make(...)` and
 `.compile(...)` for explicit control:
 
-- `absolute`, `clamp`, `modulo`, `divmod`, `is_close`
+- `absolute`, `abs_diff`, `clamp`, `modulo`, `divmod`, `is_close`
 - `factorial`, `fibonacci`, `power`, `comb`, `perm`
 - `gcd`, `lcm`, `is_coprime`, `is_divisible`, `isqrt`, `is_even`, `is_odd`,
-  `is_prime`
+  `is_prime`, `totient`, `next_prime`, `mod_inverse`, `hypot`
 - `floor`, `ceil`, `trunc`, `round`, `floor_ceil`, `rescale`
-- `sin`, `cos`, `tan`, `exp`, `expm1`, `log`, `log1p`, `log2`, `log10`,
-  `sqrt`, `erf`, `erfc`, `tanh`, `sinh`, `cosh`, `sigmoid`
+- `sin`, `cos`, `tan`, `asin`, `acos`, `atan`, `exp`, `expm1`, `log`,
+  `log1p`, `log2`, `log10`, `sqrt`, `cbrt`, `erf`, `erfc`, `tanh`, `sinh`,
+  `cosh`, `sigmoid`, `degrees`, `radians`
 - `unsigned_floor_divide`, `fixed_point_divide`
 
 Basic integer operations:
 
-- native arithmetic: `add`, `subtract`, `multiply`, `negate`, `square`
-- comparisons: `equal`, `not_equal`, `less`, `less_equal`, `greater`, `greater_equal`
+- native arithmetic: `add`, `subtract`, `multiply`, `negate`, `square`, `cube`
+- comparisons: `equal`, `not_equal`, `less`, `less_equal`, `greater`, `greater_equal`, `is_zero`
+- oblivious branching: `select(control, when_true, when_false)`, `compile_select`
 - compilers: `compile_add`, `compile_subtract`, `compile_multiply`,
   `compile_negate`, `compile_square`, `compile_scalar_multiply`
 - lookup helpers: `make_absolute`, `compile_absolute`, `make_clamp`,

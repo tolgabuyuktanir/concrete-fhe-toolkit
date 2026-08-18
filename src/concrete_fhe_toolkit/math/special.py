@@ -825,3 +825,267 @@ def compile_sigmoid(
         allow_large_lookup=allow_large_lookup,
         configuration=configuration,
     )
+
+
+def _cbrt(value: float) -> float:
+    return math.copysign(abs(value) ** (1.0 / 3.0), value)
+
+
+def make_asin(
+    min_input: int = -100,
+    max_input: int = 100,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 1000,
+    invalid_result: Optional[int] = None,
+) -> UnaryFunction:
+    """Create scaled arcsine (radians); invalid_result handles |x| > 1 if needed."""
+    return _make_scaled_unary(
+        "make_asin",
+        math.asin,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=lambda value: -1 <= value <= 1,
+    )
+
+
+def compile_asin(
+    min_input: int = -100,
+    max_input: int = 100,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 1000,
+    invalid_result: Optional[int] = None,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled arcsine (radians); invalid_result handles |x| > 1 if needed."""
+    return _compile_scaled_unary(
+        "compile_asin",
+        math.asin,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=lambda value: -1 <= value <= 1,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_acos(
+    min_input: int = -100,
+    max_input: int = 100,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 1000,
+    invalid_result: Optional[int] = None,
+) -> UnaryFunction:
+    """Create scaled arccosine (radians); invalid_result handles |x| > 1 if needed."""
+    return _make_scaled_unary(
+        "make_acos",
+        math.acos,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=lambda value: -1 <= value <= 1,
+    )
+
+
+def compile_acos(
+    min_input: int = -100,
+    max_input: int = 100,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 1000,
+    invalid_result: Optional[int] = None,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled arccosine (radians); invalid_result handles |x| > 1 if needed."""
+    return _compile_scaled_unary(
+        "compile_acos",
+        math.acos,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=lambda value: -1 <= value <= 1,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_atan(
+    min_input: int = -500,
+    max_input: int = 500,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 1000,
+) -> UnaryFunction:
+    """Create scaled arctangent (radians) for encrypted fixed-point inputs."""
+    return _make_scaled_unary(
+        "make_atan",
+        math.atan,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+    )
+
+
+def compile_atan(
+    min_input: int = -500,
+    max_input: int = 500,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 1000,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled arctangent (radians) for encrypted fixed-point inputs."""
+    return _compile_scaled_unary(
+        "compile_atan",
+        math.atan,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=None,
+        domain=None,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_cbrt(
+    min_input: int = -1000,
+    max_input: int = 1000,
+    *,
+    input_scale: int = 1,
+    output_scale: int = 100,
+) -> UnaryFunction:
+    """Create scaled cube root (sign-preserving) for encrypted fixed-point inputs."""
+    return _make_scaled_unary(
+        "make_cbrt",
+        _cbrt,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+    )
+
+
+def compile_cbrt(
+    min_input: int = -1000,
+    max_input: int = 1000,
+    *,
+    input_scale: int = 1,
+    output_scale: int = 100,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled cube root (sign-preserving) for encrypted fixed-point inputs."""
+    return _compile_scaled_unary(
+        "compile_cbrt",
+        _cbrt,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=None,
+        domain=None,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_degrees(
+    min_input: int = -628,
+    max_input: int = 628,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 1,
+) -> UnaryFunction:
+    """Create scaled radians-to-degrees conversion for encrypted inputs."""
+    return _make_scaled_unary(
+        "make_degrees",
+        math.degrees,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+    )
+
+
+def compile_degrees(
+    min_input: int = -628,
+    max_input: int = 628,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 1,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled radians-to-degrees conversion for encrypted inputs."""
+    return _compile_scaled_unary(
+        "compile_degrees",
+        math.degrees,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=None,
+        domain=None,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_radians(
+    min_input: int = -360,
+    max_input: int = 360,
+    *,
+    input_scale: int = 1,
+    output_scale: int = 100,
+) -> UnaryFunction:
+    """Create scaled degrees-to-radians conversion for encrypted inputs."""
+    return _make_scaled_unary(
+        "make_radians",
+        math.radians,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+    )
+
+
+def compile_radians(
+    min_input: int = -360,
+    max_input: int = 360,
+    *,
+    input_scale: int = 1,
+    output_scale: int = 100,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled degrees-to-radians conversion for encrypted inputs."""
+    return _compile_scaled_unary(
+        "compile_radians",
+        math.radians,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=None,
+        domain=None,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )

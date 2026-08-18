@@ -5,8 +5,7 @@ from typing import Any, Optional
 from .._compat import fhe
 
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
-from concrete_fhe_toolkit.arithmetic import sign
-from concrete_fhe_toolkit.math import greater_equal, sigmoid, tanh
+from concrete_fhe_toolkit.math import greater_equal
 from concrete_fhe_toolkit.math.basic import maximum
 
 

@@ -55,3 +55,34 @@ def test_hinge_loss_compiles_and_simulates():
     assert int(circuit.simulate(1, 1)) == 0
     assert int(circuit.simulate(-1, 1)) == 2
     assert int(circuit.simulate(0, -1)) == 1
+
+
+def test_decision_tree_inference_compiles_and_simulates():
+    import numpy as np
+    from concrete import fhe
+
+    from concrete_fhe_toolkit.ml import decision_tree_inference
+
+    tree = {
+        "feature": 0,
+        "threshold": 5,
+        "left": {"feature": 1, "threshold": 3, "left": 30, "right": 20},
+        "right": 10,
+    }
+
+    def program(x):
+        return decision_tree_inference([x[0], x[1]], tree)
+
+    compiler = fhe.Compiler(program, {"x": "encrypted"})
+    circuit = compiler.compile(
+        [
+            np.array([0, 0], dtype=np.int64),
+            np.array([9, 5], dtype=np.int64),
+            np.array([0, 5], dtype=np.int64),
+            np.array([9, 0], dtype=np.int64),
+        ]
+    )
+
+    assert int(circuit.simulate(np.array([7, 4], dtype=np.int64))) == 30
+    assert int(circuit.simulate(np.array([7, 1], dtype=np.int64))) == 20
+    assert int(circuit.simulate(np.array([2, 4], dtype=np.int64))) == 10

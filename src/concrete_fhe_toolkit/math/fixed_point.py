@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from fractions import Fraction
-import math
 from typing import Any, Literal, Optional
 
 from .._compat import fhe

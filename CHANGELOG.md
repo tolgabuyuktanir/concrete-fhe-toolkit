@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `knn_inference` now supports real k-NN via a `k` parameter (iterated
+  argmin with distance masking, majority vote; binary labels for `k > 1`).
+- `logistic_regression_inference`: binary classification from the linear
+  score with an optional public threshold.
+- `decision_tree_inference`: oblivious evaluation of a full public decision
+  tree (dict nodes, integer leaves) over encrypted features.
+- Ruff configuration in `pyproject.toml`, pre-commit hooks, and an
+  enforcing `lint.yml` workflow (the `--exit-zero` pylint workflow was
+  removed).
+- CONTRIBUTING.md: domain-module acceptance bar and dependency-direction
+  rule.
+
 ## 0.3.0 - 2026-08-18
 
 Project home is now

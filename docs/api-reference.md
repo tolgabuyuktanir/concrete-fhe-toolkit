@@ -508,9 +508,11 @@ Models:
 | Function | Computes |
 | --- | --- |
 | `linear_regression_inference(weights, bias, features)` | `weights . features + bias` |
+| `logistic_regression_inference(weights, bias, features, threshold=0)` | binary class from the linear score (`score >= threshold`) |
 | `decision_tree_node(feature_val, threshold, left_branch, right_branch)` | `left_branch` when `feature_val >= threshold`, else `right_branch` |
 | `compile_decision_tree_node(min_value, max_value, ...)` | compiled single tree node |
-| `knn_inference(test_sample, train_samples, train_labels, max_distance=15)` | 1-nearest-neighbor label; `max_distance` must bound the squared distances |
+| `decision_tree_inference(features, tree)` | oblivious evaluation of a full public tree (dict nodes, integer leaves) |
+| `knn_inference(test_sample, train_samples, train_labels, k=1, max_distance=15)` | k-nearest-neighbor label; `max_distance` must bound the squared distances; `k > 1` requires binary labels (majority vote, odd `k` recommended) |
 | `majority_votes(predictions)` | majority vote over binary predictions |
 
 Activations (with `compile_relu`, `compile_leaky_relu`, `compile_unit_step`,

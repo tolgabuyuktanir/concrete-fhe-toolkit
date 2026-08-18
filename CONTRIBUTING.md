@@ -46,6 +46,33 @@ maintainer checklist.
   domains plus a representative compiler/simulation test.
 - Keep large lookup tables behind the `allow_large_lookup=True` opt-in so users
   do not accidentally compile huge circuits.
+- Run `ruff check src tests` before pushing (CI enforces it). Installing the
+  pre-commit hooks (`pip install pre-commit && pre-commit install`) does this
+  automatically.
+- Keep the dependency direction one-way:
+  `finance`/`ml` → `math`/`arrays`/`arithmetic` → `_utils`/`_compat` → Concrete.
+  Submodules import from their real sources (relative imports), never from
+  their own package `__init__`.
+
+## Domain modules
+
+`finance` is the template for domain-specific subpackages. A new domain
+module (or a substantial addition to an existing one) is accepted only when
+it brings all of the following — thin one-line wrappers around core helpers
+do not qualify:
+
+1. **A data contract**: how real-world values map to bounded integers (for
+   example the `RATE_SCALE` money convention), documented in the module
+   docstring.
+2. **Explicit bounds**: every operation states and validates its input
+   domain; silent defaults that corrupt results out of range are not
+   acceptable.
+3. **`compile_*` helpers** (or `BoundedOperation` objects) alongside the
+   traceable functions, with boundary-covering inputsets.
+4. **Tests**: exhaustive cleartext checks plus at least one
+   compile-and-simulate test per circuit builder.
+5. **Docs**: an entry in the generated API reference (docstrings) and, when
+   behavior is non-obvious, a guide section.
 
 ## Submitting changes
 

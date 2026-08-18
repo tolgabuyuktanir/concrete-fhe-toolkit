@@ -123,3 +123,54 @@ def test_utils_clear():
 
     clipped = ml.clip_array([-5, 0, 9], -2, 4)
     assert [int(item) for item in clipped] == [-2, 0, 4]
+
+
+def test_logistic_regression_inference_clear():
+    weights = [2, -1]
+    bias = -3
+
+    # score = 2*x - y - 3; class = score >= 0
+    assert int(ml.logistic_regression_inference(weights, bias, [3, 1])) == 1
+    assert int(ml.logistic_regression_inference(weights, bias, [1, 1])) == 0
+    assert int(ml.logistic_regression_inference(weights, bias, [2, 1], threshold=1)) == 0
+    assert int(ml.logistic_regression_inference(weights, bias, [3, 0], threshold=1)) == 1
+
+
+def test_knn_inference_k_greater_than_one_clear():
+    train_samples = [[0, 0], [1, 1], [5, 5], [6, 6], [9, 9]]
+    train_labels = [0, 0, 1, 1, 1]
+
+    # Nearest to [1, 0]: [0,0] and [1,1] (labels 0), then [5,5] (label 1).
+    assert int(ml.knn_inference([1, 0], train_samples, train_labels, k=3, max_distance=200)) == 0
+    # Nearest to [6, 5]: [5,5], [6,6], then [9,9] (all label 1).
+    assert int(ml.knn_inference([6, 5], train_samples, train_labels, k=3, max_distance=200)) == 1
+    # k=5 uses every sample: labels sum to 3 of 5 -> majority 1.
+    assert int(ml.knn_inference([1, 0], train_samples, train_labels, k=5, max_distance=200)) == 1
+
+    with pytest.raises(ValueError):
+        ml.knn_inference([1, 0], train_samples, train_labels, k=6, max_distance=200)
+    with pytest.raises(ValueError):
+        ml.knn_inference([1, 0], train_samples, [0, 1], max_distance=200)
+
+
+def test_decision_tree_inference_clear():
+    tree = {
+        "feature": 0,
+        "threshold": 5,
+        "left": {"feature": 1, "threshold": 3, "left": 30, "right": 20},
+        "right": 10,
+    }
+
+    def reference(x, y):
+        if x >= 5:
+            return 30 if y >= 3 else 20
+        return 10
+
+    for x in range(0, 10):
+        for y in range(0, 6):
+            assert int(ml.decision_tree_inference([x, y], tree)) == reference(x, y)
+
+    with pytest.raises(ValueError):
+        ml.decision_tree_inference([1, 2], {"feature": 0, "threshold": 5, "left": 1})
+    with pytest.raises(ValueError):
+        ml.decision_tree_inference([1, 2], {"feature": 7, "threshold": 5, "left": 1, "right": 0})

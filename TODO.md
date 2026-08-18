@@ -4,13 +4,12 @@ Working list for the team. Check items off in the PR that completes them.
 
 ## High priority
 
-- [ ] **Real k-NN**: add a `k` parameter to `knn_inference` and combine with
-  `majority_votes` (currently 1-NN only).
-- [ ] **Logistic regression helper**: `linear_regression_inference` +
-  sigmoid/threshold as a single documented ml helper.
-- [ ] **Full decision-tree evaluator**: `make_decision_tree` that takes a tree
-  structure (thresholds, feature indices, leaf values) and composes
-  `decision_tree_node` — not just a single node.
+- [x] **Real k-NN**: `knn_inference` now takes `k` (iterated argmin with
+  masking + `majority_votes`; binary labels for `k > 1`).
+- [x] **Logistic regression helper**: `logistic_regression_inference`
+  (linear score + threshold; sigmoid not needed for classification).
+- [x] **Full decision-tree evaluator**: `decision_tree_inference` evaluates
+  a public dict-based tree obliviously over encrypted features.
 
 ## API consistency
 
@@ -20,16 +19,18 @@ Working list for the team. Check items off in the PR that completes them.
 - [ ] Resolve naming overlap: `math.maximum`/`minimum` (scalar pair),
   `math.compile_maximum`/`compile_minimum` (pair circuit), and root
   `compile_maximum`/`compile_minimum` (array reduction).
-- [ ] Decide whether `ml.sigmoid` / `ml.tanh` re-exports (compile factories)
-  should stay in the ml namespace or be replaced with traceable activations.
+- [x] Decide whether `ml.sigmoid` / `ml.tanh` re-exports (compile factories)
+  should stay in the ml namespace — kept for backwards compatibility, now
+  imported from their real homes and documented as compile factories in
+  `ml/__init__.py`.
 
 ## Quality gates
 
-- [ ] Add a **domain-module acceptance bar** to CONTRIBUTING.md: a domain
-  module (like `finance`) must bring its own data contract (e.g. money
-  scale), bounds, `compile_*` helpers, and tests — no thin wrappers.
-- [ ] Enforce lint: adopt **ruff** (+ pre-commit) and remove `--exit-zero`
-  from the pylint workflow (currently the lint job can never fail).
+- [x] Add a **domain-module acceptance bar** to CONTRIBUTING.md: data
+  contract, bounds, `compile_*` helpers, tests, docs — no thin wrappers.
+- [x] Enforce lint: ruff adopted (pyproject config + pre-commit hooks +
+  enforcing `lint.yml`); the `--exit-zero` pylint workflow was removed.
+  Next step: widen the ruff rule set beyond E/F/B once convenient.
 - [ ] Meaningful typing: replace blanket `Any` with documented aliases
   (e.g. `EncryptedValue`) and add a mypy CI step.
 

@@ -1,6 +1,7 @@
 from typing import Any, List, Optional
 from .._compat import fhe
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
+from concrete_fhe_toolkit.arithmetic import make_floor_divide
 
 from concrete_fhe_toolkit.arrays import array_sum
 from concrete_fhe_toolkit.math import square, maximum, equal,not_equal
@@ -117,3 +118,31 @@ def compile_hinge_loss(
         ],
         configuration,
     )
+
+def precision_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+    """Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.
+
+    The encrypted-by-encrypted division uses a multivariate lookup whose
+    cost grows with the count range, so keep sample counts small when this
+    runs under encryption (it is cheap on decrypted predictions).
+    """
+    divide = make_floor_divide(zero_result=0)
+    tp = true_positives(y_preds, y_trues)
+    fp = false_positives(y_preds, y_trues)
+    return divide(tp * 100, tp + fp)
+
+
+def recall_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+    """Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels."""
+    divide = make_floor_divide(zero_result=0)
+    tp = true_positives(y_preds, y_trues)
+    fn = false_negatives(y_preds, y_trues)
+    return divide(tp * 100, tp + fn)
+
+
+def f1_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+    """Integer percent F1: 2 * P * R // (P + R), 0 when both are 0."""
+    divide = make_floor_divide(zero_result=0)
+    precision = precision_score(y_preds, y_trues)
+    recall = recall_score(y_preds, y_trues)
+    return divide(2 * precision * recall, precision + recall)

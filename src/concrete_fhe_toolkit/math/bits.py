@@ -277,3 +277,110 @@ bxor = bit_xor
 bsel = bit_select
 fadd_bit = full_adder_bit
 fsub_bit = full_subtractor_bit
+
+
+def shift_left_bits(bits: Iterable[Any], amount: int) -> tuple:
+    """Logical left shift by a public amount; output keeps the input width."""
+    normalized = tuple(bits)
+    if not normalized:
+        raise ValueError("bits must contain at least one bit")
+    shift = validate_integer("amount", amount, minimum=0)
+    width = len(normalized)
+    return ((0,) * min(shift, width) + normalized)[:width]
+
+
+def shift_right_bits(
+    bits: Iterable[Any],
+    amount: int,
+    *,
+    arithmetic: bool = False,
+) -> tuple:
+    """Right shift by a public amount; arithmetic=True sign-extends from the MSB."""
+    normalized = tuple(bits)
+    if not normalized:
+        raise ValueError("bits must contain at least one bit")
+    shift = validate_integer("amount", amount, minimum=0)
+    width = len(normalized)
+    fill = normalized[-1] if arithmetic else 0
+    return (normalized[min(shift, width):] + (fill,) * min(shift, width))[:width]
+
+
+def rotate_left_bits(bits: Iterable[Any], amount: int) -> tuple:
+    """Rotate toward the MSB by a public amount (little-endian bit lists)."""
+    normalized = tuple(bits)
+    if not normalized:
+        raise ValueError("bits must contain at least one bit")
+    shift = validate_integer("amount", amount, minimum=0) % len(normalized)
+    return tuple(
+        normalized[(index - shift) % len(normalized)]
+        for index in range(len(normalized))
+    )
+
+
+def rotate_right_bits(bits: Iterable[Any], amount: int) -> tuple:
+    """Rotate toward the LSB by a public amount (little-endian bit lists)."""
+    normalized = tuple(bits)
+    if not normalized:
+        raise ValueError("bits must contain at least one bit")
+    shift = validate_integer("amount", amount, minimum=0) % len(normalized)
+    return tuple(
+        normalized[(index + shift) % len(normalized)]
+        for index in range(len(normalized))
+    )
+
+
+def popcount_bits(bits: Iterable[Any]) -> Any:
+    """Return the number of set bits as an integer expression (tournament sum)."""
+    layer = list(bits)
+    if not layer:
+        raise ValueError("bits must contain at least one bit")
+    while len(layer) > 1:
+        next_layer = []
+        for index in range(0, len(layer) - 1, 2):
+            next_layer.append(layer[index] + layer[index + 1])
+        if len(layer) % 2 == 1:
+            next_layer.append(layer[-1])
+        layer = next_layer
+    return layer[0]
+
+
+def parity_bits(bits: Iterable[Any]) -> Any:
+    """Return the XOR-parity (1 when an odd number of bits are set)."""
+    return bit_xor_many(bits)
+
+
+def bit_length_bits(bits: Iterable[Any]) -> Any:
+    """Return the bit length (index of the highest set bit plus one, 0 for zero)."""
+    normalized = tuple(bits)
+    if not normalized:
+        raise ValueError("bits must contain at least one bit")
+    running = normalized[-1]
+    total: Any = running
+    for index in range(len(normalized) - 2, -1, -1):
+        running = bit_or(running, normalized[index])
+        total = total + running
+    return total
+
+
+def unsigned_compare_bits(
+    left_bits: Iterable[Any],
+    right_bits: Iterable[Any],
+) -> tuple:
+    """Return (is_less, is_equal) bits for two little-endian unsigned bit lists."""
+    left = tuple(left_bits)
+    right = tuple(right_bits)
+    width = max(len(left), len(right))
+    if width == 0:
+        raise ValueError("bit lists must contain at least one bit")
+    padded_left = left + (0,) * (width - len(left))
+    padded_right = right + (0,) * (width - len(right))
+
+    is_less: Any = 0
+    is_equal: Any = 1
+    for index in range(width - 1, -1, -1):
+        left_bit = padded_left[index]
+        right_bit = padded_right[index]
+        less_here = bit_and(bit_not(left_bit), right_bit)
+        is_less = bit_or(is_less, bit_and(is_equal, less_here))
+        is_equal = bit_and(is_equal, bit_not(bit_xor(left_bit, right_bit)))
+    return is_less, is_equal

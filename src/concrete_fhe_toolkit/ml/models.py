@@ -5,12 +5,13 @@ from typing import Any, List, Optional
 from .._compat import fhe
 
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds, validate_integer
-from concrete_fhe_toolkit.arrays import array_sum, make_argmin
-from concrete_fhe_toolkit.math import equal, greater, greater_equal
+from concrete_fhe_toolkit.arrays import array_sum, make_argmax, make_argmin
+from concrete_fhe_toolkit.math import equal, greater, greater_equal, select
+from concrete_fhe_toolkit.math._lookup import make_unary_lookup
 
-from .activations import threshold_activation
+from .activations import relu, threshold_activation
 from .core import euclidean_distance_squared
-from .matrix import dot_product
+from .matrix import dot_product, matrix_vector_multiply
 
 
 def linear_regression_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
@@ -46,7 +47,7 @@ def decision_tree_node(feature_val: Any, threshold: Any, left_branch: Any, right
     ``right_branch``. Branch values may be arbitrary bounded integers.
     """
     control = greater_equal(feature_val, threshold)
-    return control * left_branch + (1 - control) * right_branch
+    return select(control, left_branch, right_branch)
 
 
 def majority_votes(predictions: List[Any]) -> Any:
@@ -152,7 +153,7 @@ def decision_tree_inference(features: List[Any], tree: Any) -> Any:
     control = greater_equal(features[feature_index], threshold)
     left_value = decision_tree_inference(features, tree["left"])
     right_value = decision_tree_inference(features, tree["right"])
-    return control * left_value + (1 - control) * right_value
+    return select(control, left_value, right_value)
 
 
 def compile_decision_tree_node(
@@ -179,3 +180,127 @@ def compile_decision_tree_node(
         ],
         configuration,
     )
+
+
+def random_forest_inference(features: List[Any], trees: List[Any]) -> Any:
+    """Evaluate a random forest with binary (0/1) leaves via majority vote.
+
+    Each tree uses the public dict structure accepted by
+    :func:`decision_tree_inference`. Use an odd number of trees to avoid
+    ties (a tie resolves to 0).
+    """
+    if not trees:
+        raise ValueError("trees must contain at least one tree")
+    predictions = [decision_tree_inference(features, tree) for tree in trees]
+    return majority_votes(predictions)
+
+
+def mlp_inference(features: List[Any], layers: List[Any]) -> List[Any]:
+    """Evaluate a small multilayer perceptron with public integer weights.
+
+    ``layers`` is a list of ``(weights_matrix, biases)`` pairs. Hidden
+    layers apply ReLU; the final layer stays linear and returns the raw
+    score vector. Weights, biases, and features must share one integer
+    scale; note that every layer multiplies scales together, so keep the
+    network shallow or rescale between layers.
+    """
+    if not layers:
+        raise ValueError("layers must contain at least one (weights, biases) pair")
+
+    activations_vector = list(features)
+    for layer_index, (weights, biases) in enumerate(layers):
+        if len(weights) != len(biases):
+            raise ValueError("each layer needs one bias per output row")
+        scores = matrix_vector_multiply(weights, activations_vector)
+        scores = [score + bias for score, bias in zip(scores, biases)]
+        if layer_index < len(layers) - 1:
+            scores = [relu(score) for score in scores]
+        activations_vector = scores
+    return activations_vector
+
+
+def nearest_centroid_inference(
+    sample: List[Any],
+    centroids: List[List[Any]],
+    labels: Optional[List[Any]] = None,
+    *,
+    max_distance: int = 15,
+) -> Any:
+    """Assign an encrypted sample to the nearest public centroid (k-means step).
+
+    Returns the centroid index, or the matching label when ``labels`` is
+    given. ``max_distance`` must bound the squared distance to any centroid.
+    """
+    maximum_distance = validate_integer("max_distance", max_distance, minimum=1)
+    if not centroids:
+        raise ValueError("centroids must contain at least one centroid")
+    if labels is not None and len(labels) != len(centroids):
+        raise ValueError("labels and centroids must have the same length")
+
+    distances = [
+        euclidean_distance_squared(centroid, sample)
+        for centroid in centroids
+    ]
+    arg_min = make_argmin(len(distances), 0, maximum_distance)
+    nearest_index = arg_min(distances)
+
+    if labels is None:
+        return nearest_index
+
+    prediction: Any = 0
+    for index, label in enumerate(labels):
+        prediction = prediction + equal(index, nearest_index) * label
+    return prediction
+
+
+def argmax_inference(scores: List[Any], min_score: int, max_score: int) -> Any:
+    """Return the index of the highest class score (multi-class head)."""
+    items = list(scores)
+    if not items:
+        raise ValueError("scores must contain at least one score")
+    arg_max = make_argmax(len(items), min_score, max_score)
+    return arg_max(items)
+
+
+def naive_bayes_inference(
+    features: List[Any],
+    log_prob_tables: List[List[List[int]]],
+    priors: List[int],
+    *,
+    min_feature: int = 0,
+) -> Any:
+    """Evaluate a categorical naive Bayes classifier on encrypted features.
+
+    ``log_prob_tables[class][feature]`` is a public list of scaled integer
+    log-probabilities indexed by ``feature_value - min_feature``; ``priors``
+    holds the scaled log-priors per class. Returns the encrypted index of
+    the best class. Score bounds for the final argmax are derived from the
+    public tables.
+    """
+    if len(log_prob_tables) != len(priors):
+        raise ValueError("log_prob_tables and priors must have the same length")
+    if not log_prob_tables:
+        raise ValueError("at least one class is required")
+    minimum_feature = validate_integer("min_feature", min_feature)
+
+    scores = []
+    lower_bounds = []
+    upper_bounds = []
+    for class_index, tables in enumerate(log_prob_tables):
+        if len(tables) != len(features):
+            raise ValueError("each class needs one table per feature")
+        prior = validate_integer("prior", priors[class_index])
+        score: Any = prior
+        low = prior
+        high = prior
+        for feature_index, table in enumerate(tables):
+            values = [validate_integer("log probability", value) for value in table]
+            lookup = make_unary_lookup(values, minimum_feature)
+            score = score + lookup(features[feature_index])
+            low += min(values)
+            high += max(values)
+        scores.append(score)
+        lower_bounds.append(low)
+        upper_bounds.append(high)
+
+    return argmax_inference(scores, min(lower_bounds), max(upper_bounds))

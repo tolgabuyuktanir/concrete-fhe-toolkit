@@ -782,3 +782,164 @@ def compile_abs_diff(
         inputset,
         configuration,
     )
+
+
+def make_copysign(min_value: int = -15, max_value: int = 15) -> BinaryFunction:
+    """Create copysign(x, y): |x| when y >= 0, otherwise -|x|.
+
+    Follows the integer convention that y == 0 keeps the magnitude positive.
+    """
+    minimum, maximum = validate_bounds(min_value, max_value)
+    absolute = make_absolute(minimum, maximum)
+
+    def copysign(x: Any, y: Any) -> Any:
+        sign_factor = (y >= 0) * 2 - 1
+        return absolute(x) * sign_factor
+
+    return copysign
+
+
+def compile_copysign(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile copysign(x, y) over inclusive signed bounds."""
+    minimum, maximum = validate_bounds(min_value, max_value)
+    check_lookup_cost(
+        "compile_copysign",
+        unary_values(abs, minimum, maximum),
+        allow_large_lookup=allow_large_lookup,
+    )
+    function = make_copysign(minimum, maximum)
+    inputset = [
+        (minimum, minimum),
+        (minimum, maximum),
+        (maximum, minimum),
+        (maximum, maximum),
+    ]
+    return compile_function(
+        function,
+        {"x": "encrypted", "y": "encrypted"},
+        inputset,
+        configuration,
+    )
+
+
+def _saturating_output_range(operation: str, minimum: int, maximum: int) -> tuple:
+    if operation == "add":
+        return 2 * minimum, 2 * maximum
+    if operation == "subtract":
+        return minimum - maximum, maximum - minimum
+    corners = [
+        minimum * minimum,
+        minimum * maximum,
+        maximum * minimum,
+        maximum * maximum,
+    ]
+    return min(corners), max(corners)
+
+
+def _make_saturating(operation: str, min_value: int, max_value: int) -> BinaryFunction:
+    minimum, maximum = validate_bounds(min_value, max_value)
+    low, high = _saturating_output_range(operation, minimum, maximum)
+    clamp_result = make_clamp(low, high, minimum, maximum)
+
+    if operation == "add":
+        def saturating(left: Any, right: Any) -> Any:
+            return clamp_result(left + right)
+    elif operation == "subtract":
+        def saturating(left: Any, right: Any) -> Any:
+            return clamp_result(left - right)
+    else:
+        def saturating(left: Any, right: Any) -> Any:
+            return clamp_result(left * right)
+
+    return saturating
+
+
+def make_saturating_add(min_value: int = -15, max_value: int = 15) -> BinaryFunction:
+    """Create addition whose result is clamped back into [min_value, max_value]."""
+    return _make_saturating("add", min_value, max_value)
+
+
+def make_saturating_subtract(min_value: int = -15, max_value: int = 15) -> BinaryFunction:
+    """Create subtraction whose result is clamped back into [min_value, max_value]."""
+    return _make_saturating("subtract", min_value, max_value)
+
+
+def make_saturating_multiply(min_value: int = -15, max_value: int = 15) -> BinaryFunction:
+    """Create multiplication whose result is clamped back into [min_value, max_value]."""
+    return _make_saturating("multiply", min_value, max_value)
+
+
+def _compile_saturating(
+    operation: str,
+    min_value: int,
+    max_value: int,
+    allow_large_lookup: bool,
+    configuration: Optional[fhe.Configuration],
+) -> fhe.Circuit:
+    minimum, maximum = validate_bounds(min_value, max_value)
+    low, high = _saturating_output_range(operation, minimum, maximum)
+    check_lookup_cost(
+        f"compile_saturating_{operation}",
+        unary_values(
+            lambda value: max(minimum, min(value, maximum)),
+            low,
+            high,
+        ),
+        allow_large_lookup=allow_large_lookup,
+    )
+    function = _make_saturating(operation, minimum, maximum)
+    inputset = [
+        (minimum, minimum),
+        (minimum, maximum),
+        (maximum, minimum),
+        (maximum, maximum),
+    ]
+    return compile_function(
+        function,
+        {"left": "encrypted", "right": "encrypted"},
+        inputset,
+        configuration,
+    )
+
+
+def compile_saturating_add(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile clamped encrypted addition."""
+    return _compile_saturating("add", min_value, max_value, allow_large_lookup, configuration)
+
+
+def compile_saturating_subtract(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile clamped encrypted subtraction."""
+    return _compile_saturating(
+        "subtract", min_value, max_value, allow_large_lookup, configuration
+    )
+
+
+def compile_saturating_multiply(
+    min_value: int = -15,
+    max_value: int = 15,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile clamped encrypted multiplication."""
+    return _compile_saturating(
+        "multiply", min_value, max_value, allow_large_lookup, configuration
+    )

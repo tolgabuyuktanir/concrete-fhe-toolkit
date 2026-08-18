@@ -1,6 +1,6 @@
 """Bounded integer helpers for Concrete FHE."""
 
-from . import finance, math, ml
+from . import finance, math, ml, stats
 from .arithmetic import (
     compile_floor_divide,
     compile_floor_divide_by_product,
@@ -14,11 +14,17 @@ from .arithmetic import (
 from .arrays import (
     array_add,
     array_all_equal,
+    array_concat,
     array_contains,
     array_count,
+    array_cumsum,
+    array_index,
+    array_index_of,
     array_multiply,
     array_pad,
+    array_reverse,
     array_scale,
+    array_set,
     array_slice,
     array_sub,
     array_sum,
@@ -28,22 +34,30 @@ from .arrays import (
     compile_maximum,
     compile_minimum,
     compile_sort,
+    compile_top_k,
     make_argmax,
     make_argmin,
     make_compare_swap,
     make_maximum,
     make_minimum,
     make_sort,
+    make_top_k,
 )
 
 __all__ = [
     "array_add",
     "array_all_equal",
+    "array_concat",
     "array_contains",
     "array_count",
+    "array_cumsum",
+    "array_index",
+    "array_index_of",
     "array_multiply",
     "array_pad",
+    "array_reverse",
     "array_scale",
+    "array_set",
     "array_slice",
     "array_sub",
     "array_sum",
@@ -57,6 +71,7 @@ __all__ = [
     "compile_minimum",
     "compile_sign",
     "compile_sort",
+    "compile_top_k",
     "compare",
     "finance",
     "make_argmax",
@@ -67,9 +82,11 @@ __all__ = [
     "make_maximum",
     "make_minimum",
     "make_sort",
+    "make_top_k",
     "math",
     "ml",
     "sign",
+    "stats",
 ]
 
 __version__ = "0.3.0"

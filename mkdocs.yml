@@ -71,6 +71,7 @@ nav:
       - Core:
           - Arithmetic: api/arithmetic.md
           - Arrays: api/arrays.md
+          - Statistics: api/stats.md
       - Math:
           - Basic operations: api/math-basic.md
           - Combinatorics: api/math-combinatorics.md

@@ -13,6 +13,28 @@
 - Math, basics: `select(control, when_true, when_false)` for oblivious
   branching over arbitrary bounded integers (plus `compile_select`) and
   `abs_diff` (|left - right| via a difference-domain lookup).
+- Math, more coverage: `atan2`, `gamma`, `lgamma`, arbitrary-base `log`,
+  `powmod` (public base/modulus, encrypted exponent), `copysign`,
+  saturating `add`/`subtract`/`multiply`, `round_to_multiple`, `modf`,
+  `fixed_point_multiply` (rescaled product), and clear-side
+  `encode_fixed_point` / `decode_fixed_point` codecs.
+- Bit level: `shift_left/right_bits` (logical/arithmetic), rotates,
+  `popcount_bits`, `parity_bits`, `bit_length_bits`,
+  `unsigned_compare_bits`, and the restoring divider's remainder exposed as
+  `unsigned_mod_bits` / `make_unsigned_mod` / `compile_unsigned_mod`.
+- Arrays: oblivious `array_index` / `array_set` / `array_index_of`,
+  `array_cumsum`, `array_reverse`, `array_concat`, and `make_top_k` /
+  `compile_top_k` (k largest or smallest values via masked arg-extreme
+  rounds).
+- New top-level `concrete_fhe_toolkit.stats` subpackage: mean, variance,
+  std (isqrt), covariance, min/max/range, count-greater, median and
+  percentile (via the bitonic sort), histogram/bincount, mode, and z-score
+  normalization. `ml.stats` re-exports for backwards compatibility.
+- ML: `random_forest_inference`, `mlp_inference` (ReLU hidden layers),
+  `nearest_centroid_inference` (k-means assignment), `naive_bayes_inference`
+  (categorical, public log-prob tables), `argmax_inference` (multi-class
+  head), and `precision_score` / `recall_score` / `f1_score`. Decision
+  trees now build on `math.select`.
 
 - `knn_inference` now supports real k-NN via a `k` parameter (iterated
   argmin with distance masking, majority vote; binary labels for `k > 1`).

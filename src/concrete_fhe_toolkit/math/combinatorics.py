@@ -220,3 +220,46 @@ make_permutations = make_perm
 compile_permutations = compile_perm
 make_exponential = make_power
 compile_exponential = compile_power
+
+
+def make_powmod(base: int, modulus: int, max_exponent: int) -> UnaryFunction:
+    """Create pow(base, exponent, modulus) with a public base and modulus.
+
+    The exponent is encrypted and bounded by ``max_exponent``; the result
+    stays below the modulus, so the output bit width is small even for
+    large exponents.
+    """
+    normalized_base = validate_integer("base", base)
+    normalized_modulus = validate_integer("modulus", modulus, minimum=1)
+    maximum = _validate_maximum("max_exponent", max_exponent)
+    values = [
+        pow(normalized_base, exponent, normalized_modulus)
+        for exponent in range(maximum + 1)
+    ]
+    return make_unary_lookup(values, 0)
+
+
+def compile_powmod(
+    base: int,
+    modulus: int,
+    max_exponent: int,
+    *,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile pow(base, exponent, modulus) with a public base and modulus."""
+    normalized_base = validate_integer("base", base)
+    normalized_modulus = validate_integer("modulus", modulus, minimum=1)
+    maximum = _validate_maximum("max_exponent", max_exponent)
+    values = [
+        pow(normalized_base, exponent, normalized_modulus)
+        for exponent in range(maximum + 1)
+    ]
+    return compile_unary_lookup(
+        "compile_powmod",
+        values,
+        0,
+        maximum,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )

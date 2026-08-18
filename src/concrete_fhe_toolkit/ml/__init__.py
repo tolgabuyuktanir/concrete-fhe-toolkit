@@ -15,9 +15,27 @@ from .activations import (
     threshold_activation,
     unit_step,
 )
-from .core import accuracy_score, compile_hinge_loss, confusion_matrix, euclidean_distance_squared, hamming_distance, hinge_loss, manhattan_distance, mean_absolute_error, mean_squared_error, true_positives, true_negatives, false_positives, false_negatives
+from .core import (
+    accuracy_score,
+    compile_hinge_loss,
+    confusion_matrix,
+    euclidean_distance_squared,
+    f1_score,
+    false_negatives,
+    false_positives,
+    hamming_distance,
+    hinge_loss,
+    manhattan_distance,
+    mean_absolute_error,
+    mean_squared_error,
+    precision_score,
+    recall_score,
+    true_negatives,
+    true_positives,
+)
 from .matrix import dot_product, matrix_add, matrix_transpose, matrix_subtract, matrix_multiply, matrix_vector_multiply
 from .models import (
+    argmax_inference,
     compile_decision_tree_node,
     decision_tree_inference,
     decision_tree_node,
@@ -25,11 +43,16 @@ from .models import (
     linear_regression_inference,
     logistic_regression_inference,
     majority_votes,
+    mlp_inference,
+    naive_bayes_inference,
+    nearest_centroid_inference,
+    random_forest_inference,
 )
 from .stats import array_max, array_mean, array_min, array_range, array_variance, array_count_greater
 from .utils import binarize, one_hot_encode, clip_array
 
 __all__ = [
+    "argmax_inference",
     "array_count_greater",
     "array_max",
     "array_mean",
@@ -37,6 +60,13 @@ __all__ = [
     "array_range",
     "array_variance",
     "accuracy_score",
+    "f1_score",
+    "mlp_inference",
+    "naive_bayes_inference",
+    "nearest_centroid_inference",
+    "precision_score",
+    "random_forest_inference",
+    "recall_score",
     "compile_decision_tree_node",
     "compile_hinge_loss",
     "compile_leaky_relu",

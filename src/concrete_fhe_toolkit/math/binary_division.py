@@ -44,7 +44,7 @@ def _restoring_divide_bits(
     numerator_bits: tuple[Any, ...],
     denominator_bits: tuple[Any, ...],
     quotient_width: int,
-) -> tuple[Any, ...]:
+) -> tuple[tuple[Any, ...], tuple[Any, ...]]:
     remainder: list[Any] = [0] * (quotient_width + 1)
     quotient: list[Any] = [0] * quotient_width
     padded_denominator = (
@@ -73,7 +73,7 @@ def _restoring_divide_bits(
             for bit_index in range(quotient_width + 1)
         ]
 
-    return tuple(quotient)
+    return tuple(quotient), tuple(remainder)
 
 
 def unsigned_divide_bits(
@@ -98,7 +98,7 @@ def unsigned_divide_bits(
         raise ValueError("quotient_width must be at least len(numerator_bits)")
     zero = _validate_zero_result(zero_result, width)
 
-    quotient = _restoring_divide_bits(numerator, denominator, width)
+    quotient, _ = _restoring_divide_bits(numerator, denominator, width)
     denominator_nonzero = bit_or_many(denominator)
     fallback = unsigned_to_bits(zero, width)
     return tuple(
@@ -277,6 +277,78 @@ def compile_fixed_point_divide(
         d_width,
         fractional_bits=fractional_bits,
         quotient_width=quotient_width,
+        zero_result=zero_result,
+    )
+    return compile_function(
+        function,
+        {"numerator": "encrypted", "denominator": "encrypted"},
+        _division_inputset(n_width, d_width),
+        configuration,
+    )
+
+
+def unsigned_mod_bits(
+    numerator_bits: Iterable[Any],
+    denominator_bits: Iterable[Any],
+    *,
+    zero_result: int = 0,
+) -> tuple[Any, ...]:
+    """Return little-endian remainder bits for unsigned modulo.
+
+    The remainder always fits in the denominator's bit width. Division by
+    zero returns the clear fallback encoded by ``zero_result``.
+    """
+    numerator = _as_nonempty_bits("numerator_bits", numerator_bits)
+    denominator = _as_nonempty_bits("denominator_bits", denominator_bits)
+    width = len(denominator)
+    zero = _validate_zero_result(zero_result, width)
+
+    _, remainder = _restoring_divide_bits(numerator, denominator, len(numerator))
+    denominator_nonzero = bit_or_many(denominator)
+    fallback = unsigned_to_bits(zero, width)
+    return tuple(
+        bit_select(denominator_nonzero, remainder[index], fallback[index])
+        for index in range(width)
+    )
+
+
+def make_unsigned_mod(
+    numerator_width: int,
+    denominator_width: int,
+    *,
+    zero_result: int = 0,
+) -> Any:
+    """Create unsigned encrypted modulo from scalar integer inputs."""
+    n_width = _validate_width("numerator_width", numerator_width)
+    d_width = _validate_width("denominator_width", denominator_width)
+    zero = _validate_zero_result(zero_result, d_width)
+
+    def modulo(numerator: Any, denominator: Any) -> Any:
+        numerator_bits = integer_to_bits(numerator, n_width)
+        denominator_bits = integer_to_bits(denominator, d_width)
+        remainder_bits = unsigned_mod_bits(
+            numerator_bits,
+            denominator_bits,
+            zero_result=zero,
+        )
+        return bits_to_unsigned(remainder_bits)
+
+    return modulo
+
+
+def compile_unsigned_mod(
+    numerator_width: int,
+    denominator_width: int,
+    *,
+    zero_result: int = 0,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile unsigned modulo using the bit-level restoring circuit."""
+    n_width = _validate_width("numerator_width", numerator_width)
+    d_width = _validate_width("denominator_width", denominator_width)
+    function = make_unsigned_mod(
+        n_width,
+        d_width,
         zero_result=zero_result,
     )
     return compile_function(

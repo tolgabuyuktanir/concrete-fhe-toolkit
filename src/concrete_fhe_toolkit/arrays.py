@@ -6,7 +6,15 @@ from typing import Any, Callable, Literal, Optional,List
 
 from ._compat import fhe
 
-from concrete_fhe_toolkit.math import equal,bit_or_many,bit_and_many
+from concrete_fhe_toolkit.math import (
+    bit_and,
+    bit_and_many,
+    bit_not,
+    bit_or,
+    bit_or_many,
+    equal,
+    select,
+)
 
 from ._utils import (
     array_inputset,
@@ -423,4 +431,131 @@ def compile_argmax(
         maximum,
         tie_break=tie_break,
     )
+    return _compile_array_function(function, size, minimum, maximum, configuration)
+
+
+def array_index(array: List[Any], index: Any) -> Any:
+    """Oblivious read: return array[index] without revealing the encrypted index."""
+    items = list(array)
+    if not items:
+        raise ValueError("array must contain at least one element")
+    result: Any = 0
+    for position, value in enumerate(items):
+        result = result + equal(position, index) * value
+    return result
+
+
+def array_set(array: List[Any], index: Any, value: Any) -> List[Any]:
+    """Oblivious write: return a copy with array[index] replaced by value."""
+    items = list(array)
+    if not items:
+        raise ValueError("array must contain at least one element")
+    return [
+        select(equal(position, index), value, item)
+        for position, item in enumerate(items)
+    ]
+
+
+def array_index_of(array: List[Any], value: Any, *, missing_result: Optional[int] = None) -> Any:
+    """Return the first index holding value, or missing_result (default len(array))."""
+    items = list(array)
+    if not items:
+        raise ValueError("array must contain at least one element")
+    missing = len(items) if missing_result is None else int(missing_result)
+
+    found: Any = 0
+    result: Any = 0
+    for position, item in enumerate(items):
+        flag = equal(item, value)
+        is_first = bit_and(flag, bit_not(found))
+        result = result + position * is_first
+        found = bit_or(found, flag)
+    return result + missing * bit_not(found)
+
+
+def array_cumsum(array: List[Any]) -> List[Any]:
+    """Return the running prefix sums of an encrypted array."""
+    sums: List[Any] = []
+    running: Any = 0
+    for item in array:
+        running = running + item
+        sums.append(running)
+    return sums
+
+
+def array_reverse(array: List[Any]) -> List[Any]:
+    """Return the array with its (public) element order reversed."""
+    return list(reversed(list(array)))
+
+
+def array_concat(*arrays: List[Any]) -> List[Any]:
+    """Concatenate encrypted arrays along their public length."""
+    combined: List[Any] = []
+    for array in arrays:
+        combined.extend(list(array))
+    return combined
+
+
+def make_top_k(
+    size: int,
+    k: int,
+    min_value: int = 0,
+    max_value: int = 15,
+    *,
+    largest: bool = True,
+) -> UnaryArrayFunction:
+    """Create a reduction returning the k largest (or smallest) values in order.
+
+    Runs k arg-extreme rounds, masking each selected element with a penalty,
+    so circuit cost grows linearly with k.
+    """
+    size = validate_size(size)
+    minimum, maximum = validate_bounds(min_value, max_value)
+    k = validate_size(k)
+    if k > size:
+        raise ValueError("k cannot exceed size")
+    span = maximum - minimum
+    penalty = span + 1
+
+    if largest:
+        arg_extreme = make_argmax(size, minimum - penalty, maximum)
+    else:
+        arg_extreme = make_argmin(size, minimum, maximum + penalty)
+
+    def top_k(x: Any) -> Any:
+        current = [x[index] for index in range(size)]
+        results = []
+        for _ in range(k):
+            extreme_index = arg_extreme(current)
+            selected_flags = [
+                equal(position, extreme_index) for position in range(size)
+            ]
+            value: Any = 0
+            next_values = []
+            for flag, item in zip(selected_flags, current):
+                value = value + flag * item
+                if largest:
+                    next_values.append(item - flag * penalty)
+                else:
+                    next_values.append(item + flag * penalty)
+            results.append(value)
+            current = next_values
+        return fhe.array(results)
+
+    return top_k
+
+
+def compile_top_k(
+    size: int,
+    k: int,
+    min_value: int = 0,
+    max_value: int = 15,
+    *,
+    largest: bool = True,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile a top-k reduction circuit."""
+    size = validate_size(size)
+    minimum, maximum = validate_bounds(min_value, max_value)
+    function = make_top_k(size, k, minimum, maximum, largest=largest)
     return _compile_array_function(function, size, minimum, maximum, configuration)

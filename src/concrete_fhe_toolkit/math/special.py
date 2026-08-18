@@ -8,7 +8,16 @@ import math
 from .._compat import fhe
 
 from .._utils import validate_bounds, validate_integer
-from ._lookup import UnaryFunction, compile_unary_lookup, make_unary_lookup, unary_values
+from ._lookup import (
+    BinaryFunction,
+    UnaryFunction,
+    binary_values,
+    compile_binary_lookup,
+    compile_unary_lookup,
+    make_binary_lookup,
+    make_unary_lookup,
+    unary_values,
+)
 
 AngleUnit = Literal["radians", "degrees"]
 
@@ -345,6 +354,14 @@ def compile_expm1(
     )
 
 
+def _validate_log_base(base: Optional[float]):
+    if base is None:
+        return math.log
+    if base <= 0 or base == 1:
+        raise ValueError("base must be positive and different from 1")
+    return lambda value: math.log(value, base)
+
+
 def make_log(
     min_input: int = 1,
     max_input: int = 1000,
@@ -352,11 +369,12 @@ def make_log(
     input_scale: int = 100,
     output_scale: int = 1000,
     invalid_result: Optional[int] = None,
+    base: Optional[float] = None,
 ) -> UnaryFunction:
-    """Create scaled natural log; invalid_result handles x <= 0 if needed."""
+    """Create scaled log (natural by default, or any base); invalid_result handles x <= 0."""
     return _make_scaled_unary(
         "make_log",
-        math.log,
+        _validate_log_base(base),
         min_input,
         max_input,
         input_scale=input_scale,
@@ -373,13 +391,14 @@ def compile_log(
     input_scale: int = 100,
     output_scale: int = 1000,
     invalid_result: Optional[int] = None,
+    base: Optional[float] = None,
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile scaled natural log; invalid_result handles x <= 0 if needed."""
+    """Compile scaled log (natural by default, or any base); invalid_result handles x <= 0."""
     return _compile_scaled_unary(
         "compile_log",
-        math.log,
+        _validate_log_base(base),
         min_input,
         max_input,
         input_scale=input_scale,
@@ -1086,6 +1105,156 @@ def compile_radians(
         output_scale=output_scale,
         invalid_result=None,
         domain=None,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def _gamma_domain(value: float) -> bool:
+    return not (value <= 0 and float(value).is_integer())
+
+
+def make_gamma(
+    min_input: int = 1,
+    max_input: int = 50,
+    *,
+    input_scale: int = 10,
+    output_scale: int = 100,
+    invalid_result: Optional[int] = None,
+) -> UnaryFunction:
+    """Create scaled gamma; invalid_result handles the non-positive-integer poles."""
+    return _make_scaled_unary(
+        "make_gamma",
+        math.gamma,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=_gamma_domain,
+    )
+
+
+def compile_gamma(
+    min_input: int = 1,
+    max_input: int = 50,
+    *,
+    input_scale: int = 10,
+    output_scale: int = 100,
+    invalid_result: Optional[int] = None,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled gamma; invalid_result handles the non-positive-integer poles."""
+    return _compile_scaled_unary(
+        "compile_gamma",
+        math.gamma,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=_gamma_domain,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def make_lgamma(
+    min_input: int = 1,
+    max_input: int = 100,
+    *,
+    input_scale: int = 10,
+    output_scale: int = 100,
+    invalid_result: Optional[int] = None,
+) -> UnaryFunction:
+    """Create scaled log-gamma; invalid_result handles the non-positive-integer poles."""
+    return _make_scaled_unary(
+        "make_lgamma",
+        math.lgamma,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=_gamma_domain,
+    )
+
+
+def compile_lgamma(
+    min_input: int = 1,
+    max_input: int = 100,
+    *,
+    input_scale: int = 10,
+    output_scale: int = 100,
+    invalid_result: Optional[int] = None,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled log-gamma; invalid_result handles the non-positive-integer poles."""
+    return _compile_scaled_unary(
+        "compile_lgamma",
+        math.lgamma,
+        min_input,
+        max_input,
+        input_scale=input_scale,
+        output_scale=output_scale,
+        invalid_result=invalid_result,
+        domain=_gamma_domain,
+        allow_large_lookup=allow_large_lookup,
+        configuration=configuration,
+    )
+
+
+def _atan2_values(
+    min_input: int,
+    max_input: int,
+    input_scale: int,
+    output_scale: int,
+) -> list:
+    source = _validate_scale("input_scale", input_scale)
+    target = _validate_scale("output_scale", output_scale)
+    return binary_values(
+        lambda y, x: round(math.atan2(y / source, x / source) * target),
+        min_input,
+        max_input,
+        min_input,
+        max_input,
+    )
+
+
+def make_atan2(
+    min_input: int = -100,
+    max_input: int = 100,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 1000,
+) -> BinaryFunction:
+    """Create scaled quadrant-aware atan2(y, x) for encrypted fixed-point inputs."""
+    minimum, maximum = validate_bounds(min_input, max_input)
+    values = _atan2_values(minimum, maximum, input_scale, output_scale)
+    return make_binary_lookup(values, minimum, minimum, maximum - minimum + 1)
+
+
+def compile_atan2(
+    min_input: int = -100,
+    max_input: int = 100,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 1000,
+    allow_large_lookup: bool = False,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile scaled quadrant-aware atan2(y, x) for encrypted fixed-point inputs."""
+    minimum, maximum = validate_bounds(min_input, max_input)
+    values = _atan2_values(minimum, maximum, input_scale, output_scale)
+    return compile_binary_lookup(
+        "compile_atan2",
+        values,
+        minimum,
+        maximum,
+        minimum,
+        maximum,
         allow_large_lookup=allow_large_lookup,
         configuration=configuration,
     )

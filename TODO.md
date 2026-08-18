@@ -44,10 +44,10 @@ domain modules must clear the acceptance bar in CONTRIBUTING.md.
   domain know-how in house; do not pick up without coordinating)*
 - [ ] **finance.portfolio** — encrypted portfolio value, position-limit
   checks, risk-threshold counts. *(owner: Tolga)*
-- [ ] **stats** (top-level) — promote `ml.stats` and add private-analytics
+- [x] **stats** (top-level) — promote `ml.stats` and add private-analytics
   primitives: median/percentile (reuse the bitonic sort), top-k,
   histogram/bincount, mode (bincount + argmax).
-- [ ] **ml ensembles** — `random_forest_inference`
+- [x] **ml ensembles** — `random_forest_inference`
   (decision_tree_inference x N + majority_votes), small `mlp_inference`
   (matrix_vector_multiply + relu layers); both compose existing pieces.
 - [ ] Later, use-case driven: `sets` (PSI primitives: intersection size,
@@ -60,36 +60,36 @@ domain modules must clear the acceptance bar in CONTRIBUTING.md.
 
 ### math
 
-- [ ] **`atan2(y, x)`** — two-input scaled LUT (quadrant-aware angle);
+- [x] **`atan2(y, x)`** — two-input scaled LUT (quadrant-aware angle);
   completes the inverse-trig set.
-- [ ] **`powmod`** — `pow(base, exponent, modulus)` with public base and
+- [x] **`powmod`** — `pow(base, exponent, modulus)` with public base and
   modulus, encrypted exponent (unary LUT; toy-crypto and hashing demos).
-- [ ] **`copysign(x, y)`** — via abs LUT + comparison, or a two-input LUT.
-- [ ] **`log(x, base)`** — arbitrary-base parameter on the existing log.
-- [ ] **`gamma` / `lgamma`** — scaled unary LUTs, same pattern as erf.
-- [ ] **Saturating arithmetic** — `saturating_add/sub/mul` (op + clamp LUT)
+- [x] **`copysign(x, y)`** — via abs LUT + comparison, or a two-input LUT.
+- [x] **`log(x, base)`** — arbitrary-base parameter on the existing log.
+- [x] **`gamma` / `lgamma`** — scaled unary LUTs, same pattern as erf.
+- [x] **Saturating arithmetic** — `saturating_add/sub/mul` (op + clamp LUT)
   so pipelines can bound growth without manual clamping.
-- [ ] **`round_to_multiple(value, step)`** — quantization primitive for
+- [x] **`round_to_multiple(value, step)`** — quantization primitive for
   rescaling pipelines.
-- [ ] **fixed_point: `modf`** — (integer_part, fractional_part) pair, same
+- [x] **fixed_point: `modf`** — (integer_part, fractional_part) pair, same
   two-LUT pattern as floor_ceil.
-- [ ] **fixed_point: `fixed_point_multiply`** — multiply two scaled values
+- [x] **fixed_point: `fixed_point_multiply`** — multiply two scaled values
   and rescale the product back (`a * b // scale`); the missing primitive
   for chaining fixed-point math.
-- [ ] **Clear-side codec helpers** — `encode(value, scale)` /
+- [x] **Clear-side codec helpers** — `encode(value, scale)` /
   `decode(value, scale)` utilities so users stop hand-rolling the scaling
   shown in the README examples.
 
 ### math.bits / binary_division
 
-- [ ] **Shifts and rotates** — `shift_left/right_bits`,
+- [x] **Shifts and rotates** — `shift_left/right_bits`,
   `rotate_left/right_bits` (re-indexing, nearly free).
-- [ ] **`popcount` / `parity`** — bit-count via tournament sum; parity via
+- [x] **`popcount` / `parity`** — bit-count via tournament sum; parity via
   xor-reduce (bit_xor_many exists).
-- [ ] **`bit_length` / leading zeros** — LUT or mux ladder.
-- [ ] **`unsigned_compare_bits`** — comparator from bit lists (enables
+- [x] **`bit_length` / leading zeros** — LUT or mux ladder.
+- [x] **`unsigned_compare_bits`** — comparator from bit lists (enables
   sorting/threshold logic in pure bit circuits).
-- [ ] **Expose remainder from restoring division** — `unsigned_mod_bits`
+- [x] **Expose remainder from restoring division** — `unsigned_mod_bits`
   (the restoring circuit already computes it internally).
 - [ ] **Signed division** — sign-magnitude wrapper around the unsigned
   restoring divider.
@@ -98,46 +98,46 @@ domain modules must clear the acceptance bar in CONTRIBUTING.md.
 
 ### arrays
 
-- [ ] **`array_index(array, index)`** — oblivious read: `sum(equal(i, idx)
+- [x] **`array_index(array, index)`** — oblivious read: `sum(equal(i, idx)
   * arr[i])`; currently hand-rolled inside knn_inference — promote to a
   named primitive and reuse it there.
-- [ ] **`array_set(array, index, value)`** — oblivious write via select.
-- [ ] **`array_index_of(array, value)`** — first index of a value
+- [x] **`array_set(array, index, value)`** — oblivious write via select.
+- [x] **`array_index_of(array, value)`** — first index of a value
   (equal flags + argmax with tie_break="first").
-- [ ] **`array_cumsum`** — prefix sums (native adds).
-- [ ] **`array_top_k`** — k-round argmax with masking (same pattern as
+- [x] **`array_cumsum`** — prefix sums (native adds).
+- [x] **`array_top_k`** — k-round argmax with masking (same pattern as
   knn's iterated argmin; factor the shared loop out).
-- [ ] **`array_reverse`, `array_concat`** — trivial clear-side utilities
+- [x] **`array_reverse`, `array_concat`** — trivial clear-side utilities
   for completeness.
 
 ### stats (new top-level module — see candidate list)
 
-- [ ] median / percentile via the existing bitonic sort.
-- [ ] histogram / bincount (equal-flag sums over a bounded value range);
+- [x] median / percentile via the existing bitonic sort.
+- [x] histogram / bincount (equal-flag sums over a bounded value range);
   mode = bincount + argmax.
-- [ ] std deviation = isqrt(variance); covariance / scaled correlation
-  (needs fixed_point divide).
-- [ ] z-score normalization with public mean/scale (affine transform).
-- [ ] Absorb `ml.stats` into this module and re-export for compatibility.
+- [x] std deviation = isqrt(variance) and covariance. (Scaled correlation
+  still open — needs a fixed-point divide design.)
+- [x] z-score normalization with public mean/scale (affine transform).
+- [x] Absorb `ml.stats` into this module and re-export for compatibility.
 
 ### ml
 
-- [ ] **`random_forest_inference`** — decision_tree_inference over a list
+- [x] **`random_forest_inference`** — decision_tree_inference over a list
   of trees + majority_votes (pure composition, cheap win).
-- [ ] **`mlp_inference`** — small multilayer perceptron:
+- [x] **`mlp_inference`** — small multilayer perceptron:
   matrix_vector_multiply + relu per layer, public weights.
-- [ ] **`nearest_centroid_inference`** — k-means assignment step: argmin
+- [x] **`nearest_centroid_inference`** — k-means assignment step: argmin
   of distances to public centroids (knn machinery with public rows).
-- [ ] **`naive_bayes_inference`** — sum of public log-probability tables
+- [x] **`naive_bayes_inference`** — sum of public log-probability tables
   indexed by encrypted features (LUT per feature + argmax).
-- [ ] **`argmax_inference`** — multi-class head: argmax over class scores
+- [x] **`argmax_inference`** — multi-class head: argmax over class scores
   (replaces softmax for classification).
-- [ ] **precision / recall / f1** — from the existing confusion counts,
+- [x] **precision / recall / f1** — from the existing confusion counts,
   returned as scaled percentages like accuracy_score.
 - [ ] **cosine similarity (squared/scaled)** — dot² scaled by norms via
   fixed-point divide.
-- [ ] Migrate ml to the make_/compile_ bounds pattern (tracked above) and
-  rebuild decision trees on math.select.
+- [ ] Migrate ml to the make_/compile_ bounds pattern (tracked above).
+  Decision trees already rebuilt on math.select.
 
 ### Infrastructure / DX (non-finance)
 

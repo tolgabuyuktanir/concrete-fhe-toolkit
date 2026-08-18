@@ -50,3 +50,8 @@ Working list for the team. Check items off in the PR that completes them.
 - [ ] Write module docstrings/examples for `ml.stats`, `ml.utils`,
   `ml.matrix`, and `finance.transactions` so the generated API pages are
   self-explanatory.
+- [ ] **Track Zensical**: MkDocs 1.x is unmaintained and MkDocs 2.0 drops
+  the plugin system, so Material for MkDocs is in maintenance mode; its
+  team's successor, Zensical (zensical.org), reads mkdocs.yml as-is.
+  Migrate once its mkdocstrings + mike (versioning) support is solid —
+  until then the current pin (mkdocs-material constrains mkdocs<2) is safe.

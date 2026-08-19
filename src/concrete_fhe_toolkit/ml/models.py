@@ -5,13 +5,14 @@ from typing import Any, List, Optional
 from .._compat import fhe
 
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds, validate_integer
-from concrete_fhe_toolkit.arrays import array_sum, make_argmax, make_argmin
+from concrete_fhe_toolkit.arrays import array_sum, make_argmax, make_argmin, array_sub
 from concrete_fhe_toolkit.math import equal, greater, greater_equal, select
 from concrete_fhe_toolkit.math._lookup import make_unary_lookup
+from concrete_fhe_toolkit.arithmetic import sign
 
 from .activations import relu, threshold_activation
 from .core import euclidean_distance_squared
-from .matrix import dot_product, matrix_vector_multiply
+from .matrix import dot_product, matrix_vector_multiply, matrix_flatten
 
 
 def linear_regression_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
@@ -304,3 +305,61 @@ def naive_bayes_inference(
         upper_bounds.append(high)
 
     return argmax_inference(scores, min(lower_bounds), max(upper_bounds))
+
+def svm_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
+    """Evaluate a linear Support Vector Machine (SVM) on encrypted features.
+    
+    Returns 1 if the sample is on the positive side of the hyperplane,
+    -1 if it's on the negative side, and 0 if it lies exactly on the boundary.
+    """
+    regression_result = linear_regression_inference(weights, bias, features)
+    return sign(regression_result)
+
+def pca_inference(features: List[Any],means: List[Any],components: List[List[Any]]) -> List[Any]:
+    """Apply Principal Component Analysis (PCA) to reduce dimensionality of encrypted data.
+
+    Args:
+        features: The encrypted feature vector (list of encrypted integers).
+        mean: The public mean vector (list of integers).
+        components: The public principal components matrix (list of lists of integers).
+
+    Returns:
+        The encrypted principal components vector (list of encrypted integers).
+    """
+    diffs = array_sub(features,means)
+    return matrix_vector_multiply(components,diffs)
+
+def xgboost_inference(features: List[Any],trees: List[Any]) -> Any:
+    """
+    Evaluate a XGBoost classifier on encrypted features.
+
+    Args:
+        features: The encrypted feature vector (list of encrypted integers).
+        trees: The list of encrypted decision trees.
+
+    Returns:
+        The encrypted prediction of the XGBoost classifier.
+    """
+    tree_sum = 0
+    for tree in trees:
+        tree_sum += decision_tree_inference(features,tree)
+
+    return greater(tree_sum,0)
+
+def cnn_inference(filters: List[List[List[Any]]], bias: List[Any], image: List[List[List[Any]]]) -> Any:
+    feature_map = []
+    num_rows = len(filters[0])
+    num_columns = len(filters[0][0])
+
+    for index,filter in enumerate(filters):
+        flatten_filter = matrix_flatten(filter)
+        for i in range(len(image[0]) - num_rows + 1):
+            conv_rows = image[0][i:i+num_rows]
+            for j in range(len(image[0][0]) - num_columns + 1):
+                conv_matrix = [row[j:j+num_columns] for row in conv_rows]
+                flatten_conv_matrix = matrix_flatten(conv_matrix)
+                product = dot_product(flatten_filter,flatten_conv_matrix)
+                feature_map.append(product+bias[index])
+
+    return feature_map            
+    

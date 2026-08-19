@@ -103,7 +103,6 @@ def array_all_equal(array1: List[Any], array2: List[Any]) -> Any:
     equal_list = [equal(item1,item2) for item1,item2 in zip(list1,list2)]
     return bit_and_many(equal_list)
 
-
 def make_compare_swap(
     min_value: int = 0,
     max_value: int = 15,

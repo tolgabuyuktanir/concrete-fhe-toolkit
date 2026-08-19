@@ -47,6 +47,7 @@ def matrix_subtract(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[
         result_matrix.append(row)
 
     return result_matrix
+
 def matrix_multiply(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[Any]]:
     """Perform matrix multiplication (dot product) of two encrypted matrices."""
     result_matrix = []
@@ -75,3 +76,12 @@ def matrix_vector_multiply(matrix: List[List[Any]], array: List[Any]) -> List[An
         result_vector.append(dot_product(matrix[i],array))
 
     return result_vector        
+
+def matrix_flatten(matrix: List[List[Any]]) -> List[Any]: 
+    flatten_list = []
+
+    for row in matrix:
+        for value in row:
+            flatten_list.append(value)
+
+    return flatten_list        

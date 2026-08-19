@@ -36,6 +36,7 @@ from .core import (
 from .matrix import dot_product, matrix_add, matrix_transpose, matrix_subtract, matrix_multiply, matrix_vector_multiply
 from .models import (
     argmax_inference,
+    cnn_inference,
     compile_decision_tree_node,
     decision_tree_inference,
     decision_tree_node,
@@ -46,7 +47,10 @@ from .models import (
     mlp_inference,
     naive_bayes_inference,
     nearest_centroid_inference,
+    pca_inference,
     random_forest_inference,
+    svm_inference,
+    xgboost_inference,
 )
 from .stats import array_max, array_mean, array_min, array_range, array_variance, array_count_greater
 from .utils import binarize, one_hot_encode, clip_array
@@ -60,10 +64,12 @@ __all__ = [
     "array_range",
     "array_variance",
     "accuracy_score",
+    "cnn_inference",
     "f1_score",
     "mlp_inference",
     "naive_bayes_inference",
     "nearest_centroid_inference",
+    "pca_inference",
     "precision_score",
     "random_forest_inference",
     "recall_score",
@@ -98,6 +104,7 @@ __all__ = [
     "relu",
     "sigmoid",
     "sign",
+    "svm_inference",
     "tanh",
     "threshold_activation",
     "true_negatives",
@@ -106,4 +113,5 @@ __all__ = [
     "binarize",
     "clip_array",
     "one_hot_encode",
+    "xgboost_inference",
 ]

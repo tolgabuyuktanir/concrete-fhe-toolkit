@@ -53,6 +53,7 @@ extra:
     provider: mike
 
 markdown_extensions:
+  - md_in_html
   - admonition
   - tables
   - toc:

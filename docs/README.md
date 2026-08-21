@@ -18,8 +18,8 @@ math helper library for Zama Concrete.
 | Guide | Read it when you want to… |
 | --- | --- |
 | [**Bounds and costs**](bounds-and-costs.md) | Choose input bounds, understand why bounds are public, and learn how the lookup cost guards work. |
-| [**API reference**](api-reference.md) | Look up exactly what each user-facing function family does and how to call it. |
-| [**Testing and release checks**](testing-and-release.md) | (Maintainers) Run the verification commands used before publishing a release. |
+| [**API usage guide**](api-reference.md) | Look up exactly what each user-facing function family does and how to call it. |
+| [**Testing and release**](testing-and-release.md) | (Maintainers) Run the verification commands used before publishing a release. |
 
 > [!TIP]
 > New to the package? Start with **Bounds and costs**, then keep the **API

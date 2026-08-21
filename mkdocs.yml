@@ -63,8 +63,8 @@ markdown_extensions:
 nav:
   - Home: README.md
   - Guides:
-      - API usage guide: api-reference.md
       - Bounds and costs: bounds-and-costs.md
+      - API usage guide: api-reference.md
       - Testing and release: testing-and-release.md
   - API reference:
       - Overview: api/index.md

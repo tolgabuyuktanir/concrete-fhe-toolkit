@@ -3,10 +3,11 @@
 from typing import Any, List, Optional
 
 from .._compat import fhe
+import numpy as np
 
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds, validate_integer
-from concrete_fhe_toolkit.arrays import array_sum, make_argmax, make_argmin, array_sub
-from concrete_fhe_toolkit.math import equal, greater, greater_equal, select
+from concrete_fhe_toolkit.arrays import array_sum, make_argmax, make_argmin, array_sub, make_maximum
+from concrete_fhe_toolkit.math import equal, greater, greater_equal, select, maximum
 from concrete_fhe_toolkit.math._lookup import make_unary_lookup
 from concrete_fhe_toolkit.arithmetic import sign
 
@@ -346,7 +347,7 @@ def xgboost_inference(features: List[Any],trees: List[Any]) -> Any:
 
     return greater(tree_sum,0)
 
-def cnn_inference(filters: List[List[List[Any]]], bias: List[Any], image: List[List[List[Any]]]) -> Any:
+def cnn_inference(filters: List[List[List[Any]]], bias: List[Any], image: List[List[List[Any]]]) -> List[Any]:
     feature_map = []
     num_rows = len(filters[0])
     num_columns = len(filters[0][0])
@@ -363,3 +364,67 @@ def cnn_inference(filters: List[List[List[Any]]], bias: List[Any], image: List[L
 
     return feature_map            
     
+def max_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
+    pooling_size = 2
+    pooling_values = []
+
+    for i in range(0,len(image[0]) - pooling_size + 1,pooling_size):
+        pooling_rows = image[0][i:i + pooling_size]
+
+        for j in range(0,len(image[0][0]) - pooling_size + 1,pooling_size):
+            pooling_matrix = [row[j:j + pooling_size] for row in pooling_rows]
+            flatten_matrix = matrix_flatten(pooling_matrix)
+
+            max_element = flatten_matrix[0]
+            for val in flatten_matrix[1:]:
+                max_element = maximum(val,max_element)
+
+            pooling_values.append(max_element)
+
+    return pooling_values
+
+def avg_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
+    pooling_size = 2
+    pooling_values = []
+
+    for i in range(0,len(image[0]) - pooling_size + 1,pooling_size):
+        pooling_rows = image[0][i:i + pooling_size]
+
+        for j in range(0,len(image[0][0]) - pooling_size + 1,pooling_size):
+            pooling_matrix = [row[j:j + pooling_size] for row in pooling_rows]
+            flatten_matrix = matrix_flatten(pooling_matrix)
+            pooling_values.append(array_sum(flatten_matrix)//4)
+
+    return pooling_values    
+
+def auto_quantizer(images: List[List[List[List[Any]]]], filters: List[List[List[Any]]], model: Any, mode: str="optimal") -> Any:
+    max_pixel_val = images[0][0][0][0]
+    for image in images:
+        for channel in image:
+            for row in channel:
+                for pixel in row:
+                    max_pixel_val = max(abs(pixel),max_pixel_val)
+
+    if mode == "optimal":
+        weight_power = np.max(np.sum(np.abs(model.coef_), axis=1))
+        filter_power = np.sum(np.abs(filters))
+        cnn_pixel_count = 1
+        num_of_features = 1
+    
+    elif mode == "worst_case":
+        weight_power = np.max(np.abs(model.coef_))
+        filter_power = filters[0][0][0]
+        for filt in filters:
+            for row in filt:
+                for val in row:
+                    filter_power = max(abs(val),filter_power)
+
+        cnn_pixel_count = len(filters[0]) * len(filters[0][0])
+        num_of_features = len(model.coef_[0])
+
+    else:
+        raise ValueError("mode should be optimal or worst_case")    
+    
+    max_product = max_pixel_val * filter_power * cnn_pixel_count * num_of_features * weight_power
+
+    return max(1,int(32767 // max_product))

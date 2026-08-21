@@ -51,6 +51,9 @@ from .models import (
     random_forest_inference,
     svm_inference,
     xgboost_inference,
+    max_pooling_2d,
+    avg_pooling_2d,
+    auto_quantizer,
 )
 from .stats import array_max, array_mean, array_min, array_range, array_variance, array_count_greater
 from .utils import binarize, one_hot_encode, clip_array
@@ -114,4 +117,7 @@ __all__ = [
     "clip_array",
     "one_hot_encode",
     "xgboost_inference",
+    "max_pooling_2d",
+    "avg_pooling_2d",
+    "auto_quantizer",
 ]

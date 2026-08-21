@@ -19,3 +19,8 @@ def clip_array(array: List[Any], min_val: Any, max_val: Any) -> List[Any]:
         clipped_array.append(minimum(max_val, maximum(min_val,item)))
 
     return clipped_array    
+
+
+def normalize_array(array: List[Any], divisor: int) -> List[Any]:
+    normalized_array = [item//divisor for item in array]
+    return normalized_array

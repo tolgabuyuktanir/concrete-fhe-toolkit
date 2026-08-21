@@ -1,0 +1,3071 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Bounded math helpers for compiling common Zama Concrete FHE circuits">
+      
+      
+      
+        <link rel="canonical" href="https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/0.4.1/api/ml-models/">
+      
+      
+        <link rel="prev" href="../ml-core/">
+      
+      
+        <link rel="next" href="../ml-matrix/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Models - concrete-fhe-toolkit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/zama.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#models" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="concrete-fhe-toolkit" class="md-header__button md-logo" aria-label="concrete-fhe-toolkit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            concrete-fhe-toolkit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Models
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tolgabuyuktanir/concrete-fhe-toolkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tolgabuyuktanir/concrete-fhe-toolkit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../bounds-and-costs/" class="md-tabs__link">
+          
+  
+  
+  Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  API reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="concrete-fhe-toolkit" class="md-nav__button md-logo" aria-label="concrete-fhe-toolkit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    concrete-fhe-toolkit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tolgabuyuktanir/concrete-fhe-toolkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tolgabuyuktanir/concrete-fhe-toolkit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bounds-and-costs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bounds and costs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API usage guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing-and-release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arithmetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Math
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-combinatorics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Combinatorics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-number-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Number theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-fixed-point/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fixed point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-special/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Special functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-bits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bit primitives
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-binary-division/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Binary division
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Machine learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metrics and losses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.linear_regression_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        linear_regression_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.logistic_regression_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        logistic_regression_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.decision_tree_node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        decision_tree_node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.majority_votes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        majority_votes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.knn_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        knn_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.decision_tree_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        decision_tree_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.compile_decision_tree_node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_decision_tree_node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.random_forest_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        random_forest_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.mlp_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mlp_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.nearest_centroid_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nearest_centroid_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.argmax_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        argmax_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.naive_bayes_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        naive_bayes_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.svm_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        svm_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.pca_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pca_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.xgboost_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xgboost_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matrix algebra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml-activations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml-stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml-utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Finance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finance-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rates and interest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../finance-transactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transactions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.linear_regression_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        linear_regression_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.logistic_regression_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        logistic_regression_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.decision_tree_node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        decision_tree_node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.majority_votes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        majority_votes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.knn_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        knn_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.decision_tree_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        decision_tree_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.compile_decision_tree_node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_decision_tree_node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.random_forest_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        random_forest_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.mlp_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mlp_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.nearest_centroid_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nearest_centroid_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.argmax_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        argmax_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.naive_bayes_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        naive_bayes_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.svm_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        svm_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.pca_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pca_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.xgboost_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xgboost_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="models">Models<a class="headerlink" href="#models" title="Permanent link">&para;</a></h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="concrete_fhe_toolkit.ml.models" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">concrete_fhe_toolkit.ml.models</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Encrypted inference helpers for simple ML models.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.linear_regression_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">linear_regression_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.linear_regression_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">linear_regression_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a linear regression model (dot product of weights and features plus bias).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">linear_regression_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Evaluate a linear regression model (dot product of weights and features plus bias)."""</span>
+    <span class="n">product</span> <span class="o">=</span> <span class="n">dot_product</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">bias</span> <span class="o">+</span> <span class="n">product</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.logistic_regression_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">logistic_regression_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.logistic_regression_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">logistic_regression_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a logistic regression classifier on encrypted features.</p>
+<p>Computes the linear score <code>weights . features + bias</code> and returns the
+binary class <code>score &gt;= threshold</code>. Because the sigmoid is monotonic,
+thresholding the raw score at 0 is equivalent to thresholding the
+probability at 0.5, so no sigmoid lookup is needed for classification.
+Scale weights, bias, and features to integers with the same factor
+before calling.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">logistic_regression_inference</span><span class="p">(</span>
+    <span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+    <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Evaluate a logistic regression classifier on encrypted features.</span>
+
+<span class="sd">    Computes the linear score ``weights . features + bias`` and returns the</span>
+<span class="sd">    binary class ``score &gt;= threshold``. Because the sigmoid is monotonic,</span>
+<span class="sd">    thresholding the raw score at 0 is equivalent to thresholding the</span>
+<span class="sd">    probability at 0.5, so no sigmoid lookup is needed for classification.</span>
+<span class="sd">    Scale weights, bias, and features to integers with the same factor</span>
+<span class="sd">    before calling.</span>
+<span class="sd">    """</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">linear_regression_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">threshold_activation</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.decision_tree_node" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">decision_tree_node</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.decision_tree_node" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">decision_tree_node</span><span class="p">(</span><span class="n">feature_val</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">left_branch</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">right_branch</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a single decision tree node.</p>
+<p>Returns <code>left_branch</code> when <code>feature_val &gt;= threshold</code>, otherwise
+<code>right_branch</code>. Branch values may be arbitrary bounded integers.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">decision_tree_node</span><span class="p">(</span><span class="n">feature_val</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">left_branch</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">right_branch</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Evaluate a single decision tree node.</span>
+
+<span class="sd">    Returns ``left_branch`` when ``feature_val &gt;= threshold``, otherwise</span>
+<span class="sd">    ``right_branch``. Branch values may be arbitrary bounded integers.</span>
+<span class="sd">    """</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">greater_equal</span><span class="p">(</span><span class="n">feature_val</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">select</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">left_branch</span><span class="p">,</span> <span class="n">right_branch</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.majority_votes" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">majority_votes</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.majority_votes" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">majority_votes</span><span class="p">(</span><span class="n">predictions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Perform majority voting for an ensemble of binary predictions.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">majority_votes</span><span class="p">(</span><span class="n">predictions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Perform majority voting for an ensemble of binary predictions."""</span>
+    <span class="n">sum_predictions</span> <span class="o">=</span> <span class="n">array_sum</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">greater</span><span class="p">(</span><span class="n">sum_predictions</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.knn_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">knn_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.knn_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">knn_inference</span><span class="p">(</span><span class="n">test_sample</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">train_samples</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">train_labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a k-nearest-neighbor model on an encrypted test sample.</p>
+<p><code>max_distance</code> must be an upper bound on the squared Euclidean distance
+between the test sample and any training sample. The argmin reductions
+are built for that range, so distances above the bound silently corrupt
+the result.</p>
+<p>With <code>k=1</code> the nearest label is returned directly and labels may be
+arbitrary bounded integers. With <code>k &gt; 1</code> the labels must be binary
+(0/1) and the majority vote of the k nearest labels is returned; use an
+odd <code>k</code> to avoid ties (a tie resolves to 0).</p>
+<p>The k &gt; 1 path runs k argmin rounds, masking each selected neighbor with
+a distance penalty, so circuit cost grows linearly with <code>k</code>.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">knn_inference</span><span class="p">(</span>
+    <span class="n">test_sample</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+    <span class="n">train_samples</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">train_labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Evaluate a k-nearest-neighbor model on an encrypted test sample.</span>
+
+<span class="sd">    ``max_distance`` must be an upper bound on the squared Euclidean distance</span>
+<span class="sd">    between the test sample and any training sample. The argmin reductions</span>
+<span class="sd">    are built for that range, so distances above the bound silently corrupt</span>
+<span class="sd">    the result.</span>
+
+<span class="sd">    With ``k=1`` the nearest label is returned directly and labels may be</span>
+<span class="sd">    arbitrary bounded integers. With ``k &gt; 1`` the labels must be binary</span>
+<span class="sd">    (0/1) and the majority vote of the k nearest labels is returned; use an</span>
+<span class="sd">    odd ``k`` to avoid ties (a tie resolves to 0).</span>
+
+<span class="sd">    The k &gt; 1 path runs k argmin rounds, masking each selected neighbor with</span>
+<span class="sd">    a distance penalty, so circuit cost grows linearly with ``k``.</span>
+<span class="sd">    """</span>
+    <span class="n">maximum_distance</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"max_distance"</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">normalized_k</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"k"</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_samples</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_labels</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"train_samples and train_labels must have the same length"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">normalized_k</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_samples</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"k cannot exceed the number of training samples"</span><span class="p">)</span>
+
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">euclidean_distance_squared</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">test_sample</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">train_samples</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">normalized_k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">argmin_func</span> <span class="o">=</span> <span class="n">make_argmin</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">distances</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">maximum_distance</span><span class="p">)</span>
+        <span class="n">min_index</span> <span class="o">=</span> <span class="n">argmin_func</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+
+        <span class="n">prediction</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_labels</span><span class="p">):</span>
+            <span class="n">prediction</span> <span class="o">+=</span> <span class="n">equal</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">min_index</span><span class="p">)</span> <span class="o">*</span> <span class="n">label</span>
+
+        <span class="k">return</span> <span class="n">prediction</span>
+
+    <span class="c1"># k &gt; 1: iterated argmin. Each round the selected neighbor's distance is</span>
+    <span class="c1"># pushed above max_distance so it cannot be selected again.</span>
+    <span class="n">penalty</span> <span class="o">=</span> <span class="n">maximum_distance</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">argmin_func</span> <span class="o">=</span> <span class="n">make_argmin</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">distances</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">maximum_distance</span> <span class="o">+</span> <span class="n">penalty</span><span class="p">)</span>
+    <span class="n">current_distances</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+    <span class="n">votes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">normalized_k</span><span class="p">):</span>
+        <span class="n">min_index</span> <span class="o">=</span> <span class="n">argmin_func</span><span class="p">(</span><span class="n">current_distances</span><span class="p">)</span>
+
+        <span class="n">vote</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">next_distances</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">current_distances</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)):</span>
+            <span class="n">selected</span> <span class="o">=</span> <span class="n">equal</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">min_index</span><span class="p">)</span>
+            <span class="n">vote</span> <span class="o">+=</span> <span class="n">selected</span> <span class="o">*</span> <span class="n">label</span>
+            <span class="n">next_distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">distance</span> <span class="o">+</span> <span class="n">selected</span> <span class="o">*</span> <span class="n">penalty</span><span class="p">)</span>
+
+        <span class="n">current_distances</span> <span class="o">=</span> <span class="n">next_distances</span>
+        <span class="n">votes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vote</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">majority_votes</span><span class="p">(</span><span class="n">votes</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.decision_tree_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">decision_tree_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.decision_tree_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">decision_tree_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">tree</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a full decision tree on encrypted features.</p>
+<p><code>tree</code> is a public structure. An internal node is a dict with keys
+<code>"feature"</code> (index into <code>features</code>), <code>"threshold"</code> (public
+integer), <code>"left"</code>, and <code>"right"</code> (subtrees); a leaf is a plain
+integer label or value. The left branch is taken when
+<code>features[feature] &gt;= threshold</code>.</p>
+<p>Every path of the tree is evaluated obliviously, so the visited path is
+never revealed — circuit cost grows with the total number of nodes.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">decision_tree_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">tree</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Evaluate a full decision tree on encrypted features.</span>
+
+<span class="sd">    ``tree`` is a public structure. An internal node is a dict with keys</span>
+<span class="sd">    ``"feature"`` (index into ``features``), ``"threshold"`` (public</span>
+<span class="sd">    integer), ``"left"``, and ``"right"`` (subtrees); a leaf is a plain</span>
+<span class="sd">    integer label or value. The left branch is taken when</span>
+<span class="sd">    ``features[feature] &gt;= threshold``.</span>
+
+<span class="sd">    Every path of the tree is evaluated obliviously, so the visited path is</span>
+<span class="sd">    never revealed — circuit cost grows with the total number of nodes.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"leaf value"</span><span class="p">,</span> <span class="n">tree</span><span class="p">)</span>
+
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"feature"</span><span class="p">,</span> <span class="s2">"threshold"</span><span class="p">,</span> <span class="s2">"left"</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">}</span> <span class="o">-</span> <span class="n">tree</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"tree node is missing keys: </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">missing</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+
+    <span class="n">feature_index</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"feature"</span><span class="p">,</span> <span class="n">tree</span><span class="p">[</span><span class="s2">"feature"</span><span class="p">],</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">feature_index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"tree feature index is out of range for the feature vector"</span><span class="p">)</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"threshold"</span><span class="p">,</span> <span class="n">tree</span><span class="p">[</span><span class="s2">"threshold"</span><span class="p">])</span>
+
+    <span class="n">control</span> <span class="o">=</span> <span class="n">greater_equal</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">feature_index</span><span class="p">],</span> <span class="n">threshold</span><span class="p">)</span>
+    <span class="n">left_value</span> <span class="o">=</span> <span class="n">decision_tree_inference</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">tree</span><span class="p">[</span><span class="s2">"left"</span><span class="p">])</span>
+    <span class="n">right_value</span> <span class="o">=</span> <span class="n">decision_tree_inference</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">tree</span><span class="p">[</span><span class="s2">"right"</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">select</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">left_value</span><span class="p">,</span> <span class="n">right_value</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.compile_decision_tree_node" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">compile_decision_tree_node</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.compile_decision_tree_node" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">compile_decision_tree_node</span><span class="p">(</span><span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Compile a single encrypted decision tree node.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_decision_tree_node</span><span class="p">(</span>
+    <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Compile a single encrypted decision tree node."""</span>
+    <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span> <span class="o">=</span> <span class="n">validate_bounds</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">compile_function</span><span class="p">(</span>
+        <span class="n">decision_tree_node</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">"feature_val"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">,</span>
+            <span class="s2">"threshold"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">,</span>
+            <span class="s2">"left_branch"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">,</span>
+            <span class="s2">"right_branch"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">minimum</span><span class="p">,</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">minimum</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">,</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">maximum</span><span class="p">,</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">,</span> <span class="n">minimum</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">maximum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">),</span>
+        <span class="p">],</span>
+        <span class="n">configuration</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.random_forest_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">random_forest_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.random_forest_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">random_forest_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">trees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a random forest with binary (0/1) leaves via majority vote.</p>
+<p>Each tree uses the public dict structure accepted by
+:func:<code>decision_tree_inference</code>. Use an odd number of trees to avoid
+ties (a tie resolves to 0).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">random_forest_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">trees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Evaluate a random forest with binary (0/1) leaves via majority vote.</span>
+
+<span class="sd">    Each tree uses the public dict structure accepted by</span>
+<span class="sd">    :func:`decision_tree_inference`. Use an odd number of trees to avoid</span>
+<span class="sd">    ties (a tie resolves to 0).</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">trees</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"trees must contain at least one tree"</span><span class="p">)</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">decision_tree_inference</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">tree</span><span class="p">)</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">trees</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">majority_votes</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.mlp_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">mlp_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.mlp_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">mlp_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">layers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a small multilayer perceptron with public integer weights.</p>
+<p><code>layers</code> is a list of <code>(weights_matrix, biases)</code> pairs. Hidden
+layers apply ReLU; the final layer stays linear and returns the raw
+score vector. Weights, biases, and features must share one integer
+scale; note that every layer multiplies scales together, so keep the
+network shallow or rescale between layers.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mlp_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">layers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Evaluate a small multilayer perceptron with public integer weights.</span>
+
+<span class="sd">    ``layers`` is a list of ``(weights_matrix, biases)`` pairs. Hidden</span>
+<span class="sd">    layers apply ReLU; the final layer stays linear and returns the raw</span>
+<span class="sd">    score vector. Weights, biases, and features must share one integer</span>
+<span class="sd">    scale; note that every layer multiplies scales together, so keep the</span>
+<span class="sd">    network shallow or rescale between layers.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">layers</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"layers must contain at least one (weights, biases) pair"</span><span class="p">)</span>
+
+    <span class="n">activations_vector</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">layer_index</span><span class="p">,</span> <span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">biases</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layers</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">biases</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"each layer needs one bias per output row"</span><span class="p">)</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">matrix_vector_multiply</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">activations_vector</span><span class="p">)</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">score</span> <span class="o">+</span> <span class="n">bias</span> <span class="k">for</span> <span class="n">score</span><span class="p">,</span> <span class="n">bias</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">biases</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">layer_index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">relu</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">]</span>
+        <span class="n">activations_vector</span> <span class="o">=</span> <span class="n">scores</span>
+    <span class="k">return</span> <span class="n">activations_vector</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.nearest_centroid_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">nearest_centroid_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.nearest_centroid_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">nearest_centroid_inference</span><span class="p">(</span><span class="n">sample</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">centroids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Assign an encrypted sample to the nearest public centroid (k-means step).</p>
+<p>Returns the centroid index, or the matching label when <code>labels</code> is
+given. <code>max_distance</code> must bound the squared distance to any centroid.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">nearest_centroid_inference</span><span class="p">(</span>
+    <span class="n">sample</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+    <span class="n">centroids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Assign an encrypted sample to the nearest public centroid (k-means step).</span>
+
+<span class="sd">    Returns the centroid index, or the matching label when ``labels`` is</span>
+<span class="sd">    given. ``max_distance`` must bound the squared distance to any centroid.</span>
+<span class="sd">    """</span>
+    <span class="n">maximum_distance</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"max_distance"</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">centroids</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"centroids must contain at least one centroid"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">centroids</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"labels and centroids must have the same length"</span><span class="p">)</span>
+
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">euclidean_distance_squared</span><span class="p">(</span><span class="n">centroid</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="n">centroids</span>
+    <span class="p">]</span>
+    <span class="n">arg_min</span> <span class="o">=</span> <span class="n">make_argmin</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">distances</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">maximum_distance</span><span class="p">)</span>
+    <span class="n">nearest_index</span> <span class="o">=</span> <span class="n">arg_min</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">nearest_index</span>
+
+    <span class="n">prediction</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="n">prediction</span> <span class="o">+</span> <span class="n">equal</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">nearest_index</span><span class="p">)</span> <span class="o">*</span> <span class="n">label</span>
+    <span class="k">return</span> <span class="n">prediction</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.argmax_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">argmax_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.argmax_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">argmax_inference</span><span class="p">(</span><span class="n">scores</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_score</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_score</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the index of the highest class score (multi-class head).</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">argmax_inference</span><span class="p">(</span><span class="n">scores</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_score</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_score</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Return the index of the highest class score (multi-class head)."""</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">items</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"scores must contain at least one score"</span><span class="p">)</span>
+    <span class="n">arg_max</span> <span class="o">=</span> <span class="n">make_argmax</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">),</span> <span class="n">min_score</span><span class="p">,</span> <span class="n">max_score</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">arg_max</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.naive_bayes_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">naive_bayes_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.naive_bayes_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">naive_bayes_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">log_prob_tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]],</span> <span class="n">priors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">min_feature</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a categorical naive Bayes classifier on encrypted features.</p>
+<p><code>log_prob_tables[class][feature]</code> is a public list of scaled integer
+log-probabilities indexed by <code>feature_value - min_feature</code>; <code>priors</code>
+holds the scaled log-priors per class. Returns the encrypted index of
+the best class. Score bounds for the final argmax are derived from the
+public tables.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">naive_bayes_inference</span><span class="p">(</span>
+    <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+    <span class="n">log_prob_tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]],</span>
+    <span class="n">priors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">min_feature</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Evaluate a categorical naive Bayes classifier on encrypted features.</span>
+
+<span class="sd">    ``log_prob_tables[class][feature]`` is a public list of scaled integer</span>
+<span class="sd">    log-probabilities indexed by ``feature_value - min_feature``; ``priors``</span>
+<span class="sd">    holds the scaled log-priors per class. Returns the encrypted index of</span>
+<span class="sd">    the best class. Score bounds for the final argmax are derived from the</span>
+<span class="sd">    public tables.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">log_prob_tables</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">priors</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"log_prob_tables and priors must have the same length"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">log_prob_tables</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"at least one class is required"</span><span class="p">)</span>
+    <span class="n">minimum_feature</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"min_feature"</span><span class="p">,</span> <span class="n">min_feature</span><span class="p">)</span>
+
+    <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lower_bounds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">upper_bounds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">class_index</span><span class="p">,</span> <span class="n">tables</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">log_prob_tables</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tables</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"each class needs one table per feature"</span><span class="p">)</span>
+        <span class="n">prior</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"prior"</span><span class="p">,</span> <span class="n">priors</span><span class="p">[</span><span class="n">class_index</span><span class="p">])</span>
+        <span class="n">score</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">prior</span>
+        <span class="n">low</span> <span class="o">=</span> <span class="n">prior</span>
+        <span class="n">high</span> <span class="o">=</span> <span class="n">prior</span>
+        <span class="k">for</span> <span class="n">feature_index</span><span class="p">,</span> <span class="n">table</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tables</span><span class="p">):</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">validate_integer</span><span class="p">(</span><span class="s2">"log probability"</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">table</span><span class="p">]</span>
+            <span class="n">lookup</span> <span class="o">=</span> <span class="n">make_unary_lookup</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">minimum_feature</span><span class="p">)</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">+</span> <span class="n">lookup</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">feature_index</span><span class="p">])</span>
+            <span class="n">low</span> <span class="o">+=</span> <span class="nb">min</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+            <span class="n">high</span> <span class="o">+=</span> <span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+        <span class="n">lower_bounds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">low</span><span class="p">)</span>
+        <span class="n">upper_bounds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">high</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">argmax_inference</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">lower_bounds</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">upper_bounds</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.svm_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">svm_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.svm_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">svm_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a linear Support Vector Machine (SVM) on encrypted features.</p>
+<p>Returns 1 if the sample is on the positive side of the hyperplane,
+-1 if it's on the negative side, and 0 if it lies exactly on the boundary.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">svm_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Evaluate a linear Support Vector Machine (SVM) on encrypted features.</span>
+
+<span class="sd">    Returns 1 if the sample is on the positive side of the hyperplane,</span>
+<span class="sd">    -1 if it's on the negative side, and 0 if it lies exactly on the boundary.</span>
+<span class="sd">    """</span>
+    <span class="n">regression_result</span> <span class="o">=</span> <span class="n">linear_regression_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sign</span><span class="p">(</span><span class="n">regression_result</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.pca_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">pca_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.pca_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">pca_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">means</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">components</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Apply Principal Component Analysis (PCA) to reduce dimensionality of encrypted data.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>features</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted feature vector (list of encrypted integers).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>mean</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The public mean vector (list of integers).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>components</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The public principal components matrix (list of lists of integers).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted principal components vector (list of encrypted integers).</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">pca_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span><span class="n">means</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span><span class="n">components</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Apply Principal Component Analysis (PCA) to reduce dimensionality of encrypted data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        features: The encrypted feature vector (list of encrypted integers).</span>
+<span class="sd">        mean: The public mean vector (list of integers).</span>
+<span class="sd">        components: The public principal components matrix (list of lists of integers).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The encrypted principal components vector (list of encrypted integers).</span>
+<span class="sd">    """</span>
+    <span class="n">diffs</span> <span class="o">=</span> <span class="n">array_sub</span><span class="p">(</span><span class="n">features</span><span class="p">,</span><span class="n">means</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">matrix_vector_multiply</span><span class="p">(</span><span class="n">components</span><span class="p">,</span><span class="n">diffs</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.xgboost_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">xgboost_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.xgboost_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">xgboost_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">trees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a XGBoost classifier on encrypted features.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>features</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted feature vector (list of encrypted integers).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>trees</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The list of encrypted decision trees.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted prediction of the XGBoost classifier.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">xgboost_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span><span class="n">trees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Evaluate a XGBoost classifier on encrypted features.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        features: The encrypted feature vector (list of encrypted integers).</span>
+<span class="sd">        trees: The list of encrypted decision trees.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The encrypted prediction of the XGBoost classifier.</span>
+<span class="sd">    """</span>
+    <span class="n">tree_sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">trees</span><span class="p">:</span>
+        <span class="n">tree_sum</span> <span class="o">+=</span> <span class="n">decision_tree_inference</span><span class="p">(</span><span class="n">features</span><span class="p">,</span><span class="n">tree</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">greater</span><span class="p">(</span><span class="n">tree_sum</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2986 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Bounded math helpers for compiling common Zama Concrete FHE circuits">
+      
+      
+      
+        <link rel="canonical" href="https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/0.4.1/api-reference/">
+      
+      
+        <link rel="prev" href="../bounds-and-costs/">
+      
+      
+        <link rel="next" href="../testing-and-release/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>API usage guide - concrete-fhe-toolkit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../stylesheets/zama.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="concrete-fhe-toolkit" class="md-header__button md-logo" aria-label="concrete-fhe-toolkit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            concrete-fhe-toolkit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API usage guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tolgabuyuktanir/concrete-fhe-toolkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tolgabuyuktanir/concrete-fhe-toolkit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../bounds-and-costs/" class="md-tabs__link">
+          
+  
+  
+  Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../api/" class="md-tabs__link">
+          
+  
+  
+  API reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="concrete-fhe-toolkit" class="md-nav__button md-logo" aria-label="concrete-fhe-toolkit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>
+
+    </a>
+    concrete-fhe-toolkit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tolgabuyuktanir/concrete-fhe-toolkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tolgabuyuktanir/concrete-fhe-toolkit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bounds-and-costs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bounds and costs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API usage guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API usage guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#root-package-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root package functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#math-operation-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Math operation objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-integer-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic integer operations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bounded-lookup-integer-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bounded lookup integer helpers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bounded lookup integer helpers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#absolute-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Absolute value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clamp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modulo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#divmod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Divmod
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-close" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is close
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combinatorics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combinatorics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#number-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number theory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fixed-point-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed-point helpers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#special-fixed-point-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Special fixed-point functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit-level-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bit-level helpers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit-level-division" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bit-level division
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resource-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resource helpers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#machine-learning-subpackage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Machine learning subpackage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finance-subpackage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finance subpackage
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing-and-release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/arithmetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arithmetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Math
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/math-basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/math-combinatorics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Combinatorics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/math-number-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Number theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/math-fixed-point/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fixed point
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/math-special/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Special functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/math-bits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bit primitives
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/math-binary-division/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Binary division
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Machine learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/ml-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metrics and losses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/ml-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/ml-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Matrix algebra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/ml-activations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/ml-stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/ml-utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Finance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/finance-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rates and interest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/finance-transactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transactions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#root-package-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root package functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#math-operation-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Math operation objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-integer-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic integer operations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bounded-lookup-integer-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bounded lookup integer helpers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bounded lookup integer helpers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#absolute-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Absolute value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clamp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modulo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#divmod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Divmod
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-close" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is close
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combinatorics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combinatorics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#number-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Number theory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fixed-point-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed-point helpers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#special-fixed-point-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Special fixed-point functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit-level-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bit-level helpers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit-level-division" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bit-level division
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resource-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resource helpers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#machine-learning-subpackage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Machine learning subpackage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finance-subpackage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finance subpackage
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="api-reference">API reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h1>
+<p>This page describes the user-facing functions in <code>concrete-fhe-toolkit</code>.</p>
+<p>For most functions there are three layers:</p>
+<ul>
+<li>friendly operation, for example <code>fhe_math.gcd(...)</code>, which compiles by
+  default;</li>
+<li>explicit compiler, for example <code>fhe_math.compile_gcd(...)</code>;</li>
+<li>composable builder, for example <code>fhe_math.make_gcd(...)</code>.</li>
+</ul>
+<p>Use the friendly operation or <code>compile_*</code> for normal use. Use <code>make_*</code> when
+you are manually composing a larger Concrete function.</p>
+<h2 id="root-package-functions">Root package functions<a class="headerlink" href="#root-package-functions" title="Permanent link">&para;</a></h2>
+<p>Import from the package root:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_sort</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>What it does</th>
+<th>Main bounds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sign(x, y)</code></td>
+<td>Clear/traceable comparison returning <code>1</code>, <code>0</code>, or <code>-1</code></td>
+<td>Values must fit the circuit bounds when compiled</td>
+</tr>
+<tr>
+<td><code>compile_sign(min_value=-15, max_value=15)</code></td>
+<td>Compiles encrypted sign comparison</td>
+<td><code>min_value..max_value</code> for both inputs</td>
+</tr>
+<tr>
+<td><code>make_compare_swap(min_value=0, max_value=15)</code></td>
+<td>Builds a traceable two-value ascending sort step</td>
+<td>Scalar range</td>
+</tr>
+<tr>
+<td><code>compile_compare_swap(min_value=0, max_value=15)</code></td>
+<td>Compiles encrypted compare-swap</td>
+<td>Scalar range</td>
+</tr>
+<tr>
+<td><code>make_sort(size, min_value=0, max_value=15, descending=False)</code></td>
+<td>Builds a fixed-size sorting network</td>
+<td>Array size and scalar range</td>
+</tr>
+<tr>
+<td><code>compile_sort(size, min_value=0, max_value=15, descending=False)</code></td>
+<td>Compiles encrypted array sort</td>
+<td>Array size and scalar range</td>
+</tr>
+<tr>
+<td><code>make_minimum(size, min_value=0, max_value=15)</code></td>
+<td>Builds encrypted-array minimum</td>
+<td>Array size and scalar range</td>
+</tr>
+<tr>
+<td><code>compile_minimum(size, min_value=0, max_value=15)</code></td>
+<td>Compiles encrypted-array minimum</td>
+<td>Array size and scalar range</td>
+</tr>
+<tr>
+<td><code>make_maximum(size, min_value=0, max_value=15)</code></td>
+<td>Builds encrypted-array maximum</td>
+<td>Array size and scalar range</td>
+</tr>
+<tr>
+<td><code>compile_maximum(size, min_value=0, max_value=15)</code></td>
+<td>Compiles encrypted-array maximum</td>
+<td>Array size and scalar range</td>
+</tr>
+<tr>
+<td><code>make_argmin(size, min_value=0, max_value=15, tie_break="first")</code></td>
+<td>Builds index of minimum value</td>
+<td>Array size and scalar range</td>
+</tr>
+<tr>
+<td><code>compile_argmin(size, min_value=0, max_value=15, tie_break="first")</code></td>
+<td>Compiles encrypted argmin</td>
+<td>Array size and scalar range</td>
+</tr>
+<tr>
+<td><code>make_argmax(size, min_value=0, max_value=15, tie_break="first")</code></td>
+<td>Builds index of maximum value</td>
+<td>Array size and scalar range</td>
+</tr>
+<tr>
+<td><code>compile_argmax(size, min_value=0, max_value=15, tie_break="first")</code></td>
+<td>Compiles encrypted argmax</td>
+<td>Array size and scalar range</td>
+</tr>
+<tr>
+<td><code>make_floor_divide(zero_result=0)</code></td>
+<td>Builds bounded floor division using Concrete multivariate lookup</td>
+<td>Inputset supplied by caller</td>
+</tr>
+<tr>
+<td><code>compile_floor_divide(max_numerator, max_denominator, zero_result=0)</code></td>
+<td>Compiles <code>numerator // denominator</code> for nonnegative inputs</td>
+<td><code>0..max_numerator</code>, <code>0..max_denominator</code></td>
+</tr>
+<tr>
+<td><code>make_floor_divide_by_product(zero_result=0)</code></td>
+<td>Builds <code>numerator // (left * right)</code></td>
+<td>Inputset supplied by caller</td>
+</tr>
+<tr>
+<td><code>compile_floor_divide_by_product(max_numerator, max_left, max_right, zero_result=0)</code></td>
+<td>Compiles division by encrypted product</td>
+<td>Nonnegative maxima</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_sort</span>
+
+<span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="n">sort</span> <span class="o">=</span> <span class="n">compile_sort</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sort</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+<span class="c1"># [ 1  3  7 12]</span>
+</code></pre></div>
+<h2 id="math-operation-objects">Math operation objects<a class="headerlink" href="#math-operation-objects" title="Permanent link">&para;</a></h2>
+<p>Import the math subpackage:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+</code></pre></div>
+<p>Each operation object supports:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">gcd</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">function</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">gcd</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</code></pre></div>
+<p>The friendly operation objects are:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>What it computes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>absolute</code> / <code>abs</code></td>
+<td>Absolute value</td>
+</tr>
+<tr>
+<td><code>clamp</code></td>
+<td>Clamp value into <code>[min_value, max_value]</code></td>
+</tr>
+<tr>
+<td><code>modulo</code></td>
+<td><code>numerator % denominator</code> with denominator-zero fallback</td>
+</tr>
+<tr>
+<td><code>divmod</code></td>
+<td><code>(numerator // denominator, numerator % denominator)</code> with denominator-zero fallbacks</td>
+</tr>
+<tr>
+<td><code>is_close</code></td>
+<td>Integer absolute-tolerance predicate</td>
+</tr>
+<tr>
+<td><code>factorial</code></td>
+<td><code>n!</code> for encrypted <code>n</code></td>
+</tr>
+<tr>
+<td><code>fibonacci</code></td>
+<td>nth Fibonacci number for encrypted <code>n</code></td>
+</tr>
+<tr>
+<td><code>power</code></td>
+<td>Public-base exponentiation with encrypted exponent</td>
+</tr>
+<tr>
+<td><code>comb</code> / <code>combinations</code></td>
+<td><code>math.comb(n, r)</code> with invalid fallback for <code>r &gt; n</code></td>
+</tr>
+<tr>
+<td><code>perm</code> / <code>permutations</code></td>
+<td><code>math.perm(n, r)</code> with invalid fallback for <code>r &gt; n</code></td>
+</tr>
+<tr>
+<td><code>gcd</code></td>
+<td>Greatest common divisor</td>
+</tr>
+<tr>
+<td><code>lcm</code></td>
+<td>Least common multiple</td>
+</tr>
+<tr>
+<td><code>is_coprime</code></td>
+<td><code>gcd(left, right) == 1</code></td>
+</tr>
+<tr>
+<td><code>is_divisible</code></td>
+<td><code>numerator % denominator == 0</code> with denominator-zero fallback</td>
+</tr>
+<tr>
+<td><code>isqrt</code></td>
+<td>Integer square root</td>
+</tr>
+<tr>
+<td><code>is_even</code></td>
+<td>Even predicate</td>
+</tr>
+<tr>
+<td><code>is_odd</code></td>
+<td>Odd predicate</td>
+</tr>
+<tr>
+<td><code>is_prime</code></td>
+<td>Primality predicate</td>
+</tr>
+<tr>
+<td><code>floor</code></td>
+<td>Fixed-point floor</td>
+</tr>
+<tr>
+<td><code>ceil</code></td>
+<td>Fixed-point ceil</td>
+</tr>
+<tr>
+<td><code>trunc</code></td>
+<td>Fixed-point truncation toward zero</td>
+</tr>
+<tr>
+<td><code>round</code></td>
+<td>Fixed-point rounding using Python's ties-to-even rule</td>
+</tr>
+<tr>
+<td><code>floor_ceil</code></td>
+<td>Pair <code>(floor(x), ceil(x))</code></td>
+</tr>
+<tr>
+<td><code>rescale</code></td>
+<td>Convert one fixed-point scale to another</td>
+</tr>
+<tr>
+<td><code>sin</code>, <code>cos</code>, <code>tan</code></td>
+<td>Fixed-point trigonometric approximations</td>
+</tr>
+<tr>
+<td><code>exp</code>, <code>expm1</code></td>
+<td>Fixed-point exponential functions</td>
+</tr>
+<tr>
+<td><code>log</code>, <code>log1p</code>, <code>log2</code>, <code>log10</code></td>
+<td>Fixed-point logarithms with invalid-domain policy</td>
+</tr>
+<tr>
+<td><code>sqrt</code></td>
+<td>Fixed-point square root with invalid-domain policy</td>
+</tr>
+<tr>
+<td><code>erf</code>, <code>erfc</code></td>
+<td>Fixed-point error functions</td>
+</tr>
+<tr>
+<td><code>tanh</code>, <code>sinh</code>, <code>cosh</code></td>
+<td>Fixed-point hyperbolic functions</td>
+</tr>
+<tr>
+<td><code>sigmoid</code></td>
+<td>Fixed-point logistic sigmoid</td>
+</tr>
+<tr>
+<td><code>unsigned_floor_divide</code></td>
+<td>Bit-level unsigned integer division</td>
+</tr>
+<tr>
+<td><code>fixed_point_divide</code></td>
+<td>Bit-level unsigned fixed-point division</td>
+</tr>
+</tbody>
+</table>
+<h2 id="basic-integer-operations">Basic integer operations<a class="headerlink" href="#basic-integer-operations" title="Permanent link">&para;</a></h2>
+<p>These simple functions are traceable and can be used inside manual Concrete
+programs:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Computes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add(left, right)</code></td>
+<td><code>left + right</code></td>
+</tr>
+<tr>
+<td><code>subtract(left, right)</code> / <code>compile_sub</code> alias</td>
+<td><code>left - right</code></td>
+</tr>
+<tr>
+<td><code>multiply(left, right)</code></td>
+<td><code>left * right</code></td>
+</tr>
+<tr>
+<td><code>negate(value)</code></td>
+<td><code>-value</code></td>
+</tr>
+<tr>
+<td><code>square(value)</code></td>
+<td><code>value * value</code></td>
+</tr>
+<tr>
+<td><code>equal(left, right)</code></td>
+<td><code>left == right</code> as <code>0</code> or <code>1</code></td>
+</tr>
+<tr>
+<td><code>not_equal(left, right)</code></td>
+<td><code>left != right</code> as <code>0</code> or <code>1</code></td>
+</tr>
+<tr>
+<td><code>less(left, right)</code></td>
+<td><code>left &lt; right</code> as <code>0</code> or <code>1</code></td>
+</tr>
+<tr>
+<td><code>less_equal(left, right)</code></td>
+<td><code>left &lt;= right</code> as <code>0</code> or <code>1</code></td>
+</tr>
+<tr>
+<td><code>greater(left, right)</code></td>
+<td><code>left &gt; right</code> as <code>0</code> or <code>1</code></td>
+</tr>
+<tr>
+<td><code>greater_equal(left, right)</code></td>
+<td><code>left &gt;= right</code> as <code>0</code> or <code>1</code></td>
+</tr>
+<tr>
+<td><code>make_scalar_multiply(multiplier)</code></td>
+<td>Returns a traceable <code>value * multiplier</code> function</td>
+</tr>
+</tbody>
+</table>
+<p>Compiler helpers:</p>
+<ul>
+<li><code>compile_add(min_left=0, max_left=15, min_right=0, max_right=15)</code></li>
+<li><code>compile_subtract(min_left=0, max_left=15, min_right=0, max_right=15)</code></li>
+<li><code>compile_multiply(min_left=0, max_left=15, min_right=0, max_right=15)</code></li>
+<li><code>compile_negate(min_value=-15, max_value=15)</code></li>
+<li><code>compile_square(min_value=-15, max_value=15)</code></li>
+<li><code>compile_scalar_multiply(min_value, max_value, multiplier)</code></li>
+<li><code>compile_equal(min_value=-15, max_value=15)</code></li>
+<li><code>compile_not_equal(min_value=-15, max_value=15)</code></li>
+<li><code>compile_less(min_value=-15, max_value=15)</code></li>
+<li><code>compile_less_equal(min_value=-15, max_value=15)</code></li>
+<li><code>compile_greater(min_value=-15, max_value=15)</code></li>
+<li><code>compile_greater_equal(min_value=-15, max_value=15)</code></li>
+<li><code>compile_is_close(min_value, max_value, absolute_tolerance=...)</code></li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">add</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">compile_add</span><span class="p">(</span><span class="n">min_left</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_left</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_right</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_right</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># 2</span>
+</code></pre></div>
+<h2 id="bounded-lookup-integer-helpers">Bounded lookup integer helpers<a class="headerlink" href="#bounded-lookup-integer-helpers" title="Permanent link">&para;</a></h2>
+<h3 id="absolute-value">Absolute value<a class="headerlink" href="#absolute-value" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">absolute</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">absolute</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">))</span>
+<span class="c1"># 7</span>
+</code></pre></div>
+<p>Aliases:</p>
+<ul>
+<li><code>absolute</code></li>
+<li><code>abs</code></li>
+<li><code>make_absolute</code></li>
+<li><code>make_abs</code></li>
+<li><code>compile_absolute</code></li>
+<li><code>compile_abs</code></li>
+</ul>
+<h3 id="clamp">Clamp<a class="headerlink" href="#clamp" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">clamp</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span>
+    <span class="n">min_input</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">max_input</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">min_value</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">max_value</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clamp</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1"># 4</span>
+</code></pre></div>
+<h3 id="modulo">Modulo<a class="headerlink" href="#modulo" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">modulo</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">modulo</span><span class="p">(</span>
+    <span class="n">min_numerator</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_numerator</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">min_denominator</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_denominator</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">zero_result</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">modulo</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># 2</span>
+</code></pre></div>
+<h3 id="divmod">Divmod<a class="headerlink" href="#divmod" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">divmod_circuit</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">divmod</span><span class="p">(</span>
+    <span class="n">min_numerator</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_numerator</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">min_denominator</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_denominator</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">zero_quotient</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">zero_remainder</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">divmod_circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># (3, 2)</span>
+</code></pre></div>
+<h3 id="is-close">Is close<a class="headerlink" href="#is-close" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">is_close</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">is_close</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">absolute_tolerance</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">is_close</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="c1"># 1</span>
+</code></pre></div>
+<h2 id="combinatorics">Combinatorics<a class="headerlink" href="#combinatorics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Bounds</th>
+<th>Invalid policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>factorial(max_n)</code></td>
+<td>encrypted <code>n</code> in <code>0..max_n</code></td>
+<td>no invalid input inside bounds</td>
+</tr>
+<tr>
+<td><code>fibonacci(max_n)</code></td>
+<td>encrypted <code>n</code> in <code>0..max_n</code></td>
+<td>no invalid input inside bounds</td>
+</tr>
+<tr>
+<td><code>power(base, max_exponent)</code></td>
+<td>encrypted exponent in <code>0..max_exponent</code></td>
+<td>base is public</td>
+</tr>
+<tr>
+<td><code>comb(max_n, invalid_result=0)</code></td>
+<td>encrypted <code>n</code> and <code>r</code> in <code>0..max_n</code></td>
+<td>returns <code>invalid_result</code> when <code>r &gt; n</code></td>
+</tr>
+<tr>
+<td><code>perm(max_n, invalid_result=0)</code></td>
+<td>encrypted <code>n</code> and <code>r</code> in <code>0..max_n</code></td>
+<td>returns <code>invalid_result</code> when <code>r &gt; n</code></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">factorial</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="c1"># 120</span>
+
+<span class="n">comb</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">comb</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="c1"># 20</span>
+</code></pre></div>
+<p>Aliases:</p>
+<ul>
+<li><code>combinations</code> is an alias of <code>comb</code></li>
+<li><code>permutations</code> is an alias of <code>perm</code></li>
+<li><code>compile_exponential</code> / <code>make_exponential</code> are aliases for public-base
+  exponentiation helpers</li>
+</ul>
+<h2 id="number-theory">Number theory<a class="headerlink" href="#number-theory" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Computes</th>
+<th>Bounds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gcd(min_value=0, max_value=15)</code></td>
+<td><code>math.gcd(left, right)</code></td>
+<td>both inputs in <code>min_value..max_value</code></td>
+</tr>
+<tr>
+<td><code>lcm(min_value=0, max_value=15)</code></td>
+<td><code>math.lcm(left, right)</code></td>
+<td>both inputs in <code>min_value..max_value</code></td>
+</tr>
+<tr>
+<td><code>is_coprime(min_value=0, max_value=15)</code></td>
+<td><code>gcd(left, right) == 1</code></td>
+<td>both inputs in <code>min_value..max_value</code></td>
+</tr>
+<tr>
+<td><code>is_divisible(min_numerator, max_numerator, min_denominator, max_denominator, zero_result=0)</code></td>
+<td>divisibility predicate</td>
+<td>numerator and denominator ranges</td>
+</tr>
+<tr>
+<td><code>isqrt(max_value)</code></td>
+<td><code>math.isqrt(value)</code></td>
+<td>input in <code>0..max_value</code></td>
+</tr>
+<tr>
+<td><code>is_even(min_value=0, max_value=15)</code></td>
+<td>even predicate</td>
+<td>input range</td>
+</tr>
+<tr>
+<td><code>is_odd(min_value=0, max_value=15)</code></td>
+<td>odd predicate</td>
+<td>input range</td>
+</tr>
+<tr>
+<td><code>is_prime(min_value=0, max_value=100)</code></td>
+<td>primality predicate</td>
+<td>input range</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">gcd</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gcd</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="c1"># 2</span>
+
+<span class="n">prime</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">is_prime</span><span class="p">(</span><span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prime</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">37</span><span class="p">))</span>
+<span class="c1"># 1</span>
+</code></pre></div>
+<h2 id="fixed-point-helpers">Fixed-point helpers<a class="headerlink" href="#fixed-point-helpers" title="Permanent link">&para;</a></h2>
+<p>These helpers interpret an encrypted integer as a scaled value.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Computes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>floor(min_input, max_input, scale=10)</code></td>
+<td><code>floor(value / scale)</code></td>
+</tr>
+<tr>
+<td><code>ceil(min_input, max_input, scale=10)</code></td>
+<td><code>ceil(value / scale)</code></td>
+</tr>
+<tr>
+<td><code>trunc(min_input, max_input, scale=10)</code></td>
+<td>truncation toward zero</td>
+</tr>
+<tr>
+<td><code>round(min_input, max_input, scale=10)</code></td>
+<td>Python-style rounding</td>
+</tr>
+<tr>
+<td><code>floor_ceil(min_input, max_input, scale=10)</code></td>
+<td><code>(floor(value / scale), ceil(value / scale))</code></td>
+</tr>
+<tr>
+<td><code>rescale(min_input, max_input, input_scale, output_scale, rounding="nearest")</code></td>
+<td>convert between fixed-point scales</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">trunc</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">50</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trunc</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">-</span><span class="mi">37</span><span class="p">))</span>
+<span class="c1"># -3</span>
+
+<span class="n">rescale</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">rescale</span><span class="p">(</span>
+    <span class="n">min_input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_input</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">output_scale</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rescale</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+<span class="c1"># 150, representing 1.50</span>
+</code></pre></div>
+<p>Rounding modes for <code>rescale</code>:</p>
+<ul>
+<li><code>"nearest"</code></li>
+<li><code>"floor"</code></li>
+<li><code>"ceil"</code></li>
+<li><code>"trunc"</code></li>
+</ul>
+<h2 id="special-fixed-point-functions">Special fixed-point functions<a class="headerlink" href="#special-fixed-point-functions" title="Permanent link">&para;</a></h2>
+<p>These helpers approximate real-valued math functions by lookup over bounded
+scaled integers. Outputs are integers scaled by <code>output_scale</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Default input interpretation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sin</code>, <code>cos</code></td>
+<td>radians scaled by 100, or degrees with <code>angle_unit="degrees"</code></td>
+<td>Use <code>input_scale</code> and <code>output_scale</code></td>
+</tr>
+<tr>
+<td><code>tan</code></td>
+<td>radians scaled by 100, or degrees with <code>angle_unit="degrees"</code></td>
+<td>Avoid bounds near singularities</td>
+</tr>
+<tr>
+<td><code>exp</code>, <code>expm1</code></td>
+<td>input scaled by 10</td>
+<td>Output scaled by <code>output_scale</code></td>
+</tr>
+<tr>
+<td><code>log</code>, <code>log1p</code>, <code>log2</code>, <code>log10</code></td>
+<td>scaled or integer inputs depending on helper defaults</td>
+<td>Use <code>invalid_result</code> if bounds include invalid values</td>
+</tr>
+<tr>
+<td><code>sqrt</code></td>
+<td>input scaled by 100 by default</td>
+<td>Use <code>invalid_result</code> if bounds include negatives</td>
+</tr>
+<tr>
+<td><code>erf</code>, <code>erfc</code></td>
+<td>input scaled by 10</td>
+<td>Output scaled by <code>output_scale</code></td>
+</tr>
+<tr>
+<td><code>tanh</code>, <code>sinh</code>, <code>cosh</code></td>
+<td>input scaled by 10</td>
+<td>Output scaled by <code>output_scale</code></td>
+</tr>
+<tr>
+<td><code>sigmoid</code></td>
+<td>input scaled by 10</td>
+<td>Output scaled by <code>output_scale</code></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">sin</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span>
+    <span class="n">min_input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_input</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+    <span class="n">input_scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">output_scale</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">angle_unit</span><span class="o">=</span><span class="s2">"degrees"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sin</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">30</span><span class="p">))</span>
+<span class="c1"># 500, representing 0.500</span>
+</code></pre></div>
+<p>Invalid-domain example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">sqrt</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+    <span class="n">min_input</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">max_input</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">output_scale</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">invalid_result</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sqrt</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span>
+<span class="c1"># -1</span>
+</code></pre></div>
+<h2 id="bit-level-helpers">Bit-level helpers<a class="headerlink" href="#bit-level-helpers" title="Permanent link">&para;</a></h2>
+<p>Bit lists are little-endian: index 0 is the least significant bit.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Computes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bit_not(bit)</code> / <code>bnot</code></td>
+<td>bit NOT</td>
+</tr>
+<tr>
+<td><code>bit_and(left, right)</code> / <code>band</code></td>
+<td>bit AND</td>
+</tr>
+<tr>
+<td><code>bit_or(left, right)</code> / <code>bor</code></td>
+<td>bit OR</td>
+</tr>
+<tr>
+<td><code>bit_xor(left, right)</code> / <code>bxor</code></td>
+<td>bit XOR</td>
+</tr>
+<tr>
+<td><code>bit_select(control, when_one, when_zero)</code> / <code>bsel</code></td>
+<td>choose one bit based on control</td>
+</tr>
+<tr>
+<td><code>full_adder_bit(left, right, carry_in)</code> / <code>fadd_bit</code></td>
+<td>one full-adder stage</td>
+</tr>
+<tr>
+<td><code>full_subtractor_bit(left, right, borrow_in)</code> / <code>fsub_bit</code></td>
+<td>one full-subtractor stage</td>
+</tr>
+<tr>
+<td><code>bit_or_many(bits)</code></td>
+<td>OR-reduce bit iterable</td>
+</tr>
+<tr>
+<td><code>integer_to_bits(value, width)</code></td>
+<td>traceable unsigned integer-to-bits conversion</td>
+</tr>
+<tr>
+<td><code>bits_to_unsigned(bits)</code></td>
+<td>little-endian bits to unsigned integer</td>
+</tr>
+<tr>
+<td><code>unsigned_to_bits(value, width)</code></td>
+<td>clear unsigned integer to bits</td>
+</tr>
+<tr>
+<td><code>twos_complement_bits(value, width)</code></td>
+<td>clear signed integer to two's-complement bits</td>
+</tr>
+<tr>
+<td><code>sign_magnitude_to_twos_complement_bits(magnitude_bits, sign_bit, width=None)</code></td>
+<td>sign-magnitude to two's-complement bits</td>
+</tr>
+<tr>
+<td><code>twos_complement_add_bits(left_bits, right_bits, width)</code></td>
+<td>two's-complement addition modulo <code>2 ** width</code></td>
+</tr>
+<tr>
+<td><code>twos_complement_multiply_by_constant_bits(signed_bits, multiplier, output_width)</code></td>
+<td>multiply signed bits by a nonnegative public constant</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fhe_math</span><span class="o">.</span><span class="n">unsigned_to_bits</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># (1, 0, 1, 1, 0)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fhe_math</span><span class="o">.</span><span class="n">bits_to_unsigned</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="c1"># 13</span>
+</code></pre></div>
+<h2 id="bit-level-division">Bit-level division<a class="headerlink" href="#bit-level-division" title="Permanent link">&para;</a></h2>
+<p>These helpers use a restoring binary division circuit. They support unsigned
+scalar inputs that fit in the declared bit widths.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Computes</th>
+<th>Output scale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unsigned_floor_divide(numerator_width, denominator_width, quotient_width=None, zero_result=0)</code></td>
+<td><code>numerator // denominator</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>fixed_point_divide(numerator_width, denominator_width, fractional_bits, quotient_width=None, zero_result=0)</code></td>
+<td><code>floor((numerator &lt;&lt; fractional_bits) / denominator)</code></td>
+<td><code>2 ** fractional_bits</code></td>
+</tr>
+<tr>
+<td><code>unsigned_divide_bits(numerator_bits, denominator_bits, quotient_width=None, zero_result=0)</code></td>
+<td>quotient bits</td>
+<td>bits</td>
+</tr>
+<tr>
+<td><code>fixed_point_divide_bits(numerator_bits, denominator_bits, fractional_bits, quotient_width=None, zero_result=0)</code></td>
+<td>fixed-point quotient bits</td>
+<td>bits</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">floor_divide</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">unsigned_floor_divide</span><span class="p">(</span>
+    <span class="n">numerator_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">denominator_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">floor_divide</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="c1"># 14</span>
+
+<span class="n">fixed_divide</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">fixed_point_divide</span><span class="p">(</span>
+    <span class="n">numerator_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">denominator_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">fractional_bits</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fixed_divide</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="c1"># 85, representing floor((1 / 3) * 256)</span>
+</code></pre></div>
+<h2 id="resource-helpers">Resource helpers<a class="headerlink" href="#resource-helpers" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>estimate_lookup_cost(domain_size, min_output, max_output)</code></td>
+<td>Static lookup pressure estimate</td>
+</tr>
+<tr>
+<td><code>LookupCost</code></td>
+<td>Dataclass returned by <code>estimate_lookup_cost</code></td>
+</tr>
+<tr>
+<td><code>FHECostWarning</code></td>
+<td>Warning for large lookup estimates</td>
+</tr>
+<tr>
+<td><code>LookupResourceError</code></td>
+<td>Error requiring <code>allow_large_lookup=True</code> for very large estimates</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">fhe_math</span>
+
+<span class="n">cost</span> <span class="o">=</span> <span class="n">fhe_math</span><span class="o">.</span><span class="n">estimate_lookup_cost</span><span class="p">(</span>
+    <span class="n">domain_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">min_output</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_output</span><span class="o">=</span><span class="mi">1_000_000</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cost</span><span class="o">.</span><span class="n">level</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="machine-learning-subpackage">Machine learning subpackage<a class="headerlink" href="#machine-learning-subpackage" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">ml</span>
+</code></pre></div>
+<p>These helpers are traceable building blocks: call them inside your own
+<code>fhe.compiler</code> function (or use the provided <code>compile_*</code> helpers). Inputs are
+bounded encrypted integers; scale features and weights to integers first.</p>
+<p>Metrics and distances:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Computes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>manhattan_distance(array1, array2)</code></td>
+<td>L1 distance</td>
+</tr>
+<tr>
+<td><code>euclidean_distance_squared(array1, array2)</code></td>
+<td>squared L2 distance</td>
+</tr>
+<tr>
+<td><code>hamming_distance(array1, array2)</code></td>
+<td>number of mismatches</td>
+</tr>
+<tr>
+<td><code>mean_squared_error(array1, array2)</code></td>
+<td>integer MSE</td>
+</tr>
+<tr>
+<td><code>mean_absolute_error(y_preds, y_trues)</code></td>
+<td>integer MAE</td>
+</tr>
+<tr>
+<td><code>accuracy_score(y_preds, y_trues)</code></td>
+<td>integer percent accuracy</td>
+</tr>
+<tr>
+<td><code>confusion_matrix(y_preds, y_trues)</code></td>
+<td><code>[[TN, FP], [FN, TP]]</code> for binary labels</td>
+</tr>
+<tr>
+<td><code>true_positives</code> / <code>true_negatives</code> / <code>false_positives</code> / <code>false_negatives</code></td>
+<td>binary counts</td>
+</tr>
+<tr>
+<td><code>hinge_loss(y_pred, y_true)</code> / <code>compile_hinge_loss(...)</code></td>
+<td><code>max(0, 1 - y_true * y_pred)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Matrix and vector algebra:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Computes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dot_product(array1, array2)</code></td>
+<td>vector dot product</td>
+</tr>
+<tr>
+<td><code>matrix_add</code> / <code>matrix_subtract</code></td>
+<td>element-wise matrix addition/subtraction</td>
+</tr>
+<tr>
+<td><code>matrix_multiply(matrix1, matrix2)</code></td>
+<td>matrix product</td>
+</tr>
+<tr>
+<td><code>matrix_vector_multiply(matrix, array)</code></td>
+<td>matrix-vector product</td>
+</tr>
+<tr>
+<td><code>matrix_transpose(matrix)</code></td>
+<td>transpose</td>
+</tr>
+</tbody>
+</table>
+<p>Models:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Computes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>linear_regression_inference(weights, bias, features)</code></td>
+<td><code>weights . features + bias</code></td>
+</tr>
+<tr>
+<td><code>logistic_regression_inference(weights, bias, features, threshold=0)</code></td>
+<td>binary class from the linear score (<code>score &gt;= threshold</code>)</td>
+</tr>
+<tr>
+<td><code>decision_tree_node(feature_val, threshold, left_branch, right_branch)</code></td>
+<td><code>left_branch</code> when <code>feature_val &gt;= threshold</code>, else <code>right_branch</code></td>
+</tr>
+<tr>
+<td><code>compile_decision_tree_node(min_value, max_value, ...)</code></td>
+<td>compiled single tree node</td>
+</tr>
+<tr>
+<td><code>decision_tree_inference(features, tree)</code></td>
+<td>oblivious evaluation of a full public tree (dict nodes, integer leaves)</td>
+</tr>
+<tr>
+<td><code>knn_inference(test_sample, train_samples, train_labels, k=1, max_distance=15)</code></td>
+<td>k-nearest-neighbor label; <code>max_distance</code> must bound the squared distances; <code>k &gt; 1</code> requires binary labels (majority vote, odd <code>k</code> recommended)</td>
+</tr>
+<tr>
+<td><code>majority_votes(predictions)</code></td>
+<td>majority vote over binary predictions</td>
+</tr>
+</tbody>
+</table>
+<p>Activations (with <code>compile_relu</code>, <code>compile_leaky_relu</code>, <code>compile_unit_step</code>,
+and <code>compile_threshold_activation</code> counterparts):</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Computes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>relu(value)</code></td>
+<td><code>max(0, value)</code></td>
+</tr>
+<tr>
+<td><code>leaky_relu(value, alpha=0.01)</code></td>
+<td>negative branch scaled by <code>alpha</code> (must be <code>1/k</code>), truncated toward zero</td>
+</tr>
+<tr>
+<td><code>unit_step(value)</code></td>
+<td>0 when <code>value &lt; 0</code>, otherwise 1</td>
+</tr>
+<tr>
+<td><code>threshold_activation(value, threshold)</code></td>
+<td>1 when <code>value &gt;= threshold</code></td>
+</tr>
+</tbody>
+</table>
+<p>Array statistics and preprocessing: <code>array_mean</code>, <code>array_variance</code>,
+<code>array_min</code>, <code>array_max</code>, <code>array_range</code>, <code>array_count_greater</code>,
+<code>one_hot_encode(label, num_classes)</code>, <code>binarize(array, threshold)</code>,
+<code>clip_array(array, min_val, max_val)</code>.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml</span><span class="w"> </span><span class="kn">import</span> <span class="n">linear_regression_inference</span><span class="p">,</span> <span class="n">threshold_activation</span>
+
+<span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="nd">@fhe</span><span class="o">.</span><span class="n">compiler</span><span class="p">({</span><span class="s2">"features"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">})</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">classify</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">linear_regression_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">threshold_activation</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">classify</span><span class="o">.</span><span class="n">compile</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="c1"># 1</span>
+</code></pre></div>
+<h2 id="finance-subpackage">Finance subpackage<a class="headerlink" href="#finance-subpackage" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">finance</span>
+</code></pre></div>
+<p>Money convention: encrypted amounts are integers in the smallest currency
+unit you choose. Rates are public floats with at most two decimal digits,
+applied through the fixed <code>RATE_SCALE = 100</code> factor. Every rate-scaled result
+is therefore 100x the real value; decode after decryption with
+<code>return_actual_value</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Computes</th>
+<th>Output scale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apply_rate(amount, rate)</code></td>
+<td><code>amount * rate</code></td>
+<td><code>RATE_SCALE</code></td>
+</tr>
+<tr>
+<td><code>calculate_tax(amount, rate)</code></td>
+<td>tax amount</td>
+<td><code>RATE_SCALE</code></td>
+</tr>
+<tr>
+<td><code>discount(amount, rate)</code></td>
+<td>discounted amount</td>
+<td><code>RATE_SCALE</code></td>
+</tr>
+<tr>
+<td><code>simple_interest(amount, rate, time_period)</code></td>
+<td><code>amount * rate * time</code></td>
+<td><code>RATE_SCALE</code></td>
+</tr>
+<tr>
+<td><code>transfer(sender_balance, receiver_balance, amount)</code></td>
+<td>balances after a guarded transfer (no-op when the sender balance is insufficient)</td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>return_actual_value(value)</code></td>
+<td>decode a <code>RATE_SCALE</code>-scaled cleartext result</td>
+<td>float</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">finance</span>
+
+<span class="n">tax</span> <span class="o">=</span> <span class="n">finance</span><span class="o">.</span><span class="n">calculate_tax</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">finance</span><span class="o">.</span><span class="n">return_actual_value</span><span class="p">(</span><span class="n">tax</span><span class="p">))</span>
+<span class="c1"># 36.0</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

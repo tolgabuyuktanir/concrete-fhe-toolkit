@@ -14,7 +14,16 @@ TernaryFunction = Callable[[Any, Any, Any], Any]
 
 
 def compare(x: Any, y: Any) -> Any:
-    """Return 1 when x > y, 0 when equal, and -1 when x < y."""
+    """Return 1 when x > y, 0 when equal, and -1 when x < y.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compare
+        
+        print(compare(10, 5))  # 1
+        print(compare(5, 5))   # 0
+        ```
+    """
     difference = x - y
     return 1 * (difference > 0) - 1 * (difference < 0)
 
@@ -25,7 +34,16 @@ def compile_compare(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a sign-comparison circuit with inclusive input bounds."""
+    """Compile a sign-comparison circuit with inclusive input bounds.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_compare
+        
+        circuit = compile_compare(min_value=-10, max_value=10)
+        print(circuit.encrypt_run_decrypt(5, 2))  # 1
+        ```
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     inputset = [
         (minimum, minimum),
@@ -41,6 +59,15 @@ def compile_compare(
     )
 
 def sign(x: Any) -> Any:
+    """Return the sign of a number (1 if positive, -1 if negative, 0 if zero).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import sign
+        
+        print(sign(-42))  # -1
+        ```
+    """
     return compare(x,0)
 
 def compile_sign(
@@ -49,7 +76,16 @@ def compile_sign(
         *,
         configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a circuit returning the sign (-1, 0, or 1) of one encrypted input."""
+    """Compile a circuit returning the sign (-1, 0, or 1) of one encrypted input.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_sign
+        
+        circuit = compile_sign(min_value=-5, max_value=5)
+        print(circuit.encrypt_run_decrypt(-3))  # -1
+        ```
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     inputset = [minimum, maximum]
     if minimum <= 0 <= maximum:
@@ -62,7 +98,16 @@ def compile_sign(
     )
 
 def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
-    """Create exact encrypted floor division using a multivariate table lookup."""
+    """Create exact encrypted floor division using a multivariate table lookup.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import make_floor_divide
+        
+        divide = make_floor_divide(zero_result=0)
+        # Use `divide(x, y)` inside a larger FHE program compilation
+        ```
+    """
     zero_result = validate_integer("zero_result", zero_result)
 
     def clear_floor_divide(numerator: Any, denominator: Any) -> Any:
@@ -82,7 +127,16 @@ def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
 
 
 def make_floor_divide_by_product(*, zero_result: int = 0) -> TernaryFunction:
-    """Create numerator // (left * right) using a multivariate table lookup."""
+    """Create numerator // (left * right) using a multivariate table lookup.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import make_floor_divide_by_product
+        
+        div_prod = make_floor_divide_by_product(zero_result=0)
+        # Use `div_prod(num, a, b)` inside a larger FHE program compilation
+        ```
+    """
     floor_divide = make_floor_divide(zero_result=zero_result)
 
     def floor_divide_by_product(
@@ -102,7 +156,16 @@ def compile_floor_divide(
     zero_result: int = 0,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile floor division for nonnegative bounded encrypted inputs."""
+    """Compile floor division for nonnegative bounded encrypted inputs.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_floor_divide
+        
+        circuit = compile_floor_divide(max_numerator=10, max_denominator=5)
+        print(circuit.encrypt_run_decrypt(9, 2))  # 4
+        ```
+    """
     maximum_numerator = validate_integer(
         "max_numerator",
         max_numerator,
@@ -138,7 +201,16 @@ def compile_floor_divide_by_product(
     zero_result: int = 0,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile numerator // (left * right) for nonnegative bounded inputs."""
+    """Compile numerator // (left * right) for nonnegative bounded inputs.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_floor_divide_by_product
+        
+        circuit = compile_floor_divide_by_product(max_numerator=20, max_left=5, max_right=5)
+        print(circuit.encrypt_run_decrypt(20, 2, 3))  # 3
+        ```
+    """
     maximum_numerator = validate_integer(
         "max_numerator",
         max_numerator,

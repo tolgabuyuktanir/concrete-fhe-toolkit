@@ -254,7 +254,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../api-reference/" class="md-tabs__link">
+        <a href="../../bounds-and-costs/" class="md-tabs__link">
           
   
   
@@ -419,14 +419,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api-reference/" class="md-nav__link">
+      <a href="../../bounds-and-costs/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    API usage guide
+    Bounds and costs
   
 
     
@@ -447,14 +447,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bounds-and-costs/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Bounds and costs
+    API usage guide
   
 
     
@@ -1839,8 +1839,7 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/matrix.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
-<span class="normal">51</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
@@ -1857,7 +1856,8 @@
 <span class="normal">65</span>
 <span class="normal">66</span>
 <span class="normal">67</span>
-<span class="normal">68</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">matrix_multiply</span><span class="p">(</span><span class="n">matrix1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">matrix2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">matrix_multiply</span><span class="p">(</span><span class="n">matrix1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">matrix2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">"""Perform matrix multiplication (dot product) of two encrypted matrices."""</span>
     <span class="n">result_matrix</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">matrix2_transpose</span> <span class="o">=</span> <span class="n">matrix_transpose</span><span class="p">(</span><span class="n">matrix2</span><span class="p">)</span>
@@ -1875,7 +1875,7 @@
 
         <span class="n">result_matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">result_matrix</span>    
+    <span class="k">return</span> <span class="n">result_matrix</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1900,14 +1900,14 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/matrix.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">matrix_vector_multiply</span><span class="p">(</span><span class="n">matrix</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">matrix_vector_multiply</span><span class="p">(</span><span class="n">matrix</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""Multiply an encrypted matrix by an encrypted vector."""</span>
     <span class="n">result_vector</span> <span class="o">=</span> <span class="p">[]</span>
 

@@ -254,7 +254,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../api-reference/" class="md-tabs__link">
+        <a href="../../bounds-and-costs/" class="md-tabs__link">
           
   
   
@@ -419,14 +419,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api-reference/" class="md-nav__link">
+      <a href="../../bounds-and-costs/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    API usage guide
+    Bounds and costs
   
 
     
@@ -447,14 +447,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bounds-and-costs/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Bounds and costs
+    API usage guide
   
 
     
@@ -1289,6 +1289,39 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.svm_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        svm_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.pca_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pca_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.xgboost_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xgboost_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1719,6 +1752,39 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.svm_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        svm_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.pca_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pca_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.models.xgboost_inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xgboost_inference
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1799,10 +1865,10 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">linear_regression_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">linear_regression_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Evaluate a linear regression model (dot product of weights and features plus bias)."""</span>
     <span class="n">product</span> <span class="o">=</span> <span class="n">dot_product</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">bias</span> <span class="o">+</span> <span class="n">product</span>
@@ -1836,9 +1902,7 @@ before calling.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
@@ -1853,7 +1917,9 @@ before calling.</p>
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">logistic_regression_inference</span><span class="p">(</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">logistic_regression_inference</span><span class="p">(</span>
     <span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
     <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
@@ -1897,14 +1963,14 @@ before calling.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
 <span class="normal">49</span>
-<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">decision_tree_node</span><span class="p">(</span><span class="n">feature_val</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">left_branch</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">right_branch</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">decision_tree_node</span><span class="p">(</span><span class="n">feature_val</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">left_branch</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">right_branch</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Evaluate a single decision tree node.</span>
 
 <span class="sd">    Returns ``left_branch`` when ``feature_val &gt;= threshold``, otherwise</span>
@@ -1936,10 +2002,10 @@ before calling.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">majority_votes</span><span class="p">(</span><span class="n">predictions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">majority_votes</span><span class="p">(</span><span class="n">predictions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Perform majority voting for an ensemble of binary predictions."""</span>
     <span class="n">sum_predictions</span> <span class="o">=</span> <span class="n">array_sum</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">greater</span><span class="p">(</span><span class="n">sum_predictions</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
@@ -1977,9 +2043,7 @@ a distance penalty, so circuit cost grows linearly with <code>k</code>.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 61</span>
 <span class="normal"> 62</span>
 <span class="normal"> 63</span>
 <span class="normal"> 64</span>
@@ -2042,7 +2106,9 @@ a distance penalty, so circuit cost grows linearly with <code>k</code>.</p>
 <span class="normal">121</span>
 <span class="normal">122</span>
 <span class="normal">123</span>
-<span class="normal">124</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">knn_inference</span><span class="p">(</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">knn_inference</span><span class="p">(</span>
     <span class="n">test_sample</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
     <span class="n">train_samples</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
     <span class="n">train_labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
@@ -2139,9 +2205,7 @@ never revealed — circuit cost grows with the total number of nodes.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
 <span class="normal">132</span>
@@ -2168,7 +2232,9 @@ never revealed — circuit cost grows with the total number of nodes.</p>
 <span class="normal">153</span>
 <span class="normal">154</span>
 <span class="normal">155</span>
-<span class="normal">156</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">decision_tree_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">tree</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">decision_tree_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">tree</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Evaluate a full decision tree on encrypted features.</span>
 
 <span class="sd">    ``tree`` is a public structure. An internal node is a dict with keys</span>
@@ -2222,9 +2288,7 @@ never revealed — circuit cost grows with the total number of nodes.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">161</span>
 <span class="normal">162</span>
 <span class="normal">163</span>
 <span class="normal">164</span>
@@ -2245,7 +2309,9 @@ never revealed — circuit cost grows with the total number of nodes.</p>
 <span class="normal">179</span>
 <span class="normal">180</span>
 <span class="normal">181</span>
-<span class="normal">182</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_decision_tree_node</span><span class="p">(</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_decision_tree_node</span><span class="p">(</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -2296,9 +2362,7 @@ ties (a tie resolves to 0).</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">187</span>
 <span class="normal">188</span>
 <span class="normal">189</span>
 <span class="normal">190</span>
@@ -2306,7 +2370,9 @@ ties (a tie resolves to 0).</p>
 <span class="normal">192</span>
 <span class="normal">193</span>
 <span class="normal">194</span>
-<span class="normal">195</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">random_forest_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">trees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">random_forest_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">trees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Evaluate a random forest with binary (0/1) leaves via majority vote.</span>
 
 <span class="sd">    Each tree uses the public dict structure accepted by</span>
@@ -2346,9 +2412,7 @@ network shallow or rescale between layers.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">200</span>
 <span class="normal">201</span>
 <span class="normal">202</span>
 <span class="normal">203</span>
@@ -2367,7 +2431,9 @@ network shallow or rescale between layers.</p>
 <span class="normal">216</span>
 <span class="normal">217</span>
 <span class="normal">218</span>
-<span class="normal">219</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mlp_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">layers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mlp_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">layers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""Evaluate a small multilayer perceptron with public integer weights.</span>
 
 <span class="sd">    ``layers`` is a list of ``(weights_matrix, biases)`` pairs. Hidden</span>
@@ -2415,9 +2481,7 @@ given. <code>max_distance</code> must bound the squared distance to any centroid
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">224</span>
 <span class="normal">225</span>
 <span class="normal">226</span>
 <span class="normal">227</span>
@@ -2446,7 +2510,9 @@ given. <code>max_distance</code> must bound the squared distance to any centroid
 <span class="normal">250</span>
 <span class="normal">251</span>
 <span class="normal">252</span>
-<span class="normal">253</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">nearest_centroid_inference</span><span class="p">(</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">nearest_centroid_inference</span><span class="p">(</span>
     <span class="n">sample</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
     <span class="n">centroids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
     <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -2502,13 +2568,13 @@ given. <code>max_distance</code> must bound the squared distance to any centroid
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">258</span>
 <span class="normal">259</span>
 <span class="normal">260</span>
 <span class="normal">261</span>
-<span class="normal">262</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">argmax_inference</span><span class="p">(</span><span class="n">scores</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_score</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_score</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">argmax_inference</span><span class="p">(</span><span class="n">scores</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_score</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_score</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Return the index of the highest class score (multi-class head)."""</span>
     <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">items</span><span class="p">:</span>
@@ -2544,9 +2610,7 @@ public tables.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">267</span>
 <span class="normal">268</span>
 <span class="normal">269</span>
 <span class="normal">270</span>
@@ -2585,7 +2649,9 @@ public tables.</p>
 <span class="normal">303</span>
 <span class="normal">304</span>
 <span class="normal">305</span>
-<span class="normal">306</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">naive_bayes_inference</span><span class="p">(</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">naive_bayes_inference</span><span class="p">(</span>
     <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
     <span class="n">log_prob_tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]],</span>
     <span class="n">priors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
@@ -2627,6 +2693,306 @@ public tables.</p>
         <span class="n">upper_bounds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">high</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">argmax_inference</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">lower_bounds</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">upper_bounds</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.svm_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">svm_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.svm_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">svm_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a linear Support Vector Machine (SVM) on encrypted features.</p>
+<p>Returns 1 if the sample is on the positive side of the hyperplane,
+-1 if it's on the negative side, and 0 if it lies exactly on the boundary.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">svm_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">bias</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Evaluate a linear Support Vector Machine (SVM) on encrypted features.</span>
+
+<span class="sd">    Returns 1 if the sample is on the positive side of the hyperplane,</span>
+<span class="sd">    -1 if it's on the negative side, and 0 if it lies exactly on the boundary.</span>
+<span class="sd">    """</span>
+    <span class="n">regression_result</span> <span class="o">=</span> <span class="n">linear_regression_inference</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sign</span><span class="p">(</span><span class="n">regression_result</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.pca_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">pca_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.pca_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">pca_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">means</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">components</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Apply Principal Component Analysis (PCA) to reduce dimensionality of encrypted data.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>features</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted feature vector (list of encrypted integers).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>mean</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The public mean vector (list of integers).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>components</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The public principal components matrix (list of lists of integers).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted principal components vector (list of encrypted integers).</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">pca_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span><span class="n">means</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span><span class="n">components</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Apply Principal Component Analysis (PCA) to reduce dimensionality of encrypted data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        features: The encrypted feature vector (list of encrypted integers).</span>
+<span class="sd">        mean: The public mean vector (list of integers).</span>
+<span class="sd">        components: The public principal components matrix (list of lists of integers).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The encrypted principal components vector (list of encrypted integers).</span>
+<span class="sd">    """</span>
+    <span class="n">diffs</span> <span class="o">=</span> <span class="n">array_sub</span><span class="p">(</span><span class="n">features</span><span class="p">,</span><span class="n">means</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">matrix_vector_multiply</span><span class="p">(</span><span class="n">components</span><span class="p">,</span><span class="n">diffs</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.models.xgboost_inference" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">xgboost_inference</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.models.xgboost_inference" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">xgboost_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">trees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a XGBoost classifier on encrypted features.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>features</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted feature vector (list of encrypted integers).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>trees</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The list of encrypted decision trees.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted prediction of the XGBoost classifier.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">xgboost_inference</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span><span class="n">trees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Evaluate a XGBoost classifier on encrypted features.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        features: The encrypted feature vector (list of encrypted integers).</span>
+<span class="sd">        trees: The list of encrypted decision trees.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The encrypted prediction of the XGBoost classifier.</span>
+<span class="sd">    """</span>
+    <span class="n">tree_sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">trees</span><span class="p">:</span>
+        <span class="n">tree_sum</span> <span class="o">+=</span> <span class="n">decision_tree_inference</span><span class="p">(</span><span class="n">features</span><span class="p">,</span><span class="n">tree</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">greater</span><span class="p">(</span><span class="n">tree_sum</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

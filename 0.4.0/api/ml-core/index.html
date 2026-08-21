@@ -254,7 +254,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../api-reference/" class="md-tabs__link">
+        <a href="../../bounds-and-costs/" class="md-tabs__link">
           
   
   
@@ -419,14 +419,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api-reference/" class="md-nav__link">
+      <a href="../../bounds-and-costs/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    API usage guide
+    Bounds and costs
   
 
     
@@ -447,14 +447,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bounds-and-costs/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Bounds and costs
+    API usage guide
   
 
     
@@ -2315,12 +2315,7 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">107</span>
 <span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span>
@@ -2333,7 +2328,12 @@
 <span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span>
-<span class="normal">120</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_hinge_loss</span><span class="p">(</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_hinge_loss</span><span class="p">(</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -2379,17 +2379,17 @@ runs under encryption (it is cheap on decrypted predictions).</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
 <span class="normal">128</span>
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
-<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">precision_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">precision_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.</span>
 
 <span class="sd">    The encrypted-by-encrypted division uses a multivariate lookup whose</span>
@@ -2424,12 +2424,12 @@ runs under encryption (it is cheap on decrypted predictions).</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">recall_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">recall_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels."""</span>
     <span class="n">divide</span> <span class="o">=</span> <span class="n">make_floor_divide</span><span class="p">(</span><span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">true_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="n">y_trues</span><span class="p">)</span>
@@ -2459,12 +2459,12 @@ runs under encryption (it is cheap on decrypted predictions).</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">f1_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">f1_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Integer percent F1: 2 * P * R // (P + R), 0 when both are 0."""</span>
     <span class="n">divide</span> <span class="o">=</span> <span class="n">make_floor_divide</span><span class="p">(</span><span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">precision</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="n">y_trues</span><span class="p">)</span>

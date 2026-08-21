@@ -6,7 +6,7 @@ from .._compat import fhe
 import numpy as np
 
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds, validate_integer
-from concrete_fhe_toolkit.arrays import array_sum, make_argmax, make_argmin, array_sub, make_maximum
+from concrete_fhe_toolkit.arrays import array_sum, make_argmax, make_argmin, array_sub
 from concrete_fhe_toolkit.math import equal, greater, greater_equal, select, maximum
 from concrete_fhe_toolkit.math._lookup import make_unary_lookup
 from concrete_fhe_toolkit.arithmetic import sign

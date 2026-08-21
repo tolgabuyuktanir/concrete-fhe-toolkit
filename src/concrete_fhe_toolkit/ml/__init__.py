@@ -32,8 +32,9 @@ from .core import (
     recall_score,
     true_negatives,
     true_positives,
+    l1_norm,
 )
-from .matrix import dot_product, matrix_add, matrix_transpose, matrix_subtract, matrix_multiply, matrix_vector_multiply
+from .matrix import dot_product, matrix_add, matrix_transpose, matrix_subtract, matrix_multiply, matrix_vector_multiply, tensor_flatten, matrix_elementwise_multiply
 from .models import (
     argmax_inference,
     cnn_inference,
@@ -56,7 +57,7 @@ from .models import (
     auto_quantizer,
 )
 from .stats import array_max, array_mean, array_min, array_range, array_variance, array_count_greater
-from .utils import binarize, one_hot_encode, clip_array
+from .utils import binarize, one_hot_encode, clip_array, normalize_array
 
 __all__ = [
     "argmax_inference",
@@ -120,4 +121,8 @@ __all__ = [
     "max_pooling_2d",
     "avg_pooling_2d",
     "auto_quantizer",
+    "normalize_array",
+    "tensor_flatten",
+    "l1_norm",
+    "matrix_elementwise_multiply",
 ]

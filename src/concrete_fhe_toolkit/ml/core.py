@@ -98,6 +98,11 @@ def hinge_loss(y_pred: Any, y_true: Any) -> Any:
     """Calculate the encrypted Hinge Loss for a single prediction and true value."""
     return maximum(0, 1-(y_true*y_pred))
 
+def l1_norm(array: List[Any]) -> Any:
+    total = 0
+    for item in array:
+        total += abs(item)
+    return total
 
 def compile_hinge_loss(
     min_value: int = -15,

@@ -1,6 +1,6 @@
 from typing import Any, List
 
-from concrete_fhe_toolkit.arrays import array_sum
+from concrete_fhe_toolkit.arrays import array_sum, array_multiply
 
 
 def matrix_transpose(matrix: List[List[Any]]) -> List[List[Any]]:
@@ -66,7 +66,21 @@ def matrix_multiply(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[
 
         result_matrix.append(row)
         
-    return result_matrix    
+    return result_matrix
+
+def matrix_elementwise_multiply(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[Any]]:
+    result_matrix = []
+    if len(matrix1) == 0 or len(matrix2) == 0:
+        return []
+
+    for i in range(len(matrix1)):
+        if len(matrix1[i]) != len(matrix2[i]):
+            raise ValueError("Matrix dimensions are incompatible for multiplication")
+
+        result_matrix.append(array_multiply(matrix1[i],matrix2[i]))    
+
+    return result_matrix
+
 
 def matrix_vector_multiply(matrix: List[List[Any]], array: List[Any]) -> List[Any]:
     """Multiply an encrypted matrix by an encrypted vector."""
@@ -85,3 +99,13 @@ def matrix_flatten(matrix: List[List[Any]]) -> List[Any]:
             flatten_list.append(value)
 
     return flatten_list        
+
+def tensor_flatten(tensor: List[List[List[Any]]]) -> List[Any]:
+    flatten_list = []
+    
+    for channel in tensor:
+        for row in channel:
+            for value in row:
+                flatten_list.append(value)
+
+    return flatten_list 

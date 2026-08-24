@@ -29,7 +29,15 @@ UnaryArrayFunction = Callable[[Any], Any]
 BinaryScalarFunction = Callable[[Any, Any], Any]
     
 def array_sum(elements: List[Any]) -> Any:
-    """Calculate the sum of all elements in an encrypted array using a tournament reduction."""
+    """Calculate the sum of all elements in an encrypted array using a tournament reduction.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_sum
+        
+        print(array_sum([1, 2, 3, 4]))  # 10
+        ```
+    """
     current_round = list(elements)
     if(len(current_round) == 0):
         return 0
@@ -49,23 +57,63 @@ def array_sum(elements: List[Any]) -> Any:
     return current_round[0]
 
 def array_scale(array: List[Any],factor: int):
-    """Multiply every element of an encrypted array by a scalar constant."""
+    """Multiply every element of an encrypted array by a scalar constant.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_scale
+        
+        print(array_scale([1, 2, 3], factor=3))  # [3, 6, 9]
+        ```
+    """
     return [factor * value for value in array]
 
 def array_add(array1: List[Any],array2: List[Any]) -> List[Any]:
-    """Perform element-wise addition of two encrypted arrays."""
+    """Perform element-wise addition of two encrypted arrays.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_add
+        
+        print(array_add([1, 2], [3, 4]))  # [4, 6]
+        ```
+    """
     return [x+y for x,y in zip(array1,array2)]
 
 def array_sub(array1: List[Any],array2: List[Any]) -> List[Any]:
-    """Perform element-wise subtraction of two encrypted arrays."""
+    """Perform element-wise subtraction of two encrypted arrays.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_sub
+        
+        print(array_sub([5, 5], [2, 1]))  # [3, 4]
+        ```
+    """
     return [x-y for x,y in zip(array1,array2)]
 
 def array_multiply(array1: List[Any],array2: List[Any]) -> List[Any]:
-    """Perform element-wise multiplication of two encrypted arrays."""
+    """Perform element-wise multiplication of two encrypted arrays.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_multiply
+        
+        print(array_multiply([2, 3], [4, 5]))  # [8, 15]
+        ```
+    """
     return [x*y for x,y in zip(array1,array2)]
 
 def array_pad(array: List[Any], target_size: Any) -> List[Any]:
-    """Pad an encrypted array with zeros up to the specified target size."""
+    """Pad an encrypted array with zeros up to the specified target size.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_pad
+        
+        print(array_pad([1, 2], target_size=4))  # [1, 2, 0, 0]
+        ```
+    """
     raw_list = list(array)
     if(len(raw_list) > target_size):
         raise ValueError("target_size must be at least the array size")
@@ -73,7 +121,15 @@ def array_pad(array: List[Any], target_size: Any) -> List[Any]:
     return padded_list
 
 def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> List[Any]:
-    """Slice an encrypted array (return elements from begin_index to end_index - 1)."""
+    """Slice an encrypted array (return elements from begin_index to end_index - 1).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_slice
+        
+        print(array_slice([10, 20, 30, 40], 1, 3))  # [20, 30]
+        ```
+    """
     raw_list = list(array)
     list_length = len(raw_list)
     if(list_length < begin_index or list_length < end_index or end_index < begin_index):
@@ -84,17 +140,41 @@ def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> List[Any]
     return raw_list[begin_index:end_index]
 
 def array_contains(array: List[Any], value: Any) -> Any:
-    """Check if an encrypted array contains a specific target value (returns 1 or 0)."""
+    """Check if an encrypted array contains a specific target value (returns 1 or 0).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_contains
+        
+        print(array_contains([1, 3, 5], value=3))  # 1
+        ```
+    """
     contain_list = [equal(item,value) for item in array]
     return bit_or_many(contain_list)
 
 def array_count(array: List[Any], value: Any) -> Any:
-    """Count occurrences of a specific value in an encrypted array."""
+    """Count occurrences of a specific value in an encrypted array.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_count
+        
+        print(array_count([1, 2, 2, 3], value=2))  # 2
+        ```
+    """
     count_list = [equal(item,value) for item in array]
     return array_sum(count_list)
 
 def array_all_equal(array1: List[Any], array2: List[Any]) -> Any:
-    """Check if two encrypted arrays are identical (returns 1 or 0)."""
+    """Check if two encrypted arrays are identical (returns 1 or 0).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_all_equal
+        
+        print(array_all_equal([1, 2], [1, 2]))  # 1
+        ```
+    """
     list1 = list(array1)
     list2 = list(array2)
     if(len(list1) != len(list2)):
@@ -107,7 +187,16 @@ def make_compare_swap(
     min_value: int = 0,
     max_value: int = 15,
 ) -> BinaryScalarFunction:
-    """Create an ascending compare-swap function for bounded encrypted integers."""
+    """Create an ascending compare-swap function for bounded encrypted integers.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import make_compare_swap
+        
+        swap = make_compare_swap(min_value=0, max_value=10)
+        # Use `swap(x, y)` inside an FHE program compilation
+        ```
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     span = maximum - minimum
 
@@ -133,7 +222,16 @@ def make_sort(
     *,
     descending: bool = False,
 ) -> UnaryArrayFunction:
-    """Create a fixed-size bitonic sorting network."""
+    """Create a fixed-size bitonic sorting network.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import make_sort
+        
+        sort_fn = make_sort(size=4, min_value=0, max_value=10)
+        # Use `sort_fn(array)` inside an FHE program compilation
+        ```
+    """
     size = validate_size(size, power_of_two=True)
     minimum, maximum = validate_bounds(min_value, max_value)
     compare_swap = make_compare_swap(minimum, maximum)
@@ -210,7 +308,16 @@ def make_minimum(
     min_value: int = 0,
     max_value: int = 15,
 ) -> UnaryArrayFunction:
-    """Create a tournament reduction that returns the minimum value."""
+    """Create a tournament reduction that returns the minimum value.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import make_minimum
+        
+        min_fn = make_minimum(size=4, min_value=0, max_value=10)
+        # Use `min_fn(array)` inside an FHE program compilation
+        ```
+    """
     return _make_extreme("min", size, min_value, max_value)
 
 
@@ -219,7 +326,16 @@ def make_maximum(
     min_value: int = 0,
     max_value: int = 15,
 ) -> UnaryArrayFunction:
-    """Create a tournament reduction that returns the maximum value."""
+    """Create a tournament reduction that returns the maximum value.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import make_maximum
+        
+        max_fn = make_maximum(size=4, min_value=0, max_value=10)
+        # Use `max_fn(array)` inside an FHE program compilation
+        ```
+    """
     return _make_extreme("max", size, min_value, max_value)
 
 
@@ -296,7 +412,16 @@ def make_argmin(
     *,
     tie_break: TieBreak = "first",
 ) -> UnaryArrayFunction:
-    """Create an argmin reduction with deterministic tie handling."""
+    """Create an argmin reduction with deterministic tie handling.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import make_argmin
+        
+        argmin_fn = make_argmin(size=4, min_value=0, max_value=10)
+        # Use `argmin_fn(array)` inside an FHE program compilation
+        ```
+    """
     return _make_arg_extreme("min", size, min_value, max_value, tie_break)
 
 
@@ -307,7 +432,16 @@ def make_argmax(
     *,
     tie_break: TieBreak = "first",
 ) -> UnaryArrayFunction:
-    """Create an argmax reduction with deterministic tie handling."""
+    """Create an argmax reduction with deterministic tie handling.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import make_argmax
+        
+        argmax_fn = make_argmax(size=4, min_value=0, max_value=10)
+        # Use `argmax_fn(array)` inside an FHE program compilation
+        ```
+    """
     return _make_arg_extreme("max", size, min_value, max_value, tie_break)
 
 
@@ -317,7 +451,16 @@ def compile_compare_swap(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile an ascending compare-swap circuit."""
+    """Compile an ascending compare-swap circuit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_compare_swap
+        
+        circuit = compile_compare_swap(min_value=0, max_value=10)
+        print(circuit.encrypt_run_decrypt(5, 3))  # (3, 5)
+        ```
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     function = make_compare_swap(minimum, maximum)
     inputset = [
@@ -353,7 +496,16 @@ def compile_sort(
     descending: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a fixed-size bitonic sorting circuit."""
+    """Compile a fixed-size bitonic sorting circuit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_sort
+        
+        circuit = compile_sort(size=4, min_value=0, max_value=10)
+        print(circuit.encrypt_run_decrypt([4, 1, 3, 2]))  # [1, 2, 3, 4]
+        ```
+    """
     size = validate_size(size, power_of_two=True)
     minimum, maximum = validate_bounds(min_value, max_value)
     function = make_sort(
@@ -372,7 +524,16 @@ def compile_minimum(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a minimum reduction circuit."""
+    """Compile a minimum reduction circuit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_minimum
+        
+        circuit = compile_minimum(size=4, min_value=0, max_value=10)
+        print(circuit.encrypt_run_decrypt([4, 1, 3, 2]))  # 1
+        ```
+    """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
     function = make_minimum(size, minimum, maximum)
@@ -386,7 +547,16 @@ def compile_maximum(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a maximum reduction circuit."""
+    """Compile a maximum reduction circuit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_maximum
+        
+        circuit = compile_maximum(size=4, min_value=0, max_value=10)
+        print(circuit.encrypt_run_decrypt([4, 1, 3, 2]))  # 4
+        ```
+    """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
     function = make_maximum(size, minimum, maximum)
@@ -401,7 +571,16 @@ def compile_argmin(
     tie_break: TieBreak = "first",
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile an argmin reduction circuit."""
+    """Compile an argmin reduction circuit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_argmin
+        
+        circuit = compile_argmin(size=4, min_value=0, max_value=10)
+        print(circuit.encrypt_run_decrypt([4, 1, 3, 2]))  # 1
+        ```
+    """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
     function = make_argmin(
@@ -421,7 +600,16 @@ def compile_argmax(
     tie_break: TieBreak = "first",
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile an argmax reduction circuit."""
+    """Compile an argmax reduction circuit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_argmax
+        
+        circuit = compile_argmax(size=4, min_value=0, max_value=10)
+        print(circuit.encrypt_run_decrypt([4, 1, 3, 2]))  # 0
+        ```
+    """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
     function = make_argmax(
@@ -434,7 +622,15 @@ def compile_argmax(
 
 
 def array_index(array: List[Any], index: Any) -> Any:
-    """Oblivious read: return array[index] without revealing the encrypted index."""
+    """Oblivious read: return array[index] without revealing the encrypted index.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_index
+        
+        print(array_index([10, 20, 30], index=1))  # 20
+        ```
+    """
     items = list(array)
     if not items:
         raise ValueError("array must contain at least one element")
@@ -445,7 +641,15 @@ def array_index(array: List[Any], index: Any) -> Any:
 
 
 def array_set(array: List[Any], index: Any, value: Any) -> List[Any]:
-    """Oblivious write: return a copy with array[index] replaced by value."""
+    """Oblivious write: return a copy with array[index] replaced by value.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_set
+        
+        print(array_set([10, 20, 30], index=1, value=99))  # [10, 99, 30]
+        ```
+    """
     items = list(array)
     if not items:
         raise ValueError("array must contain at least one element")
@@ -456,7 +660,15 @@ def array_set(array: List[Any], index: Any, value: Any) -> List[Any]:
 
 
 def array_index_of(array: List[Any], value: Any, *, missing_result: Optional[int] = None) -> Any:
-    """Return the first index holding value, or missing_result (default len(array))."""
+    """Return the first index holding value, or missing_result (default len(array)).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_index_of
+        
+        print(array_index_of([10, 20, 30], value=20))  # 1
+        ```
+    """
     items = list(array)
     if not items:
         raise ValueError("array must contain at least one element")
@@ -473,7 +685,15 @@ def array_index_of(array: List[Any], value: Any, *, missing_result: Optional[int
 
 
 def array_cumsum(array: List[Any]) -> List[Any]:
-    """Return the running prefix sums of an encrypted array."""
+    """Return the running prefix sums of an encrypted array.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_cumsum
+        
+        print(array_cumsum([1, 2, 3]))  # [1, 3, 6]
+        ```
+    """
     sums: List[Any] = []
     running: Any = 0
     for item in array:
@@ -483,12 +703,28 @@ def array_cumsum(array: List[Any]) -> List[Any]:
 
 
 def array_reverse(array: List[Any]) -> List[Any]:
-    """Return the array with its (public) element order reversed."""
+    """Return the array with its (public) element order reversed.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_reverse
+        
+        print(array_reverse([1, 2, 3]))  # [3, 2, 1]
+        ```
+    """
     return list(reversed(list(array)))
 
 
 def array_concat(*arrays: List[Any]) -> List[Any]:
-    """Concatenate encrypted arrays along their public length."""
+    """Concatenate encrypted arrays along their public length.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_concat
+        
+        print(array_concat([1, 2], [3, 4]))  # [1, 2, 3, 4]
+        ```
+    """
     combined: List[Any] = []
     for array in arrays:
         combined.extend(list(array))
@@ -507,6 +743,14 @@ def make_top_k(
 
     Runs k arg-extreme rounds, masking each selected element with a penalty,
     so circuit cost grows linearly with k.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import make_top_k
+        
+        top_k_fn = make_top_k(size=4, k=2, min_value=0, max_value=10)
+        # Use `top_k_fn(array)` inside an FHE program compilation
+        ```
     """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
@@ -553,7 +797,16 @@ def compile_top_k(
     largest: bool = True,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a top-k reduction circuit."""
+    """Compile a top-k reduction circuit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import compile_top_k
+        
+        circuit = compile_top_k(size=4, k=2, min_value=0, max_value=10)
+        print(circuit.encrypt_run_decrypt([4, 1, 3, 2]))  # [4, 3]
+        ```
+    """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
     function = make_top_k(size, k, minimum, maximum, largest=largest)

@@ -17,12 +17,28 @@ from .math.number_theory import make_isqrt
 
 
 def array_mean(array: List[Any]) -> Any:
-    """Calculate the floor mean of an encrypted array."""
+    """Calculate the floor mean of an encrypted array.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_mean
+        
+        print(array_mean([2, 4, 6]))  # 4
+        ```
+    """
     return array_sum(array) // len(array)
 
 
 def array_variance(array: List[Any]) -> Any:
-    """Calculate the floor variance of an encrypted array."""
+    """Calculate the floor variance of an encrypted array.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_variance
+        
+        print(array_variance([2, 4, 6]))  # 2
+        ```
+    """
     mean_value = array_mean(array)
     diff_sum: Any = 0
     for item in array:
@@ -35,6 +51,14 @@ def array_std(array: List[Any], min_value: int, max_value: int) -> Any:
 
     ``min_value`` / ``max_value`` bound the array elements; the isqrt lookup
     is built over the worst-case variance for that range.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_std
+        
+        # Used inside an FHE program compilation
+        std_val = array_std([2, 4, 6], min_value=0, max_value=10)
+        ```
     """
     minimum_value, maximum_value = validate_bounds(min_value, max_value)
     span = maximum_value - minimum_value
@@ -46,7 +70,15 @@ def array_std(array: List[Any], min_value: int, max_value: int) -> Any:
 
 
 def array_covariance(array1: List[Any], array2: List[Any]) -> Any:
-    """Calculate the floor covariance of two encrypted arrays."""
+    """Calculate the floor covariance of two encrypted arrays.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_covariance
+        
+        print(array_covariance([1, 2, 3], [1, 2, 3]))  # 0
+        ```
+    """
     if len(array1) != len(array2):
         raise ValueError("The array sizes must be equal")
     mean1 = array_mean(array1)
@@ -58,7 +90,15 @@ def array_covariance(array1: List[Any], array2: List[Any]) -> Any:
 
 
 def array_max(elements: List[Any]) -> Any:
-    """Find the maximum value in an encrypted array using a tournament reduction."""
+    """Find the maximum value in an encrypted array using a tournament reduction.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_max
+        
+        print(array_max([1, 5, 3]))  # 5
+        ```
+    """
     current_round = list(elements)
     if len(current_round) == 0:
         return 0
@@ -73,7 +113,15 @@ def array_max(elements: List[Any]) -> Any:
 
 
 def array_min(elements: List[Any]) -> Any:
-    """Find the minimum value in an encrypted array using a tournament reduction."""
+    """Find the minimum value in an encrypted array using a tournament reduction.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_min
+        
+        print(array_min([1, 5, 3]))  # 1
+        ```
+    """
     current_round = list(elements)
     if len(current_round) == 0:
         return 0
@@ -88,12 +136,28 @@ def array_min(elements: List[Any]) -> Any:
 
 
 def array_range(array: List[Any]) -> Any:
-    """Calculate the range (max - min) of an encrypted array."""
+    """Calculate the range (max - min) of an encrypted array.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_range
+        
+        print(array_range([1, 5, 3]))  # 4
+        ```
+    """
     return array_max(array) - array_min(array)
 
 
 def array_count_greater(array: List[Any], threshold: Any) -> Any:
-    """Count how many elements are strictly greater than a threshold."""
+    """Count how many elements are strictly greater than a threshold.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_count_greater
+        
+        print(array_count_greater([1, 5, 3], threshold=2))  # 2
+        ```
+    """
     count: Any = 0
     for item in array:
         count = count + greater(item, threshold)
@@ -105,6 +169,14 @@ def array_median(array: List[Any], min_value: int, max_value: int) -> Any:
 
     Uses the bitonic sorting network, so the array length must be a power
     of two.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_median
+        
+        # Used inside an FHE program compilation
+        median_val = array_median([1, 5, 3, 4], min_value=0, max_value=10)
+        ```
     """
     items = list(array)
     size = validate_size(len(items), power_of_two=True)
@@ -122,6 +194,14 @@ def array_percentile(array: List[Any], q: int, min_value: int, max_value: int) -
 
     Uses the bitonic sorting network, so the array length must be a power
     of two.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_percentile
+        
+        # 50th percentile (median)
+        perc = array_percentile([1, 5, 3, 4], q=50, min_value=0, max_value=10)
+        ```
     """
     items = list(array)
     size = validate_size(len(items), power_of_two=True)
@@ -136,7 +216,15 @@ def array_percentile(array: List[Any], q: int, min_value: int, max_value: int) -
 
 
 def array_histogram(array: List[Any], min_value: int, max_value: int) -> List[Any]:
-    """Count occurrences of every value in [min_value, max_value] (bincount)."""
+    """Count occurrences of every value in [min_value, max_value] (bincount).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_histogram
+        
+        print(array_histogram([1, 2, 1], min_value=1, max_value=3))  # [2, 1, 0]
+        ```
+    """
     minimum_value, maximum_value = validate_bounds(min_value, max_value)
     items = list(array)
     return [
@@ -146,7 +234,16 @@ def array_histogram(array: List[Any], min_value: int, max_value: int) -> List[An
 
 
 def array_mode(array: List[Any], min_value: int, max_value: int) -> Any:
-    """Return the most frequent value (smallest value wins ties)."""
+    """Return the most frequent value (smallest value wins ties).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_mode
+        
+        # Used inside an FHE program compilation
+        mode_val = array_mode([1, 2, 2, 3], min_value=1, max_value=5)
+        ```
+    """
     minimum_value, maximum_value = validate_bounds(min_value, max_value)
     counts = array_histogram(array, minimum_value, maximum_value)
     if len(counts) == 1:
@@ -156,7 +253,15 @@ def array_mode(array: List[Any], min_value: int, max_value: int) -> Any:
 
 
 def array_normalize(array: List[Any], mean: Any, scale: int) -> List[Any]:
-    """Return (x - mean) * scale for every element (z-score style affine transform)."""
+    """Return (x - mean) * scale for every element (z-score style affine transform).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.stats import array_normalize
+        
+        print(array_normalize([2, 4, 6], mean=4, scale=10))  # [-20, 0, 20]
+        ```
+    """
     normalized_scale = validate_integer("scale", scale, minimum=1)
     return [(item - mean) * normalized_scale for item in array]
 

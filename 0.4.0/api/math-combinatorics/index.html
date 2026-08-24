@@ -1797,13 +1797,40 @@
         <p>Create n! for an encrypted n in [0, max_n].</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_factorial</span>
+
+<span class="n">factorial_fn</span> <span class="o">=</span> <span class="n">make_factorial</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># Use `factorial_fn(n)` inside an FHE program compilation</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_factorial</span><span class="p">(</span><span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnaryFunction</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Create n! for an encrypted n in [0, max_n]."""</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_factorial</span><span class="p">(</span><span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnaryFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Create n! for an encrypted n in [0, max_n].</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import make_factorial</span>
+
+<span class="sd">        factorial_fn = make_factorial(max_n=5)</span>
+<span class="sd">        # Use `factorial_fn(n)` inside an FHE program compilation</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">values</span> <span class="o">=</span> <span class="n">_factorials</span><span class="p">(</span><span class="n">max_n</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">make_unary_lookup</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1828,31 +1855,58 @@
         <p>Compile n! for an encrypted n in [0, max_n].</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_factorial</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_factorial</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>  <span class="c1"># 24</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
-<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_factorial</span><span class="p">(</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_factorial</span><span class="p">(</span>
     <span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">allow_large_lookup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile n! for an encrypted n in [0, max_n]."""</span>
+<span class="w">    </span><span class="sd">"""Compile n! for an encrypted n in [0, max_n].</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import compile_factorial</span>
+
+<span class="sd">        circuit = compile_factorial(max_n=5)</span>
+<span class="sd">        print(circuit.encrypt_run_decrypt(4))  # 24</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">maximum</span> <span class="o">=</span> <span class="n">_validate_maximum</span><span class="p">(</span><span class="s2">"max_n"</span><span class="p">,</span> <span class="n">max_n</span><span class="p">)</span>
     <span class="n">values</span> <span class="o">=</span> <span class="n">_factorials</span><span class="p">(</span><span class="n">maximum</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">compile_unary_lookup</span><span class="p">(</span>
@@ -1885,13 +1939,40 @@
         <p>Create the nth Fibonacci number for encrypted n in [0, max_n].</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_fibonacci</span>
+
+<span class="n">fib_fn</span> <span class="o">=</span> <span class="n">make_fibonacci</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Use `fib_fn(n)` inside an FHE program compilation</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_fibonacci</span><span class="p">(</span><span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnaryFunction</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Create the nth Fibonacci number for encrypted n in [0, max_n]."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_fibonacci</span><span class="p">(</span><span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnaryFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Create the nth Fibonacci number for encrypted n in [0, max_n].</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import make_fibonacci</span>
+
+<span class="sd">        fib_fn = make_fibonacci(max_n=10)</span>
+<span class="sd">        # Use `fib_fn(n)` inside an FHE program compilation</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">values</span> <span class="o">=</span> <span class="n">_fibonacci_values</span><span class="p">(</span><span class="n">max_n</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">make_unary_lookup</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1916,31 +1997,58 @@
         <p>Compile the nth Fibonacci number for encrypted n in [0, max_n].</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_fibonacci</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_fibonacci</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>  <span class="c1"># 8</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_fibonacci</span><span class="p">(</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_fibonacci</span><span class="p">(</span>
     <span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">allow_large_lookup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile the nth Fibonacci number for encrypted n in [0, max_n]."""</span>
+<span class="w">    </span><span class="sd">"""Compile the nth Fibonacci number for encrypted n in [0, max_n].</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import compile_fibonacci</span>
+
+<span class="sd">        circuit = compile_fibonacci(max_n=10)</span>
+<span class="sd">        print(circuit.encrypt_run_decrypt(6))  # 8</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">maximum</span> <span class="o">=</span> <span class="n">_validate_maximum</span><span class="p">(</span><span class="s2">"max_n"</span><span class="p">,</span> <span class="n">max_n</span><span class="p">)</span>
     <span class="n">values</span> <span class="o">=</span> <span class="n">_fibonacci_values</span><span class="p">(</span><span class="n">maximum</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">compile_unary_lookup</span><span class="p">(</span>
@@ -1973,15 +2081,42 @@
         <p>Create public-base exponentiation for an encrypted exponent.</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_power</span>
+
+<span class="n">pow_fn</span> <span class="o">=</span> <span class="n">make_power</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_exponent</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Use `pow_fn(exponent)` inside an FHE program compilation</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_power</span><span class="p">(</span><span class="n">base</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_exponent</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnaryFunction</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Create public-base exponentiation for an encrypted exponent."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_power</span><span class="p">(</span><span class="n">base</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_exponent</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnaryFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Create public-base exponentiation for an encrypted exponent.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import make_power</span>
+
+<span class="sd">        pow_fn = make_power(base=2, max_exponent=10)</span>
+<span class="sd">        # Use `pow_fn(exponent)` inside an FHE program compilation</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">normalized_base</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"base"</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
     <span class="n">maximum</span> <span class="o">=</span> <span class="n">_validate_maximum</span><span class="p">(</span><span class="s2">"max_exponent"</span><span class="p">,</span> <span class="n">max_exponent</span><span class="p">)</span>
     <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">normalized_base</span><span class="o">**</span><span class="n">exponent</span> <span class="k">for</span> <span class="n">exponent</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maximum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
@@ -2008,34 +2143,61 @@
         <p>Compile public-base exponentiation for an encrypted exponent.</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_power</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_power</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_exponent</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 8</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_power</span><span class="p">(</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_power</span><span class="p">(</span>
     <span class="n">base</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">max_exponent</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">allow_large_lookup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile public-base exponentiation for an encrypted exponent."""</span>
+<span class="w">    </span><span class="sd">"""Compile public-base exponentiation for an encrypted exponent.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import compile_power</span>
+
+<span class="sd">        circuit = compile_power(base=2, max_exponent=10)</span>
+<span class="sd">        print(circuit.encrypt_run_decrypt(3))  # 8</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">normalized_base</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"base"</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
     <span class="n">maximum</span> <span class="o">=</span> <span class="n">_validate_maximum</span><span class="p">(</span><span class="s2">"max_exponent"</span><span class="p">,</span> <span class="n">max_exponent</span><span class="p">)</span>
     <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">normalized_base</span><span class="o">**</span><span class="n">exponent</span> <span class="k">for</span> <span class="n">exponent</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maximum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
@@ -2069,12 +2231,39 @@
         <p>Create math.comb(n, r), returning invalid_result when r &gt; n.</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_comb</span>
+
+<span class="n">comb_fn</span> <span class="o">=</span> <span class="n">make_comb</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Use `comb_fn(n, r)` inside an FHE program compilation</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_comb</span><span class="p">(</span><span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">invalid_result</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryFunction</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Create math.comb(n, r), returning invalid_result when r &gt; n."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_comb</span><span class="p">(</span><span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">invalid_result</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Create math.comb(n, r), returning invalid_result when r &gt; n.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import make_comb</span>
+
+<span class="sd">        comb_fn = make_comb(max_n=5, invalid_result=0)</span>
+<span class="sd">        # Use `comb_fn(n, r)` inside an FHE program compilation</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_make_n_r_lookup</span><span class="p">(</span><span class="n">_comb_value</span><span class="p">,</span> <span class="n">max_n</span><span class="p">,</span> <span class="n">invalid_result</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2098,42 +2287,69 @@
         <p>Compile math.comb(n, r) for encrypted n and r in [0, max_n].</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_comb</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_comb</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># 10</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_comb</span><span class="p">(</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_comb</span><span class="p">(</span>
     <span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">invalid_result</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">allow_large_lookup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile math.comb(n, r) for encrypted n and r in [0, max_n]."""</span>
+<span class="w">    </span><span class="sd">"""Compile math.comb(n, r) for encrypted n and r in [0, max_n].</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import compile_comb</span>
+
+<span class="sd">        circuit = compile_comb(max_n=5)</span>
+<span class="sd">        print(circuit.encrypt_run_decrypt(5, 2))  # 10</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">maximum</span> <span class="o">=</span> <span class="n">_validate_maximum</span><span class="p">(</span><span class="s2">"max_n"</span><span class="p">,</span> <span class="n">max_n</span><span class="p">)</span>
     <span class="n">invalid</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"invalid_result"</span><span class="p">,</span> <span class="n">invalid_result</span><span class="p">)</span>
     <span class="n">values</span> <span class="o">=</span> <span class="n">binary_values</span><span class="p">(</span>
@@ -2175,12 +2391,39 @@
         <p>Create math.perm(n, r), returning invalid_result when r &gt; n.</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_perm</span>
+
+<span class="n">perm_fn</span> <span class="o">=</span> <span class="n">make_perm</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Use `perm_fn(n, r)` inside an FHE program compilation</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_perm</span><span class="p">(</span><span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">invalid_result</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryFunction</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Create math.perm(n, r), returning invalid_result when r &gt; n."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_perm</span><span class="p">(</span><span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">invalid_result</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Create math.perm(n, r), returning invalid_result when r &gt; n.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import make_perm</span>
+
+<span class="sd">        perm_fn = make_perm(max_n=5, invalid_result=0)</span>
+<span class="sd">        # Use `perm_fn(n, r)` inside an FHE program compilation</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_make_n_r_lookup</span><span class="p">(</span><span class="n">_perm_value</span><span class="p">,</span> <span class="n">max_n</span><span class="p">,</span> <span class="n">invalid_result</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2204,42 +2447,69 @@
         <p>Compile math.perm(n, r) for encrypted n and r in [0, max_n].</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_perm</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_perm</span><span class="p">(</span><span class="n">max_n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># 20</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_perm</span><span class="p">(</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_perm</span><span class="p">(</span>
     <span class="n">max_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">invalid_result</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">allow_large_lookup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile math.perm(n, r) for encrypted n and r in [0, max_n]."""</span>
+<span class="w">    </span><span class="sd">"""Compile math.perm(n, r) for encrypted n and r in [0, max_n].</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import compile_perm</span>
+
+<span class="sd">        circuit = compile_perm(max_n=5)</span>
+<span class="sd">        print(circuit.encrypt_run_decrypt(5, 2))  # 20</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">maximum</span> <span class="o">=</span> <span class="n">_validate_maximum</span><span class="p">(</span><span class="s2">"max_n"</span><span class="p">,</span> <span class="n">max_n</span><span class="p">)</span>
     <span class="n">invalid</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"invalid_result"</span><span class="p">,</span> <span class="n">invalid_result</span><span class="p">)</span>
     <span class="n">values</span> <span class="o">=</span> <span class="n">binary_values</span><span class="p">(</span>
@@ -2284,28 +2554,53 @@ stays below the modulus, so the output bit width is small even for
 large exponents.</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_powmod</span>
+
+<span class="n">powmod_fn</span> <span class="o">=</span> <span class="n">make_powmod</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_exponent</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Use `powmod_fn(exponent)` inside an FHE program compilation</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_powmod</span><span class="p">(</span><span class="n">base</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">modulus</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_exponent</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnaryFunction</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_powmod</span><span class="p">(</span><span class="n">base</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">modulus</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_exponent</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnaryFunction</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Create pow(base, exponent, modulus) with a public base and modulus.</span>
 
 <span class="sd">    The exponent is encrypted and bounded by ``max_exponent``; the result</span>
 <span class="sd">    stays below the modulus, so the output bit width is small even for</span>
 <span class="sd">    large exponents.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import make_powmod</span>
+
+<span class="sd">        powmod_fn = make_powmod(base=2, modulus=5, max_exponent=10)</span>
+<span class="sd">        # Use `powmod_fn(exponent)` inside an FHE program compilation</span>
+<span class="sd">        ```</span>
 <span class="sd">    """</span>
     <span class="n">normalized_base</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"base"</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
     <span class="n">normalized_modulus</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"modulus"</span><span class="p">,</span> <span class="n">modulus</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -2337,32 +2632,50 @@ large exponents.</p>
         <p>Compile pow(base, exponent, modulus) with a public base and modulus.</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_powmod</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_powmod</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_exponent</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 3</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/math/combinatorics.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_powmod</span><span class="p">(</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_powmod</span><span class="p">(</span>
     <span class="n">base</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">modulus</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">max_exponent</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -2370,7 +2683,16 @@ large exponents.</p>
     <span class="n">allow_large_lookup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile pow(base, exponent, modulus) with a public base and modulus."""</span>
+<span class="w">    </span><span class="sd">"""Compile pow(base, exponent, modulus) with a public base and modulus.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.math.combinatorics import compile_powmod</span>
+
+<span class="sd">        circuit = compile_powmod(base=2, modulus=5, max_exponent=10)</span>
+<span class="sd">        print(circuit.encrypt_run_decrypt(3))  # 3</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">normalized_base</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"base"</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
     <span class="n">normalized_modulus</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"modulus"</span><span class="p">,</span> <span class="n">modulus</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">maximum</span> <span class="o">=</span> <span class="n">_validate_maximum</span><span class="p">(</span><span class="s2">"max_exponent"</span><span class="p">,</span> <span class="n">max_exponent</span><span class="p">)</span>

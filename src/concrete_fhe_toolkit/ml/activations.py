@@ -8,7 +8,7 @@ from concrete_fhe_toolkit._utils import compile_function, validate_bounds
 from concrete_fhe_toolkit.math import greater_equal, make_exp
 from concrete_fhe_toolkit.math.basic import maximum
 from concrete_fhe_toolkit.arithmetic import make_floor_divide
-from concrete_fhe_toolkit.math import sigmoid, make_sigmoid, compile_sigmoid
+
 
 def relu(value: Any) -> Any:
     """Return max(0, value).

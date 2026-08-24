@@ -4,7 +4,7 @@
 # backwards compatibility; sigmoid/tanh are BoundedOperation compile
 # factories from the math subpackage, not traceable activations.
 from ..arithmetic import sign
-from ..math import sigmoid, tanh
+from ..math import sigmoid, tanh, make_sigmoid, compile_sigmoid
 from .activations import (
     compile_leaky_relu,
     compile_relu,
@@ -16,8 +16,6 @@ from .activations import (
     unit_step,
     make_softmax,
     compile_softmax,
-    make_sigmoid,
-    compile_sigmoid,
 )
 from .core import (
     accuracy_score,

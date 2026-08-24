@@ -1,13 +1,14 @@
 """Activation helpers for encrypted ML circuits."""
 
-from typing import Any, Optional
+from typing import Any, Optional, List, Callable
 
 from .._compat import fhe
 
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
-from concrete_fhe_toolkit.math import greater_equal
+from concrete_fhe_toolkit.math import greater_equal, make_exp
 from concrete_fhe_toolkit.math.basic import maximum
-
+from concrete_fhe_toolkit.arithmetic import make_floor_divide
+from concrete_fhe_toolkit.math import sigmoid, make_sigmoid, compile_sigmoid
 
 def relu(value: Any) -> Any:
     """Return max(0, value).
@@ -85,6 +86,50 @@ def threshold_activation(value: Any, threshold: Any) -> Any:
     """
     return greater_equal(value, threshold)
 
+def make_softmax(
+    min_input: int = -127, 
+    max_input: int = 127,
+    *,
+    input_scale: int = 10,
+    output_scale: int = 100,
+    probability_scale: int = 100,
+) -> Callable[[List[Any]], List[Any]]:
+    """Create a scaled softmax function for a list of encrypted scores.
+    
+    This function uses an exponential approximation and floor division to calculate
+    probabilities as integer percentages. The output is scaled by `probability_scale`.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.activations import make_softmax
+        
+        # Create a softmax function for inputs scaled by 10
+        softmax = make_softmax(min_input=-50, max_input=50, input_scale=10)
+        
+        # Inside an FHE circuit
+        # enc_probs = softmax(enc_scores)
+        ```
+    """
+    exp_func = make_exp(min_input, max_input, input_scale=input_scale, output_scale=output_scale)
+    div_func = make_floor_divide(zero_result=0)
+    
+    def softmax(values: List[Any]) -> List[Any]:
+        total: Any = 0
+        exp_values = []
+        for value in values:
+            # make_exp already handles dividing by input_scale and multiplying by output_scale internally
+            exp_value = exp_func(value)
+            total = total + exp_value
+            exp_values.append(exp_value)
+
+        probabilities = []
+        for value in exp_values:
+            # We multiply by probability_scale before dividing so the output is an integer percentage
+            probabilities.append(div_func(value * probability_scale, total))  
+
+        return probabilities
+
+    return softmax     
 
 def compile_relu(
     min_value: int = -15,
@@ -199,6 +244,42 @@ def compile_threshold_activation(
             (minimum, maximum),
             (maximum, minimum),
             (maximum, maximum),
+        ],
+        configuration,
+    )
+
+def compile_softmax(
+    size: int,
+    min_value: int = -127,
+    max_value: int = 127,
+    *,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    """Compile an FHE circuit for the softmax function over an array of fixed size.
+    
+    Since FHE circuits require fixed dimensions, the `size` of the input array 
+    must be specified at compile time.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.activations import compile_softmax
+        
+        # Compile softmax for a 3-class model
+        circuit = compile_softmax(size=3, min_value=-50, max_value=50)
+        
+        # Run it (inputs should be scaled!)
+        # probs = circuit.encrypt_run_decrypt([20, -10, 5])
+        ```
+    """
+    function = make_softmax(min_value,max_value)
+    minimum, maximum = validate_bounds(min_value, max_value)
+    return compile_function(
+        function,
+        {"values": "encrypted"},
+        [
+            [minimum] * size,
+            [maximum] * size,
+            [0] * size
         ],
         configuration,
     )

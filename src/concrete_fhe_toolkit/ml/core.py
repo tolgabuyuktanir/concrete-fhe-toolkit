@@ -1,10 +1,11 @@
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Callable
 from .._compat import fhe
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
 from concrete_fhe_toolkit.arithmetic import make_floor_divide
 
 from concrete_fhe_toolkit.arrays import array_sum
 from concrete_fhe_toolkit.math import square, maximum, equal,not_equal
+from concrete_fhe_toolkit.math.special import make_log
 
 
 def manhattan_distance(array1: List[Any], array2: List[Any]) -> Any:
@@ -276,6 +277,64 @@ def compile_hinge_loss(
         ],
         configuration,
     )
+
+def make_cross_entropy_loss(
+    min_input: int = -127,
+    max_input: int = 128,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 100,
+) -> Callable[[List[Any],List[Any]], Any]:
+    """Create a scaled Binary Cross-Entropy loss function.
+    
+    This factory creates a cross-entropy function using a pre-configured 
+    logarithm table (TLU). The probabilities should be scaled integers.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.core import make_cross_entropy_loss
+        
+        cross_entropy = make_cross_entropy_loss(min_input=1, max_input=100)
+        # Inside an FHE circuit
+        # loss = cross_entropy(enc_preds, enc_labels)
+        ```
+    """
+    log_func = make_log(min_input, max_input, input_scale=input_scale, output_scale=output_scale, invalid_result=-999)
+
+    def cross_entropy_loss(y_preds: List[Any], y_trues: List[Any]) -> Any:
+        losses = []
+        for pred, true in zip(y_preds, y_trues):
+            pred_log = log_func(pred)
+            minus_pred_log = log_func(input_scale - pred)
+            loss = -(true * pred_log + (1 - true) * minus_pred_log)
+            losses.append(loss)
+
+        return array_sum(losses) // len(y_trues)
+        
+    return cross_entropy_loss 
+
+def compile_cross_entropy_loss(
+    array_size: int,
+    min_value: int = -127,
+    max_value: int = 127,
+    *,
+    input_scale: int = 100,
+    output_scale: int = 100,
+    configuration: Optional[fhe.Configuration] = None,
+) -> fhe.Circuit:
+    function = make_cross_entropy_loss(min_value, max_value, input_scale=input_scale, output_scale=output_scale)
+    minimum, maximum = validate_bounds(min_value, max_value)
+    
+    return compile_function(
+        function,
+        {"y_preds": "encrypted", "y_trues": "encrypted"},
+        [
+            ([minimum] * array_size, [0] * array_size), # preds ve trues
+            ([maximum] * array_size, [1] * array_size),
+        ],
+        configuration,
+    )
+
 
 def precision_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
     """Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.

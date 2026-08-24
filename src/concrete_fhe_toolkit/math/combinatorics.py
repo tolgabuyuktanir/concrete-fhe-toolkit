@@ -43,7 +43,16 @@ def _fibonacci_values(max_n: int) -> list[int]:
 
 
 def make_factorial(max_n: int) -> UnaryFunction:
-    """Create n! for an encrypted n in [0, max_n]."""
+    """Create n! for an encrypted n in [0, max_n].
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import make_factorial
+        
+        factorial_fn = make_factorial(max_n=5)
+        # Use `factorial_fn(n)` inside an FHE program compilation
+        ```
+    """
     values = _factorials(max_n)
     return make_unary_lookup(values, 0)
 
@@ -54,7 +63,16 @@ def compile_factorial(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile n! for an encrypted n in [0, max_n]."""
+    """Compile n! for an encrypted n in [0, max_n].
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import compile_factorial
+        
+        circuit = compile_factorial(max_n=5)
+        print(circuit.encrypt_run_decrypt(4))  # 24
+        ```
+    """
     maximum = _validate_maximum("max_n", max_n)
     values = _factorials(maximum)
     return compile_unary_lookup(
@@ -68,7 +86,16 @@ def compile_factorial(
 
 
 def make_fibonacci(max_n: int) -> UnaryFunction:
-    """Create the nth Fibonacci number for encrypted n in [0, max_n]."""
+    """Create the nth Fibonacci number for encrypted n in [0, max_n].
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import make_fibonacci
+        
+        fib_fn = make_fibonacci(max_n=10)
+        # Use `fib_fn(n)` inside an FHE program compilation
+        ```
+    """
     values = _fibonacci_values(max_n)
     return make_unary_lookup(values, 0)
 
@@ -79,7 +106,16 @@ def compile_fibonacci(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile the nth Fibonacci number for encrypted n in [0, max_n]."""
+    """Compile the nth Fibonacci number for encrypted n in [0, max_n].
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import compile_fibonacci
+        
+        circuit = compile_fibonacci(max_n=10)
+        print(circuit.encrypt_run_decrypt(6))  # 8
+        ```
+    """
     maximum = _validate_maximum("max_n", max_n)
     values = _fibonacci_values(maximum)
     return compile_unary_lookup(
@@ -93,7 +129,16 @@ def compile_fibonacci(
 
 
 def make_power(base: int, max_exponent: int) -> UnaryFunction:
-    """Create public-base exponentiation for an encrypted exponent."""
+    """Create public-base exponentiation for an encrypted exponent.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import make_power
+        
+        pow_fn = make_power(base=2, max_exponent=10)
+        # Use `pow_fn(exponent)` inside an FHE program compilation
+        ```
+    """
     normalized_base = validate_integer("base", base)
     maximum = _validate_maximum("max_exponent", max_exponent)
     values = [normalized_base**exponent for exponent in range(maximum + 1)]
@@ -107,7 +152,16 @@ def compile_power(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile public-base exponentiation for an encrypted exponent."""
+    """Compile public-base exponentiation for an encrypted exponent.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import compile_power
+        
+        circuit = compile_power(base=2, max_exponent=10)
+        print(circuit.encrypt_run_decrypt(3))  # 8
+        ```
+    """
     normalized_base = validate_integer("base", base)
     maximum = _validate_maximum("max_exponent", max_exponent)
     values = [normalized_base**exponent for exponent in range(maximum + 1)]
@@ -147,7 +201,16 @@ def _make_n_r_lookup(
 
 
 def make_comb(max_n: int, *, invalid_result: int = 0) -> BinaryFunction:
-    """Create math.comb(n, r), returning invalid_result when r > n."""
+    """Create math.comb(n, r), returning invalid_result when r > n.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import make_comb
+        
+        comb_fn = make_comb(max_n=5, invalid_result=0)
+        # Use `comb_fn(n, r)` inside an FHE program compilation
+        ```
+    """
     return _make_n_r_lookup(_comb_value, max_n, invalid_result)
 
 
@@ -158,7 +221,16 @@ def compile_comb(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile math.comb(n, r) for encrypted n and r in [0, max_n]."""
+    """Compile math.comb(n, r) for encrypted n and r in [0, max_n].
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import compile_comb
+        
+        circuit = compile_comb(max_n=5)
+        print(circuit.encrypt_run_decrypt(5, 2))  # 10
+        ```
+    """
     maximum = _validate_maximum("max_n", max_n)
     invalid = validate_integer("invalid_result", invalid_result)
     values = binary_values(
@@ -181,7 +253,16 @@ def compile_comb(
 
 
 def make_perm(max_n: int, *, invalid_result: int = 0) -> BinaryFunction:
-    """Create math.perm(n, r), returning invalid_result when r > n."""
+    """Create math.perm(n, r), returning invalid_result when r > n.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import make_perm
+        
+        perm_fn = make_perm(max_n=5, invalid_result=0)
+        # Use `perm_fn(n, r)` inside an FHE program compilation
+        ```
+    """
     return _make_n_r_lookup(_perm_value, max_n, invalid_result)
 
 
@@ -192,7 +273,16 @@ def compile_perm(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile math.perm(n, r) for encrypted n and r in [0, max_n]."""
+    """Compile math.perm(n, r) for encrypted n and r in [0, max_n].
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import compile_perm
+        
+        circuit = compile_perm(max_n=5)
+        print(circuit.encrypt_run_decrypt(5, 2))  # 20
+        ```
+    """
     maximum = _validate_maximum("max_n", max_n)
     invalid = validate_integer("invalid_result", invalid_result)
     values = binary_values(
@@ -228,6 +318,14 @@ def make_powmod(base: int, modulus: int, max_exponent: int) -> UnaryFunction:
     The exponent is encrypted and bounded by ``max_exponent``; the result
     stays below the modulus, so the output bit width is small even for
     large exponents.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import make_powmod
+        
+        powmod_fn = make_powmod(base=2, modulus=5, max_exponent=10)
+        # Use `powmod_fn(exponent)` inside an FHE program compilation
+        ```
     """
     normalized_base = validate_integer("base", base)
     normalized_modulus = validate_integer("modulus", modulus, minimum=1)
@@ -247,7 +345,16 @@ def compile_powmod(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile pow(base, exponent, modulus) with a public base and modulus."""
+    """Compile pow(base, exponent, modulus) with a public base and modulus.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.combinatorics import compile_powmod
+        
+        circuit = compile_powmod(base=2, modulus=5, max_exponent=10)
+        print(circuit.encrypt_run_decrypt(3))  # 3
+        ```
+    """
     normalized_base = validate_integer("base", base)
     normalized_modulus = validate_integer("modulus", modulus, minimum=1)
     maximum = _validate_maximum("max_exponent", max_exponent)

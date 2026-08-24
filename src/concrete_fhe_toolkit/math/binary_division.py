@@ -86,6 +86,15 @@ def unsigned_divide_bits(
     """Return little-endian quotient bits for unsigned floor division.
 
     Division by zero returns the clear fallback encoded by `zero_result`.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.binary_division import unsigned_divide_bits
+        
+        num_bits = [1, 0, 1]  # 5
+        den_bits = [0, 1]     # 2
+        # Use `unsigned_divide_bits(num_bits, den_bits)` inside an FHE program compilation
+        ```
     """
     numerator = _as_nonempty_bits("numerator_bits", numerator_bits)
     denominator = _as_nonempty_bits("denominator_bits", denominator_bits)
@@ -115,7 +124,17 @@ def fixed_point_divide_bits(
     quotient_width: int | None = None,
     zero_result: int = 0,
 ) -> tuple[Any, ...]:
-    """Return quotient bits for floor((numerator << fractional_bits) / denominator)."""
+    """Return quotient bits for floor((numerator << fractional_bits) / denominator).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.binary_division import fixed_point_divide_bits
+        
+        num_bits = [1, 0, 1]  # 5
+        den_bits = [0, 1]     # 2
+        # Use `fixed_point_divide_bits(num_bits, den_bits, fractional_bits=1)` inside an FHE program compilation
+        ```
+    """
     numerator = _as_nonempty_bits("numerator_bits", numerator_bits)
     fraction = _validate_fractional_bits(fractional_bits)
     shifted_numerator = (0,) * fraction + numerator
@@ -143,7 +162,16 @@ def make_unsigned_floor_divide(
     quotient_width: int | None = None,
     zero_result: int = 0,
 ) -> Any:
-    """Create unsigned encrypted floor division from scalar integer inputs."""
+    """Create unsigned encrypted floor division from scalar integer inputs.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.binary_division import make_unsigned_floor_divide
+        
+        div_fn = make_unsigned_floor_divide(numerator_width=4, denominator_width=4)
+        # Use `div_fn(num, den)` inside an FHE program compilation
+        ```
+    """
     n_width = _validate_width("numerator_width", numerator_width)
     d_width = _validate_width("denominator_width", denominator_width)
     q_width = (
@@ -177,7 +205,16 @@ def make_fixed_point_divide(
     quotient_width: int | None = None,
     zero_result: int = 0,
 ) -> Any:
-    """Create fixed-point unsigned division from scalar integer inputs."""
+    """Create fixed-point unsigned division from scalar integer inputs.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.binary_division import make_fixed_point_divide
+        
+        div_fn = make_fixed_point_divide(4, 4, fractional_bits=2)
+        # Use `div_fn(num, den)` inside an FHE program compilation
+        ```
+    """
     n_width = _validate_width("numerator_width", numerator_width)
     d_width = _validate_width("denominator_width", denominator_width)
     fraction = _validate_fractional_bits(fractional_bits)
@@ -243,7 +280,16 @@ def compile_unsigned_floor_divide(
     zero_result: int = 0,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile unsigned floor division using a bit-level restoring circuit."""
+    """Compile unsigned floor division using a bit-level restoring circuit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.binary_division import compile_unsigned_floor_divide
+        
+        circuit = compile_unsigned_floor_divide(numerator_width=4, denominator_width=4)
+        print(circuit.encrypt_run_decrypt(10, 3))  # 3
+        ```
+    """
     n_width = _validate_width("numerator_width", numerator_width)
     d_width = _validate_width("denominator_width", denominator_width)
     function = make_unsigned_floor_divide(
@@ -269,7 +315,16 @@ def compile_fixed_point_divide(
     zero_result: int = 0,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile fixed-point unsigned division using a bit-level circuit."""
+    """Compile fixed-point unsigned division using a bit-level circuit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.binary_division import compile_fixed_point_divide
+        
+        circuit = compile_fixed_point_divide(4, 4, fractional_bits=2)
+        print(circuit.encrypt_run_decrypt(5, 2))  # floor((5 << 2) / 2) = 10
+        ```
+    """
     n_width = _validate_width("numerator_width", numerator_width)
     d_width = _validate_width("denominator_width", denominator_width)
     function = make_fixed_point_divide(
@@ -297,6 +352,15 @@ def unsigned_mod_bits(
 
     The remainder always fits in the denominator's bit width. Division by
     zero returns the clear fallback encoded by ``zero_result``.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.binary_division import unsigned_mod_bits
+        
+        num_bits = [1, 0, 1]  # 5
+        den_bits = [0, 1]     # 2
+        # Use `unsigned_mod_bits(num_bits, den_bits)` inside an FHE program compilation
+        ```
     """
     numerator = _as_nonempty_bits("numerator_bits", numerator_bits)
     denominator = _as_nonempty_bits("denominator_bits", denominator_bits)
@@ -318,7 +382,16 @@ def make_unsigned_mod(
     *,
     zero_result: int = 0,
 ) -> Any:
-    """Create unsigned encrypted modulo from scalar integer inputs."""
+    """Create unsigned encrypted modulo from scalar integer inputs.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.binary_division import make_unsigned_mod
+        
+        mod_fn = make_unsigned_mod(numerator_width=4, denominator_width=4)
+        # Use `mod_fn(num, den)` inside an FHE program compilation
+        ```
+    """
     n_width = _validate_width("numerator_width", numerator_width)
     d_width = _validate_width("denominator_width", denominator_width)
     zero = _validate_zero_result(zero_result, d_width)
@@ -343,7 +416,16 @@ def compile_unsigned_mod(
     zero_result: int = 0,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile unsigned modulo using the bit-level restoring circuit."""
+    """Compile unsigned modulo using the bit-level restoring circuit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.binary_division import compile_unsigned_mod
+        
+        circuit = compile_unsigned_mod(numerator_width=4, denominator_width=4)
+        print(circuit.encrypt_run_decrypt(10, 3))  # 1
+        ```
+    """
     n_width = _validate_width("numerator_width", numerator_width)
     d_width = _validate_width("denominator_width", denominator_width)
     function = make_unsigned_mod(

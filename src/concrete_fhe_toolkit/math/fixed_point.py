@@ -56,7 +56,16 @@ def make_floor(
     *,
     scale: int = 10,
 ) -> UnaryFunction:
-    """Create floor(value / scale) for encrypted scaled integers."""
+    """Create floor(value / scale) for encrypted scaled integers.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import make_floor
+        
+        floor_fn = make_floor(min_input=0, max_input=50, scale=10)
+        # Use `floor_fn(value)` inside an FHE program compilation
+        ```
+    """
     values = _scaled_values(min_input, max_input, scale, "floor")
     return make_unary_lookup(values, min_input)
 
@@ -69,7 +78,16 @@ def compile_floor(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile floor(value / scale) for encrypted scaled integers."""
+    """Compile floor(value / scale) for encrypted scaled integers.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import compile_floor
+        
+        circuit = compile_floor(min_input=0, max_input=50, scale=10)
+        print(circuit.encrypt_run_decrypt(25))  # 2
+        ```
+    """
     values = _scaled_values(min_input, max_input, scale, "floor")
     return compile_unary_lookup(
         "compile_floor",
@@ -87,7 +105,16 @@ def make_ceil(
     *,
     scale: int = 10,
 ) -> UnaryFunction:
-    """Create ceil(value / scale) for encrypted scaled integers."""
+    """Create ceil(value / scale) for encrypted scaled integers.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import make_ceil
+        
+        ceil_fn = make_ceil(min_input=0, max_input=50, scale=10)
+        # Use `ceil_fn(value)` inside an FHE program compilation
+        ```
+    """
     values = _scaled_values(min_input, max_input, scale, "ceil")
     return make_unary_lookup(values, min_input)
 
@@ -100,7 +127,16 @@ def compile_ceil(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile ceil(value / scale) for encrypted scaled integers."""
+    """Compile ceil(value / scale) for encrypted scaled integers.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import compile_ceil
+        
+        circuit = compile_ceil(min_input=0, max_input=50, scale=10)
+        print(circuit.encrypt_run_decrypt(25))  # 3
+        ```
+    """
     values = _scaled_values(min_input, max_input, scale, "ceil")
     return compile_unary_lookup(
         "compile_ceil",
@@ -118,7 +154,16 @@ def make_trunc(
     *,
     scale: int = 10,
 ) -> UnaryFunction:
-    """Create trunc(value / scale) toward zero for encrypted scaled integers."""
+    """Create trunc(value / scale) toward zero for encrypted scaled integers.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import make_trunc
+        
+        trunc_fn = make_trunc(min_input=-50, max_input=50, scale=10)
+        # Use `trunc_fn(value)` inside an FHE program compilation
+        ```
+    """
     values = _scaled_values(min_input, max_input, scale, "trunc")
     return make_unary_lookup(values, min_input)
 
@@ -131,7 +176,16 @@ def compile_trunc(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile trunc(value / scale) toward zero for encrypted scaled integers."""
+    """Compile trunc(value / scale) toward zero for encrypted scaled integers.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import compile_trunc
+        
+        circuit = compile_trunc(min_input=-50, max_input=50, scale=10)
+        print(circuit.encrypt_run_decrypt(-25))  # -2
+        ```
+    """
     values = _scaled_values(min_input, max_input, scale, "trunc")
     return compile_unary_lookup(
         "compile_trunc",
@@ -149,7 +203,16 @@ def make_round(
     *,
     scale: int = 10,
 ) -> UnaryFunction:
-    """Create round(value / scale) using Python's ties-to-even rule."""
+    """Create round(value / scale) using Python's ties-to-even rule.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import make_round
+        
+        round_fn = make_round(min_input=0, max_input=50, scale=10)
+        # Use `round_fn(value)` inside an FHE program compilation
+        ```
+    """
     values = _scaled_values(min_input, max_input, scale, "nearest")
     return make_unary_lookup(values, min_input)
 
@@ -162,7 +225,16 @@ def compile_round(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile round(value / scale) using Python's ties-to-even rule."""
+    """Compile round(value / scale) using Python's ties-to-even rule.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import compile_round
+        
+        circuit = compile_round(min_input=0, max_input=50, scale=10)
+        print(circuit.encrypt_run_decrypt(25))  # 2 (ties-to-even)
+        ```
+    """
     values = _scaled_values(min_input, max_input, scale, "nearest")
     return compile_unary_lookup(
         "compile_round",
@@ -180,7 +252,16 @@ def make_floor_ceil(
     *,
     scale: int = 10,
 ) -> UnaryFunction:
-    """Create a function returning both floor and ceil for a scaled integer."""
+    """Create a function returning both floor and ceil for a scaled integer.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import make_floor_ceil
+        
+        floor_ceil_fn = make_floor_ceil(min_input=0, max_input=50, scale=10)
+        # Use `floor_ceil_fn(value)` inside an FHE program compilation
+        ```
+    """
     floor_values = _scaled_values(min_input, max_input, scale, "floor")
     ceil_values = _scaled_values(min_input, max_input, scale, "ceil")
     floor_lookup = make_unary_lookup(floor_values, min_input)
@@ -200,7 +281,16 @@ def compile_floor_ceil(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a circuit returning both floor and ceil for a scaled integer."""
+    """Compile a circuit returning both floor and ceil for a scaled integer.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import compile_floor_ceil
+        
+        circuit = compile_floor_ceil(min_input=0, max_input=50, scale=10)
+        print(circuit.encrypt_run_decrypt(25))  # (2, 3)
+        ```
+    """
     floor_values = _scaled_values(min_input, max_input, scale, "floor")
     ceil_values = _scaled_values(min_input, max_input, scale, "ceil")
     check_lookup_cost(
@@ -231,7 +321,16 @@ def make_rescale(
     output_scale: int,
     rounding: RoundingMode = "nearest",
 ) -> UnaryFunction:
-    """Create rescaling from one fixed-point scale to another."""
+    """Create rescaling from one fixed-point scale to another.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import make_rescale
+        
+        rescale_fn = make_rescale(0, 100, input_scale=10, output_scale=100)
+        # Use `rescale_fn(value)` inside an FHE program compilation
+        ```
+    """
     input_minimum, input_maximum = validate_bounds(min_input, max_input)
     source = _validate_scale("input_scale", input_scale)
     target = _validate_scale("output_scale", output_scale)
@@ -253,7 +352,16 @@ def compile_rescale(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile rescaling from one fixed-point scale to another."""
+    """Compile rescaling from one fixed-point scale to another.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import compile_rescale
+        
+        circuit = compile_rescale(0, 100, input_scale=10, output_scale=100)
+        print(circuit.encrypt_run_decrypt(50))  # 500
+        ```
+    """
     input_minimum, input_maximum = validate_bounds(min_input, max_input)
     source = _validate_scale("input_scale", input_scale)
     target = _validate_scale("output_scale", output_scale)
@@ -279,7 +387,16 @@ def make_round_to_multiple(
     *,
     rounding: RoundingMode = "nearest",
 ) -> UnaryFunction:
-    """Create quantization of an encrypted integer to the nearest multiple of step."""
+    """Create quantization of an encrypted integer to the nearest multiple of step.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import make_round_to_multiple
+        
+        quantize_fn = make_round_to_multiple(0, 100, step=5)
+        # Use `quantize_fn(value)` inside an FHE program compilation
+        ```
+    """
     minimum, maximum = validate_bounds(min_input, max_input)
     normalized_step = validate_integer("step", step)
     if normalized_step < 1:
@@ -302,7 +419,16 @@ def compile_round_to_multiple(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile quantization of an encrypted integer to the nearest multiple of step."""
+    """Compile quantization of an encrypted integer to the nearest multiple of step.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import compile_round_to_multiple
+        
+        circuit = compile_round_to_multiple(0, 100, step=5)
+        print(circuit.encrypt_run_decrypt(12))  # 10
+        ```
+    """
     minimum, maximum = validate_bounds(min_input, max_input)
     normalized_step = validate_integer("step", step)
     if normalized_step < 1:
@@ -334,6 +460,14 @@ def make_modf(
     The integer part truncates toward zero; the fractional part keeps the
     input's sign and stays at the input scale (e.g. -37 with scale=10
     yields (-7, -3)).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import make_modf
+        
+        modf_fn = make_modf(-50, 50, scale=10)
+        # Use `modf_fn(value)` inside an FHE program compilation
+        ```
     """
     minimum, maximum = validate_bounds(min_input, max_input)
     normalized_scale = _validate_scale("scale", scale)
@@ -359,7 +493,16 @@ def compile_modf(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a circuit returning (fractional_part, integer_part) like math.modf."""
+    """Compile a circuit returning (fractional_part, integer_part) like math.modf.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import compile_modf
+        
+        circuit = compile_modf(-50, 50, scale=10)
+        print(circuit.encrypt_run_decrypt(-37))  # (-7, -3)
+        ```
+    """
     minimum, maximum = validate_bounds(min_input, max_input)
     normalized_scale = _validate_scale("scale", scale)
     integer_values = _scaled_values(minimum, maximum, normalized_scale, "trunc")
@@ -398,6 +541,14 @@ def make_fixed_point_multiply(
     Computes ``(left * right) / scale`` so that two inputs at the same
     fixed-point scale produce an output at that scale. This is the missing
     primitive for chaining fixed-point math without scale growth.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import make_fixed_point_multiply
+        
+        mul_fn = make_fixed_point_multiply(scale=10)
+        # Use `mul_fn(left, right)` inside an FHE program compilation
+        ```
     """
     normalized_scale = _validate_scale("scale", scale)
     if rounding == "floor":
@@ -423,7 +574,16 @@ def compile_fixed_point_multiply(
     rounding: RoundingMode = "floor",
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile rescaled multiplication of two scaled encrypted values."""
+    """Compile rescaled multiplication of two scaled encrypted values.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import compile_fixed_point_multiply
+        
+        circuit = compile_fixed_point_multiply(0, 50, scale=10)
+        print(circuit.encrypt_run_decrypt(20, 15))  # (2.0 * 1.5) = 30
+        ```
+    """
     minimum, maximum = validate_bounds(min_input, max_input)
     function = make_fixed_point_multiply(scale=scale, rounding=rounding)
     inputset = [
@@ -441,12 +601,28 @@ def compile_fixed_point_multiply(
 
 
 def encode_fixed_point(value: float, scale: int) -> int:
-    """Encode a clear real value as a scaled integer for circuit inputs."""
+    """Encode a clear real value as a scaled integer for circuit inputs.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import encode_fixed_point
+        
+        print(encode_fixed_point(2.5, scale=10))  # 25
+        ```
+    """
     normalized_scale = _validate_scale("scale", scale)
     return int(round(value * normalized_scale))
 
 
 def decode_fixed_point(value: Any, scale: int) -> float:
-    """Decode a decrypted scaled integer back to its real value."""
+    """Decode a decrypted scaled integer back to its real value.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.fixed_point import decode_fixed_point
+        
+        print(decode_fixed_point(25, scale=10))  # 2.5
+        ```
+    """
     normalized_scale = _validate_scale("scale", scale)
     return value / normalized_scale

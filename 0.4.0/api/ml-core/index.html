@@ -1881,7 +1881,19 @@
     <div class="doc doc-contents ">
 
         <p>Calculate the Manhattan (L1) distance between two encrypted arrays.</p>
+<p>This is often used as a robust distance metric for clustering or
+k-nearest neighbor algorithms under encryption, since it avoids 
+the expensive squaring operations required by Euclidean distance.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">manhattan_distance</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># dist = manhattan_distance([enc_x1, enc_y1], [enc_x2, enc_y2])</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
@@ -1890,8 +1902,34 @@
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">manhattan_distance</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the Manhattan (L1) distance between two encrypted arrays."""</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">manhattan_distance</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the Manhattan (L1) distance between two encrypted arrays.</span>
+
+<span class="sd">    This is often used as a robust distance metric for clustering or</span>
+<span class="sd">    k-nearest neighbor algorithms under encryption, since it avoids </span>
+<span class="sd">    the expensive squaring operations required by Euclidean distance.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import manhattan_distance</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # dist = manhattan_distance([enc_x1, enc_y1], [enc_x2, enc_y2])</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array2</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The array sizes must be equal"</span><span class="p">)</span>
     <span class="n">diffs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span><span class="n">array2</span><span class="p">)]</span>
@@ -1916,20 +1954,55 @@
     <div class="doc doc-contents ">
 
         <p>Calculate the Hamming distance (number of mismatches) between two encrypted arrays.</p>
+<p>This is useful for comparing binary feature vectors or categorical data, 
+measuring the number of positions where the two arrays differ.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">hamming_distance</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># dist = hamming_distance([enc_a1, enc_b1], [enc_a2, enc_b2])</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hamming_distance</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the Hamming distance (number of mismatches) between two encrypted arrays."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hamming_distance</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the Hamming distance (number of mismatches) between two encrypted arrays.</span>
+
+<span class="sd">    This is useful for comparing binary feature vectors or categorical data, </span>
+<span class="sd">    measuring the number of positions where the two arrays differ.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import hamming_distance</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # dist = hamming_distance([enc_a1, enc_b1], [enc_a2, enc_b2])</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array2</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The array sizes must be equal"</span><span class="p">)</span>
     <span class="n">distance</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1957,17 +2030,52 @@
     <div class="doc doc-contents ">
 
         <p>Calculate the squared Euclidean (L2) distance between two encrypted arrays.</p>
+<p>Often used in k-means clustering or RBF kernels. Using the squared 
+distance avoids the need for an expensive square root operation.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">euclidean_distance_squared</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># dist_sq = euclidean_distance_squared(enc_point_1, enc_point_2)</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">euclidean_distance_squared</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the squared Euclidean (L2) distance between two encrypted arrays."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">euclidean_distance_squared</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the squared Euclidean (L2) distance between two encrypted arrays.</span>
+
+<span class="sd">    Often used in k-means clustering or RBF kernels. Using the squared </span>
+<span class="sd">    distance avoids the need for an expensive square root operation.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import euclidean_distance_squared</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # dist_sq = euclidean_distance_squared(enc_point_1, enc_point_2)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array2</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The array sizes must be equal"</span><span class="p">)</span>
     <span class="n">diffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span><span class="n">array2</span><span class="p">)]</span>
@@ -1992,16 +2100,54 @@
     <div class="doc doc-contents ">
 
         <p>Calculate the Mean Squared Error (MSE) between two encrypted arrays.</p>
+<p>A standard metric for regression tasks. It measures the average 
+of the squares of the errors (the difference between estimated values 
+and the actual value).</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># mse = mean_squared_error(enc_predictions, enc_true_values)</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mean_squared_error</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the Mean Squared Error (MSE) between two encrypted arrays."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mean_squared_error</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the Mean Squared Error (MSE) between two encrypted arrays.</span>
+
+<span class="sd">    A standard metric for regression tasks. It measures the average </span>
+<span class="sd">    of the squares of the errors (the difference between estimated values </span>
+<span class="sd">    and the actual value).</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import mean_squared_error</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # mse = mean_squared_error(enc_predictions, enc_true_values)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array2</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The array sizes must be equal"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">euclidean_distance_squared</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span><span class="n">array2</span><span class="p">)</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
@@ -2025,15 +2171,47 @@
     <div class="doc doc-contents ">
 
         <p>Calculate the Mean Absolute Error (MAE) between predictions and true values.</p>
+<p>A robust alternative to MSE that is less sensitive to outliers.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_absolute_error</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># mae = mean_absolute_error(enc_predictions, enc_true_values)</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mean_absolute_error</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the Mean Absolute Error (MAE) between predictions and true values."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mean_absolute_error</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the Mean Absolute Error (MAE) between predictions and true values.</span>
+
+<span class="sd">    A robust alternative to MSE that is less sensitive to outliers.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import mean_absolute_error</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # mae = mean_absolute_error(enc_predictions, enc_true_values)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">distance</span> <span class="o">=</span> <span class="n">manhattan_distance</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_trues</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">distance</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_trues</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -2056,21 +2234,56 @@
     <div class="doc doc-contents ">
 
         <p>Calculate the percentage accuracy score between predictions and true labels.</p>
+<p>Returns an integer percentage [0, 100]. Useful for evaluating 
+classification models directly on encrypted data.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># acc_pct = accuracy_score(enc_predictions, enc_labels)</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">accuracy_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the percentage accuracy score between predictions and true labels."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">accuracy_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the percentage accuracy score between predictions and true labels.</span>
+
+<span class="sd">    Returns an integer percentage [0, 100]. Useful for evaluating </span>
+<span class="sd">    classification models directly on encrypted data.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import accuracy_score</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # acc_pct = accuracy_score(enc_predictions, enc_labels)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_preds</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_trues</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The array sizes must be equal"</span><span class="p">)</span>
     <span class="n">true_predictions</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2099,21 +2312,56 @@
     <div class="doc doc-contents ">
 
         <p>Calculate the number of True Positives in binary classification.</p>
+<p>Assuming 1 is positive and 0 is negative, this counts instances 
+where both the prediction and the true label are 1.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">true_positives</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># tp = true_positives(enc_binary_preds, enc_binary_labels)</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">true_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the number of True Positives in binary classification."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">true_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the number of True Positives in binary classification.</span>
+
+<span class="sd">    Assuming 1 is positive and 0 is negative, this counts instances </span>
+<span class="sd">    where both the prediction and the true label are 1.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import true_positives</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # tp = true_positives(enc_binary_preds, enc_binary_labels)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_preds</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_trues</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The array sizes must be equal"</span><span class="p">)</span>
     <span class="n">num_of_true_positives</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2142,20 +2390,55 @@
     <div class="doc doc-contents ">
 
         <p>Calculate the number of True Negatives in binary classification.</p>
+<p>Assuming 1 is positive and 0 is negative, this counts instances 
+where both the prediction and the true label are 0.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">true_negatives</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># tn = true_negatives(enc_binary_preds, enc_binary_labels)</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">true_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the number of True Negatives in binary classification."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">true_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the number of True Negatives in binary classification.</span>
+
+<span class="sd">    Assuming 1 is positive and 0 is negative, this counts instances </span>
+<span class="sd">    where both the prediction and the true label are 0.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import true_negatives</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # tn = true_negatives(enc_binary_preds, enc_binary_labels)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_preds</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_trues</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The array sizes must be equal"</span><span class="p">)</span>
     <span class="n">num_of_true_negatives</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2185,13 +2468,40 @@
         <p>Calculate the number of False Negatives in binary classification.</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">false_negatives</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># fn = false_negatives(enc_binary_preds, enc_binary_labels)</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">false_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the number of False Negatives in binary classification."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">false_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the number of False Negatives in binary classification.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import false_negatives</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # fn = false_negatives(enc_binary_preds, enc_binary_labels)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">num_of_positives</span> <span class="o">=</span> <span class="n">array_sum</span><span class="p">(</span><span class="n">y_trues</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">num_of_positives</span> <span class="o">-</span> <span class="n">true_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="n">y_trues</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -2216,13 +2526,40 @@
         <p>Calculate the number of False Positives in binary classification.</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">false_positives</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># fp = false_positives(enc_binary_preds, enc_binary_labels)</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">false_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the number of False Positives in binary classification."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">false_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the number of False Positives in binary classification.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import false_positives</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # fp = false_positives(enc_binary_preds, enc_binary_labels)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">num_of_negatives</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_trues</span><span class="p">)</span> <span class="o">-</span> <span class="n">array_sum</span><span class="p">(</span><span class="n">y_trues</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">num_of_negatives</span> <span class="o">-</span> <span class="n">true_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="n">y_trues</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -2245,18 +2582,59 @@
     <div class="doc doc-contents ">
 
         <p>Generate a confusion matrix [[TN, FP], [FN, TP]] for binary classification.</p>
+<p>This is extremely useful for calculating various ML metrics (like precision, 
+recall, F1) securely over encrypted predictions.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># matrix = confusion_matrix(enc_binary_preds, enc_binary_labels)</span>
+<span class="c1"># tn, fp = matrix[0]</span>
+<span class="c1"># fn, tp = matrix[1]</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">confusion_matrix</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Generate a confusion matrix [[TN, FP], [FN, TP]] for binary classification."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">confusion_matrix</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Generate a confusion matrix [[TN, FP], [FN, TP]] for binary classification.</span>
+
+<span class="sd">    This is extremely useful for calculating various ML metrics (like precision, </span>
+<span class="sd">    recall, F1) securely over encrypted predictions.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import confusion_matrix</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # matrix = confusion_matrix(enc_binary_preds, enc_binary_labels)</span>
+<span class="sd">        # tn, fp = matrix[0]</span>
+<span class="sd">        # fn, tp = matrix[1]</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">true_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_trues</span><span class="p">)</span>
     <span class="n">tn</span> <span class="o">=</span> <span class="n">true_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_trues</span><span class="p">)</span>
     <span class="n">fn</span> <span class="o">=</span> <span class="n">false_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span><span class="n">y_trues</span><span class="p">)</span>
@@ -2282,14 +2660,49 @@
     <div class="doc doc-contents ">
 
         <p>Calculate the encrypted Hinge Loss for a single prediction and true value.</p>
+<p>Hinge loss is commonly used for "maximum-margin" classification, most 
+notably for Support Vector Machines (SVMs). The true label should be +1 or -1.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">hinge_loss</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># loss = hinge_loss(enc_pred_score, enc_true_label)</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">97</span>
-<span class="normal">98</span>
-<span class="normal">99</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hinge_loss</span><span class="p">(</span><span class="n">y_pred</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the encrypted Hinge Loss for a single prediction and true value."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hinge_loss</span><span class="p">(</span><span class="n">y_pred</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the encrypted Hinge Loss for a single prediction and true value.</span>
+
+<span class="sd">    Hinge loss is commonly used for "maximum-margin" classification, most </span>
+<span class="sd">    notably for Support Vector Machines (SVMs). The true label should be +1 or -1.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import hinge_loss</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # loss = hinge_loss(enc_pred_score, enc_true_label)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">y_true</span><span class="o">*</span><span class="n">y_pred</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2311,35 +2724,70 @@
     <div class="doc doc-contents ">
 
         <p>Compile encrypted hinge loss.</p>
+<p>Compiles the <code>hinge_loss</code> function into an FHE circuit so that loss 
+can be evaluated completely obliviously.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_hinge_loss</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_hinge_loss</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Calculates max(0, 1 - (y_true * y_pred)) under encryption</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_hinge_loss</span><span class="p">(</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_hinge_loss</span><span class="p">(</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile encrypted hinge loss."""</span>
+<span class="w">    </span><span class="sd">"""Compile encrypted hinge loss.</span>
+
+<span class="sd">    Compiles the `hinge_loss` function into an FHE circuit so that loss </span>
+<span class="sd">    can be evaluated completely obliviously.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import compile_hinge_loss</span>
+
+<span class="sd">        circuit = compile_hinge_loss(min_value=-10, max_value=10)</span>
+<span class="sd">        # Calculates max(0, 1 - (y_true * y_pred)) under encryption</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">minimum_val</span><span class="p">,</span> <span class="n">maximum_val</span> <span class="o">=</span> <span class="n">validate_bounds</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">compile_function</span><span class="p">(</span>
         <span class="n">hinge_loss</span><span class="p">,</span>
@@ -2377,24 +2825,49 @@ cost grows with the count range, so keep sample counts small when this
 runs under encryption (it is cheap on decrypted predictions).</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">precision_score</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># precision_pct = precision_score(enc_binary_preds, enc_binary_labels)</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">precision_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">precision_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.</span>
 
 <span class="sd">    The encrypted-by-encrypted division uses a multivariate lookup whose</span>
 <span class="sd">    cost grows with the count range, so keep sample counts small when this</span>
 <span class="sd">    runs under encryption (it is cheap on decrypted predictions).</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import precision_score</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # precision_pct = precision_score(enc_binary_preds, enc_binary_labels)</span>
+<span class="sd">        ```</span>
 <span class="sd">    """</span>
     <span class="n">divide</span> <span class="o">=</span> <span class="n">make_floor_divide</span><span class="p">(</span><span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">true_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="n">y_trues</span><span class="p">)</span>
@@ -2422,15 +2895,42 @@ runs under encryption (it is cheap on decrypted predictions).</p>
         <p>Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels.</p>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">recall_score</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># recall_pct = recall_score(enc_binary_preds, enc_binary_labels)</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">recall_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">recall_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import recall_score</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # recall_pct = recall_score(enc_binary_preds, enc_binary_labels)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">divide</span> <span class="o">=</span> <span class="n">make_floor_divide</span><span class="p">(</span><span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">true_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="n">y_trues</span><span class="p">)</span>
     <span class="n">fn</span> <span class="o">=</span> <span class="n">false_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="n">y_trues</span><span class="p">)</span>
@@ -2455,17 +2955,52 @@ runs under encryption (it is cheap on decrypted predictions).</p>
     <div class="doc doc-contents ">
 
         <p>Integer percent F1: 2 * P * R // (P + R), 0 when both are 0.</p>
+<p>Calculates the harmonic mean of precision and recall. Since it relies on 
+encrypted division, keeping sample sizes small is recommended.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">f1_score</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># f1_pct = f1_score(enc_binary_preds, enc_binary_labels)</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">f1_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Integer percent F1: 2 * P * R // (P + R), 0 when both are 0."""</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">f1_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Integer percent F1: 2 * P * R // (P + R), 0 when both are 0.</span>
+
+<span class="sd">    Calculates the harmonic mean of precision and recall. Since it relies on </span>
+<span class="sd">    encrypted division, keeping sample sizes small is recommended.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.core import f1_score</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # f1_pct = f1_score(enc_binary_preds, enc_binary_labels)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">divide</span> <span class="o">=</span> <span class="n">make_floor_divide</span><span class="p">(</span><span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">precision</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="n">y_trues</span><span class="p">)</span>
     <span class="n">recall</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">,</span> <span class="n">y_trues</span><span class="p">)</span>

@@ -1548,8 +1548,22 @@
 
     <div class="doc doc-contents ">
 
-        <p>Transfers an amount from one account to another.</p>
+        <p>Transfers an amount from one account to another securely under encryption.</p>
+<p>If the sender has insufficient balance (sender_balance &lt; amount), the 
+transfer is silently cancelled (amount becomes 0) without leaking 
+information about the failure.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.finance.transactions</span><span class="w"> </span><span class="kn">import</span> <span class="n">transfer</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># enc_new_sender_bal, enc_new_receiver_bal = transfer(</span>
+<span class="c1">#     enc_sender_bal, enc_receiver_bal, enc_transfer_amount</span>
+<span class="c1"># )</span>
+</code></pre></div>
+</details>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/finance/transactions.py</code></summary>
@@ -1560,8 +1574,38 @@
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">transfer</span><span class="p">(</span><span class="n">sender_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">receiver_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span><span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Transfers an amount from one account to another."""</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">transfer</span><span class="p">(</span><span class="n">sender_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">receiver_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Transfers an amount from one account to another securely under encryption.</span>
+
+<span class="sd">    If the sender has insufficient balance (sender_balance &lt; amount), the </span>
+<span class="sd">    transfer is silently cancelled (amount becomes 0) without leaking </span>
+<span class="sd">    information about the failure.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.finance.transactions import transfer</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # enc_new_sender_bal, enc_new_receiver_bal = transfer(</span>
+<span class="sd">        #     enc_sender_bal, enc_receiver_bal, enc_transfer_amount</span>
+<span class="sd">        # )</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
     <span class="n">is_balance_enough</span> <span class="o">=</span> <span class="n">greater_equal</span><span class="p">(</span><span class="n">sender_balance</span><span class="p">,</span><span class="n">amount</span><span class="p">)</span>
     <span class="n">amount</span> <span class="o">*=</span> <span class="n">is_balance_enough</span> 
     <span class="n">sender_balance</span> <span class="o">-=</span> <span class="n">amount</span>

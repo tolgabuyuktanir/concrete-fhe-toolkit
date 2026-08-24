@@ -1,7 +1,6 @@
 from typing import Any, List
 
 from concrete_fhe_toolkit.arrays import array_sum, array_multiply
-import math as python_math
 
 
 def matrix_transpose(matrix: List[List[Any]]) -> List[List[Any]]:

@@ -38,7 +38,7 @@ from .core import (
     true_positives,
     l1_norm,
 )
-from .matrix import dot_product, matrix_add, matrix_transpose, matrix_subtract, matrix_multiply, matrix_vector_multiply, tensor_flatten, matrix_elementwise_multiply
+from .matrix import dot_product, matrix_add, matrix_transpose, matrix_subtract, matrix_multiply, matrix_vector_multiply, tensor_flatten, matrix_elementwise_multiply, matrix_exp, covariance_matrix
 from .models import (
     argmax_inference,
     cnn_inference,
@@ -135,4 +135,6 @@ __all__ = [
     "tensor_flatten",
     "l1_norm",
     "matrix_elementwise_multiply",
+    "matrix_exp",
+    "covariance_matrix",
 ]

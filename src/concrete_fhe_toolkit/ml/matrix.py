@@ -1,6 +1,7 @@
 from typing import Any, List
 
 from concrete_fhe_toolkit.arrays import array_sum, array_multiply
+import math as python_math
 
 
 def matrix_transpose(matrix: List[List[Any]]) -> List[List[Any]]:
@@ -160,7 +161,95 @@ def matrix_vector_multiply(matrix: List[List[Any]], array: List[Any]) -> List[An
     for i in range(len(matrix)):
         result_vector.append(dot_product(matrix[i],array))
 
-    return result_vector        
+    return result_vector       
+
+def matrix_exp(matrix: List[List[Any]], exponent: int) -> List[List[Any]]:
+    """Calculate the power of an encrypted square matrix.
+    
+    This uses the highly efficient Square-and-Multiply (Binary Exponentiation)
+    algorithm to reduce the number of FHE matrix multiplications required.
+    
+    Args:
+        matrix: The square encrypted matrix.
+        exponent: The public integer exponent to raise the matrix to.
+        
+    Returns:
+        The exponentiated encrypted matrix.
+        
+    Raises:
+        ValueError: If the matrix is not square or the exponent is negative.
+        
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.matrix import matrix_exp
+        
+        # Inside an FHE circuit
+        # M_cubed = matrix_exp(enc_matrix, 3)
+        ```
+    """
+    if len(matrix) != len(matrix[0]):
+        raise ValueError("Matrix should be square matrix for the exponentiation")
+
+    result_matrix = []
+    for i in range(len(matrix)):
+        row = []
+        for j in range(len(matrix[i])):
+            row.append(1 if i==j else 0)
+        result_matrix.append(row)
+
+    if exponent < 0:
+        raise ValueError("The exponent cannot be negative")
+    
+    elif exponent == 0:
+        return result_matrix   
+    
+    base = matrix
+    while exponent > 0:
+        if exponent % 2 == 1:
+            result_matrix = matrix_multiply(result_matrix, base)
+        base = matrix_multiply(base, base)
+        exponent = exponent // 2
+        
+    return result_matrix
+ 
+def covariance_matrix(matrix: List[List[Any]]) -> List[List[Any]]:
+    """Calculate the covariance matrix of an encrypted 2D dataset.
+    
+    The dataset should have observations as rows and features as columns.
+    Uses integer division to center the data, maintaining the FHE pipeline.
+    
+    Args:
+        matrix: The encrypted 2D dataset (N observations x M features).
+        
+    Returns:
+        The M x M encrypted covariance matrix.
+        
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.matrix import covariance_matrix
+        
+        # Inside an FHE circuit
+        # cov = covariance_matrix(enc_dataset)
+        ```
+    """
+    transpose_matrix = matrix_transpose(matrix)
+    means = [array_sum(row) // len(row) for row in transpose_matrix]
+
+    cov_matrix = []
+    for i in range(len(matrix)):
+        row = []
+        for j in range(len(matrix[0])):
+            row.append(matrix[i][j] - means[j])
+        cov_matrix.append(row)
+
+    cov_matrix = matrix_multiply(transpose_matrix,cov_matrix)
+
+    for i in range(len(cov_matrix)):
+        for j in range(len(cov_matrix[0])):
+            cov_matrix[i][j] = cov_matrix[i][j] // (len(matrix) - 1)
+   
+    return cov_matrix            
+
 
 def matrix_flatten(matrix: List[List[Any]]) -> List[Any]: 
     """Flatten a 2D encrypted matrix into a 1D encrypted array.

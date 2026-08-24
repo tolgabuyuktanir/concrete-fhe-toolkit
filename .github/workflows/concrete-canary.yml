@@ -29,11 +29,11 @@ jobs:
       - name: Install latest concrete-python (ignoring our pins)
         run: |
           python -m pip install --upgrade pip
-          pip install pytest "setuptools<70"
+          pip install pytest "setuptools<81"
           if [ "${{ matrix.concrete }}" = "pre" ]; then
-            pip install --upgrade --pre concrete-python
+            pip install --upgrade --pre concrete-python "setuptools<81"
           else
-            pip install --upgrade concrete-python
+            pip install --upgrade concrete-python "setuptools<81"
           fi
           # Install the toolkit without letting our own pins downgrade concrete.
           pip install -e . --no-deps

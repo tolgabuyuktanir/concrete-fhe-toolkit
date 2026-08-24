@@ -17,7 +17,18 @@ from .matrix import dot_product, matrix_vector_multiply, matrix_flatten
 
 
 def linear_regression_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
-    """Evaluate a linear regression model (dot product of weights and features plus bias)."""
+    """Evaluate a linear regression model (dot product of weights and features plus bias).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import linear_regression_inference
+        
+        # Inside an FHE circuit
+        # prediction = linear_regression_inference(
+        #     weights=[2, -1], bias=5, features=[enc_f1, enc_f2]
+        # )
+        ```
+    """
     product = dot_product(weights, features)
     return bias + product
 
@@ -37,6 +48,16 @@ def logistic_regression_inference(
     probability at 0.5, so no sigmoid lookup is needed for classification.
     Scale weights, bias, and features to integers with the same factor
     before calling.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import logistic_regression_inference
+        
+        # Inside an FHE circuit
+        # class_pred = logistic_regression_inference(
+        #     weights=[3, 1], bias=-10, features=[enc_f1, enc_f2], threshold=0
+        # )
+        ```
     """
     score = linear_regression_inference(weights, bias, features)
     return threshold_activation(score, threshold)
@@ -47,13 +68,30 @@ def decision_tree_node(feature_val: Any, threshold: Any, left_branch: Any, right
 
     Returns ``left_branch`` when ``feature_val >= threshold``, otherwise
     ``right_branch``. Branch values may be arbitrary bounded integers.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import decision_tree_node
+        
+        # Inside an FHE circuit
+        # out = decision_tree_node(enc_feature, threshold=5, left_branch=1, right_branch=0)
+        ```
     """
     control = greater_equal(feature_val, threshold)
     return select(control, left_branch, right_branch)
 
 
 def majority_votes(predictions: List[Any]) -> Any:
-    """Perform majority voting for an ensemble of binary predictions."""
+    """Perform majority voting for an ensemble of binary predictions.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import majority_votes
+        
+        # Inside an FHE circuit
+        # final_pred = majority_votes([enc_pred1, enc_pred2, enc_pred3])
+        ```
+    """
     sum_predictions = array_sum(predictions)
     return greater(sum_predictions, len(predictions) // 2)
 
@@ -80,6 +118,16 @@ def knn_inference(
 
     The k > 1 path runs k argmin rounds, masking each selected neighbor with
     a distance penalty, so circuit cost grows linearly with ``k``.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import knn_inference
+        
+        # Inside an FHE circuit
+        # label = knn_inference(
+        #     enc_test_sample, public_train_samples, public_train_labels, k=3
+        # )
+        ```
     """
     maximum_distance = validate_integer("max_distance", max_distance, minimum=1)
     normalized_k = validate_integer("k", k, minimum=1)
@@ -137,6 +185,20 @@ def decision_tree_inference(features: List[Any], tree: Any) -> Any:
 
     Every path of the tree is evaluated obliviously, so the visited path is
     never revealed — circuit cost grows with the total number of nodes.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import decision_tree_inference
+        
+        # Public tree definition (trained offline)
+        tree = {
+            "feature": 0, "threshold": 5, 
+            "left": 1, "right": 0
+        }
+        
+        # Inside an FHE circuit
+        # label = decision_tree_inference(enc_features, tree)
+        ```
     """
     if not isinstance(tree, dict):
         return validate_integer("leaf value", tree)
@@ -164,7 +226,16 @@ def compile_decision_tree_node(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a single encrypted decision tree node."""
+    """Compile a single encrypted decision tree node.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import compile_decision_tree_node
+        
+        circuit = compile_decision_tree_node(min_value=-10, max_value=10)
+        # Allows evaluating one tree node completely obliviously
+        ```
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(
         decision_tree_node,
@@ -190,6 +261,15 @@ def random_forest_inference(features: List[Any], trees: List[Any]) -> Any:
     Each tree uses the public dict structure accepted by
     :func:`decision_tree_inference`. Use an odd number of trees to avoid
     ties (a tie resolves to 0).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import random_forest_inference
+        
+        # public_trees is a list of tree dictionaries
+        # Inside an FHE circuit
+        # label = random_forest_inference(enc_features, public_trees)
+        ```
     """
     if not trees:
         raise ValueError("trees must contain at least one tree")
@@ -205,6 +285,15 @@ def mlp_inference(features: List[Any], layers: List[Any]) -> List[Any]:
     score vector. Weights, biases, and features must share one integer
     scale; note that every layer multiplies scales together, so keep the
     network shallow or rescale between layers.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import mlp_inference
+        
+        # layers = [(W1, b1), (W2, b2)] where Wi and bi are public lists
+        # Inside an FHE circuit
+        # scores = mlp_inference(enc_features, layers)
+        ```
     """
     if not layers:
         raise ValueError("layers must contain at least one (weights, biases) pair")
@@ -232,6 +321,16 @@ def nearest_centroid_inference(
 
     Returns the centroid index, or the matching label when ``labels`` is
     given. ``max_distance`` must bound the squared distance to any centroid.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import nearest_centroid_inference
+        
+        # Inside an FHE circuit
+        # cluster_idx = nearest_centroid_inference(
+        #     enc_sample, public_centroids, max_distance=100
+        # )
+        ```
     """
     maximum_distance = validate_integer("max_distance", max_distance, minimum=1)
     if not centroids:
@@ -256,7 +355,16 @@ def nearest_centroid_inference(
 
 
 def argmax_inference(scores: List[Any], min_score: int, max_score: int) -> Any:
-    """Return the index of the highest class score (multi-class head)."""
+    """Return the index of the highest class score (multi-class head).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import argmax_inference
+        
+        # Inside an FHE circuit
+        # pred_class = argmax_inference(enc_scores, min_score=0, max_score=50)
+        ```
+    """
     items = list(scores)
     if not items:
         raise ValueError("scores must contain at least one score")
@@ -278,6 +386,16 @@ def naive_bayes_inference(
     holds the scaled log-priors per class. Returns the encrypted index of
     the best class. Score bounds for the final argmax are derived from the
     public tables.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import naive_bayes_inference
+        
+        # Inside an FHE circuit
+        # pred_class = naive_bayes_inference(
+        #     enc_features, public_log_prob_tables, public_priors
+        # )
+        ```
     """
     if len(log_prob_tables) != len(priors):
         raise ValueError("log_prob_tables and priors must have the same length")
@@ -312,6 +430,14 @@ def svm_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
     
     Returns 1 if the sample is on the positive side of the hyperplane,
     -1 if it's on the negative side, and 0 if it lies exactly on the boundary.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import svm_inference
+        
+        # Inside an FHE circuit
+        # sign_pred = svm_inference(public_weights, public_bias, enc_features)
+        ```
     """
     regression_result = linear_regression_inference(weights, bias, features)
     return sign(regression_result)
@@ -326,6 +452,14 @@ def pca_inference(features: List[Any],means: List[Any],components: List[List[Any
 
     Returns:
         The encrypted principal components vector (list of encrypted integers).
+        
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import pca_inference
+        
+        # Inside an FHE circuit
+        # enc_pca_features = pca_inference(enc_features, public_mean, public_components)
+        ```
     """
     diffs = array_sub(features,means)
     return matrix_vector_multiply(components,diffs)
@@ -340,6 +474,14 @@ def xgboost_inference(features: List[Any],trees: List[Any]) -> Any:
 
     Returns:
         The encrypted prediction of the XGBoost classifier.
+        
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import xgboost_inference
+        
+        # Inside an FHE circuit
+        # pred = xgboost_inference(enc_features, public_trees)
+        ```
     """
     tree_sum = 0
     for tree in trees:
@@ -348,6 +490,16 @@ def xgboost_inference(features: List[Any],trees: List[Any]) -> Any:
     return greater(tree_sum,0)
 
 def cnn_inference(filters: List[List[List[Any]]], bias: List[Any], image: List[List[List[Any]]]) -> List[Any]:
+    """Apply a 2D convolutional layer (CNN) to an encrypted image.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import cnn_inference
+        
+        # Inside an FHE circuit
+        # enc_feature_map = cnn_inference(public_filters, public_bias, enc_image)
+        ```
+    """
     feature_map = []
     num_rows = len(filters[0])
     num_columns = len(filters[0][0])
@@ -365,6 +517,16 @@ def cnn_inference(filters: List[List[List[Any]]], bias: List[Any], image: List[L
     return feature_map            
     
 def max_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
+    """Apply 2D max pooling (2x2 kernel, stride 2) to an encrypted feature map.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import max_pooling_2d
+        
+        # Inside an FHE circuit
+        # enc_pooled = max_pooling_2d(enc_image)
+        ```
+    """
     pooling_size = 2
     pooling_values = []
 
@@ -384,6 +546,16 @@ def max_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
     return pooling_values
 
 def avg_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
+    """Apply 2D average pooling (2x2 kernel, stride 2) to an encrypted feature map.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import avg_pooling_2d
+        
+        # Inside an FHE circuit
+        # enc_pooled = avg_pooling_2d(enc_image)
+        ```
+    """
     pooling_size = 2
     pooling_values = []
 
@@ -398,6 +570,17 @@ def avg_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
     return pooling_values    
 
 def auto_quantizer(images: List[List[List[List[Any]]]], filters: List[List[List[Any]]], model: Any, mode: str="optimal") -> Any:
+    """Calculate the optimal scaling factor for quantizing network inputs/weights.
+    
+    This helps keep intermediate multiplications within the FHE bit-width limit.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.models import auto_quantizer
+        
+        scale_factor = auto_quantizer(plain_images, plain_filters, sklearn_model)
+        ```
+    """
     max_pixel_val = images[0][0][0][0]
     for image in images:
         for channel in image:

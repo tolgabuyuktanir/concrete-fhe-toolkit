@@ -829,17 +829,12 @@ license. Review Zama's current licensing terms before commercial use.
 
 This project is not affiliated with or endorsed by Zama.
 
-## Author and Contributors
-
-**Author and maintainer**
-
-- Erkan Işık Bacak ([@ErkanIsikB](https://github.com/ErkanIsikB))
-
+## Contributors
 **Contributors**
 
 - Tolga Büyüktanır ([@tolgabuyuktanir](https://github.com/tolgabuyuktanir))
-- Yusuf Emir Alakuş ([@YusufAlakus](https://github.com/YusufAlakus)
 - Muharrem Uğurelli ([@mugurelli](https://github.com/mugurelli))
+- Erkan Işık Bacak ([@ErkanIsikB](https://github.com/ErkanIsikB))
 - Yücel Pehlevan ([@YucelPehlevan](https://github.com/YucelPehlevan)) 
 
 **Organizational contributor**

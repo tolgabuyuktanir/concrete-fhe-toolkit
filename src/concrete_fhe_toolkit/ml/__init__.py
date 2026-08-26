@@ -62,6 +62,14 @@ from .models import (
 )
 from .stats import array_max, array_mean, array_min, array_range, array_variance, array_count_greater
 from .utils import binarize, one_hot_encode, clip_array, normalize_array
+from .classes import (
+    FHEModel,
+    FHELogisticRegression,
+    FHELinearRegression,
+    FHEDecisionTree,
+    FHEPCA,
+    FHECNN,
+)
 
 __all__ = [
     "argmax_inference",
@@ -137,4 +145,10 @@ __all__ = [
     "matrix_elementwise_multiply",
     "matrix_exp",
     "covariance_matrix",
+    "FHEModel",
+    "FHELogisticRegression",
+    "FHELinearRegression",
+    "FHEDecisionTree",
+    "FHEPCA",
+    "FHECNN",
 ]

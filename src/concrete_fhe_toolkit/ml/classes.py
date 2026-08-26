@@ -3,7 +3,7 @@ from concrete_fhe_toolkit.ml import (
     logistic_regression_inference, linear_regression_inference,
     decision_tree_inference, pca_inference, cnn_inference,
     random_forest_inference, xgboost_inference, svm_inference,
-    knn_inference, naive_bayes_inference, mlp_inference
+    knn_inference, naive_bayes_inference, mlp_inference, naive_bayes_training
     )
 class FHEModel:
     """Base class for all FHE machine learning models.
@@ -44,7 +44,7 @@ class FHELogisticRegression(FHEModel):
 
     def _circuit_logic(self, features):
         return logistic_regression_inference(self.weights, self.bias, features)
-    
+        
 
 class FHELinearRegression(FHEModel):
     """Encrypted Linear Regression Inference Model.
@@ -181,7 +181,23 @@ class FHEKNN(FHEModel):
         self.k = k
 
     def _circuit_logic(self, features):
-        return knn_inference(features, self.X_train, self.y_train, self.k)     
+        return knn_inference(features, self.X_train, self.y_train, k=self.k)
+
+
+class FHEMLP(FHEModel):    
+    """Encrypted Multi-Layer Perceptron (Dense) Inference Model.
+    
+    Evaluates a sequence of dense neural network layers over encrypted features.
+    
+    Args:
+        mlp_layers: The public list of layer tuples, where each tuple is `(weights, bias)`.
+    """
+    def __init__(self, mlp_layers):
+        super().__init__()
+        self.mlp_layers = mlp_layers
+
+    def _circuit_logic(self, features):
+        return mlp_inference(features,self.mlp_layers)    
 
 
 class FHENaiveBayes(FHEModel):
@@ -202,17 +218,22 @@ class FHENaiveBayes(FHEModel):
         return naive_bayes_inference(features,self.log_prob_tables,self.priors)
 
 
-class FHEMLP(FHEModel):    
-    """Encrypted Multi-Layer Perceptron (Dense) Inference Model.
+class FHENaiveBayesTrainer:
+    """Trainer for Encrypted Naive Bayes.
     
-    Evaluates a sequence of dense neural network layers over encrypted features.
-    
-    Args:
-        mlp_layers: The public list of layer tuples, where each tuple is `(weights, bias)`.
+    Trains a Naive Bayes model over encrypted features and encrypted one-hot labels.
     """
-    def __init__(self, mlp_layers):
-        super().__init__()
-        self.mlp_layers = mlp_layers
+    def __init__(self):
+        self.circuit = None
+        self.compiler = None
 
-    def _circuit_logic(self, features):
-        return mlp_inference(features,self.mlp_layers)    
+    def fit_encrypted(self, X_train, y_train):
+        self.compiler = fhe.Compiler(naive_bayes_training,{"X_train": "encrypted", "y_train_one_hot": "encrypted"})
+        self.circuit = self.compiler.compile([(X_train, y_train)])
+
+        # The circuit returns (feature_counts, class_counts)
+        log_prob_tables, priors = self.circuit.encrypt_run_decrypt(X_train, y_train)
+        
+        # We pass the raw counts directly to the inference model as "probabilities"
+        # Since naive_bayes_inference aggregates these counts, higher count = higher score
+        return FHENaiveBayes(log_prob_tables, priors)

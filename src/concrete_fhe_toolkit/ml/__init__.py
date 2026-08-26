@@ -62,6 +62,7 @@ from .models import (
 )
 from .stats import array_max, array_mean, array_min, array_range, array_variance, array_count_greater
 from .utils import binarize, one_hot_encode, clip_array, normalize_array
+from .training import naive_bayes_training
 from .classes import (
     FHEModel,
     FHELogisticRegression,
@@ -151,6 +152,7 @@ __all__ = [
     "matrix_elementwise_multiply",
     "matrix_exp",
     "covariance_matrix",
+    "naive_bayes_training",
     "FHEModel",
     "FHELogisticRegression",
     "FHELinearRegression",

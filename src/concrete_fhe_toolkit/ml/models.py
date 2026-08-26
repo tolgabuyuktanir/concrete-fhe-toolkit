@@ -399,7 +399,7 @@ def naive_bayes_inference(
     """
     if len(log_prob_tables) != len(priors):
         raise ValueError("log_prob_tables and priors must have the same length")
-    if not log_prob_tables:
+    if len(log_prob_tables) == 0:
         raise ValueError("at least one class is required")
     minimum_feature = validate_integer("min_feature", min_feature)
 

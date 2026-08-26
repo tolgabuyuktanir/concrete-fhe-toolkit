@@ -69,6 +69,12 @@ from .classes import (
     FHEDecisionTree,
     FHEPCA,
     FHECNN,
+    FHERandomForest,
+    FHEXGBoost,
+    FHESVM,
+    FHEKNN,
+    FHENaiveBayes,
+    FHEMLP,
 )
 
 __all__ = [
@@ -151,4 +157,10 @@ __all__ = [
     "FHEDecisionTree",
     "FHEPCA",
     "FHECNN",
+    "FHERandomForest",
+    "FHEXGBoost",
+    "FHESVM",
+    "FHEKNN",
+    "FHENaiveBayes",
+    "FHEMLP",
 ]

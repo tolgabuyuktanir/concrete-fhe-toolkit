@@ -1,6 +1,10 @@
 from .._compat import fhe
-from concrete_fhe_toolkit.ml import logistic_regression_inference, linear_regression_inference, decision_tree_inference, pca_inference, cnn_inference
-
+from concrete_fhe_toolkit.ml import (
+    logistic_regression_inference, linear_regression_inference,
+    decision_tree_inference, pca_inference, cnn_inference,
+    random_forest_inference, xgboost_inference, svm_inference,
+    knn_inference, naive_bayes_inference, mlp_inference
+    )
 class FHEModel:
     """Base class for all FHE machine learning models.
     
@@ -93,6 +97,7 @@ class FHEPCA(FHEModel):
     def _circuit_logic(self, features):
         return pca_inference(features, self.means, self.components)
 
+
 class FHECNN(FHEModel):
     """Encrypted Convolutional Neural Network (CNN) Inference Model.
     
@@ -108,4 +113,106 @@ class FHECNN(FHEModel):
         self.bias = bias
 
     def _circuit_logic(self, features):
-        return cnn_inference(self.filters, self.bias, image = features)    
+        return cnn_inference(self.filters, self.bias, image = features)
+
+
+class FHERandomForest(FHEModel):
+    """Encrypted Random Forest Inference Model.
+    
+    Evaluates an ensemble of decision trees over encrypted features.
+    
+    Args:
+        trees: The public list of tree representations (dict format).
+    """
+    def __init__(self, trees):
+        super().__init__()
+        self.trees = trees
+
+    def _circuit_logic(self, features):
+        return random_forest_inference(features,self.trees)    
+
+
+class FHEXGBoost(FHEModel):
+    """Encrypted XGBoost Inference Model.
+    
+    Evaluates a gradient boosting tree ensemble over encrypted features.
+    
+    Args:
+        trees: The public list of tree representations (dict format).
+    """
+    def __init__(self, trees):
+        super().__init__() 
+        self.trees = trees   
+
+    def _circuit_logic(self, features):
+        return xgboost_inference(features, self.trees)    
+
+class FHESVM(FHEModel):
+    """Encrypted Support Vector Machine (SVM) Inference Model.
+    
+    Evaluates a linear SVM over encrypted features.
+    
+    Args:
+        weights: The public list of support vector weights (dual_coef/coef).
+        bias: The public bias or intercept term.
+    """
+    def __init__(self, weights, bias):
+        super().__init__()
+        self.weights = weights
+        self.bias = bias
+
+    def _circuit_logic(self, features):
+        return svm_inference(self.weights, self.bias, features)
+
+class FHEKNN(FHEModel):
+    """Encrypted K-Nearest Neighbors (KNN) Inference Model.
+    
+    Evaluates KNN distances between encrypted features and plaintext training data.
+    
+    Args:
+        X_train: The public training dataset features.
+        y_train: The public training dataset labels.
+        k: The number of nearest neighbors to consider.
+    """
+    def __init__(self, X_train, y_train, k):
+        super().__init__()
+        self.X_train = X_train
+        self.y_train = y_train
+        self.k = k
+
+    def _circuit_logic(self, features):
+        return knn_inference(features, self.X_train, self.y_train, self.k)     
+
+
+class FHENaiveBayes(FHEModel):
+    """Encrypted Naive Bayes Inference Model.
+    
+    Evaluates a Naive Bayes classifier over encrypted features.
+    
+    Args:
+        log_prob_tables: The public feature log probabilities.
+        priors: The public class priors.
+    """
+    def __init__(self, log_prob_tables, priors):
+        super().__init__()
+        self.log_prob_tables = log_prob_tables
+        self.priors = priors
+
+    def _circuit_logic(self, features):
+        return naive_bayes_inference(features,self.log_prob_tables,self.priors)
+
+
+class FHEMLP(FHEModel):    
+    """Encrypted Multi-Layer Perceptron (Dense) Inference Model.
+    
+    Evaluates a sequence of dense neural network layers over encrypted features.
+    
+    Args:
+        mlp_layers: The public list of layer tuples, where each tuple is `(weights, bias)`.
+    """
+    def __init__(self, mlp_layers):
+        super().__init__()
+        self.mlp_layers = mlp_layers
+
+    def _circuit_logic(self, features):
+        return mlp_inference(features,self.mlp_layers)    

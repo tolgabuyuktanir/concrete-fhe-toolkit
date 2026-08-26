@@ -1,4 +1,5 @@
 from .._compat import fhe
+import math
 from concrete_fhe_toolkit.ml import (
     logistic_regression_inference, linear_regression_inference,
     decision_tree_inference, pca_inference, cnn_inference,
@@ -234,16 +235,33 @@ class FHENaiveBayesTrainer:
         # The circuit returns raw counts (feature_counts, class_counts)
         raw_feature_counts, priors = self.circuit.encrypt_run_decrypt(X_train, y_train)
         
-        # naive_bayes_inference expects a 3D table: [class_idx][feature_idx] = [count_for_0, count_for_1]
-        # Our circuit calculated count_for_1. We can easily deduce count_for_0 = prior - count_for_1
+        # naive_bayes_inference expects SCALED LOG PROBABILITIES, not raw counts!
+        # We will apply Laplace smoothing and scale by 1000.
         formatted_tables = []
+        formatted_priors = []
+        total_samples = sum(priors)
+        SCALE = 1000
+        
         for c, class_feature_counts in enumerate(raw_feature_counts):
             class_total = int(priors[c])
+            
+            # Prior Log Prob
+            prior_prob = class_total / total_samples
+            formatted_priors.append(int(math.log(prior_prob) * SCALE))
+            
             class_tables = []
             for count_of_ones in class_feature_counts:
                 count_of_ones = int(count_of_ones)
                 count_of_zeros = class_total - count_of_ones
-                class_tables.append([count_of_zeros, count_of_ones])
+                
+                # Laplace smoothed probabilities: (count + 1) / (class_total + num_classes)
+                prob_0 = (count_of_zeros + 1) / (class_total + 2)
+                prob_1 = (count_of_ones + 1) / (class_total + 2)
+                
+                log_prob_0 = int(math.log(prob_0) * SCALE)
+                log_prob_1 = int(math.log(prob_1) * SCALE)
+                
+                class_tables.append([log_prob_0, log_prob_1])
             formatted_tables.append(class_tables)
             
-        return FHENaiveBayes(formatted_tables, priors.tolist())
+        return FHENaiveBayes(formatted_tables, formatted_priors)

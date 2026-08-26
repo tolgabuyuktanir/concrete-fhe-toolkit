@@ -231,9 +231,19 @@ class FHENaiveBayesTrainer:
         self.compiler = fhe.Compiler(naive_bayes_training,{"X_train": "encrypted", "y_train_one_hot": "encrypted"})
         self.circuit = self.compiler.compile([(X_train, y_train)])
 
-        # The circuit returns (feature_counts, class_counts)
-        log_prob_tables, priors = self.circuit.encrypt_run_decrypt(X_train, y_train)
+        # The circuit returns raw counts (feature_counts, class_counts)
+        raw_feature_counts, priors = self.circuit.encrypt_run_decrypt(X_train, y_train)
         
-        # We pass the raw counts directly to the inference model as "probabilities"
-        # Since naive_bayes_inference aggregates these counts, higher count = higher score
-        return FHENaiveBayes(log_prob_tables, priors)
+        # naive_bayes_inference expects a 3D table: [class_idx][feature_idx] = [count_for_0, count_for_1]
+        # Our circuit calculated count_for_1. We can easily deduce count_for_0 = prior - count_for_1
+        formatted_tables = []
+        for c, class_feature_counts in enumerate(raw_feature_counts):
+            class_total = int(priors[c])
+            class_tables = []
+            for count_of_ones in class_feature_counts:
+                count_of_ones = int(count_of_ones)
+                count_of_zeros = class_total - count_of_ones
+                class_tables.append([count_of_zeros, count_of_ones])
+            formatted_tables.append(class_tables)
+            
+        return FHENaiveBayes(formatted_tables, priors.tolist())

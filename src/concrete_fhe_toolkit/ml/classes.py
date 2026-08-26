@@ -73,7 +73,7 @@ class FHEDecisionTree(FHEModel):
         self.tree = tree
 
     def _circuit_logic(self, features):
-        return decision_tree_inference(feature_val = features, self.tree)
+        return decision_tree_inference(features, self.tree)
 
 
 class FHEPCA(FHEModel):

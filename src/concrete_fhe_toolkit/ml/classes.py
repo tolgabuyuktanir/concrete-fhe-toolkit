@@ -19,7 +19,7 @@ class FHEModel:
         self.circuit = self.compiler.compile(inputset)    
 
     def predict(self,features):
-        if self.circuit == None:
+        if self.circuit is None:
             raise ValueError("The model should be compiled before prediction")
         return self.circuit.encrypt_run_decrypt(features)  
 
@@ -51,7 +51,7 @@ class FHELinearRegression(FHEModel):
         weights: The public list of weights for the regression.
         bias: The public bias term.
     """
-    def __init__(self):
+    def __init__(self, weights, bias):
         super().__init__()
         self.weights = weights
         self.bias = bias

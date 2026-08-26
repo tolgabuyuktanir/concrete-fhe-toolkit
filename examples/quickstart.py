@@ -28,7 +28,26 @@ from sklearn.linear_model import LogisticRegression
 from concrete import fhe
 
 # Import our custom FHE machine learning capabilities
-from concrete_fhe_toolkit.ml import cnn_inference, mlp_inference
+from concrete_fhe_toolkit.ml import cnn_inference, mlp_inference, auto_quantizer
+from concrete_fhe_toolkit.ml.classes import FHEModel
+
+class FHEDigitRecognizer(FHEModel):
+    """Custom FHE Model that chains a CNN Edge Detector with a Dense Classifier."""
+    def __init__(self, filters, bias, mlp_weights, mlp_bias):
+        super().__init__()
+        self.filters = filters
+        self.bias = bias
+        self.mlp_layers = [(mlp_weights, mlp_bias)]
+        
+    def _circuit_logic(self, features):
+        # Step A: The "Eyes" - Extract edge features
+        conv_out = cnn_inference(self.filters, self.bias, features)
+        
+        # Step B: The "Brain" - Calculate scores for all 10 digits
+        dense_out = mlp_inference(conv_out, self.mlp_layers)
+        
+        # We must return an explicit fhe.array for Zama to compile successfully
+        return fhe.array(dense_out)
 
 def main():
     print("--- FHE MNIST DIGIT RECOGNIZER ---\n")
@@ -80,33 +99,25 @@ def main():
     clf = LogisticRegression(max_iter=1000)
     clf.fit(X_features, y)
 
-    # FHE requires integers. We scale the trained floating-point weights by 5
-    # and round them to nearest integer. A small scaling factor (5) is chosen
-    # deliberately to prevent 16-bit integer overflow inside the FHE circuit.
-    mlp_weights = np.round(clf.coef_ * 5).astype(int).tolist()
-    mlp_bias = np.round(clf.intercept_ * 5).astype(int).tolist()
-    mlp_layers = [(mlp_weights, mlp_bias)]
+    # FHE requires integers. Instead of manually guessing a scale factor (like 5),
+    # we use our intelligent auto_quantizer to find the absolute maximum scale
+    # factor that won't cause integer overflow during FHE execution.
+    scale_factor = auto_quantizer(X_images[:100], filters, clf)
+    print(f"    -> Auto-Quantizer selected scale factor: {scale_factor}")
+    
+    mlp_weights = np.round(clf.coef_ * scale_factor).astype(int).tolist()
+    mlp_bias = np.round(clf.intercept_ * scale_factor).astype(int).tolist()
 
     # ---------------------------------------------------------
     # 5. FHE CIRCUIT DEFINITION & COMPILATION
     # ---------------------------------------------------------
-    def fhe_digit_recognizer(image):
-        # Step A: The "Eyes" - Extract edge features from the encrypted image
-        conv_out = cnn_inference(filters, cnn_bias, image)
-        
-        # Step B: The "Brain" - Calculate scores for all 10 digits
-        dense_out = mlp_inference(conv_out, mlp_layers)
-        
-        # We must return an explicit fhe.array for Zama to compile successfully
-        return fhe.array(dense_out)
-
     print("4/4: Compiling the FHE Circuit (This may take 1-2 minutes)...")
-    compiler = fhe.Compiler(fhe_digit_recognizer, {"image": "encrypted"})
     
-    # We provide 100 representative samples so the compiler accurately learns 
-    # the mathematical bounds (min/max) of the circuit.
-    inputset = X_images[:100]
-    circuit = compiler.compile(inputset)
+    # Instantiate our custom class-based model
+    model = FHEDigitRecognizer(filters, cnn_bias, mlp_weights, mlp_bias)
+    
+    # Compile with 100 representative samples
+    model.compile(X_images[:100])
     print("Circuit successfully compiled!\n")
 
     # ---------------------------------------------------------
@@ -123,14 +134,9 @@ def main():
         test_img = X_images[i]
         actual_label = y[i]
         
-        # 1. ENCRYPT the image (Client side)
-        encrypted_img = circuit.encrypt(test_img)
-        
-        # 2. RUN INFERENCE on the blind box (Server side)
-        encrypted_scores = circuit.run(encrypted_img)
-        
-        # 3. DECRYPT the 10 scores and find the highest one (Client side)
-        decrypted_scores = circuit.decrypt(encrypted_scores)
+        # 1. ENCRYPT, RUN, and DECRYPT the image in one single step!
+        # The class perfectly hides the complexity of Key Generation and networking.
+        decrypted_scores = model.predict(test_img)
         pred_label = np.argmax(decrypted_scores)
         
         result_icon = "✅ CORRECT" if pred_label == actual_label else "❌ WRONG"

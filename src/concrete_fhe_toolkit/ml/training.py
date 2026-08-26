@@ -1,6 +1,6 @@
 from typing import List, Any
 from concrete_fhe_toolkit.ml import matrix_transpose, dot_product
-import numpy as np
+from concrete import fhe
 
 def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[Any]]) -> tuple[List[Any],List[Any]]:
     class_counts = [0] * len(y_train_one_hot[0])
@@ -18,4 +18,4 @@ def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[An
             class_features.append(dot_product(row_x,row_y))
         feature_counts.append(class_features)
 
-    return np.array(feature_counts), np.array(class_counts)    
+    return fhe.array(feature_counts), fhe.array(class_counts)    

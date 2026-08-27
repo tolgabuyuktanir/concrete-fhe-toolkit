@@ -13,6 +13,15 @@
   `ml.clustering` with `*Classifier`/`*Regressor` aliases; flat names
   remain for backwards compatibility.
 - Metrics: `r2_score` (integer percent R²) and clustering `inertia`.
+- `FHEPipeline`: preprocessing transformers and a model chained into a
+  single compiled circuit, plus `ml.preprocessing` transformers
+  (`FHEBinner` scorecard binning, `FHEStandardScaler`, `FHEMinMaxScaler`)
+  and the `bin_feature` primitive.
+- Top-level `privacy` subpackage: `laplace_mechanism`,
+  `gaussian_mechanism`, and `dp_release` add calibrated differential-
+  privacy noise to decrypted trainer aggregates (FHE + DP pattern).
+- `FHEModel` gains `simulate`, `predict_many`, and `simulate_many`:
+  one compile and one key set serve any number of predictions.
 
 ## 0.4.0 - 2026-08-18
 

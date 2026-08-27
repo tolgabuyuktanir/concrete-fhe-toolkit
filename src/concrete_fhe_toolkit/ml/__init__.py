@@ -87,6 +87,8 @@ from .trainers import (
     FHETrainer,
     linear_regression_training,
 )
+from .pipeline import FHEPipeline
+from .preprocessing import FHEBinner, FHEMinMaxScaler, FHEStandardScaler, bin_feature
 from . import classification, clustering, regression
 
 __all__ = [
@@ -169,6 +171,11 @@ __all__ = [
     "classification",
     "clustering",
     "regression",
+    "FHEBinner",
+    "FHEMinMaxScaler",
+    "FHEPipeline",
+    "FHEStandardScaler",
+    "bin_feature",
     "FHETrainer",
     "FHEDecisionTreeTrainer",
     "FHEKMeans",

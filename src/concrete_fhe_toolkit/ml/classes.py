@@ -23,10 +23,54 @@ class FHEModel:
         self.compiler = fhe.Compiler(self._circuit_logic,{"features": "encrypted"})
         self.circuit = self.compiler.compile(inputset)    
 
-    def predict(self,features):
+    def predict(self, features):
+        """Encrypt one sample, run the compiled circuit, and decrypt the result.
+
+        Example:
+            ```python
+            model = FHELogisticRegression(weights=[3, 2], bias=-7)
+            model.compile(inputset=[[0, 0], [5, 5]])
+            print(model.predict([4, 1]))  # 1
+            ```
+        """
         if self.circuit is None:
             raise ValueError("The model should be compiled before prediction")
-        return self.circuit.encrypt_run_decrypt(features)  
+        return self.circuit.encrypt_run_decrypt(features)
+
+    def simulate(self, features):
+        """Run one prediction in Concrete's simulator (fast, no key generation).
+
+        Simulation is for prototyping and tests only — inputs are NOT
+        protected. The model must be compiled first.
+
+        Example:
+            ```python
+            model.compile(inputset)
+            print(model.simulate([4, 1]))  # same output, no keygen
+            ```
+        """
+        if self.circuit is None:
+            raise ValueError("The model should be compiled before prediction")
+        return self.circuit.simulate(features)
+
+    def predict_many(self, samples):
+        """Predict a batch of samples with one compiled circuit (one key set).
+
+        The circuit is compiled once; every sample is then encrypted, run,
+        and decrypted through it — no recompilation or fresh key generation
+        per sample.
+
+        Example:
+            ```python
+            model.compile(inputset)
+            predictions = model.predict_many([[4, 1], [0, 2], [5, 5]])
+            ```
+        """
+        return [self.predict(sample) for sample in samples]
+
+    def simulate_many(self, samples):
+        """Simulate a batch of samples (fast counterpart of ``predict_many``)."""
+        return [self.simulate(sample) for sample in samples]
 
 
 class FHELogisticRegression(FHEModel):
@@ -292,3 +336,4 @@ class FHEKMeans(FHEModel):
             self.centroids,
             max_distance=self.max_distance,
         )
+

@@ -199,6 +199,29 @@ backwards-compatible aliases.
   aggregates) — multi-bank training story.
 - [ ] Migrate `FHENaiveBayesTrainer` onto the `FHETrainer` base.
 
+### New directions (2026-08-26 review)
+
+- [x] **FHEPipeline** — preprocessing + model chained into ONE circuit
+  (`ml/pipeline.py`), with `FHEBinner`, `FHEStandardScaler`,
+  `FHEMinMaxScaler` transformers (`ml/preprocessing.py`). Also closes the
+  old `bin_feature` scorecard item.
+- [x] **Differential privacy on released aggregates** — top-level
+  `privacy` module: `laplace_mechanism`, `gaussian_mechanism`,
+  `dp_release` (budget split across a vector). Accounting/composition is
+  documented as the caller's responsibility; trainer-integrated budgets
+  with rigorous sensitivity accounting remain open.
+- [x] **Batch inference v1** — `FHEModel.predict_many` / `simulate` /
+  `simulate_many`: one compile + one key set for N samples. True
+  tensor-shaped batching (one circuit run for N samples) remains open.
+- [ ] **Model serialization** — `model.save()/load()` (JSON for trees,
+  weights, centroids) + Concrete `server.save/load` wiring.
+- [ ] **Rounded-TLU speed knob** — optional `lookup_precision` in
+  `_lookup` using Concrete's rounded/truncated bit patterns.
+- [ ] **Model-level cost estimator** — extend `estimate_lookup_cost` to
+  predict compile/keygen/run cost for a model + bounds before compiling.
+- [ ] **End-to-end example gallery** — breast cancer, German Credit
+  (fintech scorecard), k-means segmentation as runnable examples in CI.
+
 ### Infrastructure / DX (non-finance)
 
 - [ ] **`deploy` helpers** — thin wrappers over Concrete's client/server

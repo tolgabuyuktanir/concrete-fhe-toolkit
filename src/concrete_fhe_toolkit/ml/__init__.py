@@ -74,9 +74,20 @@ from .classes import (
     FHEXGBoost,
     FHESVM,
     FHEKNN,
+    FHEKMeans,
     FHENaiveBayes,
+    FHENaiveBayesTrainer,
     FHEMLP,
 )
+from .core import r2_score
+from .trainers import (
+    FHEDecisionTreeTrainer,
+    FHEKMeansTrainer,
+    FHELinearRegressionTrainer,
+    FHETrainer,
+    linear_regression_training,
+)
+from . import classification, clustering, regression
 
 __all__ = [
     "argmax_inference",
@@ -153,6 +164,17 @@ __all__ = [
     "matrix_exp",
     "covariance_matrix",
     "naive_bayes_training",
+    "linear_regression_training",
+    "r2_score",
+    "classification",
+    "clustering",
+    "regression",
+    "FHETrainer",
+    "FHEDecisionTreeTrainer",
+    "FHEKMeans",
+    "FHEKMeansTrainer",
+    "FHELinearRegressionTrainer",
+    "FHENaiveBayesTrainer",
     "FHEModel",
     "FHELogisticRegression",
     "FHELinearRegression",

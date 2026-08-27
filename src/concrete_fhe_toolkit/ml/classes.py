@@ -265,3 +265,30 @@ class FHENaiveBayesTrainer:
             formatted_tables.append(class_tables)
             
         return FHENaiveBayes(formatted_tables, formatted_priors)
+
+class FHEKMeans(FHEModel):
+    """Encrypted K-Means Inference Model (cluster assignment).
+
+    Assigns encrypted samples to the nearest public centroid. Train with
+    ``FHEKMeansTrainer.fit_encrypted`` or provide centroids directly.
+
+    Args:
+        centroids (list): The public list of cluster centroids.
+        max_distance (int): Upper bound on the squared distance from any
+            sample to any centroid (sizes the argmin reduction).
+    """
+
+    def __init__(self, centroids, *, max_distance):
+        super().__init__()
+        from .models import nearest_centroid_inference
+
+        self._nearest_centroid_inference = nearest_centroid_inference
+        self.centroids = [list(centroid) for centroid in centroids]
+        self.max_distance = max_distance
+
+    def _circuit_logic(self, features):
+        return self._nearest_centroid_inference(
+            features,
+            self.centroids,
+            max_distance=self.max_distance,
+        )

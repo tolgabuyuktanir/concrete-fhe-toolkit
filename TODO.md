@@ -168,6 +168,37 @@ domain modules must clear the acceptance bar in CONTRIBUTING.md.
   compute post-decryption), softmax (argmax suffices), deep networks
   (Concrete-ML's territory).
 
+### Encrypted training + task taxonomy (approved 2026-08-26)
+
+Design: every trainer follows the **aggregate-decrypt pattern** (circuit
+computes counts/sums/X^T X over encrypted data; only aggregates are
+decrypted; model assembled clear-side). Task namespaces mirror sklearn:
+`ml.classification`, `ml.regression`, `ml.clustering`; flat names stay as
+backwards-compatible aliases.
+
+- [x] `FHETrainer` base class (simulate mode + configuration passthrough).
+- [x] `FHELinearRegressionTrainer` — sufficient statistics (A^T A, A^T y
+  with intercept column), clear-side normal-equation solve.
+- [x] `FHEDecisionTreeTrainer` — hybrid level-wise counting: per level one
+  circuit yields (node x candidate-split) class counts; Gini + split
+  selection clear-side; chosen splits become next level's public constants.
+- [x] `FHEKMeansTrainer` + `FHEKMeans` — fixed-iteration Lloyd: circuit
+  assigns samples to nearest public centroids and returns per-cluster
+  sums/counts; centroid update clear-side.
+- [x] Task namespaces with `*Classifier`/`*Regressor` aliases; `r2_score`
+  (regression) and `inertia` (clustering) metrics.
+- [ ] `FHEPerceptronTrainer` — fully-encrypted sign-SGD (fixed epochs,
+  weights never decrypted); the first trainer with no aggregate leak.
+- [ ] Fully-oblivious decision-tree training (tier B): encrypted Gini
+  comparison via cross-multiplication, argmax over candidates; depth <= 3,
+  binned features. Research flag.
+- [ ] Encrypted-model inference variants (encrypted weights via
+  enc x enc dot products) — closes the train-encrypted -> test-encrypted
+  loop without ever decrypting the model.
+- [ ] Federated aggregation helpers (secure sum of per-client encrypted
+  aggregates) — multi-bank training story.
+- [ ] Migrate `FHENaiveBayesTrainer` onto the `FHETrainer` base.
+
 ### Infrastructure / DX (non-finance)
 
 - [ ] **`deploy` helpers** — thin wrappers over Concrete's client/server

@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Encrypted training via the aggregate-decrypt pattern (`ml.trainers`):
+  `FHETrainer` base (with a `simulate` mode for fast prototyping),
+  `FHELinearRegressionTrainer` (sufficient statistics + clear-side normal
+  equations), `FHEDecisionTreeTrainer` (hybrid level-wise Gini counting),
+  and `FHEKMeansTrainer` with the `FHEKMeans` model class.
+- sklearn-style task namespaces: `ml.classification`, `ml.regression`,
+  `ml.clustering` with `*Classifier`/`*Regressor` aliases; flat names
+  remain for backwards compatibility.
+- Metrics: `r2_score` (integer percent R²) and clustering `inertia`.
+
 ## 0.4.0 - 2026-08-18
 
 Big capability release: Python-math and C-math parity for the math

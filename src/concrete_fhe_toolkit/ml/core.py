@@ -392,3 +392,20 @@ def f1_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
     precision = precision_score(y_preds, y_trues)
     recall = recall_score(y_preds, y_trues)
     return divide(2 * precision * recall, precision + recall)
+
+
+def r2_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+    """Integer percent R²: 100 - 100 * SS_res // SS_tot.
+
+    SS_tot uses the floor mean of ``y_trues``. When SS_tot is zero
+    (constant targets) the result is 0. Like precision/recall, the
+    encrypted-by-encrypted division uses a multivariate lookup — cheap on
+    decrypted values, expensive under encryption for large ranges.
+    """
+    divide = make_floor_divide(zero_result=100)
+    ss_res = euclidean_distance_squared(y_preds, y_trues)
+    mean_true = array_sum(y_trues) // len(y_trues)
+    ss_tot: Any = 0
+    for value in y_trues:
+        ss_tot = ss_tot + (value - mean_true) * (value - mean_true)
+    return 100 - divide(100 * ss_res, ss_tot)

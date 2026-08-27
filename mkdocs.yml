@@ -84,6 +84,8 @@ nav:
       - Machine learning:
           - Metrics and losses: api/ml-core.md
           - Models: api/ml-models.md
+          - Trainers (encrypted training): api/ml-trainers.md
+          - Clustering: api/ml-clustering.md
           - Matrix algebra: api/ml-matrix.md
           - Activations: api/ml-activations.md
           - Statistics: api/ml-stats.md

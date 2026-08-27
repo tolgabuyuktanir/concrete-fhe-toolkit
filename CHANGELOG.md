@@ -4,10 +4,24 @@
 
 ### Added
 
+- Deployment helpers (top-level `deploy`): `save_deployment` exports a
+  compiled circuit as server.zip (evaluation logic, no keys — safe for
+  untrusted infrastructure) + client.zip (data-owner specs);
+  `load_server` / `load_client` restore them for the encrypted
+  client/server round trip.
+- sklearn bridge (`ml.sklearn_bridge`): `from_sklearn_linear`,
+  `from_sklearn_tree`, `from_sklearn_forest` convert fitted sklearn
+  models into toolkit FHE models (lazy sklearn import; sklearn's `<=`
+  splits are translated to the toolkit's `>=` convention exactly).
 - Model serialization (`ml.serialization`): `save_model` / `load_model`
   persist every parametric model class (trees, weights, centroids,
   tables) as portable JSON; circuits and keys are never serialized —
   recompile after loading.
+
+### Fixed
+
+- The PyPI publish step now passes `skip-existing: true`, so re-running a
+  publish workflow no longer fails with "400 File already exists".
 
 ## 0.5.0 - 2026-08-26
 

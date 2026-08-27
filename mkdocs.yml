@@ -74,6 +74,7 @@ nav:
           - Arrays: api/arrays.md
           - Statistics: api/stats.md
           - Privacy (DP): api/privacy.md
+          - Deployment: api/deploy.md
       - Math:
           - Basic operations: api/math-basic.md
           - Combinatorics: api/math-combinatorics.md
@@ -89,6 +90,7 @@ nav:
           - Pipelines: api/ml-pipeline.md
           - Preprocessing: api/ml-preprocessing.md
           - Serialization: api/ml-serialization.md
+          - sklearn bridge: api/ml-sklearn-bridge.md
           - Clustering: api/ml-clustering.md
           - Matrix algebra: api/ml-matrix.md
           - Activations: api/ml-activations.md

@@ -145,10 +145,9 @@ domain modules must clear the acceptance bar in CONTRIBUTING.md.
   across trees + threshold (decision_tree_inference + add +
   threshold_activation). The de-facto credit-scoring model; direct synergy
   with finance.scoring.
-- [ ] **sklearn bridge (clear-side)** — `from_sklearn_linear(model, scale)`
-  and `from_sklearn_tree(model, scale)` converters into our integer
-  weight-list / dict-tree formats; sklearn as an optional import inside
-  the functions. Kills the manual scaling ritual in the README example.
+- [x] **sklearn bridge (clear-side)** — `from_sklearn_linear/tree/forest`
+  converters (`ml.sklearn_bridge`, lazy sklearn import); tree conversion
+  matches sklearn predictions exactly on a full grid.
 - [ ] **`linear_multiclass_inference`** — per-class W.x+b scores +
   argmax_inference (pure composition).
 - [ ] **`logistic_regression_proba`** — scaled probability output via a
@@ -226,9 +225,9 @@ backwards-compatible aliases.
 
 ### Infrastructure / DX (non-finance)
 
-- [ ] **`deploy` helpers** — thin wrappers over Concrete's client/server
-  split (fhe.Client / fhe.Server, circuit save/load) with a worked
-  example; turns the toolkit from notebook-ware into deployable services.
+- [x] **`deploy` helpers** — `deploy.save_deployment/load_server/
+  load_client` wrap Concrete's client/server split; real encrypted round
+  trip covered by a gated test.
 - [ ] **examples/ growth** — one runnable example per subpackage (only
   quickstart.py exists today); wire them into CI as smoke tests.
 - [ ] **benchmarks/** — script measuring compile/keygen/run times per

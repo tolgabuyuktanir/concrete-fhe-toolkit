@@ -208,3 +208,24 @@ print(divide.encrypt_run_decrypt(1, 3))
 ```
 
 The fixed-point result is an integer scaled by `2 ** fractional_bits`.
+
+
+## Rounded lookups: trading accuracy for speed
+
+Large, smooth tables (sigmoid, exp, sin) can be evaluated through Concrete's
+rounded table lookups: `make_unary_lookup(values, min_value, precision=N)`
+rounds the lookup index down to `N` bits before indexing, so the compiler
+evaluates a `2**N`-entry table instead of the full one. The input is
+approximated to steps of `2**(input_bits - N)`, so reserve this knob for
+functions where a coarser input grid is acceptable — never for exact
+functions such as `gcd` or parity.
+
+## Estimating a model before compiling
+
+`ml.estimation.estimate_model_cost(model, min_feature=..., max_feature=...)`
+counts the encrypted comparisons, lookups, and multiplications a model will
+compile into and reports the widest lookup domain in bits, mapped to the
+same small/moderate/large/very-large levels as the lookup guardrails. Use
+it to compare candidate models and to catch circuits that will not fit
+(for example a k-NN whose argmin encoding needs 16+ bits) before paying
+for a compile.

@@ -91,6 +91,7 @@ nav:
           - Preprocessing: api/ml-preprocessing.md
           - Serialization: api/ml-serialization.md
           - sklearn bridge: api/ml-sklearn-bridge.md
+          - Cost estimation: api/ml-estimation.md
           - Clustering: api/ml-clustering.md
           - Matrix algebra: api/ml-matrix.md
           - Activations: api/ml-activations.md

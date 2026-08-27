@@ -13,6 +13,16 @@
   `from_sklearn_tree`, `from_sklearn_forest` convert fitted sklearn
   models into toolkit FHE models (lazy sklearn import; sklearn's `<=`
   splits are translated to the toolkit's `>=` convention exactly).
+- Rounded-lookup speed knob: `make_unary_lookup` /
+  `compile_unary_lookup` accept `precision=N` to evaluate large smooth
+  tables through Concrete's rounded bit patterns (documented in
+  bounds-and-costs).
+- Model cost estimator (`ml.estimation.estimate_model_cost`): structural
+  operation counts and lookup bit widths for any model or pipeline before
+  compiling, with guardrail-aligned levels.
+- Example gallery: encrypted credit scorecard, encrypted k-means
+  segmentation with DP release, and sklearn-bridge breast-cancer
+  diagnosis — all smoke-tested in CI.
 - Model serialization (`ml.serialization`): `save_model` / `load_model`
   persist every parametric model class (trees, weights, centroids,
   tables) as portable JSON; circuits and keys are never serialized —

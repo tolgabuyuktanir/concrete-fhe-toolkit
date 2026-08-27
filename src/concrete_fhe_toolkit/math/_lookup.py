@@ -130,15 +130,67 @@ def binary_values(
     ]
 
 
-def make_unary_lookup(values: Sequence[int], min_value: int) -> UnaryFunction:
-    """Create a traceable unary lookup over values starting at min_value."""
+def make_unary_lookup(
+    values: Sequence[int],
+    min_value: int,
+    *,
+    precision: Optional[int] = None,
+) -> UnaryFunction:
+    """Create a traceable unary lookup over values starting at min_value.
+
+    ``precision`` is the rounded-TLU speed knob: when set to fewer bits than
+    the table needs, the lookup index is rounded with Concrete's
+    ``round_bit_pattern`` before indexing, which lets the compiler evaluate
+    a much cheaper table at the cost of approximating the input to
+    ``2**(input_bits - precision)`` steps. Use it for large, smooth tables
+    (sigmoid, exp, sin) where a coarser input grid is acceptable — never for
+    exact functions such as gcd or parity.
+
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math._lookup import make_unary_lookup
+
+        table = [round((v / 100) ** 2 * 100) for v in range(1024)]
+        fast_square = make_unary_lookup(table, 0, precision=6)
+        # 10-bit domain evaluated through a 6-bit rounded lookup.
+        ```
+    """
     minimum = validate_integer("min_value", min_value)
-    lookup = fhe.LookupTable(list(values))
+    normalized = list(values)
 
-    def operation(value: Any) -> Any:
-        return lookup[value - minimum]
+    if precision is None:
+        lookup = fhe.LookupTable(normalized)
 
-    return operation
+        def operation(value: Any) -> Any:
+            return lookup[value - minimum]
+
+        return operation
+
+    input_bits = max(1, (len(normalized) - 1).bit_length())
+    normalized_precision = validate_integer("precision", precision, minimum=1)
+    lsbs_to_remove = input_bits - normalized_precision
+    if lsbs_to_remove <= 0:
+        lookup = fhe.LookupTable(normalized)
+
+        def exact_operation(value: Any) -> Any:
+            return lookup[value - minimum]
+
+        return exact_operation
+
+    # Rounding can push the index up to the next multiple of 2**lsbs, so pad
+    # the table with the last value to keep every rounded index in range.
+    padded_length = (1 << input_bits) + (1 << lsbs_to_remove)
+    padded = normalized + [normalized[-1]] * (padded_length - len(normalized))
+    lookup = fhe.LookupTable(padded)
+
+    def rounded_operation(value: Any) -> Any:
+        index = fhe.round_bit_pattern(
+            value - minimum,
+            lsbs_to_remove=lsbs_to_remove,
+        )
+        return lookup[index]
+
+    return rounded_operation
 
 
 def make_binary_lookup(
@@ -168,11 +220,16 @@ def compile_unary_lookup(
     *,
     allow_large_lookup: bool,
     configuration: Optional[fhe.Configuration],
+    precision: Optional[int] = None,
 ) -> fhe.Circuit:
-    """Compile a bounded unary lookup with resource checks."""
+    """Compile a bounded unary lookup with resource checks.
+
+    ``precision`` enables the rounded-TLU speed knob documented on
+    :func:`make_unary_lookup`.
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     check_lookup_cost(name, values, allow_large_lookup=allow_large_lookup)
-    operation = make_unary_lookup(values, minimum)
+    operation = make_unary_lookup(values, minimum, precision=precision)
     return compile_function(
         operation,
         {"value": "encrypted"},

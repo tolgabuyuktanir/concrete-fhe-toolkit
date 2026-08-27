@@ -216,12 +216,18 @@ backwards-compatible aliases.
   (portable JSON for all parametric model classes; circuits/keys never
   serialized). Concrete `server.save/load` wiring goes with the deploy
   helpers.
-- [ ] **Rounded-TLU speed knob** — optional `lookup_precision` in
-  `_lookup` using Concrete's rounded/truncated bit patterns.
-- [ ] **Model-level cost estimator** — extend `estimate_lookup_cost` to
-  predict compile/keygen/run cost for a model + bounds before compiling.
-- [ ] **End-to-end example gallery** — breast cancer, German Credit
-  (fintech scorecard), k-means segmentation as runnable examples in CI.
+- [x] **Rounded-TLU speed knob** — `make_unary_lookup(...,
+  precision=N)` / `compile_unary_lookup(..., precision=N)` round the
+  lookup index via `round_bit_pattern`; documented in bounds-and-costs.
+  Threading the knob through the scaled special functions is a follow-up.
+- [x] **Model-level cost estimator** — `ml.estimation.
+  estimate_model_cost(model, bounds)` counts comparisons/lookups/
+  multiplications and the widest lookup domain, with guardrail-aligned
+  levels and bit-width warnings.
+- [x] **End-to-end example gallery** — `examples/credit_scorecard.py`
+  (binning pipeline + estimator), `examples/kmeans_segmentation.py`
+  (encrypted training + DP release), `examples/breast_cancer_diagnosis.py`
+  (sklearn bridge); all smoke-tested in CI (sklearn one skips when absent).
 
 ### Infrastructure / DX (non-finance)
 

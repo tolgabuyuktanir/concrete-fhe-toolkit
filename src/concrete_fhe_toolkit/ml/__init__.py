@@ -88,6 +88,7 @@ from .trainers import (
     linear_regression_training,
 )
 from .pipeline import FHEPipeline
+from .estimation import ModelCostEstimate, estimate_model_cost
 from .serialization import load_model, save_model
 from .sklearn_bridge import from_sklearn_forest, from_sklearn_linear, from_sklearn_tree
 from .preprocessing import FHEBinner, FHEMinMaxScaler, FHEStandardScaler, bin_feature
@@ -175,6 +176,8 @@ __all__ = [
     "regression",
     "load_model",
     "save_model",
+    "ModelCostEstimate",
+    "estimate_model_cost",
     "from_sklearn_forest",
     "from_sklearn_linear",
     "from_sklearn_tree",

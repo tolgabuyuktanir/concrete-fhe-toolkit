@@ -1,9 +1,26 @@
 # Changelog
 
-## Unreleased
+## 0.5.0 - 2026-08-26
+
+The machine-learning release: a sklearn-style class API, encrypted
+training for four model families, single-circuit pipelines, and
+differential-privacy helpers for released aggregates.
 
 ### Added
 
+- sklearn-style class API (`ml.classes`): `FHEModel` base with
+  compile/predict lifecycle and eleven ready models —
+  `FHELogisticRegression`, `FHELinearRegression`, `FHEDecisionTree`,
+  `FHERandomForest`, `FHEXGBoost`, `FHESVM`, `FHEKNN`, `FHENaiveBayes`,
+  `FHEMLP`, `FHEPCA`, `FHECNN`.
+- New inference and matrix helpers: `pca_inference`, `cnn_inference`,
+  `svm_inference`, `xgboost_inference`, `max/avg_pooling_2d`,
+  `auto_quantizer`, `normalize_array`, `matrix_exp`, `covariance_matrix`,
+  `matrix_elementwise_multiply`, `matrix_flatten`, `tensor_flatten`,
+  `l1_norm`; plus a docstring-example pass across the ml modules.
+- Encrypted Naive Bayes training: `naive_bayes_training` and
+  `FHENaiveBayesTrainer` (Laplace smoothing and log-prob tables built
+  clear-side from decrypted counts).
 - Encrypted training via the aggregate-decrypt pattern (`ml.trainers`):
   `FHETrainer` base (with a `simulate` mode for fast prototyping),
   `FHELinearRegressionTrainer` (sufficient statistics + clear-side normal

@@ -88,6 +88,7 @@ from .trainers import (
     linear_regression_training,
 )
 from .pipeline import FHEPipeline
+from .serialization import load_model, save_model
 from .preprocessing import FHEBinner, FHEMinMaxScaler, FHEStandardScaler, bin_feature
 from . import classification, clustering, regression
 
@@ -171,6 +172,8 @@ __all__ = [
     "classification",
     "clustering",
     "regression",
+    "load_model",
+    "save_model",
     "FHEBinner",
     "FHEMinMaxScaler",
     "FHEPipeline",

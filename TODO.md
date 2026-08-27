@@ -213,8 +213,10 @@ backwards-compatible aliases.
 - [x] **Batch inference v1** — `FHEModel.predict_many` / `simulate` /
   `simulate_many`: one compile + one key set for N samples. True
   tensor-shaped batching (one circuit run for N samples) remains open.
-- [ ] **Model serialization** — `model.save()/load()` (JSON for trees,
-  weights, centroids) + Concrete `server.save/load` wiring.
+- [x] **Model serialization** — `ml.serialization.save_model/load_model`
+  (portable JSON for all parametric model classes; circuits/keys never
+  serialized). Concrete `server.save/load` wiring goes with the deploy
+  helpers.
 - [ ] **Rounded-TLU speed knob** — optional `lookup_precision` in
   `_lookup` using Concrete's rounded/truncated bit patterns.
 - [ ] **Model-level cost estimator** — extend `estimate_lookup_cost` to

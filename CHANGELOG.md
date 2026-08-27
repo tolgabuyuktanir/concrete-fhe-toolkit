@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Model serialization (`ml.serialization`): `save_model` / `load_model`
+  persist every parametric model class (trees, weights, centroids,
+  tables) as portable JSON; circuits and keys are never serialized —
+  recompile after loading.
+
 ## 0.5.0 - 2026-08-26
 
 The machine-learning release: a sklearn-style class API, encrypted

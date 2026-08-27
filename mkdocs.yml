@@ -88,6 +88,7 @@ nav:
           - Trainers (encrypted training): api/ml-trainers.md
           - Pipelines: api/ml-pipeline.md
           - Preprocessing: api/ml-preprocessing.md
+          - Serialization: api/ml-serialization.md
           - Clustering: api/ml-clustering.md
           - Matrix algebra: api/ml-matrix.md
           - Activations: api/ml-activations.md

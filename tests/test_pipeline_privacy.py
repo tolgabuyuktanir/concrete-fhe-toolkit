@@ -172,3 +172,40 @@ def test_trainer_aggregates_compose_with_dp():
         rng=np.random.default_rng(3),
     )
     assert len(noised) == 4
+
+
+def test_model_serialization_round_trip(tmp_path):
+    from concrete_fhe_toolkit.ml.serialization import load_model, save_model
+
+    tree = {"feature": 0, "threshold": 5, "left": 1, "right": 0}
+    originals = [
+        ml.FHELogisticRegression(weights=[3, 2], bias=-7),
+        ml.FHEDecisionTree(tree),
+        ml.FHERandomForest([tree, tree, tree]),
+        ml.FHEKNN([[0, 0], [5, 5]], [0, 1], 1),
+        ml.FHEMLP([([[1, 0], [0, 1]], [0, 0]), ([[1, 1]], [1])]),
+        ml.FHEKMeans([[1, 1], [8, 8]], max_distance=200),
+    ]
+
+    for index, model in enumerate(originals):
+        path = tmp_path / f"model_{index}.json"
+        save_model(model, str(path))
+        restored = load_model(str(path))
+        assert type(restored) is type(model)
+
+    # Behavior survives the round trip (clear evaluation of the tree).
+    path = tmp_path / "tree.json"
+    save_model(ml.FHEDecisionTree(tree), str(path))
+    restored = load_model(str(path))
+    assert int(ml.decision_tree_inference([7, 0], restored.tree)) == 1
+    assert int(ml.decision_tree_inference([2, 0], restored.tree)) == 0
+
+    # Trainer extras (output_scale) survive too.
+    trained = ml.FHELinearRegression([200, 300], 100)
+    trained.output_scale = 100
+    path = tmp_path / "linreg.json"
+    save_model(trained, str(path))
+    assert load_model(str(path)).output_scale == 100
+
+    with pytest.raises(ValueError):
+        save_model(object(), str(tmp_path / "bad.json"))

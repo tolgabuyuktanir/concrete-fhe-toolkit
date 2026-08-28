@@ -314,7 +314,9 @@ class FHENaiveBayesTrainer:
         self.circuit = None
         self.compiler = None
 
-    def fit_encrypted(self, X_train, y_train):
+    def fit_encrypted(self, X_train, y_train, * ,max_bit_width = 8):
+        if(max_bit_width > 16):
+            raise ValueError("The maximum supported bit width is 16")
         self.compiler = fhe.Compiler(naive_bayes_training,{"X_train": "encrypted", "y_train_one_hot": "encrypted"})
         self.circuit = self.compiler.compile([(X_train, y_train)])
 
@@ -326,8 +328,26 @@ class FHENaiveBayesTrainer:
         formatted_tables = []
         formatted_priors = []
         total_samples = sum(priors)
-        SCALE = 1000
+
+        max_abs_score = 0
+        num_features = len(raw_feature_counts[0]) # Özellik sayısı
+        for prior in priors:
+            class_total = int(prior) # Sınıfın adeti
+            
+            # 1. Sınıfın gelme olasılığı (Prior Prob)
+            prior_prob = class_total / total_samples
+            
+            # 2. O sınıf için Laplace'ın verebileceği en düşük olasılık
+            min_feature_prob = 1 / (class_total + 2)
+            
+            # En ekstrem skoru topla ve maksimumla karşılaştır
+            score_abs = abs(math.log(prior_prob)) + (num_features * abs(math.log(min_feature_prob)))
+            max_abs_score = max(max_abs_score, score_abs)
+
+        max_target_int = (2**(max_bit_width - 1)) -1
         
+        SCALE = max(1,int(max_target_int / max_abs_score))
+
         for c, class_feature_counts in enumerate(raw_feature_counts):
             class_total = int(priors[c])
             
@@ -350,7 +370,10 @@ class FHENaiveBayesTrainer:
                 class_tables.append([log_prob_0, log_prob_1])
             formatted_tables.append(class_tables)
             
-        return FHENaiveBayes(formatted_tables, formatted_priors)
+        model = FHENaiveBayes(formatted_tables, formatted_priors)
+        model.scale = SCALE
+        return model
+
 
 class FHEKMeans(FHEModel):
     """Encrypted K-Means Inference Model (cluster assignment).

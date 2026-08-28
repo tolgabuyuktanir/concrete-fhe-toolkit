@@ -6,6 +6,7 @@ from concrete_fhe_toolkit.ml import (
     random_forest_inference, xgboost_inference, svm_inference,
     knn_inference, naive_bayes_inference, mlp_inference, naive_bayes_training
     )
+import warnings
 
 class FHEModel:
     """Base class for all FHE machine learning models.
@@ -317,6 +318,8 @@ class FHENaiveBayesTrainer:
     def fit_encrypted(self, X_train, y_train, * ,max_bit_width = 8):
         if(max_bit_width > 16):
             raise ValueError("The maximum supported bit width is 16")
+        if(max_bit_width > 8):
+            warnings.warn("Higher bit widths(>8) may result in longer computation times.",UserWarning)
         self.compiler = fhe.Compiler(naive_bayes_training,{"X_train": "encrypted", "y_train_one_hot": "encrypted"})
         self.circuit = self.compiler.compile([(X_train, y_train)])
 
@@ -353,7 +356,7 @@ class FHENaiveBayesTrainer:
             
             # Prior Log Prob
             prior_prob = class_total / total_samples
-            formatted_priors.append(int(math.log(prior_prob) * SCALE))
+            formatted_priors.append(int(round(math.log(prior_prob) * SCALE)))
             
             class_tables = []
             for count_of_ones in class_feature_counts:
@@ -364,8 +367,8 @@ class FHENaiveBayesTrainer:
                 prob_0 = (count_of_zeros + 1) / (class_total + 2)
                 prob_1 = (count_of_ones + 1) / (class_total + 2)
                 
-                log_prob_0 = int(math.log(prob_0) * SCALE)
-                log_prob_1 = int(math.log(prob_1) * SCALE)
+                log_prob_0 = int(round(math.log(prob_0) * SCALE))
+                log_prob_1 = int(round(math.log(prob_1) * SCALE))
                 
                 class_tables.append([log_prob_0, log_prob_1])
             formatted_tables.append(class_tables)

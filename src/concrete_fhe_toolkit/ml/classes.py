@@ -21,7 +21,7 @@ class FHEModel:
         raise NotImplementedError("This function can be used in inherited classes")
         
     def _batch_circuit_logic(self, features_batch):
-        return [self._circuit_logic(sample) for sample in features_batch]
+        return fhe.array([self._circuit_logic(sample) for sample in features_batch])
 
     def compile(self, inputset, batch_size: int = 16):
         self.batch_size = batch_size

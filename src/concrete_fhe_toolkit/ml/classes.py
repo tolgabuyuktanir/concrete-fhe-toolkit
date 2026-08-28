@@ -6,7 +6,6 @@ from concrete_fhe_toolkit.ml import (
     random_forest_inference, xgboost_inference, svm_inference,
     knn_inference, naive_bayes_inference, mlp_inference, naive_bayes_training
     )
-from concrete_fhe_toolkit.arrays import array_pad
 
 class FHEModel:
     """Base class for all FHE machine learning models.

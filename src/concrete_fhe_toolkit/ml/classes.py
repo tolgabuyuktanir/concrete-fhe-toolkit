@@ -6,6 +6,8 @@ from concrete_fhe_toolkit.ml import (
     random_forest_inference, xgboost_inference, svm_inference,
     knn_inference, naive_bayes_inference, mlp_inference, naive_bayes_training
     )
+from concrete_fhe_toolkit.arrays import array_pad
+
 class FHEModel:
     """Base class for all FHE machine learning models.
     
@@ -18,24 +20,29 @@ class FHEModel:
 
     def _circuit_logic(self,features):
         raise NotImplementedError("This function can be used in inherited classes")
+        
+    def _batch_circuit_logic(self, features_batch):
+        return [self._circuit_logic(sample) for sample in features_batch]
 
-    def compile(self,inputset):
-        self.compiler = fhe.Compiler(self._circuit_logic,{"features": "encrypted"})
+    def compile(self, inputset, batch_size: int = 16):
+        self.batch_size = batch_size
+        self.compiler = fhe.Compiler(self._batch_circuit_logic,{"features_batch": "encrypted"})
         self.circuit = self.compiler.compile(inputset)    
 
     def predict(self, features):
         """Encrypt one sample, run the compiled circuit, and decrypt the result.
+        This is a convenience wrapper that calls `predict_many`.
 
         Example:
             ```python
             model = FHELogisticRegression(weights=[3, 2], bias=-7)
-            model.compile(inputset=[[0, 0], [5, 5]])
+            model.compile(inputset=[[[0, 0]] * 16], batch_size=16)
             print(model.predict([4, 1]))  # 1
             ```
         """
         if self.circuit is None:
             raise ValueError("The model should be compiled before prediction")
-        return self.circuit.encrypt_run_decrypt(features)
+        return self.predict_many([features])[0]
 
     def simulate(self, features):
         """Run one prediction in Concrete's simulator (fast, no key generation).
@@ -45,32 +52,68 @@ class FHEModel:
 
         Example:
             ```python
-            model.compile(inputset)
+            model.compile(inputset=[[[0, 0]] * 16], batch_size=16)
             print(model.simulate([4, 1]))  # same output, no keygen
             ```
         """
         if self.circuit is None:
             raise ValueError("The model should be compiled before prediction")
-        return self.circuit.simulate(features)
+        return self.simulate_many([features])[0]
 
     def predict_many(self, samples):
         """Predict a batch of samples with one compiled circuit (one key set).
 
-        The circuit is compiled once; every sample is then encrypted, run,
-        and decrypted through it — no recompilation or fresh key generation
-        per sample.
+        The circuit is compiled for a specific `batch_size`. If the number of 
+        samples is not a multiple of `batch_size`, dummy samples are automatically 
+        padded and then removed from the final result.
 
         Example:
             ```python
-            model.compile(inputset)
+            model.compile(inputset=[[[0, 0]] * 16], batch_size=16)
             predictions = model.predict_many([[4, 1], [0, 2], [5, 5]])
             ```
         """
-        return [self.predict(sample) for sample in samples]
+        original_samples_length = len(samples)
+        num_of_full_batches = original_samples_length // self.batch_size
+        num_of_padding = self.batch_size - original_samples_length % self.batch_size
+        
+        padded_samples = list(samples)
+        if num_of_padding != self.batch_size:
+            num_of_full_batches += 1
+            for _ in range(num_of_padding):
+                padded_samples.append([0] * len(padded_samples[0]))
+
+        predictions = []
+        start = 0
+        for _ in range(num_of_full_batches):
+            batch = padded_samples[start:start+self.batch_size]
+            predictions.extend(self.circuit.encrypt_run_decrypt(batch))
+            start += self.batch_size
+
+        return predictions[:original_samples_length]    
+
+        
 
     def simulate_many(self, samples):
         """Simulate a batch of samples (fast counterpart of ``predict_many``)."""
-        return [self.simulate(sample) for sample in samples]
+        original_samples_length = len(samples)
+        num_of_full_batches = original_samples_length // self.batch_size
+        num_of_padding = self.batch_size - original_samples_length % self.batch_size
+        
+        padded_samples = list(samples)
+        if num_of_padding != self.batch_size:
+            num_of_full_batches += 1
+            for _ in range(num_of_padding):
+                padded_samples.append([0] * len(padded_samples[0]))
+
+        predictions = []
+        start = 0
+        for _ in range(num_of_full_batches):
+            batch = padded_samples[start:start+self.batch_size]
+            predictions.extend(self.circuit.simulate(batch))
+            start += self.batch_size
+
+        return predictions[:original_samples_length]
 
 
 class FHELogisticRegression(FHEModel):

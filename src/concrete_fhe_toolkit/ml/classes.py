@@ -419,23 +419,18 @@ class FHENaiveBayesTrainer:
         raw_feature_counts, priors = self.circuit.encrypt_run_decrypt(X_train, y_train)
         
         # naive_bayes_inference expects SCALED LOG PROBABILITIES, not raw counts!
-        # We will apply Laplace smoothing and scale by 1000.
+        # We will apply Laplace smoothing and dynamically scale the log probabilities.
         formatted_tables = []
         formatted_priors = []
         total_samples = sum(priors)
 
         max_abs_score = 0
-        num_features = len(raw_feature_counts[0]) # Özellik sayısı
+        num_features = len(raw_feature_counts[0])
         for prior in priors:
-            class_total = int(prior) # Sınıfın adeti
-            
-            # 1. Sınıfın gelme olasılığı (Prior Prob)
+            class_total = int(prior)
             prior_prob = class_total / total_samples
-            
-            # 2. O sınıf için Laplace'ın verebileceği en düşük olasılık
             min_feature_prob = 1 / (class_total + 2)
             
-            # En ekstrem skoru topla ve maksimumla karşılaştır
             score_abs = abs(math.log(prior_prob)) + (num_features * abs(math.log(min_feature_prob)))
             max_abs_score = max(max_abs_score, score_abs)
 

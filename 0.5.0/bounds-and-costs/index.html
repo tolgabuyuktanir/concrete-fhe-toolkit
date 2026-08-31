@@ -560,6 +560,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rounded-lookups-trading-accuracy-for-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rounded lookups: trading accuracy for speed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimating-a-model-before-compiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estimating a model before compiling
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -863,6 +885,34 @@
     
   
     Privacy (DP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/deploy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
   
 
     
@@ -1339,6 +1389,90 @@
   
   
     <li class="md-nav__item">
+      <a href="../api/ml-serialization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Serialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/ml-sklearn-bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sklearn bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/ml-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cost estimation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../api/ml-clustering/" class="md-nav__link">
         
   
@@ -1706,6 +1840,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rounded-lookups-trading-accuracy-for-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rounded lookups: trading accuracy for speed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimating-a-model-before-compiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estimating a model before compiling
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1937,6 +2093,22 @@ fit in <code>denominator_width</code> unsigned bits. Division by zero returns
 <span class="c1"># 85, representing floor((1 / 3) * 256)</span>
 </code></pre></div>
 <p>The fixed-point result is an integer scaled by <code>2 ** fractional_bits</code>.</p>
+<h2 id="rounded-lookups-trading-accuracy-for-speed">Rounded lookups: trading accuracy for speed<a class="headerlink" href="#rounded-lookups-trading-accuracy-for-speed" title="Permanent link">&para;</a></h2>
+<p>Large, smooth tables (sigmoid, exp, sin) can be evaluated through Concrete's
+rounded table lookups: <code>make_unary_lookup(values, min_value, precision=N)</code>
+rounds the lookup index down to <code>N</code> bits before indexing, so the compiler
+evaluates a <code>2**N</code>-entry table instead of the full one. The input is
+approximated to steps of <code>2**(input_bits - N)</code>, so reserve this knob for
+functions where a coarser input grid is acceptable — never for exact
+functions such as <code>gcd</code> or parity.</p>
+<h2 id="estimating-a-model-before-compiling">Estimating a model before compiling<a class="headerlink" href="#estimating-a-model-before-compiling" title="Permanent link">&para;</a></h2>
+<p><code>ml.estimation.estimate_model_cost(model, min_feature=..., max_feature=...)</code>
+counts the encrypted comparisons, lookups, and multiplications a model will
+compile into and reports the widest lookup domain in bits, mapped to the
+same small/moderate/large/very-large levels as the lookup guardrails. Use
+it to compare candidate models and to catch circuits that will not fit
+(for example a k-NN whose argmin encoding needs 16+ bits) before paying
+for a compile.</p>
 
 
 

@@ -10,11 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/0.5.0/api/finance-transactions/">
+        <link rel="canonical" href="https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/0.5.0/api/deploy/">
       
       
-        <link rel="prev" href="../finance-core/">
+        <link rel="prev" href="../privacy/">
       
+      
+        <link rel="next" href="../math-basic/">
       
       
         
@@ -25,7 +27,7 @@
     
     
       
-        <title>Transactions - concrete-fhe-toolkit</title>
+        <title>Deployment - concrete-fhe-toolkit</title>
       
     
     
@@ -80,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#transactions" class="md-skip">
+        <a href="#deployment" class="md-skip">
           Skip to content
         </a>
       
@@ -118,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Transactions
+              Deployment
             
           </span>
         </div>
@@ -590,6 +592,8 @@
                 
   
   
+    
+  
   
   
     
@@ -605,11 +609,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
         
           
           <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
@@ -630,7 +634,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -757,10 +761,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../deploy/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -776,6 +807,76 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        deploy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="deploy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.deploy.save_deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.deploy.load_server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.deploy.load_client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_client
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1479,8 +1580,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1496,11 +1595,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
         
           
           <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="">
@@ -1521,7 +1620,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1564,37 +1663,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Transactions
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../finance-transactions/" class="md-nav__link">
         
   
   
@@ -1610,54 +1682,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#concrete_fhe_toolkit.finance.transactions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        transactions
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="transactions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#concrete_fhe_toolkit.finance.transactions.transfer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        transfer
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1705,22 +1729,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#concrete_fhe_toolkit.finance.transactions" class="md-nav__link">
+  <a href="#concrete_fhe_toolkit.deploy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        transactions
+        deploy
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="transactions">
+    <nav class="md-nav" aria-label="deploy">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#concrete_fhe_toolkit.finance.transactions.transfer" class="md-nav__link">
+  <a href="#concrete_fhe_toolkit.deploy.save_deployment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        transfer
+        save_deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.deploy.load_server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.deploy.load_client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_client
       
     </span>
   </a>
@@ -1752,21 +1798,54 @@
   
 
 
-<h1 id="transactions">Transactions<a class="headerlink" href="#transactions" title="Permanent link">&para;</a></h1>
+<h1 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h1>
 
 
 <div class="doc doc-object doc-module">
 
 
 
-<h2 id="concrete_fhe_toolkit.finance.transactions" class="doc doc-heading">
-            <span class="doc doc-object-name doc-module-name">concrete_fhe_toolkit.finance.transactions</span>
+<h2 id="concrete_fhe_toolkit.deploy" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">concrete_fhe_toolkit.deploy</span>
 
 
-<a href="#concrete_fhe_toolkit.finance.transactions" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#concrete_fhe_toolkit.deploy" class="headerlink" title="Permanent link">&para;</a></h2>
 
     <div class="doc doc-contents first">
 
+        <p>Client/server deployment helpers for compiled circuits.</p>
+<p>Concrete splits a compiled circuit into two artifacts:</p>
+<ul>
+<li><strong>server.zip</strong> — the evaluation logic. Ships to the untrusted server; it
+  contains no key material and can only compute on ciphertexts.</li>
+<li><strong>client.zip</strong> — the client specs. Stays with the data owner, who
+  generates keys locally, encrypts inputs, and decrypts results.</li>
+</ul>
+<p>These helpers wrap that split into three calls, so a trained toolkit model
+becomes a deployable encrypted service:</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">deploy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml</span><span class="w"> </span><span class="kn">import</span> <span class="n">FHELogisticRegression</span>
+
+<span class="c1"># --- offline: train/compile and export the two artifacts ---</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">FHELogisticRegression</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
+<span class="n">deploy</span><span class="o">.</span><span class="n">save_deployment</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">circuit</span><span class="p">,</span> <span class="s2">"deployment/"</span><span class="p">)</span>
+
+<span class="c1"># --- server side (untrusted): load logic only ---</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">deploy</span><span class="o">.</span><span class="n">load_server</span><span class="p">(</span><span class="s2">"deployment/"</span><span class="p">)</span>
+
+<span class="c1"># --- client side (data owner): keys, encrypt, decrypt ---</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">deploy</span><span class="o">.</span><span class="n">load_client</span><span class="p">(</span><span class="s2">"deployment/"</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">encrypt</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">evaluation_keys</span><span class="o">=</span><span class="n">client</span><span class="o">.</span><span class="n">evaluation_keys</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>  <span class="c1"># 1</span>
+</code></pre></div>
+</details>
 
 
 
@@ -1790,80 +1869,258 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="concrete_fhe_toolkit.finance.transactions.transfer" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">transfer</span>
+<h3 id="concrete_fhe_toolkit.deploy.save_deployment" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">save_deployment</span>
 
 
-<a href="#concrete_fhe_toolkit.finance.transactions.transfer" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">transfer</span><span class="p">(</span><span class="n">sender_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">receiver_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<a href="#concrete_fhe_toolkit.deploy.save_deployment" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">save_deployment</span><span class="p">(</span><span class="n">circuit</span><span class="p">:</span> <span class="s1">'fhe.Circuit'</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Transfers an amount from one account to another securely under encryption.</p>
-<p>If the sender has insufficient balance (sender_balance &lt; amount), the 
-transfer is silently cancelled (amount becomes 0) without leaking 
-information about the failure.</p>
+        <p>Export a compiled circuit as server.zip + client.zip artifacts.</p>
+<p>The directory is created when missing. No key material is written:
+<code>server.zip</code> holds only evaluation logic and <code>client.zip</code> holds the
+specs the data owner needs to generate keys locally.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>circuit</code>
+            </td>
+            <td>
+                  <code>&#39;fhe.Circuit&#39;</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A compiled <code>fhe.Circuit</code> (for a toolkit model, compile
+it first and pass <code>model.circuit</code>).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>directory</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Destination directory for the two artifacts.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
   <summary>Example</summary>
-  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.finance.transactions</span><span class="w"> </span><span class="kn">import</span> <span class="n">transfer</span>
-
-<span class="c1"># Inside an FHE circuit</span>
-<span class="c1"># enc_new_sender_bal, enc_new_receiver_bal = transfer(</span>
-<span class="c1">#     enc_sender_bal, enc_receiver_bal, enc_transfer_amount</span>
-<span class="c1"># )</span>
+  <div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
+<span class="n">deploy</span><span class="o">.</span><span class="n">save_deployment</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">circuit</span><span class="p">,</span> <span class="s2">"deployment/"</span><span class="p">)</span>
 </code></pre></div>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/finance/transactions.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">transfer</span><span class="p">(</span><span class="n">sender_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">receiver_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span><span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Transfers an amount from one account to another securely under encryption.</span>
+              <summary>Source code in <code>src/concrete_fhe_toolkit/deploy.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">save_deployment</span><span class="p">(</span><span class="n">circuit</span><span class="p">:</span> <span class="s2">"fhe.Circuit"</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Export a compiled circuit as server.zip + client.zip artifacts.</span>
 
-<span class="sd">    If the sender has insufficient balance (sender_balance &lt; amount), the </span>
-<span class="sd">    transfer is silently cancelled (amount becomes 0) without leaking </span>
-<span class="sd">    information about the failure.</span>
+<span class="sd">    The directory is created when missing. No key material is written:</span>
+<span class="sd">    ``server.zip`` holds only evaluation logic and ``client.zip`` holds the</span>
+<span class="sd">    specs the data owner needs to generate keys locally.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        circuit: A compiled ``fhe.Circuit`` (for a toolkit model, compile</span>
+<span class="sd">            it first and pass ``model.circuit``).</span>
+<span class="sd">        directory: Destination directory for the two artifacts.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
-<span class="sd">        from concrete_fhe_toolkit.finance.transactions import transfer</span>
-
-<span class="sd">        # Inside an FHE circuit</span>
-<span class="sd">        # enc_new_sender_bal, enc_new_receiver_bal = transfer(</span>
-<span class="sd">        #     enc_sender_bal, enc_receiver_bal, enc_transfer_amount</span>
-<span class="sd">        # )</span>
+<span class="sd">        model.compile(inputset)</span>
+<span class="sd">        deploy.save_deployment(model.circuit, "deployment/")</span>
 <span class="sd">        ```</span>
 <span class="sd">    """</span>
-    <span class="n">is_balance_enough</span> <span class="o">=</span> <span class="n">greater_equal</span><span class="p">(</span><span class="n">sender_balance</span><span class="p">,</span><span class="n">amount</span><span class="p">)</span>
-    <span class="n">amount</span> <span class="o">*=</span> <span class="n">is_balance_enough</span> 
-    <span class="n">sender_balance</span> <span class="o">-=</span> <span class="n">amount</span>
-    <span class="n">receiver_balance</span> <span class="o">+=</span> <span class="n">amount</span>
+    <span class="k">if</span> <span class="n">circuit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"circuit is not compiled; call compile(...) first"</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">circuit</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">SERVER_FILENAME</span><span class="p">))</span>
+    <span class="n">circuit</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">CLIENT_FILENAME</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
 
-    <span class="k">return</span> <span class="n">sender_balance</span><span class="p">,</span><span class="n">receiver_balance</span>
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.deploy.load_server" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">load_server</span>
+
+
+<a href="#concrete_fhe_toolkit.deploy.load_server" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">load_server</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'fhe.Server'</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Load the evaluation-only server artifact from a deployment directory.</p>
+<p>Safe to run on untrusted infrastructure — the server can only compute
+on ciphertexts and never sees keys or plaintexts.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="n">server</span> <span class="o">=</span> <span class="n">deploy</span><span class="o">.</span><span class="n">load_server</span><span class="p">(</span><span class="s2">"deployment/"</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">encrypted_args</span><span class="p">,</span> <span class="n">evaluation_keys</span><span class="o">=</span><span class="n">keys</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/deploy.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">load_server</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"fhe.Server"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Load the evaluation-only server artifact from a deployment directory.</span>
+
+<span class="sd">    Safe to run on untrusted infrastructure — the server can only compute</span>
+<span class="sd">    on ciphertexts and never sees keys or plaintexts.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        server = deploy.load_server("deployment/")</span>
+<span class="sd">        result = server.run(encrypted_args, evaluation_keys=keys)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">SERVER_FILENAME</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"no </span><span class="si">{</span><span class="n">SERVER_FILENAME</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">directory</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.deploy.load_client" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">load_client</span>
+
+
+<a href="#concrete_fhe_toolkit.deploy.load_client" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">load_client</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'fhe.Client'</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Load the client specs from a deployment directory (data-owner side).</p>
+<p>Generate keys locally with <code>client.keys.generate()</code> before the first
+<code>encrypt</code>; keys never leave the client except the public evaluation
+keys passed to <code>server.run</code>.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">deploy</span><span class="o">.</span><span class="n">load_client</span><span class="p">(</span><span class="s2">"deployment/"</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/concrete_fhe_toolkit/deploy.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">load_client</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"fhe.Client"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Load the client specs from a deployment directory (data-owner side).</span>
+
+<span class="sd">    Generate keys locally with ``client.keys.generate()`` before the first</span>
+<span class="sd">    ``encrypt``; keys never leave the client except the public evaluation</span>
+<span class="sd">    keys passed to ``server.run``.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        client = deploy.load_client("deployment/")</span>
+<span class="sd">        client.keys.generate()</span>
+<span class="sd">        args = client.encrypt(sample)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">CLIENT_FILENAME</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"no </span><span class="si">{</span><span class="n">CLIENT_FILENAME</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">directory</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Client</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

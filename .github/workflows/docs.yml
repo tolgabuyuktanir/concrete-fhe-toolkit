@@ -37,7 +37,7 @@ jobs:
         # concrete-python) does not need to be installed.
         run: |
           python -m pip install --upgrade pip
-          pip install mkdocs-material "mkdocstrings[python]" mike
+          pip install mkdocs-material "mkdocstrings[python]" mike mkdocs-jupyter
 
       - name: Configure git author
         run: |

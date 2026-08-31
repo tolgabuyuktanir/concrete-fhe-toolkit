@@ -3268,6 +3268,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="encrypted-machine-learning-trainers"></a></p>
 <h1 id="encrypted-machine-learning-trainers">Encrypted Machine Learning: Trainers<a class="anchor-link" href="#encrypted-machine-learning-trainers">¶</a></h1><p>This tutorial covers <code>src/concrete_fhe_toolkit/ml/trainers.py</code>. The toolkit supports training models directly on encrypted data using the <strong>aggregate-decrypt</strong> pattern.</p>
 <p>In this pattern, a fixed circuit computes aggregate statistics (like counts or sums) over the encrypted training data. The key holder decrypts only these aggregates—never the raw data—and the final model is assembled clear-side from them.</p>
 </div>
@@ -3280,6 +3281,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="encrypted-linear-regression-training"></a></p>
 <h2 id="encrypted-linear-regression-training">Encrypted Linear Regression Training<a class="anchor-link" href="#encrypted-linear-regression-training">¶</a></h2><p>Let's train a Linear Regression model on encrypted data. To make this run quickly for the tutorial, we use <code>simulate=True</code>. In a real scenario, you would set <code>simulate=False</code>.</p>
 </div>
 </div>

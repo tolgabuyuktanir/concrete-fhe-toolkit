@@ -3290,6 +3290,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="encrypted-machine-learning-preprocessing"></a></p>
 <h1 id="encrypted-machine-learning-preprocessing">Encrypted Machine Learning: Preprocessing<a class="anchor-link" href="#encrypted-machine-learning-preprocessing">¶</a></h1><p>This tutorial covers <code>src/concrete_fhe_toolkit/ml/preprocessing.py</code>. Preprocessing transformers can be chained inside an <code>FHEPipeline</code> before a model. They operate entirely in the encrypted domain, allowing for secure standard scaling, min-max scaling, and continuous-to-categorical binning.</p>
 </div>
 </div>
@@ -3301,6 +3302,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="encrypted-binning-scorecard-binning"></a></p>
 <h2 id="encrypted-binning-scorecard-binning">Encrypted Binning (Scorecard binning)<a class="anchor-link" href="#encrypted-binning-scorecard-binning">¶</a></h2><p>An <code>FHEBinner</code> takes continuous encrypted inputs and assigns them to ordinal bucket indices based on public bucket boundaries. This is especially useful for logistic regression scorecards.</p>
 </div>
 </div>
@@ -3381,6 +3383,7 @@ print("✅ Encrypted FHEBinner passed!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="standard-scaler"></a></p>
 <h2 id="standard-scaler">Standard Scaler<a class="anchor-link" href="#standard-scaler">¶</a></h2><p>Computes z-scores <code>((x - mean) * scale) // std</code> per feature while remaining in the integer domain.</p>
 </div>
 </div>

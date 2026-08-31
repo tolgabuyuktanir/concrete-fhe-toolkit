@@ -3268,6 +3268,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="encrypted-machine-learning-sklearn-bridge"></a></p>
 <h1 id="encrypted-machine-learning-sklearn-bridge">Encrypted Machine Learning: Sklearn Bridge<a class="anchor-link" href="#encrypted-machine-learning-sklearn-bridge">¶</a></h1><p>This tutorial covers <code>src/concrete_fhe_toolkit/ml/sklearn_bridge.py</code>. Training directly under encryption can be slow. Often, the best workflow is to train a model on <strong>clear</strong> data using <code>scikit-learn</code>, and then convert it into an <code>FHEModel</code> for encrypted inference. This module provides functions to automate that conversion and handles the quantization of weights and thresholds.</p>
 </div>
 </div>
@@ -3279,6 +3280,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="converting-a-linear-model"></a></p>
 <h2 id="converting-a-linear-model">Converting a Linear Model<a class="anchor-link" href="#converting-a-linear-model">¶</a></h2><p>You can convert an sklearn <code>LogisticRegression</code> or <code>LinearRegression</code> model using <code>from_sklearn_linear</code>. We will use a mock object here that acts like a fitted sklearn LogisticRegression model.</p>
 </div>
 </div>

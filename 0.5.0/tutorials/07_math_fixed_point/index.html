@@ -3312,6 +3312,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="encrypted-math-tutorial-fixed-point"></a></p>
 <h1 id="encrypted-math-tutorial-fixed-point">Encrypted Math Tutorial: Fixed Point<a class="anchor-link" href="#encrypted-math-tutorial-fixed-point">¶</a></h1><p>This tutorial covers <code>src/concrete_fhe_toolkit/math/fixed_point.py</code>. FHE only natively supports integers. To compute with fractional numbers, we scale them up (e.g., $2.5 \times 10 = 25$) and track the implicit denominator. The toolkit provides helpers to round, rescale, and multiply these simulated floats.</p>
 </div>
 </div>
@@ -3323,6 +3324,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="encoding-decoding"></a></p>
 <h2 id="encoding-decoding">Encoding &amp; Decoding<a class="anchor-link" href="#encoding-decoding">¶</a></h2><p>Translating between Python floats and scaled integers.</p>
 </div>
 </div>
@@ -3383,6 +3385,7 @@ print("✅ Encoding/Decoding passed!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="rounding-operations-make_floor-make_ceil-make_round"></a></p>
 <h2 id="rounding-operations-make_floor-make_ceil-make_round">Rounding Operations (<code>make_floor</code>, <code>make_ceil</code>, <code>make_round</code>)<a class="anchor-link" href="#rounding-operations-make_floor-make_ceil-make_round">¶</a></h2>
 </div>
 </div>
@@ -3461,6 +3464,7 @@ print("✅ Encrypted rounding passed!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="fixed-point-multiplication-make_fixed_point_multiply"></a></p>
 <h2 id="fixed-point-multiplication-make_fixed_point_multiply">Fixed Point Multiplication (<code>make_fixed_point_multiply</code>)<a class="anchor-link" href="#fixed-point-multiplication-make_fixed_point_multiply">¶</a></h2><p>If you multiply two values scaled by $S$, the result is scaled by $S^2$. This function implicitly divides the product by $S$ so the result remains at scale $S$.</p>
 </div>
 </div>

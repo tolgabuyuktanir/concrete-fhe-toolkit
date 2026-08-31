@@ -3312,6 +3312,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="encrypted-machine-learning-models"></a></p>
 <h1 id="encrypted-machine-learning-models">Encrypted Machine Learning: Models<a class="anchor-link" href="#encrypted-machine-learning-models">¶</a></h1><p>This tutorial covers <code>src/concrete_fhe_toolkit/ml/models.py</code>. This massive module provides the raw algorithmic inference functions for all supported ML models. These functions are what the <code>FHEModel</code> classes compile under the hood.</p>
 </div>
 </div>
@@ -3323,6 +3324,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="knn-inference"></a></p>
 <h2 id="knn-inference">KNN Inference<a class="anchor-link" href="#knn-inference">¶</a></h2><p>KNN inference works by calculating distances between the encrypted test sample and all public training samples, and returning the label of the nearest neighbor (or majority vote if k &gt; 1).</p>
 </div>
 </div>
@@ -3403,6 +3405,7 @@ print("✅ Encrypted KNN Inference passed!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="decision-tree-inference"></a></p>
 <h2 id="decision-tree-inference">Decision Tree Inference<a class="anchor-link" href="#decision-tree-inference">¶</a></h2><p>Decision Trees are executed obliviously. Every path is evaluated, and the final result is selected without leaking which branch was taken.</p>
 </div>
 </div>
@@ -3471,6 +3474,7 @@ print("✅ Encrypted Decision Tree Inference passed!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="naive-bayes-inference"></a></p>
 <h2 id="naive-bayes-inference">Naive Bayes Inference<a class="anchor-link" href="#naive-bayes-inference">¶</a></h2><p>Evaluates a Naive Bayes model using quantized log probabilities.</p>
 </div>
 </div>

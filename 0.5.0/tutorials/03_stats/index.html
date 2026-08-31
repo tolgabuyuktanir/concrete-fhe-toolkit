@@ -3334,6 +3334,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="encrypted-statistics-tutorial"></a></p>
 <h1 id="encrypted-statistics-tutorial">Encrypted Statistics Tutorial<a class="anchor-link" href="#encrypted-statistics-tutorial">¶</a></h1><p>This notebook covers the <code>stats.py</code> module, demonstrating how to compute statistical metrics over encrypted arrays. Since division and dynamic branching are complex in FHE, these functions utilize specialized mathematical approximations and tournament reductions to achieve exact or bounded results.</p>
 </div>
 </div>
@@ -3345,6 +3346,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="basic-statistical-metrics"></a></p>
 <h2 id="basic-statistical-metrics">Basic Statistical Metrics<a class="anchor-link" href="#basic-statistical-metrics">¶</a></h2><p>Functions covered: <code>array_mean</code>, <code>array_variance</code>, <code>array_std</code>, <code>array_covariance</code></p>
 </div>
 </div>
@@ -3449,6 +3451,7 @@ print("✅ Encrypted basic stats passed!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="extremes-and-spread"></a></p>
 <h2 id="extremes-and-spread">Extremes and Spread<a class="anchor-link" href="#extremes-and-spread">¶</a></h2><p>Functions covered: <code>array_max</code>, <code>array_min</code>, <code>array_range</code>, <code>array_count_greater</code></p>
 </div>
 </div>
@@ -3545,6 +3548,7 @@ print("✅ Encrypted extremes passed!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="quantiles-and-distributions"></a></p>
 <h2 id="quantiles-and-distributions">Quantiles and Distributions<a class="anchor-link" href="#quantiles-and-distributions">¶</a></h2><p>Functions covered: <code>array_median</code>, <code>array_percentile</code>, <code>array_histogram</code>, <code>array_mode</code></p>
 <p><strong>Note on Sorting in FHE:</strong> <code>array_median</code> and <code>array_percentile</code> require sorting the array cryptographically. Thus, bounds must be provided to construct the underlying bitonic sorting network.</p>
 </div>
@@ -3642,6 +3646,7 @@ print("✅ Encrypted distributions passed!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="preprocessing"></a></p>
 <h2 id="preprocessing">Preprocessing<a class="anchor-link" href="#preprocessing">¶</a></h2><p>Functions covered: <code>array_normalize</code>
 Normalizing data inside FHE is highly useful for feeding outputs from one network layer into another layer requiring rigidly bounded inputs.</p>
 </div>

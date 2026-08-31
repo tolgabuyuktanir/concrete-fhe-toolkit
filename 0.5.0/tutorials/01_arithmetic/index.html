@@ -3334,6 +3334,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="arithmetic-operations-tutorial"></a></p>
 <h1 id="arithmetic-operations-tutorial">Arithmetic Operations Tutorial<a class="anchor-link" href="#arithmetic-operations-tutorial">¶</a></h1><p>Welcome to the <code>concrete-fhe-toolkit</code> tutorials! This notebook exhaustively covers all bounded scalar arithmetic operations in <code>src/concrete_fhe_toolkit/arithmetic.py</code>.</p>
 <p>In Fully Homomorphic Encryption (FHE), we cannot rely on native Python operators (<code>&gt;</code>, <code>//</code>, etc.) because dynamic branching is impossible on encrypted data. We provide specialized, bounded cryptographic functions for every scenario.</p>
 </div>
@@ -3346,6 +3347,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="comparing-values-compare"></a></p>
 <h2 id="comparing-values-compare">Comparing Values (<code>compare</code>)<a class="anchor-link" href="#comparing-values-compare">¶</a></h2><p>The <code>compare</code> function returns <code>1</code> when <code>x &gt; y</code>, <code>0</code> when <code>x == y</code>, and <code>-1</code> when <code>x &lt; y</code>. We test all three edge cases below.</p>
 </div>
 </div>
@@ -3418,6 +3420,7 @@ print("✅ Encrypted compare() passed all edge cases!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="sign-of-a-value-sign"></a></p>
 <h2 id="sign-of-a-value-sign">Sign of a Value (<code>sign</code>)<a class="anchor-link" href="#sign-of-a-value-sign">¶</a></h2><p>The <code>sign</code> function returns the mathematical sign of a number (1, 0, or -1). Let's test it across positive, zero, and negative domains.</p>
 </div>
 </div>
@@ -3486,6 +3489,7 @@ print("✅ Encrypted sign() passed all edge cases!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="floor-division-make_floor_divide"></a></p>
 <h2 id="floor-division-make_floor_divide">Floor Division (<code>make_floor_divide</code>)<a class="anchor-link" href="#floor-division-make_floor_divide">¶</a></h2><p>Division in FHE is notoriously difficult due to the lack of dynamic branching. <code>make_floor_divide</code> creates a function that performs exact floor division using multivariate table lookups.</p>
 <p>Crucially, we test what happens when <strong>dividing by zero</strong>, which is safely handled by our <code>zero_result</code> parameter!</p>
 </div>
@@ -3561,6 +3565,7 @@ print("✅ Encrypted floor_divide passed standard and zero-division edge cases!"
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="floor-divide-by-product-make_floor_divide_by_product"></a></p>
 <h2 id="floor-divide-by-product-make_floor_divide_by_product">Floor Divide by Product (<code>make_floor_divide_by_product</code>)<a class="anchor-link" href="#floor-divide-by-product-make_floor_divide_by_product">¶</a></h2><p>This is an advanced division where the denominator is the product of two numbers <code>numerator // (left * right)</code>. This is highly useful in financial calculations and complex scaling algorithms without consuming multiple FHE multiplication layers.</p>
 </div>
 </div>

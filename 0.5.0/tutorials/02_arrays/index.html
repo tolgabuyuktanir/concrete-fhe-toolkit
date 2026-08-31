@@ -3356,6 +3356,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="encrypted-array-operations-tutorial"></a></p>
 <h1 id="encrypted-array-operations-tutorial">Encrypted Array Operations Tutorial<a class="anchor-link" href="#encrypted-array-operations-tutorial">¶</a></h1><p>This notebook provides exhaustive testing and examples for every single function within the <code>arrays.py</code> module of the <code>concrete-fhe-toolkit</code>. We cover everything from simple element-wise math to complex cryptographic sorting and reductions.</p>
 <p>When working with Fully Homomorphic Encryption (FHE), standard Python lists and NumPy arrays behave differently. We must use constant-time operations to avoid leaking information about the data size, positions, or conditions.</p>
 </div>
@@ -3368,6 +3369,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="basic-array-math"></a></p>
 <h2 id="basic-array-math">Basic Array Math<a class="anchor-link" href="#basic-array-math">¶</a></h2><p>Functions covered: <code>array_add</code>, <code>array_sub</code>, <code>array_multiply</code>, <code>array_scale</code>, <code>array_sum</code>.</p>
 </div>
 </div>
@@ -3474,6 +3476,7 @@ print("✅ Encrypted basic math passed all edge cases!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="array-manipulation"></a></p>
 <h2 id="array-manipulation">Array Manipulation<a class="anchor-link" href="#array-manipulation">¶</a></h2><p>Functions covered: <code>array_pad</code>, <code>array_slice</code>, <code>array_reverse</code>, <code>array_concat</code>, <code>array_cumsum</code>.</p>
 </div>
 </div>
@@ -3572,6 +3575,7 @@ print("✅ Encrypted manipulation passed!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="searching-querying-indexing"></a></p>
 <h2 id="searching-querying-indexing">Searching, Querying &amp; Indexing<a class="anchor-link" href="#searching-querying-indexing">¶</a></h2><p>Functions covered: <code>array_contains</code>, <code>array_count</code>, <code>array_all_equal</code>, <code>array_index</code>, <code>array_index_of</code>, <code>array_set</code>.</p>
 <blockquote>
 <p><strong>Crucial FHE Note:</strong> When accessing an array using a secret index (<code>array[secret_index]</code>), you cannot use standard indexing. <code>array_index</code> securely extracts the value without revealing the index, and <code>array_set</code> securely updates the array.</p>
@@ -3695,6 +3699,7 @@ print("✅ Encrypted query passed standard and missing edge cases!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="minmax-reductions"></a></p>
 <h2 id="minmax-reductions">Min/Max Reductions<a class="anchor-link" href="#minmax-reductions">¶</a></h2><p>Functions covered: <code>compile_minimum</code>, <code>compile_maximum</code>, <code>compile_argmin</code>, <code>compile_argmax</code>.</p>
 <p>These functions use tournament reduction algorithms to find extreme values. We test the <code>tie_break</code> edge cases to ensure stable deterministic behavior.</p>
 </div>
@@ -3770,6 +3775,7 @@ print("✅ Encrypted reductions passed tie-breaker edge cases!")</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a id="sorting-and-top-k"></a></p>
 <h2 id="sorting-and-top-k">Sorting and Top-K<a class="anchor-link" href="#sorting-and-top-k">¶</a></h2><p>Functions covered: <code>compile_sort</code>, <code>compile_compare_swap</code>, <code>compile_top_k</code>.</p>
 <p>Sorting algorithms within FHE utilize <em>Bitonic Sort</em> circuits. We test ascending, descending, and getting the Top-K elements.</p>
 </div>

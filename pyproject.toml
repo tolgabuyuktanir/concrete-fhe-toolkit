@@ -65,6 +65,7 @@ docs = [
   "mkdocs-material>=9",
   "mkdocstrings[python]>=0.26",
   "mike>=2",
+  "mkdocs-jupyter>=0.24",
 ]
 
 [tool.setuptools]

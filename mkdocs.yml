@@ -35,6 +35,8 @@ extra_css:
 
 plugins:
   - search
+  - mkdocs-jupyter:
+      execute: false
   - mkdocstrings:
       handlers:
         python:
@@ -67,6 +69,33 @@ nav:
       - Bounds and costs: bounds-and-costs.md
       - API usage guide: api-reference.md
       - Testing and release: testing-and-release.md
+  - Tutorials:
+      - Arithmetic: tutorials/01_arithmetic.ipynb
+      - Arrays: tutorials/02_arrays.ipynb
+      - Statistics: tutorials/03_stats.ipynb
+      - Math (Basic): tutorials/04_math_basic.ipynb
+      - Math (Combinatorics): tutorials/05_math_combinatorics.ipynb
+      - Math (Number Theory): tutorials/06_math_number_theory.ipynb
+      - Math (Fixed Point): tutorials/07_math_fixed_point.ipynb
+      - Math (Special): tutorials/08_math_special.ipynb
+      - Math (Bits): tutorials/09_math_bits.ipynb
+      - Math (Binary Division): tutorials/10_math_binary_division.ipynb
+      - Finance (Core): tutorials/11_finance_core.ipynb
+      - Finance (Transactions): tutorials/12_finance_transactions.ipynb
+      - ML (Activations): tutorials/13_ml_activations.ipynb
+      - ML (Classes): tutorials/14_ml_classes.ipynb
+      - ML (Clustering): tutorials/16_ml_clustering.ipynb
+      - ML (Core): tutorials/17_ml_core.ipynb
+      - ML (Estimation): tutorials/18_ml_estimation.ipynb
+      - ML (Matrix): tutorials/19_ml_matrix.ipynb
+      - ML (Models): tutorials/20_ml_models.ipynb
+      - ML (Pipeline): tutorials/21_ml_pipeline.ipynb
+      - ML (Preprocessing): tutorials/22_ml_preprocessing.ipynb
+      - ML (Serialization): tutorials/24_ml_serialization.ipynb
+      - ML (Sklearn_bridge): tutorials/25_ml_sklearn_bridge.ipynb
+      - ML (Trainers): tutorials/27_ml_trainers.ipynb
+      - ML (Training): tutorials/28_ml_training.ipynb
+      - ML (Utils): tutorials/29_ml_utils.ipynb
   - API reference:
       - Overview: api/index.md
       - Core:

@@ -2,7 +2,7 @@ from typing import List, Any
 from concrete_fhe_toolkit.ml import matrix_transpose, dot_product
 from concrete import fhe
 
-def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[Any]]) -> tuple[List[Any],List[Any]]:
+def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[Any]]) -> tuple[List[List[Any]],List[Any]]:
     class_counts = [0] * len(y_train_one_hot[0])
     for row in y_train_one_hot:
         for i in range(len(row)):

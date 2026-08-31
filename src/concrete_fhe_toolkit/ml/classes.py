@@ -347,16 +347,18 @@ class FHENaiveBayesTrainer:
             score_abs = abs(math.log(prior_prob)) + (num_features * abs(math.log(min_feature_prob)))
             max_abs_score = max(max_abs_score, score_abs)
 
+        centered_max = max_abs_score / 2.0
         max_target_int = (2**(max_bit_width - 1)) -1
         
-        SCALE = max(1,int(max_target_int / max_abs_score))
+        SCALE = max(1,int(max_target_int / centered_max))
 
         for c, class_feature_counts in enumerate(raw_feature_counts):
             class_total = int(priors[c])
             
             # Prior Log Prob
             prior_prob = class_total / total_samples
-            formatted_priors.append(int(round(math.log(prior_prob) * SCALE)))
+            unscaled_prior = math.log(prior_prob) + centered_max 
+            formatted_priors.append(int(round(unscaled_prior * SCALE)))
             
             class_tables = []
             for count_of_ones in class_feature_counts:

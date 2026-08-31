@@ -84,6 +84,7 @@ nav:
           - Bit primitives: api/math-bits.md
           - Binary division: api/math-binary-division.md
       - Machine learning:
+          - Base Classes: api/ml-classes.md
           - Metrics and losses: api/ml-core.md
           - Models: api/ml-models.md
           - Trainers (encrypted training): api/ml-trainers.md

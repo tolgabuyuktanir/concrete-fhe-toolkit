@@ -411,7 +411,7 @@ class FHENaiveBayesTrainer:
         if(max_bit_width > 16):
             raise ValueError("The maximum supported bit width is 16")
         if(max_bit_width > 8):
-            warnings.warn("Higher bit widths(>8) may result in longer computation times.",UserWarning)
+            warnings.warn("Higher bit widths(>8) may result in longer computation times.", UserWarning, stacklevel=2)
         self.compiler = fhe.Compiler(naive_bayes_training,{"X_train": "encrypted", "y_train_one_hot": "encrypted"})
         self.circuit = self.compiler.compile([(X_train, y_train)])
 

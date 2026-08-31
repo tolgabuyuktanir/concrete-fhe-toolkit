@@ -124,6 +124,12 @@ class FHELogisticRegression(FHEModel):
     Args:
         weights: The public list of weights for the regression.
         bias: The public bias term.
+        
+    Example:
+        ```python
+        model = FHELogisticRegression(weights=[3, 2], bias=-7)
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """
     def __init__(self, weights, bias):
         super().__init__()
@@ -142,6 +148,12 @@ class FHELinearRegression(FHEModel):
     Args:
         weights: The public list of weights for the regression.
         bias: The public bias term.
+        
+    Example:
+        ```python
+        model = FHELinearRegression(weights=[10, -5], bias=2)
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """
     def __init__(self, weights, bias):
         super().__init__()
@@ -159,6 +171,12 @@ class FHEDecisionTree(FHEModel):
     
     Args:
         tree: The public tree representation (dict format).
+        
+    Example:
+        ```python
+        model = FHEDecisionTree(tree=my_parsed_tree)
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """
     def __init__(self,tree):
         super().__init__()
@@ -176,6 +194,12 @@ class FHEPCA(FHEModel):
     Args:
         means: The public list of feature means.
         components: The public principal components matrix.
+        
+    Example:
+        ```python
+        model = FHEPCA(means=[0.5, 0.5], components=[[1, 0], [0, 1]])
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """
     def __init__(self, means, components):
         super().__init__()
@@ -194,6 +218,12 @@ class FHECNN(FHEModel):
     Args:
         filters: The public 2D or 3D list of convolutional filters.
         bias: The public list of bias terms for the filters.
+        
+    Example:
+        ```python
+        model = FHECNN(filters=my_conv_filters, bias=my_conv_bias)
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """        
     def __init__(self, filters, bias):
         super().__init__()
@@ -211,6 +241,12 @@ class FHERandomForest(FHEModel):
     
     Args:
         trees: The public list of tree representations (dict format).
+        
+    Example:
+        ```python
+        model = FHERandomForest(trees=[tree1, tree2, tree3])
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """
     def __init__(self, trees):
         super().__init__()
@@ -227,6 +263,12 @@ class FHEXGBoost(FHEModel):
     
     Args:
         trees: The public list of tree representations (dict format).
+        
+    Example:
+        ```python
+        model = FHEXGBoost(trees=my_xgb_trees)
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """
     def __init__(self, trees):
         super().__init__() 
@@ -243,6 +285,12 @@ class FHESVM(FHEModel):
     Args:
         weights: The public list of support vector weights (dual_coef/coef).
         bias: The public bias or intercept term.
+        
+    Example:
+        ```python
+        model = FHESVM(weights=[0.5, -1.2], bias=0.1)
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """
     def __init__(self, weights, bias):
         super().__init__()
@@ -261,6 +309,12 @@ class FHEKNN(FHEModel):
         X_train: The public training dataset features.
         y_train: The public training dataset labels.
         k: The number of nearest neighbors to consider.
+        
+    Example:
+        ```python
+        model = FHEKNN(X_train=public_X, y_train=public_y, k=3)
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """
     def __init__(self, X_train, y_train, k):
         super().__init__()
@@ -279,6 +333,12 @@ class FHEMLP(FHEModel):
     
     Args:
         mlp_layers: The public list of layer tuples, where each tuple is `(weights, bias)`.
+        
+    Example:
+        ```python
+        model = FHEMLP(mlp_layers=[(w1, b1), (w2, b2)])
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """
     def __init__(self, mlp_layers):
         super().__init__()
@@ -291,11 +351,20 @@ class FHEMLP(FHEModel):
 class FHENaiveBayes(FHEModel):
     """Encrypted Naive Bayes Inference Model.
     
-    Evaluates a Naive Bayes classifier over encrypted features.
+    Evaluates a Bernoulli Naive Bayes classifier over encrypted binary features.
+    The model aggregates log probabilities using FHE lookup tables and returns 
+    the class index with the highest score using an encrypted argmax reduction.
     
     Args:
-        log_prob_tables: The public feature log probabilities.
-        priors: The public class priors.
+        log_prob_tables: The public quantized feature log probabilities.
+        priors: The public quantized class priors.
+
+    Example:
+        ```python
+        # Assuming `model` was returned by FHENaiveBayesTrainer.fit_encrypted
+        model.compile(dummy_inputset, batch_size=1)
+        prediction = model.predict([1, 0, 1, 1])
+        ```
     """
     def __init__(self, log_prob_tables, priors):
         super().__init__()
@@ -307,9 +376,32 @@ class FHENaiveBayes(FHEModel):
 
 
 class FHENaiveBayesTrainer:
-    """Trainer for Encrypted Naive Bayes.
+    """Trainer for Encrypted Bernoulli Naive Bayes.
     
-    Trains a Naive Bayes model over encrypted features and encrypted one-hot labels.
+    Trains a Naive Bayes model over encrypted binary features and encrypted one-hot labels.
+    The trainer automatically determines the optimal SCALE for probability quantization
+    while maximizing the utilization of the specified `max_bit_width`.
+
+    FHE Optimization (Zero-Centered Shifting):
+    Log probabilities are always negative. This wastes half of the available integer 
+    space in any bit width (e.g., the positive +1 to +127 range in 8-bit, or higher in 
+    16-bit). This class mathematically shifts the log probabilities by finding the 
+    `centered_max` and adding it entirely to the class Prior. This centers the final 
+    circuit score perfectly in the middle of the available bit-width range, effectively 
+    doubling the precision (SCALE) for any chosen bit-width (from 8-bit up to 16-bit).
+
+    Laplace Smoothing:
+    To prevent log(0) -infinity errors for features that never appeared in the training 
+    set, Laplace smoothing is automatically applied to probability calculations.
+
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.classes import FHENaiveBayesTrainer
+        
+        trainer = FHENaiveBayesTrainer()
+        # X_train must be binary (0 or 1), y_train must be one-hot encoded
+        model = trainer.fit_encrypted(X_train, y_train_ohe, max_bit_width=10)
+        ```
     """
     def __init__(self):
         self.circuit = None
@@ -390,6 +482,12 @@ class FHEKMeans(FHEModel):
         centroids (list): The public list of cluster centroids.
         max_distance (int): Upper bound on the squared distance from any
             sample to any centroid (sizes the argmin reduction).
+            
+    Example:
+        ```python
+        model = FHEKMeans(centroids=[[0,0], [10,10]], max_distance=200)
+        model.compile(dummy_inputset, batch_size=1)
+        ```
     """
 
     def __init__(self, centroids, *, max_distance):

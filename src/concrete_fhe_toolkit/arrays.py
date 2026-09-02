@@ -6,6 +6,8 @@ from typing import Any, Callable, Literal, Optional,List
 
 from ._compat import fhe
 
+import numpy as np
+
 from concrete_fhe_toolkit.math import (
     bit_and,
     bit_and_many,
@@ -56,7 +58,6 @@ def array_sum(elements: List[Any]) -> Any:
     
     return current_round[0]
 
-import numpy as np
 
 def _ensure_tensor(arr: Any) -> Any:
     if isinstance(arr, (list, tuple)):

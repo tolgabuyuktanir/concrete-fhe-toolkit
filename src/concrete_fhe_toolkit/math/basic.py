@@ -108,7 +108,8 @@ def equal(left: Any, right: Any) -> Any:
         # result = equal(encrypted_a, encrypted_b)
         ```
     """
-    return left == right
+    res = left == right
+    return int(res) if isinstance(res, bool) else res
 
 
 def not_equal(left: Any, right: Any) -> Any:
@@ -121,7 +122,8 @@ def not_equal(left: Any, right: Any) -> Any:
         # result = not_equal(encrypted_a, encrypted_b)
         ```
     """
-    return left != right
+    res = left != right
+    return int(res) if isinstance(res, bool) else res
 
 
 def less(left: Any, right: Any) -> Any:
@@ -134,7 +136,8 @@ def less(left: Any, right: Any) -> Any:
         # result = less(encrypted_a, encrypted_b)
         ```
     """
-    return left < right
+    res = left < right
+    return int(res) if isinstance(res, bool) else res
 
 
 def less_equal(left: Any, right: Any) -> Any:
@@ -147,7 +150,8 @@ def less_equal(left: Any, right: Any) -> Any:
         # result = less_equal(encrypted_a, encrypted_b)
         ```
     """
-    return left <= right
+    res = left <= right
+    return int(res) if isinstance(res, bool) else res
 
 
 def greater(left: Any, right: Any) -> Any:
@@ -160,7 +164,8 @@ def greater(left: Any, right: Any) -> Any:
         # result = greater(encrypted_a, encrypted_b)
         ```
     """
-    return left > right
+    res = left > right
+    return int(res) if isinstance(res, bool) else res
 
 
 def greater_equal(left: Any, right: Any) -> Any:
@@ -173,7 +178,8 @@ def greater_equal(left: Any, right: Any) -> Any:
         # result = greater_equal(encrypted_a, encrypted_b)
         ```
     """
-    return left >= right
+    res = left >= right
+    return int(res) if isinstance(res, bool) else res
 
 
 def is_zero(value: Any) -> Any:

@@ -66,9 +66,9 @@ def array_scale(array: List[Any],factor: int):
         print(array_scale([1, 2, 3], factor=3))  # [3, 6, 9]
         ```
     """
-    return [factor * value for value in array]
+    return fhe.array([factor * value for value in array])
 
-def array_add(array1: List[Any],array2: List[Any]) -> List[Any]:
+def array_add(array1: List[Any],array2: List[Any]) -> Any:
     """Perform element-wise addition of two encrypted arrays.
     
     Example:
@@ -78,9 +78,9 @@ def array_add(array1: List[Any],array2: List[Any]) -> List[Any]:
         print(array_add([1, 2], [3, 4]))  # [4, 6]
         ```
     """
-    return [x+y for x,y in zip(array1,array2)]
+    return fhe.array([x+y for x,y in zip(array1,array2)])
 
-def array_sub(array1: List[Any],array2: List[Any]) -> List[Any]:
+def array_sub(array1: List[Any],array2: List[Any]) -> Any:
     """Perform element-wise subtraction of two encrypted arrays.
     
     Example:
@@ -90,21 +90,21 @@ def array_sub(array1: List[Any],array2: List[Any]) -> List[Any]:
         print(array_sub([5, 5], [2, 1]))  # [3, 4]
         ```
     """
-    return [x-y for x,y in zip(array1,array2)]
+    return fhe.array([x-y for x,y in zip(array1,array2)])
 
-def array_multiply(array1: List[Any],array2: List[Any]) -> List[Any]:
+def array_multiply(array1: List[Any],array2: List[Any]) -> Any:
     """Perform element-wise multiplication of two encrypted arrays.
     
     Example:
         ```python
         from concrete_fhe_toolkit import array_multiply
         
-        print(array_multiply([2, 3], [4, 5]))  # [8, 15]
+        print(array_multiply([1, 2], [3, 4]))  # [3, 8]
         ```
     """
-    return [x*y for x,y in zip(array1,array2)]
+    return fhe.array([x*y for x,y in zip(array1,array2)])
 
-def array_pad(array: List[Any], target_size: Any) -> List[Any]:
+def array_pad(array: List[Any], target_size: Any) -> Any:
     """Pad an encrypted array with zeros up to the specified target size.
     
     Example:
@@ -118,9 +118,9 @@ def array_pad(array: List[Any], target_size: Any) -> List[Any]:
     if(len(raw_list) > target_size):
         raise ValueError("target_size must be at least the array size")
     padded_list = raw_list + [0] * (target_size - len(raw_list))
-    return padded_list
+    return fhe.array(padded_list)
 
-def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> List[Any]:
+def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> Any:
     """Slice an encrypted array (return elements from begin_index to end_index - 1).
     
     Example:
@@ -137,7 +137,7 @@ def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> List[Any]
             "indexes must be within the array size and begin_index cannot be greater than end_index"
         )
 
-    return raw_list[begin_index:end_index]
+    return fhe.array(raw_list[begin_index:end_index])
 
 def array_contains(array: List[Any], value: Any) -> Any:
     """Check if an encrypted array contains a specific target value (returns 1 or 0).

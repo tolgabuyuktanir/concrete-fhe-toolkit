@@ -56,6 +56,13 @@ def array_sum(elements: List[Any]) -> Any:
     
     return current_round[0]
 
+import numpy as np
+
+def _ensure_tensor(arr: Any) -> Any:
+    if isinstance(arr, (list, tuple)):
+        return np.array(arr)
+    return arr
+
 def array_scale(array: List[Any],factor: int):
     """Multiply every element of an encrypted array by a scalar constant.
     
@@ -66,7 +73,7 @@ def array_scale(array: List[Any],factor: int):
         print(array_scale([1, 2, 3], factor=3))  # [3, 6, 9]
         ```
     """
-    return fhe.array([factor * value for value in array])
+    return _ensure_tensor(array) * factor
 
 def array_add(array1: List[Any],array2: List[Any]) -> Any:
     """Perform element-wise addition of two encrypted arrays.
@@ -78,7 +85,7 @@ def array_add(array1: List[Any],array2: List[Any]) -> Any:
         print(array_add([1, 2], [3, 4]))  # [4, 6]
         ```
     """
-    return fhe.array([x+y for x,y in zip(array1,array2)])
+    return _ensure_tensor(array1) + _ensure_tensor(array2)
 
 def array_sub(array1: List[Any],array2: List[Any]) -> Any:
     """Perform element-wise subtraction of two encrypted arrays.
@@ -90,7 +97,7 @@ def array_sub(array1: List[Any],array2: List[Any]) -> Any:
         print(array_sub([5, 5], [2, 1]))  # [3, 4]
         ```
     """
-    return fhe.array([x-y for x,y in zip(array1,array2)])
+    return _ensure_tensor(array1) - _ensure_tensor(array2)
 
 def array_multiply(array1: List[Any],array2: List[Any]) -> Any:
     """Perform element-wise multiplication of two encrypted arrays.
@@ -102,7 +109,7 @@ def array_multiply(array1: List[Any],array2: List[Any]) -> Any:
         print(array_multiply([1, 2], [3, 4]))  # [3, 8]
         ```
     """
-    return fhe.array([x*y for x,y in zip(array1,array2)])
+    return _ensure_tensor(array1) * _ensure_tensor(array2)
 
 def array_pad(array: List[Any], target_size: Any) -> Any:
     """Pad an encrypted array with zeros up to the specified target size.

@@ -413,8 +413,10 @@ class FHENaiveBayesTrainer:
         if(max_bit_width > 8):
             warnings.warn("Higher bit widths(>8) may result in longer computation times.", UserWarning, stacklevel=2)
             
-        dummy_X = [[0]*num_features for _ in range(num_samples)]
-        dummy_y = [[0]*num_classes for _ in range(num_samples)]
+        # To prevent 'uint1' inference, use max possible value for bit width
+        max_val = (2**(max_bit_width - 1)) - 1
+        dummy_X = [[max_val]*num_features for _ in range(num_samples)]
+        dummy_y = [[1]*num_classes for _ in range(num_samples)]
         
         if thresholds is not None:
             from .training import make_raw_naive_bayes_training

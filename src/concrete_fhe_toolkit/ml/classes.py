@@ -407,7 +407,7 @@ class FHENaiveBayesTrainer:
         self.circuit = None
         self.compiler = None
 
-    def compile_trainer(self, num_samples: int, num_features: int, num_classes: int, max_bit_width=8, thresholds=None):
+    def prepare_trainer(self, num_samples: int, num_features: int, num_classes: int, max_bit_width=8, thresholds=None):
         if(max_bit_width > 16):
             raise ValueError("The maximum supported bit width is 16")
         if(max_bit_width > 8):
@@ -434,13 +434,13 @@ class FHENaiveBayesTrainer:
         
         return self.circuit.encrypt(X_train, y_train)
 
-    def train_on_server(self, encrypted_X, encrypted_y):
+    def train_encrypted(self, encrypted_X, encrypted_y):
         if self.circuit is None:
             raise ValueError("Circuit is not compiled on server.")
             
         return self.circuit.run(encrypted_X, encrypted_y)
 
-    def decrypt_and_finalize(self, encrypted_results, max_bit_width=8):
+    def decrypt_and_finalize_model(self, encrypted_results, max_bit_width=8):
         raw_feature_counts, priors = self.circuit.decrypt(*encrypted_results)
         
         formatted_tables = []

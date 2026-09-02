@@ -192,7 +192,8 @@ def is_zero(value: Any) -> Any:
         # result = is_zero(encrypted_val)
         ```
     """
-    return value == 0   
+    res = value == 0
+    return int(res) if isinstance(res, bool) else res
 
 
 def maximum(left: Any, right: Any) -> Any:

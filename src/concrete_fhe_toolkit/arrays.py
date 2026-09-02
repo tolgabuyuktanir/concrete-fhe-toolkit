@@ -660,7 +660,7 @@ def array_set(array: List[Any], index: Any, value: Any) -> List[Any]:
     items = list(array)
     if not items:
         raise ValueError("array must contain at least one element")
-    return _ensure_tensor([
+    return fhe.array([
         select(equal(position, index), value, item)
         for position, item in enumerate(items)
     ])
@@ -706,7 +706,7 @@ def array_cumsum(array: List[Any]) -> List[Any]:
     for item in array:
         running = running + item
         sums.append(running)
-    return _ensure_tensor(sums)
+    return fhe.array(sums)
 
 
 def array_reverse(array: List[Any]) -> List[Any]:
@@ -719,7 +719,7 @@ def array_reverse(array: List[Any]) -> List[Any]:
         print(array_reverse([1, 2, 3]))  # [3, 2, 1]
         ```
     """
-    return _ensure_tensor(list(reversed(list(array))))
+    return fhe.array(list(reversed(list(array))))
 
 
 def array_concat(*arrays: List[Any]) -> List[Any]:
@@ -735,7 +735,7 @@ def array_concat(*arrays: List[Any]) -> List[Any]:
     combined: List[Any] = []
     for array in arrays:
         combined.extend(list(array))
-    return _ensure_tensor(combined)
+    return fhe.array(combined)
 
 
 def make_top_k(

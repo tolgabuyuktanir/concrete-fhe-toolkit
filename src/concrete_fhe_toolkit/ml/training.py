@@ -41,3 +41,19 @@ def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[An
         feature_counts.append(class_features)
 
     return fhe.array(feature_counts), fhe.array(class_counts)    
+
+def make_raw_naive_bayes_training(thresholds: List[Any]):
+    from concrete_fhe_toolkit.math.basic import greater
+    
+    def raw_naive_bayes_training(X_train_raw: List[List[Any]], y_train_one_hot: List[List[Any]]) -> tuple[List[List[Any]],List[Any]]:
+        X_train_binary = []
+        for row in X_train_raw:
+            binary_row = []
+            for i, val in enumerate(row):
+                # Apply the threshold securely inside FHE
+                binary_row.append(greater(val, thresholds[i]))
+            X_train_binary.append(binary_row)
+        
+        return naive_bayes_training(X_train_binary, y_train_one_hot)
+    
+    return raw_naive_bayes_training

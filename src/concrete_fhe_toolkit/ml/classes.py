@@ -407,12 +407,99 @@ class FHENaiveBayesTrainer:
         self.circuit = None
         self.compiler = None
 
-    def fit_encrypted(self, X_train, y_train, * ,max_bit_width = 8):
+    def compile_trainer(self, num_samples: int, num_features: int, num_classes: int, max_bit_width=8, thresholds=None):
         if(max_bit_width > 16):
             raise ValueError("The maximum supported bit width is 16")
         if(max_bit_width > 8):
             warnings.warn("Higher bit widths(>8) may result in longer computation times.", UserWarning, stacklevel=2)
-        self.compiler = fhe.Compiler(naive_bayes_training,{"X_train": "encrypted", "y_train_one_hot": "encrypted"})
+            
+        dummy_X = [[0]*num_features for _ in range(num_samples)]
+        dummy_y = [[0]*num_classes for _ in range(num_samples)]
+        
+        if thresholds is not None:
+            from .training import make_raw_naive_bayes_training
+            circuit_logic = make_raw_naive_bayes_training(thresholds)
+            self.compiler = fhe.Compiler(circuit_logic, {"X_train_raw": "encrypted", "y_train_one_hot": "encrypted"})
+        else:
+            self.compiler = fhe.Compiler(naive_bayes_training, {"X_train": "encrypted", "y_train_one_hot": "encrypted"})
+            
+        self.circuit = self.compiler.compile([(dummy_X, dummy_y)])
+        return self.circuit
+
+    def encrypt_data(self, X_train, y_train):
+        if self.circuit is None:
+            raise ValueError("Circuit is not compiled. Call compile_trainer first.")
+        
+        return self.circuit.encrypt(X_train, y_train)
+
+    def train_on_server(self, encrypted_X, encrypted_y):
+        if self.circuit is None:
+            raise ValueError("Circuit is not compiled on server.")
+            
+        return self.circuit.run(encrypted_X, encrypted_y)
+
+    def decrypt_and_finalize(self, encrypted_results, max_bit_width=8):
+        raw_feature_counts, priors = self.circuit.decrypt(*encrypted_results)
+        
+        formatted_tables = []
+        formatted_priors = []
+        total_samples = sum(priors)
+
+        max_abs_score = 0
+        num_features = len(raw_feature_counts[0])
+        for prior in priors:
+            class_total = int(prior)
+            prior_prob = class_total / total_samples
+            min_feature_prob = 1 / (class_total + 2)
+            
+            score_abs = abs(math.log(prior_prob)) + (num_features * abs(math.log(min_feature_prob)))
+            max_abs_score = max(max_abs_score, score_abs)
+
+        centered_max = max_abs_score / 2.0
+        max_target_int = (2**(max_bit_width - 1)) -1
+        
+        SCALE = max(1,int(max_target_int / centered_max))
+
+        for c, class_feature_counts in enumerate(raw_feature_counts):
+            class_total = int(priors[c])
+            
+            # Prior Log Prob
+            prior_prob = class_total / total_samples
+            unscaled_prior = math.log(prior_prob) + centered_max 
+            formatted_priors.append(int(round(unscaled_prior * SCALE)))
+            
+            class_tables = []
+            for count_of_ones in class_feature_counts:
+                count_of_ones = int(count_of_ones)
+                count_of_zeros = class_total - count_of_ones
+                
+                # Laplace smoothed probabilities: (count + 1) / (class_total + num_classes)
+                prob_0 = (count_of_zeros + 1) / (class_total + 2)
+                prob_1 = (count_of_ones + 1) / (class_total + 2)
+                
+                log_prob_0 = int(round(math.log(prob_0) * SCALE))
+                log_prob_1 = int(round(math.log(prob_1) * SCALE))
+                
+                class_tables.append([log_prob_0, log_prob_1])
+            formatted_tables.append(class_tables)
+            
+        model = FHENaiveBayes(formatted_tables, formatted_priors)
+        model.scale = SCALE
+        return model
+
+    def fit_encrypted(self, X_train, y_train, * ,max_bit_width = 8, thresholds=None):
+        if(max_bit_width > 16):
+            raise ValueError("The maximum supported bit width is 16")
+        if(max_bit_width > 8):
+            warnings.warn("Higher bit widths(>8) may result in longer computation times.", UserWarning, stacklevel=2)
+            
+        if thresholds is not None:
+            from .training import make_raw_naive_bayes_training
+            circuit_logic = make_raw_naive_bayes_training(thresholds)
+            self.compiler = fhe.Compiler(circuit_logic, {"X_train_raw": "encrypted", "y_train_one_hot": "encrypted"})
+        else:
+            self.compiler = fhe.Compiler(naive_bayes_training,{"X_train": "encrypted", "y_train_one_hot": "encrypted"})
+            
         self.circuit = self.compiler.compile([(X_train, y_train)])
 
         # The circuit returns raw counts (feature_counts, class_counts)

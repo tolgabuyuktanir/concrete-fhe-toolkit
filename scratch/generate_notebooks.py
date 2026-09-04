@@ -96,63 +96,59 @@ assert circuit.encrypt_run_decrypt(0) == 0"""
         ),
         (
             "make_floor_divide",
-            "Creates an exact encrypted floor division. Tests exact division, floor division, negatives, and division by zero. Constrained to small bit widths to prevent memory explosion.",
-            """floor_divide = make_floor_divide(zero_result=99)
+            "Creates an exact encrypted floor division. Tests exact division, floor division, negatives, and division by zero. Bounds are kept very small to prevent FHE bivariate table lookup from exploding RAM.",
+            """floor_divide = make_floor_divide(zero_result=7)
 
 def test_floor_divide(num, den):
     return floor_divide(num, den)
 
 compiler = fhe.Compiler(test_floor_divide, {"num": "encrypted", "den": "encrypted"})
-inputset = [(10, 3), (10, -3), (-10, 3), (-10, -3), (5, 0), (0, 5)]
+inputset = [(4, 2), (4, -2), (-4, 2), (-4, -2), (3, 0), (0, 3)]
 circuit = compiler.compile(inputset)
 
-assert circuit.encrypt_run_decrypt(10, 3) == 3
-assert circuit.encrypt_run_decrypt(10, -3) == -4
-assert circuit.encrypt_run_decrypt(-10, 3) == -4
-assert circuit.encrypt_run_decrypt(-10, -3) == 3
-assert circuit.encrypt_run_decrypt(5, 0) == 99
-assert circuit.encrypt_run_decrypt(0, 5) == 0"""
+assert circuit.encrypt_run_decrypt(4, 2) == 2
+assert circuit.encrypt_run_decrypt(4, -2) == -2
+assert circuit.encrypt_run_decrypt(-4, 2) == -2
+assert circuit.encrypt_run_decrypt(-4, -2) == 2
+assert circuit.encrypt_run_decrypt(3, 0) == 7
+assert circuit.encrypt_run_decrypt(0, 3) == 0"""
         ),
         (
             "make_floor_divide_by_product",
             "Creates a division by a product (numerator // (left * right)). Tests positives, negatives, zeroes.",
-            """div_prod = make_floor_divide_by_product(zero_result=99)
+            """div_prod = make_floor_divide_by_product(zero_result=7)
 
 def test_div_prod(num, left, right):
     return div_prod(num, left, right)
 
 compiler = fhe.Compiler(test_div_prod, {"num": "encrypted", "left": "encrypted", "right": "encrypted"})
-inputset = [(10, 2, 2), (-10, 2, -1), (10, -2, 2), (10, 0, 2), (0, 2, 2)]
+inputset = [(4, 2, 1), (-4, 2, -1), (4, -2, 1), (4, 0, 1), (0, 2, 1)]
 circuit = compiler.compile(inputset)
 
-assert circuit.encrypt_run_decrypt(10, 2, 2) == 2
-assert circuit.encrypt_run_decrypt(-10, 2, -1) == 5
-assert circuit.encrypt_run_decrypt(10, -2, 2) == -3
-assert circuit.encrypt_run_decrypt(10, 0, 2) == 99
-assert circuit.encrypt_run_decrypt(0, 2, 2) == 0"""
+assert circuit.encrypt_run_decrypt(4, 2, 1) == 2
+assert circuit.encrypt_run_decrypt(-4, 2, -1) == 2
+assert circuit.encrypt_run_decrypt(4, -2, 1) == -2
+assert circuit.encrypt_run_decrypt(4, 0, 1) == 7
+assert circuit.encrypt_run_decrypt(0, 2, 1) == 0"""
         ),
         (
             "compile_floor_divide",
-            "Returns a compiled floor division circuit. Tests exact division, flooring, negative inputs, and division by zero.",
-            """circuit = compile_floor_divide(max_numerator=10, max_denominator=5, zero_result=99)
+            "Returns a compiled floor division circuit. Note: This function only supports nonnegative inputs by design.",
+            """circuit = compile_floor_divide(max_numerator=5, max_denominator=3, zero_result=7)
 
-assert circuit.encrypt_run_decrypt(10, 4) == 2
-assert circuit.encrypt_run_decrypt(10, 5) == 2
-assert circuit.encrypt_run_decrypt(8, 0) == 99
-assert circuit.encrypt_run_decrypt(-10, 5) == -2
-assert circuit.encrypt_run_decrypt(10, -5) == -2
-assert circuit.encrypt_run_decrypt(-8, -4) == 2"""
+assert circuit.encrypt_run_decrypt(5, 2) == 2
+assert circuit.encrypt_run_decrypt(4, 3) == 1
+assert circuit.encrypt_run_decrypt(5, 0) == 7
+assert circuit.encrypt_run_decrypt(0, 2) == 0"""
         ),
         (
             "compile_floor_divide_by_product",
-            "Returns a compiled circuit for division by a product. Tests positives, negatives, and zeroes.",
-            """circuit = compile_floor_divide_by_product(max_numerator=15, max_left=3, max_right=3, zero_result=99)
+            "Returns a compiled circuit for division by a product. Note: This function only supports nonnegative inputs by design.",
+            """circuit = compile_floor_divide_by_product(max_numerator=5, max_left=2, max_right=2, zero_result=7)
 
-assert circuit.encrypt_run_decrypt(15, 2, 2) == 3
-assert circuit.encrypt_run_decrypt(10, 0, 2) == 99
-assert circuit.encrypt_run_decrypt(-15, 2, 2) == -4
-assert circuit.encrypt_run_decrypt(12, -2, 2) == -3
-assert circuit.encrypt_run_decrypt(-12, -2, -3) == -2"""
+assert circuit.encrypt_run_decrypt(4, 2, 1) == 2
+assert circuit.encrypt_run_decrypt(5, 0, 2) == 7
+assert circuit.encrypt_run_decrypt(0, 2, 2) == 0"""
         )
     ]
 

@@ -31,7 +31,9 @@ def generate_notebook(filename, module_name, tests):
         cells.append(create_cell("markdown", f"### Testing `{fn_name}`\n\n{desc}"))
         
         # Build imports
-        imports = f"import numpy as np\nfrom concrete import fhe\nfrom {module_name} import {fn_name}\n\n"
+        imports = f"from concrete import fhe\nfrom {module_name} import {fn_name}\n\n"
+        if "np." in test_code:
+            imports = "import numpy as np\n" + imports
         
         cells.append(create_cell("code", f"{imports}{test_code}\nprint(\"{fn_name} tests passed!\")"))
         

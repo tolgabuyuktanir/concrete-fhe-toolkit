@@ -73,7 +73,7 @@ assert circuit.encrypt_run_decrypt(-20, 40) == -1"""
     return sign(x)
 
 compiler = fhe.Compiler(test_sign, {"x": "encrypted"})
-inputset = [[42], [-42], [0]]
+inputset = [(42,), (-42,), (0,)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt(42) == 1
@@ -150,7 +150,7 @@ def get_arrays_tests():
     return array_sum(arr)
 
 compiler = fhe.Compiler(test_array_sum, {"arr": "encrypted"})
-inputset = [[1, 2, 3, 4], [0, 0, 0, 0], [-1, 1, -1, 1]]
+inputset = [([1, 2, 3, 4],), ([0, 0, 0, 0],), ([-1, 1, -1, 1],)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([1, 2, 3, 4]) == 10
@@ -306,7 +306,7 @@ def test_sort(x):
     return sort_fn(x)
 
 compiler = fhe.Compiler(test_sort, {"x": "encrypted"})
-inputset = [[4, 1, 3, 2], [0, 0, 0, 0]]
+inputset = [([4, 1, 3, 2],), ([0, 0, 0, 0],)]
 circuit = compiler.compile(inputset)
 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([4, 1, 3, 2]), [1, 2, 3, 4])
@@ -321,7 +321,7 @@ def test_min(x):
     return min_fn(x)
 
 compiler = fhe.Compiler(test_min, {"x": "encrypted"})
-inputset = [[4, 1, 3, 2], [5, 5, 5, 5], [0, 8, 3, 9]]
+inputset = [([4, 1, 3, 2],), ([5, 5, 5, 5],), ([0, 8, 3, 9],)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([4, 1, 3, 2]) == 1
@@ -337,7 +337,7 @@ def test_max(x):
     return max_fn(x)
 
 compiler = fhe.Compiler(test_max, {"x": "encrypted"})
-inputset = [[4, 1, 3, 2], [5, 5, 5, 5], [0, 8, 3, 9]]
+inputset = [([4, 1, 3, 2],), ([5, 5, 5, 5],), ([0, 8, 3, 9],)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([4, 1, 3, 2]) == 4
@@ -353,7 +353,7 @@ def test_argmin(x):
     return argmin_fn(x)
 
 compiler = fhe.Compiler(test_argmin, {"x": "encrypted"})
-inputset = [[4, 1, 3, 2], [4, 1, 1, 2]]
+inputset = [([4, 1, 3, 2],), ([4, 1, 1, 2],)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([4, 1, 3, 2]) == 1
@@ -368,7 +368,7 @@ def test_argmax(x):
     return argmax_fn(x)
 
 compiler = fhe.Compiler(test_argmax, {"x": "encrypted"})
-inputset = [[4, 1, 5, 2], [4, 5, 5, 2]]
+inputset = [([4, 1, 5, 2],), ([4, 5, 5, 2],)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([4, 1, 5, 2]) == 2
@@ -469,7 +469,7 @@ assert circuit.encrypt_run_decrypt([10, 20, 30], 40, 99) == 99"""
     return array_cumsum(arr)
 
 compiler = fhe.Compiler(test_array_cumsum, {"arr": "encrypted"})
-inputset = [[1, 2, 3], [0, 0, 0], [-1, 1, -1, 1]]
+inputset = [([1, 2, 3],), ([0, 0, 0],), ([-1, 1, -1, 1],)]
 circuit = compiler.compile(inputset)
 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([1, 2, 3]), [1, 3, 6])
@@ -483,7 +483,7 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-1, 1, -1, 1]), [-1, 
     return array_reverse(arr)
 
 compiler = fhe.Compiler(test_array_reverse, {"arr": "encrypted"})
-inputset = [[1, 2, 3], [0, 0], [5, -2, 3]]
+inputset = [([1, 2, 3],), ([0, 0],), ([5, -2, 3],)]
 circuit = compiler.compile(inputset)
 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([1, 2, 3]), [3, 2, 1])
@@ -512,7 +512,7 @@ def test_top_k(x):
     return top_k_fn(x)
 
 compiler = fhe.Compiler(test_top_k, {"x": "encrypted"})
-inputset = [[4, 1, 3, 2], [10, 10, 0, -10]]
+inputset = [([4, 1, 3, 2],), ([10, 10, 0, -10],)]
 circuit = compiler.compile(inputset)
 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([4, 1, 3, 2]), [4, 3])
@@ -537,7 +537,7 @@ def get_stats_tests():
     return array_mean(arr)
 
 compiler = fhe.Compiler(test_array_mean, {"arr": "encrypted"})
-inputset = [[2, 4, 6], [1, 1, 1, 1], [0, 5, 10]]
+inputset = [([2, 4, 6],), ([1, 1, 1, 1],), ([0, 5, 10],)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([2, 4, 6]) == 4
@@ -551,7 +551,7 @@ assert circuit.encrypt_run_decrypt([0, 5, 10]) == 5"""
     return array_variance(arr)
 
 compiler = fhe.Compiler(test_array_variance, {"arr": "encrypted"})
-inputset = [[2, 4, 6], [5, 5, 5]]
+inputset = [([2, 4, 6],), ([5, 5, 5],)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([2, 4, 6]) == 2
@@ -590,7 +590,7 @@ assert circuit.encrypt_run_decrypt([2, 4, 6], [2, 4, 6]) == 2"""
     return array_max(arr)
 
 compiler = fhe.Compiler(test_array_max, {"arr": "encrypted"})
-inputset = [[1, 5, 3], [7, 7, 7], [0, -2, 2]]
+inputset = [([1, 5, 3],), ([7, 7, 7],), ([0, -2, 2],)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([1, 5, 3]) == 5
@@ -604,7 +604,7 @@ assert circuit.encrypt_run_decrypt([0, -2, 2]) == 2"""
     return array_min(arr)
 
 compiler = fhe.Compiler(test_array_min, {"arr": "encrypted"})
-inputset = [[1, 5, 3], [7, 7, 7], [0, -2, 2]]
+inputset = [([1, 5, 3],), ([7, 7, 7],), ([0, -2, 2],)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([1, 5, 3]) == 1
@@ -618,7 +618,7 @@ assert circuit.encrypt_run_decrypt([0, -2, 2]) == -2"""
     return array_range(arr)
 
 compiler = fhe.Compiler(test_array_range, {"arr": "encrypted"})
-inputset = [[1, 5, 3], [7, 7, 7], [-5, 0, 5]]
+inputset = [([1, 5, 3],), ([7, 7, 7],), ([-5, 0, 5],)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([1, 5, 3]) == 4

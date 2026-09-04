@@ -49,22 +49,22 @@ def get_arithmetic_tests():
     return compare(x, y)
 
 compiler = fhe.Compiler(test_compare, {"x": "encrypted", "y": "encrypted"})
-inputset = [(10, 5), (5, 5), (-5, 5), (0, 0)]
+inputset = [(15, 10), (10, 10), (-15, 10), (0, 0)]
 circuit = compiler.compile(inputset)
 
-assert circuit.encrypt_run_decrypt(10, 5) == 1
-assert circuit.encrypt_run_decrypt(5, 5) == 0
-assert circuit.encrypt_run_decrypt(-5, 5) == -1
+assert circuit.encrypt_run_decrypt(15, 10) == 1
+assert circuit.encrypt_run_decrypt(10, 10) == 0
+assert circuit.encrypt_run_decrypt(-15, 10) == -1
 assert circuit.encrypt_run_decrypt(0, 0) == 0"""
         ),
         (
             "compile_compare",
             "This function returns an already compiled FHE circuit to compare two encrypted values.",
-            """circuit = compile_compare(min_value=-50, max_value=50)
+            """circuit = compile_compare(min_value=-15, max_value=15)
 
-assert circuit.encrypt_run_decrypt(30, 10) == 1
-assert circuit.encrypt_run_decrypt(20, 20) == 0
-assert circuit.encrypt_run_decrypt(-20, 40) == -1"""
+assert circuit.encrypt_run_decrypt(10, 5) == 1
+assert circuit.encrypt_run_decrypt(12, 12) == 0
+assert circuit.encrypt_run_decrypt(-10, 15) == -1"""
         ),
         (
             "sign",
@@ -73,20 +73,20 @@ assert circuit.encrypt_run_decrypt(-20, 40) == -1"""
     return sign(x)
 
 compiler = fhe.Compiler(test_sign, {"x": "encrypted"})
-inputset = [(42,), (-42,), (0,)]
+inputset = [(15,), (-15,), (0,)]
 circuit = compiler.compile(inputset)
 
-assert circuit.encrypt_run_decrypt(42) == 1
-assert circuit.encrypt_run_decrypt(-42) == -1
+assert circuit.encrypt_run_decrypt(15) == 1
+assert circuit.encrypt_run_decrypt(-15) == -1
 assert circuit.encrypt_run_decrypt(0) == 0"""
         ),
         (
             "compile_sign",
             "This function returns a compiled FHE circuit to return the sign of a number.",
-            """circuit = compile_sign(min_value=-50, max_value=50)
+            """circuit = compile_sign(min_value=-15, max_value=15)
 
-assert circuit.encrypt_run_decrypt(40) == 1
-assert circuit.encrypt_run_decrypt(-30) == -1
+assert circuit.encrypt_run_decrypt(10) == 1
+assert circuit.encrypt_run_decrypt(-10) == -1
 assert circuit.encrypt_run_decrypt(0) == 0"""
         ),
         (
@@ -98,11 +98,11 @@ def test_floor_divide(num, den):
     return floor_divide(num, den)
 
 compiler = fhe.Compiler(test_floor_divide, {"num": "encrypted", "den": "encrypted"})
-inputset = [(10, 3), (10, 5), (5, 0)]
+inputset = [(15, 3), (15, 7), (5, 0)]
 circuit = compiler.compile(inputset)
 
-assert circuit.encrypt_run_decrypt(10, 3) == 3
-assert circuit.encrypt_run_decrypt(10, 5) == 2
+assert circuit.encrypt_run_decrypt(15, 3) == 5
+assert circuit.encrypt_run_decrypt(15, 7) == 2
 assert circuit.encrypt_run_decrypt(5, 0) == 99"""
         ),
         (
@@ -124,19 +124,19 @@ assert circuit.encrypt_run_decrypt(15, 0, 5) == 0"""
         (
             "compile_floor_divide",
             "Returns a compiled floor division circuit.",
-            """circuit = compile_floor_divide(max_numerator=50, max_denominator=20, zero_result=0)
+            """circuit = compile_floor_divide(max_numerator=15, max_denominator=7, zero_result=0)
 
-assert circuit.encrypt_run_decrypt(45, 10) == 4
-assert circuit.encrypt_run_decrypt(20, 5) == 4
+assert circuit.encrypt_run_decrypt(15, 4) == 3
+assert circuit.encrypt_run_decrypt(10, 5) == 2
 assert circuit.encrypt_run_decrypt(8, 0) == 0"""
         ),
         (
             "compile_floor_divide_by_product",
             "Returns a compiled circuit for division by a product.",
-            """circuit = compile_floor_divide_by_product(max_numerator=50, max_left=10, max_right=10, zero_result=0)
+            """circuit = compile_floor_divide_by_product(max_numerator=20, max_left=4, max_right=4, zero_result=0)
 
-assert circuit.encrypt_run_decrypt(50, 2, 5) == 5
-assert circuit.encrypt_run_decrypt(15, 5, 1) == 3
+assert circuit.encrypt_run_decrypt(20, 2, 3) == 3
+assert circuit.encrypt_run_decrypt(15, 4, 1) == 3
 assert circuit.encrypt_run_decrypt(10, 0, 2) == 0"""
         )
     ]
@@ -150,12 +150,12 @@ def get_arrays_tests():
     return array_sum(arr)
 
 compiler = fhe.Compiler(test_array_sum, {"arr": "encrypted"})
-inputset = [([1, 2, 3, 4],), ([0, 0, 0, 0],), ([-1, 1, -1, 1],)]
+inputset = [([5, 5, 5, 5],), ([0, 0, 0, 0],), ([-5, 5, -5, 5],)]
 circuit = compiler.compile(inputset)
 
-assert circuit.encrypt_run_decrypt([1, 2, 3, 4]) == 10
+assert circuit.encrypt_run_decrypt([5, 5, 5, 5]) == 20
 assert circuit.encrypt_run_decrypt([0, 0, 0, 0]) == 0
-assert circuit.encrypt_run_decrypt([-1, 1, -1, 1]) == 0"""
+assert circuit.encrypt_run_decrypt([-5, 5, -5, 5]) == 0"""
         ),
         (
             "array_scale",
@@ -178,11 +178,11 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-1, 2, -3], -2), [2, 
     return array_add(a1, a2)
 
 compiler = fhe.Compiler(test_array_add, {"a1": "encrypted", "a2": "encrypted"})
-inputset = [([1, 2], [3, 4]), ([-1, -2], [1, 2]), ([0, 0], [0, 0])]
+inputset = [([5, 10], [10, 5]), ([-5, -10], [5, 10]), ([0, 0], [0, 0])]
 circuit = compiler.compile(inputset)
 
-np.testing.assert_array_equal(circuit.encrypt_run_decrypt([1, 2], [3, 4]), [4, 6])
-np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-1, -2], [1, 2]), [0, 0])
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([5, 10], [10, 5]), [15, 15])
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-5, -10], [5, 10]), [0, 0])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([0, 0], [0, 0]), [0, 0])"""
         ),
         (
@@ -192,11 +192,11 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt([0, 0], [0, 0]), [0, 0
     return array_sub(a1, a2)
 
 compiler = fhe.Compiler(test_array_sub, {"a1": "encrypted", "a2": "encrypted"})
-inputset = [([5, 5], [2, 1]), ([1, 2], [3, 4]), ([0, 0], [0, 0])]
+inputset = [([15, 15], [5, 10]), ([5, 10], [15, 20]), ([0, 0], [0, 0])]
 circuit = compiler.compile(inputset)
 
-np.testing.assert_array_equal(circuit.encrypt_run_decrypt([5, 5], [2, 1]), [3, 4])
-np.testing.assert_array_equal(circuit.encrypt_run_decrypt([1, 2], [3, 4]), [-2, -2])
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([15, 15], [5, 10]), [10, 5])
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([5, 10], [15, 20]), [-10, -10])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([0, 0], [0, 0]), [0, 0])"""
         ),
         (
@@ -206,12 +206,12 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt([0, 0], [0, 0]), [0, 0
     return array_multiply(a1, a2)
 
 compiler = fhe.Compiler(test_array_multiply, {"a1": "encrypted", "a2": "encrypted"})
-inputset = [([1, 2], [3, 4]), ([0, 5], [10, 0]), ([-1, -2], [3, 4])]
+inputset = [([2, 3], [4, 5]), ([0, 5], [10, 0]), ([-2, -3], [4, 5])]
 circuit = compiler.compile(inputset)
 
-np.testing.assert_array_equal(circuit.encrypt_run_decrypt([1, 2], [3, 4]), [3, 8])
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([2, 3], [4, 5]), [8, 15])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([0, 5], [10, 0]), [0, 0])
-np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-1, -2], [3, 4]), [-3, -8])"""
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-2, -3], [4, 5]), [-8, -15])"""
         ),
         (
             "array_pad",
@@ -284,7 +284,7 @@ assert circuit.encrypt_run_decrypt([0, 0], [0, 0]) == 1"""
         (
             "make_compare_swap",
             "Creates ascending compare-swap. The returned function takes `x` and `y` (`Any`), both `encrypted`.",
-            """swap = make_compare_swap(min_value=-50, max_value=50)
+            """swap = make_compare_swap(min_value=-15, max_value=15)
 
 def test_swap(x, y):
     return swap(x, y)
@@ -300,7 +300,7 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt(7, 7), [7, 7])"""
         (
             "make_sort",
             "Creates a bitonic sorting network. The returned function takes `x` (`Any`), `encrypted`.",
-            """sort_fn = make_sort(size=4, min_value=-50, max_value=50)
+            """sort_fn = make_sort(size=4, min_value=-15, max_value=15)
 
 def test_sort(x):
     return sort_fn(x)
@@ -315,7 +315,7 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt([0, 0, 0, 0]), [0, 0, 
         (
             "make_minimum",
             "Creates a minimum reduction function. The array `x` is `encrypted`.",
-            """min_fn = make_minimum(size=4, min_value=-50, max_value=50)
+            """min_fn = make_minimum(size=4, min_value=-15, max_value=15)
 
 def test_min(x):
     return min_fn(x)
@@ -331,7 +331,7 @@ assert circuit.encrypt_run_decrypt([0, 8, 3, 9]) == 0"""
         (
             "make_maximum",
             "Creates a maximum reduction function. `x` is `encrypted`.",
-            """max_fn = make_maximum(size=4, min_value=-50, max_value=50)
+            """max_fn = make_maximum(size=4, min_value=-15, max_value=15)
 
 def test_max(x):
     return max_fn(x)
@@ -347,7 +347,7 @@ assert circuit.encrypt_run_decrypt([0, 8, 3, 9]) == 9"""
         (
             "make_argmin",
             "Creates an argmin reduction. `x` is `encrypted`.",
-            """argmin_fn = make_argmin(size=4, min_value=-50, max_value=50)
+            """argmin_fn = make_argmin(size=4, min_value=-15, max_value=15)
 
 def test_argmin(x):
     return argmin_fn(x)
@@ -362,7 +362,7 @@ assert circuit.encrypt_run_decrypt([4, 1, 1, 2]) == 1"""
         (
             "make_argmax",
             "Creates an argmax reduction. `x` is `encrypted`.",
-            """argmax_fn = make_argmax(size=4, min_value=-50, max_value=50)
+            """argmax_fn = make_argmax(size=4, min_value=-15, max_value=15)
 
 def test_argmax(x):
     return argmax_fn(x)
@@ -377,7 +377,7 @@ assert circuit.encrypt_run_decrypt([4, 5, 5, 2]) == 1"""
         (
             "compile_compare_swap",
             "Returns a compiled compare-swap circuit.",
-            """circuit = compile_compare_swap(min_value=-50, max_value=50)
+            """circuit = compile_compare_swap(min_value=-15, max_value=15)
 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt(5, 3), [3, 5])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt(1, 4), [1, 4])"""
@@ -385,7 +385,7 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt(1, 4), [1, 4])"""
         (
             "compile_sort",
             "Returns a compiled bitonic sort circuit.",
-            """circuit = compile_sort(size=4, min_value=-50, max_value=50)
+            """circuit = compile_sort(size=4, min_value=-15, max_value=15)
 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([4, 1, 3, 2]), [1, 2, 3, 4])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-5, 0, 5, -10]), [-10, -5, 0, 5])"""
@@ -393,7 +393,7 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-5, 0, 5, -10]), [-10
         (
             "compile_minimum",
             "Returns a compiled minimum reduction circuit.",
-            """circuit = compile_minimum(size=4, min_value=-50, max_value=50)
+            """circuit = compile_minimum(size=4, min_value=-15, max_value=15)
 
 assert circuit.encrypt_run_decrypt([4, 1, 3, 2]) == 1
 assert circuit.encrypt_run_decrypt([5, 8, 9, 6]) == 5"""
@@ -401,7 +401,7 @@ assert circuit.encrypt_run_decrypt([5, 8, 9, 6]) == 5"""
         (
             "compile_maximum",
             "Returns a compiled maximum reduction circuit.",
-            """circuit = compile_maximum(size=4, min_value=-50, max_value=50)
+            """circuit = compile_maximum(size=4, min_value=-15, max_value=15)
 
 assert circuit.encrypt_run_decrypt([4, 1, 3, 2]) == 4
 assert circuit.encrypt_run_decrypt([1, 2, 0, 0]) == 2"""
@@ -409,7 +409,7 @@ assert circuit.encrypt_run_decrypt([1, 2, 0, 0]) == 2"""
         (
             "compile_argmin",
             "Returns a compiled argmin circuit.",
-            """circuit = compile_argmin(size=4, min_value=-50, max_value=50)
+            """circuit = compile_argmin(size=4, min_value=-15, max_value=15)
 
 assert circuit.encrypt_run_decrypt([4, 1, 3, 2]) == 1
 assert circuit.encrypt_run_decrypt([5, 3, 3, 6]) == 1"""
@@ -417,7 +417,7 @@ assert circuit.encrypt_run_decrypt([5, 3, 3, 6]) == 1"""
         (
             "compile_argmax",
             "Returns a compiled argmax circuit.",
-            """circuit = compile_argmax(size=4, min_value=-50, max_value=50)
+            """circuit = compile_argmax(size=4, min_value=-15, max_value=15)
 
 assert circuit.encrypt_run_decrypt([4, 1, 3, 2]) == 0
 assert circuit.encrypt_run_decrypt([1, 5, 5, 2]) == 1"""
@@ -443,11 +443,11 @@ assert circuit.encrypt_run_decrypt([5, 5, 5], 2) == 5"""
     return array_set(arr, idx, val)
 
 compiler = fhe.Compiler(test_array_set, {"arr": "encrypted", "idx": "encrypted", "val": "encrypted"})
-inputset = [([10, 20, 30], 1, 99), ([10, 20, 30], 0, 50)]
+inputset = [([10, 20, 30], 1, 15), ([10, 20, 30], 0, 15)]
 circuit = compiler.compile(inputset)
 
-np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 1, 99), [10, 99, 30])
-np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 0, 50), [50, 20, 30])"""
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 1, 15), [10, 15, 30])
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 0, 15), [15, 20, 30])"""
         ),
         (
             "array_index_of",
@@ -506,7 +506,7 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt([0], [0]), [0, 0])"""
         (
             "make_top_k",
             "Creates a top_k reduction. `x` is `encrypted`.",
-            """top_k_fn = make_top_k(size=4, k=2, min_value=-50, max_value=50)
+            """top_k_fn = make_top_k(size=4, k=2, min_value=-15, max_value=15)
 
 def test_top_k(x):
     return top_k_fn(x)
@@ -521,7 +521,7 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 10, 0, -10]), [10
         (
             "compile_top_k",
             "Returns a compiled top-k circuit.",
-            """circuit = compile_top_k(size=4, k=2, min_value=-50, max_value=50)
+            """circuit = compile_top_k(size=4, k=2, min_value=-15, max_value=15)
 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([4, 1, 3, 2]), [4, 3])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 10, 0, -10]), [10, 10])"""
@@ -564,11 +564,11 @@ assert circuit.encrypt_run_decrypt([5, 5, 5]) == 0"""
     return array_std(arr, min_val, max_val)
 
 compiler = fhe.Compiler(test_array_std, {"arr": "encrypted", "min_val": "clear", "max_val": "clear"})
-inputset = [([2, 4, 6], -50, 50), ([5, 5, 5], -50, 50)]
+inputset = [([2, 4, 6], -15, 15), ([5, 5, 5], -15, 15)]
 circuit = compiler.compile(inputset)
 
-assert circuit.encrypt_run_decrypt([2, 4, 6], -50, 50) == 1
-assert circuit.encrypt_run_decrypt([5, 5, 5], -50, 50) == 0"""
+assert circuit.encrypt_run_decrypt([2, 4, 6], -15, 15) == 1
+assert circuit.encrypt_run_decrypt([5, 5, 5], -15, 15) == 0"""
         ),
         (
             "array_covariance",
@@ -646,11 +646,11 @@ assert circuit.encrypt_run_decrypt([1, 5, 3], 0) == 3"""
     return array_median(arr, min_val, max_val)
 
 compiler = fhe.Compiler(test_array_median, {"arr": "encrypted", "min_val": "clear", "max_val": "clear"})
-inputset = [([1, 5, 3, 4], -50, 50), ([0, 0, 2, 2], -50, 50)]
+inputset = [([1, 5, 3, 4], -15, 15), ([0, 0, 2, 2], -15, 15)]
 circuit = compiler.compile(inputset)
 
-assert circuit.encrypt_run_decrypt([1, 5, 3, 4], -50, 50) == 3
-assert circuit.encrypt_run_decrypt([0, 0, 2, 2], -50, 50) == 1"""
+assert circuit.encrypt_run_decrypt([1, 5, 3, 4], -15, 15) == 3
+assert circuit.encrypt_run_decrypt([0, 0, 2, 2], -15, 15) == 1"""
         ),
         (
             "array_percentile",
@@ -659,11 +659,11 @@ assert circuit.encrypt_run_decrypt([0, 0, 2, 2], -50, 50) == 1"""
     return array_percentile(arr, q, min_val, max_val)
 
 compiler = fhe.Compiler(test_array_percentile, {"arr": "encrypted", "q": "clear", "min_val": "clear", "max_val": "clear"})
-inputset = [([1, 5, 3, 4], 50, -50, 50), ([1, 5, 3, 4], 100, -50, 50)]
+inputset = [([1, 5, 3, 4], 50, -15, 15), ([1, 5, 3, 4], 100, -15, 15)]
 circuit = compiler.compile(inputset)
 
-assert circuit.encrypt_run_decrypt([1, 5, 3, 4], 50, -50, 50) == 4
-assert circuit.encrypt_run_decrypt([1, 5, 3, 4], 100, -50, 50) == 5"""
+assert circuit.encrypt_run_decrypt([1, 5, 3, 4], 50, -15, 15) == 4
+assert circuit.encrypt_run_decrypt([1, 5, 3, 4], 100, -15, 15) == 5"""
         ),
         (
             "array_histogram",

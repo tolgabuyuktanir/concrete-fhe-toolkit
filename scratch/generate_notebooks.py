@@ -351,7 +351,7 @@ def test_sort(x):
     return sort_fn(x)
 
 compiler = fhe.Compiler(test_sort, {"x": "encrypted"})
-inputset = [([4, 3, 2, 1],), ([1, 2, 3, 4],), ([5, 5, 5, 5],), ([0, -5, -2, 3],), ([0, 0, 0, 0],)]
+inputset = [([4, 3, 2, 1],), ([1, 2, 3, 4],), ([5, 5, 5, 5],), ([0, -5, -2, 3],), ([0, 0, 0, 0],), ([-5, -5, -5, -5],)]
 circuit = compiler.compile(inputset)
 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([4, 3, 2, 1]), [1, 2, 3, 4])

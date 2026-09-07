@@ -299,12 +299,12 @@ assert circuit.encrypt_run_decrypt([-1, 1, 2], -1) == 1"""
     return array_count(arr, val)
 
 compiler = fhe.Compiler(test_array_count, {"arr": "encrypted", "val": "encrypted"})
-inputset = [([1, 2, 2, 3], 2), ([1, 2, 2, 3], 5), ([0, 0, 0], 0), ([-5, -6, -5, -8], -5)]
+inputset = [([1, 2, 2, 3], 2), ([1, 2, 2, 3], 5), ([0, 0, 0, 0], 0), ([-5, -6, -5, -8], -5)]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([1, 2, 2, 3], 2) == 2
 assert circuit.encrypt_run_decrypt([1, 2, 2, 3], 5) == 0
-assert circuit.encrypt_run_decrypt([0, 0, 0], 0) == 3
+assert circuit.encrypt_run_decrypt([0, 0, 0, 0], 0) == 4
 assert circuit.encrypt_run_decrypt([-5, -6, -5, -8], -5) == 2"""
         ),
         (
@@ -314,14 +314,14 @@ assert circuit.encrypt_run_decrypt([-5, -6, -5, -8], -5) == 2"""
     return array_all_equal(a1, a2)
 
 compiler = fhe.Compiler(test_array_all_equal, {"a1": "encrypted", "a2": "encrypted"})
-inputset = [([1, 2, 3], [1, 2, 3]), ([1, 2, 3], [9, 2, 3]), ([1, 2, 3], [1, 2, 9]), ([0, 0, 0], [1, 1, 1]), ([-1, -2], [-1, -2])]
+inputset = [([1, 2, 3], [1, 2, 3]), ([1, 2, 3], [9, 2, 3]), ([1, 2, 3], [1, 2, 9]), ([0, 0, 0], [1, 1, 1]), ([-1, -2, -3], [-1, -2, -3])]
 circuit = compiler.compile(inputset)
 
 assert circuit.encrypt_run_decrypt([1, 2, 3], [1, 2, 3]) == 1
 assert circuit.encrypt_run_decrypt([1, 2, 3], [9, 2, 3]) == 0
 assert circuit.encrypt_run_decrypt([1, 2, 3], [1, 2, 9]) == 0
 assert circuit.encrypt_run_decrypt([0, 0, 0], [1, 1, 1]) == 0
-assert circuit.encrypt_run_decrypt([-1, -2], [-1, -2]) == 1"""
+assert circuit.encrypt_run_decrypt([-1, -2, -3], [-1, -2, -3]) == 1"""
         ),
         (
             "make_compare_swap",
@@ -528,12 +528,12 @@ assert circuit.encrypt_run_decrypt([0, 0, 0, 0], 0, 99) == 0"""
     return array_cumsum(arr)
 
 compiler = fhe.Compiler(test_array_cumsum, {"arr": "encrypted"})
-inputset = [([1, 2, 3],), ([0, 0, 0],), ([-1, 1, -1, 1],), ([5, -2, -3],), ([-2, -3, -4],)]
+inputset = [([1, 2, 3],), ([0, 0, 0],), ([-1, 1, -1],), ([5, -2, -3],), ([-2, -3, -4],)]
 circuit = compiler.compile(inputset)
 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([1, 2, 3]), [1, 3, 6])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([0, 0, 0]), [0, 0, 0])
-np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-1, 1, -1, 1]), [-1, 0, -1, 0])
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-1, 1, -1]), [-1, 0, -1])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([5, -2, -3]), [5, 3, 0])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-2, -3, -4]), [-2, -5, -9])"""
         ),

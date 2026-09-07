@@ -85,6 +85,7 @@ def square(value: Any) -> Any:
     """
     return value * value
 
+
 def cube(value: Any) -> Any:
     """Return cube of a number.
     
@@ -99,136 +100,25 @@ def cube(value: Any) -> Any:
 
 
 def equal(left: Any, right: Any) -> Any:
-    """Return 1 when left equals right, otherwise 0.
-    
-    Example:
-        ```python
-        from concrete_fhe_toolkit.math.basic import equal
-        # Inside FHE circuit
-        # result = equal(encrypted_a, encrypted_b)
-        ```
-    """
-    res = left == right
-    try:
-        res = int(res)
-    except Exception:
-        return res
-
-    return res    
-
+    return (left == right) * 1
 
 def not_equal(left: Any, right: Any) -> Any:
-    """Return 1 when left differs from right, otherwise 0.
-    
-    Example:
-        ```python
-        from concrete_fhe_toolkit.math.basic import not_equal
-        # Inside FHE circuit
-        # result = not_equal(encrypted_a, encrypted_b)
-        ```
-    """
-    res = left != right
-    try:
-        res = int(res)
-    except Exception:
-        return res
-
-    return res
-
+    return (left != right) * 1
 
 def less(left: Any, right: Any) -> Any:
-    """Return 1 when left is less than right, otherwise 0.
-    
-    Example:
-        ```python
-        from concrete_fhe_toolkit.math.basic import less
-        # Inside FHE circuit
-        # result = less(encrypted_a, encrypted_b)
-        ```
-    """
-    res = left < right
-    try:
-        res = int(res)
-    except Exception:
-        return res
-
-    return res
-
+    return (left < right) * 1
 
 def less_equal(left: Any, right: Any) -> Any:
-    """Return 1 when left is less than or equal to right.
-    
-    Example:
-        ```python
-        from concrete_fhe_toolkit.math.basic import less_equal
-        # Inside FHE circuit
-        # result = less_equal(encrypted_a, encrypted_b)
-        ```
-    """
-    res = left <= right
-    try:
-        res = int(res)
-    except Exception:
-        return res
-
-    return res
-
+    return (left <= right) * 1
 
 def greater(left: Any, right: Any) -> Any:
-    """Return 1 when left is greater than right, otherwise 0.
-    
-    Example:
-        ```python
-        from concrete_fhe_toolkit.math.basic import greater
-        # Inside FHE circuit
-        # result = greater(encrypted_a, encrypted_b)
-        ```
-    """
-    res = left > right
-    try:
-        res = int(res)
-    except Exception:
-        return res
-
-    return res
-
+    return (left > right) * 1
 
 def greater_equal(left: Any, right: Any) -> Any:
-    """Return 1 when left is greater than or equal to right.
-    
-    Example:
-        ```python
-        from concrete_fhe_toolkit.math.basic import greater_equal
-        # Inside FHE circuit
-        # result = greater_equal(encrypted_a, encrypted_b)
-        ```
-    """
-    res = left >= right
-    try:
-        res = int(res)
-    except Exception:
-        return res
-
-    return res
-
+    return (left >= right) * 1
 
 def is_zero(value: Any) -> Any:
-    """Return 1 when value is 0, otherwise 0.
-    
-    Example:
-        ```python
-        from concrete_fhe_toolkit.math.basic import is_zero
-        # Inside FHE circuit
-        # result = is_zero(encrypted_val)
-        ```
-    """
-    res = value == 0
-    try:
-        res = int(res)
-    except Exception:
-        return res
-
-    return res
+    return (value == 0) * 1
 
 
 def maximum(left: Any, right: Any) -> Any:

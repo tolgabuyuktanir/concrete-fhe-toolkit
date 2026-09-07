@@ -100,24 +100,94 @@ def cube(value: Any) -> Any:
 
 
 def equal(left: Any, right: Any) -> Any:
+    """Return 1 if left equals right, otherwise 0.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import equal
+        
+        # Inside FHE circuit
+        # result = equal(encrypted_a, encrypted_b)
+        ```
+    """
     return (left == right) * 1
 
 def not_equal(left: Any, right: Any) -> Any:
+    """Return 1 if left differs from right, otherwise 0.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import not_equal
+        
+        # Inside FHE circuit
+        # result = not_equal(encrypted_a, encrypted_b)
+        ```
+    """
     return (left != right) * 1
 
 def less(left: Any, right: Any) -> Any:
+    """Return 1 if left is strictly less than right, otherwise 0.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import less
+        
+        # Inside FHE circuit
+        # result = less(encrypted_a, encrypted_b)
+        ```
+    """
     return (left < right) * 1
 
 def less_equal(left: Any, right: Any) -> Any:
+    """Return 1 if left is less than or equal to right, otherwise 0.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import less_equal
+        
+        # Inside FHE circuit
+        # result = less_equal(encrypted_a, encrypted_b)
+        ```
+    """
     return (left <= right) * 1
 
 def greater(left: Any, right: Any) -> Any:
+    """Return 1 if left is strictly greater than right, otherwise 0.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import greater
+        
+        # Inside FHE circuit
+        # result = greater(encrypted_a, encrypted_b)
+        ```
+    """
     return (left > right) * 1
 
 def greater_equal(left: Any, right: Any) -> Any:
+    """Return 1 if left is greater than or equal to right, otherwise 0.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import greater_equal
+        
+        # Inside FHE circuit
+        # result = greater_equal(encrypted_a, encrypted_b)
+        ```
+    """
     return (left >= right) * 1
 
 def is_zero(value: Any) -> Any:
+    """Return 1 if value is exactly 0, otherwise 0.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import is_zero
+        
+        # Inside FHE circuit
+        # result = is_zero(encrypted_val)
+        ```
+    """
     return (value == 0) * 1
 
 
@@ -872,7 +942,7 @@ def select(control: Any, when_true: Any, when_false: Any) -> Any:
     control must be 0 or 1. Unlike `bit_select`, the branches may be any
     bounded integers, so this is the building block for oblivious branching.
     """
-    return control * when_true + (1 - control) * when_false
+    return control * (when_true - when_false) + when_false
 
 
 def compile_select(

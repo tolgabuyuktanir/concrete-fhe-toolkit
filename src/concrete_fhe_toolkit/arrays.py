@@ -15,7 +15,6 @@ from concrete_fhe_toolkit.math import (
     bit_or,
     bit_or_many,
     equal,
-    select,
 )
 
 from ._utils import (

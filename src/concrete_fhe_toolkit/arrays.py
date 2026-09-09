@@ -703,8 +703,10 @@ def make_top_k(
 ) -> UnaryArrayFunction:
     """Create a reduction returning the k largest (or smallest) values in order.
 
-    Runs k arg-extreme rounds, masking each selected element with a penalty,
-    so circuit cost grows linearly with k.
+    Uses a sorting network (Bitonic Sort) and slices the top k elements,
+    which is significantly more efficient in FHE than iterative greedy selection.
+    
+    Note: Requires `size` to be a power of two (2, 4, 8...) due to the underlying sort.
     
     Example:
         ```python
@@ -714,38 +716,18 @@ def make_top_k(
         # Use `top_k_fn(array)` inside an FHE program compilation
         ```
     """
-    size = validate_size(size)
+    size = validate_size(size, power_of_two=True)
     minimum, maximum = validate_bounds(min_value, max_value)
     k = validate_size(k)
     if k > size:
         raise ValueError("k cannot exceed size")
-    span = maximum - minimum
-    penalty = span + 1
 
-    if largest:
-        arg_extreme = make_argmax(size, minimum - penalty, maximum)
-    else:
-        arg_extreme = make_argmin(size, minimum, maximum + penalty)
+    # Use bitonic sort
+    sort_fn = make_sort(size, minimum, maximum, descending=largest)
 
     def top_k(x: Any) -> Any:
-        current = [x[index] for index in range(size)]
-        results = []
-        for _ in range(k):
-            extreme_index = arg_extreme(current)
-            selected_flags = [
-                equal(position, extreme_index) for position in range(size)
-            ]
-            value: Any = 0
-            next_values = []
-            for flag, item in zip(selected_flags, current):
-                value = value + flag * item
-                if largest:
-                    next_values.append(item - flag * penalty)
-                else:
-                    next_values.append(item + flag * penalty)
-            results.append(value)
-            current = next_values
-        return fhe.array(results)
+        sorted_arr = sort_fn(x)
+        return sorted_arr[:k]
 
     return top_k
 

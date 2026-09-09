@@ -251,6 +251,14 @@ np.testing.assert_array_equal(circuit2.encrypt_run_decrypt([1, 2]), [1, 2, 0, 0]
 np.testing.assert_array_equal(circuit4.encrypt_run_decrypt([1, 2, 3, 4]), [1, 2, 3, 4])"""
         ),
         (
+            "compile_array_pad",
+            "Returns a compiled array padding circuit.",
+            """circuit = compile_array_pad(size=2, target_size=4, min_value=-5, max_value=5)
+
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([1, 2]), [1, 2, 0, 0])
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-3, 5]), [-3, 5, 0, 0])"""
+        ),
+        (
             "array_slice",
             "Slices an array. Tests standard slice, full slice, and negative index slice (safely constrained by python slice semantics).",
             """def test_array_slice_1_3(arr):
@@ -294,6 +302,14 @@ assert circuit.encrypt_run_decrypt([-2, -2, -2], -2) == 1
 assert circuit.encrypt_run_decrypt([-1, 1, 2], -1) == 1"""
         ),
         (
+            "compile_array_contains",
+            "Returns a compiled membership-test circuit.",
+            """circuit = compile_array_contains(size=3, min_value=-5, max_value=5)
+
+assert circuit.encrypt_run_decrypt([1, 3, 5], 3) == 1
+assert circuit.encrypt_run_decrypt([1, 3, 5], 2) == 0"""
+        ),
+        (
             "make_array_count",
             "Creates a value-counting function. Tests zero count, single count, multiple count, negatives and zeroes.",
             """count_fn = make_array_count(size=4, min_value=-8, max_value=5)
@@ -309,6 +325,14 @@ assert circuit.encrypt_run_decrypt([1, 2, 2, 3], 2) == 2
 assert circuit.encrypt_run_decrypt([1, 2, 2, 3], 5) == 0
 assert circuit.encrypt_run_decrypt([0, 0, 0, 0], 0) == 4
 assert circuit.encrypt_run_decrypt([-5, -6, -5, -8], -5) == 2"""
+        ),
+        (
+            "compile_array_count",
+            "Returns a compiled value-counting circuit.",
+            """circuit = compile_array_count(size=4, min_value=-8, max_value=5)
+
+assert circuit.encrypt_run_decrypt([1, 2, 2, 3], 2) == 2
+assert circuit.encrypt_run_decrypt([0, 0, 0, 0], 0) == 4"""
         ),
         (
             "array_all_equal",
@@ -503,6 +527,14 @@ assert circuit.encrypt_run_decrypt([10, 20, 30], 0) == 10
 assert circuit.encrypt_run_decrypt([10, 20, 30], 2) == 30"""
         ),
         (
+            "compile_array_index",
+            "Returns a compiled oblivious-read circuit.",
+            """circuit = compile_array_index(size=3, min_value=0, max_value=30)
+
+assert circuit.encrypt_run_decrypt([10, 20, 30], 1) == 20
+assert circuit.encrypt_run_decrypt([10, 20, 30], 0) == 10"""
+        ),
+        (
             "make_array_set",
             "Creates an oblivious-write function. Tests writing to start, middle, and end of the array with positive, zeroes, negatives.",
             """set_fn = make_array_set(size=3, min_value=-5, max_value=30)
@@ -517,6 +549,14 @@ circuit = compiler.compile(inputset)
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 1, 15), [10, 15, 30])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 0, -5), [-5, 20, 30])
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 2, 0), [10, 20, 0])"""
+        ),
+        (
+            "compile_array_set",
+            "Returns a compiled oblivious-write circuit.",
+            """circuit = compile_array_set(size=3, min_value=-5, max_value=30)
+
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 1, 15), [10, 15, 30])
+np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 0, -5), [-5, 20, 30])"""
         ),
         (
             "make_array_index_of",
@@ -534,6 +574,14 @@ assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 20) == 1
 assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 40) == 4
 assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 30) == 2
 assert circuit.encrypt_run_decrypt([0, 0, 0, 0], 0) == 0"""
+        ),
+        (
+            "compile_array_index_of",
+            "Returns a compiled first-index-of search circuit.",
+            """circuit = compile_array_index_of(size=4, min_value=0, max_value=40)
+
+assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 20) == 1
+assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 30) == 2"""
         ),
         (
             "array_cumsum",

@@ -615,10 +615,11 @@ def make_array_set(
         items = list(array)
         if not items:
             raise ValueError("array must contain at least one element")
-        return [
-            select(equal(position, index), value, item)
-            for position, item in enumerate(items)
-        ]
+        arr_tensor = fhe.array(items)
+        positions = np.arange(len(items))
+        # Use tensor broadcasting to avoid FHE scalar boolean op failures
+        mask = (positions == index) * 1
+        return mask * value + (1 - mask) * arr_tensor
 
     return array_set    
 
@@ -801,7 +802,7 @@ def make_array_pad(
         """Pad an encrypted array with zeros up to the specified target size."""
         raw_list = list(array)
         padded_list = raw_list + [0] * (target_size - len(raw_list))
-        return padded_list
+        return fhe.array(padded_list)
 
     return array_pad
 

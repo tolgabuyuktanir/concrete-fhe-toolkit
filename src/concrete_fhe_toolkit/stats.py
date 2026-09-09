@@ -227,10 +227,14 @@ def array_histogram(array: List[Any], min_value: int, max_value: int) -> List[An
     """
     minimum_value, maximum_value = validate_bounds(min_value, max_value)
     items = list(array)
-    return [
-        array_sum([equal(item, value) for item in items])
-        for value in range(minimum_value, maximum_value + 1)
-    ]
+    arr = fhe.array(items)
+    counts = []
+    for value in range(minimum_value, maximum_value + 1):
+        # Tensor broadcast equality, avoiding scalar boolean fallback issues
+        mask = (arr == value) * 1
+        # Use existing efficient tournament reduction over the mask
+        counts.append(array_sum(list(mask)))
+    return fhe.array(counts)
 
 
 def array_mode(array: List[Any], min_value: int, max_value: int) -> Any:
@@ -263,7 +267,9 @@ def array_normalize(array: List[Any], mean: Any, scale: int) -> List[Any]:
         ```
     """
     normalized_scale = validate_integer("scale", scale, minimum=1)
-    return [(item - mean) * normalized_scale for item in array]
+    arr = fhe.array(array)
+    # Native tensor arithmetic bypasses boolean / node graph explosion
+    return (arr - mean) * normalized_scale
 
 
 __all__ = [

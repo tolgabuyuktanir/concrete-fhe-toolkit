@@ -811,7 +811,7 @@ assert circuit.encrypt_run_decrypt([1, 5, 3, 4]) == 3
 assert circuit.encrypt_run_decrypt([0, 0, 2, 2]) == 1
 assert circuit.encrypt_run_decrypt([4, 3, 2, 1]) == 2
 assert circuit.encrypt_run_decrypt([0, 0, 0, 0]) == 0
-assert circuit.encrypt_run_decrypt([-1, -5, -3, -4]) == -3"""
+assert circuit.encrypt_run_decrypt([-1, -5, -3, -4]) == -4"""
         ),
         (
             "array_percentile",

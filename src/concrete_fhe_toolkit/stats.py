@@ -10,9 +10,10 @@ from __future__ import annotations
 
 from typing import Any, List
 
+from ._compat import fhe
 from ._utils import validate_bounds, validate_integer, validate_size
 from .arrays import array_sum, make_argmax, make_sort
-from .math import equal, greater, maximum, minimum
+from .math import greater, maximum, minimum
 from .math.number_theory import make_isqrt
 
 

@@ -112,7 +112,21 @@ def array_multiply(array1: List[Any],array2: List[Any]) -> Any:
     """
     return _ensure_tensor(array1) * _ensure_tensor(array2)
 
-
+def array_pad(array: List[Any], target_size: Any) -> Any:
+    """Pad an encrypted array with zeros up to the specified target size.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_pad
+        
+        print(array_pad([1, 2], target_size=4))  # [1, 2, 0, 0]
+        ```
+    """
+    raw_list = list(array)
+    if(len(raw_list) > target_size):
+        raise ValueError("target_size must be at least the array size")
+    padded_list = raw_list + [0] * (target_size - len(raw_list))
+    return padded_list
 
 def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> Any:
     """Slice an encrypted array (return elements from begin_index to end_index - 1).
@@ -133,7 +147,31 @@ def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> Any:
 
     return fhe.array(raw_list[begin_index:end_index])
 
+def array_contains(array: List[Any], value: Any) -> Any:
+    """Check if an encrypted array contains a specific target value (returns 1 or 0).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_contains
+        
+        print(array_contains([1, 3, 5], value=3))  # 1
+        ```
+    """
+    contain_list = [equal(item,value) for item in array]
+    return bit_or_many(contain_list)
 
+def array_count(array: List[Any], value: Any) -> Any:
+    """Count occurrences of a specific value in an encrypted array.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_count
+        
+        print(array_count([1, 2, 2, 3], value=2))  # 2
+        ```
+    """
+    count_list = [equal(item,value) for item in array]
+    return array_sum(count_list)
 
 def array_all_equal(array1: List[Any], array2: List[Any]) -> Any:
     """Check if two encrypted arrays are identical (returns 1 or 0).
@@ -591,7 +629,23 @@ def compile_argmax(
     return _compile_array_function(function, size, minimum, maximum, configuration)
 
 
-
+def array_index(array: List[Any], index: Any) -> Any:
+    """Oblivious read: return array[index] without revealing the encrypted index.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_index
+        
+        print(array_index([10, 20, 30], index=1))  # 20
+        ```
+    """
+    items = list(array)
+    if not items:
+        raise ValueError("array must contain at least one element")
+    result: Any = 0
+    for position, value in enumerate(items):
+        result = result + equal(position, index) * value
+    return result
 
 
 def make_array_set(
@@ -623,27 +677,38 @@ def make_array_set(
     return array_set    
 
 def compile_array_set(
-    size: int,
+    size : int,
     min_value: int = -15,
     max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     array_set_func = make_array_set(size, min_value, max_value)
-    base_arrays = array_inputset(size, min_value, max_value)
-    inputset = []
-    for i, arr in enumerate(base_arrays):
-        idx = 0 if i % 2 == 0 else (size - 1)
-        val = min_value if i % 2 == 0 else max_value
-        inputset.append((arr, idx, val))
-    return compile_function(
-        array_set_func,
-        {"array": "encrypted", "index": "encrypted", "value": "encrypted"},
-        inputset,
-        configuration,
-    )
+    compiler = fhe.Compiler(array_set_func, {"array": "encrypted", "index": "encrypted", "value": "encrypted"})
+    inputset = [([min_value] * size, 0, min_value), ([max_value] * size, size-1, max_value)]
+    return compiler.compile(inputset)
 
+def array_index_of(array: List[Any], value: Any, *, missing_result: Optional[int] = None) -> Any:
+    """Return the first index holding value, or missing_result (default len(array)).
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit import array_index_of
+        
+        print(array_index_of([10, 20, 30], value=20))  # 1
+        ```
+    """
+    items = list(array)
+    if not items:
+        raise ValueError("array must contain at least one element")
+    missing = len(items) if missing_result is None else int(missing_result)
 
+    found: Any = 0
+    result: Any = 0
+    for position, item in enumerate(items):
+        flag = equal(item, value)
+        is_first = bit_and(flag, bit_not(found))
+        result = result + position * is_first
+        found = bit_or(found, flag)
+    return result + missing * bit_not(found)
 
 
 def array_cumsum(array: List[Any]) -> List[Any]:
@@ -781,117 +846,52 @@ def make_array_pad(
     min_value: int = -15,
     max_value: int = 15,
 ):
-    """Create a fixed-size array padding function.
-
-    Example:
-        ```python
-        from concrete_fhe_toolkit import make_array_pad
-
-        pad_fn = make_array_pad(size=2, target_size=4, min_value=0, max_value=10)
-        print(pad_fn([1, 2]))  # [1, 2, 0, 0]
-        ```
-    """
     size = validate_size(size)
     target_size = validate_size(target_size)
     minimum, maximum = validate_bounds(min_value, max_value)
-    if size > target_size:
-        raise ValueError("target_size must be at least the array size")
 
-    def array_pad(array: List[Any]) -> Any:
-        """Pad an encrypted array with zeros up to the specified target size."""
-        raw_list = list(array)
-        padded_list = raw_list + [0] * (target_size - len(raw_list))
-        return padded_list
-
-    return array_pad
+    def pad_func(array: List[Any]) -> Any:
+        return array_pad(array, target_size)
+    
+    return pad_func
 
 def compile_array_pad(
     size: int,
     target_size: int,
     min_value: int = -15,
     max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a fixed-size array padding circuit.
-
-    Example:
-        ```python
-        from concrete_fhe_toolkit import compile_array_pad
-
-        circuit = compile_array_pad(size=2, target_size=4, min_value=0, max_value=10)
-        print(circuit.encrypt_run_decrypt([1, 2]))  # [1, 2, 0, 0]
-        ```
-    """
     func = make_array_pad(size, target_size, min_value, max_value)
-    inputset = array_inputset(size, min_value, max_value)
-    return compile_function(func, {"array": "encrypted"}, inputset, configuration)
+    compiler = fhe.Compiler(func, {"array": "encrypted"})
+    inputset = [([min_value] * size,), ([max_value] * size,), ([0] * size,)]
+    return compiler.compile(inputset)
 
 
 def make_array_index_of(
     size: int,
     min_value: int = -15,
     max_value: int = 15,
-    *,
-    missing_result: Optional[int] = None,
 ):
-    """Create a first-index-of search function for bounded encrypted arrays.
-
-    Example:
-        ```python
-        from concrete_fhe_toolkit import make_array_index_of
-
-        index_of_fn = make_array_index_of(size=3, min_value=0, max_value=10)
-        print(index_of_fn([10, 20, 30], 20))  # 1
-        ```
-    """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
-    missing = size if missing_result is None else int(missing_result)
 
-    def array_index_of(array: List[Any], value: Any) -> Any:
-        """Return the first index holding value, or missing_result (default size)."""
-        items = list(array)
-        if not items:
-            raise ValueError("array must contain at least one element")
-        found: Any = 0
-        result: Any = 0
-        for position, item in enumerate(items):
-            flag = equal(item, value)
-            is_first = bit_and(flag, bit_not(found))
-            result = result + position * is_first
-            found = bit_or(found, flag)
-        return result + missing * bit_not(found)
-
-    return array_index_of
+    def index_of_func(array: List[Any], value: Any) -> Any:
+        return array_index_of(array, value)
+    
+    return index_of_func
 
 def compile_array_index_of(
     size: int,
     min_value: int = -15,
     max_value: int = 15,
-    *,
-    missing_result: Optional[int] = None,
-    configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a first-index-of search circuit.
-
-    Example:
-        ```python
-        from concrete_fhe_toolkit import compile_array_index_of
-
-        circuit = compile_array_index_of(size=3, min_value=0, max_value=10)
-        print(circuit.encrypt_run_decrypt([10, 20, 30], 20))  # 1
-        ```
-    """
-    func = make_array_index_of(size, min_value, max_value, missing_result=missing_result)
-    base_arrays = array_inputset(size, min_value, max_value)
-    inputset = []
-    for i, arr in enumerate(base_arrays):
-        val = min_value if i % 2 == 0 else max_value
-        inputset.append((arr, val))
-    return compile_function(
-        func, {"array": "encrypted", "value": "encrypted"}, inputset, configuration
-    )
+    func = make_array_index_of(size, min_value, max_value)
+    compiler = fhe.Compiler(func, {"array": "encrypted", "value": "encrypted"})
+    inputset = [
+        ([min_value] * size, min_value),
+        ([max_value] * size, max_value),
+    ]
+    return compiler.compile(inputset)
 
 
 def make_array_count(
@@ -899,52 +899,26 @@ def make_array_count(
     min_value: int = -15,
     max_value: int = 15,
 ):
-    """Create a value-counting function for bounded encrypted arrays.
-
-    Example:
-        ```python
-        from concrete_fhe_toolkit import make_array_count
-
-        count_fn = make_array_count(size=4, min_value=0, max_value=10)
-        print(count_fn([1, 2, 2, 3], 2))  # 2
-        ```
-    """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
 
-    def array_count(array: List[Any], value: Any) -> Any:
-        """Count occurrences of a specific value in an encrypted array."""
-        count_list = [equal(item, value) for item in array]
-        return array_sum(count_list)
-
-    return array_count
+    def count_func(array: List[Any], value: Any) -> Any:
+        return array_count(array, value)
+    
+    return count_func
 
 def compile_array_count(
     size: int,
     min_value: int = -15,
     max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a value-counting circuit.
-
-    Example:
-        ```python
-        from concrete_fhe_toolkit import compile_array_count
-
-        circuit = compile_array_count(size=4, min_value=0, max_value=10)
-        print(circuit.encrypt_run_decrypt([1, 2, 2, 3], 2))  # 2
-        ```
-    """
     func = make_array_count(size, min_value, max_value)
-    base_arrays = array_inputset(size, min_value, max_value)
-    inputset = []
-    for i, arr in enumerate(base_arrays):
-        val = min_value if i % 2 == 0 else max_value
-        inputset.append((arr, val))
-    return compile_function(
-        func, {"array": "encrypted", "value": "encrypted"}, inputset, configuration
-    )
+    compiler = fhe.Compiler(func, {"array": "encrypted", "value": "encrypted"})
+    inputset = [
+        ([min_value] * size, min_value),
+        ([max_value] * size, max_value),
+    ]
+    return compiler.compile(inputset)
 
 
 def make_array_contains(
@@ -952,52 +926,26 @@ def make_array_contains(
     min_value: int = -15,
     max_value: int = 15,
 ):
-    """Create a membership-test function for bounded encrypted arrays.
-
-    Example:
-        ```python
-        from concrete_fhe_toolkit import make_array_contains
-
-        contains_fn = make_array_contains(size=3, min_value=0, max_value=10)
-        print(contains_fn([1, 3, 5], 3))  # 1
-        ```
-    """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
 
-    def array_contains(array: List[Any], value: Any) -> Any:
-        """Check if an encrypted array contains a specific target value (returns 1 or 0)."""
-        contain_list = [equal(item, value) for item in array]
-        return bit_or_many(contain_list)
-
-    return array_contains
+    def contains_func(array: List[Any], value: Any) -> Any:
+        return array_contains(array, value)
+    
+    return contains_func
 
 def compile_array_contains(
     size: int,
     min_value: int = -15,
     max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile a membership-test circuit.
-
-    Example:
-        ```python
-        from concrete_fhe_toolkit import compile_array_contains
-
-        circuit = compile_array_contains(size=3, min_value=0, max_value=10)
-        print(circuit.encrypt_run_decrypt([1, 3, 5], 3))  # 1
-        ```
-    """
     func = make_array_contains(size, min_value, max_value)
-    base_arrays = array_inputset(size, min_value, max_value)
-    inputset = []
-    for i, arr in enumerate(base_arrays):
-        val = min_value if i % 2 == 0 else max_value
-        inputset.append((arr, val))
-    return compile_function(
-        func, {"array": "encrypted", "value": "encrypted"}, inputset, configuration
-    )
+    compiler = fhe.Compiler(func, {"array": "encrypted", "value": "encrypted"})
+    inputset = [
+        ([min_value] * size, min_value),
+        ([max_value] * size, max_value),
+    ]
+    return compiler.compile(inputset)
 
 
 def make_array_index(
@@ -1005,54 +953,23 @@ def make_array_index(
     min_value: int = -15,
     max_value: int = 15,
 ):
-    """Create an oblivious-read function for bounded encrypted arrays.
-
-    Example:
-        ```python
-        from concrete_fhe_toolkit import make_array_index
-
-        index_fn = make_array_index(size=3, min_value=0, max_value=30)
-        print(index_fn([10, 20, 30], 1))  # 20
-        ```
-    """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
 
-    def array_index(array: List[Any], index: Any) -> Any:
-        """Oblivious read: return array[index] without revealing the encrypted index."""
-        items = list(array)
-        if not items:
-            raise ValueError("array must contain at least one element")
-        result: Any = 0
-        for position, value in enumerate(items):
-            result = result + equal(position, index) * value
-        return result
-
-    return array_index
+    def index_func(array: List[Any], index: Any) -> Any:
+        return array_index(array, index)
+    
+    return index_func
 
 def compile_array_index(
     size: int,
     min_value: int = -15,
     max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile an oblivious-read circuit.
-
-    Example:
-        ```python
-        from concrete_fhe_toolkit import compile_array_index
-
-        circuit = compile_array_index(size=3, min_value=0, max_value=30)
-        print(circuit.encrypt_run_decrypt([10, 20, 30], 1))  # 20
-        ```
-    """
     func = make_array_index(size, min_value, max_value)
-    base_arrays = array_inputset(size, min_value, max_value)
-    inputset = []
-    for i, arr in enumerate(base_arrays):
-        idx = 0 if i % 2 == 0 else (size - 1)
-        inputset.append((arr, idx))
-    return compile_function(
-        func, {"array": "encrypted", "index": "encrypted"}, inputset, configuration
-    )
+    compiler = fhe.Compiler(func, {"array": "encrypted", "index": "encrypted"})
+    inputset = [
+        ([min_value] * size, 0),
+        ([max_value] * size, size - 1),
+    ]
+    return compiler.compile(inputset)

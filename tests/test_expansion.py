@@ -9,11 +9,11 @@ import pytest
 from concrete_fhe_toolkit import (
     array_concat,
     array_cumsum,
-    array_index,
-    array_index_of,
     array_reverse,
-    array_set,
     compile_top_k,
+    make_array_index,
+    make_array_index_of,
+    make_array_set,
     make_top_k,
     ml,
     stats,
@@ -142,12 +142,21 @@ def test_unsigned_mod_clear():
 
 
 def test_oblivious_array_access():
+    array_index = make_array_index(size=3, min_value=0, max_value=9)
     assert int(array_index([4, 7, 9], 2)) == 9
+
+    array_set = make_array_set(size=3, min_value=0, max_value=99)
     assert [int(v) for v in array_set([4, 7, 9], 1, 5)] == [4, 5, 9]
 
+    array_index_of = make_array_index_of(size=4, min_value=0, max_value=9)
     assert int(array_index_of([4, 7, 9, 7], 7)) == 1
-    assert int(array_index_of([1, 2], 5)) == 2
-    assert int(array_index_of([1, 2], 5, missing_result=-1)) == -1
+
+    array_index_of_2 = make_array_index_of(size=2, min_value=0, max_value=5)
+    assert int(array_index_of_2([1, 2], 5)) == 2
+
+    array_index_of_3 = make_array_index_of(size=2, min_value=-1, max_value=5, missing_result=-1)
+    assert int(array_index_of_3([1, 2], 5)) == -1
+
 
 
 def test_array_utilities():

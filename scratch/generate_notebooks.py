@@ -230,25 +230,24 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt([0, 5], [10, 0]), [0, 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([-2, -3], [4, -5]), [-8, 15])"""
         ),
         (
-            "array_pad",
-            "Pads or truncates an array to exactly `target_size`. The wrapper strictly enforces size 4. We test arrays that are smaller, exact size, and larger (truncation).",
-            """def test_pad_from_2_to_4(arr):
-    return array_pad(arr, 4)
+            "make_array_pad",
+            "Creates a fixed-size padding function. Tests padding from smaller to target size, and exact size (no-op).",
+            """pad_fn = make_array_pad(size=2, target_size=4, min_value=-15, max_value=15)
+
+def test_pad_from_2_to_4(arr):
+    return pad_fn(arr)
 compiler2 = fhe.Compiler(test_pad_from_2_to_4, {"arr": "encrypted"})
 circuit2 = compiler2.compile([([1, 2],), ([-1, -1],)])
 
-def test_pad_from_5_to_4(arr):
-    return array_pad(arr, 4)
-compiler5 = fhe.Compiler(test_pad_from_5_to_4, {"arr": "encrypted"})
-circuit5 = compiler5.compile([([1, 2, 3, 4, 5],), ([0, 0, 0, 0, 0],)])
+# make_array_pad(size=5, target_size=4, ...) will raise ValueError at creation time
 
+pad_fn_exact = make_array_pad(size=4, target_size=4, min_value=-15, max_value=15)
 def test_pad_from_4_to_4(arr):
-    return array_pad(arr, 4)
+    return pad_fn_exact(arr)
 compiler4 = fhe.Compiler(test_pad_from_4_to_4, {"arr": "encrypted"})
 circuit4 = compiler4.compile([([1, 2, 3, 4],), ([0, 0, 0, 0],)])
 
 np.testing.assert_array_equal(circuit2.encrypt_run_decrypt([1, 2]), [1, 2, 0, 0])
-np.testing.assert_array_equal(circuit5.encrypt_run_decrypt([1, 2, 3, 4, 5]), [1, 2, 3, 4])
 np.testing.assert_array_equal(circuit4.encrypt_run_decrypt([1, 2, 3, 4]), [1, 2, 3, 4])"""
         ),
         (
@@ -277,10 +276,12 @@ np.testing.assert_array_equal(circuit2.encrypt_run_decrypt([10, 20, 30, 40]), [1
 np.testing.assert_array_equal(circuit3.encrypt_run_decrypt([10, 20, 30, 40]), [20, 30])"""
         ),
         (
-            "array_contains",
-            "Checks if array contains value. Tests exists, does not exist, exists multiple times, negatives, zeroes.",
-            """def test_array_contains(arr, val):
-    return array_contains(arr, val)
+            "make_array_contains",
+            "Creates a membership-test function. Tests exists, does not exist, exists multiple times, negatives, zeroes.",
+            """contains_fn = make_array_contains(size=3, min_value=-5, max_value=5)
+
+def test_array_contains(arr, val):
+    return contains_fn(arr, val)
 
 compiler = fhe.Compiler(test_array_contains, {"arr": "encrypted", "val": "encrypted"})
 inputset = [([1, 3, 5], 3), ([1, 3, 5], 2), ([0, 0, 0], 0), ([-2, -2, -2], -2), ([-1, 1, 2], -1)]
@@ -293,10 +294,12 @@ assert circuit.encrypt_run_decrypt([-2, -2, -2], -2) == 1
 assert circuit.encrypt_run_decrypt([-1, 1, 2], -1) == 1"""
         ),
         (
-            "array_count",
-            "Counts occurrences of value. Tests zero count, single count, multiple count, negatives and zeroes.",
-            """def test_array_count(arr, val):
-    return array_count(arr, val)
+            "make_array_count",
+            "Creates a value-counting function. Tests zero count, single count, multiple count, negatives and zeroes.",
+            """count_fn = make_array_count(size=4, min_value=-8, max_value=5)
+
+def test_array_count(arr, val):
+    return count_fn(arr, val)
 
 compiler = fhe.Compiler(test_array_count, {"arr": "encrypted", "val": "encrypted"})
 inputset = [([1, 2, 2, 3], 2), ([1, 2, 2, 3], 5), ([0, 0, 0, 0], 0), ([-5, -6, -5, -8], -5)]
@@ -484,10 +487,12 @@ assert circuit.encrypt_run_decrypt([4, 1, 3, 2]) == 0
 assert circuit.encrypt_run_decrypt([1, 5, 5, 2]) == 1"""
         ),
         (
-            "array_index",
-            "Oblivious read. Tests reading from start, middle, and end of the array. Out of bounds triggers Python IndexError, so not FHE-compatible in clear.",
-            """def test_array_index(arr, idx):
-    return array_index(arr, idx)
+            "make_array_index",
+            "Creates an oblivious-read function. Tests reading from start, middle, and end of the array.",
+            """index_fn = make_array_index(size=3, min_value=0, max_value=30)
+
+def test_array_index(arr, idx):
+    return index_fn(arr, idx)
 
 compiler = fhe.Compiler(test_array_index, {"arr": "encrypted", "idx": "encrypted"})
 inputset = [([10, 20, 30], 1), ([10, 20, 30], 0), ([5, 5, 5], 2)]
@@ -498,10 +503,12 @@ assert circuit.encrypt_run_decrypt([10, 20, 30], 0) == 10
 assert circuit.encrypt_run_decrypt([10, 20, 30], 2) == 30"""
         ),
         (
-            "array_set",
-            "Oblivious write. Tests writing to start, middle, and end of the array with positive, zeroes, negatives.",
-            """def test_array_set(arr, idx, val):
-    return array_set(arr, idx, val)
+            "make_array_set",
+            "Creates an oblivious-write function. Tests writing to start, middle, and end of the array with positive, zeroes, negatives.",
+            """set_fn = make_array_set(size=3, min_value=-5, max_value=30)
+
+def test_array_set(arr, idx, val):
+    return set_fn(arr, idx, val)
 
 compiler = fhe.Compiler(test_array_set, {"arr": "encrypted", "idx": "encrypted", "val": "encrypted"})
 inputset = [([10, 20, 30], 1, 15), ([10, 20, 30], 0, -5), ([10, 20, 30], 2, 0)]
@@ -512,19 +519,21 @@ np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 0, -5), 
 np.testing.assert_array_equal(circuit.encrypt_run_decrypt([10, 20, 30], 2, 0), [10, 20, 0])"""
         ),
         (
-            "array_index_of",
-            "Returns index of value. Tests existing element, missing element (returns `missing_result`), first occurrence of duplicates, and zeroes.",
-            """def test_array_index_of(arr, val, missing):
-    return array_index_of(arr, val, missing_result=missing)
+            "make_array_index_of",
+            "Creates a first-index-of search function. Tests existing element, missing element (returns size as default), first occurrence of duplicates, and zeroes.",
+            """index_of_fn = make_array_index_of(size=4, min_value=0, max_value=40)
 
-compiler = fhe.Compiler(test_array_index_of, {"arr": "encrypted", "val": "encrypted", "missing": "clear"})
-inputset = [([10, 20, 30, 20], 20, 99), ([10, 20, 30, 20], 40, 99), ([10, 20, 30, 20], 30, 99), ([0, 0, 0, 0], 0, 99)]
+def test_array_index_of(arr, val):
+    return index_of_fn(arr, val)
+
+compiler = fhe.Compiler(test_array_index_of, {"arr": "encrypted", "val": "encrypted"})
+inputset = [([10, 20, 30, 20], 20), ([10, 20, 30, 20], 40), ([10, 20, 30, 20], 30), ([0, 0, 0, 0], 0)]
 circuit = compiler.compile(inputset)
 
-assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 20, 99) == 1
-assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 40, 99) == 99
-assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 30, 99) == 2
-assert circuit.encrypt_run_decrypt([0, 0, 0, 0], 0, 99) == 0"""
+assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 20) == 1
+assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 40) == 4
+assert circuit.encrypt_run_decrypt([10, 20, 30, 20], 30) == 2
+assert circuit.encrypt_run_decrypt([0, 0, 0, 0], 0) == 0"""
         ),
         (
             "array_cumsum",

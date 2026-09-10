@@ -79,7 +79,7 @@ def gaussian_mechanism(
 ) -> int:
     """Release an integer aggregate with (epsilon, delta)-DP Gaussian noise.
 
-    Uses the analytic calibration ``sigma = sensitivity * sqrt(2 ln(1.25/delta))
+    Uses the classical sufficient calibration ``sigma = sensitivity * sqrt(2 ln(1.25/delta))
     / epsilon`` (valid for ``epsilon <= 1``). Prefer this over Laplace when
     many values are released together, since Gaussian noise composes better.
 
@@ -112,7 +112,7 @@ def gaussian_mechanism(
         raise ValueError("delta must be smaller than 1")
     sigma = (
         _validate_positive("sensitivity", sensitivity)
-        * math.sqrt(2 * math.log(1.25 / dlt))
+        * math.sqrt(2 * (math.log(1.25) - math.log(dlt)))
         / eps
     )
     generator = rng if rng is not None else np.random.default_rng()
@@ -131,9 +131,14 @@ def dp_release(
     """Noise a whole vector of decrypted aggregates with one shared budget.
 
     The given ``epsilon`` is the budget for the *entire* release: it is
-    split evenly across the values (simple composition), so releasing more
-    values means more noise per value. Use it on the aggregate vectors the
-    encrypted trainers decrypt (class counts, cluster sums, ...).
+    split evenly across the values, so releasing more values means more noise
+    per value. Laplace uses simple composition. For Gaussian, ``delta`` is
+    also a total vector budget and total ``epsilon`` must be in ``(0, 1]``.
+    With n values of sensitivity s, the vector L2 sensitivity is at most
+    sqrt(n)*s; the existing noise n*s*sqrt(2*ln(1.25/delta))/epsilon is a
+    conservative calibration for that vector. Delta need not be split again.
+    These guarantees assume the stated sensitivity bounds and independent
+    noise. Use the decrypted aggregate vectors (counts, sums, ...) as input.
 
     Args:
         values: The decrypted aggregates to release together.
@@ -141,7 +146,7 @@ def dp_release(
         epsilon: Total privacy budget for the whole vector.
         mechanism: ``"laplace"`` (pure epsilon-DP) or ``"gaussian"``
             (requires ``delta``).
-        delta: Failure probability for the Gaussian mechanism.
+        delta: Total delta budget for the Gaussian vector release, in (0, 1).
         rng: Optional ``numpy.random.Generator`` for reproducible noise.
 
     Returns:
@@ -161,10 +166,21 @@ def dp_release(
         print(noisy)  # e.g. [410, 431] — safe to use clear-side
         ```
     """
+    if mechanism not in {"laplace", "gaussian"}:
+        raise ValueError("mechanism must be 'laplace' or 'gaussian'")
+    total_epsilon = _validate_positive("epsilon", epsilon)
+    _validate_positive("sensitivity", sensitivity)
+    if mechanism == "gaussian":
+        if total_epsilon > 1:
+            raise ValueError("total epsilon must be at most 1 for the Gaussian calibration")
+        if delta is None:
+            raise ValueError("the gaussian mechanism requires delta")
+        if _validate_positive("delta", delta) >= 1:
+            raise ValueError("delta must be smaller than 1")
     items = list(values)
     if not items:
         return []
-    per_value_epsilon = _validate_positive("epsilon", epsilon) / len(items)
+    per_value_epsilon = total_epsilon / len(items)
     generator = rng if rng is not None else np.random.default_rng()
     if mechanism == "laplace":
         return [

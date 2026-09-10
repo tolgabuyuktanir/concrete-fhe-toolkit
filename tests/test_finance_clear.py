@@ -44,3 +44,21 @@ def test_transfer():
 
     sender, receiver = finance.transfer(30, 0, 30)
     assert (int(sender), int(receiver)) == (0, 30)
+
+
+@pytest.mark.parametrize("amount", [-100, -30, -1, 0, 30, 101])
+def test_transfer_rejects_negative_or_unaffordable_amounts(amount):
+    expected = amount if 0 <= amount <= 100 else 0
+    assert finance.transfer(100, 50, amount) == (100 - expected, 50 + expected)
+
+
+def test_transfer_guard_compiles_and_simulates():
+    from itertools import product
+    from concrete import fhe
+    circuit = fhe.Compiler(finance.transfer, {
+        "sender_balance": "encrypted", "receiver_balance": "encrypted", "amount": "encrypted"
+    }).compile(list(product([0, 3], [0, 3], [-3, 0, 1, 3, 4])),
+               configuration=fhe.Configuration(p_error=2**-40))
+    for amount in [-3, -1, 0, 2, 4]:
+        expected = amount if 0 <= amount <= 3 else 0
+        assert tuple(circuit.simulate(3, 2, amount)) == (3 - expected, 2 + expected)

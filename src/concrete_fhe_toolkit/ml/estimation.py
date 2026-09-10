@@ -140,12 +140,13 @@ def _accumulate(model: Any, out: ModelCostEstimate, span: int) -> None:
         out.multiplications += 2 * nodes  # oblivious select per node
         return
 
-    if name in ("FHERandomForest", "FHEXGBoost"):
+    if name in ("FHERandomForest", "FHEXGBoost", "FHEXGBoostRegressor"):
         for tree in model.trees:
             nodes, _ = _tree_stats(tree)
             out.comparisons += nodes
             out.multiplications += 2 * nodes
-        out.comparisons += 1  # vote / threshold
+        if name != "FHEXGBoostRegressor":
+            out.comparisons += 1  # vote / threshold
         return
 
     if name == "FHEKNN":

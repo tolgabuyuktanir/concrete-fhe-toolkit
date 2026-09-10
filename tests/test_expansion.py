@@ -161,20 +161,20 @@ def test_oblivious_array_access():
 
 def test_array_utilities():
     assert [int(v) for v in array_cumsum([1, 2, 3])] == [1, 3, 6]
-    assert array_reverse([1, 2, 3]) == [3, 2, 1]
-    assert array_concat([1, 2], [3], [4, 5]) == [1, 2, 3, 4, 5]
+    np.testing.assert_array_equal(array_reverse([1, 2, 3]), [3, 2, 1])
+    np.testing.assert_array_equal(array_concat([1, 2], [3], [4, 5]), [1, 2, 3, 4, 5])
 
 
 def test_top_k_clear():
-    values = np.array([5, 17, 3, 9, 17], dtype=np.int64)
-    top3 = make_top_k(5, 3, 0, 20)(values)
+    values = np.array([5, 17, 3, 9, 17, 2, 8, 6], dtype=np.int64)
+    top3 = make_top_k(8, 3, 0, 20)(values)
     assert [int(v) for v in top3] == [17, 17, 9]
 
-    bottom2 = make_top_k(5, 2, 0, 20, largest=False)(values)
-    assert [int(v) for v in bottom2] == [3, 5]
+    bottom2 = make_top_k(8, 2, 0, 20, largest=False)(values)
+    assert [int(v) for v in bottom2] == [2, 3]
 
     with pytest.raises(ValueError):
-        make_top_k(3, 4, 0, 20)
+        make_top_k(4, 5, 0, 20)
 
 
 # ---------- stats ----------

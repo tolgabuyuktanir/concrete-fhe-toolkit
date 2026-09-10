@@ -1,5 +1,7 @@
 from .._compat import fhe
 import math
+import numpy as np
+from .._utils import validate_integer
 from concrete_fhe_toolkit.ml import (
     logistic_regression_inference, linear_regression_inference,
     decision_tree_inference, pca_inference, cnn_inference,
@@ -9,111 +11,138 @@ from concrete_fhe_toolkit.ml import (
 import warnings
 
 class FHEModel:
-    """Base class for all FHE machine learning models.
-    
-    This class handles the boilerplate of compiling the FHE circuit and 
-    running predictions. Child classes should override the `_circuit_logic`
-    method to provide the specific model's mathematical logic.
-    """
+    """Base class for models with single-sample or fixed-batch circuits."""
+
     def __init__(self):
         self.circuit = None
+        self.batch_size = 1
+        self._batched = False
+        self._sample_shape = None
 
-    def _circuit_logic(self,features):
-        raise NotImplementedError("This function can be used in inherited classes")
-        
+    def _circuit_logic(self, features):
+        raise NotImplementedError("Subclasses must implement _circuit_logic")
+
     def _batch_circuit_logic(self, features_batch):
         return fhe.array([self._circuit_logic(sample) for sample in features_batch])
 
-    def compile(self, inputset, batch_size: int = 16):
-        self.batch_size = batch_size
-        self.compiler = fhe.Compiler(self._batch_circuit_logic,{"features_batch": "encrypted"})
-        self.circuit = self.compiler.compile(inputset)    
+    def _single_circuit_logic(self, features):
+        result = self._circuit_logic(features)
+        return fhe.array(result) if isinstance(result, (list, tuple)) else result
 
-    def predict(self, features):
-        """Encrypt one sample, run the compiled circuit, and decrypt the result.
-        This is a convenience wrapper that calls `predict_many`.
+    @staticmethod
+    def _integer_array(value):
+        array = np.asarray(value)
+        if array.size == 0:
+            raise ValueError("samples must not be empty")
+        if array.dtype.kind not in "iu":
+            raise TypeError("samples must contain integers")
+        if array.dtype.kind == "u" and np.any(array > np.iinfo(np.int64).max):
+            raise ValueError("samples must fit in signed 64-bit integers")
+        return array.astype(np.int64)
+
+    def compile(self, inputset, batch_size=None, *, inputset_is_batched=None,
+                configuration=None):
+        """Compile representative integer samples.
+
+        By default, each inputset item is one sample and the circuit accepts
+        one sample, including image/tensor samples. ``predict_many`` reuses it.
+
+        For compatibility, an explicit ``batch_size`` means each inputset
+        item is an already assembled batch. Pass ``inputset_is_batched=False``
+        with ``batch_size`` to build a batch circuit from individual samples.
+        ``inputset_is_batched=True`` can infer batch size from the first item.
+        All batches must have the same shape and size. Runtime samples must
+        remain within the public bounds represented by the inputset.
 
         Example:
             ```python
-            model = FHELogisticRegression(weights=[3, 2], bias=-7)
-            model.compile(inputset=[[[0, 0]] * 16], batch_size=16)
-            print(model.predict([4, 1]))  # 1
+            model.compile([[0, 0], [5, 5]])
+            model.compile([[0, 0], [5, 5]], batch_size=4,
+                          inputset_is_batched=False)
+            model.compile([[[0, 0]] * 4, [[5, 5]] * 4], batch_size=4)
             ```
         """
-        if self.circuit is None:
-            raise ValueError("The model should be compiled before prediction")
+        if inputset_is_batched is not None and not isinstance(inputset_is_batched, bool):
+            raise TypeError("inputset_is_batched must be a boolean or None")
+        size = None if batch_size is None else validate_integer("batch_size", batch_size, 1)
+        prebatched = size is not None if inputset_is_batched is None else inputset_is_batched
+        items = [self._integer_array(item) for item in inputset]
+        if not items:
+            raise ValueError("inputset must contain at least one sample")
+        shape = items[0].shape
+        if any(item.shape != shape for item in items):
+            raise ValueError("all inputset items must have the same shape")
+        batched = prebatched or size is not None
+        if prebatched:
+            if not shape:
+                raise ValueError("each inputset item must contain a batch")
+            size = shape[0] if size is None else size
+            if shape[0] != size:
+                raise ValueError("inputset batch dimension must equal batch_size")
+            sample_shape = shape[1:]
+            calibration = items
+        elif batched:
+            sample_shape = shape
+            # Every lane observes every calibration sample and its bounds.
+            calibration = [np.stack([item] * size) for item in items]
+        else:
+            size = 1
+            sample_shape = shape
+            calibration = items
+        function = self._batch_circuit_logic if batched else self._single_circuit_logic
+        parameter = "features_batch" if batched else "features"
+        compiler = fhe.Compiler(function, {parameter: "encrypted"})
+        if configuration is None:
+            circuit = compiler.compile(calibration)
+        else:
+            circuit = compiler.compile(calibration, configuration=configuration)
+        # Commit state only after successful compilation.
+        self.compiler = compiler
+        self.circuit = circuit
+        self.batch_size = size
+        self._batched = batched
+        self._sample_shape = sample_shape
+
+    def predict(self, features):
+        """Encrypt one sample, evaluate it, and decrypt its prediction."""
         return self.predict_many([features])[0]
 
     def simulate(self, features):
-        """Run one prediction in Concrete's simulator (fast, no key generation).
-
-        Simulation is for prototyping and tests only — inputs are NOT
-        protected. The model must be compiled first.
-
-        Example:
-            ```python
-            model.compile(inputset=[[[0, 0]] * 16], batch_size=16)
-            print(model.simulate([4, 1]))  # same output, no keygen
-            ```
-        """
-        if self.circuit is None:
-            raise ValueError("The model should be compiled before prediction")
+        """Simulate one sample without encryption; compile the model first."""
         return self.simulate_many([features])[0]
 
+    def _run_many(self, samples, method):
+        if self.circuit is None:
+            raise ValueError("The model should be compiled before prediction")
+        items = [self._integer_array(sample) for sample in samples]
+        if not items:
+            return []
+        expected_shape = self._sample_shape if self._sample_shape is not None else items[0].shape
+        if any(item.shape != expected_shape for item in items):
+            raise ValueError("sample shape does not match the compiled model")
+        run = getattr(self.circuit, method)
+        if not self._batched:
+            return [run(item) for item in items]
+        results = []
+        for start in range(0, len(items), self.batch_size):
+            batch = items[start:start + self.batch_size]
+            count = len(batch)
+            # Repeat an in-domain sample, preserving arbitrary tensor shape.
+            batch = batch + [batch[-1]] * (self.batch_size - count)
+            results.extend(run(np.stack(batch))[:count])
+        return results
+
     def predict_many(self, samples):
-        """Predict a batch of samples with one compiled circuit (one key set).
+        """Predict samples using the compiled circuit and its existing keys.
 
-        The circuit is compiled for a specific `batch_size`. If the number of 
-        samples is not a multiple of `batch_size`, dummy samples are automatically 
-        padded and then removed from the final result.
-
-        Example:
-            ```python
-            model.compile(inputset=[[[0, 0]] * 16], batch_size=16)
-            predictions = model.predict_many([[4, 1], [0, 2], [5, 5]])
-            ```
+        Partial batches repeat the final sample for padding; padded predictions
+        are discarded. Single-sample circuits execute once per input sample.
         """
-        original_samples_length = len(samples)
-        num_of_full_batches = original_samples_length // self.batch_size
-        num_of_padding = self.batch_size - original_samples_length % self.batch_size
-        
-        padded_samples = list(samples)
-        if num_of_padding != self.batch_size:
-            num_of_full_batches += 1
-            for _ in range(num_of_padding):
-                padded_samples.append([0] * len(padded_samples[0]))
-
-        predictions = []
-        start = 0
-        for _ in range(num_of_full_batches):
-            batch = padded_samples[start:start+self.batch_size]
-            predictions.extend(self.circuit.encrypt_run_decrypt(batch))
-            start += self.batch_size
-
-        return predictions[:original_samples_length]    
-
-        
+        return self._run_many(samples, "encrypt_run_decrypt")
 
     def simulate_many(self, samples):
-        """Simulate a batch of samples (fast counterpart of ``predict_many``)."""
-        original_samples_length = len(samples)
-        num_of_full_batches = original_samples_length // self.batch_size
-        num_of_padding = self.batch_size - original_samples_length % self.batch_size
-        
-        padded_samples = list(samples)
-        if num_of_padding != self.batch_size:
-            num_of_full_batches += 1
-            for _ in range(num_of_padding):
-                padded_samples.append([0] * len(padded_samples[0]))
-
-        predictions = []
-        start = 0
-        for _ in range(num_of_full_batches):
-            batch = padded_samples[start:start+self.batch_size]
-            predictions.extend(self.circuit.simulate(batch))
-            start += self.batch_size
-
-        return predictions[:original_samples_length]
+        """Simulate samples with the same batching rules as ``predict_many``."""
+        return self._run_many(samples, "simulate")
 
 
 class FHELogisticRegression(FHEModel):
@@ -443,6 +472,10 @@ class FHENaiveBayesTrainer:
     def decrypt_and_finalize_model(self, encrypted_results, max_bit_width=8):
         raw_feature_counts, priors = self.circuit.decrypt(*encrypted_results)
         
+        return self._finalize_model(raw_feature_counts, priors, max_bit_width)
+
+    @staticmethod
+    def _finalize_model(raw_feature_counts, priors, max_bit_width):
         formatted_tables = []
         formatted_priors = []
         total_samples = sum(priors)
@@ -507,53 +540,7 @@ class FHENaiveBayesTrainer:
         # The circuit returns raw counts (feature_counts, class_counts)
         raw_feature_counts, priors = self.circuit.encrypt_run_decrypt(X_train, y_train)
         
-        # naive_bayes_inference expects SCALED LOG PROBABILITIES, not raw counts!
-        # We will apply Laplace smoothing and dynamically scale the log probabilities.
-        formatted_tables = []
-        formatted_priors = []
-        total_samples = sum(priors)
-
-        max_abs_score = 0
-        num_features = len(raw_feature_counts[0])
-        for prior in priors:
-            class_total = int(prior)
-            prior_prob = class_total / total_samples
-            min_feature_prob = 1 / (class_total + 2)
-            
-            score_abs = abs(math.log(prior_prob)) + (num_features * abs(math.log(min_feature_prob)))
-            max_abs_score = max(max_abs_score, score_abs)
-
-        centered_max = max_abs_score / 2.0
-        max_target_int = (2**(max_bit_width - 1)) -1
-        
-        SCALE = max(1,int(max_target_int / centered_max))
-
-        for c, class_feature_counts in enumerate(raw_feature_counts):
-            class_total = int(priors[c])
-            
-            # Prior Log Prob
-            prior_prob = class_total / total_samples
-            unscaled_prior = math.log(prior_prob) + centered_max 
-            formatted_priors.append(int(round(unscaled_prior * SCALE)))
-            
-            class_tables = []
-            for count_of_ones in class_feature_counts:
-                count_of_ones = int(count_of_ones)
-                count_of_zeros = class_total - count_of_ones
-                
-                # Laplace smoothed probabilities: (count + 1) / (class_total + num_classes)
-                prob_0 = (count_of_zeros + 1) / (class_total + 2)
-                prob_1 = (count_of_ones + 1) / (class_total + 2)
-                
-                log_prob_0 = int(round(math.log(prob_0) * SCALE))
-                log_prob_1 = int(round(math.log(prob_1) * SCALE))
-                
-                class_tables.append([log_prob_0, log_prob_1])
-            formatted_tables.append(class_tables)
-            
-        model = FHENaiveBayes(formatted_tables, formatted_priors)
-        model.scale = SCALE
-        return model
+        return self._finalize_model(raw_feature_counts, priors, max_bit_width)
 
 
 class FHEKMeans(FHEModel):

@@ -8,6 +8,7 @@ from .._compat import fhe
 
 from .._utils import compile_function, validate_bounds, validate_integer
 from ._lookup import (
+    check_lookup_domain,
     BinaryFunction,
     binary_values,
     check_lookup_cost,
@@ -631,6 +632,11 @@ def compile_absolute(
         print(circuit.encrypt_run_decrypt(-8))  # 8
         ```
     """
+    check_lookup_domain(
+        "compile_absolute",
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     values = unary_values(abs, min_value, max_value)
     return compile_unary_lookup(
         "compile_absolute",
@@ -685,6 +691,11 @@ def compile_clamp(
         print(circuit.encrypt_run_decrypt(2))  # 5
         ```
     """
+    check_lookup_domain(
+        "compile_clamp",
+        (min_input, max_input),
+        allow_large_lookup=allow_large_lookup,
+    )
     input_minimum, input_maximum = validate_bounds(min_input, max_input)
     clamp_minimum, clamp_maximum = validate_bounds(min_value, max_value)
     values = unary_values(
@@ -761,6 +772,12 @@ def compile_modulo(
         print(circuit.encrypt_run_decrypt(10, 3))  # 1
         ```
     """
+    check_lookup_domain(
+        "compile_modulo",
+        (min_numerator, max_numerator),
+        (min_denominator, max_denominator),
+        allow_large_lookup=allow_large_lookup,
+    )
     zero = validate_integer("zero_result", zero_result)
     values = binary_values(
         lambda numerator, denominator: (
@@ -867,6 +884,12 @@ def compile_divmod(
         print(circuit.encrypt_run_decrypt(10, 3))  # (3, 1)
         ```
     """
+    check_lookup_domain(
+        "compile_divmod",
+        (min_numerator, max_numerator),
+        (min_denominator, max_denominator),
+        allow_large_lookup=allow_large_lookup,
+    )
     function = make_divmod(
         min_numerator,
         max_numerator,
@@ -1028,6 +1051,12 @@ def compile_abs_diff(
         print(circuit.encrypt_run_decrypt(5, 10))  # 5
         ```
     """
+    low, high = validate_bounds(min_value, max_value)
+    check_lookup_domain(
+        "compile_abs_diff",
+        (-(high - low), high - low),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     span = maximum - minimum
     if span:
@@ -1091,6 +1120,11 @@ def compile_copysign(
         print(circuit.encrypt_run_decrypt(5, -10))  # -5
         ```
     """
+    check_lookup_domain(
+        "compile_copysign",
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     check_lookup_cost(
         "compile_copysign",
@@ -1195,6 +1229,7 @@ def _compile_saturating(
 ) -> fhe.Circuit:
     minimum, maximum = validate_bounds(min_value, max_value)
     low, high = _saturating_output_range(operation, minimum, maximum)
+    check_lookup_domain('_compile_saturating', (low, high), allow_large_lookup=allow_large_lookup)
     check_lookup_cost(
         f"compile_saturating_{operation}",
         unary_values(
@@ -1330,6 +1365,12 @@ def compile_fdim(
         print(circuit.encrypt_run_decrypt(3, 10))  # 0
         ```
     """
+    low, high = validate_bounds(min_value, max_value)
+    check_lookup_domain(
+        "compile_fdim",
+        (0, 2 * (high - low)),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     span = maximum - minimum
     if span:
@@ -1466,6 +1507,12 @@ def compile_remainder(
         print(circuit.encrypt_run_decrypt(10, 3))  # 1
         ```
     """
+    check_lookup_domain(
+        "compile_remainder",
+        (min_numerator, max_numerator),
+        (min_denominator, max_denominator),
+        allow_large_lookup=allow_large_lookup,
+    )
     from fractions import Fraction
 
     zero = validate_integer("zero_result", zero_result)

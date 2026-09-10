@@ -9,6 +9,7 @@ from .._compat import fhe
 
 from .._utils import compile_function, validate_bounds, validate_integer
 from ._lookup import (
+    check_lookup_domain,
     UnaryFunction,
     check_lookup_cost,
     compile_unary_lookup,
@@ -88,6 +89,11 @@ def compile_floor(
         print(circuit.encrypt_run_decrypt(25))  # 2
         ```
     """
+    check_lookup_domain(
+        "compile_floor",
+        (min_input, max_input),
+        allow_large_lookup=allow_large_lookup,
+    )
     values = _scaled_values(min_input, max_input, scale, "floor")
     return compile_unary_lookup(
         "compile_floor",
@@ -137,6 +143,11 @@ def compile_ceil(
         print(circuit.encrypt_run_decrypt(25))  # 3
         ```
     """
+    check_lookup_domain(
+        "compile_ceil",
+        (min_input, max_input),
+        allow_large_lookup=allow_large_lookup,
+    )
     values = _scaled_values(min_input, max_input, scale, "ceil")
     return compile_unary_lookup(
         "compile_ceil",
@@ -186,6 +197,11 @@ def compile_trunc(
         print(circuit.encrypt_run_decrypt(-25))  # -2
         ```
     """
+    check_lookup_domain(
+        "compile_trunc",
+        (min_input, max_input),
+        allow_large_lookup=allow_large_lookup,
+    )
     values = _scaled_values(min_input, max_input, scale, "trunc")
     return compile_unary_lookup(
         "compile_trunc",
@@ -235,6 +251,11 @@ def compile_round(
         print(circuit.encrypt_run_decrypt(25))  # 2 (ties-to-even)
         ```
     """
+    check_lookup_domain(
+        "compile_round",
+        (min_input, max_input),
+        allow_large_lookup=allow_large_lookup,
+    )
     values = _scaled_values(min_input, max_input, scale, "nearest")
     return compile_unary_lookup(
         "compile_round",
@@ -291,6 +312,11 @@ def compile_floor_ceil(
         print(circuit.encrypt_run_decrypt(25))  # (2, 3)
         ```
     """
+    check_lookup_domain(
+        "compile_floor_ceil",
+        (min_input, max_input),
+        allow_large_lookup=allow_large_lookup,
+    )
     floor_values = _scaled_values(min_input, max_input, scale, "floor")
     ceil_values = _scaled_values(min_input, max_input, scale, "ceil")
     check_lookup_cost(
@@ -362,6 +388,11 @@ def compile_rescale(
         print(circuit.encrypt_run_decrypt(50))  # 500
         ```
     """
+    check_lookup_domain(
+        "compile_rescale",
+        (min_input, max_input),
+        allow_large_lookup=allow_large_lookup,
+    )
     input_minimum, input_maximum = validate_bounds(min_input, max_input)
     source = _validate_scale("input_scale", input_scale)
     target = _validate_scale("output_scale", output_scale)
@@ -429,6 +460,11 @@ def compile_round_to_multiple(
         print(circuit.encrypt_run_decrypt(12))  # 10
         ```
     """
+    check_lookup_domain(
+        "compile_round_to_multiple",
+        (min_input, max_input),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_input, max_input)
     normalized_step = validate_integer("step", step)
     if normalized_step < 1:
@@ -503,6 +539,11 @@ def compile_modf(
         print(circuit.encrypt_run_decrypt(-37))  # (-7, -3)
         ```
     """
+    check_lookup_domain(
+        "compile_modf",
+        (min_input, max_input),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_input, max_input)
     normalized_scale = _validate_scale("scale", scale)
     integer_values = _scaled_values(minimum, maximum, normalized_scale, "trunc")

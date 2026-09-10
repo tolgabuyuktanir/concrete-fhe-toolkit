@@ -40,6 +40,8 @@ from .classes import (
     FHEXGBoost,
 )
 
+from .regression import FHEXGBoostRegressor
+
 FORMAT = "concrete-fhe-toolkit/model"
 FORMAT_VERSION = 1
 
@@ -59,8 +61,10 @@ _REGISTRY = {
     "FHEKMeans": (FHEKMeans, ["centroids"], ["max_distance"]),
 }
 
+_REGISTRY["FHEXGBoostRegressor"] = (FHEXGBoostRegressor, ["trees"], [])
+
 # Optional attributes preserved when present (set by trainers).
-_EXTRAS = ("output_scale",)
+_EXTRAS = ("output_scale", "input_scale")
 
 
 def save_model(model: Any, path: str) -> None:
@@ -128,14 +132,22 @@ def load_model(path: str) -> Any:
     with open(path, encoding="utf-8") as handle:
         document = json.load(handle)
 
-    if document.get("format") != FORMAT:
+    if not isinstance(document, dict) or document.get("format") != FORMAT:
         raise ValueError(f"{path} is not a {FORMAT} file")
+    version = document.get("format_version")
+    if type(version) is not int or version != FORMAT_VERSION:
+        raise ValueError(f"unsupported model format_version: {version!r}")
     name = document.get("model")
-    if name not in _REGISTRY:
+    if not isinstance(name, str) or name not in _REGISTRY:
         raise ValueError(f"unknown model class in file: {name!r}")
 
     cls, positional, keyword_only = _REGISTRY[name]
     params = document.get("params", {})
+    if not isinstance(params, dict):
+        raise ValueError("model params must be an object")
+    extras = document.get("extras", {})
+    if not isinstance(extras, dict):
+        raise ValueError("model extras must be an object")
     missing = [attr for attr in positional + keyword_only if attr not in params]
     if missing:
         raise ValueError(f"model file is missing parameters: {', '.join(missing)}")
@@ -144,7 +156,7 @@ def load_model(path: str) -> Any:
         *[params[attr] for attr in positional],
         **{attr: params[attr] for attr in keyword_only},
     )
-    for attr, value in document.get("extras", {}).items():
+    for attr, value in extras.items():
         if attr in _EXTRAS:
             setattr(model, attr, value)
     return model

@@ -4,7 +4,7 @@ from concrete_fhe_toolkit.math import greater_equal
 def transfer(sender_balance: Any, receiver_balance: Any, amount: Any) -> tuple[Any,Any]:
     """Transfers an amount from one account to another securely under encryption.
     
-    If the sender has insufficient balance (sender_balance < amount), the 
+    If the amount is negative or the sender has insufficient balance, the
     transfer is silently cancelled (amount becomes 0) without leaking 
     information about the failure.
     
@@ -18,9 +18,6 @@ def transfer(sender_balance: Any, receiver_balance: Any, amount: Any) -> tuple[A
         # )
         ```
     """
-    is_balance_enough = greater_equal(sender_balance,amount)
-    amount *= is_balance_enough 
-    sender_balance -= amount
-    receiver_balance += amount
-
-    return sender_balance,receiver_balance
+    valid = greater_equal(amount, 0) * greater_equal(sender_balance, amount)
+    transferred = amount * valid
+    return sender_balance - transferred, receiver_balance + transferred

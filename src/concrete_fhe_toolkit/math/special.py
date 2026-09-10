@@ -9,6 +9,7 @@ from .._compat import fhe
 
 from .._utils import validate_bounds, validate_integer
 from ._lookup import (
+    check_lookup_domain,
     BinaryFunction,
     UnaryFunction,
     binary_values,
@@ -118,6 +119,7 @@ def _compile_scaled_unary(
     allow_large_lookup: bool,
     configuration: Optional[fhe.Configuration],
 ) -> fhe.Circuit:
+    check_lookup_domain(name, (min_input, max_input), allow_large_lookup=allow_large_lookup)
     values = _scaled_values(
         name,
         function,
@@ -1696,6 +1698,12 @@ def compile_atan2(
         print(circuit.encrypt_run_decrypt(100, 100))  # ~785 (scaled pi/4)
         ```
     """
+    check_lookup_domain(
+        "compile_atan2",
+        (min_input, max_input),
+        (min_input, max_input),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_input, max_input)
     values = _atan2_values(minimum, maximum, input_scale, output_scale)
     return compile_binary_lookup(

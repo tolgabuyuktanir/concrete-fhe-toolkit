@@ -45,21 +45,22 @@ def _restoring_divide_bits(
     denominator_bits: tuple[Any, ...],
     quotient_width: int,
 ) -> tuple[tuple[Any, ...], tuple[Any, ...]]:
-    remainder: list[Any] = [0] * (quotient_width + 1)
+    remainder_width = max(quotient_width + 1, len(denominator_bits))
+    remainder: list[Any] = [0] * (remainder_width)
     quotient: list[Any] = [0] * quotient_width
     padded_denominator = (
-        list(denominator_bits) + [0] * (quotient_width + 1)
-    )[: quotient_width + 1]
+        list(denominator_bits) + [0] * (remainder_width)
+    )[: remainder_width]
     padded_numerator = (
         list(numerator_bits) + [0] * quotient_width
     )[:quotient_width]
 
     for index in range(quotient_width - 1, -1, -1):
-        remainder = [padded_numerator[index]] + remainder[:quotient_width]
-        difference: list[Any] = [0] * (quotient_width + 1)
+        remainder = [padded_numerator[index]] + remainder[:remainder_width - 1]
+        difference: list[Any] = [0] * (remainder_width)
         borrow: Any = 0
 
-        for bit_index in range(quotient_width + 1):
+        for bit_index in range(remainder_width):
             difference[bit_index], borrow = full_subtractor_bit(
                 remainder[bit_index],
                 padded_denominator[bit_index],
@@ -70,7 +71,7 @@ def _restoring_divide_bits(
         quotient[index] = no_borrow
         remainder = [
             bit_select(no_borrow, difference[bit_index], remainder[bit_index])
-            for bit_index in range(quotient_width + 1)
+            for bit_index in range(remainder_width)
         ]
 
     return tuple(quotient), tuple(remainder)

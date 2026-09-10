@@ -4,8 +4,10 @@ These helpers kill the manual scaling ritual: train with sklearn on clear
 data as usual, convert once, and run encrypted inference with the toolkit.
 scikit-learn is imported lazily, so it stays an optional dependency.
 
-Remember the shared-scale rule: features fed to the FHE model must be
-quantized with the **same** ``scale`` used here (``round(value * scale)``).
+For linear models, ``scale`` quantizes coefficients. Inputs stay in the
+training coordinate system by default. To encode real inputs as integers,
+pass a separate ``input_scale`` and feed ``round(value * input_scale)``.
+Tree conversion uses its ``scale`` parameter for input thresholds.
 """
 
 from __future__ import annotations
@@ -21,18 +23,24 @@ from .classes import (
 )
 
 
-def from_sklearn_linear(model: Any, *, scale: int = 100) -> Any:
+def from_sklearn_linear(
+    model: Any, *, scale: int = 100, input_scale: int = 1
+) -> Any:
     """Convert a fitted sklearn linear model into an FHE model.
 
     ``LogisticRegression`` (binary) becomes an
     :class:`FHELogisticRegression`; ``LinearRegression`` (and other
     regressors exposing ``coef_``/``intercept_``) become an
-    :class:`FHELinearRegression` whose predictions are scaled by ``scale``.
+    :class:`FHELinearRegression` whose predictions are scaled by
+    ``scale * input_scale``. With the default ``input_scale=1``, use integer
+    features in exactly the coordinate system used during training. If you
+    trained on already quantized data, do not quantize those inputs again.
 
     Args:
         model: A fitted sklearn estimator with ``coef_`` and ``intercept_``.
-        scale: Integer factor used to quantize the float weights. Quantize
-            inference features with the same factor.
+        scale: Integer factor used to quantize the float weights.
+        input_scale: Factor for encoding training-space feature values at
+            inference. Bias and output scale account for both factors.
 
     Returns:
         A ready-to-compile toolkit model.
@@ -43,12 +51,14 @@ def from_sklearn_linear(model: Any, *, scale: int = 100) -> Any:
         from concrete_fhe_toolkit.ml.sklearn_bridge import from_sklearn_linear
 
         clf = LogisticRegression().fit(X_scaled, y)
-        fhe_model = from_sklearn_linear(clf, scale=10)
+        fhe_model = from_sklearn_linear(clf, scale=100, input_scale=10)
+        # quantized_inputset/sample contain round(training_space_value * 10)
         fhe_model.compile(quantized_inputset)
         fhe_model.predict(quantized_sample)
         ```
     """
     normalized_scale = validate_integer("scale", scale, minimum=1)
+    source_scale = validate_integer("input_scale", input_scale, minimum=1)
     if not hasattr(model, "coef_") or not hasattr(model, "intercept_"):
         raise ValueError("model must be a fitted sklearn linear estimator")
 
@@ -63,13 +73,15 @@ def from_sklearn_linear(model: Any, *, scale: int = 100) -> Any:
         )
 
     weights = [int(round(value * normalized_scale)) for value in coefficients[0]]
-    bias = int(round(float(intercepts[0]) * normalized_scale))
+    bias = int(round(float(intercepts[0]) * normalized_scale * source_scale))
 
     is_classifier = hasattr(model, "classes_")
     if is_classifier:
-        return FHELogisticRegression(weights, bias)
-    converted = FHELinearRegression(weights, bias)
-    converted.output_scale = normalized_scale
+        converted = FHELogisticRegression(weights, bias)
+    else:
+        converted = FHELinearRegression(weights, bias)
+        converted.output_scale = normalized_scale * source_scale
+    converted.input_scale = source_scale
     return converted
 
 

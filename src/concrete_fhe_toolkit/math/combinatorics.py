@@ -9,6 +9,7 @@ from .._compat import fhe
 
 from .._utils import validate_integer
 from ._lookup import (
+    check_lookup_domain,
     BinaryFunction,
     UnaryFunction,
     binary_values,
@@ -73,6 +74,7 @@ def compile_factorial(
         print(circuit.encrypt_run_decrypt(4))  # 24
         ```
     """
+    check_lookup_domain('compile_factorial', (0, max_n), allow_large_lookup=allow_large_lookup)
     maximum = _validate_maximum("max_n", max_n)
     values = _factorials(maximum)
     return compile_unary_lookup(
@@ -116,6 +118,7 @@ def compile_fibonacci(
         print(circuit.encrypt_run_decrypt(6))  # 8
         ```
     """
+    check_lookup_domain('compile_fibonacci', (0, max_n), allow_large_lookup=allow_large_lookup)
     maximum = _validate_maximum("max_n", max_n)
     values = _fibonacci_values(maximum)
     return compile_unary_lookup(
@@ -162,6 +165,7 @@ def compile_power(
         print(circuit.encrypt_run_decrypt(3))  # 8
         ```
     """
+    check_lookup_domain('compile_power', (0, max_exponent), allow_large_lookup=allow_large_lookup)
     normalized_base = validate_integer("base", base)
     maximum = _validate_maximum("max_exponent", max_exponent)
     values = [normalized_base**exponent for exponent in range(maximum + 1)]
@@ -231,6 +235,12 @@ def compile_comb(
         print(circuit.encrypt_run_decrypt(5, 2))  # 10
         ```
     """
+    check_lookup_domain(
+        "compile_comb",
+        (0, max_n),
+        (0, max_n),
+        allow_large_lookup=allow_large_lookup,
+    )
     maximum = _validate_maximum("max_n", max_n)
     invalid = validate_integer("invalid_result", invalid_result)
     values = binary_values(
@@ -283,6 +293,12 @@ def compile_perm(
         print(circuit.encrypt_run_decrypt(5, 2))  # 20
         ```
     """
+    check_lookup_domain(
+        "compile_perm",
+        (0, max_n),
+        (0, max_n),
+        allow_large_lookup=allow_large_lookup,
+    )
     maximum = _validate_maximum("max_n", max_n)
     invalid = validate_integer("invalid_result", invalid_result)
     values = binary_values(
@@ -355,6 +371,7 @@ def compile_powmod(
         print(circuit.encrypt_run_decrypt(3))  # 3
         ```
     """
+    check_lookup_domain('compile_powmod', (0, max_exponent), allow_large_lookup=allow_large_lookup)
     normalized_base = validate_integer("base", base)
     normalized_modulus = validate_integer("modulus", modulus, minimum=1)
     maximum = _validate_maximum("max_exponent", max_exponent)

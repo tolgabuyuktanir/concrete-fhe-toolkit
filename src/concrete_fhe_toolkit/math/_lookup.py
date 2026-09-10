@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import ceil, log2
 from typing import Any, Callable, Iterable, Optional, Sequence
 import warnings
 
@@ -51,7 +50,7 @@ def estimate_lookup_cost(
     """Estimate lookup pressure from input-domain and output bit widths."""
     size = validate_integer("domain_size", domain_size, minimum=1)
     minimum, maximum = validate_bounds(min_output, max_output)
-    input_bits = max(1, ceil(log2(size)))
+    input_bits = max(1, (size - 1).bit_length())
     output_bits = _range_bit_width(minimum, maximum)
 
     if input_bits >= 10 or output_bits >= 28:
@@ -64,6 +63,24 @@ def estimate_lookup_cost(
         level = "small"
 
     return LookupCost(size, input_bits, output_bits, level)
+
+
+def check_lookup_domain(name: str, *bounds: tuple[int, int], allow_large_lookup: bool) -> None:
+    """Reject excessive indexing domains before evaluating any table values.
+
+    Output-width checks still run after evaluation. Builders (make_*) remain
+    available for composition; compiler opt-in only controls compile_* calls.
+    """
+    size = 1
+    for low, high in bounds:
+        minimum, maximum = validate_bounds(low, high)
+        size *= maximum - minimum + 1
+    bits = max(1, (size - 1).bit_length())
+    if bits >= 10 and not allow_large_lookup:
+        raise LookupResourceError(
+            f"{name} uses a {size}-entry lookup with {bits}-bit indexing. "
+            "Pass allow_large_lookup=True to compile it explicitly."
+        )
 
 
 def check_lookup_cost(

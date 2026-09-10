@@ -30,6 +30,23 @@
 
 ### Fixed
 
+- Model compilation now accepts individual samples by default, validates shapes,
+  and pads partial batches with an in-domain sample of the correct tensor shape.
+  Explicit prebatched inputsets remain supported.
+- Linear sklearn conversion distinguishes coefficient and input scales and
+  preserves both input and output scales in model files.
+- Binary division and modulo retain all denominator bits when its width exceeds
+  the numerator width.
+- Covariance uses exact integer numerators and rounds only the final result;
+  matrix operations reject incompatible and ragged shapes.
+- Transfers reject negative amounts, and `FHEXGBoostRegressor` returns numeric
+  tree scores rather than classifier labels.
+- Lookup compilation rejects oversized domains before constructing tables;
+  model loading rejects unsupported JSON format versions.
+- Gaussian vector releases validate the total epsilon budget against the
+  calibration's supported range `(0, 1]` and document total delta accounting.
+- Shared batch execution and Naive Bayes finalization remove duplicated logic;
+  the Iris notebook passes the repository lint rules.
 - The PyPI publish step now passes `skip-existing: true`, so re-running a
   publish workflow no longer fails with "400 File already exists".
 

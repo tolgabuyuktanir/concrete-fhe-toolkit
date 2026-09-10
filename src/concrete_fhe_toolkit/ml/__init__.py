@@ -93,6 +93,7 @@ from .serialization import load_model, save_model
 from .sklearn_bridge import from_sklearn_forest, from_sklearn_linear, from_sklearn_tree
 from .preprocessing import FHEBinner, FHEMinMaxScaler, FHEStandardScaler, bin_feature
 from . import classification, clustering, regression
+from .regression import FHEXGBoostRegressor
 
 __all__ = [
     "argmax_inference",
@@ -200,6 +201,7 @@ __all__ = [
     "FHECNN",
     "FHERandomForest",
     "FHEXGBoost",
+    "FHEXGBoostRegressor",
     "FHESVM",
     "FHEKNN",
     "FHENaiveBayes",

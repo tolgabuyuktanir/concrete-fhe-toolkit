@@ -46,8 +46,8 @@ def logistic_regression_inference(
     binary class ``score >= threshold``. Because the sigmoid is monotonic,
     thresholding the raw score at 0 is equivalent to thresholding the
     probability at 0.5, so no sigmoid lookup is needed for classification.
-    Scale weights, bias, and features to integers with the same factor
-    before calling.
+    Quantize weights and features to integers before calling. Bias and any
+    nonzero threshold must use the product of the weight and feature scales.
     
     Example:
         ```python

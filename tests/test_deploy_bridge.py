@@ -117,3 +117,25 @@ def test_deployment_round_trip_real(tmp_path):
     args = client.encrypt(np.array([4, 1], dtype=np.int64))
     result = server.run(args, evaluation_keys=client.evaluation_keys)
     assert int(client.decrypt(result)) == 1
+
+
+@pytest.mark.parametrize("input_scale", [1, 10, 100])
+def test_linear_conversion_preserves_input_coordinate_system(input_scale):
+    X = np.array([[0], [1], [2], [3]])
+    model = LinearRegression().fit(X, 2 * X[:, 0] + 1)
+    converted = ml.from_sklearn_linear(model, scale=10, input_scale=input_scale)
+    assert converted.output_scale == 10 * input_scale
+    assert converted.input_scale == input_scale
+    for x in [0, 1, 3]:
+        assert converted._circuit_logic([x * input_scale]) / converted.output_scale == 2*x + 1
+
+
+def test_logistic_conversion_scales_bias_with_features():
+    from types import SimpleNamespace
+    model = SimpleNamespace(coef_=np.array([[1.0]]), intercept_=np.array([-2.0]),
+                            classes_=np.array([0, 1]))
+    converted = ml.from_sklearn_linear(model, scale=10, input_scale=10)
+    assert int(converted._circuit_logic([10])) == 0
+    assert int(converted._circuit_logic([30])) == 1
+    with pytest.raises(ValueError):
+        ml.from_sklearn_linear(model, input_scale=0)

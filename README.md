@@ -400,7 +400,8 @@ clf.fit(X_train_scaled, y_train)
 # Scale weights to integers to avoid 16-bit FHE lookup limit
 scale = 10
 weights = np.round(clf.coef_[0] * scale).astype(int).tolist()
-bias = int(np.round(clf.intercept_[0] * scale))
+bias = int(np.round(clf.intercept_[0] * scale * scale))
+# Features and weights each carry a factor of scale; bias must match their product.
 X_test_int = np.round(X_test_scaled * scale).astype(int).tolist()
 
 # 2. Define the FHE Circuit

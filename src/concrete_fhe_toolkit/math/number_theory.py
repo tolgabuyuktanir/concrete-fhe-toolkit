@@ -9,6 +9,7 @@ from .._compat import fhe
 
 from .._utils import validate_bounds, validate_integer
 from ._lookup import (
+    check_lookup_domain,
     BinaryFunction,
     UnaryFunction,
     binary_values,
@@ -73,6 +74,12 @@ def compile_gcd(
         print(circuit.encrypt_run_decrypt(12, 8))  # 4
         ```
     """
+    check_lookup_domain(
+        "compile_gcd",
+        (min_value, max_value),
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     values = _binary_math_values(math.gcd, minimum, maximum)
     return compile_binary_lookup(
@@ -118,6 +125,12 @@ def compile_lcm(
         print(circuit.encrypt_run_decrypt(4, 6))  # 12
         ```
     """
+    check_lookup_domain(
+        "compile_lcm",
+        (min_value, max_value),
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     values = _binary_math_values(math.lcm, minimum, maximum)
     return compile_binary_lookup(
@@ -170,6 +183,12 @@ def compile_is_coprime(
         print(circuit.encrypt_run_decrypt(4, 9))  # 1 (coprime)
         ```
     """
+    check_lookup_domain(
+        "compile_is_coprime",
+        (min_value, max_value),
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     values = _binary_math_values(
         lambda left, right: int(math.gcd(left, right) == 1),
@@ -248,6 +267,12 @@ def compile_is_divisible(
         print(circuit.encrypt_run_decrypt(10, 5))  # 1 (divisible)
         ```
     """
+    check_lookup_domain(
+        "compile_is_divisible",
+        (min_numerator, max_numerator),
+        (min_denominator, max_denominator),
+        allow_large_lookup=allow_large_lookup,
+    )
     zero = validate_integer("zero_result", zero_result)
     values = binary_values(
         lambda numerator, denominator: (
@@ -302,6 +327,7 @@ def compile_isqrt(
         print(circuit.encrypt_run_decrypt(25))  # 5
         ```
     """
+    check_lookup_domain('compile_isqrt', (0, max_value), allow_large_lookup=allow_large_lookup)
     maximum = validate_integer("max_value", max_value, minimum=0)
     values = unary_values(math.isqrt, 0, maximum)
     return compile_unary_lookup(
@@ -347,6 +373,11 @@ def compile_is_even(
         print(circuit.encrypt_run_decrypt(4))  # 1
         ```
     """
+    check_lookup_domain(
+        "compile_is_even",
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     values = unary_values(lambda value: int(value % 2 == 0), minimum, maximum)
     return compile_unary_lookup(
@@ -392,6 +423,11 @@ def compile_is_odd(
         print(circuit.encrypt_run_decrypt(5))  # 1
         ```
     """
+    check_lookup_domain(
+        "compile_is_odd",
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     values = unary_values(lambda value: int(value % 2 != 0), minimum, maximum)
     return compile_unary_lookup(
@@ -451,6 +487,11 @@ def compile_is_prime(
         print(circuit.encrypt_run_decrypt(7))  # 1
         ```
     """
+    check_lookup_domain(
+        "compile_is_prime",
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     values = unary_values(_is_prime, minimum, maximum)
     return compile_unary_lookup(
@@ -513,6 +554,11 @@ def compile_totient(
         print(circuit.encrypt_run_decrypt(9))  # 6
         ```
     """
+    check_lookup_domain(
+        "compile_totient",
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     values = unary_values(_totient, minimum, maximum)
     return compile_unary_lookup(
@@ -565,6 +611,11 @@ def compile_next_prime(
         print(circuit.encrypt_run_decrypt(14))  # 17
         ```
     """
+    check_lookup_domain(
+        "compile_next_prime",
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     values = unary_values(_next_prime, minimum, maximum)
     return compile_unary_lookup(
@@ -628,6 +679,12 @@ def compile_mod_inverse(
         print(circuit.encrypt_run_decrypt(3, 11))  # 4 (since 3*4 = 12 = 1 mod 11)
         ```
     """
+    check_lookup_domain(
+        "compile_mod_inverse",
+        (min_value, max_value),
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     invalid = validate_integer("invalid_result", invalid_result)
     values = _binary_math_values(
@@ -682,6 +739,12 @@ def compile_hypot(
         print(circuit.encrypt_run_decrypt(3, 4))  # 5
         ```
     """
+    check_lookup_domain(
+        "compile_hypot",
+        (min_value, max_value),
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     values = _binary_math_values(
         lambda left, right: round(math.hypot(left, right)),
@@ -744,6 +807,11 @@ def compile_ilogb(
         print(circuit.encrypt_run_decrypt(8))  # 3
         ```
     """
+    check_lookup_domain(
+        "compile_ilogb",
+        (min_value, max_value),
+        allow_large_lookup=allow_large_lookup,
+    )
     minimum, maximum = validate_bounds(min_value, max_value)
     invalid = validate_integer("invalid_result", invalid_result)
     values = unary_values(
@@ -835,6 +903,11 @@ def compile_dist(
     normalized_size = validate_integer("size", size, minimum=1)
     minimum, maximum = validate_bounds(min_value, max_value)
     span = maximum - minimum
+    check_lookup_domain(
+        "compile_dist",
+        (0, normalized_size * span * span),
+        allow_large_lookup=allow_large_lookup,
+    )
     if span:
         from ._lookup import check_lookup_cost
 
@@ -912,6 +985,12 @@ def compile_pow(
         print(circuit.encrypt_run_decrypt(2, 3))  # 8
         ```
     """
+    check_lookup_domain(
+        "compile_pow",
+        (min_base, max_base),
+        (0, max_exponent),
+        allow_large_lookup=allow_large_lookup,
+    )
     base_minimum, base_maximum = validate_bounds(min_base, max_base)
     exponent_maximum = validate_integer("max_exponent", max_exponent, minimum=0)
     values = binary_values(

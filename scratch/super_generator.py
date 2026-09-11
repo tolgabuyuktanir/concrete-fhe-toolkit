@@ -27,20 +27,78 @@ def save_notebook(filename, cells):
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(notebook, f, indent=2)
 
+def generate_inputset(fn_name, param_names):
+    arity = len(param_names)
+    if arity == 1:
+        if 'square' in fn_name or 'cube' in fn_name:
+            return [(2,), (-2,), (0,), (15,), (-15,)]
+        elif 'sqrt' in fn_name:
+            return [(0,), (1,), (4,), (9,), (15,)]
+        elif 'log' in fn_name or 'exp' in fn_name:
+            return [(1,), (2,), (5,), (10,)]
+        elif 'bits' in fn_name or 'count' in fn_name:
+            return [(0,), (1,), (7,), (15,)]
+        return [(15,), (-15,), (0,), (2,)]
+    elif arity == 2:
+        if 'div' in fn_name or 'mod' in fn_name or 'remainder' in fn_name:
+            return [(15, 4), (-14, 5), (3, -2), (6, 6), (15, 0), (0, 7)]
+        elif 'shift' in fn_name:
+            return [(15, 1), (1, 3), (-15, 2), (8, 0)]
+        elif 'coprime' in fn_name or 'gcd' in fn_name or 'lcm' in fn_name:
+            return [(15, 5), (14, 7), (12, 8), (7, 7)]
+        return [(15, 1), (-15, -2), (0, 0), (14, -7), (0, 15)]
+    elif arity == 3:
+        return [(15, 2, 1), (-15, -2, 3), (0, 0, 0), (10, -5, 2)]
+    return []
+
+def filter_kwargs(kwargs, func):
+    sig = inspect.signature(func)
+    return {k: v for k, v in kwargs.items() if k in sig.parameters}
+
+def get_kwargs(sig, fn_name):
+    kwargs = {}
+    is_positive_only = 'sqrt' in fn_name or 'log' in fn_name or 'exp' in fn_name
+    
+    for p_name, p in sig.parameters.items():
+        if p_name in ('min_left', 'min_right', 'min_numerator', 'min_denominator', 'min_value', 'min_input', 'min_base'):
+            kwargs[p_name] = 0 if is_positive_only else -15
+        elif p_name in ('max_left', 'max_right', 'max_numerator', 'max_denominator', 'max_value', 'max_input', 'max_base', 'max_exponent', 'max_n'):
+            kwargs[p_name] = 4 if 'pow' in fn_name else 15
+        elif p_name == 'min_exponent': kwargs[p_name] = 1
+        elif p_name == 'exponent': kwargs[p_name] = 2
+        elif p_name == 'base': kwargs[p_name] = 2
+        elif p_name == 'modulus': kwargs[p_name] = 5
+        elif p_name == 'step': kwargs[p_name] = 3
+        elif p_name == 'size': kwargs[p_name] = 3
+        elif p_name == 'multiplier': kwargs[p_name] = 2
+        elif p_name == 'absolute_tolerance': kwargs[p_name] = 1
+        elif p_name == 'invalid_result': kwargs[p_name] = 7
+        elif p_name == 'zero_result': kwargs[p_name] = 7
+        elif p_name == 'zero_quotient': kwargs[p_name] = 7
+        elif p_name == 'zero_remainder': kwargs[p_name] = 7
+        elif p_name == 'k': kwargs[p_name] = 2
+        elif p_name == 'scale': kwargs[p_name] = 10
+        elif p_name == 'input_scale': kwargs[p_name] = 10
+        elif p_name == 'output_scale': kwargs[p_name] = 10
+        elif p_name == 'angle_unit': kwargs[p_name] = 'degrees'
+        elif p_name == 'numerator_width': kwargs[p_name] = 4
+        elif p_name == 'denominator_width': kwargs[p_name] = 3
+        elif p_name == 'fractional_bits': kwargs[p_name] = 3
+        elif p_name == 'configuration': pass
+        elif p.default != inspect.Parameter.empty and p.default is not None:
+            kwargs[p_name] = p.default if isinstance(p.default, (int, float, str)) else str(p.default)
+    return kwargs
+
 def generate_notebook_for_module(mod_name, notebook_name):
     mod = importlib.import_module(f"concrete_fhe_toolkit.math.{mod_name}")
     
-    # Extract only functions that belong to this exact module
     all_funcs = []
     for name, obj in inspect.getmembers(mod, inspect.isfunction):
         if not name.startswith('_') and getattr(obj, '__module__', '') == mod.__name__:
             all_funcs.append((name, obj))
             
-    # Group by the actual function object to detect aliases and find original line number
     primary_funcs = {}
     for name, obj in all_funcs:
-        # we group by function identity (or name)
-        # compile_sub is alias of compile_subtract. compile_sub.__name__ is 'compile_subtract'
         primary_name = obj.__name__
         if primary_name not in primary_funcs:
             primary_funcs[primary_name] = {
@@ -51,10 +109,6 @@ def generate_notebook_for_module(mod_name, notebook_name):
         if name != primary_name:
             primary_funcs[primary_name]['aliases'].append(name)
             
-    # Also if the primary name was somehow not exported but an alias was, the primary might not be the exported name.
-    # Usually the primary name is in the module dict though.
-    
-    # Sort by original definition line number
     sorted_primary = sorted(primary_funcs.items(), key=lambda x: x[1]['line_no'])
     
     cells = []
@@ -63,77 +117,62 @@ def generate_notebook_for_module(mod_name, notebook_name):
         func = data['obj']
         aliases = data['aliases']
         sig = inspect.signature(func)
-        
-        # We will use the primary name for the test, but mention aliases
         fn_name = primary_name
         
-        desc = f"Tests the `{fn_name}` function. Includes various inputs to cover edge cases like positives, negatives, and zeros."
+        desc = f"Tests the `{fn_name}` function. Includes specific edge cases and a widened `[-15, 15]` input domain."
         if aliases:
             desc += f"\n\n**Aliases**: `{', '.join(aliases)}` can also be used equivalently."
             
         cells.append(create_cell("markdown", f"### Testing `{fn_name}`\n\n{desc}"))
         
         imports = f"from concrete import fhe\nfrom concrete_fhe_toolkit.math.{mod_name} import {fn_name}\n"
-        if mod_name == 'combinatorics' or mod_name == 'number_theory' or mod_name == 'special':
+        if mod_name in ('combinatorics', 'number_theory', 'special'):
             imports += "import math\n"
         
         base_fn_name = fn_name.replace("compile_", "") if fn_name.startswith("compile_") else fn_name
-        if fn_name.startswith("compile_") and hasattr(mod, base_fn_name):
-            imports += f"from concrete_fhe_toolkit.math.{mod_name} import {base_fn_name}\n"
-            
+        make_fn_name = fn_name.replace("compile_", "make_") if fn_name.startswith("compile_") else fn_name
+        
+        if fn_name.startswith("compile_"):
+            if hasattr(mod, base_fn_name):
+                imports += f"from concrete_fhe_toolkit.math.{mod_name} import {base_fn_name}\n"
+            if hasattr(mod, make_fn_name):
+                imports += f"from concrete_fhe_toolkit.math.{mod_name} import {make_fn_name}\n"
+                
         test_code = imports + "\n"
         
         try:
             if fn_name.startswith("compile_"):
-                kwargs = {}
-                for p_name, p in sig.parameters.items():
-                    if p_name in ('min_left', 'min_right', 'min_numerator', 'min_denominator', 'min_value', 'min_input'):
-                        kwargs[p_name] = -3
-                    elif p_name in ('max_left', 'max_right', 'max_numerator', 'max_denominator', 'max_value', 'max_input'):
-                        kwargs[p_name] = 3
-                    elif p_name == 'size': kwargs[p_name] = 3
-                    elif p_name == 'multiplier': kwargs[p_name] = 2
-                    elif p_name == 'absolute_tolerance': kwargs[p_name] = 1
-                    elif p_name == 'zero_result': kwargs[p_name] = 7
-                    elif p_name == 'zero_quotient': kwargs[p_name] = 7
-                    elif p_name == 'zero_remainder': kwargs[p_name] = 7
-                    elif p_name == 'scale': kwargs[p_name] = 10
-                    elif p_name == 'input_scale': kwargs[p_name] = 10
-                    elif p_name == 'output_scale': kwargs[p_name] = 10
-                    elif p_name == 'angle_unit': kwargs[p_name] = "'degrees'"
-                    elif p_name == 'k': kwargs[p_name] = 2
-                    elif p_name == 'numerator_width': kwargs[p_name] = 4
-                    elif p_name == 'denominator_width': kwargs[p_name] = 3
-                    elif p_name == 'fractional_bits': kwargs[p_name] = 3
-                    elif p_name == 'configuration': pass
-                    elif p.default != inspect.Parameter.empty and p.default is not None:
-                        kwargs[p_name] = p.default if isinstance(p.default, (int, float, str)) else str(p.default)
-                        
+                kwargs = get_kwargs(sig, fn_name)
                 args_str = ", ".join(f"{k}={v}" for k, v in kwargs.items())
                 test_code += f"circuit = {fn_name}({args_str})\n\n"
                 
-                arity = 1
-                if hasattr(mod, base_fn_name):
-                    base_sig = inspect.signature(getattr(mod, base_fn_name))
-                    arity = len(base_sig.parameters)
+                # Determine parameter names and cleartext fallback dynamically
+                if hasattr(mod, make_fn_name):
+                    make_fn = getattr(mod, make_fn_name)
+                    make_kwargs = filter_kwargs(kwargs, make_fn)
+                    clear_fn = make_fn(**make_kwargs)
+                    param_names = list(inspect.signature(clear_fn).parameters.keys())
+                    expected_args_str = ", ".join(f"{k}={v}" for k, v in make_kwargs.items())
+                    expected_call = f"{make_fn_name}({expected_args_str})(*inp)"
+                elif hasattr(mod, base_fn_name):
+                    base_fn = getattr(mod, base_fn_name)
+                    param_names = list(inspect.signature(base_fn).parameters.keys())
+                    expected_call = f"{base_fn_name}(*inp)"
                 else:
-                    if 'left' in sig.parameters or 'right' in sig.parameters or 'numerator' in sig.parameters:
-                        arity = 2
+                    p_names = list(sig.parameters.keys())
+                    if any(n in p_names for n in ('min_left', 'min_right', 'min_numerator', 'left', 'numerator', 'right')):
+                        param_names = ['left', 'right']
+                    else:
+                        param_names = ['value']
+                    expected_call = None
                         
-                test_inputs = []
-                if arity == 1:
-                    test_inputs = [(2,), (-1,), (0,), (3,)]
-                elif arity == 2:
-                    test_inputs = [(2, 1), (-1, -1), (0, 0), (3, -2), (0, 2)]
-                elif arity == 3:
-                    test_inputs = [(2, 1, 1), (-1, -1, 2), (0, 0, 0), (3, -2, 1)]
-                    
+                test_inputs = generate_inputset(fn_name, param_names)
                 test_code += f"inputset = {test_inputs}\n"
                 
                 test_code += "for inp in inputset:\n"
                 test_code += "    try:\n"
-                if hasattr(mod, base_fn_name):
-                    test_code += f"        expected = {base_fn_name}(*inp)\n"
+                if expected_call:
+                    test_code += f"        expected = {expected_call}\n"
                     test_code += "        if isinstance(expected, tuple):\n"
                     test_code += "            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f\"Failed at {inp}\"\n"
                     test_code += "        else:\n"
@@ -144,48 +183,20 @@ def generate_notebook_for_module(mod_name, notebook_name):
                 test_code += "        print(f\"Skipping {inp} due to bounds or other error: {e}\")\n\n"
                 
             elif fn_name.startswith("make_"):
-                kwargs = {}
-                for p_name, p in sig.parameters.items():
-                    if p_name in ('min_left', 'min_right', 'min_numerator', 'min_denominator', 'min_value', 'min_input'):
-                        kwargs[p_name] = -3
-                    elif p_name in ('max_left', 'max_right', 'max_numerator', 'max_denominator', 'max_value', 'max_input'):
-                        kwargs[p_name] = 3
-                    elif p_name == 'size': kwargs[p_name] = 3
-                    elif p_name == 'multiplier': kwargs[p_name] = 2
-                    elif p_name == 'absolute_tolerance': kwargs[p_name] = 1
-                    elif p_name == 'zero_result': kwargs[p_name] = 7
-                    elif p_name == 'zero_quotient': kwargs[p_name] = 7
-                    elif p_name == 'zero_remainder': kwargs[p_name] = 7
-                    elif p_name == 'k': kwargs[p_name] = 2
-                    elif p_name == 'scale': kwargs[p_name] = 10
-                    elif p_name == 'configuration': pass
-                    elif p.default != inspect.Parameter.empty and p.default is not None:
-                        kwargs[p_name] = p.default if isinstance(p.default, (int, float, str)) else str(p.default)
-                        
+                kwargs = get_kwargs(sig, fn_name)
                 args_str = ", ".join(f"{k}={v}" for k, v in kwargs.items())
                 test_code += f"fn = {fn_name}({args_str})\n\n"
                 
-                base_fn_name = fn_name.replace("make_", "")
-                arity = 1
-                if hasattr(mod, base_fn_name):
-                    base_sig = inspect.signature(getattr(mod, base_fn_name))
-                    arity = len(base_sig.parameters)
-                else:
-                    if 'left' in sig.parameters or 'numerator' in sig.parameters: arity = 2
+                # Introspect the returned function to get actual parameter names!
+                real_fn = getattr(mod, fn_name)(**kwargs)
+                param_names = list(inspect.signature(real_fn).parameters.keys())
                 
-                enc_dict = "{" + ", ".join([f"'arg{i}': 'encrypted'" for i in range(arity)]) + "}"
-                params_str = ", ".join([f"arg{i}" for i in range(arity)])
+                enc_dict = "{" + ", ".join([f"'{k}': 'encrypted'" for k in param_names]) + "}"
+                params_str = ", ".join(param_names)
                 test_code += f"def test_{fn_name}_enc({params_str}):\n    return fn({params_str})\n\n"
                 test_code += f"compiler = fhe.Compiler(test_{fn_name}_enc, {enc_dict})\n"
                 
-                test_inputs = []
-                if arity == 1:
-                    test_inputs = [(2,), (-1,), (0,), (3,)]
-                elif arity == 2:
-                    test_inputs = [(2, 1), (-1, -1), (0, 0), (3, -2), (0, 2)]
-                elif arity == 3:
-                    test_inputs = [(2, 1, 1), (-1, -1, 2), (0, 0, 0), (3, -2, 1)]
-                
+                test_inputs = generate_inputset(fn_name, param_names)
                 test_code += f"inputset = {test_inputs}\n"
                 test_code += "circuit = compiler.compile(inputset)\n\n"
                 
@@ -200,20 +211,13 @@ def generate_notebook_for_module(mod_name, notebook_name):
                 test_code += "        print(f\"Skipping {inp} due to bounds or other error: {e}\")\n\n"
                         
             else:
-                params_str = ", ".join(sig.parameters.keys())
+                param_names = list(sig.parameters.keys())
+                params_str = ", ".join(param_names)
                 test_code += f"def test_{fn_name}({params_str}):\n    return {fn_name}({params_str})\n\n"
-                enc_dict = "{" + ", ".join([f"'{k}': 'encrypted'" for k in sig.parameters.keys()]) + "}"
+                enc_dict = "{" + ", ".join([f"'{k}': 'encrypted'" for k in param_names]) + "}"
                 test_code += f"compiler = fhe.Compiler(test_{fn_name}, {enc_dict})\n"
                 
-                test_inputs = []
-                arity = len(sig.parameters)
-                if arity == 1:
-                    test_inputs = [(2,), (-1,), (0,), (3,)]
-                elif arity == 2:
-                    test_inputs = [(2, 1), (-1, -1), (0, 0), (3, -2), (0, 2)]
-                elif arity == 3:
-                    test_inputs = [(2, 1, 1), (-1, -1, 2), (0, 0, 0), (3, -2, 1)]
-                
+                test_inputs = generate_inputset(fn_name, param_names)
                 test_code += f"inputset = {test_inputs}\n"
                 test_code += "circuit = compiler.compile(inputset)\n\n"
                 

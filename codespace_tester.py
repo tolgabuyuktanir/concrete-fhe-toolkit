@@ -14,7 +14,7 @@ def test_notebooks():
     report = ["# Concrete FHE Notebooks - Automated Test Report\n"]
     
     os.makedirs('scratch', exist_ok=True)
-    temp_script = 'scratch/temp_cell.py'
+    temp_script = '.temp_cell.py'
     
     for nb_path in notebooks:
         nb_name = os.path.basename(nb_path)

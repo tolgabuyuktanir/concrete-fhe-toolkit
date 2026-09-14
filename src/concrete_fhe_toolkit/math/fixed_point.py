@@ -641,29 +641,37 @@ def compile_fixed_point_multiply(
     )
 
 
-def encode_fixed_point(value: float, scale: int) -> int:
-    """Encode a clear real value as a scaled integer for circuit inputs.
+def make_encode_fixed_point(scale: int = 10):
+    """Create a client-side helper to encode a clear real value as a scaled integer.
     
     Example:
         ```python
-        from concrete_fhe_toolkit.math.fixed_point import encode_fixed_point
+        from concrete_fhe_toolkit.math.fixed_point import make_encode_fixed_point
         
-        print(encode_fixed_point(2.5, scale=10))  # 25
+        encode_fn = make_encode_fixed_point(scale=10)
+        print(encode_fn(2.5))  # 25
         ```
     """
     normalized_scale = _validate_scale("scale", scale)
-    return int(round(value * normalized_scale))
+    def encode_fixed_point(value: float) -> int:
+        return int(round(value * normalized_scale))
+
+    return encode_fixed_point
 
 
-def decode_fixed_point(value: Any, scale: int) -> float:
-    """Decode a decrypted scaled integer back to its real value.
+def make_decode_fixed_point(scale: int = 10):
+    """Create a client-side helper to decode a decrypted scaled integer back to a real value.
     
     Example:
         ```python
-        from concrete_fhe_toolkit.math.fixed_point import decode_fixed_point
+        from concrete_fhe_toolkit.math.fixed_point import make_decode_fixed_point
         
-        print(decode_fixed_point(25, scale=10))  # 2.5
+        decode_fn = make_decode_fixed_point(scale=10)
+        print(decode_fn(25))  # 2.5
         ```
     """
     normalized_scale = _validate_scale("scale", scale)
-    return value / normalized_scale
+    def decode_fixed_point(value: Any) -> float:
+        return value / normalized_scale
+
+    return decode_fixed_point

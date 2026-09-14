@@ -106,7 +106,6 @@ from .bits import (
     bit_and_many,
     bit_length_bits,
     bit_not,
-    bit_op_many,
     bit_or,
     bit_or_many,
     bit_select,
@@ -166,8 +165,8 @@ from .fixed_point import (
     compile_round,
     compile_round_to_multiple,
     compile_trunc,
-    decode_fixed_point,
-    encode_fixed_point,
+    make_decode_fixed_point,
+    make_encode_fixed_point,
     make_ceil,
     make_fixed_point_multiply,
     make_floor,
@@ -666,7 +665,7 @@ fmin = minimum
 
 
 # Clear-side constants mirroring Python's math module; use with
-# encode_fixed_point(pi, scale) to feed them into circuits.
+# make_encode_fixed_point(pi, scale) to feed them into circuits.
 from math import e, pi, tau  # noqa: E402
 
 dist = BoundedOperation(
@@ -701,7 +700,6 @@ __all__ = [
     "bit_length_bits",
     "bit_not",
     "BIT_NOT_LUT",
-    "bit_op_many",
     "bit_or",
     "BIT_OR_LUT",
     "bit_or_many",
@@ -825,12 +823,12 @@ __all__ = [
     "cos",
     "cosh",
     "cube",
-    "decode_fixed_point",
+    "make_decode_fixed_point",
     "degrees",
     "dist",
     "divmod",
     "e",
-    "encode_fixed_point",
+    "make_encode_fixed_point",
     "equal",
     "erf",
     "erfc",

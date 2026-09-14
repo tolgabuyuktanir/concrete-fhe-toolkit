@@ -122,14 +122,14 @@ def full_subtractor_bit(left: Any, right: Any, borrow_in: Any) -> tuple[Any, Any
     return FULL_SUBTRACTOR_DIFF_LUT[address], FULL_SUBTRACTOR_BORROW_LUT[address]
 
 
-def bit_op_many(bits: Iterable[Any] , function: Callable[[Any,Any],Any]) -> Any:
+def _bit_op_many(bits: Iterable[Any] , function: Callable[[Any,Any],Any]) -> Any:
     """Return the bitwise-operation-reduction of a bit iterable with higher performance.
     
     Example:
         ```python
-        from concrete_fhe_toolkit.math.bits import bit_op_many, bit_and
+        from concrete_fhe_toolkit.math.bits import _bit_op_many, bit_and
         
-        print(bit_op_many([1, 1, 0], bit_and))  # 0
+        print(_bit_op_many([1, 1, 0], bit_and))  # 0
         ```
     """
     current_round = list(bits)
@@ -160,7 +160,7 @@ def bit_or_many(bits: Iterable[Any]) -> Any:
         print(bit_or_many([0, 1, 0]))  # 1
         ```
     """
-    result = bit_op_many(bits,bit_or)
+    result = _bit_op_many(bits,bit_or)
     return result 
 
 def bit_and_many(bits: Iterable[Any]) -> Any:
@@ -173,7 +173,7 @@ def bit_and_many(bits: Iterable[Any]) -> Any:
         print(bit_and_many([1, 1, 1]))  # 1
         ```
     """
-    result = bit_op_many(bits,bit_and)
+    result = _bit_op_many(bits,bit_and)
     return result  
 
 def bit_xor_many(bits: Iterable[Any]) -> Any:
@@ -186,7 +186,7 @@ def bit_xor_many(bits: Iterable[Any]) -> Any:
         print(bit_xor_many([1, 1, 1]))  # 1
         ```
     """
-    result = bit_op_many(bits,bit_xor)
+    result = _bit_op_many(bits,bit_xor)
     return result       
  
 

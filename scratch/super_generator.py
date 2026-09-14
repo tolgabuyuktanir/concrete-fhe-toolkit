@@ -38,7 +38,7 @@ def generate_inputset(fn_name, param_names):
         return [([-1, 2, -2],), ([0, 0, 0],), ([3, -2, 3],)]
 
     if 'bits' in fn_name or 'bit_' in fn_name or fn_name in ('full_adder_bit', 'full_subtractor_bit', 'popcount_bits', 'parity_bits', 'unsigned_compare_bits', 'twos_complement_add_bits', 'twos_complement_multiply_by_constant_bits', 'multiply_bits'):
-        if fn_name in ('integer_to_bits', 'unsigned_to_bits', 'twos_complement_bits'):
+        if fn_name in ('integer_to_bits', 'unsigned_to_bits', 'twos_complement_bits', 'return_actual_value'):
             return [(2,), (-2,), (0,), (1,)] if arity == 1 else [(2, 0), (1, 1)]
         if fn_name == 'sign_magnitude_to_twos_complement_bits':
             return [([0, 1, 0], 1), ([1, 1, 1], 0), ([0, 0, 0], 0)]
@@ -85,7 +85,7 @@ def generate_inputset(fn_name, param_names):
             return [(3, 3), (0, 3), (3, 0), (2, 2)]
         return [(3, 1), (-2, -2), (0, 0), (2, 2), (1, 3)]
     elif arity == 3:
-        return [(3, 2, 1), (-2, -2, 3), (0, 0, 0), (2, -2, 2)]
+        return [(3, 2, 1), (-2, -2, 3), (0, 0, 0), (2, -2, 2), (10, 5, -2)]
     
     # Fallback for arity >= 4
     return [tuple([2]*arity), tuple([0]*arity), tuple([1]*arity)]
@@ -129,8 +129,8 @@ def get_kwargs(sig, fn_name):
             kwargs[p_name] = p.default if isinstance(p.default, (int, float, str)) else str(p.default)
     return kwargs
 
-def generate_notebook_for_module(mod_name, notebook_name):
-    mod = importlib.import_module(f"concrete_fhe_toolkit.math.{mod_name}")
+def generate_notebook_for_module(subpkg, mod_name, notebook_name):
+    mod = importlib.import_module(f"concrete_fhe_toolkit.{subpkg}.{mod_name}")
     
     all_funcs = []
     for name, obj in inspect.getmembers(mod, inspect.isfunction):
@@ -159,13 +159,13 @@ def generate_notebook_for_module(mod_name, notebook_name):
         sig = inspect.signature(func)
         fn_name = primary_name
         
-        if fn_name in ('make_encode_fixed_point', 'make_decode_fixed_point', 'unsigned_to_bits', 'twos_complement_bits'):
+        if fn_name in ('make_encode_fixed_point', 'make_decode_fixed_point', 'unsigned_to_bits', 'twos_complement_bits', 'return_actual_value'):
             desc = f"Demonstrates the `{fn_name}` function. This is a client-side (cleartext) helper function. It is **not** an FHE circuit and cannot be compiled with `fhe.Compiler`."
-            cells.append(create_cell("markdown", f"### Client-Side Helper: `{fn_name}`\n\n{desc}"))
+            cells.append(create_cell("markdown", f"### {fn_name}() (Helper)\n\n{desc}"))
             
             if fn_name == 'unsigned_to_bits':
                 test_code = (
-                    f"from concrete_fhe_toolkit.math.{mod_name} import {fn_name}\n\n"
+                    f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n\n"
                     "clear_int = 5\n"
                     "bits = unsigned_to_bits(clear_int, width=4)\n"
                     "print(f'Unsigned integer {clear_int} to bits -> {bits}')\n"
@@ -174,16 +174,25 @@ def generate_notebook_for_module(mod_name, notebook_name):
                 )
             elif fn_name == 'twos_complement_bits':
                 test_code = (
-                    f"from concrete_fhe_toolkit.math.{mod_name} import {fn_name}\n\n"
+                    f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n\n"
                     "clear_int = -3\n"
                     "bits = twos_complement_bits(clear_int, width=4)\n"
                     "print(f'Two\\'s complement integer {clear_int} to bits -> {bits}')\n"
                     "assert bits == (1, 0, 1, 1)\n"
                     "print('Conversion successful!')\n"
                 )
+            elif fn_name == 'return_actual_value':
+                test_code = (
+                    f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n\n"
+                    "decrypted_val = 1500  # 15.00 scaled by 100\n"
+                    "actual_float = return_actual_value(decrypted_val)\n"
+                    "print(f'Decrypted integer {decrypted_val} to real value -> {actual_float}')\n"
+                    "assert actual_float == 15.0\n"
+                    "print('Decoding successful!')\n"
+                )
             elif "encode" in fn_name:
                 test_code = (
-                    f"from concrete_fhe_toolkit.math.{mod_name} import {fn_name}\n\n"
+                    f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n\n"
                     "encode_fn = make_encode_fixed_point(scale=10)\n"
                     "clear_float = 2.5\n"
                     "encoded_int = encode_fn(clear_float)\n"
@@ -193,7 +202,7 @@ def generate_notebook_for_module(mod_name, notebook_name):
                 )
             else:
                 test_code = (
-                    f"from concrete_fhe_toolkit.math.{mod_name} import {fn_name}\n\n"
+                    f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n\n"
                     "decode_fn = make_decode_fixed_point(scale=10)\n"
                     "decrypted_int = 25\n"
                     "decoded_float = decode_fn(decrypted_int)\n"
@@ -210,9 +219,9 @@ def generate_notebook_for_module(mod_name, notebook_name):
         if aliases:
             desc += f"\n\n**Aliases**: `{', '.join(aliases)}` can also be used equivalently."
             
-        cells.append(create_cell("markdown", f"### Testing `{fn_name}`\n\n{desc}"))
+        cells.append(create_cell("markdown", f"### {fn_name}()\n\n{desc}"))
         
-        imports = f"from concrete import fhe\nfrom concrete_fhe_toolkit.math.{mod_name} import {fn_name}\n"
+        imports = f"from concrete import fhe\nfrom concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n"
         if mod_name in ('combinatorics', 'number_theory', 'special'):
             imports += "import math\n"
         
@@ -221,9 +230,9 @@ def generate_notebook_for_module(mod_name, notebook_name):
         
         if fn_name.startswith("compile_"):
             if hasattr(mod, base_fn_name):
-                imports += f"from concrete_fhe_toolkit.math.{mod_name} import {base_fn_name}\n"
+                imports += f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {base_fn_name}\n"
             if hasattr(mod, make_fn_name):
-                imports += f"from concrete_fhe_toolkit.math.{mod_name} import {make_fn_name}\n"
+                imports += f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {make_fn_name}\n"
                 
         test_code = imports + "\n"
         
@@ -278,7 +287,7 @@ def generate_notebook_for_module(mod_name, notebook_name):
                 real_fn = getattr(mod, fn_name)(**kwargs)
                 param_names = list(inspect.signature(real_fn).parameters.keys())
                 
-                clear_params = {'start', 'step', 'size', 'k', 'angle_unit', 'rounding', 'scale', 'input_scale', 'output_scale', 'amount', 'multiplier', 'fractional_bits', 'zero_result', 'quotient_width', 'denominator_width', 'numerator_width', 'remainder_width', 'width', 'zero_quotient', 'zero_remainder', 'min_value', 'max_value', 'min_left', 'max_left', 'min_right', 'max_right', 'min_input', 'max_input', 'min_base', 'max_base', 'max_exponent', 'min_numerator', 'max_numerator', 'min_denominator', 'max_denominator', 'max_n', 'max_k', 'exponent', 'base', 'modulus', 'absolute_tolerance', 'arithmetic'}
+                clear_params = {'rate'} if subpkg == 'finance' else {'start', 'step', 'size', 'k', 'angle_unit', 'rounding', 'scale', 'input_scale', 'output_scale', 'amount', 'multiplier', 'fractional_bits', 'zero_result', 'quotient_width', 'denominator_width', 'numerator_width', 'remainder_width', 'width', 'zero_quotient', 'zero_remainder', 'min_value', 'max_value', 'min_left', 'max_left', 'min_right', 'max_right', 'min_input', 'max_input', 'min_base', 'max_base', 'max_exponent', 'min_numerator', 'max_numerator', 'min_denominator', 'max_denominator', 'max_n', 'max_k', 'exponent', 'base', 'modulus', 'absolute_tolerance', 'arithmetic'}
                 def get_mode(k): return 'clear' if k in clear_params else 'encrypted'
                 enc_dict = "{" + ", ".join([f"'{k}': '{get_mode(k)}'" for k in param_names]) + "}"
                 params_str = ", ".join(param_names)
@@ -301,7 +310,7 @@ def generate_notebook_for_module(mod_name, notebook_name):
                         
             else:
                 param_names = list(sig.parameters.keys())
-                clear_params = {'start', 'step', 'size', 'k', 'angle_unit', 'rounding', 'scale', 'input_scale', 'output_scale', 'amount', 'multiplier', 'fractional_bits', 'zero_result', 'quotient_width', 'denominator_width', 'numerator_width', 'remainder_width', 'width', 'zero_quotient', 'zero_remainder', 'min_value', 'max_value', 'min_left', 'max_left', 'min_right', 'max_right', 'min_input', 'max_input', 'min_base', 'max_base', 'max_exponent', 'min_numerator', 'max_numerator', 'min_denominator', 'max_denominator', 'max_n', 'max_k', 'exponent', 'base', 'modulus', 'absolute_tolerance', 'arithmetic'}
+                clear_params = {'rate'} if subpkg == 'finance' else {'start', 'step', 'size', 'k', 'angle_unit', 'rounding', 'scale', 'input_scale', 'output_scale', 'amount', 'multiplier', 'fractional_bits', 'zero_result', 'quotient_width', 'denominator_width', 'numerator_width', 'remainder_width', 'width', 'zero_quotient', 'zero_remainder', 'min_value', 'max_value', 'min_left', 'max_left', 'min_right', 'max_right', 'min_input', 'max_input', 'min_base', 'max_base', 'max_exponent', 'min_numerator', 'max_numerator', 'min_denominator', 'max_denominator', 'max_n', 'max_k', 'exponent', 'base', 'modulus', 'absolute_tolerance', 'arithmetic'}
                 encrypted_params = [p for p in param_names if p not in clear_params and 'width' not in p]
                 
                 clear_defaults = {
@@ -310,7 +319,7 @@ def generate_notebook_for_module(mod_name, notebook_name):
                     'scale': 10, 'input_scale': 10, 'output_scale': 10,
                     'numerator_width': 4, 'denominator_width': 3, 'fractional_bits': 3,
                     'quotient_width': 8, 'remainder_width': 4, 'width': 4,
-                    'amount': 1, 'multiplier': 2, 'zero_result': 0, 'zero_quotient': 0, 'zero_remainder': 0, 'arithmetic': 1
+                    'amount': 1, 'multiplier': 2, 'zero_result': 0, 'zero_quotient': 0, 'zero_remainder': 0, 'arithmetic': 1, 'rate': 0.05
                 }
                 
                 bound_args = []
@@ -384,5 +393,13 @@ if __name__ == "__main__":
         ("special", "10_math_special.ipynb"),
     ]
     for mod, fname in modules:
-        generate_notebook_for_module(mod, f"docs/tutorials/{fname}")
+        generate_notebook_for_module('math', mod, f"docs/tutorials/{fname}")
+
+    finance_modules = [
+        ("core", "11_finance_core.ipynb"),
+        ("transactions", "12_finance_transactions.ipynb")
+    ]
+    for mod, fname in finance_modules:
+        generate_notebook_for_module('finance', mod, f"docs/tutorials/{fname}")
+        print(f"Generated {fname}")
         print(f"Generated {fname}")

@@ -6,7 +6,7 @@ import sys
 
 def test_notebooks():
     # Codespace paths for notebooks
-    notebooks = sorted(glob.glob(r'docs/tutorials/*math*.ipynb'))
+    notebooks = sorted(glob.glob(r'docs/tutorials/*.ipynb'))
     if not notebooks:
         print("No notebooks found! Run this script from the root of the repository.")
         sys.exit(1)

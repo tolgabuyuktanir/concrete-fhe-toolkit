@@ -13,6 +13,10 @@
         <link rel="canonical" href="https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/0.5.0/tutorials/08_math_fixed_point/">
       
       
+        <link rel="prev" href="../07_math_combinatorics/">
+      
+      
+        <link rel="next" href="../09_math_number_theory/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>08 math fixed point - concrete-fhe-toolkit</title>
+        <title>Math (Fixed Point) - concrete-fhe-toolkit</title>
       
     
     
@@ -78,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#testing" class="md-skip">
+        <a href="#make_floor" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              08 math fixed point
+              Math (Fixed Point)
             
           </span>
         </div>
@@ -266,10 +270,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../01_arithmetic/" class="md-tabs__link">
           
   
@@ -521,26 +527,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -558,7 +569,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -688,147 +699,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05_math_combinatorics.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Math (Combinatorics)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06_math_number_theory.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Math (Number Theory)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07_math_fixed_point.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Math (Fixed Point)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../08_math_special.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Math (Special)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../09_math_bits.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Math (Bits)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../10_math_binary_division.ipynb" class="md-nav__link">
+      <a href="../05_math_binary_division/" class="md-nav__link">
         
   
   
@@ -856,7 +727,410 @@
   
   
     <li class="md-nav__item">
-      <a href="../11_finance_core.ipynb" class="md-nav__link">
+      <a href="../06_math_bits/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math (Bits)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_math_combinatorics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math (Combinatorics)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math (Fixed Point)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math (Fixed Point)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#make_floor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_floor()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile_floor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_floor()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make_ceil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_ceil()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile_ceil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_ceil()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make_trunc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_trunc()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile_trunc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_trunc()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make_round" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_round()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile_round" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_round()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make_floor_ceil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_floor_ceil()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile_floor_ceil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_floor_ceil()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make_rescale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_rescale()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile_rescale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_rescale()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make_round_to_multiple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_round_to_multiple()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile_round_to_multiple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_round_to_multiple()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make_modf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_modf()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile_modf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_modf()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make_fixed_point_multiply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_fixed_point_multiply()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile_fixed_point_multiply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compile_fixed_point_multiply()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make_encode_fixed_point-helper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_encode_fixed_point() (Helper)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make_decode_fixed_point-helper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        make_decode_fixed_point() (Helper)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_math_number_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math (Number Theory)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_math_special/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math (Special)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_finance_core/" class="md-nav__link">
         
   
   
@@ -884,7 +1158,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12_finance_transactions.ipynb" class="md-nav__link">
+      <a href="../12_finance_transactions/" class="md-nav__link">
         
   
   
@@ -892,398 +1166,6 @@
     
   
     Finance (Transactions)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13_ml_activations.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Activations)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../14_ml_classes.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Classes)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../16_ml_clustering.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Clustering)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../17_ml_core.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Core)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../18_ml_estimation.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Estimation)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../19_ml_matrix.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Matrix)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../20_ml_models.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Models)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../21_ml_pipeline.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Pipeline)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../22_ml_preprocessing.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Preprocessing)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../24_ml_serialization.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Serialization)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../25_ml_sklearn_bridge.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Sklearn_bridge)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../27_ml_trainers.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Trainers)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../28_ml_training.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Training)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../29_ml_utils.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Utils)
   
 
     
@@ -2440,10 +2322,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#testing" class="md-nav__link">
+  <a href="#make_floor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        make_floor()
       
     </span>
   </a>
@@ -2451,10 +2333,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_1" class="md-nav__link">
+  <a href="#compile_floor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        compile_floor()
       
     </span>
   </a>
@@ -2462,10 +2344,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_2" class="md-nav__link">
+  <a href="#make_ceil" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        make_ceil()
       
     </span>
   </a>
@@ -2473,10 +2355,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_3" class="md-nav__link">
+  <a href="#compile_ceil" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        compile_ceil()
       
     </span>
   </a>
@@ -2484,10 +2366,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_4" class="md-nav__link">
+  <a href="#make_trunc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        make_trunc()
       
     </span>
   </a>
@@ -2495,10 +2377,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_5" class="md-nav__link">
+  <a href="#compile_trunc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        compile_trunc()
       
     </span>
   </a>
@@ -2506,10 +2388,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_6" class="md-nav__link">
+  <a href="#make_round" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        make_round()
       
     </span>
   </a>
@@ -2517,10 +2399,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_7" class="md-nav__link">
+  <a href="#compile_round" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        compile_round()
       
     </span>
   </a>
@@ -2528,10 +2410,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_8" class="md-nav__link">
+  <a href="#make_floor_ceil" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        make_floor_ceil()
       
     </span>
   </a>
@@ -2539,10 +2421,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_9" class="md-nav__link">
+  <a href="#compile_floor_ceil" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        compile_floor_ceil()
       
     </span>
   </a>
@@ -2550,10 +2432,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_10" class="md-nav__link">
+  <a href="#make_rescale" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        make_rescale()
       
     </span>
   </a>
@@ -2561,10 +2443,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_11" class="md-nav__link">
+  <a href="#compile_rescale" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        compile_rescale()
       
     </span>
   </a>
@@ -2572,10 +2454,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_12" class="md-nav__link">
+  <a href="#make_round_to_multiple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        make_round_to_multiple()
       
     </span>
   </a>
@@ -2583,10 +2465,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_13" class="md-nav__link">
+  <a href="#compile_round_to_multiple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        compile_round_to_multiple()
       
     </span>
   </a>
@@ -2594,10 +2476,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_14" class="md-nav__link">
+  <a href="#make_modf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        make_modf()
       
     </span>
   </a>
@@ -2605,10 +2487,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_15" class="md-nav__link">
+  <a href="#compile_modf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        compile_modf()
       
     </span>
   </a>
@@ -2616,10 +2498,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_16" class="md-nav__link">
+  <a href="#make_fixed_point_multiply" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        make_fixed_point_multiply()
       
     </span>
   </a>
@@ -2627,10 +2509,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_17" class="md-nav__link">
+  <a href="#compile_fixed_point_multiply" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        compile_fixed_point_multiply()
       
     </span>
   </a>
@@ -2638,10 +2520,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#client-side-helper" class="md-nav__link">
+  <a href="#make_encode_fixed_point-helper" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Client-Side Helper:
+        make_encode_fixed_point() (Helper)
       
     </span>
   </a>
@@ -2649,10 +2531,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#client-side-helper_1" class="md-nav__link">
+  <a href="#make_decode_fixed_point-helper" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Client-Side Helper:
+        make_decode_fixed_point() (Helper)
       
     </span>
   </a>
@@ -2679,7 +2561,7 @@
   
 
 
-  <h1>08 math fixed point</h1>
+  <h1>Math (Fixed Point)</h1>
 
 <script>
 (function (global, factory) {
@@ -3402,19 +3284,19 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a557321f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=484db95c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-make_floor">Testing <code>make_floor</code><a class="anchor-link" href="#testing-make_floor">¶</a></h3><p>Create floor(value / scale) for encrypted scaled integers.</p>
+<h3 id="make_floor">make_floor()<a class="anchor-link" href="#make_floor">¶</a></h3><p>Create floor(value / scale) for encrypted scaled integers.</p>
 <p>This cell verifies the <code>make_floor</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=df5cbb13">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0637733b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3489,19 +3371,19 @@ print("make_floor tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3b3c7d01">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e5b74a65">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-compile_floor">Testing <code>compile_floor</code><a class="anchor-link" href="#testing-compile_floor">¶</a></h3><p>Compile floor(value / scale) for encrypted scaled integers.</p>
+<h3 id="compile_floor">compile_floor()<a class="anchor-link" href="#compile_floor">¶</a></h3><p>Compile floor(value / scale) for encrypted scaled integers.</p>
 <p>This cell verifies the <code>compile_floor</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=90108ce1">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=13d19284">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3566,19 +3448,19 @@ print("compile_floor tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e3f335e2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=83872f42">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-make_ceil">Testing <code>make_ceil</code><a class="anchor-link" href="#testing-make_ceil">¶</a></h3><p>Create ceil(value / scale) for encrypted scaled integers.</p>
+<h3 id="make_ceil">make_ceil()<a class="anchor-link" href="#make_ceil">¶</a></h3><p>Create ceil(value / scale) for encrypted scaled integers.</p>
 <p>This cell verifies the <code>make_ceil</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8695bdf0">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c23236cc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3653,19 +3535,19 @@ print("make_ceil tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b6daf1b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=431965af">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-compile_ceil">Testing <code>compile_ceil</code><a class="anchor-link" href="#testing-compile_ceil">¶</a></h3><p>Compile ceil(value / scale) for encrypted scaled integers.</p>
+<h3 id="compile_ceil">compile_ceil()<a class="anchor-link" href="#compile_ceil">¶</a></h3><p>Compile ceil(value / scale) for encrypted scaled integers.</p>
 <p>This cell verifies the <code>compile_ceil</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b4de1a1f">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1a050ec0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3730,19 +3612,19 @@ print("compile_ceil tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ef7f041a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e58a6170">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-make_trunc">Testing <code>make_trunc</code><a class="anchor-link" href="#testing-make_trunc">¶</a></h3><p>Create trunc(value / scale) toward zero for encrypted scaled integers.</p>
+<h3 id="make_trunc">make_trunc()<a class="anchor-link" href="#make_trunc">¶</a></h3><p>Create trunc(value / scale) toward zero for encrypted scaled integers.</p>
 <p>This cell verifies the <code>make_trunc</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=06c882c8">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0784c1d3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3817,19 +3699,19 @@ print("make_trunc tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6b206147">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ed4a7f79">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-compile_trunc">Testing <code>compile_trunc</code><a class="anchor-link" href="#testing-compile_trunc">¶</a></h3><p>Compile trunc(value / scale) toward zero for encrypted scaled integers.</p>
+<h3 id="compile_trunc">compile_trunc()<a class="anchor-link" href="#compile_trunc">¶</a></h3><p>Compile trunc(value / scale) toward zero for encrypted scaled integers.</p>
 <p>This cell verifies the <code>compile_trunc</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f14bbd4e">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=52624a8d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3894,19 +3776,19 @@ print("compile_trunc tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8ab8fd39">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8ea68962">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-make_round">Testing <code>make_round</code><a class="anchor-link" href="#testing-make_round">¶</a></h3><p>Create round(value / scale) using Python's ties-to-even rule.</p>
+<h3 id="make_round">make_round()<a class="anchor-link" href="#make_round">¶</a></h3><p>Create round(value / scale) using Python's ties-to-even rule.</p>
 <p>This cell verifies the <code>make_round</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2e9ede29">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=96e325f4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3981,19 +3863,19 @@ print("make_round tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6d83f179">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6ce8580e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-compile_round">Testing <code>compile_round</code><a class="anchor-link" href="#testing-compile_round">¶</a></h3><p>Compile round(value / scale) using Python's ties-to-even rule.</p>
+<h3 id="compile_round">compile_round()<a class="anchor-link" href="#compile_round">¶</a></h3><p>Compile round(value / scale) using Python's ties-to-even rule.</p>
 <p>This cell verifies the <code>compile_round</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ae38c1fb">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=05cc564e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4058,19 +3940,19 @@ print("compile_round tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a1774753">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0a67dbe9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-make_floor_ceil">Testing <code>make_floor_ceil</code><a class="anchor-link" href="#testing-make_floor_ceil">¶</a></h3><p>Create a function returning both floor and ceil for a scaled integer.</p>
+<h3 id="make_floor_ceil">make_floor_ceil()<a class="anchor-link" href="#make_floor_ceil">¶</a></h3><p>Create a function returning both floor and ceil for a scaled integer.</p>
 <p>This cell verifies the <code>make_floor_ceil</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fbbabd86">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6e7383d0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4145,19 +4027,19 @@ print("make_floor_ceil tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fec951cb">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a99f0059">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-compile_floor_ceil">Testing <code>compile_floor_ceil</code><a class="anchor-link" href="#testing-compile_floor_ceil">¶</a></h3><p>Compile a circuit returning both floor and ceil for a scaled integer.</p>
+<h3 id="compile_floor_ceil">compile_floor_ceil()<a class="anchor-link" href="#compile_floor_ceil">¶</a></h3><p>Compile a circuit returning both floor and ceil for a scaled integer.</p>
 <p>This cell verifies the <code>compile_floor_ceil</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fc75fd90">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=10d539ac">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4222,19 +4104,19 @@ print("compile_floor_ceil tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9fdbcacc">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6c58b86e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-make_rescale">Testing <code>make_rescale</code><a class="anchor-link" href="#testing-make_rescale">¶</a></h3><p>Create rescaling from one fixed-point scale to another.</p>
+<h3 id="make_rescale">make_rescale()<a class="anchor-link" href="#make_rescale">¶</a></h3><p>Create rescaling from one fixed-point scale to another.</p>
 <p>This cell verifies the <code>make_rescale</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=34991192">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3fa18663">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4309,19 +4191,19 @@ print("make_rescale tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=49cdcf2e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8be5637c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-compile_rescale">Testing <code>compile_rescale</code><a class="anchor-link" href="#testing-compile_rescale">¶</a></h3><p>Compile rescaling from one fixed-point scale to another.</p>
+<h3 id="compile_rescale">compile_rescale()<a class="anchor-link" href="#compile_rescale">¶</a></h3><p>Compile rescaling from one fixed-point scale to another.</p>
 <p>This cell verifies the <code>compile_rescale</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=02f42735">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=22af3280">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4386,19 +4268,19 @@ print("compile_rescale tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c5562098">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2832b077">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-make_round_to_multiple">Testing <code>make_round_to_multiple</code><a class="anchor-link" href="#testing-make_round_to_multiple">¶</a></h3><p>Create quantization of an encrypted integer to the nearest multiple of step.</p>
+<h3 id="make_round_to_multiple">make_round_to_multiple()<a class="anchor-link" href="#make_round_to_multiple">¶</a></h3><p>Create quantization of an encrypted integer to the nearest multiple of step.</p>
 <p>This cell verifies the <code>make_round_to_multiple</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=300d9e0e">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=caa06efd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4473,19 +4355,19 @@ print("make_round_to_multiple tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6da988b0">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=66007e46">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-compile_round_to_multiple">Testing <code>compile_round_to_multiple</code><a class="anchor-link" href="#testing-compile_round_to_multiple">¶</a></h3><p>Compile quantization of an encrypted integer to the nearest multiple of step.</p>
+<h3 id="compile_round_to_multiple">compile_round_to_multiple()<a class="anchor-link" href="#compile_round_to_multiple">¶</a></h3><p>Compile quantization of an encrypted integer to the nearest multiple of step.</p>
 <p>This cell verifies the <code>compile_round_to_multiple</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=839f47ad">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=aadaeac4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4550,19 +4432,19 @@ print("compile_round_to_multiple tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9602105a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=41f6c620">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-make_modf">Testing <code>make_modf</code><a class="anchor-link" href="#testing-make_modf">¶</a></h3><p>Create a function returning (fractional_part, integer_part) like math.modf.</p>
+<h3 id="make_modf">make_modf()<a class="anchor-link" href="#make_modf">¶</a></h3><p>Create a function returning (fractional_part, integer_part) like math.modf.</p>
 <p>This cell verifies the <code>make_modf</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c60a81ac">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d2171b1d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4637,19 +4519,19 @@ print("make_modf tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=07951503">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=64d2af4c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-compile_modf">Testing <code>compile_modf</code><a class="anchor-link" href="#testing-compile_modf">¶</a></h3><p>Compile a circuit returning (fractional_part, integer_part) like math.modf.</p>
+<h3 id="compile_modf">compile_modf()<a class="anchor-link" href="#compile_modf">¶</a></h3><p>Compile a circuit returning (fractional_part, integer_part) like math.modf.</p>
 <p>This cell verifies the <code>compile_modf</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=752b5279">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=50a9f1f3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4714,19 +4596,19 @@ print("compile_modf tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5609d9e5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=773498f1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-make_fixed_point_multiply">Testing <code>make_fixed_point_multiply</code><a class="anchor-link" href="#testing-make_fixed_point_multiply">¶</a></h3><p>Create multiplication of two scaled values with the product rescaled back.</p>
+<h3 id="make_fixed_point_multiply">make_fixed_point_multiply()<a class="anchor-link" href="#make_fixed_point_multiply">¶</a></h3><p>Create multiplication of two scaled values with the product rescaled back.</p>
 <p>This cell verifies the <code>make_fixed_point_multiply</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9206a199">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3c878045">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4801,19 +4683,19 @@ print("make_fixed_point_multiply tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3566a57c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e3dac56f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-compile_fixed_point_multiply">Testing <code>compile_fixed_point_multiply</code><a class="anchor-link" href="#testing-compile_fixed_point_multiply">¶</a></h3><p>Compile rescaled multiplication of two scaled encrypted values.</p>
+<h3 id="compile_fixed_point_multiply">compile_fixed_point_multiply()<a class="anchor-link" href="#compile_fixed_point_multiply">¶</a></h3><p>Compile rescaled multiplication of two scaled encrypted values.</p>
 <p>This cell verifies the <code>compile_fixed_point_multiply</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b8e9542a">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=09798410">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4878,18 +4760,18 @@ print("compile_fixed_point_multiply tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=145aef7d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=67b3cf4f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="client-side-helper-make_encode_fixed_point">Client-Side Helper: <code>make_encode_fixed_point</code><a class="anchor-link" href="#client-side-helper-make_encode_fixed_point">¶</a></h3><p>Demonstrates the <code>make_encode_fixed_point</code> function. This is a client-side (cleartext) helper function. It is <strong>not</strong> an FHE circuit and cannot be compiled with <code>fhe.Compiler</code>.</p>
+<h3 id="make_encode_fixed_point-helper">make_encode_fixed_point() (Helper)<a class="anchor-link" href="#make_encode_fixed_point-helper">¶</a></h3><p>Demonstrates the <code>make_encode_fixed_point</code> function. This is a client-side (cleartext) helper function. It is <strong>not</strong> an FHE circuit and cannot be compiled with <code>fhe.Compiler</code>.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=52a04f70">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8be5428e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4931,18 +4813,18 @@ print('Encoding successful! Ready for encryption.')
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d390e50c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=62ba9cc2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="client-side-helper-make_decode_fixed_point">Client-Side Helper: <code>make_decode_fixed_point</code><a class="anchor-link" href="#client-side-helper-make_decode_fixed_point">¶</a></h3><p>Demonstrates the <code>make_decode_fixed_point</code> function. This is a client-side (cleartext) helper function. It is <strong>not</strong> an FHE circuit and cannot be compiled with <code>fhe.Compiler</code>.</p>
+<h3 id="make_decode_fixed_point-helper">make_decode_fixed_point() (Helper)<a class="anchor-link" href="#make_decode_fixed_point-helper">¶</a></h3><p>Demonstrates the <code>make_decode_fixed_point</code> function. This is a client-side (cleartext) helper function. It is <strong>not</strong> an FHE circuit and cannot be compiled with <code>fhe.Compiler</code>.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3e7a3e1c">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2919f4f2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

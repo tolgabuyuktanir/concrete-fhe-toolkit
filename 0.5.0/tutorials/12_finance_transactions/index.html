@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/0.5.0/tutorials/05_math_binary_division/">
+        <link rel="canonical" href="https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/0.5.0/tutorials/12_finance_transactions/">
       
       
-        <link rel="prev" href="../04_math_basic/">
+        <link rel="prev" href="../11_finance_core/">
       
       
-        <link rel="next" href="../06_math_bits/">
+        <link rel="next" href="../../api/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Math (Binary Division) - concrete-fhe-toolkit</title>
+        <title>Finance (Transactions) - concrete-fhe-toolkit</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#unsigned_divide_bits" class="md-skip">
+        <a href="#transfer" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Math (Binary Division)
+              Finance (Transactions)
             
           </span>
         </div>
@@ -696,35 +696,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Math (Binary Division)
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../05_math_binary_division/" class="md-nav__link">
         
   
   
@@ -740,123 +715,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#unsigned_divide_bits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        unsigned_divide_bits()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fixed_point_divide_bits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        fixed_point_divide_bits()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#make_unsigned_floor_divide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        make_unsigned_floor_divide()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#make_fixed_point_divide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        make_fixed_point_divide()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compile_unsigned_floor_divide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        compile_unsigned_floor_divide()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compile_fixed_point_divide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        compile_fixed_point_divide()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#unsigned_mod_bits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        unsigned_mod_bits()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#make_unsigned_mod" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        make_unsigned_mod()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compile_unsigned_mod" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        compile_unsigned_mod()
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1034,10 +892,35 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../12_finance_transactions/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finance (Transactions)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1053,6 +936,35 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        transfer()
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2201,98 +2113,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unsigned_divide_bits" class="md-nav__link">
+  <a href="#transfer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        unsigned_divide_bits()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fixed_point_divide_bits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        fixed_point_divide_bits()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#make_unsigned_floor_divide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        make_unsigned_floor_divide()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#make_fixed_point_divide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        make_fixed_point_divide()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compile_unsigned_floor_divide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        compile_unsigned_floor_divide()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compile_fixed_point_divide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        compile_fixed_point_divide()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#unsigned_mod_bits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        unsigned_mod_bits()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#make_unsigned_mod" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        make_unsigned_mod()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compile_unsigned_mod" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        compile_unsigned_mod()
+        transfer()
       
     </span>
   </a>
@@ -2319,7 +2143,7 @@
   
 
 
-  <h1>Math (Binary Division)</h1>
+  <h1>Finance (Transactions)</h1>
 
 <script>
 (function (global, factory) {
@@ -3042,19 +2866,19 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=80e2b704">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c97dbf37">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="unsigned_divide_bits">unsigned_divide_bits()<a class="anchor-link" href="#unsigned_divide_bits">¶</a></h3><p>Return little-endian quotient bits for unsigned floor division.</p>
-<p>This cell verifies the <code>unsigned_divide_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
+<h3 id="transfer">transfer()<a class="anchor-link" href="#transfer">¶</a></h3><p>Transfers an amount from one account to another securely under encryption.</p>
+<p>This cell verifies the <code>transfer</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=db6ea527">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fcd1edbb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3073,18 +2897,18 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">unsigned_divide_bits</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.finance.transactions</span><span class="w"> </span><span class="kn">import</span> <span class="n">transfer</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">test_unsigned_divide_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">unsigned_divide_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">,</span> <span class="n">quotient_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_transfer</span><span class="p">(</span><span class="n">sender_balance</span><span class="p">,</span> <span class="n">receiver_balance</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">transfer</span><span class="p">(</span><span class="n">sender_balance</span><span class="p">,</span> <span class="n">receiver_balance</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
 
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_unsigned_divide_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'numerator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'denominator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
+<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_transfer</span><span class="p">,</span> <span class="p">{</span><span class="s1">'sender_balance'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'receiver_balance'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'amount'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">unsigned_divide_bits</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">quotient_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">transfer</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
         <span class="k">else</span><span class="p">:</span>
@@ -3094,21 +2918,21 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"unsigned_divide_bits tests passed!"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"transfer tests passed!"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-1">from concrete import fhe
-from concrete_fhe_toolkit.math.binary_division import unsigned_divide_bits
+from concrete_fhe_toolkit.finance.transactions import transfer
 
-def test_unsigned_divide_bits(numerator_bits, denominator_bits):
-    return unsigned_divide_bits(numerator_bits, denominator_bits, quotient_width=8, zero_result=0)
+def test_transfer(sender_balance, receiver_balance, amount):
+    return transfer(sender_balance, receiver_balance, amount)
 
-compiler = fhe.Compiler(test_unsigned_divide_bits, {'numerator_bits': 'encrypted', 'denominator_bits': 'encrypted'})
-inputset = [([0, 1, 0], [1, 0, 1]), ([1, 1, 1], [1, 1, 1]), ([0, 0, 0], [0, 0, 0])]
+compiler = fhe.Compiler(test_transfer, {'sender_balance': 'encrypted', 'receiver_balance': 'encrypted', 'amount': 'encrypted'})
+inputset = [(3, 2, 1), (-2, -2, 3), (0, 0, 0), (2, -2, 2), (10, 5, -2)]
 circuit = compiler.compile(inputset)
 
 for inp in inputset:
     try:
-        expected = unsigned_divide_bits(inp[0], inp[1], quotient_width=8, zero_result=0)
+        expected = transfer(inp[0], inp[1], inp[2])
         if isinstance(expected, tuple):
             assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
         else:
@@ -3118,665 +2942,7 @@ for inp in inputset:
     except Exception as e:
         print(f"Skipping {inp} due to bounds or other error: {e}")
 
-print("unsigned_divide_bits tests passed!")</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=56a186ff">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="fixed_point_divide_bits">fixed_point_divide_bits()<a class="anchor-link" href="#fixed_point_divide_bits">¶</a></h3><p>Return quotient bits for floor((numerator &lt;&lt; fractional_bits) / denominator).</p>
-<p>This cell verifies the <code>fixed_point_divide_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3a561804">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">fixed_point_divide_bits</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_fixed_point_divide_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fixed_point_divide_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">,</span> <span class="n">fractional_bits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">quotient_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_fixed_point_divide_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'numerator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'denominator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">fixed_point_divide_bits</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fractional_bits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">quotient_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"fixed_point_divide_bits tests passed!"</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-2">from concrete import fhe
-from concrete_fhe_toolkit.math.binary_division import fixed_point_divide_bits
-
-def test_fixed_point_divide_bits(numerator_bits, denominator_bits):
-    return fixed_point_divide_bits(numerator_bits, denominator_bits, fractional_bits=3, quotient_width=8, zero_result=0)
-
-compiler = fhe.Compiler(test_fixed_point_divide_bits, {'numerator_bits': 'encrypted', 'denominator_bits': 'encrypted'})
-inputset = [([0, 1, 0], [1, 0, 1]), ([1, 1, 1], [1, 1, 1]), ([0, 0, 0], [0, 0, 0])]
-circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = fixed_point_divide_bits(inp[0], inp[1], fractional_bits=3, quotient_width=8, zero_result=0)
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("fixed_point_divide_bits tests passed!")</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4e530500">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="make_unsigned_floor_divide">make_unsigned_floor_divide()<a class="anchor-link" href="#make_unsigned_floor_divide">¶</a></h3><p>Create unsigned encrypted floor division from scalar integer inputs.</p>
-<p>This cell verifies the <code>make_unsigned_floor_divide</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e56a8f6">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_unsigned_floor_divide</span>
-
-<span class="n">fn</span> <span class="o">=</span> <span class="n">make_unsigned_floor_divide</span><span class="p">(</span><span class="n">numerator_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">denominator_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_make_unsigned_floor_divide_enc</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">)</span>
-
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_unsigned_floor_divide_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'numerator'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'denominator'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"make_unsigned_floor_divide tests passed!"</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-3">from concrete import fhe
-from concrete_fhe_toolkit.math.binary_division import make_unsigned_floor_divide
-
-fn = make_unsigned_floor_divide(numerator_width=4, denominator_width=3, zero_result=7)
-
-def test_make_unsigned_floor_divide_enc(numerator, denominator):
-    return fn(numerator, denominator)
-
-compiler = fhe.Compiler(test_make_unsigned_floor_divide_enc, {'numerator': 'encrypted', 'denominator': 'encrypted'})
-inputset = [(3, 2), (-2, 3), (3, -2), (3, 3), (2, 0), (0, 3)]
-circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = fn(*inp)
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("make_unsigned_floor_divide tests passed!")</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a549e4f3">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="make_fixed_point_divide">make_fixed_point_divide()<a class="anchor-link" href="#make_fixed_point_divide">¶</a></h3><p>Create fixed-point unsigned division from scalar integer inputs.</p>
-<p>This cell verifies the <code>make_fixed_point_divide</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e82a083e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-4">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_fixed_point_divide</span>
-
-<span class="n">fn</span> <span class="o">=</span> <span class="n">make_fixed_point_divide</span><span class="p">(</span><span class="n">numerator_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">denominator_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fractional_bits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_make_fixed_point_divide_enc</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">)</span>
-
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_fixed_point_divide_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'numerator'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'denominator'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"make_fixed_point_divide tests passed!"</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-4">from concrete import fhe
-from concrete_fhe_toolkit.math.binary_division import make_fixed_point_divide
-
-fn = make_fixed_point_divide(numerator_width=4, denominator_width=3, fractional_bits=3, zero_result=7)
-
-def test_make_fixed_point_divide_enc(numerator, denominator):
-    return fn(numerator, denominator)
-
-compiler = fhe.Compiler(test_make_fixed_point_divide_enc, {'numerator': 'encrypted', 'denominator': 'encrypted'})
-inputset = [(3, 2), (-2, 3), (3, -2), (3, 3), (2, 0), (0, 3)]
-circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = fn(*inp)
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("make_fixed_point_divide tests passed!")</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=56941542">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="compile_unsigned_floor_divide">compile_unsigned_floor_divide()<a class="anchor-link" href="#compile_unsigned_floor_divide">¶</a></h3><p>Compile unsigned floor division using a bit-level restoring circuit.</p>
-<p>This cell verifies the <code>compile_unsigned_floor_divide</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ce82cdc9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-5">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_unsigned_floor_divide</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_unsigned_floor_divide</span>
-
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_unsigned_floor_divide</span><span class="p">(</span><span class="n">numerator_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">denominator_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">make_unsigned_floor_divide</span><span class="p">(</span><span class="n">numerator_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">denominator_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)(</span><span class="o">*</span><span class="n">inp</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"compile_unsigned_floor_divide tests passed!"</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-5">from concrete import fhe
-from concrete_fhe_toolkit.math.binary_division import compile_unsigned_floor_divide
-from concrete_fhe_toolkit.math.binary_division import make_unsigned_floor_divide
-
-circuit = compile_unsigned_floor_divide(numerator_width=4, denominator_width=3, zero_result=7)
-
-inputset = [(3, 2), (-2, 3), (3, -2), (3, 3), (2, 0), (0, 3)]
-for inp in inputset:
-    try:
-        expected = make_unsigned_floor_divide(numerator_width=4, denominator_width=3, zero_result=7)(*inp)
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("compile_unsigned_floor_divide tests passed!")</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2cbf4d02">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="compile_fixed_point_divide">compile_fixed_point_divide()<a class="anchor-link" href="#compile_fixed_point_divide">¶</a></h3><p>Compile fixed-point unsigned division using a bit-level circuit.</p>
-<p>This cell verifies the <code>compile_fixed_point_divide</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c41e6745">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_fixed_point_divide</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_fixed_point_divide</span>
-
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_fixed_point_divide</span><span class="p">(</span><span class="n">numerator_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">denominator_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fractional_bits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">make_fixed_point_divide</span><span class="p">(</span><span class="n">numerator_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">denominator_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fractional_bits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)(</span><span class="o">*</span><span class="n">inp</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"compile_fixed_point_divide tests passed!"</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-6">from concrete import fhe
-from concrete_fhe_toolkit.math.binary_division import compile_fixed_point_divide
-from concrete_fhe_toolkit.math.binary_division import make_fixed_point_divide
-
-circuit = compile_fixed_point_divide(numerator_width=4, denominator_width=3, fractional_bits=3, zero_result=7)
-
-inputset = [(3, 2), (-2, 3), (3, -2), (3, 3), (2, 0), (0, 3)]
-for inp in inputset:
-    try:
-        expected = make_fixed_point_divide(numerator_width=4, denominator_width=3, fractional_bits=3, zero_result=7)(*inp)
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("compile_fixed_point_divide tests passed!")</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=31688789">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="unsigned_mod_bits">unsigned_mod_bits()<a class="anchor-link" href="#unsigned_mod_bits">¶</a></h3><p>Return little-endian remainder bits for unsigned modulo.</p>
-<p>This cell verifies the <code>unsigned_mod_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a9f27dca">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-7">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">unsigned_mod_bits</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_unsigned_mod_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">unsigned_mod_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_unsigned_mod_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'numerator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'denominator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">unsigned_mod_bits</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"unsigned_mod_bits tests passed!"</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-7">from concrete import fhe
-from concrete_fhe_toolkit.math.binary_division import unsigned_mod_bits
-
-def test_unsigned_mod_bits(numerator_bits, denominator_bits):
-    return unsigned_mod_bits(numerator_bits, denominator_bits, zero_result=0)
-
-compiler = fhe.Compiler(test_unsigned_mod_bits, {'numerator_bits': 'encrypted', 'denominator_bits': 'encrypted'})
-inputset = [([0, 1, 0], [1, 0, 1]), ([1, 1, 1], [1, 1, 1]), ([0, 0, 0], [0, 0, 0])]
-circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = unsigned_mod_bits(inp[0], inp[1], zero_result=0)
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("unsigned_mod_bits tests passed!")</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=417f5c11">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="make_unsigned_mod">make_unsigned_mod()<a class="anchor-link" href="#make_unsigned_mod">¶</a></h3><p>Create unsigned encrypted modulo from scalar integer inputs.</p>
-<p>This cell verifies the <code>make_unsigned_mod</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=27ff9367">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-8">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_unsigned_mod</span>
-
-<span class="n">fn</span> <span class="o">=</span> <span class="n">make_unsigned_mod</span><span class="p">(</span><span class="n">numerator_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">denominator_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_make_unsigned_mod_enc</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">)</span>
-
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_unsigned_mod_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'numerator'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'denominator'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"make_unsigned_mod tests passed!"</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-8">from concrete import fhe
-from concrete_fhe_toolkit.math.binary_division import make_unsigned_mod
-
-fn = make_unsigned_mod(numerator_width=4, denominator_width=3, zero_result=7)
-
-def test_make_unsigned_mod_enc(numerator, denominator):
-    return fn(numerator, denominator)
-
-compiler = fhe.Compiler(test_make_unsigned_mod_enc, {'numerator': 'encrypted', 'denominator': 'encrypted'})
-inputset = [(3, 2), (-2, 3), (3, -2), (3, 3), (2, 0), (0, 3)]
-circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = fn(*inp)
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("make_unsigned_mod tests passed!")</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9c432fc5">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="compile_unsigned_mod">compile_unsigned_mod()<a class="anchor-link" href="#compile_unsigned_mod">¶</a></h3><p>Compile unsigned modulo using the bit-level restoring circuit.</p>
-<p>This cell verifies the <code>compile_unsigned_mod</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a3486ec6">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-9">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_unsigned_mod</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.math.binary_division</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_unsigned_mod</span>
-
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_unsigned_mod</span><span class="p">(</span><span class="n">numerator_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">denominator_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">make_unsigned_mod</span><span class="p">(</span><span class="n">numerator_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">denominator_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)(</span><span class="o">*</span><span class="n">inp</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"compile_unsigned_mod tests passed!"</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-9">from concrete import fhe
-from concrete_fhe_toolkit.math.binary_division import compile_unsigned_mod
-from concrete_fhe_toolkit.math.binary_division import make_unsigned_mod
-
-circuit = compile_unsigned_mod(numerator_width=4, denominator_width=3, zero_result=7)
-
-inputset = [(3, 2), (-2, 3), (3, -2), (3, 3), (2, 0), (0, 3)]
-for inp in inputset:
-    try:
-        expected = make_unsigned_mod(numerator_width=4, denominator_width=3, zero_result=7)(*inp)
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("compile_unsigned_mod tests passed!")</div>
+print("transfer tests passed!")</div>
 </div>
 </div>
 </div>

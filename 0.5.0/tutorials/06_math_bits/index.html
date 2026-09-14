@@ -13,6 +13,10 @@
         <link rel="canonical" href="https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/0.5.0/tutorials/06_math_bits/">
       
       
+        <link rel="prev" href="../05_math_binary_division/">
+      
+      
+        <link rel="next" href="../07_math_combinatorics/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>06 math bits - concrete-fhe-toolkit</title>
+        <title>Math (Bits) - concrete-fhe-toolkit</title>
       
     
     
@@ -78,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#testing" class="md-skip">
+        <a href="#bit_not" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              06 math bits
+              Math (Bits)
             
           </span>
         </div>
@@ -266,10 +270,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../01_arithmetic/" class="md-tabs__link">
           
   
@@ -521,26 +527,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -558,7 +569,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -688,7 +699,392 @@
   
   
     <li class="md-nav__item">
-      <a href="../05_math_combinatorics.ipynb" class="md-nav__link">
+      <a href="../05_math_binary_division/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math (Binary Division)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math (Bits)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math (Bits)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bit_not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bit_not()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit_and" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bit_and()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit_or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bit_or()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit_xor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bit_xor()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit_select" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bit_select()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full_adder_bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        full_adder_bit()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full_subtractor_bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        full_subtractor_bit()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit_or_many" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bit_or_many()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit_and_many" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bit_and_many()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit_xor_many" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bit_xor_many()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integer_to_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        integer_to_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bits_to_unsigned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bits_to_unsigned()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unsigned_to_bits-helper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unsigned_to_bits() (Helper)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#twos_complement_bits-helper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        twos_complement_bits() (Helper)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sign_magnitude_to_twos_complement_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sign_magnitude_to_twos_complement_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#twos_complement_add_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        twos_complement_add_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#twos_complement_multiply_by_constant_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        twos_complement_multiply_by_constant_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiply_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        multiply_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shift_left_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        shift_left_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shift_right_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        shift_right_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rotate_left_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rotate_left_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rotate_right_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rotate_right_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#popcount_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        popcount_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parity_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        parity_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bit_length_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bit_length_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unsigned_compare_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unsigned_compare_bits()
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_math_combinatorics/" class="md-nav__link">
         
   
   
@@ -716,35 +1112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06_math_number_theory.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Math (Number Theory)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07_math_fixed_point.ipynb" class="md-nav__link">
+      <a href="../08_math_fixed_point/" class="md-nav__link">
         
   
   
@@ -772,7 +1140,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../08_math_special.ipynb" class="md-nav__link">
+      <a href="../09_math_number_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math (Number Theory)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_math_special/" class="md-nav__link">
         
   
   
@@ -800,63 +1196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09_math_bits.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Math (Bits)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../10_math_binary_division.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Math (Binary Division)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../11_finance_core.ipynb" class="md-nav__link">
+      <a href="../11_finance_core/" class="md-nav__link">
         
   
   
@@ -884,7 +1224,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12_finance_transactions.ipynb" class="md-nav__link">
+      <a href="../12_finance_transactions/" class="md-nav__link">
         
   
   
@@ -892,398 +1232,6 @@
     
   
     Finance (Transactions)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13_ml_activations.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Activations)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../14_ml_classes.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Classes)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../16_ml_clustering.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Clustering)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../17_ml_core.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Core)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../18_ml_estimation.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Estimation)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../19_ml_matrix.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Matrix)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../20_ml_models.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Models)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../21_ml_pipeline.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Pipeline)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../22_ml_preprocessing.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Preprocessing)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../24_ml_serialization.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Serialization)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../25_ml_sklearn_bridge.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Sklearn_bridge)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../27_ml_trainers.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Trainers)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../28_ml_training.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Training)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../29_ml_utils.ipynb" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ML (Utils)
   
 
     
@@ -2440,10 +2388,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#testing" class="md-nav__link">
+  <a href="#bit_not" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        bit_not()
       
     </span>
   </a>
@@ -2451,10 +2399,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_1" class="md-nav__link">
+  <a href="#bit_and" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        bit_and()
       
     </span>
   </a>
@@ -2462,10 +2410,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_2" class="md-nav__link">
+  <a href="#bit_or" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        bit_or()
       
     </span>
   </a>
@@ -2473,10 +2421,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_3" class="md-nav__link">
+  <a href="#bit_xor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        bit_xor()
       
     </span>
   </a>
@@ -2484,10 +2432,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_4" class="md-nav__link">
+  <a href="#bit_select" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        bit_select()
       
     </span>
   </a>
@@ -2495,10 +2443,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_5" class="md-nav__link">
+  <a href="#full_adder_bit" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        full_adder_bit()
       
     </span>
   </a>
@@ -2506,10 +2454,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_6" class="md-nav__link">
+  <a href="#full_subtractor_bit" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        full_subtractor_bit()
       
     </span>
   </a>
@@ -2517,10 +2465,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_7" class="md-nav__link">
+  <a href="#bit_or_many" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        bit_or_many()
       
     </span>
   </a>
@@ -2528,10 +2476,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_8" class="md-nav__link">
+  <a href="#bit_and_many" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        bit_and_many()
       
     </span>
   </a>
@@ -2539,10 +2487,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_9" class="md-nav__link">
+  <a href="#bit_xor_many" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        bit_xor_many()
       
     </span>
   </a>
@@ -2550,10 +2498,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_10" class="md-nav__link">
+  <a href="#integer_to_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        integer_to_bits()
       
     </span>
   </a>
@@ -2561,10 +2509,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_11" class="md-nav__link">
+  <a href="#bits_to_unsigned" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        bits_to_unsigned()
       
     </span>
   </a>
@@ -2572,10 +2520,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#client-side-helper" class="md-nav__link">
+  <a href="#unsigned_to_bits-helper" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Client-Side Helper:
+        unsigned_to_bits() (Helper)
       
     </span>
   </a>
@@ -2583,10 +2531,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#client-side-helper_1" class="md-nav__link">
+  <a href="#twos_complement_bits-helper" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Client-Side Helper:
+        twos_complement_bits() (Helper)
       
     </span>
   </a>
@@ -2594,10 +2542,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_12" class="md-nav__link">
+  <a href="#sign_magnitude_to_twos_complement_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        sign_magnitude_to_twos_complement_bits()
       
     </span>
   </a>
@@ -2605,10 +2553,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_13" class="md-nav__link">
+  <a href="#twos_complement_add_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        twos_complement_add_bits()
       
     </span>
   </a>
@@ -2616,10 +2564,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_14" class="md-nav__link">
+  <a href="#twos_complement_multiply_by_constant_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        twos_complement_multiply_by_constant_bits()
       
     </span>
   </a>
@@ -2627,10 +2575,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_15" class="md-nav__link">
+  <a href="#multiply_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        multiply_bits()
       
     </span>
   </a>
@@ -2638,10 +2586,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_16" class="md-nav__link">
+  <a href="#shift_left_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        shift_left_bits()
       
     </span>
   </a>
@@ -2649,10 +2597,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_17" class="md-nav__link">
+  <a href="#shift_right_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        shift_right_bits()
       
     </span>
   </a>
@@ -2660,10 +2608,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_18" class="md-nav__link">
+  <a href="#rotate_left_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        rotate_left_bits()
       
     </span>
   </a>
@@ -2671,10 +2619,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_19" class="md-nav__link">
+  <a href="#rotate_right_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        rotate_right_bits()
       
     </span>
   </a>
@@ -2682,10 +2630,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_20" class="md-nav__link">
+  <a href="#popcount_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        popcount_bits()
       
     </span>
   </a>
@@ -2693,10 +2641,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_21" class="md-nav__link">
+  <a href="#parity_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        parity_bits()
       
     </span>
   </a>
@@ -2704,10 +2652,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_22" class="md-nav__link">
+  <a href="#bit_length_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        bit_length_bits()
       
     </span>
   </a>
@@ -2715,10 +2663,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing_23" class="md-nav__link">
+  <a href="#unsigned_compare_bits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        unsigned_compare_bits()
       
     </span>
   </a>
@@ -2745,7 +2693,7 @@
   
 
 
-  <h1>06 math bits</h1>
+  <h1>Math (Bits)</h1>
 
 <script>
 (function (global, factory) {
@@ -3468,20 +3416,20 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ace4df1d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6145bcb1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-bit_not">Testing <code>bit_not</code><a class="anchor-link" href="#testing-bit_not">¶</a></h3><p>Return NOT(bit) for a bit expression.</p>
+<h3 id="bit_not">bit_not()<a class="anchor-link" href="#bit_not">¶</a></h3><p>Return NOT(bit) for a bit expression.</p>
 <p>This cell verifies the <code>bit_not</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 <p><strong>Aliases</strong>: <code>bnot</code> can also be used equivalently.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a1d126d3">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d0e64553">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3552,20 +3500,20 @@ print("bit_not tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=151f3fd3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e45fb2c5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-bit_and">Testing <code>bit_and</code><a class="anchor-link" href="#testing-bit_and">¶</a></h3><p>Return left AND right for bit expressions.</p>
+<h3 id="bit_and">bit_and()<a class="anchor-link" href="#bit_and">¶</a></h3><p>Return left AND right for bit expressions.</p>
 <p>This cell verifies the <code>bit_and</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 <p><strong>Aliases</strong>: <code>band</code> can also be used equivalently.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9105fa47">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4845ada2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3636,20 +3584,20 @@ print("bit_and tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=55776316">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4e64ed9e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-bit_or">Testing <code>bit_or</code><a class="anchor-link" href="#testing-bit_or">¶</a></h3><p>Return left OR right for bit expressions.</p>
+<h3 id="bit_or">bit_or()<a class="anchor-link" href="#bit_or">¶</a></h3><p>Return left OR right for bit expressions.</p>
 <p>This cell verifies the <code>bit_or</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 <p><strong>Aliases</strong>: <code>bor</code> can also be used equivalently.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fdc16748">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5d92465c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3720,20 +3668,20 @@ print("bit_or tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=786c7347">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e3c83882">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-bit_xor">Testing <code>bit_xor</code><a class="anchor-link" href="#testing-bit_xor">¶</a></h3><p>Return left XOR right for bit expressions.</p>
+<h3 id="bit_xor">bit_xor()<a class="anchor-link" href="#bit_xor">¶</a></h3><p>Return left XOR right for bit expressions.</p>
 <p>This cell verifies the <code>bit_xor</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 <p><strong>Aliases</strong>: <code>bxor</code> can also be used equivalently.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6fa09f07">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=724c7fdb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3804,20 +3752,20 @@ print("bit_xor tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d46f119d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e6165db1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-bit_select">Testing <code>bit_select</code><a class="anchor-link" href="#testing-bit_select">¶</a></h3><p>Return when_one if control is 1, otherwise when_zero.</p>
+<h3 id="bit_select">bit_select()<a class="anchor-link" href="#bit_select">¶</a></h3><p>Return when_one if control is 1, otherwise when_zero.</p>
 <p>This cell verifies the <code>bit_select</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 <p><strong>Aliases</strong>: <code>bsel</code> can also be used equivalently.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9949223f">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=005c6cf7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3888,20 +3836,20 @@ print("bit_select tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=975e588b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ca8c4e45">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-full_adder_bit">Testing <code>full_adder_bit</code><a class="anchor-link" href="#testing-full_adder_bit">¶</a></h3><p>Return (sum_bit, carry_out) for one full-adder stage.</p>
+<h3 id="full_adder_bit">full_adder_bit()<a class="anchor-link" href="#full_adder_bit">¶</a></h3><p>Return (sum_bit, carry_out) for one full-adder stage.</p>
 <p>This cell verifies the <code>full_adder_bit</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 <p><strong>Aliases</strong>: <code>fadd_bit</code> can also be used equivalently.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=95b4a7f3">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=db05c73e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3972,20 +3920,20 @@ print("full_adder_bit tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fa781bd0">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=47ee1171">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-full_subtractor_bit">Testing <code>full_subtractor_bit</code><a class="anchor-link" href="#testing-full_subtractor_bit">¶</a></h3><p>Return (difference_bit, borrow_out) for one full-subtractor stage.</p>
+<h3 id="full_subtractor_bit">full_subtractor_bit()<a class="anchor-link" href="#full_subtractor_bit">¶</a></h3><p>Return (difference_bit, borrow_out) for one full-subtractor stage.</p>
 <p>This cell verifies the <code>full_subtractor_bit</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 <p><strong>Aliases</strong>: <code>fsub_bit</code> can also be used equivalently.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f55fdaa8">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=22994cf0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4056,19 +4004,19 @@ print("full_subtractor_bit tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=873b6b09">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2359a522">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-bit_or_many">Testing <code>bit_or_many</code><a class="anchor-link" href="#testing-bit_or_many">¶</a></h3><p>Return the OR-reduction of a bit iterable with higher performance.</p>
+<h3 id="bit_or_many">bit_or_many()<a class="anchor-link" href="#bit_or_many">¶</a></h3><p>Return the OR-reduction of a bit iterable with higher performance.</p>
 <p>This cell verifies the <code>bit_or_many</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=73da5c11">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=39054818">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4139,19 +4087,19 @@ print("bit_or_many tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b68ba53e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d8cefc66">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-bit_and_many">Testing <code>bit_and_many</code><a class="anchor-link" href="#testing-bit_and_many">¶</a></h3><p>Return the AND-reduction of a bit iterable with higher performance.</p>
+<h3 id="bit_and_many">bit_and_many()<a class="anchor-link" href="#bit_and_many">¶</a></h3><p>Return the AND-reduction of a bit iterable with higher performance.</p>
 <p>This cell verifies the <code>bit_and_many</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=756a1fb2">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ec6fb47a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4222,19 +4170,19 @@ print("bit_and_many tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b8812a3a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6c741907">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-bit_xor_many">Testing <code>bit_xor_many</code><a class="anchor-link" href="#testing-bit_xor_many">¶</a></h3><p>Return the XOR-reduction of a bit iterable with higher performance.</p>
+<h3 id="bit_xor_many">bit_xor_many()<a class="anchor-link" href="#bit_xor_many">¶</a></h3><p>Return the XOR-reduction of a bit iterable with higher performance.</p>
 <p>This cell verifies the <code>bit_xor_many</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c0b8feae">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f0e6ab7a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4305,19 +4253,19 @@ print("bit_xor_many tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=69e10b00">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8c57e809">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-integer_to_bits">Testing <code>integer_to_bits</code><a class="anchor-link" href="#testing-integer_to_bits">¶</a></h3><p>Return little-endian bits of an unsigned integer expression.</p>
+<h3 id="integer_to_bits">integer_to_bits()<a class="anchor-link" href="#integer_to_bits">¶</a></h3><p>Return little-endian bits of an unsigned integer expression.</p>
 <p>This cell verifies the <code>integer_to_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=46eeccbb">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a5c87659">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4388,19 +4336,19 @@ print("integer_to_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2a6d9b02">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=644a1fd7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-bits_to_unsigned">Testing <code>bits_to_unsigned</code><a class="anchor-link" href="#testing-bits_to_unsigned">¶</a></h3><p>Convert little-endian bits to an unsigned integer expression.</p>
+<h3 id="bits_to_unsigned">bits_to_unsigned()<a class="anchor-link" href="#bits_to_unsigned">¶</a></h3><p>Convert little-endian bits to an unsigned integer expression.</p>
 <p>This cell verifies the <code>bits_to_unsigned</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b4ecef5b">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cdc3434d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4471,18 +4419,18 @@ print("bits_to_unsigned tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2391a18f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=583587be">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="client-side-helper-unsigned_to_bits">Client-Side Helper: <code>unsigned_to_bits</code><a class="anchor-link" href="#client-side-helper-unsigned_to_bits">¶</a></h3><p>Demonstrates the <code>unsigned_to_bits</code> function. This is a client-side (cleartext) helper function. It is <strong>not</strong> an FHE circuit and cannot be compiled with <code>fhe.Compiler</code>.</p>
+<h3 id="unsigned_to_bits-helper">unsigned_to_bits() (Helper)<a class="anchor-link" href="#unsigned_to_bits-helper">¶</a></h3><p>Demonstrates the <code>unsigned_to_bits</code> function. This is a client-side (cleartext) helper function. It is <strong>not</strong> an FHE circuit and cannot be compiled with <code>fhe.Compiler</code>.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7bd6b8e2">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8cc0e571">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4522,18 +4470,18 @@ print('Conversion successful!')
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=52500a10">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5e5ef772">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="client-side-helper-twos_complement_bits">Client-Side Helper: <code>twos_complement_bits</code><a class="anchor-link" href="#client-side-helper-twos_complement_bits">¶</a></h3><p>Demonstrates the <code>twos_complement_bits</code> function. This is a client-side (cleartext) helper function. It is <strong>not</strong> an FHE circuit and cannot be compiled with <code>fhe.Compiler</code>.</p>
+<h3 id="twos_complement_bits-helper">twos_complement_bits() (Helper)<a class="anchor-link" href="#twos_complement_bits-helper">¶</a></h3><p>Demonstrates the <code>twos_complement_bits</code> function. This is a client-side (cleartext) helper function. It is <strong>not</strong> an FHE circuit and cannot be compiled with <code>fhe.Compiler</code>.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=33813a58">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ff0c9446">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4573,19 +4521,19 @@ print('Conversion successful!')
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a9755ef0">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=21a69c34">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-sign_magnitude_to_twos_complement_bits">Testing <code>sign_magnitude_to_twos_complement_bits</code><a class="anchor-link" href="#testing-sign_magnitude_to_twos_complement_bits">¶</a></h3><p>Convert sign-magnitude bits to two's-complement bits.</p>
+<h3 id="sign_magnitude_to_twos_complement_bits">sign_magnitude_to_twos_complement_bits()<a class="anchor-link" href="#sign_magnitude_to_twos_complement_bits">¶</a></h3><p>Convert sign-magnitude bits to two's-complement bits.</p>
 <p>This cell verifies the <code>sign_magnitude_to_twos_complement_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0928b3b4">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e4723c7e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4656,19 +4604,19 @@ print("sign_magnitude_to_twos_complement_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6dcb2246">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ba3b3d52">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-twos_complement_add_bits">Testing <code>twos_complement_add_bits</code><a class="anchor-link" href="#testing-twos_complement_add_bits">¶</a></h3><p>Add two two's-complement bit lists modulo 2**width.</p>
+<h3 id="twos_complement_add_bits">twos_complement_add_bits()<a class="anchor-link" href="#twos_complement_add_bits">¶</a></h3><p>Add two two's-complement bit lists modulo 2**width.</p>
 <p>This cell verifies the <code>twos_complement_add_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=eabffe9c">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7274f70a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4739,19 +4687,19 @@ print("twos_complement_add_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=576637be">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7df209cd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-twos_complement_multiply_by_constant_bits">Testing <code>twos_complement_multiply_by_constant_bits</code><a class="anchor-link" href="#testing-twos_complement_multiply_by_constant_bits">¶</a></h3><p>Multiply two's-complement bits by a nonnegative clear integer.</p>
+<h3 id="twos_complement_multiply_by_constant_bits">twos_complement_multiply_by_constant_bits()<a class="anchor-link" href="#twos_complement_multiply_by_constant_bits">¶</a></h3><p>Multiply two's-complement bits by a nonnegative clear integer.</p>
 <p>This cell verifies the <code>twos_complement_multiply_by_constant_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a409be04">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b84b8ab4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4822,19 +4770,19 @@ print("twos_complement_multiply_by_constant_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1343cd01">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=35bf2a48">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-multiply_bits">Testing <code>multiply_bits</code><a class="anchor-link" href="#testing-multiply_bits">¶</a></h3><p>Multiply two two's-complement bit lists.</p>
+<h3 id="multiply_bits">multiply_bits()<a class="anchor-link" href="#multiply_bits">¶</a></h3><p>Multiply two two's-complement bit lists.</p>
 <p>This cell verifies the <code>multiply_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=587d7e29">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=95c7da94">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4905,19 +4853,19 @@ print("multiply_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8f2f34f6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=14e3ea39">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-shift_left_bits">Testing <code>shift_left_bits</code><a class="anchor-link" href="#testing-shift_left_bits">¶</a></h3><p>Logical left shift by a public amount; output keeps the input width.</p>
+<h3 id="shift_left_bits">shift_left_bits()<a class="anchor-link" href="#shift_left_bits">¶</a></h3><p>Logical left shift by a public amount; output keeps the input width.</p>
 <p>This cell verifies the <code>shift_left_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ca46e7f8">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=da4f77d9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4988,19 +4936,19 @@ print("shift_left_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=391091af">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c23c6617">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-shift_right_bits">Testing <code>shift_right_bits</code><a class="anchor-link" href="#testing-shift_right_bits">¶</a></h3><p>Right shift by a public amount; arithmetic=True sign-extends from the MSB.</p>
+<h3 id="shift_right_bits">shift_right_bits()<a class="anchor-link" href="#shift_right_bits">¶</a></h3><p>Right shift by a public amount; arithmetic=True sign-extends from the MSB.</p>
 <p>This cell verifies the <code>shift_right_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9abc4e43">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a2c8b1e4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5071,19 +5019,19 @@ print("shift_right_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=69948bce">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c0dac173">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-rotate_left_bits">Testing <code>rotate_left_bits</code><a class="anchor-link" href="#testing-rotate_left_bits">¶</a></h3><p>Rotate toward the MSB by a public amount (little-endian bit lists).</p>
+<h3 id="rotate_left_bits">rotate_left_bits()<a class="anchor-link" href="#rotate_left_bits">¶</a></h3><p>Rotate toward the MSB by a public amount (little-endian bit lists).</p>
 <p>This cell verifies the <code>rotate_left_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=83ff9559">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3119da1c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5154,19 +5102,19 @@ print("rotate_left_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6b093dd8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4bb709e8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-rotate_right_bits">Testing <code>rotate_right_bits</code><a class="anchor-link" href="#testing-rotate_right_bits">¶</a></h3><p>Rotate toward the LSB by a public amount (little-endian bit lists).</p>
+<h3 id="rotate_right_bits">rotate_right_bits()<a class="anchor-link" href="#rotate_right_bits">¶</a></h3><p>Rotate toward the LSB by a public amount (little-endian bit lists).</p>
 <p>This cell verifies the <code>rotate_right_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=603cd6f5">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=565b6e03">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5237,19 +5185,19 @@ print("rotate_right_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2abfa0f5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c72f6c90">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-popcount_bits">Testing <code>popcount_bits</code><a class="anchor-link" href="#testing-popcount_bits">¶</a></h3><p>Return the number of set bits as an integer expression (tournament sum).</p>
+<h3 id="popcount_bits">popcount_bits()<a class="anchor-link" href="#popcount_bits">¶</a></h3><p>Return the number of set bits as an integer expression (tournament sum).</p>
 <p>This cell verifies the <code>popcount_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=165be900">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=73e4b74d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5320,19 +5268,19 @@ print("popcount_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=145d5f75">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c29e9fed">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-parity_bits">Testing <code>parity_bits</code><a class="anchor-link" href="#testing-parity_bits">¶</a></h3><p>Return the XOR-parity (1 when an odd number of bits are set).</p>
+<h3 id="parity_bits">parity_bits()<a class="anchor-link" href="#parity_bits">¶</a></h3><p>Return the XOR-parity (1 when an odd number of bits are set).</p>
 <p>This cell verifies the <code>parity_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c34db2e4">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=40c56bb9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5403,19 +5351,19 @@ print("parity_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=43900fb1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=df6a3076">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-bit_length_bits">Testing <code>bit_length_bits</code><a class="anchor-link" href="#testing-bit_length_bits">¶</a></h3><p>Return the bit length (index of the highest set bit plus one, 0 for zero).</p>
+<h3 id="bit_length_bits">bit_length_bits()<a class="anchor-link" href="#bit_length_bits">¶</a></h3><p>Return the bit length (index of the highest set bit plus one, 0 for zero).</p>
 <p>This cell verifies the <code>bit_length_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d7ca25cb">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=52da059f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5486,19 +5434,19 @@ print("bit_length_bits tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=244dc5bc">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5fbe9adb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="testing-unsigned_compare_bits">Testing <code>unsigned_compare_bits</code><a class="anchor-link" href="#testing-unsigned_compare_bits">¶</a></h3><p>Return (is_less, is_equal) bits for two little-endian unsigned bit lists.</p>
+<h3 id="unsigned_compare_bits">unsigned_compare_bits()<a class="anchor-link" href="#unsigned_compare_bits">¶</a></h3><p>Return (is_less, is_equal) bits for two little-endian unsigned bit lists.</p>
 <p>This cell verifies the <code>unsigned_compare_bits</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ed4a70d4">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=20b72f10">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

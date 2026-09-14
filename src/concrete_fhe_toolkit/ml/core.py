@@ -105,7 +105,11 @@ def mean_absolute_error(y_preds: List[Any], y_trues: List[Any]) -> Any:
     return distance // len(y_trues)
 
 def accuracy_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
-    """Calculate the percentage accuracy score between predictions and true labels.
+    """
+    [Client-Side Helper] This function is intended for cleartext evaluation only.
+    Do not compile it with FHE due to Table Lookup limits or list return types.
+
+    Calculate the percentage accuracy score between predictions and true labels.
     
     Returns an integer percentage [0, 100]. Useful for evaluating 
     classification models directly on encrypted data.
@@ -202,7 +206,11 @@ def false_positives(y_preds: List[Any], y_trues: List[Any]) -> int:
 
 
 def confusion_matrix(y_preds: List[Any], y_trues: List[Any]) -> List[List[Any]]:
-    """Generate a confusion matrix [[TN, FP], [FN, TP]] for binary classification.
+    """
+    [Client-Side Helper] This function is intended for cleartext evaluation only.
+    Do not compile it with FHE due to Table Lookup limits or list return types.
+
+    Generate a confusion matrix [[TN, FP], [FN, TP]] for binary classification.
     
     This is extremely useful for calculating various ML metrics (like precision, 
     recall, F1) securely over encrypted predictions.
@@ -337,7 +345,13 @@ def compile_cross_entropy_loss(
 
 
 def precision_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
-    """Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.
+    """
+    [Client-Side Helper] This function is intended for cleartext evaluation only.
+    Do not compile it with FHE due to Table Lookup limits or list return types.
+
+    Do not compile it with FHE due to Table Lookup limits or list return types.
+
+    Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.
 
     The encrypted-by-encrypted division uses a multivariate lookup whose
     cost grows with the count range, so keep sample counts small when this
@@ -358,7 +372,11 @@ def precision_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
 
 
 def recall_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
-    """Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels.
+    """
+    [Client-Side Helper] This function is intended for cleartext evaluation only.
+    Do not compile it with FHE due to Table Lookup limits or list return types.
+
+    Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels.
     
     Example:
         ```python
@@ -375,7 +393,11 @@ def recall_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
 
 
 def f1_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
-    """Integer percent F1: 2 * P * R // (P + R), 0 when both are 0.
+    """
+    [Client-Side Helper] This function is intended for cleartext evaluation only.
+    Do not compile it with FHE due to Table Lookup limits or list return types.
+
+    Integer percent F1: 2 * P * R // (P + R), 0 when both are 0.
     
     Calculates the harmonic mean of precision and recall. Since it relies on 
     encrypted division, keeping sample sizes small is recommended.
@@ -395,7 +417,11 @@ def f1_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
 
 
 def r2_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
-    """Integer percent R²: 100 - 100 * SS_res // SS_tot.
+    """
+    [Client-Side Helper] This function is intended for cleartext evaluation only.
+    Do not compile it with FHE due to Table Lookup limits or list return types.
+
+    Integer percent R²: 100 - 100 * SS_res // SS_tot.
 
     SS_tot uses the floor mean of ``y_trues``. When SS_tot is zero
     (constant targets) the result is 0. Like precision/recall, the

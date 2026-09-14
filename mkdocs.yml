@@ -82,6 +82,8 @@ nav:
       - Math (Special): tutorials/10_math_special.ipynb
       - Finance (Core): tutorials/11_finance_core.ipynb
       - Finance (Transactions): tutorials/12_finance_transactions.ipynb
+      - ML (Activations): tutorials/13_ml_activations.ipynb
+      - ML (Core): tutorials/17_ml_core.ipynb
   - API reference:
       - Overview: api/index.md
       - Core:

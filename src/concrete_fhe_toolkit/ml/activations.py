@@ -94,7 +94,8 @@ def make_softmax(
     output_scale: int = 100,
     probability_scale: int = 100,
 ) -> Callable[[List[Any]], List[Any]]:
-    """Create a scaled softmax function for a list of encrypted scores.
+    """
+    Create a scaled softmax function for a list of encrypted scores.
     
     This function uses an exponential approximation and floor division to calculate
     probabilities as integer percentages. The output is scaled by `probability_scale`.
@@ -255,7 +256,8 @@ def compile_softmax(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile an FHE circuit for the softmax function over an array of fixed size.
+    """
+    Compile an FHE circuit for the softmax function over an array of fixed size.
     
     Since FHE circuits require fixed dimensions, the `size` of the input array 
     must be specified at compile time.

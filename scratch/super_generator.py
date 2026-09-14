@@ -32,10 +32,18 @@ def generate_inputset(fn_name, param_names):
     random.seed(42)
     arity = len(param_names)
     
-    if fn_name in ('fsum', 'sumprod', 'dist', 'make_dist', 'make_dist_enc', 'compile_dist'):
-        if 'dist' in fn_name or 'sumprod' in fn_name:
-            return [([1, 2, 3], [3, 2, 1]), ([-1, 0, 1], [1, -1, 0]), ([0, 0, 0], [0, 0, 0])]
-        return [([-1, 2, -2],), ([0, 0, 0],), ([3, -2, 3],)]
+    if any(k in fn_name for k in ('fsum', 'sumprod', 'dist', 'distance', 'error', 'loss', 'score', 'accuracy', 'true_', 'false_', 'confusion', 'norm', 'binarize', 'clip', 'normalize', 'softmax', 'one_hot')):
+        if arity == 2:
+            if 'one_hot' in fn_name:
+                return [(2, 5), (0, 3)]
+            if 'binarize' in fn_name:
+                return [([0, 1, 2], 1), ([-1, 0, 1], 0)]
+            if 'normalize' in fn_name:
+                return [([0, 10, 20], 10), ([-5, 0, 5], 5)]
+            return [([0, 1, 1], [0, 0, 1]), ([1, 0, 1], [1, 0, 1]), ([0, 0, 0], [1, 1, 1])]
+        elif arity == 3:
+            return [([1, 2, 3], 1, 3), ([-1, 0, 1], -1, 1)] # For clip_array
+        return [([0, 1, 2],), ([-1, 0, 1],), ([0, 0, 0],)]
 
     if 'bits' in fn_name or 'bit_' in fn_name or fn_name in ('full_adder_bit', 'full_subtractor_bit', 'popcount_bits', 'parity_bits', 'unsigned_compare_bits', 'twos_complement_add_bits', 'twos_complement_multiply_by_constant_bits', 'multiply_bits'):
         if fn_name in ('integer_to_bits', 'unsigned_to_bits', 'twos_complement_bits', 'return_actual_value'):
@@ -134,7 +142,7 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
     
     all_funcs = []
     for name, obj in inspect.getmembers(mod, inspect.isfunction):
-        if not name.startswith('_') and getattr(obj, '__module__', '') == mod.__name__:
+        if not name.startswith('_') and getattr(obj, '__module__', '') == mod.__name__ : 
             all_funcs.append((name, obj))
             
     primary_funcs = {}
@@ -158,8 +166,12 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
         aliases = data['aliases']
         sig = inspect.signature(func)
         fn_name = primary_name
+        docstring = func.__doc__ or ''
         
-        if fn_name in ('make_encode_fixed_point', 'make_decode_fixed_point', 'unsigned_to_bits', 'twos_complement_bits', 'return_actual_value'):
+        if '[Client-Side Helper]' in docstring or fn_name in ('make_encode_fixed_point', 'make_decode_fixed_point', 'unsigned_to_bits', 'twos_complement_bits', 'return_actual_value'):
+            if fn_name.startswith('compile_'):
+                continue
+
             desc = f"Demonstrates the `{fn_name}` function. This is a client-side (cleartext) helper function. It is **not** an FHE circuit and cannot be compiled with `fhe.Compiler`."
             cells.append(create_cell("markdown", f"### {fn_name}() (Helper)\n\n{desc}"))
             
@@ -177,7 +189,7 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                     f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n\n"
                     "clear_int = -3\n"
                     "bits = twos_complement_bits(clear_int, width=4)\n"
-                    "print(f'Two\\'s complement integer {clear_int} to bits -> {bits}')\n"
+                    "print(f'Two\'s complement integer {clear_int} to bits -> {bits}')\n"
                     "assert bits == (1, 0, 1, 1)\n"
                     "print('Conversion successful!')\n"
                 )
@@ -190,7 +202,7 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                     "assert actual_float == 15.0\n"
                     "print('Decoding successful!')\n"
                 )
-            elif "encode" in fn_name:
+            elif "encode" in fn_name and "fixed_point" in fn_name:
                 test_code = (
                     f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n\n"
                     "encode_fn = make_encode_fixed_point(scale=10)\n"
@@ -200,7 +212,7 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                     "assert encoded_int == 25\n"
                     "print('Encoding successful! Ready for encryption.')\n"
                 )
-            else:
+            elif "decode" in fn_name and "fixed_point" in fn_name:
                 test_code = (
                     f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n\n"
                     "decode_fn = make_decode_fixed_point(scale=10)\n"
@@ -210,6 +222,28 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                     "assert decoded_float == 2.5\n"
                     "print('Decoding successful! Ready for client usage.')\n"
                 )
+            else:
+                test_code = f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n\n"
+                if fn_name.startswith('make_') or fn_name.startswith('compile_'):
+                    kwargs = get_kwargs(sig, fn_name)
+                    args_str = ", ".join(f"{k}={v!r}" for k, v in kwargs.items())
+                    test_code += f"fn = {fn_name}({args_str})\n\n"
+                    real_fn = getattr(mod, fn_name)(**kwargs)
+                    param_names = list(inspect.signature(real_fn).parameters.keys())
+                    test_inputs = generate_inputset(fn_name, param_names)
+                    test_code += f"inputset = {test_inputs}\n"
+                    test_code += "for inp in inputset:\n"
+                    test_code += "    expected = fn(*inp)\n"
+                    test_code += "    print(f'Helper output: {expected}')\n"
+                    test_code += f"print('{fn_name} helper executed successfully!')\n"
+                else:
+                    param_names = list(sig.parameters.keys())
+                    test_inputs = generate_inputset(fn_name, param_names)
+                    test_code += f"inputset = {test_inputs}\n"
+                    test_code += "for inp in inputset:\n"
+                    test_code += f"    expected = {fn_name}(*inp)\n"
+                    test_code += "    print(f'Helper output: {expected}')\n"
+                    test_code += f"print('{fn_name} helper executed successfully!')\n"
             cells.append(create_cell("code", test_code))
             continue
             
@@ -287,11 +321,11 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                 real_fn = getattr(mod, fn_name)(**kwargs)
                 param_names = list(inspect.signature(real_fn).parameters.keys())
                 
-                clear_params = {'rate'} if subpkg == 'finance' else {'start', 'step', 'size', 'k', 'angle_unit', 'rounding', 'scale', 'input_scale', 'output_scale', 'amount', 'multiplier', 'fractional_bits', 'zero_result', 'quotient_width', 'denominator_width', 'numerator_width', 'remainder_width', 'width', 'zero_quotient', 'zero_remainder', 'min_value', 'max_value', 'min_left', 'max_left', 'min_right', 'max_right', 'min_input', 'max_input', 'min_base', 'max_base', 'max_exponent', 'min_numerator', 'max_numerator', 'min_denominator', 'max_denominator', 'max_n', 'max_k', 'exponent', 'base', 'modulus', 'absolute_tolerance', 'arithmetic'}
+                clear_params = {'rate'} if subpkg == 'finance' else ({'alpha', 'divisor', 'num_classes'} if subpkg == 'ml' else {'start', 'step', 'size', 'k', 'angle_unit', 'rounding', 'scale', 'input_scale', 'output_scale', 'amount', 'multiplier', 'fractional_bits', 'zero_result', 'quotient_width', 'denominator_width', 'numerator_width', 'remainder_width', 'width', 'zero_quotient', 'zero_remainder', 'min_value', 'max_value', 'min_left', 'max_left', 'min_right', 'max_right', 'min_input', 'max_input', 'min_base', 'max_base', 'max_exponent', 'min_numerator', 'max_numerator', 'min_denominator', 'max_denominator', 'max_n', 'max_k', 'exponent', 'base', 'modulus', 'absolute_tolerance', 'arithmetic'})
                 def get_mode(k): return 'clear' if k in clear_params else 'encrypted'
                 enc_dict = "{" + ", ".join([f"'{k}': '{get_mode(k)}'" for k in param_names]) + "}"
                 params_str = ", ".join(param_names)
-                test_code += f"def test_{fn_name}_enc({params_str}):\n    return fn({params_str})\n\n"
+                test_code += f"def test_{fn_name}_enc({params_str}):\n    import numpy as np\n    res = fn({params_str})\n    return np.array(res) if isinstance(res, list) else res\n\n"
                 test_code += f"compiler = fhe.Compiler(test_{fn_name}_enc, {enc_dict})\n"
                 
                 test_inputs = generate_inputset(fn_name, param_names)
@@ -310,7 +344,7 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                         
             else:
                 param_names = list(sig.parameters.keys())
-                clear_params = {'rate'} if subpkg == 'finance' else {'start', 'step', 'size', 'k', 'angle_unit', 'rounding', 'scale', 'input_scale', 'output_scale', 'amount', 'multiplier', 'fractional_bits', 'zero_result', 'quotient_width', 'denominator_width', 'numerator_width', 'remainder_width', 'width', 'zero_quotient', 'zero_remainder', 'min_value', 'max_value', 'min_left', 'max_left', 'min_right', 'max_right', 'min_input', 'max_input', 'min_base', 'max_base', 'max_exponent', 'min_numerator', 'max_numerator', 'min_denominator', 'max_denominator', 'max_n', 'max_k', 'exponent', 'base', 'modulus', 'absolute_tolerance', 'arithmetic'}
+                clear_params = {'rate'} if subpkg == 'finance' else ({'alpha', 'divisor', 'num_classes'} if subpkg == 'ml' else {'start', 'step', 'size', 'k', 'angle_unit', 'rounding', 'scale', 'input_scale', 'output_scale', 'amount', 'multiplier', 'fractional_bits', 'zero_result', 'quotient_width', 'denominator_width', 'numerator_width', 'remainder_width', 'width', 'zero_quotient', 'zero_remainder', 'min_value', 'max_value', 'min_left', 'max_left', 'min_right', 'max_right', 'min_input', 'max_input', 'min_base', 'max_base', 'max_exponent', 'min_numerator', 'max_numerator', 'min_denominator', 'max_denominator', 'max_n', 'max_k', 'exponent', 'base', 'modulus', 'absolute_tolerance', 'arithmetic'})
                 encrypted_params = [p for p in param_names if p not in clear_params and 'width' not in p]
                 
                 clear_defaults = {
@@ -338,7 +372,7 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                 
                 params_str = ", ".join(encrypted_params)
                 call_args = ", ".join(bound_args)
-                test_code += f"def test_{fn_name}({params_str}):\n    return {fn_name}({call_args})\n\n"
+                test_code += f"def test_{fn_name}({params_str}):\n    import numpy as np\n    res = {fn_name}({call_args})\n    return np.array(res) if isinstance(res, list) else res\n\n"
                 
                 enc_dict = "{" + ", ".join([f"'{k}': 'encrypted'" for k in encrypted_params]) + "}"
                 test_code += f"compiler = fhe.Compiler(test_{fn_name}, {enc_dict})\n"
@@ -402,4 +436,26 @@ if __name__ == "__main__":
     for mod, fname in finance_modules:
         generate_notebook_for_module('finance', mod, f"docs/tutorials/{fname}")
         print(f"Generated {fname}")
+
+    ml_modules = [
+        ("activations", "13_ml_activations.ipynb"),
+        ("classes", "14_ml_classes.ipynb"),
+        ("classification", "15_ml_classification.ipynb"),
+        ("clustering", "16_ml_clustering.ipynb"),
+        ("core", "17_ml_core.ipynb"),
+        ("estimation", "18_ml_estimation.ipynb"),
+        ("matrix", "19_ml_matrix.ipynb"),
+        ("models", "20_ml_models.ipynb"),
+        ("pipeline", "21_ml_pipeline.ipynb"),
+        ("preprocessing", "22_ml_preprocessing.ipynb"),
+        ("regression", "23_ml_regression.ipynb"),
+        ("serialization", "24_ml_serialization.ipynb"),
+        ("sklearn_bridge", "25_ml_sklearn_bridge.ipynb"),
+        ("stats", "26_ml_stats.ipynb"),
+        ("trainers", "27_ml_trainers.ipynb"),
+        ("training", "28_ml_training.ipynb"),
+        ("utils", "29_ml_utils.ipynb")
+    ]
+    for mod, fname in ml_modules:
+        generate_notebook_for_module('ml', mod, f"docs/tutorials/{fname}")
         print(f"Generated {fname}")

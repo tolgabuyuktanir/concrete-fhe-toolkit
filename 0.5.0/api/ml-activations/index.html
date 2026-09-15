@@ -911,6 +911,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/13_ml_activations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Activations)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/17_ml_core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Core)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2781,7 +2837,8 @@ probabilities as integer percentages. The output is scaled by <code>probability_
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
-<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_softmax</span><span class="p">(</span>
+<span class="normal">132</span>
+<span class="normal">133</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_softmax</span><span class="p">(</span>
     <span class="n">min_input</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">127</span><span class="p">,</span> 
     <span class="n">max_input</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">127</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -2789,7 +2846,8 @@ probabilities as integer percentages. The output is scaled by <code>probability_
     <span class="n">output_scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
     <span class="n">probability_scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Create a scaled softmax function for a list of encrypted scores.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Create a scaled softmax function for a list of encrypted scores.</span>
 
 <span class="sd">    This function uses an exponential approximation and floor division to calculate</span>
 <span class="sd">    probabilities as integer percentages. The output is scaled by `probability_scale`.</span>
@@ -2859,8 +2917,7 @@ probabilities as integer percentages. The output is scaled by <code>probability_
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">134</span>
-<span class="normal">135</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">135</span>
 <span class="normal">136</span>
 <span class="normal">137</span>
 <span class="normal">138</span>
@@ -2883,7 +2940,8 @@ probabilities as integer percentages. The output is scaled by <code>probability_
 <span class="normal">155</span>
 <span class="normal">156</span>
 <span class="normal">157</span>
-<span class="normal">158</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_relu</span><span class="p">(</span>
+<span class="normal">158</span>
+<span class="normal">159</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_relu</span><span class="p">(</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -2943,8 +3001,7 @@ slope for negative inputs.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">161</span>
-<span class="normal">162</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">162</span>
 <span class="normal">163</span>
 <span class="normal">164</span>
 <span class="normal">165</span>
@@ -2973,7 +3030,8 @@ slope for negative inputs.</p>
 <span class="normal">188</span>
 <span class="normal">189</span>
 <span class="normal">190</span>
-<span class="normal">191</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_leaky_relu</span><span class="p">(</span>
+<span class="normal">191</span>
+<span class="normal">192</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_leaky_relu</span><span class="p">(</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -3039,8 +3097,7 @@ slope for negative inputs.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">194</span>
-<span class="normal">195</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">195</span>
 <span class="normal">196</span>
 <span class="normal">197</span>
 <span class="normal">198</span>
@@ -3064,7 +3121,8 @@ slope for negative inputs.</p>
 <span class="normal">216</span>
 <span class="normal">217</span>
 <span class="normal">218</span>
-<span class="normal">219</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_unit_step</span><span class="p">(</span>
+<span class="normal">219</span>
+<span class="normal">220</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_unit_step</span><span class="p">(</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -3123,8 +3181,7 @@ slope for negative inputs.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">222</span>
-<span class="normal">223</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">223</span>
 <span class="normal">224</span>
 <span class="normal">225</span>
 <span class="normal">226</span>
@@ -3150,7 +3207,8 @@ slope for negative inputs.</p>
 <span class="normal">246</span>
 <span class="normal">247</span>
 <span class="normal">248</span>
-<span class="normal">249</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_threshold_activation</span><span class="p">(</span>
+<span class="normal">249</span>
+<span class="normal">250</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_threshold_activation</span><span class="p">(</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -3216,8 +3274,7 @@ must be specified at compile time.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">251</span>
-<span class="normal">252</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">252</span>
 <span class="normal">253</span>
 <span class="normal">254</span>
 <span class="normal">255</span>
@@ -3250,14 +3307,17 @@ must be specified at compile time.</p>
 <span class="normal">282</span>
 <span class="normal">283</span>
 <span class="normal">284</span>
-<span class="normal">285</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_softmax</span><span class="p">(</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_softmax</span><span class="p">(</span>
     <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">127</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">127</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile an FHE circuit for the softmax function over an array of fixed size.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Compile an FHE circuit for the softmax function over an array of fixed size.</span>
 
 <span class="sd">    Since FHE circuits require fixed dimensions, the `size` of the input array </span>
 <span class="sd">    must be specified at compile time.</span>

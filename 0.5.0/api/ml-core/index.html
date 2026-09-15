@@ -911,6 +911,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/13_ml_activations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Activations)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/17_ml_core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Core)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2972,7 +3028,9 @@ and the actual value).</p>
 
     <div class="doc doc-contents ">
 
-        <p>Calculate the percentage accuracy score between predictions and true labels.</p>
+        <p>[Client-Side Helper] This function is intended for cleartext evaluation only.
+Do not compile it with FHE due to Table Lookup limits or list return types.</p>
+<p>Calculate the percentage accuracy score between predictions and true labels.</p>
 <p>Returns an integer percentage [0, 100]. Useful for evaluating 
 classification models directly on encrypted data.</p>
 
@@ -3009,8 +3067,16 @@ classification models directly on encrypted data.</p>
 <span class="normal">125</span>
 <span class="normal">126</span>
 <span class="normal">127</span>
-<span class="normal">128</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">accuracy_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the percentage accuracy score between predictions and true labels.</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">accuracy_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    [Client-Side Helper] This function is intended for cleartext evaluation only.</span>
+<span class="sd">    Do not compile it with FHE due to Table Lookup limits or list return types.</span>
+
+<span class="sd">    Calculate the percentage accuracy score between predictions and true labels.</span>
 
 <span class="sd">    Returns an integer percentage [0, 100]. Useful for evaluating </span>
 <span class="sd">    classification models directly on encrypted data.</span>
@@ -3066,11 +3132,7 @@ where both the prediction and the true label are 1.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">134</span>
 <span class="normal">135</span>
 <span class="normal">136</span>
 <span class="normal">137</span>
@@ -3087,7 +3149,11 @@ where both the prediction and the true label are 1.</p>
 <span class="normal">148</span>
 <span class="normal">149</span>
 <span class="normal">150</span>
-<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">true_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">true_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Calculate the number of True Positives in binary classification.</span>
 
 <span class="sd">    Assuming 1 is positive and 0 is negative, this counts instances </span>
@@ -3144,11 +3210,7 @@ where both the prediction and the true label are 0.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">157</span>
 <span class="normal">158</span>
 <span class="normal">159</span>
 <span class="normal">160</span>
@@ -3164,7 +3226,11 @@ where both the prediction and the true label are 0.</p>
 <span class="normal">170</span>
 <span class="normal">171</span>
 <span class="normal">172</span>
-<span class="normal">173</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">true_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">true_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Calculate the number of True Negatives in binary classification.</span>
 
 <span class="sd">    Assuming 1 is positive and 0 is negative, this counts instances </span>
@@ -3218,11 +3284,7 @@ where both the prediction and the true label are 0.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">179</span>
 <span class="normal">180</span>
 <span class="normal">181</span>
 <span class="normal">182</span>
@@ -3230,7 +3292,11 @@ where both the prediction and the true label are 0.</p>
 <span class="normal">184</span>
 <span class="normal">185</span>
 <span class="normal">186</span>
-<span class="normal">187</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">false_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">false_negatives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Calculate the number of False Negatives in binary classification.</span>
 
 <span class="sd">    Example:</span>
@@ -3276,11 +3342,7 @@ where both the prediction and the true label are 0.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">193</span>
 <span class="normal">194</span>
 <span class="normal">195</span>
 <span class="normal">196</span>
@@ -3288,7 +3350,11 @@ where both the prediction and the true label are 0.</p>
 <span class="normal">198</span>
 <span class="normal">199</span>
 <span class="normal">200</span>
-<span class="normal">201</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">false_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">false_positives</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Calculate the number of False Positives in binary classification.</span>
 
 <span class="sd">    Example:</span>
@@ -3320,7 +3386,9 @@ where both the prediction and the true label are 0.</p>
 
     <div class="doc doc-contents ">
 
-        <p>Generate a confusion matrix [[TN, FP], [FN, TP]] for binary classification.</p>
+        <p>[Client-Side Helper] This function is intended for cleartext evaluation only.
+Do not compile it with FHE due to Table Lookup limits or list return types.</p>
+<p>Generate a confusion matrix [[TN, FP], [FN, TP]] for binary classification.</p>
 <p>This is extremely useful for calculating various ML metrics (like precision, 
 recall, F1) securely over encrypted predictions.</p>
 
@@ -3338,11 +3406,7 @@ recall, F1) securely over encrypted predictions.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">208</span>
 <span class="normal">209</span>
 <span class="normal">210</span>
 <span class="normal">211</span>
@@ -3358,8 +3422,20 @@ recall, F1) securely over encrypted predictions.</p>
 <span class="normal">221</span>
 <span class="normal">222</span>
 <span class="normal">223</span>
-<span class="normal">224</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">confusion_matrix</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""Generate a confusion matrix [[TN, FP], [FN, TP]] for binary classification.</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">confusion_matrix</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    [Client-Side Helper] This function is intended for cleartext evaluation only.</span>
+<span class="sd">    Do not compile it with FHE due to Table Lookup limits or list return types.</span>
+
+<span class="sd">    Generate a confusion matrix [[TN, FP], [FN, TP]] for binary classification.</span>
 
 <span class="sd">    This is extremely useful for calculating various ML metrics (like precision, </span>
 <span class="sd">    recall, F1) securely over encrypted predictions.</span>
@@ -3414,21 +3490,21 @@ notably for Support Vector Machines (SVMs). The true label should be +1 or -1.</
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">235</span>
 <span class="normal">236</span>
 <span class="normal">237</span>
 <span class="normal">238</span>
 <span class="normal">239</span>
 <span class="normal">240</span>
-<span class="normal">241</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hinge_loss</span><span class="p">(</span><span class="n">y_pred</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hinge_loss</span><span class="p">(</span><span class="n">y_pred</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Calculate the encrypted Hinge Loss for a single prediction and true value.</span>
 
 <span class="sd">    Hinge loss is commonly used for "maximum-margin" classification, most </span>
@@ -3478,15 +3554,7 @@ can be evaluated completely obliviously.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">257</span>
 <span class="normal">258</span>
 <span class="normal">259</span>
 <span class="normal">260</span>
@@ -3508,7 +3576,15 @@ can be evaluated completely obliviously.</p>
 <span class="normal">276</span>
 <span class="normal">277</span>
 <span class="normal">278</span>
-<span class="normal">279</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_hinge_loss</span><span class="p">(</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_hinge_loss</span><span class="p">(</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -3575,15 +3651,7 @@ logarithm table (TLU). The probabilities should be scaled integers.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">289</span>
 <span class="normal">290</span>
 <span class="normal">291</span>
 <span class="normal">292</span>
@@ -3608,7 +3676,15 @@ logarithm table (TLU). The probabilities should be scaled integers.</p>
 <span class="normal">311</span>
 <span class="normal">312</span>
 <span class="normal">313</span>
-<span class="normal">314</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_cross_entropy_loss</span><span class="p">(</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_cross_entropy_loss</span><span class="p">(</span>
     <span class="n">min_input</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">127</span><span class="p">,</span>
     <span class="n">max_input</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -3661,7 +3737,10 @@ logarithm table (TLU). The probabilities should be scaled integers.</p>
 
     <div class="doc doc-contents ">
 
-        <p>Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.</p>
+        <p>[Client-Side Helper] This function is intended for cleartext evaluation only.
+Do not compile it with FHE due to Table Lookup limits or list return types.</p>
+<p>Do not compile it with FHE due to Table Lookup limits or list return types.</p>
+<p>Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.</p>
 <p>The encrypted-by-encrypted division uses a multivariate lookup whose
 cost grows with the count range, so keep sample counts small when this
 runs under encryption (it is cheap on decrypted predictions).</p>
@@ -3678,15 +3757,7 @@ runs under encryption (it is cheap on decrypted predictions).</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">339</span>
-<span class="normal">340</span>
-<span class="normal">341</span>
-<span class="normal">342</span>
-<span class="normal">343</span>
-<span class="normal">344</span>
-<span class="normal">345</span>
-<span class="normal">346</span>
-<span class="normal">347</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">347</span>
 <span class="normal">348</span>
 <span class="normal">349</span>
 <span class="normal">350</span>
@@ -3696,8 +3767,28 @@ runs under encryption (it is cheap on decrypted predictions).</p>
 <span class="normal">354</span>
 <span class="normal">355</span>
 <span class="normal">356</span>
-<span class="normal">357</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">precision_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">precision_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    [Client-Side Helper] This function is intended for cleartext evaluation only.</span>
+<span class="sd">    Do not compile it with FHE due to Table Lookup limits or list return types.</span>
+
+<span class="sd">    Do not compile it with FHE due to Table Lookup limits or list return types.</span>
+
+<span class="sd">    Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.</span>
 
 <span class="sd">    The encrypted-by-encrypted division uses a multivariate lookup whose</span>
 <span class="sd">    cost grows with the count range, so keep sample counts small when this</span>
@@ -3734,7 +3825,9 @@ runs under encryption (it is cheap on decrypted predictions).</p>
 
     <div class="doc doc-contents ">
 
-        <p>Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels.</p>
+        <p>[Client-Side Helper] This function is intended for cleartext evaluation only.
+Do not compile it with FHE due to Table Lookup limits or list return types.</p>
+<p>Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels.</p>
 
 
 <details class="example" open>
@@ -3748,22 +3841,30 @@ runs under encryption (it is cheap on decrypted predictions).</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">360</span>
-<span class="normal">361</span>
-<span class="normal">362</span>
-<span class="normal">363</span>
-<span class="normal">364</span>
-<span class="normal">365</span>
-<span class="normal">366</span>
-<span class="normal">367</span>
-<span class="normal">368</span>
-<span class="normal">369</span>
-<span class="normal">370</span>
-<span class="normal">371</span>
-<span class="normal">372</span>
-<span class="normal">373</span>
-<span class="normal">374</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">recall_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels.</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">recall_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    [Client-Side Helper] This function is intended for cleartext evaluation only.</span>
+<span class="sd">    Do not compile it with FHE due to Table Lookup limits or list return types.</span>
+
+<span class="sd">    Integer percent recall: TP * 100 // (TP + FN), 0 with no positive labels.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3796,7 +3897,9 @@ runs under encryption (it is cheap on decrypted predictions).</p>
 
     <div class="doc doc-contents ">
 
-        <p>Integer percent F1: 2 * P * R // (P + R), 0 when both are 0.</p>
+        <p>[Client-Side Helper] This function is intended for cleartext evaluation only.
+Do not compile it with FHE due to Table Lookup limits or list return types.</p>
+<p>Integer percent F1: 2 * P * R // (P + R), 0 when both are 0.</p>
 <p>Calculates the harmonic mean of precision and recall. Since it relies on 
 encrypted division, keeping sample sizes small is recommended.</p>
 
@@ -3812,25 +3915,33 @@ encrypted division, keeping sample sizes small is recommended.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">377</span>
-<span class="normal">378</span>
-<span class="normal">379</span>
-<span class="normal">380</span>
-<span class="normal">381</span>
-<span class="normal">382</span>
-<span class="normal">383</span>
-<span class="normal">384</span>
-<span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span>
-<span class="normal">392</span>
-<span class="normal">393</span>
-<span class="normal">394</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">f1_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Integer percent F1: 2 * P * R // (P + R), 0 when both are 0.</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">f1_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    [Client-Side Helper] This function is intended for cleartext evaluation only.</span>
+<span class="sd">    Do not compile it with FHE due to Table Lookup limits or list return types.</span>
+
+<span class="sd">    Integer percent F1: 2 * P * R // (P + R), 0 when both are 0.</span>
 
 <span class="sd">    Calculates the harmonic mean of precision and recall. Since it relies on </span>
 <span class="sd">    encrypted division, keeping sample sizes small is recommended.</span>
@@ -3866,7 +3977,9 @@ encrypted division, keeping sample sizes small is recommended.</p>
 
     <div class="doc doc-contents ">
 
-        <p>Integer percent R²: 100 - 100 * SS_res // SS_tot.</p>
+        <p>[Client-Side Helper] This function is intended for cleartext evaluation only.
+Do not compile it with FHE due to Table Lookup limits or list return types.</p>
+<p>Integer percent R²: 100 - 100 * SS_res // SS_tot.</p>
 <p>SS_tot uses the floor mean of <code>y_trues</code>. When SS_tot is zero
 (constant targets) the result is 0. Like precision/recall, the
 encrypted-by-encrypted division uses a multivariate lookup — cheap on
@@ -3875,22 +3988,30 @@ decrypted values, expensive under encryption for large ranges.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/concrete_fhe_toolkit/ml/core.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">397</span>
-<span class="normal">398</span>
-<span class="normal">399</span>
-<span class="normal">400</span>
-<span class="normal">401</span>
-<span class="normal">402</span>
-<span class="normal">403</span>
-<span class="normal">404</span>
-<span class="normal">405</span>
-<span class="normal">406</span>
-<span class="normal">407</span>
-<span class="normal">408</span>
-<span class="normal">409</span>
-<span class="normal">410</span>
-<span class="normal">411</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">r2_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Integer percent R²: 100 - 100 * SS_res // SS_tot.</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">r2_score</span><span class="p">(</span><span class="n">y_preds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">y_trues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    [Client-Side Helper] This function is intended for cleartext evaluation only.</span>
+<span class="sd">    Do not compile it with FHE due to Table Lookup limits or list return types.</span>
+
+<span class="sd">    Integer percent R²: 100 - 100 * SS_res // SS_tot.</span>
 
 <span class="sd">    SS_tot uses the floor mean of ``y_trues``. When SS_tot is zero</span>
 <span class="sd">    (constant targets) the result is 0. Like precision/recall, the</span>

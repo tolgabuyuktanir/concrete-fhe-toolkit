@@ -1597,6 +1597,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_ml_activations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Activations)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_ml_core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Core)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4120,7 +4176,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=db5cdbca">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3748e897">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4132,7 +4188,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e5c7d4ba">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3a7ba287">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4157,7 +4213,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_sin</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">angle_unit</span><span class="o">=</span><span class="s1">'degrees'</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_sin_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_sin_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -4184,7 +4242,9 @@ import math
 fn = make_sin(min_input=-2, max_input=3, input_scale=10, output_scale=10, angle_unit='degrees')
 
 def test_make_sin_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_sin_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -4209,7 +4269,7 @@ print("make_sin tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fce02375">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=67c4c682">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4221,7 +4281,7 @@ print("make_sin tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8b2390d3">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=21b0646a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4288,7 +4348,7 @@ print("compile_sin tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c64be171">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fec28264">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4300,7 +4360,7 @@ print("compile_sin tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5c6dc936">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c15bbbcf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4325,7 +4385,9 @@ print("compile_sin tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_cos</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">angle_unit</span><span class="o">=</span><span class="s1">'degrees'</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_cos_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_cos_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -4352,7 +4414,9 @@ import math
 fn = make_cos(min_input=-2, max_input=3, input_scale=10, output_scale=10, angle_unit='degrees')
 
 def test_make_cos_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_cos_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -4377,7 +4441,7 @@ print("make_cos tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7e6a78a9">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e0e6f210">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4389,7 +4453,7 @@ print("make_cos tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4091487f">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f84b937d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4456,7 +4520,7 @@ print("compile_cos tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3ee05b32">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=45f1095a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4468,7 +4532,7 @@ print("compile_cos tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bdd00275">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9394b263">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4493,7 +4557,9 @@ print("compile_cos tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_tan</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">angle_unit</span><span class="o">=</span><span class="s1">'degrees'</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_tan_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_tan_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -4520,7 +4586,9 @@ import math
 fn = make_tan(min_input=-2, max_input=3, input_scale=10, output_scale=10, angle_unit='degrees')
 
 def test_make_tan_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_tan_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -4545,7 +4613,7 @@ print("make_tan tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2efe73c5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=276d9de3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4557,7 +4625,7 @@ print("make_tan tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=221e2637">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2705c263">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4624,7 +4692,7 @@ print("compile_tan tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ecc90358">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cdcd5578">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4636,7 +4704,7 @@ print("compile_tan tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e564d5f9">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2aceccd8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4661,7 +4729,9 @@ print("compile_tan tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_exp</span><span class="p">(</span><span class="n">min_input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_exp_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_exp_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)]</span>
@@ -4688,7 +4758,9 @@ import math
 fn = make_exp(min_input=0, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_exp_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_exp_enc, {'value': 'encrypted'})
 inputset = [(1,), (2,), (3,)]
@@ -4713,7 +4785,7 @@ print("make_exp tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d1af64cd">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4e43a153">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4725,7 +4797,7 @@ print("make_exp tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=85d9df51">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cc0e8c01">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4792,7 +4864,7 @@ print("compile_exp tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b39606df">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=548d43fb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4804,7 +4876,7 @@ print("compile_exp tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7f4d1ec9">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=57579b88">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4829,7 +4901,9 @@ print("compile_exp tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_expm1</span><span class="p">(</span><span class="n">min_input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_expm1_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_expm1_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)]</span>
@@ -4856,7 +4930,9 @@ import math
 fn = make_expm1(min_input=0, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_expm1_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_expm1_enc, {'value': 'encrypted'})
 inputset = [(1,), (2,), (3,)]
@@ -4881,7 +4957,7 @@ print("make_expm1 tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=048814b1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=28783aee">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4893,7 +4969,7 @@ print("make_expm1 tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5dfabf17">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7c5fcc2c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4960,7 +5036,7 @@ print("compile_expm1 tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f75982b5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=77bb45ac">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4972,7 +5048,7 @@ print("compile_expm1 tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9b14deb3">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8177aadd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4997,7 +5073,9 @@ print("compile_expm1 tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_log</span><span class="p">(</span><span class="n">min_input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_log_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_log_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)]</span>
@@ -5024,7 +5102,9 @@ import math
 fn = make_log(min_input=0, max_input=3, input_scale=10, output_scale=10, invalid_result=7, base=2)
 
 def test_make_log_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_log_enc, {'value': 'encrypted'})
 inputset = [(1,), (2,), (3,)]
@@ -5049,7 +5129,7 @@ print("make_log tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=55e9a1e5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1cc9ec2c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5061,7 +5141,7 @@ print("make_log tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=560b9d4a">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=395921b0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5128,7 +5208,7 @@ print("compile_log tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cb99b01e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=657d87b6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5140,7 +5220,7 @@ print("compile_log tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dfd58551">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5f9da2ee">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5165,7 +5245,9 @@ print("compile_log tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_log2</span><span class="p">(</span><span class="n">min_input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_log2_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_log2_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)]</span>
@@ -5192,7 +5274,9 @@ import math
 fn = make_log2(min_input=0, max_input=3, input_scale=10, output_scale=10, invalid_result=7)
 
 def test_make_log2_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_log2_enc, {'value': 'encrypted'})
 inputset = [(1,), (2,), (3,)]
@@ -5217,7 +5301,7 @@ print("make_log2 tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f8950bd8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3e734814">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5229,7 +5313,7 @@ print("make_log2 tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=00398a93">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=236b3fe0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5296,7 +5380,7 @@ print("compile_log2 tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a17b98c5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6e1b363a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5308,7 +5392,7 @@ print("compile_log2 tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ea627b5b">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=63b4c4ef">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5333,7 +5417,9 @@ print("compile_log2 tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_log10</span><span class="p">(</span><span class="n">min_input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_log10_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_log10_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)]</span>
@@ -5360,7 +5446,9 @@ import math
 fn = make_log10(min_input=0, max_input=3, input_scale=10, output_scale=10, invalid_result=7)
 
 def test_make_log10_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_log10_enc, {'value': 'encrypted'})
 inputset = [(1,), (2,), (3,)]
@@ -5385,7 +5473,7 @@ print("make_log10 tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7590866a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d719dd20">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5397,7 +5485,7 @@ print("make_log10 tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=61ae1e99">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1a7a3623">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5464,7 +5552,7 @@ print("compile_log10 tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f9d77f05">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=618e1d1a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5476,7 +5564,7 @@ print("compile_log10 tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4606e020">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=af2bca15">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5501,7 +5589,9 @@ print("compile_log10 tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_log1p</span><span class="p">(</span><span class="n">min_input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_log1p_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_log1p_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)]</span>
@@ -5528,7 +5618,9 @@ import math
 fn = make_log1p(min_input=0, max_input=3, input_scale=10, output_scale=10, invalid_result=7)
 
 def test_make_log1p_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_log1p_enc, {'value': 'encrypted'})
 inputset = [(1,), (2,), (3,)]
@@ -5553,7 +5645,7 @@ print("make_log1p tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=18792fec">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6f7eed22">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5565,7 +5657,7 @@ print("make_log1p tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=68a422ec">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a661008d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5632,7 +5724,7 @@ print("compile_log1p tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f74d0d1f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7413d97b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5644,7 +5736,7 @@ print("compile_log1p tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=22a9b712">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6da0b870">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5669,7 +5761,9 @@ print("compile_log1p tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_sqrt</span><span class="p">(</span><span class="n">min_input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_sqrt_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_sqrt_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)]</span>
@@ -5696,7 +5790,9 @@ import math
 fn = make_sqrt(min_input=0, max_input=3, input_scale=10, output_scale=10, invalid_result=7)
 
 def test_make_sqrt_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_sqrt_enc, {'value': 'encrypted'})
 inputset = [(0,), (1,), (2,), (3,)]
@@ -5721,7 +5817,7 @@ print("make_sqrt tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d8ff531d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c16784f8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5733,7 +5829,7 @@ print("make_sqrt tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=eeed45fb">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=370fda2f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5800,7 +5896,7 @@ print("compile_sqrt tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dccafc87">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2043776a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5812,7 +5908,7 @@ print("compile_sqrt tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1af4c852">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f91bf3cb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5837,7 +5933,9 @@ print("compile_sqrt tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_erf</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_erf_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_erf_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -5864,7 +5962,9 @@ import math
 fn = make_erf(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_erf_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_erf_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -5889,7 +5989,7 @@ print("make_erf tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0cf495e9">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3ac52a3e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5901,7 +6001,7 @@ print("make_erf tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c550a8f9">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=606fb95b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5968,7 +6068,7 @@ print("compile_erf tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8c933e62">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af1599f2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5980,7 +6080,7 @@ print("compile_erf tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=89d8e5ff">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6aba0ca9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6005,7 +6105,9 @@ print("compile_erf tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_erfc</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_erfc_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_erfc_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -6032,7 +6134,9 @@ import math
 fn = make_erfc(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_erfc_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_erfc_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -6057,7 +6161,7 @@ print("make_erfc tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a958b8df">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e8b220a8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6069,7 +6173,7 @@ print("make_erfc tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f0182321">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=18900658">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6136,7 +6240,7 @@ print("compile_erfc tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c0d1b96f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=acbed7b4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6148,7 +6252,7 @@ print("compile_erfc tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c495ce49">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=58b735bb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6173,7 +6277,9 @@ print("compile_erfc tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_tanh</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_tanh_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_tanh_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -6200,7 +6306,9 @@ import math
 fn = make_tanh(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_tanh_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_tanh_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -6225,7 +6333,7 @@ print("make_tanh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=758cf788">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4c95138e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6237,7 +6345,7 @@ print("make_tanh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=eff7b111">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7b56ee7c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6304,7 +6412,7 @@ print("compile_tanh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1bb27d33">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6ce842ef">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6316,7 +6424,7 @@ print("compile_tanh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1bfab42a">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4d7ef6d4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6341,7 +6449,9 @@ print("compile_tanh tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_sinh</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_sinh_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_sinh_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -6368,7 +6478,9 @@ import math
 fn = make_sinh(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_sinh_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_sinh_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -6393,7 +6505,7 @@ print("make_sinh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=aeae0636">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3e1f98ef">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6405,7 +6517,7 @@ print("make_sinh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=be78b6b8">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d8e6a55b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6472,7 +6584,7 @@ print("compile_sinh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=932770b3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=003bbe0a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6484,7 +6596,7 @@ print("compile_sinh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=345a8165">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=504d6a50">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6509,7 +6621,9 @@ print("compile_sinh tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_cosh</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_cosh_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_cosh_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -6536,7 +6650,9 @@ import math
 fn = make_cosh(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_cosh_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_cosh_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -6561,7 +6677,7 @@ print("make_cosh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f7a9fc1f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ead9c35c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6573,7 +6689,7 @@ print("make_cosh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=727c37b9">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2577adc8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6640,7 +6756,7 @@ print("compile_cosh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2f7c0dce">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=67d321c4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6652,7 +6768,7 @@ print("compile_cosh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6777d3b3">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fb1110a8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6677,7 +6793,9 @@ print("compile_cosh tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_sigmoid</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_sigmoid_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_sigmoid_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -6704,7 +6822,9 @@ import math
 fn = make_sigmoid(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_sigmoid_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_sigmoid_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -6729,7 +6849,7 @@ print("make_sigmoid tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d1dbda18">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d6c4f70b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6741,7 +6861,7 @@ print("make_sigmoid tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=858e6f05">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d714a54d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6808,7 +6928,7 @@ print("compile_sigmoid tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0c24e7b7">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b696cd2c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6820,7 +6940,7 @@ print("compile_sigmoid tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4d53a045">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b1162f7e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6845,7 +6965,9 @@ print("compile_sigmoid tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_asin</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_asin_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_asin_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -6872,7 +6994,9 @@ import math
 fn = make_asin(min_input=-2, max_input=3, input_scale=10, output_scale=10, invalid_result=7)
 
 def test_make_asin_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_asin_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -6897,7 +7021,7 @@ print("make_asin tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7fc6f06d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9ba0cce9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6909,7 +7033,7 @@ print("make_asin tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=852345be">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d639ef8e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6976,7 +7100,7 @@ print("compile_asin tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=19e9b5af">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c026cf55">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6988,7 +7112,7 @@ print("compile_asin tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2f2558b9">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3ac3aecc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7013,7 +7137,9 @@ print("compile_asin tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_acos</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_acos_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_acos_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -7040,7 +7166,9 @@ import math
 fn = make_acos(min_input=-2, max_input=3, input_scale=10, output_scale=10, invalid_result=7)
 
 def test_make_acos_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_acos_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -7065,7 +7193,7 @@ print("make_acos tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2f4291e5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=aac5824c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7077,7 +7205,7 @@ print("make_acos tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d4c3e071">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3aaaa3d9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7144,7 +7272,7 @@ print("compile_acos tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3a4d3897">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=92d2ff86">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7156,7 +7284,7 @@ print("compile_acos tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e23de8f1">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=36f5ecf5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7181,7 +7309,9 @@ print("compile_acos tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_atan</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_atan_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_atan_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -7208,7 +7338,9 @@ import math
 fn = make_atan(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_atan_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_atan_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -7233,7 +7365,7 @@ print("make_atan tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a49f3151">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c3cfeae6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7245,7 +7377,7 @@ print("make_atan tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=58cbd399">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f22c5911">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7312,7 +7444,7 @@ print("compile_atan tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5712ca1d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6145e2dd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7324,7 +7456,7 @@ print("compile_atan tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cd392571">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f0959eb8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7349,7 +7481,9 @@ print("compile_atan tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_cbrt</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_cbrt_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_cbrt_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -7376,7 +7510,9 @@ import math
 fn = make_cbrt(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_cbrt_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_cbrt_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -7401,7 +7537,7 @@ print("make_cbrt tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=72e2bac8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=08a7b7e9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7413,7 +7549,7 @@ print("make_cbrt tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=21bf1dd3">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=18719fb2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7480,7 +7616,7 @@ print("compile_cbrt tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d86eed08">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bab4d40a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7492,7 +7628,7 @@ print("compile_cbrt tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1c35c850">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8ff2a622">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7517,7 +7653,9 @@ print("compile_cbrt tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_degrees</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_degrees_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_degrees_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -7544,7 +7682,9 @@ import math
 fn = make_degrees(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_degrees_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_degrees_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -7569,7 +7709,7 @@ print("make_degrees tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8860b0a5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=88866831">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7581,7 +7721,7 @@ print("make_degrees tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=741aab4b">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=86d29041">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7648,7 +7788,7 @@ print("compile_degrees tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8a863851">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ea7f5843">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7660,7 +7800,7 @@ print("compile_degrees tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bab90380">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c6df9af6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7685,7 +7825,9 @@ print("compile_degrees tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_radians</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_radians_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_radians_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -7712,7 +7854,9 @@ import math
 fn = make_radians(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_radians_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_radians_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -7737,7 +7881,7 @@ print("make_radians tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1aa6f9b3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ff6092f6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7749,7 +7893,7 @@ print("make_radians tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=368194de">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=159a0ff1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7816,7 +7960,7 @@ print("compile_radians tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4b6c9627">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f3d8e213">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7828,7 +7972,7 @@ print("compile_radians tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d931908c">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d821b1f3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7853,7 +7997,9 @@ print("compile_radians tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_gamma</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_gamma_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_gamma_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -7880,7 +8026,9 @@ import math
 fn = make_gamma(min_input=-2, max_input=3, input_scale=10, output_scale=10, invalid_result=7)
 
 def test_make_gamma_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_gamma_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -7905,7 +8053,7 @@ print("make_gamma tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=43374265">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=73c14efc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7917,7 +8065,7 @@ print("make_gamma tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=29129cab">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e56e61a4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7984,7 +8132,7 @@ print("compile_gamma tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6c7129a0">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cb3915ea">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7996,7 +8144,7 @@ print("compile_gamma tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f0c2c24a">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d5358e9e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8021,7 +8169,9 @@ print("compile_gamma tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_lgamma</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_lgamma_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_lgamma_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -8048,7 +8198,9 @@ import math
 fn = make_lgamma(min_input=-2, max_input=3, input_scale=10, output_scale=10, invalid_result=7)
 
 def test_make_lgamma_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_lgamma_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -8073,7 +8225,7 @@ print("make_lgamma tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=acc2d525">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3e4b630e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8085,7 +8237,7 @@ print("make_lgamma tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=41642e3f">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9fa31d19">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8152,7 +8304,7 @@ print("compile_lgamma tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c3bf8761">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2554f424">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8164,7 +8316,7 @@ print("compile_lgamma tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=41202946">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2d20fdce">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8189,7 +8341,9 @@ print("compile_lgamma tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_atan2</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_atan2_enc</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_atan2_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'left'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
@@ -8216,7 +8370,9 @@ import math
 fn = make_atan2(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_atan2_enc(left, right):
-    return fn(left, right)
+    import numpy as np
+    res = fn(left, right)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_atan2_enc, {'left': 'encrypted', 'right': 'encrypted'})
 inputset = [(3, 3), (0, 3), (3, 0), (2, 2)]
@@ -8241,7 +8397,7 @@ print("make_atan2 tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b783966f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c91d1f24">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8253,7 +8409,7 @@ print("make_atan2 tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=783f4c68">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5b4dc87a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8320,7 +8476,7 @@ print("compile_atan2 tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=34132b79">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4ef99374">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8332,7 +8488,7 @@ print("compile_atan2 tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=10da49fd">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6afcd212">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8357,7 +8513,9 @@ print("compile_atan2 tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_asinh</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_asinh_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_asinh_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -8384,7 +8542,9 @@ import math
 fn = make_asinh(min_input=-2, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_asinh_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_asinh_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -8409,7 +8569,7 @@ print("make_asinh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=65b4e270">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=621defd2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8421,7 +8581,7 @@ print("make_asinh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=43282a1b">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4ac7d052">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8488,7 +8648,7 @@ print("compile_asinh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=183b70d8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ccdee152">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8500,7 +8660,7 @@ print("compile_asinh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f97b0838">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cd6a5778">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8525,7 +8685,9 @@ print("compile_asinh tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_acosh</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_acosh_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_acosh_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -8552,7 +8714,9 @@ import math
 fn = make_acosh(min_input=-2, max_input=3, input_scale=10, output_scale=10, invalid_result=7)
 
 def test_make_acosh_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_acosh_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -8577,7 +8741,7 @@ print("make_acosh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bddd098c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d929e4ed">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8589,7 +8753,7 @@ print("make_acosh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=65ce68c8">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f33ce819">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8656,7 +8820,7 @@ print("compile_acosh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=827fc5f6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e119c3c6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8668,7 +8832,7 @@ print("compile_acosh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=366c673d">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=76c244f8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8693,7 +8857,9 @@ print("compile_acosh tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_atanh</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_atanh_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_atanh_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -8720,7 +8886,9 @@ import math
 fn = make_atanh(min_input=-2, max_input=3, input_scale=10, output_scale=10, invalid_result=7)
 
 def test_make_atanh_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_atanh_enc, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -8745,7 +8913,7 @@ print("make_atanh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6d4b69eb">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7ec8b592">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8757,7 +8925,7 @@ print("make_atanh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e7df29d7">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dc6b271c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8824,7 +8992,7 @@ print("compile_atanh tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=293c9ee3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f9063471">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8836,7 +9004,7 @@ print("compile_atanh tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a730bdb8">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0abf02e1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8861,7 +9029,9 @@ print("compile_atanh tests passed!")</div>
 <span class="n">fn</span> <span class="o">=</span> <span class="n">make_exp2</span><span class="p">(</span><span class="n">min_input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_make_exp2_enc</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_make_exp2_enc</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)]</span>
@@ -8888,7 +9058,9 @@ import math
 fn = make_exp2(min_input=0, max_input=3, input_scale=10, output_scale=10)
 
 def test_make_exp2_enc(value):
-    return fn(value)
+    import numpy as np
+    res = fn(value)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_make_exp2_enc, {'value': 'encrypted'})
 inputset = [(1,), (2,), (3,)]
@@ -8913,7 +9085,7 @@ print("make_exp2 tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a37e1b01">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f22064b7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8925,7 +9097,7 @@ print("make_exp2 tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=42f32135">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e008bc27">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

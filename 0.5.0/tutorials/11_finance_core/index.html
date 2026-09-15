@@ -1014,6 +1014,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_ml_activations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Activations)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_ml_core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Core)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2954,7 +3010,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c362514d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=92be0154">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -2966,7 +3022,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e9ab419d">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=48016216">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -2988,7 +3044,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.finance.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_rate</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_apply_rate</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">apply_rate</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">apply_rate</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_apply_rate</span><span class="p">,</span> <span class="p">{</span><span class="s1">'amount'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -3012,7 +3070,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 from concrete_fhe_toolkit.finance.core import apply_rate
 
 def test_apply_rate(amount):
-    return apply_rate(amount, 0.05)
+    import numpy as np
+    res = apply_rate(amount, 0.05)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_apply_rate, {'amount': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -3037,7 +3097,7 @@ print("apply_rate tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d419870b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fc63a1f9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3048,7 +3108,7 @@ print("apply_rate tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fa2e99c2">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=40af3a97">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3088,7 +3148,7 @@ print('Decoding successful!')
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af0ec1ac">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=672d9bc6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3100,7 +3160,7 @@ print('Decoding successful!')
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0561dfe9">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=841a28b6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3122,7 +3182,9 @@ print('Decoding successful!')
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.finance.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate_tax</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_calculate_tax</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">calculate_tax</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">calculate_tax</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_calculate_tax</span><span class="p">,</span> <span class="p">{</span><span class="s1">'amount'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -3146,7 +3208,9 @@ print('Decoding successful!')
 from concrete_fhe_toolkit.finance.core import calculate_tax
 
 def test_calculate_tax(amount):
-    return calculate_tax(amount, 0.05)
+    import numpy as np
+    res = calculate_tax(amount, 0.05)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_calculate_tax, {'amount': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -3171,7 +3235,7 @@ print("calculate_tax tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e4b56f7e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c423da3c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3183,7 +3247,7 @@ print("calculate_tax tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d8678474">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f3706ec6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3205,7 +3269,9 @@ print("calculate_tax tests passed!")</div>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.finance.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">discount</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_discount</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">discount</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">discount</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_discount</span><span class="p">,</span> <span class="p">{</span><span class="s1">'amount'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -3229,7 +3295,9 @@ print("calculate_tax tests passed!")</div>
 from concrete_fhe_toolkit.finance.core import discount
 
 def test_discount(amount):
-    return discount(amount, 0.05)
+    import numpy as np
+    res = discount(amount, 0.05)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_discount, {'amount': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -3254,7 +3322,7 @@ print("discount tests passed!")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=42257bec">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e39c3fc9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3266,7 +3334,7 @@ print("discount tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c62cd373">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ba7bcef7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3288,7 +3356,9 @@ print("discount tests passed!")</div>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.finance.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">simple_interest</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_simple_interest</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">time_period</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">simple_interest</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">time_period</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">simple_interest</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">time_period</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_simple_interest</span><span class="p">,</span> <span class="p">{</span><span class="s1">'amount'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'time_period'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
@@ -3312,7 +3382,9 @@ print("discount tests passed!")</div>
 from concrete_fhe_toolkit.finance.core import simple_interest
 
 def test_simple_interest(amount, time_period):
-    return simple_interest(amount, 0.05, time_period)
+    import numpy as np
+    res = simple_interest(amount, 0.05, time_period)
+    return np.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_simple_interest, {'amount': 'encrypted', 'time_period': 'encrypted'})
 inputset = [(3, 1), (-2, -2), (0, 0), (2, 2), (1, 3)]

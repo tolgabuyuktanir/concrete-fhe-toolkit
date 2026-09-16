@@ -1,4 +1,3 @@
-import numpy as np
 """Activation helpers for encrypted ML circuits."""
 
 from typing import Any, Optional, List, Callable

@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from .._utils import client_side_helper
-
 from typing import Any, List
 
 from .classes import FHEModel

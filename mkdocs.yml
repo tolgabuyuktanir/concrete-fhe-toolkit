@@ -83,7 +83,20 @@ nav:
       - Finance (Core): tutorials/11_finance_core.ipynb
       - Finance (Transactions): tutorials/12_finance_transactions.ipynb
       - ML (Activations): tutorials/13_ml_activations.ipynb
+      - ML (Classes): tutorials/14_ml_classes.ipynb
+      - ML (Clustering): tutorials/16_ml_clustering.ipynb
       - ML (Core): tutorials/17_ml_core.ipynb
+      - ML (Estimation): tutorials/18_ml_estimation.ipynb
+      - ML (Matrix): tutorials/19_ml_matrix.ipynb
+      - ML (Models): tutorials/20_ml_models.ipynb
+      - ML (Pipeline): tutorials/21_ml_pipeline.ipynb
+      - ML (Preprocessing): tutorials/22_ml_preprocessing.ipynb
+      - ML (Regression): tutorials/23_ml_regression.ipynb
+      - ML (Serialization): tutorials/24_ml_serialization.ipynb
+      - ML (Sklearn Bridge): tutorials/25_ml_sklearn_bridge.ipynb
+      - ML (Trainers): tutorials/27_ml_trainers.ipynb
+      - ML (Training): tutorials/28_ml_training.ipynb
+      - ML (Utils): tutorials/29_ml_utils.ipynb
   - API reference:
       - Overview: api/index.md
       - Core:

@@ -18,6 +18,9 @@ data.
 
 from __future__ import annotations
 
+from .._utils import client_side_helper
+
+
 import math as _pymath
 from typing import Any, List, Optional
 
@@ -68,6 +71,7 @@ class FHETrainer:
         raise NotImplementedError("fit_encrypted must be implemented by subclasses")
 
 
+@client_side_helper
 def linear_regression_training(
     X_train: Any,
     y_train: Any,

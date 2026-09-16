@@ -1,3 +1,4 @@
+import numpy as np
 """Activation helpers for encrypted ML circuits."""
 
 from typing import Any, Optional, List, Callable
@@ -273,7 +274,7 @@ def compile_softmax(
         # probs = circuit.encrypt_run_decrypt([20, -10, 5])
         ```
     """
-    function = make_softmax(min_value,max_value)
+    function = make_softmax(min_value,max_value, input_scale=1, output_scale=1, probability_scale=1)
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(
         function,

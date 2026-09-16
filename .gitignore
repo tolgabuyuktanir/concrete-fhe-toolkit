@@ -21,6 +21,7 @@ __pycache__/
 .ipynb_checkpoints/
 site/
 test_report.md
+test_summary.txt
 test_ml_notebooks.py
 codespace_tester.py
 /scratch

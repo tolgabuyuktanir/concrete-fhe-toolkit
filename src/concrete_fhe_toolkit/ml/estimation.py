@@ -11,6 +11,9 @@ paying for a compile.
 
 from __future__ import annotations
 
+from .._utils import client_side_helper
+
+
 from dataclasses import dataclass, field
 from typing import Any, List
 
@@ -41,10 +44,12 @@ class ModelCostEstimate:
     notes: List[str] = field(default_factory=list)
 
 
+@client_side_helper
 def _bits(domain_size: int) -> int:
     return max(1, (max(1, domain_size) - 1).bit_length())
 
 
+@client_side_helper
 def _tree_stats(tree: Any) -> tuple:
     if not isinstance(tree, dict):
         return 0, 0  # leaf: no comparison, depth 0
@@ -53,12 +58,14 @@ def _tree_stats(tree: Any) -> tuple:
     return 1 + left_nodes + right_nodes, 1 + max(left_depth, right_depth)
 
 
+@client_side_helper
 def _arg_extreme_cost(size: int, value_span: int) -> tuple:
     """(lookups, input_bits) of one argmin/argmax reduction."""
     encoded_span = value_span * size + size - 1
     return size, _bits(2 * encoded_span + 1)
 
 
+@client_side_helper
 def estimate_model_cost(
     model: Any,
     *,
@@ -111,6 +118,7 @@ def estimate_model_cost(
     return estimate
 
 
+@client_side_helper
 def _accumulate(model: Any, out: ModelCostEstimate, span: int) -> None:
     name = type(model).__name__
 

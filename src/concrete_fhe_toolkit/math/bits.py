@@ -8,6 +8,9 @@ expressions while compiling larger Concrete circuits.
 
 from __future__ import annotations
 
+from .._utils import client_side_helper
+
+
 from typing import Any, Iterable, Callable
 
 from .._compat import fhe
@@ -220,6 +223,7 @@ def bits_to_unsigned(bits: Iterable[Any]) -> Any:
     return result
 
 
+@client_side_helper
 def unsigned_to_bits(value: int, width: int) -> tuple[int, ...]:
     """Return little-endian bits of a clear unsigned integer constant.
     
@@ -237,6 +241,7 @@ def unsigned_to_bits(value: int, width: int) -> tuple[int, ...]:
     return tuple((normalized_value >> index) & 1 for index in range(normalized_width))
 
 
+@client_side_helper
 def twos_complement_bits(value: int, width: int) -> tuple[int, ...]:
     """Return little-endian two's-complement bits for a clear signed integer.
     

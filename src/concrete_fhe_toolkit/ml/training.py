@@ -1,7 +1,10 @@
+from .._utils import client_side_helper
+
 from typing import List, Any
 from concrete_fhe_toolkit.ml import matrix_transpose, dot_product
 from concrete import fhe
 
+@client_side_helper
 def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[Any]]) -> tuple[List[List[Any]],List[Any]]:
     """[Client-Side Helper] Encrypted training logic for Bernoulli Naive Bayes.
     
@@ -56,4 +59,4 @@ def make_raw_naive_bayes_training(thresholds: List[Any]):
         
         return naive_bayes_training(X_train_binary, y_train_one_hot)
     
-    return raw_naive_bayes_training
+    return raw_naive_bayes_training

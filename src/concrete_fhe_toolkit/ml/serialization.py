@@ -22,6 +22,9 @@ Example:
 
 from __future__ import annotations
 
+from .._utils import client_side_helper
+
+
 import json
 from typing import Any
 
@@ -67,6 +70,7 @@ _REGISTRY["FHEXGBoostRegressor"] = (FHEXGBoostRegressor, ["trees"], [])
 _EXTRAS = ("output_scale", "input_scale")
 
 
+@client_side_helper
 def save_model(model: Any, path: str) -> None:
     """[Client-Side Helper] Serialize a model's public parameters to a JSON file.
 
@@ -110,6 +114,7 @@ def save_model(model: Any, path: str) -> None:
         json.dump(document, handle, indent=2)
 
 
+@client_side_helper
 def load_model(path: str) -> Any:
     """Load a model saved with :func:`save_model`.
 

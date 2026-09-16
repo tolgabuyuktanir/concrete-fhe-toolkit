@@ -8,6 +8,8 @@ larger than the real value. Use :func:`return_actual_value` after decryption
 to recover the real value.
 """
 
+from .._utils import client_side_helper
+
 from typing import Any
 
 RATE_SCALE = 100
@@ -41,6 +43,7 @@ def apply_rate(amount: Any, rate: float) -> Any:
     return amount * _scaled_rate(rate)
 
 
+@client_side_helper
 def return_actual_value(value: Any) -> float:
     """Decode a RATE_SCALE-scaled cleartext result back to its real value.
     

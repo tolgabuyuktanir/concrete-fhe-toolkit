@@ -9,6 +9,8 @@ clear-side; only the features flowing through them are encrypted.
 
 from __future__ import annotations
 
+from .._utils import client_side_helper
+
 from typing import Any, List
 
 from .._utils import validate_integer

@@ -1,3 +1,5 @@
+from .._utils import client_side_helper
+
 from typing import Any, List, Optional, Callable
 from .._compat import fhe
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
@@ -104,6 +106,7 @@ def mean_absolute_error(y_preds: List[Any], y_trues: List[Any]) -> Any:
     distance = manhattan_distance(y_preds,y_trues)
     return distance // len(y_trues)
 
+@client_side_helper
 def accuracy_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
@@ -205,6 +208,7 @@ def false_positives(y_preds: List[Any], y_trues: List[Any]) -> int:
     return num_of_negatives - true_negatives(y_preds, y_trues)
 
 
+@client_side_helper
 def confusion_matrix(y_preds: List[Any], y_trues: List[Any]) -> List[List[Any]]:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
@@ -344,6 +348,7 @@ def compile_cross_entropy_loss(
     )
 
 
+@client_side_helper
 def precision_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
@@ -371,6 +376,7 @@ def precision_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
     return divide(tp * 100, tp + fp)
 
 
+@client_side_helper
 def recall_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
@@ -392,6 +398,7 @@ def recall_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
     return divide(tp * 100, tp + fn)
 
 
+@client_side_helper
 def f1_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
@@ -416,6 +423,7 @@ def f1_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
     return divide(2 * precision * recall, precision + recall)
 
 
+@client_side_helper
 def r2_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.

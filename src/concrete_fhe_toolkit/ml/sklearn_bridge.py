@@ -12,6 +12,9 @@ Tree conversion uses its ``scale`` parameter for input thresholds.
 
 from __future__ import annotations
 
+from .._utils import client_side_helper
+
+
 from typing import Any, List
 
 from .._utils import validate_integer
@@ -23,6 +26,7 @@ from .classes import (
 )
 
 
+@client_side_helper
 def from_sklearn_linear(
     model: Any, *, scale: int = 100, input_scale: int = 1
 ) -> Any:
@@ -85,6 +89,7 @@ def from_sklearn_linear(
     return converted
 
 
+@client_side_helper
 def _convert_tree_node(tree: Any, node: int, *, scale: int, leaf_scale: int) -> Any:
     left = tree.children_left[node]
     right = tree.children_right[node]
@@ -109,6 +114,7 @@ def _convert_tree_node(tree: Any, node: int, *, scale: int, leaf_scale: int) -> 
     }
 
 
+@client_side_helper
 def from_sklearn_tree(model: Any, *, scale: int = 1, leaf_scale: int = 1) -> Any:
     """[Client-Side Helper] Convert a fitted sklearn decision tree into an :class:`FHEDecisionTree`.
 
@@ -137,6 +143,7 @@ def from_sklearn_tree(model: Any, *, scale: int = 1, leaf_scale: int = 1) -> Any
     return FHEDecisionTree(tree_dict)
 
 
+@client_side_helper
 def from_sklearn_forest(model: Any, *, scale: int = 1) -> Any:
     """[Client-Side Helper] Convert a fitted sklearn random-forest classifier into an
     :class:`FHERandomForest` (binary labels, majority vote).

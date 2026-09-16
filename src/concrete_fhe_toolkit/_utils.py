@@ -80,7 +80,6 @@ def array_inputset(size: int, min_value: int, max_value: int) -> List[np.ndarray
         reverse_ramp,
     ]
 
-
 def compile_function(
     function: Any,
     parameter_encryption: dict,
@@ -92,3 +91,8 @@ def compile_function(
     if configuration is None:
         return compiler.compile(inputset)
     return compiler.compile(inputset, configuration=configuration)
+
+
+def client_side_helper(function):
+    function.is_helper = True
+    return function

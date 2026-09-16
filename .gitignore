@@ -22,3 +22,6 @@ __pycache__/
 site/
 test_report.md
 test_ml_notebooks.py
+codespace_tester.py
+/scratch
+/.agents

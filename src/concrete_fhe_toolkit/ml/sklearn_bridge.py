@@ -26,7 +26,7 @@ from .classes import (
 def from_sklearn_linear(
     model: Any, *, scale: int = 100, input_scale: int = 1
 ) -> Any:
-    """Convert a fitted sklearn linear model into an FHE model.
+    """[Client-Side Helper] Convert a fitted sklearn linear model into an FHE model.
 
     ``LogisticRegression`` (binary) becomes an
     :class:`FHELogisticRegression`; ``LinearRegression`` (and other
@@ -110,7 +110,7 @@ def _convert_tree_node(tree: Any, node: int, *, scale: int, leaf_scale: int) -> 
 
 
 def from_sklearn_tree(model: Any, *, scale: int = 1, leaf_scale: int = 1) -> Any:
-    """Convert a fitted sklearn decision tree into an :class:`FHEDecisionTree`.
+    """[Client-Side Helper] Convert a fitted sklearn decision tree into an :class:`FHEDecisionTree`.
 
     Classification trees keep their majority-class integer leaves;
     regression trees get leaves quantized by ``leaf_scale``. Thresholds are
@@ -138,7 +138,7 @@ def from_sklearn_tree(model: Any, *, scale: int = 1, leaf_scale: int = 1) -> Any
 
 
 def from_sklearn_forest(model: Any, *, scale: int = 1) -> Any:
-    """Convert a fitted sklearn random-forest classifier into an
+    """[Client-Side Helper] Convert a fitted sklearn random-forest classifier into an
     :class:`FHERandomForest` (binary labels, majority vote).
 
     Example:

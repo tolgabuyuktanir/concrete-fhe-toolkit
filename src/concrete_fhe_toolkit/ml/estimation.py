@@ -65,7 +65,7 @@ def estimate_model_cost(
     min_feature: int,
     max_feature: int,
 ) -> ModelCostEstimate:
-    """Estimate a model's encrypted-operation footprint before compiling.
+    """[Client-Side Helper] Estimate a model's encrypted-operation footprint before compiling.
 
     Args:
         model: Any toolkit model instance (``FHEModel`` subclasses,

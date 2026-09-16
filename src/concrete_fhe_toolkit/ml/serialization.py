@@ -68,7 +68,7 @@ _EXTRAS = ("output_scale", "input_scale")
 
 
 def save_model(model: Any, path: str) -> None:
-    """Serialize a model's public parameters to a JSON file.
+    """[Client-Side Helper] Serialize a model's public parameters to a JSON file.
 
     Args:
         model: Any registered ``FHEModel`` subclass instance (including

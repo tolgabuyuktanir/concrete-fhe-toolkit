@@ -11,13 +11,13 @@ When generating tests, notebook tutorials, or automation scripts for `concrete-f
 
 These rules dictate how the Jupyter Notebook `.ipynb` files must be formatted and organized:
 
-1. **One Notebook per File**: There must be exactly one dedicated notebook for each `.py` file being tested.
-2. **Complete Coverage**: Every FHE-compatible function in the source file must be tested. This explicitly includes all `make_` and `compile_` variations.
+1. **One Notebook per File**: There must be exactly one dedicated notebook for each `.py` file being tested. However, if a source file contains NO natively defined functions or classes (e.g. it only consists of imports or re-exports), the notebook must be omitted entirely and any empty skeleton deleted.
+2. **Complete Coverage**: Every FHE-compatible function and Class (e.g., `FHEModel` subclasses) in the source file must be tested. For classes, tests should instantiate the model and compare its `.predict()` output against its cleartext `.simulate()` output. This explicitly includes all `make_` and `compile_` variations.
 3. **Isolation (One Function = One Cell)**: Each function must be tested in its own independent Jupyter code cell. Do not group multiple functions into a single code cell.
 4. **Self-Contained & Clean Imports**: Every single code cell must include all the `import` statements required to run its specific function (e.g., `from concrete import fhe`, `import math`, etc.). Do not rely on imports from top-level cells. Do not include unnecessary imports.
 5. **Function Ordering**: The sequence of tests in the notebook MUST strictly match the exact top-to-bottom order that the functions appear in the original source `.py` file.
 6. **Alias Grouping**: For functions that have aliases (e.g., `compile_sub` and `compile_subtract`), do NOT write separate test cells. Write a single test cell for the primary function and clearly state the aliases in the Markdown explanation cell above it.
-7. **Ignore External Dependencies**: Do NOT generate tests for imported helper functions or private functions (e.g., `validate_`, `unary_values`, `_make_scaled`). Only test the functions inherently defined within that specific module.
+7. **Ignore External Dependencies**: Do NOT generate tests for imported helper functions or private functions (e.g., `validate_`, `unary_values`, `_make_scaled`). Only test the functions inherently defined within that specific module. When writing Python inspection scripts, you MUST strictly enforce this by checking `getattr(obj, '__module__', '') == mod.__name__`. Never loosen this check.
 8. **English Markdown Documentation**: Above every test cell, there must be a markdown cell containing a simple, concise ENGLISH explanation of what the function does and what specific conditions/edge cases are being tested. All operations, variables, and documentation must exclusively use English.
 9. **Assertion Verification**: Each test cell must include an `assert` block that verifies the FHE evaluation (`circuit.encrypt_run_decrypt()`) matches the expected cleartext Python evaluation. This ensures mathematical correctness.
 

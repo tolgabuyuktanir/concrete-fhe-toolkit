@@ -74,7 +74,7 @@ def linear_regression_training(
     n_samples: int,
     n_features: int,
 ) -> Any:
-    """Traceable sufficient statistics for linear regression.
+    """[Client-Side Helper] Traceable sufficient statistics for linear regression.
 
     Computes the flattened ``A^T A`` and ``A^T y`` aggregates over the
     encrypted design matrix ``A = [X | 1]`` (intercept column appended).

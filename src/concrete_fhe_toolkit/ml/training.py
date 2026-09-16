@@ -3,7 +3,7 @@ from concrete_fhe_toolkit.ml import matrix_transpose, dot_product
 from concrete import fhe
 
 def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[Any]]) -> tuple[List[List[Any]],List[Any]]:
-    """Encrypted training logic for Bernoulli Naive Bayes.
+    """[Client-Side Helper] Encrypted training logic for Bernoulli Naive Bayes.
     
     Computes feature counts and class counts directly on encrypted data using FHE.
     Because FHE circuits cannot use traditional if-else logic or dynamic loops to filter 

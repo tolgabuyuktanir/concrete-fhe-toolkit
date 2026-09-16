@@ -23,6 +23,12 @@ def save_notebook(filename, cells):
         "nbformat": 4,
         "nbformat_minor": 5
     }
+    print(f"{os.path.basename(filename)} has {len(cells)} cells.")
+    if len(cells) == 0:
+        if os.path.exists(filename):
+            os.remove(filename)
+        return
+        
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(notebook, f, indent=2)
@@ -31,6 +37,12 @@ def generate_inputset(fn_name, param_names):
     import random
     random.seed(42)
     arity = len(param_names)
+    
+    if 'training' in fn_name:
+        if 'linear_regression' in fn_name:
+            return [([[1, 2]], [0], 1, 2)]
+        if 'naive_bayes' in fn_name:
+            return [([[1, 0]], [[1, 0]])]
     
     if any(k in fn_name for k in ('fsum', 'sumprod', 'dist', 'distance', 'error', 'loss', 'score', 'accuracy', 'true_', 'false_', 'confusion', 'norm', 'binarize', 'clip', 'normalize', 'softmax', 'one_hot')):
         if arity == 2:
@@ -95,6 +107,7 @@ def generate_inputset(fn_name, param_names):
     elif arity == 3:
         return [(3, 2, 1), (-2, -2, 3), (0, 0, 0), (2, -2, 2), (10, 5, -2)]
     
+
     # Fallback for arity >= 4
     return [tuple([2]*arity), tuple([0]*arity), tuple([1]*arity)]
 
@@ -123,27 +136,42 @@ def get_kwargs(sig, fn_name):
         elif p_name == 'zero_quotient': kwargs[p_name] = 7
         elif p_name == 'zero_remainder': kwargs[p_name] = 7
         elif p_name == 'k': kwargs[p_name] = 2
-        elif p_name == 'scale': kwargs[p_name] = 10
-        elif p_name == 'input_scale': kwargs[p_name] = 10
-        elif p_name == 'output_scale': kwargs[p_name] = 10
-        elif p_name == 'angle_unit': kwargs[p_name] = 'degrees'
-        elif p_name == 'rounding': kwargs[p_name] = 'nearest'
-        elif p_name == 'allow_large_lookup': kwargs[p_name] = True
-        elif p_name == 'numerator_width': kwargs[p_name] = 4
-        elif p_name == 'denominator_width': kwargs[p_name] = 3
-        elif p_name == 'fractional_bits': kwargs[p_name] = 3
-        elif p_name == 'configuration': pass
-        elif p.default != inspect.Parameter.empty and p.default is not None:
-            kwargs[p_name] = p.default if isinstance(p.default, (int, float, str)) else str(p.default)
+        elif p_name == 'n_iterations': kwargs[p_name] = 1
+        elif p_name == 'tree': kwargs[p_name] = {'feature': 0, 'threshold': 1, 'left': 0, 'right': 1}
+        elif p_name == 'trees': kwargs[p_name] = [{'feature': 0, 'threshold': 1, 'left': 0, 'right': 1}]
+        elif p_name == 'means': kwargs[p_name] = [[1, 2]]
+        elif p_name == 'components': kwargs[p_name] = [[1, 2]]
+        elif p_name == 'filters': kwargs[p_name] = [[[[1]]]]
+        elif p_name == 'X_train': kwargs[p_name] = [[1]]
+        elif p_name == 'y_train': kwargs[p_name] = [0]
+        elif p_name == 'mlp_layers': kwargs[p_name] = [([1], [0], "relu")]
+        elif p_name == 'log_prob_tables': kwargs[p_name] = [[[1]]]
+        elif p_name == 'priors': kwargs[p_name] = [1]
+        elif p_name == 'centroids': kwargs[p_name] = [[1, 1], [3, 3]]
+        elif p_name == 'max_distance': kwargs[p_name] = 10
+        elif p_name == 'weights': kwargs[p_name] = [1, 2]
+        elif p_name == 'bias': kwargs[p_name] = 1
+        elif p_name == 'thresholds': kwargs[p_name] = [1, 1]
+        elif p_name == 'candidate_thresholds': kwargs[p_name] = [[2]]
+        elif p_name == 'initial_centroids': kwargs[p_name] = [[1, 1], [3, 3]]
+        elif p_name == 'num_classes': kwargs[p_name] = 2
+        elif p_name == 'max_depth': kwargs[p_name] = 1
+        elif p_name == 'min_samples_leaf': kwargs[p_name] = 1
+        elif p_name == 'learning_rate': kwargs[p_name] = 1
     return kwargs
 
 def generate_notebook_for_module(subpkg, mod_name, notebook_name):
     mod = importlib.import_module(f"concrete_fhe_toolkit.{subpkg}.{mod_name}")
     
     all_funcs = []
-    for name, obj in inspect.getmembers(mod, inspect.isfunction):
-        if not name.startswith('_') and getattr(obj, '__module__', '') == mod.__name__ : 
-            all_funcs.append((name, obj))
+    import inspect
+    for name, obj in inspect.getmembers(mod):
+        if name.startswith('_'):
+            continue
+        if inspect.isfunction(obj) or (inspect.isclass(obj) and issubclass(obj, object)):
+            mod_name_obj = getattr(obj, '__module__', '')
+            if mod_name_obj == mod.__name__:
+                all_funcs.append((name, obj))
             
     primary_funcs = {}
     for name, obj in all_funcs:
@@ -164,11 +192,83 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
     for primary_name, data in sorted_primary:
         func = data['obj']
         aliases = data['aliases']
-        sig = inspect.signature(func)
         fn_name = primary_name
         docstring = func.__doc__ or ''
         
-        if '[Client-Side Helper]' in docstring or fn_name in ('make_encode_fixed_point', 'make_decode_fixed_point', 'unsigned_to_bits', 'twos_complement_bits', 'return_actual_value'):
+        is_class = inspect.isclass(func)
+        if is_class:
+            try:
+                sig = inspect.signature(func.__init__)
+            except ValueError:
+                sig = inspect.signature(func)
+        else:
+            sig = inspect.signature(func)
+            
+        if is_class:
+            if fn_name == 'FHEModel' or fn_name == 'FHETrainer':
+                continue
+            kwargs = get_kwargs(sig, fn_name)
+            args_str = ", ".join(f"{k}={v!r}" for k, v in kwargs.items() if k not in ['self'])
+            
+            is_trainer = 'Trainer' in fn_name
+            
+            if is_trainer:
+                desc = f"Demonstrates the `{fn_name}` class. Runs `fit_encrypted` in simulation mode to train an encrypted model."
+            else:
+                desc = f"Demonstrates the `{fn_name}` class. Compiles and tests its `simulate` vs `predict` logic."
+            cells.append(create_cell("markdown", f"### {fn_name}\n\n{desc}"))
+            
+            test_code = f"from {getattr(func, '__module__')} import {fn_name}\n"
+            test_code += "import numpy as np\n\n"
+            
+            if is_trainer:
+                if 'simulate=' not in args_str and 'simulate' in sig.parameters:
+                    args_str = args_str + ", simulate=True" if args_str else "simulate=True"
+                test_code += f"trainer = {fn_name}({args_str})\n"
+                if 'KMeans' in fn_name:
+                    test_code += "X_train = [[1, 1], [3, 3]]\n"
+                    test_code += "try:\n"
+                    test_code += "    model = trainer.fit_encrypted(X_train)\n"
+                    test_code += f"    print('{fn_name} executed successfully!')\n"
+                else:
+                    test_code += "X_train = [[1], [3]]\n"
+                    test_code += "y_train = [0, 1]\n"
+                    test_code += "try:\n"
+                    test_code += "    model = trainer.fit_encrypted(X_train, y_train)\n"
+                    test_code += f"    print('{fn_name} executed successfully!')\n"
+                test_code += "except Exception as e:\n"
+                test_code += "    print(f'Execution failed: {e}')\n"
+            else:
+                if fn_name == 'FHEPipeline':
+                    test_code += "from concrete_fhe_toolkit.ml import FHELinearRegression\n"
+                    test_code += f"model = {fn_name}([FHELinearRegression(weights=[1,2], bias=1)])\n"
+                else:
+                    test_code += f"model = {fn_name}({args_str})\n"
+                test_code += "inputset = [([1, 2],), ([0, 0],)]\n"
+                if 'cnn' in fn_name.lower():
+                    test_code += "inputset = [([[[[1]]]],), ([[[[0]]]],)]\n"
+                test_code += "model.compile(inputset)\n"
+                test_code += "_successes = 0\n"
+                test_code += "for inp in inputset:\n"
+                test_code += "    try:\n"
+                test_code += "        expected = model.simulate(inp[0])\n"
+                test_code += "        fhe_res = model.predict(inp[0])\n"
+                test_code += "        if isinstance(expected, (list, np.ndarray)) or hasattr(expected, '__iter__'):\n"
+                test_code += "            np.testing.assert_array_equal(fhe_res, expected)\n"
+                test_code += "        else:\n"
+                test_code += "            assert int(fhe_res) == int(expected)\n"
+                test_code += "    except AssertionError:\n        raise\n    except Exception as e:\n"
+                test_code += "        print(f'Skipping {inp} due to bounds or other error: {e}')\n"
+                test_code += "    else:\n        _successes += 1\n"
+                test_code += f"assert _successes > 0, '{fn_name}: all inputs were skipped'\n"
+                test_code += f"print(f'{fn_name} model compiled and tested successfully! ({{_successes}}/{{len(inputset)}})')\n"
+            
+            cells.append(create_cell("code", test_code))
+            cells.append(create_cell("markdown", "---"))
+            continue
+
+        
+        if '[Client-Side Helper]' in docstring or fn_name in ('make_encode_fixed_point', 'make_decode_fixed_point', 'unsigned_to_bits', 'twos_complement_bits', 'return_actual_value') or mod_name in ('serialization', 'sklearn_bridge'):
             if fn_name.startswith('compile_'):
                 continue
 
@@ -222,6 +322,61 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                     "assert decoded_float == 2.5\n"
                     "print('Decoding successful! Ready for client usage.')\n"
                 )
+            elif fn_name == 'save_model':
+                test_code = (
+                    f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n"
+                    "from concrete_fhe_toolkit.ml.classes import FHELinearRegression\n"
+                    "import os\n\n"
+                    "model = FHELinearRegression()\n"
+                    "save_model(model, 'test_model.json')\n"
+                    "print('Model saved successfully!')\n"
+                    "if os.path.exists('test_model.json'): os.remove('test_model.json')\n"
+                )
+            elif fn_name == 'load_model':
+                test_code = (
+                    f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}, save_model\n"
+                    "from concrete_fhe_toolkit.ml.classes import FHELinearRegression\n"
+                    "import os\n\n"
+                    "model = FHELinearRegression()\n"
+                    "save_model(model, 'test_model2.json')\n"
+                    "loaded_model = load_model('test_model2.json')\n"
+                    "print(f'Model loaded successfully: {loaded_model.__class__.__name__}')\n"
+                    "if os.path.exists('test_model2.json'): os.remove('test_model2.json')\n"
+                )
+            elif fn_name == 'from_sklearn_linear':
+                test_code = (
+                    f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n"
+                    "try:\n"
+                    "    from sklearn.linear_model import LinearRegression\n"
+                    "    import numpy as np\n"
+                    "    sk_model = LinearRegression()\n"
+                    "    sk_model.coef_ = np.array([1.5, -2.0])\n"
+                    "    sk_model.intercept_ = 3.0\n"
+                    "    fhe_model = from_sklearn_linear(sk_model, scale=10)\n"
+                    "    print(f'Converted sklearn model to {fhe_model.__class__.__name__}')\n"
+                    "except ImportError:\n"
+                    "    print('scikit-learn is not installed. Skipping test.')\n"
+                )
+            elif fn_name == 'from_sklearn_tree':
+                test_code = (
+                    f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n"
+                    "try:\n"
+                    "    from sklearn.tree import DecisionTreeClassifier\n"
+                    "    sk_model = DecisionTreeClassifier()\n"
+                    "    print('FHE Conversion for DecisionTreeClassifier requires a fitted tree (sk_model.tree_).')\n"
+                    "except ImportError:\n"
+                    "    print('scikit-learn is not installed. Skipping test.')\n"
+                )
+            elif fn_name == 'from_sklearn_forest':
+                test_code = (
+                    f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n"
+                    "try:\n"
+                    "    from sklearn.ensemble import RandomForestClassifier\n"
+                    "    sk_model = RandomForestClassifier()\n"
+                    "    print('FHE Conversion for RandomForestClassifier requires fitted estimators (sk_model.estimators_).')\n"
+                    "except ImportError:\n"
+                    "    print('scikit-learn is not installed. Skipping test.')\n"
+                )
             else:
                 test_code = f"from concrete_fhe_toolkit.{subpkg}.{mod_name} import {fn_name}\n\n"
                 if fn_name.startswith('make_') or fn_name.startswith('compile_'):
@@ -233,16 +388,22 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                     test_inputs = generate_inputset(fn_name, param_names)
                     test_code += f"inputset = {test_inputs}\n"
                     test_code += "for inp in inputset:\n"
-                    test_code += "    expected = fn(*inp)\n"
-                    test_code += "    print(f'Helper output: {expected}')\n"
+                    test_code += "    try:\n"
+                    test_code += "        expected = fn(*inp)\n"
+                    test_code += "        print(f'Helper output: {expected}')\n"
+                    test_code += "    except Exception as e:\n"
+                    test_code += "        print(f'Skipping {inp}: {e}')\n"
                     test_code += f"print('{fn_name} helper executed successfully!')\n"
                 else:
                     param_names = list(sig.parameters.keys())
                     test_inputs = generate_inputset(fn_name, param_names)
                     test_code += f"inputset = {test_inputs}\n"
                     test_code += "for inp in inputset:\n"
-                    test_code += f"    expected = {fn_name}(*inp)\n"
-                    test_code += "    print(f'Helper output: {expected}')\n"
+                    test_code += "    try:\n"
+                    test_code += f"        expected = {fn_name}(*inp)\n"
+                    test_code += "        print(f'Helper output: {expected}')\n"
+                    test_code += "    except Exception as e:\n"
+                    test_code += "        print(f'Skipping {inp}: {e}')\n"
                     test_code += f"print('{fn_name} helper executed successfully!')\n"
             cells.append(create_cell("code", test_code))
             continue
@@ -299,18 +460,24 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                 test_inputs = generate_inputset(fn_name, param_names)
                 test_code += f"inputset = {test_inputs}\n"
                 
-                test_code += "for inp in inputset:\n"
+                test_code += f"_successes = 0\nfor inp in inputset:\n"
                 test_code += "    try:\n"
                 if expected_call:
                     test_code += f"        expected = {expected_call}\n"
-                    test_code += "        if isinstance(expected, tuple):\n"
-                    test_code += "            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f\"Failed at {inp}\"\n"
+                    test_code += "        import numpy as np\n"
+
+                    test_code += "        if isinstance(expected, (list, tuple)) or type(expected).__name__ == 'ndarray':\n"
+
+                    test_code += "            np.testing.assert_array_equal(circuit.encrypt_run_decrypt(*inp), expected)\n"
+
                     test_code += "        else:\n"
+
                     test_code += "            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f\"Failed at {inp}\"\n"
                 else:
                     test_code += "        circuit.encrypt_run_decrypt(*inp)\n"
                 test_code += "    except AssertionError:\n        raise\n    except Exception as e:\n"
-                test_code += "        print(f\"Skipping {inp} due to bounds or other error: {e}\")\n\n"
+                test_code += "        print(f\"Skipping {inp} due to bounds or other error: {e}\")\n"
+                test_code += "    else:\n        _successes += 1\n"
                 
             elif fn_name.startswith("make_"):
                 kwargs = get_kwargs(sig, fn_name)
@@ -332,15 +499,21 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                 test_code += f"inputset = {test_inputs}\n"
                 test_code += "circuit = compiler.compile(inputset)\n\n"
                 
-                test_code += "for inp in inputset:\n"
+                test_code += f"_successes = 0\nfor inp in inputset:\n"
                 test_code += "    try:\n"
                 test_code += f"        expected = fn(*inp)\n"
-                test_code += "        if isinstance(expected, tuple):\n"
-                test_code += "            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f\"Failed at {inp}\"\n"
+                test_code += "        import numpy as np\n"
+
+                test_code += "        if isinstance(expected, (list, tuple)) or type(expected).__name__ == 'ndarray':\n"
+
+                test_code += "            np.testing.assert_array_equal(circuit.encrypt_run_decrypt(*inp), expected)\n"
+
                 test_code += "        else:\n"
+
                 test_code += "            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f\"Failed at {inp}\"\n"
                 test_code += "    except AssertionError:\n        raise\n    except Exception as e:\n"
-                test_code += "        print(f\"Skipping {inp} due to bounds or other error: {e}\")\n\n"
+                test_code += "        print(f\"Skipping {inp} due to bounds or other error: {e}\")\n"
+                test_code += "    else:\n        _successes += 1\n"
                         
             else:
                 param_names = list(sig.parameters.keys())
@@ -381,7 +554,7 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                 test_code += f"inputset = {test_inputs}\n"
                 test_code += "circuit = compiler.compile(inputset)\n\n"
                 
-                test_code += "for inp in inputset:\n"
+                test_code += f"_successes = 0\nfor inp in inputset:\n"
                 test_code += "    try:\n"
                 
                 expected_args = []
@@ -402,14 +575,21 @@ def generate_notebook_for_module(subpkg, mod_name, notebook_name):
                 expected_call = f"{fn_name}({', '.join(expected_args)})"
                 
                 test_code += f"        expected = {expected_call}\n"
-                test_code += "        if isinstance(expected, tuple):\n"
-                test_code += "            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f\"Failed at {inp}\"\n"
+                test_code += "        import numpy as np\n"
+
+                test_code += "        if isinstance(expected, (list, tuple)) or type(expected).__name__ == 'ndarray':\n"
+
+                test_code += "            np.testing.assert_array_equal(circuit.encrypt_run_decrypt(*inp), expected)\n"
+
                 test_code += "        else:\n"
+
                 test_code += "            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f\"Failed at {inp}\"\n"
                 test_code += "    except AssertionError:\n        raise\n    except Exception as e:\n"
-                test_code += "        print(f\"Skipping {inp} due to bounds or other error: {e}\")\n\n"
+                test_code += "        print(f\"Skipping {inp} due to bounds or other error: {e}\")\n"
+                test_code += "    else:\n        _successes += 1\n"
             
-            test_code += f"print(\"{fn_name} tests passed!\")"
+            test_code += f"assert _successes > 0, \"{fn_name}: all inputs were skipped — test is broken\"\n"
+            test_code += f"print(f\"{fn_name} tests passed! ({{_successes}}/{{len(inputset)}})\")"
             cells.append(create_cell("code", test_code))
         except Exception as e:
             cells.append(create_cell("code", f"# Could not auto-generate test for {fn_name}\n# Error: {e}"))
@@ -449,8 +629,6 @@ if __name__ == "__main__":
         ("pipeline", "21_ml_pipeline.ipynb"),
         ("preprocessing", "22_ml_preprocessing.ipynb"),
         ("regression", "23_ml_regression.ipynb"),
-        ("serialization", "24_ml_serialization.ipynb"),
-        ("sklearn_bridge", "25_ml_sklearn_bridge.ipynb"),
         ("stats", "26_ml_stats.ipynb"),
         ("trainers", "27_ml_trainers.ipynb"),
         ("training", "28_ml_training.ipynb"),

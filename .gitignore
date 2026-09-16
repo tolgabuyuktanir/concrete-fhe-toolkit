@@ -20,3 +20,5 @@ __pycache__/
 *$py.class
 .ipynb_checkpoints/
 site/
+test_report.md
+test_ml_notebooks.py

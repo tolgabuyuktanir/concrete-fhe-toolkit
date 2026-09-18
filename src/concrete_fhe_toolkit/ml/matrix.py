@@ -1,7 +1,6 @@
 from typing import Any, List
 import numpy as np
 
-from concrete_fhe_toolkit.arrays import array_sum
 from concrete_fhe_toolkit._utils import validate_integer
 from concrete_fhe_toolkit._compat import fhe
 

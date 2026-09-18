@@ -4,7 +4,6 @@ from .._utils import client_side_helper
 from typing import Any, List, Optional
 
 from .._compat import fhe
-import numpy as np
 
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds, validate_integer
 from concrete_fhe_toolkit.arrays import array_sum, make_argmax, make_argmin, array_sub
@@ -16,6 +15,7 @@ from .activations import relu, threshold_activation
 from .core import euclidean_distance_squared
 from .matrix import dot_product, matrix_vector_multiply, matrix_flatten
 
+import numpy as np
 
 def linear_regression_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
     """Evaluate a linear regression model (dot product of weights and features plus bias).

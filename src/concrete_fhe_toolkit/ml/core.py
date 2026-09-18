@@ -1,4 +1,3 @@
-import warnings
 from .._utils import client_side_helper
 
 from typing import Any, List, Optional, Callable
@@ -10,6 +9,7 @@ from concrete_fhe_toolkit.arrays import array_sum
 from concrete_fhe_toolkit.math import square, maximum, equal,not_equal
 from concrete_fhe_toolkit.math.special import make_log
 
+import warnings
 
 def manhattan_distance(array1: List[Any], array2: List[Any]) -> Any:
     """Calculate the Manhattan (L1) distance between two encrypted arrays.

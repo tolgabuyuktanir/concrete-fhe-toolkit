@@ -3352,7 +3352,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=54f3b07a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6fcd8f3a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3364,7 +3364,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=eb271e0e">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=99f43649">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3447,7 +3447,7 @@ print(f"one_hot_encode tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=819e640c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2a689ff1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3459,7 +3459,7 @@ print(f"one_hot_encode tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9ef581a6">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=00f7276b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3479,20 +3479,22 @@ print(f"one_hot_encode tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">binarize</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_binarize</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_binarize</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="k">return</span> <span class="n">binarize</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_binarize</span><span class="p">,</span> <span class="p">{</span><span class="s1">'array'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'threshold'</span><span class="p">:</span> <span class="s1">'clear'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">)]</span>
+<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_binarize</span><span class="p">,</span> <span class="p">{</span><span class="s1">'array'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],)]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"binarize tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-2">from concrete import fhe
 from concrete_fhe_toolkit.ml.utils import binarize
-def test_binarize(array, threshold):
+def test_binarize(array):
+    threshold = 2
     return binarize(array, threshold)
-compiler = fhe.Compiler(test_binarize, {'array': 'encrypted', 'threshold': 'clear'})
-inputset = [([1, 2, 3], 2)]
+compiler = fhe.Compiler(test_binarize, {'array': 'encrypted'})
+inputset = [([1, 2, 3],)]
 circuit = compiler.compile(inputset)
 circuit.encrypt_run_decrypt(*inputset[0])
 print("binarize tests passed! (1/1)")</div>
@@ -3502,7 +3504,7 @@ print("binarize tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b1a91a79">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=be3212f6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3514,7 +3516,7 @@ print("binarize tests passed! (1/1)")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5c8dc165">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a615b7fc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3534,20 +3536,24 @@ print("binarize tests passed! (1/1)")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">clip_array</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_clip_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_clip_array</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="n">min_val</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">max_val</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="k">return</span> <span class="n">clip_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">)</span>
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_clip_array</span><span class="p">,</span> <span class="p">{</span><span class="s1">'array'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'min_val'</span><span class="p">:</span> <span class="s1">'clear'</span><span class="p">,</span> <span class="s1">'max_val'</span><span class="p">:</span> <span class="s1">'clear'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_clip_array</span><span class="p">,</span> <span class="p">{</span><span class="s1">'array'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],)]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"clip_array tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-3">from concrete import fhe
 from concrete_fhe_toolkit.ml.utils import clip_array
-def test_clip_array(array, min_val, max_val):
+def test_clip_array(array):
+    min_val = 1
+    max_val = 2
     return clip_array(array, min_val, max_val)
-compiler = fhe.Compiler(test_clip_array, {'array': 'encrypted', 'min_val': 'clear', 'max_val': 'clear'})
-inputset = [([1, 2, 3], 1, 2)]
+compiler = fhe.Compiler(test_clip_array, {'array': 'encrypted'})
+inputset = [([1, 2, 3],)]
 circuit = compiler.compile(inputset)
 circuit.encrypt_run_decrypt(*inputset[0])
 print("clip_array tests passed! (1/1)")</div>
@@ -3557,7 +3563,7 @@ print("clip_array tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f9ca4625">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=17465388">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3569,7 +3575,7 @@ print("clip_array tests passed! (1/1)")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4c832ad9">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=281129ce">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3589,20 +3595,22 @@ print("clip_array tests passed! (1/1)")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize_array</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">divisor</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_array</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="n">divisor</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="k">return</span> <span class="n">normalize_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span>
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_normalize_array</span><span class="p">,</span> <span class="p">{</span><span class="s1">'array'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'divisor'</span><span class="p">:</span> <span class="s1">'clear'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="mi">2</span><span class="p">)]</span>
+<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_normalize_array</span><span class="p">,</span> <span class="p">{</span><span class="s1">'array'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],)]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
 <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"normalize_array tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-4">from concrete import fhe
 from concrete_fhe_toolkit.ml.utils import normalize_array
-def test_normalize_array(array, divisor):
+def test_normalize_array(array):
+    divisor = 2
     return normalize_array(array, divisor)
-compiler = fhe.Compiler(test_normalize_array, {'array': 'encrypted', 'divisor': 'clear'})
-inputset = [([2, 4, 6], 2)]
+compiler = fhe.Compiler(test_normalize_array, {'array': 'encrypted'})
+inputset = [([2, 4, 6],)]
 circuit = compiler.compile(inputset)
 circuit.encrypt_run_decrypt(*inputset[0])
 print("normalize_array tests passed! (1/1)")</div>

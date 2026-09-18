@@ -8,6 +8,7 @@ from concrete_fhe_toolkit.ml import (
     random_forest_inference, xgboost_inference, svm_inference,
     knn_inference, naive_bayes_inference, mlp_inference, naive_bayes_training
     )
+from concrete_fhe_toolkit.privacy import dp_release
 import warnings
 
 class FHEModel:
@@ -469,9 +470,15 @@ class FHENaiveBayesTrainer:
             
         return self.circuit.run(encrypted_X, encrypted_y)
 
-    def decrypt_and_finalize_model(self, encrypted_results, max_bit_width=8):
+    def decrypt_and_finalize_model(self, encrypted_results, max_bit_width=8, * ,epsilon = None):
         raw_feature_counts, priors = self.circuit.decrypt(*encrypted_results)
-        
+        if epsilon is not None:
+            noisy_feature_counts = []
+            for row in raw_feature_counts:
+                noisy_feature_counts.append(dp_release(row, sensitivity=1, epsilon=epsilon/2))
+            priors_noisy = dp_release(priors, sensitivity=1, epsilon=epsilon/2)
+            return self._finalize_model(noisy_feature_counts, priors_noisy, max_bit_width)
+
         return self._finalize_model(raw_feature_counts, priors, max_bit_width)
 
     @staticmethod
@@ -522,7 +529,7 @@ class FHENaiveBayesTrainer:
         model.scale = SCALE
         return model
 
-    def fit_encrypted(self, X_train, y_train, * ,max_bit_width = 8, thresholds=None):
+    def fit_encrypted(self, X_train, y_train, * ,max_bit_width = 8, thresholds=None, epsilon=None):
         if(max_bit_width > 16):
             raise ValueError("The maximum supported bit width is 16")
         if(max_bit_width > 8):
@@ -539,7 +546,13 @@ class FHENaiveBayesTrainer:
 
         # The circuit returns raw counts (feature_counts, class_counts)
         raw_feature_counts, priors = self.circuit.encrypt_run_decrypt(X_train, y_train)
-        
+        if epsilon is not None:
+            noisy_feature_counts = []
+            for row in raw_feature_counts:
+                noisy_feature_counts.append(dp_release(row, sensitivity=1, epsilon=epsilon/2))
+            priors_noisy = dp_release(priors, sensitivity=1, epsilon=epsilon/2)
+            return self._finalize_model(noisy_feature_counts, priors_noisy, max_bit_width)
+
         return self._finalize_model(raw_feature_counts, priors, max_bit_width)
 
 

@@ -54,9 +54,7 @@ def dot_product(array1: List[Any], array2: List[Any]) -> Any:
     if(len(array1) != len(array2)):
         raise ValueError("Array sizes must be equal to perform dot product")
 
-    product_list = [x*y for x,y in zip(array1,array2)]
-    result = array_sum(product_list)
-    return result
+    return fhe.array(array1) @ fhe.array(array2)
 
 def matrix_add(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[Any]]:
     """Perform element-wise addition of two encrypted matrices of the same dimensions.
@@ -70,7 +68,7 @@ def matrix_add(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[
         ```
     """
     rows, columns = _same_matrix_shape(matrix1, matrix2)
-    return [[matrix1[i][j] + matrix2[i][j] for j in range(columns)] for i in range(rows)]
+    return fhe.array(matrix1) + fhe.array(matrix2)
 
 def matrix_subtract(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[Any]]:
     """Perform element-wise subtraction of two encrypted matrices of the same dimensions.
@@ -84,7 +82,7 @@ def matrix_subtract(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[
         ```
     """
     rows, columns = _same_matrix_shape(matrix1, matrix2)
-    return [[matrix1[i][j] - matrix2[i][j] for j in range(columns)] for i in range(rows)]
+    return fhe.array(matrix1) - fhe.array(matrix2)
 
 def matrix_multiply(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[Any]]:
     """Perform matrix multiplication (dot product) of two encrypted matrices.
@@ -106,8 +104,8 @@ def matrix_multiply(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[
         return []
     if left_columns != right_rows:
         raise ValueError("Matrix dimensions are incompatible for multiplication")
-    transposed = matrix_transpose(matrix2)
-    return [[dot_product(row, column) for column in transposed] for row in matrix1]
+
+    return fhe.array(matrix1) @ fhe.array(matrix2)
 
 def matrix_elementwise_multiply(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[Any]]:
     """Perform Hadamard (element-wise) multiplication of two encrypted matrices.
@@ -121,7 +119,7 @@ def matrix_elementwise_multiply(matrix1: List[List[Any]], matrix2: List[List[Any
         ```
     """
     rows, columns = _same_matrix_shape(matrix1, matrix2)
-    return [[matrix1[i][j] * matrix2[i][j] for j in range(columns)] for i in range(rows)]
+    return fhe.array(matrix1) * fhe.array(matrix2)
 
 
 def matrix_vector_multiply(matrix: List[List[Any]], array: List[Any]) -> List[Any]:
@@ -140,7 +138,7 @@ def matrix_vector_multiply(matrix: List[List[Any]], array: List[Any]) -> List[An
     rows, columns = _matrix_shape(matrix)
     if rows and columns != len(array):
         raise ValueError("Matrix and vector dimensions are incompatible")
-    return [dot_product(row, array) for row in matrix]
+    return fhe.array(matrix) @ fhe.array(array)
 
 def matrix_exp(matrix: List[List[Any]], exponent: int) -> List[List[Any]]:
     """Calculate the power of an encrypted square matrix.

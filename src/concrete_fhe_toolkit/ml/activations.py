@@ -1,6 +1,4 @@
-import warnings
 """Activation helpers for encrypted ML circuits."""
-
 from typing import Any, Optional, List, Callable
 
 from .._compat import fhe
@@ -10,6 +8,7 @@ from concrete_fhe_toolkit.math import greater_equal, make_exp
 from concrete_fhe_toolkit.math.basic import maximum
 from concrete_fhe_toolkit.arithmetic import make_floor_divide
 
+import warnings
 
 def relu(value: Any) -> Any:
     """Return max(0, value).

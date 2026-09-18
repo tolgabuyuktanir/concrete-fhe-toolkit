@@ -1,3 +1,4 @@
+import warnings
 from .._utils import client_side_helper
 
 from typing import Any, List, Optional, Callable
@@ -311,6 +312,11 @@ def make_cross_entropy_loss(
         # loss = cross_entropy(enc_preds, enc_labels)
         ```
     """
+    warnings.warn(
+            "Cross Entropy requires >16-bit TLUs and will likely fail to compile "
+            "in the current version of Concrete. Consider evaluating loss on the client side.",
+            UserWarning
+        )
     log_func = make_log(min_input, max_input, input_scale=input_scale, output_scale=output_scale, invalid_result=-999)
 
     def cross_entropy_loss(y_preds: List[Any], y_trues: List[Any]) -> Any:
@@ -334,6 +340,11 @@ def compile_cross_entropy_loss(
     output_scale: int = 100,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
+    warnings.warn(
+        "compile_cross_entropy_loss requires >16-bit TLUs and will likely fail to compile "
+        "in the current version of Concrete. Kept for future 32-bit TLU compatibility.",
+        UserWarning
+    )
     function = make_cross_entropy_loss(min_value, max_value, input_scale=input_scale, output_scale=output_scale)
     minimum, maximum = validate_bounds(min_value, max_value)
     

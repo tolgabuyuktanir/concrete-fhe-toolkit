@@ -1,3 +1,4 @@
+from .._utils import client_side_helper
 """Encrypted inference helpers for simple ML models."""
 
 from typing import Any, List, Optional
@@ -569,6 +570,7 @@ def avg_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
 
     return pooling_values    
 
+@client_side_helper
 def auto_quantizer(images: List[List[List[List[Any]]]], filters: List[List[List[Any]]], model: Any, mode: str="optimal") -> Any:
     """Calculate the optimal scaling factor for quantizing network inputs/weights.
     

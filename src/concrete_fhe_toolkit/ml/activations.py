@@ -1,3 +1,4 @@
+import warnings
 """Activation helpers for encrypted ML circuits."""
 
 from typing import Any, Optional, List, Callable
@@ -95,7 +96,7 @@ def make_softmax(
     probability_scale: int = 100,
 ) -> Callable[[List[Any]], List[Any]]:
     """
-    Create a scaled softmax function for a list of encrypted scores.
+Create a scaled softmax function for a list of encrypted scores.
     
     This function uses an exponential approximation and floor division to calculate
     probabilities as integer percentages. The output is scaled by `probability_scale`.
@@ -111,6 +112,13 @@ def make_softmax(
         # enc_probs = softmax(enc_scores)
         ```
     """
+
+    warnings.warn(
+        "Softmax requires >16-bit TLUs for encrypted division and will likely fail to compile "
+        "in the current version of Concrete. Consider using `argmax` or client-side Softmax instead.",
+        UserWarning, stacklevel=2
+    )
+
     exp_func = make_exp(min_input, max_input, input_scale=input_scale, output_scale=output_scale)
     div_func = make_floor_divide(zero_result=0)
     
@@ -257,7 +265,7 @@ def compile_softmax(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """
-    Compile an FHE circuit for the softmax function over an array of fixed size.
+Compile an FHE circuit for the softmax function over an array of fixed size.
     
     Since FHE circuits require fixed dimensions, the `size` of the input array 
     must be specified at compile time.
@@ -273,6 +281,13 @@ def compile_softmax(
         # probs = circuit.encrypt_run_decrypt([20, -10, 5])
         ```
     """
+
+    warnings.warn(
+        "compile_softmax requires >16-bit TLUs and will likely fail to compile "
+        "in the current version of Concrete. Kept for future 32-bit TLU compatibility.",
+        UserWarning, stacklevel=2
+    )
+
     function = make_softmax(min_value,max_value, input_scale=1, output_scale=1, probability_scale=1)
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(

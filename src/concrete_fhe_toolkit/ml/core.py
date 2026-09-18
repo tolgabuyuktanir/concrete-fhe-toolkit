@@ -315,7 +315,7 @@ def make_cross_entropy_loss(
     warnings.warn(
             "Cross Entropy requires >16-bit TLUs and will likely fail to compile "
             "in the current version of Concrete. Consider evaluating loss on the client side.",
-            UserWarning
+            UserWarning, stacklevel=2
         )
     log_func = make_log(min_input, max_input, input_scale=input_scale, output_scale=output_scale, invalid_result=-999)
 
@@ -343,7 +343,7 @@ def compile_cross_entropy_loss(
     warnings.warn(
         "compile_cross_entropy_loss requires >16-bit TLUs and will likely fail to compile "
         "in the current version of Concrete. Kept for future 32-bit TLU compatibility.",
-        UserWarning
+        UserWarning, stacklevel=2
     )
     function = make_cross_entropy_loss(min_value, max_value, input_scale=input_scale, output_scale=output_scale)
     minimum, maximum = validate_bounds(min_value, max_value)

@@ -115,7 +115,7 @@ Create a scaled softmax function for a list of encrypted scores.
     warnings.warn(
         "Softmax requires >16-bit TLUs for encrypted division and will likely fail to compile "
         "in the current version of Concrete. Consider using `argmax` or client-side Softmax instead.",
-        UserWarning, stacklevel=2
+        UserWarning, stacklevel=2, stacklevel=2
     )
 
     exp_func = make_exp(min_input, max_input, input_scale=input_scale, output_scale=output_scale)
@@ -284,7 +284,7 @@ Compile an FHE circuit for the softmax function over an array of fixed size.
     warnings.warn(
         "compile_softmax requires >16-bit TLUs and will likely fail to compile "
         "in the current version of Concrete. Kept for future 32-bit TLU compatibility.",
-        UserWarning, stacklevel=2
+        UserWarning, stacklevel=2, stacklevel=2
     )
 
     function = make_softmax(min_value,max_value, input_scale=1, output_scale=1, probability_scale=1)

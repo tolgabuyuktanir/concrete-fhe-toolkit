@@ -1,6 +1,6 @@
-from .._utils import client_side_helper
 """Encrypted inference helpers for simple ML models."""
 
+from .._utils import client_side_helper
 from typing import Any, List, Optional
 
 from .._compat import fhe

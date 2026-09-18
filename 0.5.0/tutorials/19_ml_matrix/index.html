@@ -13,6 +13,10 @@
         <link rel="canonical" href="https://tolgabuyuktanir.github.io/concrete-fhe-toolkit/0.5.0/tutorials/19_ml_matrix/">
       
       
+        <link rel="prev" href="../18_ml_estimation/">
+      
+      
+        <link rel="next" href="../20_ml_models/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>19 ml matrix - concrete-fhe-toolkit</title>
+        <title>ML (Matrix) - concrete-fhe-toolkit</title>
       
     
     
@@ -116,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              19 ml matrix
+              ML (Matrix)
             
           </span>
         </div>
@@ -266,10 +270,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../01_arithmetic/" class="md-tabs__link">
           
   
@@ -521,26 +527,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -558,7 +569,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -940,6 +951,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../14_ml_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Classes)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_ml_clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Clustering)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../17_ml_core/" class="md-nav__link">
         
   
@@ -948,6 +1015,478 @@
     
   
     ML (Core)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_ml_estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Estimation)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Matrix)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Matrix)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#matrix_transpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        matrix_transpose()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dot_product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        dot_product()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matrix_add" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        matrix_add()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matrix_subtract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        matrix_subtract()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matrix_multiply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        matrix_multiply()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matrix_elementwise_multiply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        matrix_elementwise_multiply()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matrix_vector_multiply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        matrix_vector_multiply()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matrix_exp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        matrix_exp()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#covariance_matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        covariance_matrix()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matrix_flatten" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        matrix_flatten()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tensor_flatten" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tensor_flatten()
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20_ml_models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Models)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../21_ml_pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Pipeline)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../22_ml_preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Preprocessing)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../23_ml_regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Regression)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../24_ml_serialization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Serialization)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../25_ml_sklearn_bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Sklearn Bridge)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../27_ml_trainers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Trainers)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../28_ml_training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Training)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../29_ml_utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML (Utils)
   
 
     
@@ -2244,7 +2783,7 @@
   
 
 
-  <h1>19 ml matrix</h1>
+  <h1>ML (Matrix)</h1>
 
 <script>
 (function (global, factory) {
@@ -2967,7 +3506,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7516bc3b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c3d81d14">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -2979,7 +3518,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3a38bf1b">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bd7c11bf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -2999,62 +3538,30 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix_transpose</span>
-
 <span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_transpose</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">matrix_transpose</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
-
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix_transpose</span><span class="p">(</span><span class="n">matrix</span><span class="p">))</span>
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_matrix_transpose</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],)]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">matrix_transpose</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_transpose tests passed!"</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_transpose tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-1">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import matrix_transpose
-
 def test_matrix_transpose(matrix):
-    import numpy as np
-    res = matrix_transpose(matrix)
-    return np.array(res) if isinstance(res, list) else res
-
+    return fhe.array(matrix_transpose(matrix))
 compiler = fhe.Compiler(test_matrix_transpose, {'matrix': 'encrypted'})
-inputset = [(3,), (-2,), (0,), (2,)]
+inputset = [([[1, 2], [3, 4]],)]
 circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = matrix_transpose(inp[0])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("matrix_transpose tests passed!")</div>
+circuit.encrypt_run_decrypt(*inputset[0])
+print("matrix_transpose tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4545f329">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4a748a95">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3066,7 +3573,7 @@ print("matrix_transpose tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c02d73fa">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5f59bc8c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3086,62 +3593,59 @@ print("matrix_transpose tests passed!")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">dot_product</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_dot_product</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">array2</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">dot_product</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">array2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_dot_product</span><span class="p">,</span> <span class="p">{</span><span class="s1">'array1'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'array2'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
 
+<span class="n">_successes</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">expected</span> <span class="o">=</span> <span class="n">dot_product</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
+        <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"dot_product tests passed!"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_successes</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">assert</span> <span class="n">_successes</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"dot_product tests passed! (</span><span class="si">{</span><span class="n">_successes</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-2">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import dot_product
+import numpy as np
 
 def test_dot_product(array1, array2):
-    import numpy as np
     res = dot_product(array1, array2)
-    return np.array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_dot_product, {'array1': 'encrypted', 'array2': 'encrypted'})
-inputset = [(3, 1), (-2, -2), (0, 0), (2, 2), (1, 3)]
+inputset = [([1, 2], [3, 4]), ([-1, 0], [1, 1])]
 circuit = compiler.compile(inputset)
 
+_successes = 0
 for inp in inputset:
     try:
         expected = dot_product(inp[0], inp[1])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
+        assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected)
     except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("dot_product tests passed!")</div>
+        print(f"Skipping {inp}: {e}")
+    else:
+        _successes += 1
+assert _successes &gt; 0
+print(f"dot_product tests passed! ({_successes}/{len(inputset)})")
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d5bdd2fa">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=03ccb1fd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3153,7 +3657,7 @@ print("dot_product tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3b724224">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3e0209eb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3173,62 +3677,30 @@ print("dot_product tests passed!")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix_add</span>
-
 <span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_add</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">matrix_add</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
-
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix_add</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">))</span>
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_matrix_add</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix1'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'matrix2'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">matrix_add</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_add tests passed!"</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_add tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-3">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import matrix_add
-
 def test_matrix_add(matrix1, matrix2):
-    import numpy as np
-    res = matrix_add(matrix1, matrix2)
-    return np.array(res) if isinstance(res, list) else res
-
+    return fhe.array(matrix_add(matrix1, matrix2))
 compiler = fhe.Compiler(test_matrix_add, {'matrix1': 'encrypted', 'matrix2': 'encrypted'})
-inputset = [(3, 1), (-2, -2), (0, 0), (2, 2), (1, 3)]
+inputset = [([[1, 2]], [[3, 4]])]
 circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = matrix_add(inp[0], inp[1])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("matrix_add tests passed!")</div>
+circuit.encrypt_run_decrypt(*inputset[0])
+print("matrix_add tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4fd32463">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e9e629f9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3240,7 +3712,7 @@ print("matrix_add tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a1dce1a1">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ce3a5bdc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3260,62 +3732,30 @@ print("matrix_add tests passed!")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix_subtract</span>
-
 <span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_subtract</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">matrix_subtract</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
-
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix_subtract</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">))</span>
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_matrix_subtract</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix1'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'matrix2'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">matrix_subtract</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_subtract tests passed!"</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_subtract tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-4">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import matrix_subtract
-
 def test_matrix_subtract(matrix1, matrix2):
-    import numpy as np
-    res = matrix_subtract(matrix1, matrix2)
-    return np.array(res) if isinstance(res, list) else res
-
+    return fhe.array(matrix_subtract(matrix1, matrix2))
 compiler = fhe.Compiler(test_matrix_subtract, {'matrix1': 'encrypted', 'matrix2': 'encrypted'})
-inputset = [(3, 1), (-2, -2), (0, 0), (2, 2), (1, 3)]
+inputset = [([[1, 2]], [[3, 4]])]
 circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = matrix_subtract(inp[0], inp[1])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("matrix_subtract tests passed!")</div>
+circuit.encrypt_run_decrypt(*inputset[0])
+print("matrix_subtract tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2c669c3c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e8179443">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3327,7 +3767,7 @@ print("matrix_subtract tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2a8250e0">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5673ce69">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3347,62 +3787,30 @@ print("matrix_subtract tests passed!")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix_multiply</span>
-
 <span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_multiply</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">matrix_multiply</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
-
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix_multiply</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">))</span>
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_matrix_multiply</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix1'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'matrix2'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]])]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">matrix_multiply</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_multiply tests passed!"</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_multiply tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-5">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import matrix_multiply
-
 def test_matrix_multiply(matrix1, matrix2):
-    import numpy as np
-    res = matrix_multiply(matrix1, matrix2)
-    return np.array(res) if isinstance(res, list) else res
-
+    return fhe.array(matrix_multiply(matrix1, matrix2))
 compiler = fhe.Compiler(test_matrix_multiply, {'matrix1': 'encrypted', 'matrix2': 'encrypted'})
-inputset = [(3, 1), (-2, -2), (0, 0), (2, 2), (1, 3)]
+inputset = [([[1, 2]], [[3], [4]])]
 circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = matrix_multiply(inp[0], inp[1])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("matrix_multiply tests passed!")</div>
+circuit.encrypt_run_decrypt(*inputset[0])
+print("matrix_multiply tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=45d5ee24">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a36755cd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3414,7 +3822,7 @@ print("matrix_multiply tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=82db57d5">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fb78aa8c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3434,62 +3842,30 @@ print("matrix_multiply tests passed!")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix_elementwise_multiply</span>
-
 <span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_elementwise_multiply</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">matrix_elementwise_multiply</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
-
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix_elementwise_multiply</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">))</span>
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_matrix_elementwise_multiply</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix1'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'matrix2'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">matrix_elementwise_multiply</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_elementwise_multiply tests passed!"</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_elementwise_multiply tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-6">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import matrix_elementwise_multiply
-
 def test_matrix_elementwise_multiply(matrix1, matrix2):
-    import numpy as np
-    res = matrix_elementwise_multiply(matrix1, matrix2)
-    return np.array(res) if isinstance(res, list) else res
-
+    return fhe.array(matrix_elementwise_multiply(matrix1, matrix2))
 compiler = fhe.Compiler(test_matrix_elementwise_multiply, {'matrix1': 'encrypted', 'matrix2': 'encrypted'})
-inputset = [(3, 1), (-2, -2), (0, 0), (2, 2), (1, 3)]
+inputset = [([[1, 2]], [[3, 4]])]
 circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = matrix_elementwise_multiply(inp[0], inp[1])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("matrix_elementwise_multiply tests passed!")</div>
+circuit.encrypt_run_decrypt(*inputset[0])
+print("matrix_elementwise_multiply tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=efa8b452">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d028e407">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3501,7 +3877,7 @@ print("matrix_elementwise_multiply tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=23f24fa7">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e5d06cb8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3521,62 +3897,30 @@ print("matrix_elementwise_multiply tests passed!")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix_vector_multiply</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_vector_multiply</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">matrix_vector_multiply</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">array</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
-
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_matrix_vector_multiply</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'array'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_vector_multiply</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">vector</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix_vector_multiply</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">vector</span><span class="p">))</span>
+<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_matrix_vector_multiply</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'vector'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">matrix_vector_multiply</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_vector_multiply tests passed!"</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_vector_multiply tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-7">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import matrix_vector_multiply
-
-def test_matrix_vector_multiply(matrix, array):
-    import numpy as np
-    res = matrix_vector_multiply(matrix, array)
-    return np.array(res) if isinstance(res, list) else res
-
-compiler = fhe.Compiler(test_matrix_vector_multiply, {'matrix': 'encrypted', 'array': 'encrypted'})
-inputset = [(3, 1), (-2, -2), (0, 0), (2, 2), (1, 3)]
+def test_matrix_vector_multiply(matrix, vector):
+    return fhe.array(matrix_vector_multiply(matrix, vector))
+compiler = fhe.Compiler(test_matrix_vector_multiply, {'matrix': 'encrypted', 'vector': 'encrypted'})
+inputset = [([[1, 2]], [3, 4])]
 circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = matrix_vector_multiply(inp[0], inp[1])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("matrix_vector_multiply tests passed!")</div>
+circuit.encrypt_run_decrypt(*inputset[0])
+print("matrix_vector_multiply tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5a8c9416">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9ba1cd2b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3588,7 +3932,7 @@ print("matrix_vector_multiply tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2d0fa99c">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9b09ae74">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3608,62 +3952,30 @@ print("matrix_vector_multiply tests passed!")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix_exp</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_exp</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">exponent</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">matrix_exp</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">exponent</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
-
-<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_matrix_exp</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'exponent'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_exp</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix_exp</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_matrix_exp</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="p">})</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],)]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">matrix_exp</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_exp tests passed!"</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_exp tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-8">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import matrix_exp
-
-def test_matrix_exp(matrix, exponent):
-    import numpy as np
-    res = matrix_exp(matrix, exponent)
-    return np.array(res) if isinstance(res, list) else res
-
-compiler = fhe.Compiler(test_matrix_exp, {'matrix': 'encrypted', 'exponent': 'encrypted'})
-inputset = [(3, 1), (-2, -2), (0, 0), (2, 2), (1, 3)]
+def test_matrix_exp(matrix):
+    return fhe.array(matrix_exp(matrix, 2))
+compiler = fhe.Compiler(test_matrix_exp, {'matrix': 'encrypted', })
+inputset = [([[1, 2], [3, 4]],)]
 circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = matrix_exp(inp[0], inp[1])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("matrix_exp tests passed!")</div>
+circuit.encrypt_run_decrypt(*inputset[0])
+print("matrix_exp tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d3514338">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=580d6238">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3675,7 +3987,7 @@ print("matrix_exp tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9f6e10a3">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8c356f57">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3695,62 +4007,30 @@ print("matrix_exp tests passed!")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">covariance_matrix</span>
-
 <span class="k">def</span><span class="w"> </span><span class="nf">test_covariance_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">covariance_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
-
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">covariance_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">))</span>
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_covariance_matrix</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],)]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">covariance_matrix</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"covariance_matrix tests passed!"</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"covariance_matrix tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-9">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import covariance_matrix
-
 def test_covariance_matrix(matrix):
-    import numpy as np
-    res = covariance_matrix(matrix)
-    return np.array(res) if isinstance(res, list) else res
-
+    return fhe.array(covariance_matrix(matrix))
 compiler = fhe.Compiler(test_covariance_matrix, {'matrix': 'encrypted'})
-inputset = [(3,), (-2,), (0,), (2,)]
+inputset = [([[1, 2], [3, 4], [5, 6]],)]
 circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = covariance_matrix(inp[0])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("covariance_matrix tests passed!")</div>
+circuit.encrypt_run_decrypt(*inputset[0])
+print("covariance_matrix tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=77f7379e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b9057df0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3762,7 +4042,7 @@ print("covariance_matrix tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=83a55728">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ab32711d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3782,62 +4062,30 @@ print("covariance_matrix tests passed!")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix_flatten</span>
-
 <span class="k">def</span><span class="w"> </span><span class="nf">test_matrix_flatten</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">matrix_flatten</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
-
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix_flatten</span><span class="p">(</span><span class="n">matrix</span><span class="p">))</span>
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_matrix_flatten</span><span class="p">,</span> <span class="p">{</span><span class="s1">'matrix'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],)]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">matrix_flatten</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_flatten tests passed!"</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"matrix_flatten tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-10">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import matrix_flatten
-
 def test_matrix_flatten(matrix):
-    import numpy as np
-    res = matrix_flatten(matrix)
-    return np.array(res) if isinstance(res, list) else res
-
+    return fhe.array(matrix_flatten(matrix))
 compiler = fhe.Compiler(test_matrix_flatten, {'matrix': 'encrypted'})
-inputset = [(3,), (-2,), (0,), (2,)]
+inputset = [([[1, 2], [3, 4]],)]
 circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = matrix_flatten(inp[0])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("matrix_flatten tests passed!")</div>
+circuit.encrypt_run_decrypt(*inputset[0])
+print("matrix_flatten tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=28cbcc82">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ab6f08f6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3849,7 +4097,7 @@ print("matrix_flatten tests passed!")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fd30833a">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0ea00799">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3869,55 +4117,23 @@ print("matrix_flatten tests passed!")</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.matrix</span><span class="w"> </span><span class="kn">import</span> <span class="n">tensor_flatten</span>
-
 <span class="k">def</span><span class="w"> </span><span class="nf">test_tensor_flatten</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">tensor_flatten</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
-
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tensor_flatten</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_tensor_flatten</span><span class="p">,</span> <span class="p">{</span><span class="s1">'tensor'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]],)]</span>
 <span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">tensor_flatten</span><span class="p">(</span><span class="n">inp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">))</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"Failed at </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"tensor_flatten tests passed!"</span><span class="p">)</span>
+<span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"tensor_flatten tests passed! (1/1)"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-11">from concrete import fhe
 from concrete_fhe_toolkit.ml.matrix import tensor_flatten
-
 def test_tensor_flatten(tensor):
-    import numpy as np
-    res = tensor_flatten(tensor)
-    return np.array(res) if isinstance(res, list) else res
-
+    return fhe.array(tensor_flatten(tensor))
 compiler = fhe.Compiler(test_tensor_flatten, {'tensor': 'encrypted'})
-inputset = [(3,), (-2,), (0,), (2,)]
+inputset = [([[[1, 2]]],)]
 circuit = compiler.compile(inputset)
-
-for inp in inputset:
-    try:
-        expected = tensor_flatten(inp[0])
-        if isinstance(expected, tuple):
-            assert tuple(int(x) for x in circuit.encrypt_run_decrypt(*inp)) == expected, f"Failed at {inp}"
-        else:
-            assert int(circuit.encrypt_run_decrypt(*inp)) == int(expected), f"Failed at {inp}"
-    except AssertionError:
-        raise
-    except Exception as e:
-        print(f"Skipping {inp} due to bounds or other error: {e}")
-
-print("tensor_flatten tests passed!")</div>
+circuit.encrypt_run_decrypt(*inputset[0])
+print("tensor_flatten tests passed! (1/1)")</div>
 </div>
 </div>
 </div>

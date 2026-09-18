@@ -24,5 +24,6 @@ test_report.md
 test_summary.txt
 test_ml_notebooks.py
 codespace_tester.py
+try_privacy.py
 /scratch
 /.agents

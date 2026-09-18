@@ -484,10 +484,7 @@ def xgboost_inference(features: List[Any],trees: List[Any]) -> Any:
         # pred = xgboost_inference(enc_features, public_trees)
         ```
     """
-    tree_sum = 0
-    for tree in trees:
-        tree_sum += decision_tree_inference(features,tree)
-
+    tree_sum = array_sum([decision_tree_inference(features, tree) for tree in trees])
     return greater(tree_sum,0)
 
 def cnn_inference(filters: List[List[List[Any]]], bias: List[Any], image: List[List[List[Any]]]) -> List[Any]:

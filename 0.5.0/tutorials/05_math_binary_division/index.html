@@ -3462,7 +3462,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=65dc5c4f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ea71e9ff">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3474,7 +3474,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=738a2615">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5f2b279a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3498,7 +3498,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_unsigned_divide_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">unsigned_divide_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">,</span> <span class="n">quotient_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_unsigned_divide_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'numerator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'denominator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
@@ -3528,7 +3528,7 @@ from concrete_fhe_toolkit.math.binary_division import unsigned_divide_bits
 def test_unsigned_divide_bits(numerator_bits, denominator_bits):
     import numpy as np
     res = unsigned_divide_bits(numerator_bits, denominator_bits, quotient_width=8, zero_result=0)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_unsigned_divide_bits, {'numerator_bits': 'encrypted', 'denominator_bits': 'encrypted'})
 inputset = [([0, 1, 0], [1, 0, 1]), ([1, 1, 1], [1, 1, 1]), ([0, 0, 0], [0, 0, 0])]
@@ -3557,7 +3557,7 @@ print(f"unsigned_divide_bits tests passed! ({_successes}/{len(inputset)})")</div
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=69e9ec8a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5788d6f3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3569,7 +3569,7 @@ print(f"unsigned_divide_bits tests passed! ({_successes}/{len(inputset)})")</div
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5b16b594">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=18e74d2e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3593,7 +3593,7 @@ print(f"unsigned_divide_bits tests passed! ({_successes}/{len(inputset)})")</div
 <span class="k">def</span><span class="w"> </span><span class="nf">test_fixed_point_divide_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">fixed_point_divide_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">,</span> <span class="n">fractional_bits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">quotient_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_fixed_point_divide_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'numerator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'denominator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
@@ -3623,7 +3623,7 @@ from concrete_fhe_toolkit.math.binary_division import fixed_point_divide_bits
 def test_fixed_point_divide_bits(numerator_bits, denominator_bits):
     import numpy as np
     res = fixed_point_divide_bits(numerator_bits, denominator_bits, fractional_bits=3, quotient_width=8, zero_result=0)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_fixed_point_divide_bits, {'numerator_bits': 'encrypted', 'denominator_bits': 'encrypted'})
 inputset = [([0, 1, 0], [1, 0, 1]), ([1, 1, 1], [1, 1, 1]), ([0, 0, 0], [0, 0, 0])]
@@ -3652,7 +3652,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=18d55e49">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=37211b0a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3664,7 +3664,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fce3fa78">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=03af8191">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3693,7 +3693,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fa8946f2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=001d93ab">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3705,7 +3705,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3b56e8f8">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fcdd9167">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3734,7 +3734,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6bf38a0e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=948a5546">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3746,7 +3746,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8fa808b6">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ec88d461">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3775,7 +3775,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ad9e0689">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fa51b221">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3787,7 +3787,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a98807e3">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2c7c95bd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3816,7 +3816,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7e73b984">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=79bca8c0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3828,7 +3828,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=42f16c4b">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fba28744">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3852,7 +3852,7 @@ print(f"fixed_point_divide_bits tests passed! ({_successes}/{len(inputset)})")</
 <span class="k">def</span><span class="w"> </span><span class="nf">test_unsigned_mod_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">unsigned_mod_bits</span><span class="p">(</span><span class="n">numerator_bits</span><span class="p">,</span> <span class="n">denominator_bits</span><span class="p">,</span> <span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_unsigned_mod_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'numerator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'denominator_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
@@ -3882,7 +3882,7 @@ from concrete_fhe_toolkit.math.binary_division import unsigned_mod_bits
 def test_unsigned_mod_bits(numerator_bits, denominator_bits):
     import numpy as np
     res = unsigned_mod_bits(numerator_bits, denominator_bits, zero_result=0)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_unsigned_mod_bits, {'numerator_bits': 'encrypted', 'denominator_bits': 'encrypted'})
 inputset = [([0, 1, 0], [1, 0, 1]), ([1, 1, 1], [1, 1, 1]), ([0, 0, 0], [0, 0, 0])]
@@ -3911,7 +3911,7 @@ print(f"unsigned_mod_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b8ecee30">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0fae40c4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3923,7 +3923,7 @@ print(f"unsigned_mod_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2eac52c4">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8ea6f924">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3952,7 +3952,7 @@ print(f"unsigned_mod_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0ac29548">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=88f15d8c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3964,7 +3964,7 @@ print(f"unsigned_mod_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3b9800bd">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=99a826ee">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

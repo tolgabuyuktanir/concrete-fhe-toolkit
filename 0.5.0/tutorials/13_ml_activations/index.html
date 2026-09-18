@@ -3484,7 +3484,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=069d4718">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9cd3fc99">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3496,7 +3496,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=88abe5bd">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=71b98e3f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3520,7 +3520,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_relu</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_relu</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -3550,7 +3550,7 @@ from concrete_fhe_toolkit.ml.activations import relu
 def test_relu(value):
     import numpy as np
     res = relu(value)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_relu, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -3579,7 +3579,7 @@ print(f"relu tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=24f6109e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=149b6274">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3591,7 +3591,7 @@ print(f"relu tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6c71de62">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c9f252bd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3615,7 +3615,7 @@ print(f"relu tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_leaky_relu</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">leaky_relu</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_leaky_relu</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -3645,7 +3645,7 @@ from concrete_fhe_toolkit.ml.activations import leaky_relu
 def test_leaky_relu(value):
     import numpy as np
     res = leaky_relu(value, 1)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_leaky_relu, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -3674,7 +3674,7 @@ print(f"leaky_relu tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6b2ed583">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=648d00ef">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3686,7 +3686,7 @@ print(f"leaky_relu tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a73e45ef">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e80a0a7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3710,7 +3710,7 @@ print(f"leaky_relu tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_unit_step</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">unit_step</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_unit_step</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)]</span>
@@ -3740,7 +3740,7 @@ from concrete_fhe_toolkit.ml.activations import unit_step
 def test_unit_step(value):
     import numpy as np
     res = unit_step(value)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_unit_step, {'value': 'encrypted'})
 inputset = [(3,), (-2,), (0,), (2,)]
@@ -3769,7 +3769,7 @@ print(f"unit_step tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5cb386d1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8a0b8eba">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3781,7 +3781,7 @@ print(f"unit_step tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=66c4470b">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=eda1580b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3805,7 +3805,7 @@ print(f"unit_step tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_threshold_activation</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">threshold_activation</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_threshold_activation</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'threshold'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
@@ -3835,7 +3835,7 @@ from concrete_fhe_toolkit.ml.activations import threshold_activation
 def test_threshold_activation(value, threshold):
     import numpy as np
     res = threshold_activation(value, threshold)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_threshold_activation, {'value': 'encrypted', 'threshold': 'encrypted'})
 inputset = [(3, 1), (-2, -2), (0, 0), (2, 2), (1, 3)]
@@ -3864,19 +3864,19 @@ print(f"threshold_activation tests passed! ({_successes}/{len(inputset)})")</div
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cb5c0345">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1dee3d4e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="make_softmax">make_softmax()<a class="anchor-link" href="#make_softmax">¶</a></h3><p>Create a scaled softmax function for a list of encrypted scores.</p>
-<p>This cell verifies the <code>make_softmax</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
+<p>This cell attempts to compile the circuit and explicitly expects it to fail due to Concrete's 16-bit Table Lookup (TLU) limitation. This serves as a safety check for the 22-bit noise growth.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f9a0c50a">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=443ee69d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3941,7 +3941,7 @@ print(f"-&gt; Caught expected Concrete 16-bit limitation error.")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b7b084a0">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=75b2ad7f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3953,7 +3953,7 @@ print(f"-&gt; Caught expected Concrete 16-bit limitation error.")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7b4560ea">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7ec59076">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4026,7 +4026,7 @@ print(f"compile_relu tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=58962b7f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9787af08">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4038,7 +4038,7 @@ print(f"compile_relu tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f19c2f5c">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f730743d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4074,7 +4074,7 @@ print("compile_leaky_relu tests passed! (1/1)")
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=42fc150c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cd71d55f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4086,7 +4086,7 @@ print("compile_leaky_relu tests passed! (1/1)")
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=72dbbaf2">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6b45fe64">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4159,7 +4159,7 @@ print(f"compile_unit_step tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5197c831">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e7e332bf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4171,7 +4171,7 @@ print(f"compile_unit_step tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b32cf0fa">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=71717d45">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4244,19 +4244,19 @@ print(f"compile_threshold_activation tests passed! ({_successes}/{len(inputset)}
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=35e1d084">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0b7e3e09">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="compile_softmax">compile_softmax()<a class="anchor-link" href="#compile_softmax">¶</a></h3><p>Compile an FHE circuit for the softmax function over an array of fixed size.</p>
-<p>This cell verifies the <code>compile_softmax</code> function mathematically against its cleartext counterpart, using a dynamically generated input set that covers positive, negative, zero, and array edge cases while respecting the <code>[-7, 7]</code> FHE RAM constraints.</p>
+<p>This cell attempts to compile the circuit and explicitly expects it to fail due to Concrete's 16-bit Table Lookup (TLU) limitation. This serves as a safety check for the 22-bit noise growth.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e5bf0459">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8497a533">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

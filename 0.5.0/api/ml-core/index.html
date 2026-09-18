@@ -4081,7 +4081,7 @@ logarithm table (TLU). The probabilities should be scaled integers.</p>
     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
             <span class="s2">"Cross Entropy requires &gt;16-bit TLUs and will likely fail to compile "</span>
             <span class="s2">"in the current version of Concrete. Consider evaluating loss on the client side."</span><span class="p">,</span>
-            <span class="ne">UserWarning</span>
+            <span class="ne">UserWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span>
         <span class="p">)</span>
     <span class="n">log_func</span> <span class="o">=</span> <span class="n">make_log</span><span class="p">(</span><span class="n">min_input</span><span class="p">,</span> <span class="n">max_input</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="n">input_scale</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="n">output_scale</span><span class="p">,</span> <span class="n">invalid_result</span><span class="o">=-</span><span class="mi">999</span><span class="p">)</span>
 

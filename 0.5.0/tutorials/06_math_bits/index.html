@@ -3836,7 +3836,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8c076a36">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4907049e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3849,7 +3849,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=269c2537">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2821888c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3873,7 +3873,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_bit_not</span><span class="p">(</span><span class="n">bit</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">bit_not</span><span class="p">(</span><span class="n">bit</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_bit_not</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bit'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)]</span>
@@ -3903,7 +3903,7 @@ from concrete_fhe_toolkit.math.bits import bit_not
 def test_bit_not(bit):
     import numpy as np
     res = bit_not(bit)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_bit_not, {'bit': 'encrypted'})
 inputset = [(0,), (1,)]
@@ -3932,7 +3932,7 @@ print(f"bit_not tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2b4a5b5a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f9b6072a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3945,7 +3945,7 @@ print(f"bit_not tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=26f245e5">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a5a81d72">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3969,7 +3969,7 @@ print(f"bit_not tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_bit_and</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">bit_and</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_bit_and</span><span class="p">,</span> <span class="p">{</span><span class="s1">'left'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
@@ -3999,7 +3999,7 @@ from concrete_fhe_toolkit.math.bits import bit_and
 def test_bit_and(left, right):
     import numpy as np
     res = bit_and(left, right)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_bit_and, {'left': 'encrypted', 'right': 'encrypted'})
 inputset = [(0, 0), (0, 1), (1, 0), (1, 1)]
@@ -4028,7 +4028,7 @@ print(f"bit_and tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=83e8c5f7">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0a3441f5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4041,7 +4041,7 @@ print(f"bit_and tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=60dd37ca">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4aa1b00f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4065,7 +4065,7 @@ print(f"bit_and tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_bit_or</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">bit_or</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_bit_or</span><span class="p">,</span> <span class="p">{</span><span class="s1">'left'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
@@ -4095,7 +4095,7 @@ from concrete_fhe_toolkit.math.bits import bit_or
 def test_bit_or(left, right):
     import numpy as np
     res = bit_or(left, right)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_bit_or, {'left': 'encrypted', 'right': 'encrypted'})
 inputset = [(0, 0), (0, 1), (1, 0), (1, 1)]
@@ -4124,7 +4124,7 @@ print(f"bit_or tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=db0b70e6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf25e6b1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4137,7 +4137,7 @@ print(f"bit_or tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=39502a19">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2d52a2c4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4161,7 +4161,7 @@ print(f"bit_or tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_bit_xor</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">bit_xor</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_bit_xor</span><span class="p">,</span> <span class="p">{</span><span class="s1">'left'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
@@ -4191,7 +4191,7 @@ from concrete_fhe_toolkit.math.bits import bit_xor
 def test_bit_xor(left, right):
     import numpy as np
     res = bit_xor(left, right)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_bit_xor, {'left': 'encrypted', 'right': 'encrypted'})
 inputset = [(0, 0), (0, 1), (1, 0), (1, 1)]
@@ -4220,7 +4220,7 @@ print(f"bit_xor tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=aa64841d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=92420b6c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4233,7 +4233,7 @@ print(f"bit_xor tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c038476b">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=97bde239">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4257,7 +4257,7 @@ print(f"bit_xor tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_bit_select</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">when_one</span><span class="p">,</span> <span class="n">when_zero</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">bit_select</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">when_one</span><span class="p">,</span> <span class="n">when_zero</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_bit_select</span><span class="p">,</span> <span class="p">{</span><span class="s1">'control'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'when_one'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'when_zero'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
@@ -4287,7 +4287,7 @@ from concrete_fhe_toolkit.math.bits import bit_select
 def test_bit_select(control, when_one, when_zero):
     import numpy as np
     res = bit_select(control, when_one, when_zero)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_bit_select, {'control': 'encrypted', 'when_one': 'encrypted', 'when_zero': 'encrypted'})
 inputset = [(0, 0, 0), (0, 1, 0), (1, 0, 1), (1, 1, 1), (0, 1, 1)]
@@ -4316,7 +4316,7 @@ print(f"bit_select tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0280d86c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=31934bf2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4329,7 +4329,7 @@ print(f"bit_select tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f718508d">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=35056e9b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4353,7 +4353,7 @@ print(f"bit_select tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_full_adder_bit</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">carry_in</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">full_adder_bit</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">carry_in</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_full_adder_bit</span><span class="p">,</span> <span class="p">{</span><span class="s1">'left'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'carry_in'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
@@ -4383,7 +4383,7 @@ from concrete_fhe_toolkit.math.bits import full_adder_bit
 def test_full_adder_bit(left, right, carry_in):
     import numpy as np
     res = full_adder_bit(left, right, carry_in)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_full_adder_bit, {'left': 'encrypted', 'right': 'encrypted', 'carry_in': 'encrypted'})
 inputset = [(0, 0, 0), (0, 1, 0), (1, 0, 1), (1, 1, 1), (0, 1, 1)]
@@ -4412,7 +4412,7 @@ print(f"full_adder_bit tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2dc33553">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0474a4c7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4425,7 +4425,7 @@ print(f"full_adder_bit tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3c94aa4b">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4424850d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4449,7 +4449,7 @@ print(f"full_adder_bit tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_full_subtractor_bit</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">borrow_in</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">full_subtractor_bit</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">borrow_in</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_full_subtractor_bit</span><span class="p">,</span> <span class="p">{</span><span class="s1">'left'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'borrow_in'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
@@ -4479,7 +4479,7 @@ from concrete_fhe_toolkit.math.bits import full_subtractor_bit
 def test_full_subtractor_bit(left, right, borrow_in):
     import numpy as np
     res = full_subtractor_bit(left, right, borrow_in)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_full_subtractor_bit, {'left': 'encrypted', 'right': 'encrypted', 'borrow_in': 'encrypted'})
 inputset = [(0, 0, 0), (0, 1, 0), (1, 0, 1), (1, 1, 1), (0, 1, 1)]
@@ -4508,7 +4508,7 @@ print(f"full_subtractor_bit tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6e2b4671">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=02f26454">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4520,7 +4520,7 @@ print(f"full_subtractor_bit tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b8e9a150">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=174b7a85">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4544,7 +4544,7 @@ print(f"full_subtractor_bit tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_bit_or_many</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">bit_or_many</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_bit_or_many</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -4574,7 +4574,7 @@ from concrete_fhe_toolkit.math.bits import bit_or_many
 def test_bit_or_many(bits):
     import numpy as np
     res = bit_or_many(bits)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_bit_or_many, {'bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -4603,7 +4603,7 @@ print(f"bit_or_many tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8a308561">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=65f9c75d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4615,7 +4615,7 @@ print(f"bit_or_many tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2199f20d">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9360dc52">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4639,7 +4639,7 @@ print(f"bit_or_many tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_bit_and_many</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">bit_and_many</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_bit_and_many</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -4669,7 +4669,7 @@ from concrete_fhe_toolkit.math.bits import bit_and_many
 def test_bit_and_many(bits):
     import numpy as np
     res = bit_and_many(bits)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_bit_and_many, {'bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -4698,7 +4698,7 @@ print(f"bit_and_many tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=922616aa">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c64ea87d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4710,7 +4710,7 @@ print(f"bit_and_many tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3182188e">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7b8c5b18">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4734,7 +4734,7 @@ print(f"bit_and_many tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_bit_xor_many</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">bit_xor_many</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_bit_xor_many</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -4764,7 +4764,7 @@ from concrete_fhe_toolkit.math.bits import bit_xor_many
 def test_bit_xor_many(bits):
     import numpy as np
     res = bit_xor_many(bits)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_bit_xor_many, {'bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -4793,7 +4793,7 @@ print(f"bit_xor_many tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ed338e38">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1949da12">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4805,7 +4805,7 @@ print(f"bit_xor_many tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=82117e7a">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f5e012ce">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4829,7 +4829,7 @@ print(f"bit_xor_many tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_integer_to_bits</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">integer_to_bits</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_integer_to_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'value'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)]</span>
@@ -4859,7 +4859,7 @@ from concrete_fhe_toolkit.math.bits import integer_to_bits
 def test_integer_to_bits(value):
     import numpy as np
     res = integer_to_bits(value, 4)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_integer_to_bits, {'value': 'encrypted'})
 inputset = [(2,), (-2,), (0,), (1,)]
@@ -4888,7 +4888,7 @@ print(f"integer_to_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3d75de3d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0305f9a0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4900,7 +4900,7 @@ print(f"integer_to_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9099c6df">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d86beb26">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4924,7 +4924,7 @@ print(f"integer_to_bits tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_bits_to_unsigned</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">bits_to_unsigned</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_bits_to_unsigned</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)]</span>
@@ -4954,7 +4954,7 @@ from concrete_fhe_toolkit.math.bits import bits_to_unsigned
 def test_bits_to_unsigned(bits):
     import numpy as np
     res = bits_to_unsigned(bits)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_bits_to_unsigned, {'bits': 'encrypted'})
 inputset = [(0,), (1,)]
@@ -4983,7 +4983,7 @@ print(f"bits_to_unsigned tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cce733fc">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=049f087c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -4994,7 +4994,7 @@ print(f"bits_to_unsigned tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c69b1f82">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=669b9456">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5034,7 +5034,7 @@ print('Conversion successful!')
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c743ce2a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7bdf2408">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5045,7 +5045,7 @@ print('Conversion successful!')
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f8aa06a9">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3f345c3d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5085,7 +5085,7 @@ print('Conversion successful!')
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6071d99e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=569795d9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5097,7 +5097,7 @@ print('Conversion successful!')
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=41d310b1">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=32a2d1e0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5121,7 +5121,7 @@ print('Conversion successful!')
 <span class="k">def</span><span class="w"> </span><span class="nf">test_sign_magnitude_to_twos_complement_bits</span><span class="p">(</span><span class="n">magnitude_bits</span><span class="p">,</span> <span class="n">sign_bit</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">sign_magnitude_to_twos_complement_bits</span><span class="p">(</span><span class="n">magnitude_bits</span><span class="p">,</span> <span class="n">sign_bit</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_sign_magnitude_to_twos_complement_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'magnitude_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'sign_bit'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)]</span>
@@ -5151,7 +5151,7 @@ from concrete_fhe_toolkit.math.bits import sign_magnitude_to_twos_complement_bit
 def test_sign_magnitude_to_twos_complement_bits(magnitude_bits, sign_bit):
     import numpy as np
     res = sign_magnitude_to_twos_complement_bits(magnitude_bits, sign_bit, 4)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_sign_magnitude_to_twos_complement_bits, {'magnitude_bits': 'encrypted', 'sign_bit': 'encrypted'})
 inputset = [([0, 1, 0], 1), ([1, 1, 1], 0), ([0, 0, 0], 0)]
@@ -5180,7 +5180,7 @@ print(f"sign_magnitude_to_twos_complement_bits tests passed! ({_successes}/{len(
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=53d1ecb0">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=12fc32ee">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5192,7 +5192,7 @@ print(f"sign_magnitude_to_twos_complement_bits tests passed! ({_successes}/{len(
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=63b994c8">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c00f7e3d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5216,7 +5216,7 @@ print(f"sign_magnitude_to_twos_complement_bits tests passed! ({_successes}/{len(
 <span class="k">def</span><span class="w"> </span><span class="nf">test_twos_complement_add_bits</span><span class="p">(</span><span class="n">left_bits</span><span class="p">,</span> <span class="n">right_bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">twos_complement_add_bits</span><span class="p">(</span><span class="n">left_bits</span><span class="p">,</span> <span class="n">right_bits</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_twos_complement_add_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'left_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'right_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
@@ -5246,7 +5246,7 @@ from concrete_fhe_toolkit.math.bits import twos_complement_add_bits
 def test_twos_complement_add_bits(left_bits, right_bits):
     import numpy as np
     res = twos_complement_add_bits(left_bits, right_bits, 4)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_twos_complement_add_bits, {'left_bits': 'encrypted', 'right_bits': 'encrypted'})
 inputset = [([0, 1, 0], [1, 0, 1]), ([1, 1, 1], [1, 1, 1]), ([0, 0, 0], [0, 0, 0])]
@@ -5275,7 +5275,7 @@ print(f"twos_complement_add_bits tests passed! ({_successes}/{len(inputset)})")<
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fc751f57">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=06c00408">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5287,7 +5287,7 @@ print(f"twos_complement_add_bits tests passed! ({_successes}/{len(inputset)})")<
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ecb38f21">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=634ef3b8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5311,7 +5311,7 @@ print(f"twos_complement_add_bits tests passed! ({_successes}/{len(inputset)})")<
 <span class="k">def</span><span class="w"> </span><span class="nf">test_twos_complement_multiply_by_constant_bits</span><span class="p">(</span><span class="n">signed_bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">twos_complement_multiply_by_constant_bits</span><span class="p">(</span><span class="n">signed_bits</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_twos_complement_multiply_by_constant_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'signed_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -5341,7 +5341,7 @@ from concrete_fhe_toolkit.math.bits import twos_complement_multiply_by_constant_
 def test_twos_complement_multiply_by_constant_bits(signed_bits):
     import numpy as np
     res = twos_complement_multiply_by_constant_bits(signed_bits, 2, 1)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_twos_complement_multiply_by_constant_bits, {'signed_bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -5370,7 +5370,7 @@ print(f"twos_complement_multiply_by_constant_bits tests passed! ({_successes}/{l
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b255a8f5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0c6f7ea9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5382,7 +5382,7 @@ print(f"twos_complement_multiply_by_constant_bits tests passed! ({_successes}/{l
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2c3bc4bb">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=47142067">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5406,7 +5406,7 @@ print(f"twos_complement_multiply_by_constant_bits tests passed! ({_successes}/{l
 <span class="k">def</span><span class="w"> </span><span class="nf">test_multiply_bits</span><span class="p">(</span><span class="n">left_bits</span><span class="p">,</span> <span class="n">right_bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">multiply_bits</span><span class="p">(</span><span class="n">left_bits</span><span class="p">,</span> <span class="n">right_bits</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_multiply_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'left_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'right_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
@@ -5436,7 +5436,7 @@ from concrete_fhe_toolkit.math.bits import multiply_bits
 def test_multiply_bits(left_bits, right_bits):
     import numpy as np
     res = multiply_bits(left_bits, right_bits, 4)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_multiply_bits, {'left_bits': 'encrypted', 'right_bits': 'encrypted'})
 inputset = [([0, 1, 0], [1, 0, 1]), ([1, 1, 1], [1, 1, 1]), ([0, 0, 0], [0, 0, 0])]
@@ -5465,7 +5465,7 @@ print(f"multiply_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b28221f8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d2c52e63">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5477,7 +5477,7 @@ print(f"multiply_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8ce6a44e">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=826fd865">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5501,7 +5501,7 @@ print(f"multiply_bits tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_shift_left_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">shift_left_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_shift_left_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -5531,7 +5531,7 @@ from concrete_fhe_toolkit.math.bits import shift_left_bits
 def test_shift_left_bits(bits):
     import numpy as np
     res = shift_left_bits(bits, 1)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_shift_left_bits, {'bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -5560,7 +5560,7 @@ print(f"shift_left_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=478626da">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2160a8b4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5572,7 +5572,7 @@ print(f"shift_left_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7186f2d8">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=73bb5151">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5596,7 +5596,7 @@ print(f"shift_left_bits tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_shift_right_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">shift_right_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">arithmetic</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_shift_right_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -5626,7 +5626,7 @@ from concrete_fhe_toolkit.math.bits import shift_right_bits
 def test_shift_right_bits(bits):
     import numpy as np
     res = shift_right_bits(bits, 1, arithmetic=1)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_shift_right_bits, {'bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -5655,7 +5655,7 @@ print(f"shift_right_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fb97d557">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6c8bffec">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5667,7 +5667,7 @@ print(f"shift_right_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=68daae5a">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0648a211">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5691,7 +5691,7 @@ print(f"shift_right_bits tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_rotate_left_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">rotate_left_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_rotate_left_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -5721,7 +5721,7 @@ from concrete_fhe_toolkit.math.bits import rotate_left_bits
 def test_rotate_left_bits(bits):
     import numpy as np
     res = rotate_left_bits(bits, 1)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_rotate_left_bits, {'bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -5750,7 +5750,7 @@ print(f"rotate_left_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=42aead25">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e65f1869">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5762,7 +5762,7 @@ print(f"rotate_left_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=999cfd00">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=17178e92">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5786,7 +5786,7 @@ print(f"rotate_left_bits tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_rotate_right_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">rotate_right_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_rotate_right_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -5816,7 +5816,7 @@ from concrete_fhe_toolkit.math.bits import rotate_right_bits
 def test_rotate_right_bits(bits):
     import numpy as np
     res = rotate_right_bits(bits, 1)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_rotate_right_bits, {'bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -5845,7 +5845,7 @@ print(f"rotate_right_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=21968df6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=321c4afa">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5857,7 +5857,7 @@ print(f"rotate_right_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e4d427a5">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6b3b6352">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5881,7 +5881,7 @@ print(f"rotate_right_bits tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_popcount_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">popcount_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_popcount_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -5911,7 +5911,7 @@ from concrete_fhe_toolkit.math.bits import popcount_bits
 def test_popcount_bits(bits):
     import numpy as np
     res = popcount_bits(bits)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_popcount_bits, {'bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -5940,7 +5940,7 @@ print(f"popcount_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3000c7f9">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=28156925">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5952,7 +5952,7 @@ print(f"popcount_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=574d14ac">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0b844c7a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -5976,7 +5976,7 @@ print(f"popcount_bits tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_parity_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">parity_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_parity_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -6006,7 +6006,7 @@ from concrete_fhe_toolkit.math.bits import parity_bits
 def test_parity_bits(bits):
     import numpy as np
     res = parity_bits(bits)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_parity_bits, {'bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -6035,7 +6035,7 @@ print(f"parity_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3dc39ec1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9e45afca">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6047,7 +6047,7 @@ print(f"parity_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=660f8ea2">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d06014cf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6071,7 +6071,7 @@ print(f"parity_bits tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_bit_length_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">bit_length_bits</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_bit_length_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],)]</span>
@@ -6101,7 +6101,7 @@ from concrete_fhe_toolkit.math.bits import bit_length_bits
 def test_bit_length_bits(bits):
     import numpy as np
     res = bit_length_bits(bits)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_bit_length_bits, {'bits': 'encrypted'})
 inputset = [([0, 1, 0],), ([1, 1, 1],), ([0, 0, 0],)]
@@ -6130,7 +6130,7 @@ print(f"bit_length_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3a75f92e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0b143de3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6142,7 +6142,7 @@ print(f"bit_length_bits tests passed! ({_successes}/{len(inputset)})")</div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0c376540">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fe4c2ffc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -6166,7 +6166,7 @@ print(f"bit_length_bits tests passed! ({_successes}/{len(inputset)})")</div>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_unsigned_compare_bits</span><span class="p">(</span><span class="n">left_bits</span><span class="p">,</span> <span class="n">right_bits</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">unsigned_compare_bits</span><span class="p">(</span><span class="n">left_bits</span><span class="p">,</span> <span class="n">right_bits</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 
 <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">test_unsigned_compare_bits</span><span class="p">,</span> <span class="p">{</span><span class="s1">'left_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'right_bits'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
@@ -6196,7 +6196,7 @@ from concrete_fhe_toolkit.math.bits import unsigned_compare_bits
 def test_unsigned_compare_bits(left_bits, right_bits):
     import numpy as np
     res = unsigned_compare_bits(left_bits, right_bits)
-    return array(res) if isinstance(res, list) else res
+    return fhe.array(res) if isinstance(res, list) else res
 
 compiler = fhe.Compiler(test_unsigned_compare_bits, {'left_bits': 'encrypted', 'right_bits': 'encrypted'})
 inputset = [([0, 1, 0], [1, 0, 1]), ([1, 1, 1], [1, 1, 1]), ([0, 0, 0], [0, 0, 0])]

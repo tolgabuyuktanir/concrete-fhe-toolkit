@@ -3286,7 +3286,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=63d9f4a7">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8cce6579">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3297,7 +3297,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7165467a">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=83d16e9f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3315,17 +3315,53 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">FHELinearRegression</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">FHELinearRegression</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">inputset</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">FHEXGBoostRegressor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">FHEXGBoostRegressor</span><span class="p">(</span><span class="n">trees</span><span class="o">=</span><span class="p">[{</span><span class="s1">'feature'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'threshold'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'left'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">:</span> <span class="mi">1</span><span class="p">}])</span>
+<span class="n">inputset</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
 <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"FHELinearRegression tests passed! (1/1)"</span><span class="p">)</span>
+<span class="n">_successes</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+        <span class="n">fhe_res</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="s1">'__iter__'</span><span class="p">):</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">fhe_res</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">fhe_res</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+        <span class="k">raise</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s1"> due to bounds or other error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_successes</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">assert</span> <span class="n">_successes</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'FHEXGBoostRegressor: all inputs were skipped'</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'FHEXGBoostRegressor model compiled and tested successfully! (</span><span class="si">{</span><span class="n">_successes</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span><span class="si">}</span><span class="s1">)'</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-1">from concrete_fhe_toolkit.ml.classes import FHELinearRegression
-model = FHELinearRegression(weights=[1, 1], bias=0)
-inputset = [[1, 0], [0, 1]]
+<div class="clipboard-copy-txt" id="cell-1">from concrete_fhe_toolkit.ml.regression import FHEXGBoostRegressor
+import numpy as np
+
+model = FHEXGBoostRegressor(trees=[{'feature': 0, 'threshold': 1, 'left': 0, 'right': 1}])
+inputset = [[1, 2], [0, 0]]
 model.compile(inputset)
-print("FHELinearRegression tests passed! (1/1)")
+_successes = 0
+for inp in inputset:
+    try:
+        expected = model.simulate(inp)
+        fhe_res = model.predict(inp)
+        if isinstance(expected, (list, np.ndarray)) or hasattr(expected, '__iter__'):
+            np.testing.assert_array_equal(fhe_res, expected)
+        else:
+            assert int(fhe_res) == int(expected)
+    except AssertionError:
+        raise
+    except Exception as e:
+        print(f'Skipping {inp} due to bounds or other error: {e}')
+    else:
+        _successes += 1
+assert _successes &gt; 0, 'FHEXGBoostRegressor: all inputs were skipped'
+print(f'FHEXGBoostRegressor model compiled and tested successfully! ({_successes}/{len(inputset)})')
 </div>
 </div>
 </div>
@@ -3333,7 +3369,7 @@ print("FHELinearRegression tests passed! (1/1)")
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3adff7a7">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4cf815e4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

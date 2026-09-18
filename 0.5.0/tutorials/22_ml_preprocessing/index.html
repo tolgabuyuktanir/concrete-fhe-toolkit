@@ -3352,7 +3352,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e104b329">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b2a5433">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3364,7 +3364,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f82afad7">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c8fad5c9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3407,23 +3407,24 @@ print("bin_feature tests passed! (1/1)")</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f0723c16">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=58d46e77">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="fhebinner">FHEBinner<a class="anchor-link" href="#fhebinner">¶</a></h3><p>Demonstrates the <code>FHEBinner</code> class. Compiles and tests its <code>simulate</code> vs <code>predict</code> logic.</p>
+<h3 id="fhebinner">FHEBinner<a class="anchor-link" href="#fhebinner">¶</a></h3><p>Demonstrates the <code>FHEBinner</code> class.</p>
+<p>This transformer is evaluated in cleartext here. Its FHE compilation is tested automatically when chained inside an <code>FHEPipeline</code>.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=14c7bbce">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=456bfb40">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
@@ -3436,19 +3437,42 @@ print("bin_feature tests passed! (1/1)")</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Transformer class test skipped because they are used in pipelines</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'FHEBinner model compiled and tested successfully! (1/1)'</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">FHEBinner</span>
+
+<span class="n">binner</span> <span class="o">=</span> <span class="n">FHEBinner</span><span class="p">([[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">65</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]])</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">binner</span><span class="o">.</span><span class="n">_transform_logic</span><span class="p">([</span><span class="mi">55</span><span class="p">,</span> <span class="mi">70</span><span class="p">])</span>
+
+<span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'FHEBinner logic tested successfully in cleartext! (1/1)'</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-2"># Transformer class test skipped because they are used in pipelines
-print('FHEBinner model compiled and tested successfully! (1/1)')
+<div class="clipboard-copy-txt" id="cell-2">from concrete_fhe_toolkit.ml.preprocessing import FHEBinner
+
+binner = FHEBinner([[18, 30, 45, 65], [10, 50]])
+res = binner._transform_logic([55, 70])
+
+assert list(res) == [3, 2]
+print('FHEBinner logic tested successfully in cleartext! (1/1)')
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>FHEBinner logic tested successfully in cleartext! (1/1)
+</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cae8b819">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2cc9c1c3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3459,23 +3483,24 @@ print('FHEBinner model compiled and tested successfully! (1/1)')
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0e9f75de">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=28910cd0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="fhestandardscaler">FHEStandardScaler<a class="anchor-link" href="#fhestandardscaler">¶</a></h3><p>Demonstrates the <code>FHEStandardScaler</code> class. Compiles and tests its <code>simulate</code> vs <code>predict</code> logic.</p>
+<h3 id="fhestandardscaler">FHEStandardScaler<a class="anchor-link" href="#fhestandardscaler">¶</a></h3><p>Demonstrates the <code>FHEStandardScaler</code> class.</p>
+<p>This transformer is evaluated in cleartext here. Its FHE compilation is tested automatically when chained inside an <code>FHEPipeline</code>.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f02fb85d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=011dc4a2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
@@ -3488,19 +3513,42 @@ print('FHEBinner model compiled and tested successfully! (1/1)')
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Transformer class test skipped because they are used in pipelines</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'FHEStandardScaler model compiled and tested successfully! (1/1)'</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">FHEStandardScaler</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">FHEStandardScaler</span><span class="p">(</span><span class="n">means</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">stds</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">_transform_logic</span><span class="p">([</span><span class="mi">65</span><span class="p">,</span> <span class="mi">60</span><span class="p">])</span>
+
+<span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'FHEStandardScaler logic tested successfully in cleartext! (1/1)'</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-3"># Transformer class test skipped because they are used in pipelines
-print('FHEStandardScaler model compiled and tested successfully! (1/1)')
+<div class="clipboard-copy-txt" id="cell-3">from concrete_fhe_toolkit.ml.preprocessing import FHEStandardScaler
+
+scaler = FHEStandardScaler(means=[50, 100], stds=[10, 20], scale=10)
+res = scaler._transform_logic([65, 60])
+
+assert list(res) == [15, -20]
+print('FHEStandardScaler logic tested successfully in cleartext! (1/1)')
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>FHEStandardScaler logic tested successfully in cleartext! (1/1)
+</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d7cbcf27">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=83ad3a68">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3511,23 +3559,24 @@ print('FHEStandardScaler model compiled and tested successfully! (1/1)')
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=72a30f6f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c31e5af6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="fheminmaxscaler">FHEMinMaxScaler<a class="anchor-link" href="#fheminmaxscaler">¶</a></h3><p>Demonstrates the <code>FHEMinMaxScaler</code> class. Compiles and tests its <code>simulate</code> vs <code>predict</code> logic.</p>
+<h3 id="fheminmaxscaler">FHEMinMaxScaler<a class="anchor-link" href="#fheminmaxscaler">¶</a></h3><p>Demonstrates the <code>FHEMinMaxScaler</code> class.</p>
+<p>This transformer is evaluated in cleartext here. Its FHE compilation is tested automatically when chained inside an <code>FHEPipeline</code>.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0ebbf80e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7939fcb0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-4">
@@ -3540,19 +3589,42 @@ print('FHEStandardScaler model compiled and tested successfully! (1/1)')
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Transformer class test skipped because they are used in pipelines</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'FHEMinMaxScaler model compiled and tested successfully! (1/1)'</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">FHEMinMaxScaler</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">FHEMinMaxScaler</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">_transform_logic</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+
+<span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'FHEMinMaxScaler logic tested successfully in cleartext! (1/1)'</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-4"># Transformer class test skipped because they are used in pipelines
-print('FHEMinMaxScaler model compiled and tested successfully! (1/1)')
+<div class="clipboard-copy-txt" id="cell-4">from concrete_fhe_toolkit.ml.preprocessing import FHEMinMaxScaler
+
+scaler = FHEMinMaxScaler([0, 10], [200, 20], scale=100)
+res = scaler._transform_logic([50, 15])
+
+assert list(res) == [25, 50]
+print('FHEMinMaxScaler logic tested successfully in cleartext! (1/1)')
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>FHEMinMaxScaler logic tested successfully in cleartext! (1/1)
+</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3e1b9e71">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=82f5d8a0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

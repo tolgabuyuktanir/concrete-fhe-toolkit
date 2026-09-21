@@ -446,7 +446,7 @@ def compile_expm1(
     )
 
 
-def _validate_log_base(base: Optional[float]):
+def _validate_log_base(base: Optional[float]) -> Callable:
     if base is None:
         return math.log
     if base <= 0 or base == 1:

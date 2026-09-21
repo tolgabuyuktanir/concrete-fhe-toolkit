@@ -8,16 +8,16 @@ lookup tables take explicit ``min_value`` / ``max_value`` bounds.
 
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Union
 
 from ._compat import fhe
 from ._utils import validate_bounds, validate_integer, validate_size
 from .arrays import array_sum, make_argmax, make_sort
 from .math import greater, maximum, minimum
 from .math.number_theory import make_isqrt
+import numpy as np
 
-
-def array_mean(array: List[Any]) -> Any:
+def array_mean(array: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the floor mean of an encrypted array.
     
     Example:
@@ -30,7 +30,7 @@ def array_mean(array: List[Any]) -> Any:
     return array_sum(array) // len(array)
 
 
-def array_variance(array: List[Any]) -> Any:
+def array_variance(array: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the floor variance of an encrypted array.
     
     Example:
@@ -47,7 +47,7 @@ def array_variance(array: List[Any]) -> Any:
     return diff_sum // len(array)
 
 
-def array_std(array: List[Any], min_value: int, max_value: int) -> Any:
+def array_std(array: Union[np.ndarray, List[Any]], min_value: int, max_value: int) -> Any:
     """Calculate the integer standard deviation (isqrt of the variance).
 
     ``min_value`` / ``max_value`` bound the array elements; the isqrt lookup
@@ -70,7 +70,7 @@ def array_std(array: List[Any], min_value: int, max_value: int) -> Any:
     return isqrt(variance)
 
 
-def array_covariance(array1: List[Any], array2: List[Any]) -> Any:
+def array_covariance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the floor covariance of two encrypted arrays.
     
     Example:
@@ -90,7 +90,7 @@ def array_covariance(array1: List[Any], array2: List[Any]) -> Any:
     return product_sum // len(array1)
 
 
-def array_max(elements: List[Any]) -> Any:
+def array_max(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Find the maximum value in an encrypted array using a tournament reduction.
     
     Example:
@@ -113,7 +113,7 @@ def array_max(elements: List[Any]) -> Any:
     return current_round[0]
 
 
-def array_min(elements: List[Any]) -> Any:
+def array_min(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Find the minimum value in an encrypted array using a tournament reduction.
     
     Example:
@@ -136,7 +136,7 @@ def array_min(elements: List[Any]) -> Any:
     return current_round[0]
 
 
-def array_range(array: List[Any]) -> Any:
+def array_range(array: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the range (max - min) of an encrypted array.
     
     Example:
@@ -149,7 +149,7 @@ def array_range(array: List[Any]) -> Any:
     return array_max(array) - array_min(array)
 
 
-def array_count_greater(array: List[Any], threshold: Any) -> Any:
+def array_count_greater(array: Union[np.ndarray, List[Any]], threshold: Any) -> Any:
     """Count how many elements are strictly greater than a threshold.
     
     Example:
@@ -165,7 +165,7 @@ def array_count_greater(array: List[Any], threshold: Any) -> Any:
     return count
 
 
-def array_median(array: List[Any], min_value: int, max_value: int) -> Any:
+def array_median(array: Union[np.ndarray, List[Any]], min_value: int, max_value: int) -> Any:
     """Return the median of an encrypted array (floor average of the middle pair).
 
     Uses the bitonic sorting network, so the array length must be a power
@@ -190,7 +190,7 @@ def array_median(array: List[Any], min_value: int, max_value: int) -> Any:
     return (ordered[middle - 1] + ordered[middle]) // 2
 
 
-def array_percentile(array: List[Any], q: int, min_value: int, max_value: int) -> Any:
+def array_percentile(array: Union[np.ndarray, List[Any]], q: int, min_value: int, max_value: int) -> Any:
     """Return the nearest-rank q-th percentile (0..100) of an encrypted array.
 
     Uses the bitonic sorting network, so the array length must be a power
@@ -216,7 +216,7 @@ def array_percentile(array: List[Any], q: int, min_value: int, max_value: int) -
     return ordered[rank]
 
 
-def array_histogram(array: List[Any], min_value: int, max_value: int) -> List[Any]:
+def array_histogram(array: Union[np.ndarray, List[Any]], min_value: int, max_value: int) -> Union[np.ndarray, List[Any]]:
     """Count occurrences of every value in [min_value, max_value] (bincount).
     
     Example:
@@ -238,7 +238,7 @@ def array_histogram(array: List[Any], min_value: int, max_value: int) -> List[An
     return fhe.array(counts)
 
 
-def array_mode(array: List[Any], min_value: int, max_value: int) -> Any:
+def array_mode(array: Union[np.ndarray, List[Any]], min_value: int, max_value: int) -> Any:
     """Return the most frequent value (smallest value wins ties).
     
     Example:
@@ -257,7 +257,7 @@ def array_mode(array: List[Any], min_value: int, max_value: int) -> Any:
     return minimum_value + arg_max(counts)
 
 
-def array_normalize(array: List[Any], mean: Any, scale: int) -> List[Any]:
+def array_normalize(array: Union[np.ndarray, List[Any]], mean: Any, scale: int) -> Union[np.ndarray, List[Any]]:
     """Return (x - mean) * scale for every element (z-score style affine transform).
     
     Example:

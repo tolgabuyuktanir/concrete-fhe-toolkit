@@ -16,7 +16,7 @@ your epsilon budget across the releases.
 from __future__ import annotations
 
 import math
-from typing import List, Optional, Sequence
+from typing import List, Optional, Sequence, Union
 
 import numpy as np
 
@@ -127,7 +127,7 @@ def dp_release(
     mechanism: str = "laplace",
     delta: Optional[float] = None,
     rng: Optional[np.random.Generator] = None,
-) -> List[int]:
+) -> Union[np.ndarray, List[int]]:
     """Noise a whole vector of decrypted aggregates with one shared budget.
 
     The given ``epsilon`` is the budget for the *entire* release: it is

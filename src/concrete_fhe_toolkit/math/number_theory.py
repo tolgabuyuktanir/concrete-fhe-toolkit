@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import math
-from typing import Optional
+from typing import Optional, Callable, Any
 
 from .._compat import fhe
 
@@ -21,7 +21,7 @@ from ._lookup import (
 )
 
 
-def _binary_math_values(function, min_value: int, max_value: int) -> list[int]:
+def _binary_math_values(function: Callable, min_value: int, max_value: int) -> list[int]:
     minimum, maximum = validate_bounds(min_value, max_value)
     return binary_values(
         function,
@@ -32,7 +32,7 @@ def _binary_math_values(function, min_value: int, max_value: int) -> list[int]:
     )
 
 
-def _make_binary_math(function, min_value: int, max_value: int) -> BinaryFunction:
+def _make_binary_math(function: Callable, min_value: int, max_value: int) -> BinaryFunction:
     minimum, maximum = validate_bounds(min_value, max_value)
     values = _binary_math_values(function, minimum, maximum)
     return make_binary_lookup(
@@ -850,7 +850,7 @@ def make_dist(size: int, min_value: int = 0, max_value: int = 15) -> BinaryFunct
     max_squared = normalized_size * span * span
 
     if max_squared == 0:
-        def zero_dist(p, q):
+        def zero_dist(p: Any, q: Any) -> Any:
             total = 0
             for index in range(normalized_size):
                 total = total + (p[index] - q[index])
@@ -865,7 +865,7 @@ def make_dist(size: int, min_value: int = 0, max_value: int = 15) -> BinaryFunct
     )
     root = make_unary_lookup(values, 0)
 
-    def dist(p, q):
+    def dist(p: Any, q: Any) -> Any:
         squared = 0
         for index in range(normalized_size):
             difference = p[index] - q[index]

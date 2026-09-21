@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import math
-from typing import Optional
+from typing import Optional, Callable
 
 from .._compat import fhe
 
@@ -188,7 +188,7 @@ def _perm_value(n: int, r: int, invalid_result: int) -> int:
 
 
 def _make_n_r_lookup(
-    function,
+    function: Callable,
     max_n: int,
     invalid_result: int,
 ) -> BinaryFunction:

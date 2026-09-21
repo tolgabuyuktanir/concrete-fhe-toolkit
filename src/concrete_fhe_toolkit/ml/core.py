@@ -1,6 +1,6 @@
 from .._utils import client_side_helper
 
-from typing import Any, List, Optional, Callable
+from typing import Any, List, Optional, Callable, Union
 from .._compat import fhe
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
 from concrete_fhe_toolkit.arithmetic import make_floor_divide
@@ -10,8 +10,9 @@ from concrete_fhe_toolkit.math import square, maximum, equal,not_equal
 from concrete_fhe_toolkit.math.special import make_log
 
 import warnings
+import numpy as np
 
-def manhattan_distance(array1: List[Any], array2: List[Any]) -> Any:
+def manhattan_distance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the Manhattan (L1) distance between two encrypted arrays.
     
     This is often used as a robust distance metric for clustering or
@@ -31,7 +32,7 @@ def manhattan_distance(array1: List[Any], array2: List[Any]) -> Any:
     diffs = [abs(x-y) for x,y in zip(array1,array2)]
     return array_sum(diffs)
 
-def hamming_distance(array1: List[Any], array2: List[Any]) -> Any:
+def hamming_distance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the Hamming distance (number of mismatches) between two encrypted arrays.
     
     This is useful for comparing binary feature vectors or categorical data, 
@@ -53,7 +54,7 @@ def hamming_distance(array1: List[Any], array2: List[Any]) -> Any:
 
     return distance
 
-def euclidean_distance_squared(array1: List[Any], array2: List[Any]) -> Any:
+def euclidean_distance_squared(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the squared Euclidean (L2) distance between two encrypted arrays.
     
     Often used in k-means clustering or RBF kernels. Using the squared 
@@ -72,7 +73,7 @@ def euclidean_distance_squared(array1: List[Any], array2: List[Any]) -> Any:
     diffs = [square(x-y) for x,y in zip(array1,array2)]
     return array_sum(diffs)
 
-def mean_squared_error(array1: List[Any], array2: List[Any]) -> Any:
+def mean_squared_error(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the Mean Squared Error (MSE) between two encrypted arrays.
     
     A standard metric for regression tasks. It measures the average 
@@ -91,7 +92,7 @@ def mean_squared_error(array1: List[Any], array2: List[Any]) -> Any:
             raise ValueError("The array sizes must be equal")
     return euclidean_distance_squared(array1,array2) // len(array1)
 
-def mean_absolute_error(y_preds: List[Any], y_trues: List[Any]) -> Any:
+def mean_absolute_error(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the Mean Absolute Error (MAE) between predictions and true values.
     
     A robust alternative to MSE that is less sensitive to outliers.
@@ -108,7 +109,7 @@ def mean_absolute_error(y_preds: List[Any], y_trues: List[Any]) -> Any:
     return distance // len(y_trues)
 
 @client_side_helper
-def accuracy_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+def accuracy_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
     Do not compile it with FHE due to Table Lookup limits or list return types.
@@ -135,7 +136,7 @@ def accuracy_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
 
     return true_predictions * 100 // len(y_trues)
 
-def true_positives(y_preds: List[Any], y_trues: List[Any]) -> int:
+def true_positives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> int:
     """Calculate the number of True Positives in binary classification.
     
     Assuming 1 is positive and 0 is negative, this counts instances 
@@ -158,7 +159,7 @@ def true_positives(y_preds: List[Any], y_trues: List[Any]) -> int:
 
     return num_of_true_positives
 
-def true_negatives(y_preds: List[Any], y_trues: List[Any]) -> int:
+def true_negatives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> int:
     """Calculate the number of True Negatives in binary classification.
     
     Assuming 1 is positive and 0 is negative, this counts instances 
@@ -180,7 +181,7 @@ def true_negatives(y_preds: List[Any], y_trues: List[Any]) -> int:
 
     return num_of_true_negatives
 
-def false_negatives(y_preds: List[Any], y_trues: List[Any]) -> int:
+def false_negatives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> int:
     """Calculate the number of False Negatives in binary classification.
     
     Example:
@@ -194,7 +195,7 @@ def false_negatives(y_preds: List[Any], y_trues: List[Any]) -> int:
     num_of_positives = array_sum(y_trues)
     return num_of_positives - true_positives(y_preds, y_trues)
 
-def false_positives(y_preds: List[Any], y_trues: List[Any]) -> int:
+def false_positives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> int:
     """Calculate the number of False Positives in binary classification.
     
     Example:
@@ -210,7 +211,7 @@ def false_positives(y_preds: List[Any], y_trues: List[Any]) -> int:
 
 
 @client_side_helper
-def confusion_matrix(y_preds: List[Any], y_trues: List[Any]) -> List[List[Any]]:
+def confusion_matrix(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[List[Any]]]:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
     Do not compile it with FHE due to Table Lookup limits or list return types.
@@ -253,7 +254,7 @@ def hinge_loss(y_pred: Any, y_true: Any) -> Any:
     """
     return maximum(0, 1-(y_true*y_pred))
 
-def l1_norm(array: List[Any]) -> Any:
+def l1_norm(array: Union[np.ndarray, List[Any]]) -> Any:
     total = 0
     for item in array:
         total += abs(item)
@@ -297,7 +298,7 @@ def make_cross_entropy_loss(
     *,
     input_scale: int = 100,
     output_scale: int = 100,
-) -> Callable[[List[Any],List[Any]], Any]:
+) -> Callable[[Union[np.ndarray, List[Any]],Union[np.ndarray, List[Any]]], Any]:
     """Create a scaled Binary Cross-Entropy loss function.
     
     This factory creates a cross-entropy function using a pre-configured 
@@ -319,7 +320,7 @@ def make_cross_entropy_loss(
         )
     log_func = make_log(min_input, max_input, input_scale=input_scale, output_scale=output_scale, invalid_result=-999)
 
-    def cross_entropy_loss(y_preds: List[Any], y_trues: List[Any]) -> Any:
+    def cross_entropy_loss(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
         losses = []
         for pred, true in zip(y_preds, y_trues):
             pred_log = log_func(pred)
@@ -360,7 +361,7 @@ def compile_cross_entropy_loss(
 
 
 @client_side_helper
-def precision_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+def precision_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
     Do not compile it with FHE due to Table Lookup limits or list return types.
@@ -388,7 +389,7 @@ def precision_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
 
 
 @client_side_helper
-def recall_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+def recall_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
     Do not compile it with FHE due to Table Lookup limits or list return types.
@@ -410,7 +411,7 @@ def recall_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
 
 
 @client_side_helper
-def f1_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+def f1_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
     Do not compile it with FHE due to Table Lookup limits or list return types.
@@ -435,7 +436,7 @@ def f1_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
 
 
 @client_side_helper
-def r2_score(y_preds: List[Any], y_trues: List[Any]) -> Any:
+def r2_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
     Do not compile it with FHE due to Table Lookup limits or list return types.

@@ -5,7 +5,7 @@ from concrete_fhe_toolkit._utils import validate_integer
 from concrete_fhe_toolkit._compat import fhe
 
 
-def _matrix_shape(matrix):
+def _matrix_shape(matrix: Union[np.ndarray, List[List[Any]]]) -> tuple:
     """Validate public matrix dimensions without inspecting encrypted values."""
     rows = len(matrix)
     if rows == 0:
@@ -16,14 +16,14 @@ def _matrix_shape(matrix):
     return rows, columns
 
 
-def _same_matrix_shape(matrix1, matrix2):
+def _same_matrix_shape(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> tuple:
     shape = _matrix_shape(matrix1)
     if shape != _matrix_shape(matrix2):
         raise ValueError("Matrix sizes should be equal")
     return shape
 
 
-def matrix_transpose(matrix: List[List[Any]]) -> List[List[Any]]:
+def matrix_transpose(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
     """Transpose an encrypted 2D matrix (swap rows and columns).
     
     Example:
@@ -123,7 +123,7 @@ def matrix_vector_multiply(matrix: Union[np.ndarray, List[List[Any]]], array: Un
     """
     return np.matmul(matrix, array)
 
-def matrix_exp(matrix: List[List[Any]], exponent: int) -> List[List[Any]]:
+def matrix_exp(matrix: Union[np.ndarray, List[List[Any]]], exponent: int) -> Union[np.ndarray, List[List[Any]]]:
     """Calculate the power of an encrypted square matrix.
     
     This uses the highly efficient Square-and-Multiply (Binary Exponentiation)
@@ -161,7 +161,7 @@ def matrix_exp(matrix: List[List[Any]], exponent: int) -> List[List[Any]]:
             base = matrix_multiply(base, base)
     return result
  
-def covariance_matrix(matrix: List[List[Any]]) -> List[List[Any]]:
+def covariance_matrix(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
     """Calculate the covariance matrix of an encrypted 2D dataset.
     
     The dataset should have observations as rows and features as columns.
@@ -202,7 +202,7 @@ def covariance_matrix(matrix: List[List[Any]]) -> List[List[Any]]:
     return [[covariance[i][j] for j in range(n_features)] for i in range(n_features)]
 
 
-def matrix_flatten(matrix: List[List[Any]]) -> List[Any]: 
+def matrix_flatten(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[Any]]: 
     """Flatten a 2D encrypted matrix into a 1D encrypted array.
     
     Example:
@@ -221,7 +221,7 @@ def matrix_flatten(matrix: List[List[Any]]) -> List[Any]:
 
     return flatten_list        
 
-def tensor_flatten(tensor: List[List[List[Any]]]) -> List[Any]:
+def tensor_flatten(tensor: Union[np.ndarray, List[List[List[Any]]]]) -> Union[np.ndarray, List[Any]]:
     """Flatten a 3D encrypted tensor into a 1D encrypted array.
     
     Example:

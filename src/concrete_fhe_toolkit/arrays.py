@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Callable, Literal, Optional,List
+from typing import Any, Callable, Literal, Optional,List, Union
 
 from ._compat import fhe
 
@@ -29,7 +29,7 @@ TieBreak = Literal["first", "last"]
 UnaryArrayFunction = Callable[[Any], Any]
 BinaryScalarFunction = Callable[[Any, Any], Any]
     
-def array_sum(elements: List[Any]) -> Any:
+def array_sum(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the sum of all elements in an encrypted array using a tournament reduction.
     
     Example:
@@ -63,7 +63,7 @@ def _ensure_tensor(arr: Any) -> Any:
         return np.array(arr)
     return arr
 
-def array_scale(array: List[Any],factor: int):
+def array_scale(array: Union[np.ndarray, List[Any]],factor: int) -> Union[np.ndarray, List[Any]]:
     """Multiply every element of an encrypted array by a scalar constant.
     
     Example:
@@ -75,7 +75,7 @@ def array_scale(array: List[Any],factor: int):
     """
     return _ensure_tensor(array) * factor
 
-def array_add(array1: List[Any],array2: List[Any]) -> Any:
+def array_add(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, List[Any]]) -> Any:
     """Perform element-wise addition of two encrypted arrays.
     
     Example:
@@ -87,7 +87,7 @@ def array_add(array1: List[Any],array2: List[Any]) -> Any:
     """
     return _ensure_tensor(array1) + _ensure_tensor(array2)
 
-def array_sub(array1: List[Any],array2: List[Any]) -> Any:
+def array_sub(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, List[Any]]) -> Any:
     """Perform element-wise subtraction of two encrypted arrays.
     
     Example:
@@ -99,7 +99,7 @@ def array_sub(array1: List[Any],array2: List[Any]) -> Any:
     """
     return _ensure_tensor(array1) - _ensure_tensor(array2)
 
-def array_multiply(array1: List[Any],array2: List[Any]) -> Any:
+def array_multiply(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, List[Any]]) -> Any:
     """Perform element-wise multiplication of two encrypted arrays.
     
     Example:
@@ -113,7 +113,7 @@ def array_multiply(array1: List[Any],array2: List[Any]) -> Any:
 
 
 
-def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> Any:
+def array_slice(array: Union[np.ndarray, List[Any]], begin_index: Any, end_index: Any) -> Any:
     """Slice an encrypted array (return elements from begin_index to end_index - 1).
     
     Example:
@@ -134,7 +134,7 @@ def array_slice(array: List[Any], begin_index: Any, end_index: Any) -> Any:
 
 
 
-def array_all_equal(array1: List[Any], array2: List[Any]) -> Any:
+def array_all_equal(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Check if two encrypted arrays are identical (returns 1 or 0).
     
     Example:
@@ -597,11 +597,11 @@ def make_array_set(
     size : int,
     min_value: int = -15,
     max_value: int = 15,
-):
+) -> Callable:
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value,max_value) 
 
-    def array_set(array: List[Any], index: Any, value: Any) -> List[Any]:
+    def array_set(array: Union[np.ndarray, List[Any]], index: Any, value: Any) -> Union[np.ndarray, List[Any]]:
         """Oblivious write: return a copy with array[index] replaced by value.
         
         Example:
@@ -646,7 +646,7 @@ def compile_array_set(
 
 
 
-def array_cumsum(array: List[Any]) -> List[Any]:
+def array_cumsum(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[Any]]:
     """Return the running prefix sums of an encrypted array.
     
     Example:
@@ -656,7 +656,7 @@ def array_cumsum(array: List[Any]) -> List[Any]:
         print(array_cumsum([1, 2, 3]))  # [1, 3, 6]
         ```
     """
-    sums: List[Any] = []
+    sums: Union[np.ndarray, List[Any]] = []
     running: Any = 0
     for item in array:
         running = running + item
@@ -664,7 +664,7 @@ def array_cumsum(array: List[Any]) -> List[Any]:
     return fhe.array(sums)
 
 
-def array_reverse(array: List[Any]) -> List[Any]:
+def array_reverse(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[Any]]:
     """Return the array with its (public) element order reversed.
     
     Example:
@@ -677,7 +677,7 @@ def array_reverse(array: List[Any]) -> List[Any]:
     return fhe.array(list(reversed(list(array))))
 
 
-def array_concat(*arrays: List[Any]) -> List[Any]:
+def array_concat(*arrays: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[Any]]:
     """Concatenate encrypted arrays along their public length.
     
     Example:
@@ -687,7 +687,7 @@ def array_concat(*arrays: List[Any]) -> List[Any]:
         print(array_concat([1, 2], [3, 4]))  # [1, 2, 3, 4]
         ```
     """
-    combined: List[Any] = []
+    combined: Union[np.ndarray, List[Any]] = []
     for array in arrays:
         combined.extend(list(array))
     return fhe.array(combined)
@@ -762,7 +762,7 @@ def make_array_pad(
     target_size: int,
     min_value: int = -15,
     max_value: int = 15,
-):
+) -> Callable:
     """Create a fixed-size array padding function.
 
     Example:
@@ -779,7 +779,7 @@ def make_array_pad(
     if size > target_size:
         raise ValueError("target_size must be at least the array size")
 
-    def array_pad(array: List[Any]) -> Any:
+    def array_pad(array: Union[np.ndarray, List[Any]]) -> Any:
         """Pad an encrypted array with zeros up to the specified target size."""
         raw_list = list(array)
         padded_list = raw_list + [0] * (target_size - len(raw_list))
@@ -816,7 +816,7 @@ def make_array_index_of(
     max_value: int = 15,
     *,
     missing_result: Optional[int] = None,
-):
+) -> Callable:
     """Create a first-index-of search function for bounded encrypted arrays.
 
     Example:
@@ -831,7 +831,7 @@ def make_array_index_of(
     minimum, maximum = validate_bounds(min_value, max_value)
     missing = size if missing_result is None else int(missing_result)
 
-    def array_index_of(array: List[Any], value: Any) -> Any:
+    def array_index_of(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Return the first index holding value, or missing_result (default size)."""
         items = list(array)
         if not items:
@@ -880,7 +880,7 @@ def make_array_count(
     size: int,
     min_value: int = -15,
     max_value: int = 15,
-):
+) -> Callable:
     """Create a value-counting function for bounded encrypted arrays.
 
     Example:
@@ -894,7 +894,7 @@ def make_array_count(
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
 
-    def array_count(array: List[Any], value: Any) -> Any:
+    def array_count(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Count occurrences of a specific value in an encrypted array."""
         count_list = [equal(item, value) for item in array]
         return array_sum(count_list)
@@ -933,7 +933,7 @@ def make_array_contains(
     size: int,
     min_value: int = -15,
     max_value: int = 15,
-):
+) -> Callable:
     """Create a membership-test function for bounded encrypted arrays.
 
     Example:
@@ -947,7 +947,7 @@ def make_array_contains(
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
 
-    def array_contains(array: List[Any], value: Any) -> Any:
+    def array_contains(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Check if an encrypted array contains a specific target value (returns 1 or 0)."""
         contain_list = [equal(item, value) for item in array]
         return bit_or_many(contain_list)
@@ -986,7 +986,7 @@ def make_array_index(
     size: int,
     min_value: int = -15,
     max_value: int = 15,
-):
+) -> Callable:
     """Create an oblivious-read function for bounded encrypted arrays.
 
     Example:
@@ -1000,7 +1000,7 @@ def make_array_index(
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
 
-    def array_index(array: List[Any], index: Any) -> Any:
+    def array_index(array: Union[np.ndarray, List[Any]], index: Any) -> Any:
         """Oblivious read: return array[index] without revealing the encrypted index."""
         items = list(array)
         if not items:

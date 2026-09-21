@@ -17,7 +17,7 @@ from .matrix import dot_product
 
 import numpy as np
 
-def linear_regression_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
+def linear_regression_inference(weights: Union[np.ndarray, List[Any]], bias: Any, features: Union[np.ndarray, List[Any]]) -> Any:
     """Evaluate a linear regression model (dot product of weights and features plus bias).
     
     Example:
@@ -35,9 +35,9 @@ def linear_regression_inference(weights: List[Any], bias: Any, features: List[An
 
 
 def logistic_regression_inference(
-    weights: List[Any],
+    weights: Union[np.ndarray, List[Any]],
     bias: Any,
-    features: List[Any],
+    features: Union[np.ndarray, List[Any]],
     *,
     threshold: int = 0,
 ) -> Any:
@@ -82,7 +82,7 @@ def decision_tree_node(feature_val: Any, threshold: Any, left_branch: Any, right
     return select(control, left_branch, right_branch)
 
 
-def majority_votes(predictions: List[Any]) -> Any:
+def majority_votes(predictions: Union[np.ndarray, List[Any]]) -> Any:
     """Perform majority voting for an ensemble of binary predictions.
     
     Example:
@@ -98,9 +98,9 @@ def majority_votes(predictions: List[Any]) -> Any:
 
 
 def knn_inference(
-    test_sample: List[Any],
-    train_samples: List[List[Any]],
-    train_labels: List[Any],
+    test_sample: Union[np.ndarray, List[Any]],
+    train_samples: Union[np.ndarray, List[List[Any]]],
+    train_labels: Union[np.ndarray, List[Any]],
     *,
     k: int = 1,
     max_distance: int = 15,
@@ -175,7 +175,7 @@ def knn_inference(
     return majority_votes(votes)
 
 
-def decision_tree_inference(features: List[Any], tree: Any) -> Any:
+def decision_tree_inference(features: Union[np.ndarray, List[Any]], tree: Any) -> Any:
     """Evaluate a full decision tree on encrypted features.
 
     ``tree`` is a public structure. An internal node is a dict with keys
@@ -256,7 +256,7 @@ def compile_decision_tree_node(
     )
 
 
-def random_forest_inference(features: List[Any], trees: List[Any]) -> Any:
+def random_forest_inference(features: Union[np.ndarray, List[Any]], trees: Union[np.ndarray, List[Any]]) -> Any:
     """Evaluate a random forest with binary (0/1) leaves via majority vote.
 
     Each tree uses the public dict structure accepted by
@@ -312,9 +312,9 @@ def mlp_inference(features: Union[np.ndarray, List[Any]], layers: Union[np.ndarr
 
 
 def nearest_centroid_inference(
-    sample: List[Any],
-    centroids: List[List[Any]],
-    labels: Optional[List[Any]] = None,
+    sample: Union[np.ndarray, List[Any]],
+    centroids: Union[np.ndarray, List[List[Any]]],
+    labels: Optional[Union[np.ndarray, List[Any]]] = None,
     *,
     max_distance: int = 15,
 ) -> Any:
@@ -355,7 +355,7 @@ def nearest_centroid_inference(
     return prediction
 
 
-def argmax_inference(scores: List[Any], min_score: int, max_score: int) -> Any:
+def argmax_inference(scores: Union[np.ndarray, List[Any]], min_score: int, max_score: int) -> Any:
     """Return the index of the highest class score (multi-class head).
     
     Example:
@@ -374,9 +374,9 @@ def argmax_inference(scores: List[Any], min_score: int, max_score: int) -> Any:
 
 
 def naive_bayes_inference(
-    features: List[Any],
-    log_prob_tables: List[List[List[int]]],
-    priors: List[int],
+    features: Union[np.ndarray, List[Any]],
+    log_prob_tables: Union[np.ndarray, List[List[List[int]]]],
+    priors: Union[np.ndarray, List[Any]],
     *,
     min_feature: int = 0,
 ) -> Any:
@@ -426,7 +426,7 @@ def naive_bayes_inference(
 
     return argmax_inference(scores, min(lower_bounds), max(upper_bounds))
 
-def svm_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
+def svm_inference(weights: Union[np.ndarray, List[Any]], bias: Any, features: Union[np.ndarray, List[Any]]) -> Any:
     """Evaluate a linear Support Vector Machine (SVM) on encrypted features.
     
     Returns 1 if the sample is on the positive side of the hyperplane,
@@ -465,7 +465,7 @@ def pca_inference(features: Union[np.ndarray,List[Any]], means: Union[np.ndarray
     diffs = np.subtract(features,means)
     return np.matmul(components,diffs)
 
-def xgboost_inference(features: List[Any],trees: List[Any]) -> Any:
+def xgboost_inference(features: Union[np.ndarray, List[Any]],trees: Union[np.ndarray, List[Any]]) -> Any:
     """
     Evaluate a XGBoost classifier on encrypted features.
 
@@ -535,7 +535,7 @@ def avg_pooling_2d(image: Union[np.ndarray, List[List[List[Any]]]]) -> Any:
     return out.flatten()
 
 @client_side_helper
-def auto_quantizer(images: List[List[List[List[Any]]]], filters: List[List[List[Any]]], model: Any, mode: str="optimal") -> Any:
+def auto_quantizer(images: Union[np.ndarray, List[List[List[List[Any]]]]], filters: Union[np.ndarray, List[List[List[Any]]]], model: Any, mode: str="optimal") -> Any:
     """Calculate the optimal scaling factor for quantizing network inputs/weights.
     
     This helps keep intermediate multiplications within the FHE bit-width limit.

@@ -6,7 +6,7 @@ from __future__ import annotations
 from .._utils import client_side_helper
 
 from fractions import Fraction
-from typing import Any, Literal, Optional
+from typing import Any, Literal, Optional, Callable
 
 from .._compat import fhe
 
@@ -645,7 +645,7 @@ def compile_fixed_point_multiply(
 
 
 @client_side_helper
-def make_encode_fixed_point(scale: int = 10):
+def make_encode_fixed_point(scale: int = 10) -> Callable[[float], int]:
     """Create a client-side helper to encode a clear real value as a scaled integer.
     
     Example:
@@ -664,7 +664,7 @@ def make_encode_fixed_point(scale: int = 10):
 
 
 @client_side_helper
-def make_decode_fixed_point(scale: int = 10):
+def make_decode_fixed_point(scale: int = 10) -> Callable[[float], int]:
     """Create a client-side helper to decode a decrypted scaled integer back to a real value.
     
     Example:

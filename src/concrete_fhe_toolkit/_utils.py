@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from numbers import Integral
-from typing import Any, List, Optional, Tuple
+from typing import Any, List, Optional, Tuple, Callable
 
 import numpy as np
 from ._compat import fhe
@@ -93,6 +93,6 @@ def compile_function(
     return compiler.compile(inputset, configuration=configuration)
 
 
-def client_side_helper(function):
+def client_side_helper(function: Any) -> Callable:
     function.is_helper = True
     return function

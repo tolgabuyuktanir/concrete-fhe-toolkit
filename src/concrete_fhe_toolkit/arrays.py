@@ -39,24 +39,8 @@ def array_sum(elements: Union[np.ndarray, List[Any]]) -> Any:
         print(array_sum([1, 2, 3, 4]))  # 10
         ```
     """
-    current_round = list(elements)
-    if(len(current_round) == 0):
-        return 0
-
-    sum_result = 0
-    while len(current_round) > 1:
-        next_round = []
-        for i in range(0,len(current_round)-1,2):
-            sum_result = current_round[i] + current_round[i+1]
-            next_round.append(sum_result)
-
-        if(len(current_round)%2 == 1): #odd number of element check
-            next_round.append(current_round[-1])
-
-        current_round = next_round    
-    
-    return current_round[0]
-
+    total = np.sum(_ensure_tensor(elements))
+    return total
 
 def _ensure_tensor(arr: Any) -> Any:
     if isinstance(arr, (list, tuple)):
@@ -896,8 +880,8 @@ def make_array_count(
 
     def array_count(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Count occurrences of a specific value in an encrypted array."""
-        count_list = [equal(item, value) for item in array]
-        return array_sum(count_list)
+        count = np.sum(_ensure_tensor(array) == value)
+        return count
 
     return array_count
 
@@ -949,9 +933,9 @@ def make_array_contains(
 
     def array_contains(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Check if an encrypted array contains a specific target value (returns 1 or 0)."""
-        contain_list = [equal(item, value) for item in array]
-        return bit_or_many(contain_list)
-
+        contains = np.max(_ensure_tensor(array) == value)
+        return contains
+    
     return array_contains
 
 def compile_array_contains(
@@ -1002,13 +986,13 @@ def make_array_index(
 
     def array_index(array: Union[np.ndarray, List[Any]], index: Any) -> Any:
         """Oblivious read: return array[index] without revealing the encrypted index."""
-        items = list(array)
-        if not items:
+        tensor = _ensure_tensor(array)
+        if len(tensor) == 0:
             raise ValueError("array must contain at least one element")
-        result: Any = 0
-        for position, value in enumerate(items):
-            result = result + equal(position, index) * value
-        return result
+        
+        positions = np.arange(len(tensor))
+        mask = positions == index
+        return np.sum(tensor * mask)
 
     return array_index
 

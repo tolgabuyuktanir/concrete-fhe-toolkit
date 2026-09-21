@@ -12,7 +12,7 @@ from typing import Any, List, Union
 
 from ._compat import fhe
 from ._utils import validate_bounds, validate_integer, validate_size
-from .arrays import array_sum, make_argmax, make_sort
+from .arrays import array_sum, make_argmax, make_sort, _ensure_tensor
 from .math import greater, maximum, minimum
 from .math.number_theory import make_isqrt
 import numpy as np
@@ -100,18 +100,8 @@ def array_max(elements: Union[np.ndarray, List[Any]]) -> Any:
         print(array_max([1, 5, 3]))  # 5
         ```
     """
-    current_round = list(elements)
-    if len(current_round) == 0:
-        return 0
-    while len(current_round) > 1:
-        next_round = []
-        for index in range(0, len(current_round) - 1, 2):
-            next_round.append(maximum(current_round[index], current_round[index + 1]))
-        if len(current_round) % 2 == 1:
-            next_round.append(current_round[-1])
-        current_round = next_round
-    return current_round[0]
-
+    max_item = np.max(_ensure_tensor(elements))
+    return max_item
 
 def array_min(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Find the minimum value in an encrypted array using a tournament reduction.
@@ -123,17 +113,8 @@ def array_min(elements: Union[np.ndarray, List[Any]]) -> Any:
         print(array_min([1, 5, 3]))  # 1
         ```
     """
-    current_round = list(elements)
-    if len(current_round) == 0:
-        return 0
-    while len(current_round) > 1:
-        next_round = []
-        for index in range(0, len(current_round) - 1, 2):
-            next_round.append(minimum(current_round[index], current_round[index + 1]))
-        if len(current_round) % 2 == 1:
-            next_round.append(current_round[-1])
-        current_round = next_round
-    return current_round[0]
+    min_item = np.min(_ensure_tensor(elements))
+    return min_item
 
 
 def array_range(array: Union[np.ndarray, List[Any]]) -> Any:
@@ -159,10 +140,7 @@ def array_count_greater(array: Union[np.ndarray, List[Any]], threshold: Any) -> 
         print(array_count_greater([1, 5, 3], threshold=2))  # 2
         ```
     """
-    count: Any = 0
-    for item in array:
-        count = count + greater(item, threshold)
-    return count
+    return np.sum(_ensure_tensor(array) > threshold)
 
 
 def array_median(array: Union[np.ndarray, List[Any]], min_value: int, max_value: int) -> Any:

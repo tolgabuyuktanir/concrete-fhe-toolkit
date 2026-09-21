@@ -5,7 +5,7 @@ from .._compat import fhe
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds
 from concrete_fhe_toolkit.arithmetic import make_floor_divide
 
-from concrete_fhe_toolkit.arrays import array_sum
+from concrete_fhe_toolkit.arrays import array_sum, _ensure_tensor
 from concrete_fhe_toolkit.math import square, maximum, equal,not_equal
 from concrete_fhe_toolkit.math.special import make_log
 
@@ -29,8 +29,7 @@ def manhattan_distance(array1: Union[np.ndarray, List[Any]], array2: Union[np.nd
     """
     if(len(array1) != len(array2)):
         raise ValueError("The array sizes must be equal")
-    diffs = [abs(x-y) for x,y in zip(array1,array2)]
-    return array_sum(diffs)
+    return np.sum(np.absolute(_ensure_tensor(array1) - _ensure_tensor(array2)))
 
 def hamming_distance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the Hamming distance (number of mismatches) between two encrypted arrays.
@@ -48,11 +47,8 @@ def hamming_distance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndar
     """
     if(len(array1) != len(array2)):
         raise ValueError("The array sizes must be equal")
-    distance = 0
-    for item1,item2 in zip(array1,array2):
-        distance += not_equal(item1,item2)
 
-    return distance
+    return np.sum(_ensure_tensor(array1) != _ensure_tensor(array2))
 
 def euclidean_distance_squared(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the squared Euclidean (L2) distance between two encrypted arrays.
@@ -70,8 +66,7 @@ def euclidean_distance_squared(array1: Union[np.ndarray, List[Any]], array2: Uni
     """
     if(len(array1) != len(array2)):
         raise ValueError("The array sizes must be equal")
-    diffs = [square(x-y) for x,y in zip(array1,array2)]
-    return array_sum(diffs)
+    return np.sum((_ensure_tensor(array1)-_ensure_tensor(array2)) ** 2)
 
 def mean_squared_error(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the Mean Squared Error (MSE) between two encrypted arrays.
@@ -129,11 +124,8 @@ def accuracy_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndar
     """
     if(len(y_preds) != len(y_trues)):
         raise ValueError("The array sizes must be equal")
-    true_predictions = 0
-
-    for pred,true in zip(y_preds,y_trues):
-        true_predictions += equal(pred,true)
-
+    
+    true_predictions = np.sum(_ensure_tensor(y_preds) == _ensure_tensor(y_trues))
     return true_predictions * 100 // len(y_trues)
 
 def true_positives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> int:
@@ -152,11 +144,8 @@ def true_positives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndar
     """
     if(len(y_preds) != len(y_trues)):
         raise ValueError("The array sizes must be equal")
-    num_of_true_positives = 0
-
-    for pred,true in zip(y_preds,y_trues):
-        num_of_true_positives += equal(1,pred*true)
-
+    
+    num_of_true_positives = np.sum(1 == np.multiply(_ensure_tensor(y_preds), _ensure_tensor(y_trues)))
     return num_of_true_positives
 
 def true_negatives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> int:
@@ -175,10 +164,8 @@ def true_negatives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndar
     """
     if(len(y_preds) != len(y_trues)):
         raise ValueError("The array sizes must be equal")
-    num_of_true_negatives = 0
-    for pred,true in zip(y_preds,y_trues):
-        num_of_true_negatives += equal(0,pred+true)
-
+    
+    num_of_true_negatives = np.sum(0 == _ensure_tensor(y_preds) + _ensure_tensor(y_trues))
     return num_of_true_negatives
 
 def false_negatives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> int:
@@ -255,9 +242,7 @@ def hinge_loss(y_pred: Any, y_true: Any) -> Any:
     return maximum(0, 1-(y_true*y_pred))
 
 def l1_norm(array: Union[np.ndarray, List[Any]]) -> Any:
-    total = 0
-    for item in array:
-        total += abs(item)
+    total = np.sum(np.absolute(_ensure_tensor(array)))
     return total
 
 def compile_hinge_loss(

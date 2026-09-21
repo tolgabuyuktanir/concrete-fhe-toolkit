@@ -1,7 +1,7 @@
 """Encrypted inference helpers for simple ML models."""
 
 from .._utils import client_side_helper
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Union
 
 from .._compat import fhe
 
@@ -278,7 +278,7 @@ def random_forest_inference(features: List[Any], trees: List[Any]) -> Any:
     return majority_votes(predictions)
 
 
-def mlp_inference(features: List[Any], layers: List[Any]) -> List[Any]:
+def mlp_inference(features: Union[np.ndarray, List[Any]], layers: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[Any]]:
     """Evaluate a small multilayer perceptron with public integer weights.
 
     ``layers`` is a list of ``(weights_matrix, biases)`` pairs. Hidden
@@ -299,14 +299,14 @@ def mlp_inference(features: List[Any], layers: List[Any]) -> List[Any]:
     if not layers:
         raise ValueError("layers must contain at least one (weights, biases) pair")
 
-    activations_vector = list(features)
+    activations_vector = features
     for layer_index, (weights, biases) in enumerate(layers):
         if len(weights) != len(biases):
             raise ValueError("each layer needs one bias per output row")
-        scores = matrix_vector_multiply(weights, activations_vector)
-        scores = [score + bias for score, bias in zip(scores, biases)]
+        scores = np.matmul(weights, activations_vector)
+        scores = np.add(scores, biases)
         if layer_index < len(layers) - 1:
-            scores = [relu(score) for score in scores]
+            scores = np.maximum(scores, 0)
         activations_vector = scores
     return activations_vector
 
@@ -443,7 +443,7 @@ def svm_inference(weights: List[Any], bias: Any, features: List[Any]) -> Any:
     regression_result = linear_regression_inference(weights, bias, features)
     return sign(regression_result)
 
-def pca_inference(features: List[Any],means: List[Any],components: List[List[Any]]) -> List[Any]:
+def pca_inference(features: Union[np.ndarray,List[Any]], means: Union[np.ndarray,List[Any]],components: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray,List[Any]]:
     """Apply Principal Component Analysis (PCA) to reduce dimensionality of encrypted data.
 
     Args:
@@ -462,8 +462,8 @@ def pca_inference(features: List[Any],means: List[Any],components: List[List[Any
         # enc_pca_features = pca_inference(enc_features, public_mean, public_components)
         ```
     """
-    diffs = array_sub(features,means)
-    return matrix_vector_multiply(components,diffs)
+    diffs = np.subtract(features,means)
+    return np.matmul(components,diffs)
 
 def xgboost_inference(features: List[Any],trees: List[Any]) -> Any:
     """
@@ -487,7 +487,7 @@ def xgboost_inference(features: List[Any],trees: List[Any]) -> Any:
     tree_sum = array_sum([decision_tree_inference(features, tree) for tree in trees])
     return greater(tree_sum,0)
 
-def cnn_inference(filters: List[List[List[Any]]], bias: List[Any], image: List[List[List[Any]]]) -> List[Any]:
+def cnn_inference(filters: Union[np.ndarray, List[List[List[Any]]]], bias: Union[np.ndarray, List[Any]], image: Union[np.ndarray, List[List[List[Any]]]]) -> Any:
     """Apply a 2D convolutional layer (CNN) to an encrypted image.
     
     Example:
@@ -498,23 +498,12 @@ def cnn_inference(filters: List[List[List[Any]]], bias: List[Any], image: List[L
         # enc_feature_map = cnn_inference(public_filters, public_bias, enc_image)
         ```
     """
-    feature_map = []
-    num_rows = len(filters[0])
-    num_columns = len(filters[0][0])
-
-    for index,filter in enumerate(filters):
-        flatten_filter = matrix_flatten(filter)
-        for i in range(len(image[0]) - num_rows + 1):
-            conv_rows = image[0][i:i+num_rows]
-            for j in range(len(image[0][0]) - num_columns + 1):
-                conv_matrix = [row[j:j+num_columns] for row in conv_rows]
-                flatten_conv_matrix = matrix_flatten(conv_matrix)
-                product = dot_product(flatten_filter,flatten_conv_matrix)
-                feature_map.append(product+bias[index])
-
-    return feature_map            
+    img_tensor = np.expand_dims(image, axis=0)
+    filters_tensor = np.expand_dims(filters, axis=1)
+    out = fhe.conv(x=img_tensor, weight=filters_tensor, bias=bias)
+    return out.flatten()       
     
-def max_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
+def max_pooling_2d(image: Union[np.ndarray, List[List[List[Any]]]]) -> Any:
     """Apply 2D max pooling (2x2 kernel, stride 2) to an encrypted feature map.
     
     Example:
@@ -525,25 +514,11 @@ def max_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
         # enc_pooled = max_pooling_2d(enc_image)
         ```
     """
-    pooling_size = 2
-    pooling_values = []
+    img_tensor = np.expand_dims(image, axis=0)
+    out = fhe.maxpool(x=img_tensor, kernel_shape=(2,2), strides=(2,2))
+    return out.flatten()
 
-    for i in range(0,len(image[0]) - pooling_size + 1,pooling_size):
-        pooling_rows = image[0][i:i + pooling_size]
-
-        for j in range(0,len(image[0][0]) - pooling_size + 1,pooling_size):
-            pooling_matrix = [row[j:j + pooling_size] for row in pooling_rows]
-            flatten_matrix = matrix_flatten(pooling_matrix)
-
-            max_element = flatten_matrix[0]
-            for val in flatten_matrix[1:]:
-                max_element = maximum(val,max_element)
-
-            pooling_values.append(max_element)
-
-    return pooling_values
-
-def avg_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
+def avg_pooling_2d(image: Union[np.ndarray, List[List[List[Any]]]]) -> Any:
     """Apply 2D average pooling (2x2 kernel, stride 2) to an encrypted feature map.
     
     Example:
@@ -554,18 +529,10 @@ def avg_pooling_2d(image: List[List[List[Any]]]) -> List[Any]:
         # enc_pooled = avg_pooling_2d(enc_image)
         ```
     """
-    pooling_size = 2
-    pooling_values = []
-
-    for i in range(0,len(image[0]) - pooling_size + 1,pooling_size):
-        pooling_rows = image[0][i:i + pooling_size]
-
-        for j in range(0,len(image[0][0]) - pooling_size + 1,pooling_size):
-            pooling_matrix = [row[j:j + pooling_size] for row in pooling_rows]
-            flatten_matrix = matrix_flatten(pooling_matrix)
-            pooling_values.append(array_sum(flatten_matrix)//4)
-
-    return pooling_values    
+    img_tensor = np.expand_dims(image, axis=0)
+    filters_tensor = np.ones((1,1,2,2), dtype=int)
+    out = fhe.conv(x=img_tensor, weight=filters_tensor, strides=(2,2)) // 4
+    return out.flatten()
 
 @client_side_helper
 def auto_quantizer(images: List[List[List[List[Any]]]], filters: List[List[List[Any]]], model: Any, mode: str="optimal") -> Any:

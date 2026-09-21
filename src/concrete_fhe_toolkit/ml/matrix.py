@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any, List, Union
 import numpy as np
 
 from concrete_fhe_toolkit._utils import validate_integer
@@ -37,7 +37,7 @@ def matrix_transpose(matrix: List[List[Any]]) -> List[List[Any]]:
     _matrix_shape(matrix)
     return [list(row) for row in zip(*matrix)]
 
-def dot_product(array1: List[Any], array2: List[Any]) -> Any:
+def dot_product(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the dot product of two encrypted arrays (vectors).
     
     This is the fundamental operation for linear layers and convolution.
@@ -50,12 +50,9 @@ def dot_product(array1: List[Any], array2: List[Any]) -> Any:
         # score = dot_product(enc_weights, enc_features)
         ```
     """
-    if(len(array1) != len(array2)):
-        raise ValueError("Array sizes must be equal to perform dot product")
+    return np.dot(array1, array2)
 
-    return fhe.array(array1) @ fhe.array(array2)
-
-def matrix_add(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[Any]]:
+def matrix_add(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
     """Perform element-wise addition of two encrypted matrices of the same dimensions.
     
     Example:
@@ -66,10 +63,9 @@ def matrix_add(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[
         # C = matrix_add(enc_matrix_A, enc_matrix_B)
         ```
     """
-    rows, columns = _same_matrix_shape(matrix1, matrix2)
-    return fhe.array(matrix1) + fhe.array(matrix2)
+    return np.add(matrix1, matrix2)
 
-def matrix_subtract(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[Any]]:
+def matrix_subtract(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
     """Perform element-wise subtraction of two encrypted matrices of the same dimensions.
     
     Example:
@@ -80,10 +76,9 @@ def matrix_subtract(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[
         # C = matrix_subtract(enc_matrix_A, enc_matrix_B)
         ```
     """
-    rows, columns = _same_matrix_shape(matrix1, matrix2)
-    return fhe.array(matrix1) - fhe.array(matrix2)
+    return np.subtract(matrix1, matrix2)
 
-def matrix_multiply(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[Any]]:
+def matrix_multiply(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
     """Perform matrix multiplication (dot product) of two encrypted matrices.
     
     Note: Matrix multiplication involves many multiplications and additions, 
@@ -97,16 +92,9 @@ def matrix_multiply(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[
         # C = matrix_multiply(enc_matrix_A, enc_matrix_B)
         ```
     """
-    left_rows, left_columns = _matrix_shape(matrix1)
-    right_rows, _ = _matrix_shape(matrix2)
-    if left_rows == 0 or right_rows == 0:
-        return []
-    if left_columns != right_rows:
-        raise ValueError("Matrix dimensions are incompatible for multiplication")
+    return np.matmul(matrix1, matrix2)
 
-    return fhe.array(matrix1) @ fhe.array(matrix2)
-
-def matrix_elementwise_multiply(matrix1: List[List[Any]], matrix2: List[List[Any]]) -> List[List[Any]]:
+def matrix_elementwise_multiply(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
     """Perform Hadamard (element-wise) multiplication of two encrypted matrices.
     
     Example:
@@ -117,11 +105,10 @@ def matrix_elementwise_multiply(matrix1: List[List[Any]], matrix2: List[List[Any
         # C = matrix_elementwise_multiply(enc_matrix_A, enc_matrix_B)
         ```
     """
-    rows, columns = _same_matrix_shape(matrix1, matrix2)
-    return fhe.array(matrix1) * fhe.array(matrix2)
+    return np.multiply(matrix1, matrix2)
 
 
-def matrix_vector_multiply(matrix: List[List[Any]], array: List[Any]) -> List[Any]:
+def matrix_vector_multiply(matrix: Union[np.ndarray, List[List[Any]]], array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[Any]]:
     """Multiply an encrypted matrix by an encrypted vector.
     
     Often used to evaluate a linear layer: output = W * input.
@@ -134,10 +121,7 @@ def matrix_vector_multiply(matrix: List[List[Any]], array: List[Any]) -> List[An
         # output_vec = matrix_vector_multiply(enc_weight_matrix, enc_input_vec)
         ```
     """
-    rows, columns = _matrix_shape(matrix)
-    if rows and columns != len(array):
-        raise ValueError("Matrix and vector dimensions are incompatible")
-    return fhe.array(matrix) @ fhe.array(array)
+    return np.matmul(matrix, array)
 
 def matrix_exp(matrix: List[List[Any]], exponent: int) -> List[List[Any]]:
     """Calculate the power of an encrypted square matrix.

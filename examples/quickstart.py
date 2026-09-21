@@ -1,17 +1,3 @@
-import numpy as np
-
-from concrete_fhe_toolkit import compile_argmin, compile_sort
-
-
-sort_circuit = compile_sort(size=8, min_value=0, max_value=15)
-values = np.array([12, 3, 7, 1, 15, 0, 4, 9], dtype=np.int64)
-print(sort_circuit.encrypt_run_decrypt(values))
-
-argmin_circuit = compile_argmin(size=8, min_value=0, max_value=15)
-print(argmin_circuit.encrypt_run_decrypt(values))
-
-
-# ML Example Using the Toolkit
 """
 MNIST Digit Recognition with Fully Homomorphic Encryption (FHE)
 
@@ -47,7 +33,7 @@ class FHEDigitRecognizer(FHEModel):
         dense_out = mlp_inference(conv_out, self.mlp_layers)
         
         # We must return an explicit fhe.array for Zama to compile successfully
-        return fhe.array(dense_out)
+        return dense_out
 
 def main():
     print("--- FHE MNIST DIGIT RECOGNIZER ---\n")
@@ -125,7 +111,7 @@ def main():
     # ---------------------------------------------------------
     print("--- STARTING ENCRYPTED BATCH INFERENCE (10 SAMPLES) ---")
     correct_predictions = 0
-    test_count = 10
+    test_count = 40
 
     # Pick 10 random unseen samples (from index 100 onwards)
     random_indices = random.sample(range(100, len(X_images)), test_count)

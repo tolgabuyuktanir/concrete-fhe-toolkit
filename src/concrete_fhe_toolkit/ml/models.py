@@ -6,14 +6,14 @@ from typing import Any, List, Optional, Union
 from .._compat import fhe
 
 from concrete_fhe_toolkit._utils import compile_function, validate_bounds, validate_integer
-from concrete_fhe_toolkit.arrays import array_sum, make_argmax, make_argmin, array_sub
-from concrete_fhe_toolkit.math import equal, greater, greater_equal, select, maximum
+from concrete_fhe_toolkit.arrays import array_sum, make_argmax, make_argmin
+from concrete_fhe_toolkit.math import equal, greater, greater_equal, select
 from concrete_fhe_toolkit.math._lookup import make_unary_lookup
 from concrete_fhe_toolkit.arithmetic import sign
 
-from .activations import relu, threshold_activation
+from .activations import threshold_activation
 from .core import euclidean_distance_squared
-from .matrix import dot_product, matrix_vector_multiply, matrix_flatten
+from .matrix import dot_product
 
 import numpy as np
 

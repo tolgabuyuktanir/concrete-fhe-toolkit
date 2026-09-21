@@ -16,6 +16,7 @@ from .activations import (
     unit_step,
     make_softmax,
     compile_softmax,
+    client_softmax,
 )
 from .core import (
     accuracy_score,
@@ -122,6 +123,7 @@ __all__ = [
     "compile_softmax",
     "compile_sigmoid",
     "make_softmax",
+    "client_softmax",
     "make_sigmoid",
     "confusion_matrix",
     "make_cross_entropy_loss",

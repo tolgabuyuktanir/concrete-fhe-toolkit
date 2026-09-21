@@ -1,14 +1,16 @@
 """Activation helpers for encrypted ML circuits."""
-from typing import Any, Optional, List, Callable
+from typing import Any, Optional, List, Callable, Union
 
 from .._compat import fhe
 
-from concrete_fhe_toolkit._utils import compile_function, validate_bounds
+from concrete_fhe_toolkit._utils import compile_function, validate_bounds, client_side_helper
 from concrete_fhe_toolkit.math import greater_equal, make_exp
 from concrete_fhe_toolkit.math.basic import maximum
 from concrete_fhe_toolkit.arithmetic import make_floor_divide
+from concrete_fhe_toolkit.arrays import _ensure_tensor
 
 import warnings
+import numpy as np
 
 def relu(value: Any) -> Any:
     """Return max(0, value).
@@ -118,13 +120,15 @@ Create a scaled softmax function for a list of encrypted scores.
         UserWarning, stacklevel=2
     )
 
-    exp_func = make_exp(min_input, max_input, input_scale=input_scale, output_scale=output_scale)
+    exp_func = make_exp(min_input - max_input, 0, input_scale=input_scale, output_scale=output_scale)
     div_func = make_floor_divide(zero_result=0)
     
     def softmax(values: List[Any]) -> List[Any]:
         total: Any = 0
         exp_values = []
-        for value in values:
+        shifted_values = np.subtract(values, np.max(_ensure_tensor(values)))
+        
+        for value in shifted_values:
             # make_exp already handles dividing by input_scale and multiplying by output_scale internally
             exp_value = exp_func(value)
             total = total + exp_value
@@ -135,9 +139,20 @@ Create a scaled softmax function for a list of encrypted scores.
             # We multiply by probability_scale before dividing so the output is an integer percentage
             probabilities.append(div_func(value * probability_scale, total))  
 
-        return probabilities
+        return _ensure_tensor(probabilities)
 
-    return softmax     
+    return softmax  
+
+
+@client_side_helper
+def client_softmax(scores: Union[np.ndarray, List[Any]]) -> np.ndarray:
+    """Calculate mathematically perfect Softmax on the client side after decryption."""
+    tensor = np.array(scores, dtype=np.float64)
+    shifted_tensor = tensor - np.max(tensor) # Max-trick
+    exp_values = np.exp(shifted_tensor)
+    
+    probabilities = (exp_values / np.sum(exp_values)) * 100
+    return probabilities
 
 def compile_relu(
     min_value: int = -15,

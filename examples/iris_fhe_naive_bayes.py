@@ -135,13 +135,14 @@ print(f"Automatically Found Optimal SCALE: {model.scale}")
 
 # In[16]:
 
-
-print(f"Compiling Inference Circuit (Batch Size: {len(X_test)})...")
+BATCH_SIZE = 1
+print(f"Compiling Inference Circuit (Batch Size: {BATCH_SIZE})...")
 print("This step performs heavy cryptographic key generation. Please wait...")
 
+
 # Compile with a dummy inputset of the correct shape
-dummy_inputset = [[0, 0, 0, 0]] * len(X_test)
-model.compile([dummy_inputset], batch_size=len(X_test))
+dummy_inputset = [[0, 0, 0, 0]] * BATCH_SIZE
+model.compile([dummy_inputset], batch_size=BATCH_SIZE)
 
 print("Circuit Compiled Successfully!")
 

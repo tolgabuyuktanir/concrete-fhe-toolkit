@@ -6,7 +6,7 @@ from concrete_fhe_toolkit._utils import compile_function, validate_bounds
 from concrete_fhe_toolkit.arithmetic import make_floor_divide
 
 from concrete_fhe_toolkit.arrays import array_sum, _ensure_tensor
-from concrete_fhe_toolkit.math import square, maximum, equal,not_equal
+from concrete_fhe_toolkit.math import maximum
 from concrete_fhe_toolkit.math.special import make_log
 
 import warnings

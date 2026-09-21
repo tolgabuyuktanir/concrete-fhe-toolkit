@@ -13,7 +13,6 @@ from typing import Any, List, Union
 from ._compat import fhe
 from ._utils import validate_bounds, validate_integer, validate_size
 from .arrays import array_sum, make_argmax, make_sort, _ensure_tensor
-from .math import greater, maximum, minimum
 from .math.number_theory import make_isqrt
 import numpy as np
 

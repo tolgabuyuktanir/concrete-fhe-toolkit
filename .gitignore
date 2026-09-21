@@ -26,5 +26,6 @@ test_ml_notebooks.py
 codespace_tester.py
 try_privacy.py
 benchmark_tensors.py
+benchmark_performance.py
 /scratch
 /.agents

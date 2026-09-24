@@ -11,7 +11,6 @@ import numpy as np
 from concrete_fhe_toolkit.math import (
     bit_and_many,
     equal,
-    select
 )
 
 from ._utils import (
@@ -21,8 +20,6 @@ from ._utils import (
     validate_bounds,
     validate_size,
 )
-
-from concrete_fhe_toolkit.arithmetic import sign
 
 TieBreak = Literal["first", "last"]
 UnaryArrayFunction = Callable[[Any], Any]

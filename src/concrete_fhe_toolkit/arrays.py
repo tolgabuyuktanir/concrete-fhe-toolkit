@@ -124,13 +124,10 @@ def array_all_equal(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarr
         print(array_all_equal([1, 2], [1, 2]))  # 1
         ```
     """
-    list1 = list(array1)
-    list2 = list(array2)
-    if(len(list1) != len(list2)):
-        raise ValueError("The array sizes must be equal")
-    
-    equal_list = [equal(item1,item2) for item1,item2 in zip(list1,list2)]
-    return bit_and_many(equal_list)
+    tensor1 = _ensure_tensor(array1)
+    tensor2 = _ensure_tensor(array2)
+
+    return np.sum(tensor1 == tensor2) == len(tensor1)
 
 def make_compare_swap(
     min_value: int = 0,

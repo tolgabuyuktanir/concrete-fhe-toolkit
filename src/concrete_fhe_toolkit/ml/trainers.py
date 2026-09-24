@@ -71,18 +71,25 @@ class FHETrainer:
         raise NotImplementedError("fit_encrypted must be implemented by subclasses")
 
 
-@client_side_helper
 def linear_regression_training(
     X_train: Any,
     y_train: Any,
     n_samples: int,
     n_features: int,
 ) -> Any:
-    """[Client-Side Helper] Traceable sufficient statistics for linear regression.
+    """Traceable sufficient statistics for linear regression.
 
     Computes the flattened ``A^T A`` and ``A^T y`` aggregates over the
     encrypted design matrix ``A = [X | 1]`` (intercept column appended).
     The normal equations are solved clear-side after decryption.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.trainers import linear_regression_training
+        
+        # Calculate sufficient statistics securely
+        stats = linear_regression_training(enc_X, enc_y, n_samples=100, n_features=5)
+        ```
     """
     augmented = [
         [X_train[row][column] for column in range(n_features)] + [1]

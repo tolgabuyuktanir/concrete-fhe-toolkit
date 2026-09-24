@@ -29,3 +29,4 @@ benchmark_tensors.py
 benchmark_performance.py
 /scratch
 /.agents
+*.txt

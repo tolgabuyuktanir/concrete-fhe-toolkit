@@ -386,7 +386,15 @@ def compile_negate(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer negation."""
+    """Compile encrypted integer negation.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_negate
+        
+        circuit = compile_negate()
+        ```
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(
         negate,
@@ -402,7 +410,15 @@ def compile_square(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer squaring."""
+    """Compile encrypted integer squaring.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_square
+        
+        circuit = compile_square()
+        ```
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     inputset = [minimum, maximum]
     if minimum <= 0 <= maximum:
@@ -420,7 +436,15 @@ def compile_cube(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer cubing."""
+    """Compile encrypted integer cubing.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_cube
+        
+        circuit = compile_cube()
+        ```
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     inputset = [minimum, maximum]
     if minimum <= 0 <= maximum:
@@ -440,7 +464,15 @@ def compile_scalar_multiply(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile multiplication by a public integer constant."""
+    """Compile multiplication by a public integer constant.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_scalar_multiply
+        
+        circuit = compile_scalar_multiply()
+        ```
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     function = make_scalar_multiply(multiplier)
     return compile_function(
@@ -480,7 +512,15 @@ def compile_equal(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted equality."""
+    """Compile encrypted equality.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_equal
+        
+        circuit = compile_equal()
+        ```
+    """
     return _compile_predicate(equal, min_value, max_value, configuration)
 
 
@@ -490,7 +530,15 @@ def compile_not_equal(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted inequality."""
+    """Compile encrypted inequality.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_not_equal
+        
+        circuit = compile_not_equal()
+        ```
+    """
     return _compile_predicate(not_equal, min_value, max_value, configuration)
 
 
@@ -500,7 +548,15 @@ def compile_less(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted less-than comparison."""
+    """Compile encrypted less-than comparison.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_less
+        
+        circuit = compile_less()
+        ```
+    """
     return _compile_predicate(less, min_value, max_value, configuration)
 
 
@@ -510,7 +566,22 @@ def compile_less_equal(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted less-than-or-equal comparison."""
+    """Compile encrypted less-than-or-equal comparison.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_less
+        
+        circuit = compile_less()
+        ```
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_less_equal
+        
+        circuit = compile_less_equal()
+        ```
+    """
     return _compile_predicate(less_equal, min_value, max_value, configuration)
 
 
@@ -520,7 +591,15 @@ def compile_greater(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted greater-than comparison."""
+    """Compile encrypted greater-than comparison.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_greater
+        
+        circuit = compile_greater()
+        ```
+    """
     return _compile_predicate(greater, min_value, max_value, configuration)
 
 
@@ -530,7 +609,22 @@ def compile_greater_equal(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted greater-than-or-equal comparison."""
+    """Compile encrypted greater-than-or-equal comparison.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_greater
+        
+        circuit = compile_greater()
+        ```
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_greater_equal
+        
+        circuit = compile_greater_equal()
+        ```
+    """
     return _compile_predicate(greater_equal, min_value, max_value, configuration)
 
 
@@ -540,7 +634,15 @@ def compile_is_zero(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile an encrypted is-zero predicate."""
+    """Compile an encrypted is-zero predicate.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_is_zero
+        
+        circuit = compile_is_zero()
+        ```
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(
         is_zero,
@@ -558,7 +660,15 @@ def compile_maximum(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile the encrypted maximum of two integers over inclusive bounds."""
+    """Compile the encrypted maximum of two integers over inclusive bounds.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_maximum
+        
+        circuit = compile_maximum()
+        ```
+    """
     return _compile_binary_native(
         maximum,
         min_left,
@@ -577,7 +687,15 @@ def compile_minimum(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile the encrypted minimum of two integers over inclusive bounds."""
+    """Compile the encrypted minimum of two integers over inclusive bounds.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_minimum
+        
+        circuit = compile_minimum()
+        ```
+    """
     return _compile_binary_native(
         minimum,
         min_left,
@@ -595,7 +713,15 @@ def compile_is_close(
     absolute_tolerance: int,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """Compile encrypted integer closeness with an absolute tolerance."""
+    """Compile encrypted integer closeness with an absolute tolerance.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import compile_is_close
+        
+        circuit = compile_is_close()
+        ```
+    """
     function = make_is_close(absolute_tolerance)
     return _compile_predicate(function, min_value, max_value, configuration)
 
@@ -964,6 +1090,14 @@ def select(control: Any, when_true: Any, when_false: Any) -> Any:
 
     control must be 0 or 1. Unlike `bit_select`, the branches may be any
     bounded integers, so this is the building block for oblivious branching.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.math.basic import select
+        
+        # Inside FHE circuit
+        # result = select(enc_condition, enc_true_val, enc_false_val)
+        ```
     """
     return control * (when_true - when_false) + when_false
 

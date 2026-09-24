@@ -146,7 +146,20 @@ Create a scaled softmax function for a list of encrypted scores.
 
 @client_side_helper
 def client_softmax(scores: Union[np.ndarray, List[Any]]) -> np.ndarray:
-    """Calculate mathematically perfect Softmax on the client side after decryption."""
+    """Calculate mathematically perfect Softmax on the client side after decryption.
+    
+    This function avoids FHE 16-bit limitations by performing the Softmax division 
+    and scaling on the cleartext outputs decrypted by the client.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.activations import client_softmax
+        
+        # After decrypting the raw scores (logits) from the FHE model
+        decrypted_scores = [12.4, -5.1, 14.8, 0.2]
+        probabilities = client_softmax(decrypted_scores)
+        ```
+    """
     tensor = np.array(scores, dtype=np.float64)
     shifted_tensor = tensor - np.max(tensor) # Max-trick
     exp_values = np.exp(shifted_tensor)

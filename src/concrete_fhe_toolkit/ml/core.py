@@ -242,6 +242,15 @@ def hinge_loss(y_pred: Any, y_true: Any) -> Any:
     return maximum(0, 1-(y_true*y_pred))
 
 def l1_norm(array: Union[np.ndarray, List[Any]]) -> Any:
+    """Calculate the L1 norm (sum of absolute values) of an array.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.core import l1_norm
+        
+        # In FHE circuit: l1_norm([-1, 5, -10]) -> 16
+        ```
+    """
     total = np.sum(np.absolute(_ensure_tensor(array)))
     return total
 
@@ -326,6 +335,15 @@ def compile_cross_entropy_loss(
     output_scale: int = 100,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
+    """Compile encrypted cross-entropy loss.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.core import compile_cross_entropy_loss
+        
+        circuit = compile_cross_entropy_loss(array_size=2)
+        ```
+    """
     warnings.warn(
         "compile_cross_entropy_loss requires >16-bit TLUs and will likely fail to compile "
         "in the current version of Concrete. Kept for future 32-bit TLU compatibility.",
@@ -432,6 +450,14 @@ def r2_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, L
     (constant targets) the result is 0. Like precision/recall, the
     encrypted-by-encrypted division uses a multivariate lookup — cheap on
     decrypted values, expensive under encryption for large ranges.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.core import r2_score
+        
+        # After decrypting test results
+        score = r2_score([3, 5, 8], [3, 4, 9])
+        ```
     """
     divide = make_floor_divide(zero_result=100)
     ss_res = euclidean_distance_squared(y_preds, y_trues)

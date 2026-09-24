@@ -22,6 +22,14 @@ def inertia(
 
     The standard k-means quality metric (lower is better). ``max_distance``
     must bound the squared distance from any sample to any centroid.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.clustering import inertia
+        
+        # Calculate inertia for two encrypted samples
+        enc_inertia = inertia([[1, 2], [5, 5]], centroids=[[1, 1], [4, 4]], max_distance=100)
+        ```
     """
     if not centroids:
         raise ValueError("centroids must contain at least one centroid")

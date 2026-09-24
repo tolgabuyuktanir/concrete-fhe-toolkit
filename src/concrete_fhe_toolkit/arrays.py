@@ -581,6 +581,16 @@ def make_array_set(
     min_value: int = -15,
     max_value: int = 15,
 ) -> Callable:
+    """Create a function for oblivious array writing.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.arrays import make_array_set
+        
+        array_set = make_array_set(size=5)
+        # new_arr = array_set(arr, index, value)
+        ```
+    """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value,max_value) 
 
@@ -612,6 +622,16 @@ def compile_array_set(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
+    """Compile an FHE circuit for oblivious array writing.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.arrays import compile_array_set
+        
+        circuit = compile_array_set(size=5)
+        # circuit.encrypt_run_decrypt(arr, index, value)
+        ```
+    """
     array_set_func = make_array_set(size, min_value, max_value)
     base_arrays = array_inputset(size, min_value, max_value)
     inputset = []

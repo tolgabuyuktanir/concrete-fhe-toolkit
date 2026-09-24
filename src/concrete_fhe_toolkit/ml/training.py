@@ -1,12 +1,10 @@
-from .._utils import client_side_helper
 
 from typing import List, Any
 from concrete_fhe_toolkit.ml import matrix_transpose, dot_product
 from concrete import fhe
 
-@client_side_helper
 def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[Any]]) -> tuple[List[List[Any]],List[Any]]:
-    """[Client-Side Helper] Encrypted training logic for Bernoulli Naive Bayes.
+    """Encrypted training logic for Bernoulli Naive Bayes.
     
     Computes feature counts and class counts directly on encrypted data using FHE.
     Because FHE circuits cannot use traditional if-else logic or dynamic loops to filter 
@@ -27,6 +25,14 @@ def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[An
 
     Returns:
         tuple: (feature_counts, class_counts) as encrypted arrays.
+        
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.training import naive_bayes_training
+        
+        # In FHE circuit: compute feature distributions per class
+        feature_counts, class_counts = naive_bayes_training(enc_X, enc_y_one_hot)
+        ```
     """
     class_counts = [0] * len(y_train_one_hot[0])
     for row in y_train_one_hot:
@@ -46,6 +52,17 @@ def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[An
     return fhe.array(feature_counts), fhe.array(class_counts)    
 
 def make_raw_naive_bayes_training(thresholds: List[Any]):
+    """Create a training function that first binarizes raw features before applying Naive Bayes.
+    
+    Example:
+        ```python
+        from concrete_fhe_toolkit.ml.training import make_raw_naive_bayes_training
+        
+        # Create trainer that binarizes features using specific thresholds
+        trainer_fn = make_raw_naive_bayes_training(thresholds=[5, 10, 15])
+        # feature_counts, class_counts = trainer_fn(enc_X_raw, enc_y_one_hot)
+        ```
+    """
     from concrete_fhe_toolkit.math.basic import greater
     
     def raw_naive_bayes_training(X_train_raw: List[List[Any]], y_train_one_hot: List[List[Any]]) -> tuple[List[List[Any]],List[Any]]:

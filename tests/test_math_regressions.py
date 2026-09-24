@@ -88,7 +88,7 @@ def test_elementwise_matrix_shape_validation(operation, a, b):
 
 def test_empty_and_ragged_matrices():
     for operation in [mm.matrix_add, mm.matrix_subtract, mm.matrix_elementwise_multiply]:
-        assert operation([], []) == []
+        assert operation([], []).tolist() == []
     with pytest.raises(ValueError):
         mm.matrix_transpose([[1, 2], [3]])
     with pytest.raises(ValueError):

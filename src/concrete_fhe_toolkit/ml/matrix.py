@@ -63,6 +63,7 @@ def matrix_add(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.nd
         # C = matrix_add(enc_matrix_A, enc_matrix_B)
         ```
     """
+    _same_matrix_shape(matrix1, matrix2)
     return np.add(matrix1, matrix2)
 
 def matrix_subtract(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
@@ -76,6 +77,7 @@ def matrix_subtract(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[
         # C = matrix_subtract(enc_matrix_A, enc_matrix_B)
         ```
     """
+    _same_matrix_shape(matrix1, matrix2)
     return np.subtract(matrix1, matrix2)
 
 def matrix_multiply(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
@@ -105,6 +107,7 @@ def matrix_elementwise_multiply(matrix1: Union[np.ndarray, List[List[Any]]], mat
         # C = matrix_elementwise_multiply(enc_matrix_A, enc_matrix_B)
         ```
     """
+    _same_matrix_shape(matrix1, matrix2)
     return np.multiply(matrix1, matrix2)
 
 

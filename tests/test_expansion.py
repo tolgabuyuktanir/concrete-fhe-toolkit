@@ -69,8 +69,11 @@ def test_fixed_point_multiply_clear():
 
 
 def test_fixed_point_codecs():
-    assert fhe_math.encode_fixed_point(3.14, 100) == 314
-    assert fhe_math.decode_fixed_point(314, 100) == 3.14
+    encoder = fhe_math.make_encode_fixed_point(scale=100)
+    assert encoder(math.pi) == 314
+
+    decoder = fhe_math.make_decode_fixed_point(scale=100)
+    assert decoder(314) == 3.14
 
 
 def test_powmod_clear():

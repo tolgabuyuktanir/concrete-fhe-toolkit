@@ -27,6 +27,6 @@ codespace_tester.py
 try_privacy.py
 benchmark_tensors.py
 benchmark_performance.py
+benchmark_optimizations.py
 /scratch
 /.agents
-*.txt

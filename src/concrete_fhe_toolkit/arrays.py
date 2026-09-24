@@ -9,11 +9,9 @@ from ._compat import fhe
 import numpy as np
 
 from concrete_fhe_toolkit.math import (
-    bit_and,
     bit_and_many,
-    bit_not,
-    bit_or,
     equal,
+    select
 )
 
 from ._utils import (
@@ -23,6 +21,8 @@ from ._utils import (
     validate_bounds,
     validate_size,
 )
+
+from concrete_fhe_toolkit.arithmetic import sign
 
 TieBreak = Literal["first", "last"]
 UnaryArrayFunction = Callable[[Any], Any]
@@ -573,9 +573,6 @@ def compile_argmax(
     return _compile_array_function(function, size, minimum, maximum, configuration)
 
 
-
-
-
 def make_array_set(
     size : int,
     min_value: int = -15,
@@ -635,10 +632,9 @@ def compile_array_set(
     array_set_func = make_array_set(size, min_value, max_value)
     base_arrays = array_inputset(size, min_value, max_value)
     inputset = []
-    for i, arr in enumerate(base_arrays):
-        idx = 0 if i % 2 == 0 else (size - 1)
-        val = min_value if i % 2 == 0 else max_value
-        inputset.append((arr, idx, val))
+    for arr in base_arrays:
+        inputset.append((arr, 0, min_value))
+        inputset.append((arr, size - 1, max_value))
     return compile_function(
         array_set_func,
         {"array": "encrypted", "index": "encrypted", "value": "encrypted"},
@@ -839,14 +835,28 @@ def make_array_index_of(
         items = list(array)
         if not items:
             raise ValueError("array must contain at least one element")
-        found: Any = 0
-        result: Any = 0
-        for position, item in enumerate(items):
-            flag = equal(item, value)
-            is_first = bit_and(flag, bit_not(found))
-            result = result + position * is_first
-            found = bit_or(found, flag)
-        return result + missing * bit_not(found)
+        
+        tensor = _ensure_tensor(array)
+        
+        # We subtract value first, then compare to 0.
+        # This prevents the Zama compiler from creating a multi-input subgraph 
+        # when 'value' is a cleartext runtime argument.
+        diff = tensor - value
+        found_array = (diff == 0)
+        
+        argmax_func = make_argmax(len(tensor), 0, 1)
+        index = argmax_func(found_array)
+    
+        # Check if value exists using a single TLU over the sum.
+        # This forces a PBS so it doesn't fuse with the select multiplication.
+        sum_val = array_sum(found_array)
+        any_found = fhe.LookupTable([0] + [1] * len(tensor))[sum_val]
+
+        @fhe.multivariate
+        def select_index(a, i):
+            return i if a else missing
+            
+        return select_index(any_found, index)
 
     return array_index_of
 
@@ -871,9 +881,9 @@ def compile_array_index_of(
     func = make_array_index_of(size, min_value, max_value, missing_result=missing_result)
     base_arrays = array_inputset(size, min_value, max_value)
     inputset = []
-    for i, arr in enumerate(base_arrays):
-        val = min_value if i % 2 == 0 else max_value
-        inputset.append((arr, val))
+    for arr in base_arrays:
+        inputset.append((arr, min_value))
+        inputset.append((arr, max_value))
     return compile_function(
         func, {"array": "encrypted", "value": "encrypted"}, inputset, configuration
     )
@@ -924,9 +934,9 @@ def compile_array_count(
     func = make_array_count(size, min_value, max_value)
     base_arrays = array_inputset(size, min_value, max_value)
     inputset = []
-    for i, arr in enumerate(base_arrays):
-        val = min_value if i % 2 == 0 else max_value
-        inputset.append((arr, val))
+    for arr in base_arrays:
+        inputset.append((arr, min_value))
+        inputset.append((arr, max_value))
     return compile_function(
         func, {"array": "encrypted", "value": "encrypted"}, inputset, configuration
     )
@@ -977,9 +987,9 @@ def compile_array_contains(
     func = make_array_contains(size, min_value, max_value)
     base_arrays = array_inputset(size, min_value, max_value)
     inputset = []
-    for i, arr in enumerate(base_arrays):
-        val = min_value if i % 2 == 0 else max_value
-        inputset.append((arr, val))
+    for arr in base_arrays:
+        inputset.append((arr, min_value))
+        inputset.append((arr, max_value))
     return compile_function(
         func, {"array": "encrypted", "value": "encrypted"}, inputset, configuration
     )
@@ -1035,9 +1045,9 @@ def compile_array_index(
     func = make_array_index(size, min_value, max_value)
     base_arrays = array_inputset(size, min_value, max_value)
     inputset = []
-    for i, arr in enumerate(base_arrays):
-        idx = 0 if i % 2 == 0 else (size - 1)
-        inputset.append((arr, idx))
+    for arr in base_arrays:
+        inputset.append((arr, 0))
+        inputset.append((arr, size - 1))
     return compile_function(
         func, {"array": "encrypted", "index": "encrypted"}, inputset, configuration
     )

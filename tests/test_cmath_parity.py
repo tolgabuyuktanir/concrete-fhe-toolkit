@@ -152,7 +152,8 @@ def test_math_constants():
     assert fhe_math.pi == math.pi
     assert fhe_math.e == math.e
     assert fhe_math.tau == math.tau
-    assert fhe_math.encode_fixed_point(fhe_math.pi, 100) == 314
+    encoder = fhe_math.make_encode_fixed_point(100)
+    assert encoder(fhe_math.pi) == 314
 
 
 def test_dist_compiles_and_simulates():

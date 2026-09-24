@@ -39,10 +39,10 @@ def array_variance(array: Union[np.ndarray, List[Any]]) -> Any:
         print(array_variance([2, 4, 6]))  # 2
         ```
     """
-    mean_value = array_mean(array)
-    diff_sum: Any = 0
-    for item in array:
-        diff_sum = diff_sum + (item - mean_value) * (item - mean_value)
+    tensor = _ensure_tensor(array)
+    mean_value = array_mean(tensor)
+    diffs = tensor - mean_value
+    diff_sum = np.sum(diffs * diffs)
     return diff_sum // len(array)
 
 
@@ -81,11 +81,11 @@ def array_covariance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndar
     """
     if len(array1) != len(array2):
         raise ValueError("The array sizes must be equal")
-    mean1 = array_mean(array1)
-    mean2 = array_mean(array2)
-    product_sum: Any = 0
-    for item1, item2 in zip(array1, array2):
-        product_sum = product_sum + (item1 - mean1) * (item2 - mean2)
+    tensor1 = _ensure_tensor(array1)
+    tensor2 = _ensure_tensor(array2)
+    mean1 = array_mean(tensor1)
+    mean2 = array_mean(tensor2)
+    product_sum: Any = np.sum((tensor1 - mean1) * (tensor2 - mean2))
     return product_sum // len(array1)
 
 

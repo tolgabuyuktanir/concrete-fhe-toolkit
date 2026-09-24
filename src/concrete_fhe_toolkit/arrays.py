@@ -670,7 +670,7 @@ def array_reverse(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List
         print(array_reverse([1, 2, 3]))  # [3, 2, 1]
         ```
     """
-    return fhe.array(list(reversed(list(array))))
+    return _ensure_tensor(array)[::-1]
 
 
 def array_concat(*arrays: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[Any]]:

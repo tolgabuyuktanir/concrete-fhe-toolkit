@@ -161,10 +161,12 @@ class FHELogisticRegression(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, weights, bias):
+    def __init__(self, weights, bias, *, input_scale = 1, output_scale = 1):
         super().__init__()
         self.weights = weights
         self.bias = bias
+        self.input_scale = input_scale
+        self.output_scale = output_scale
 
     def _circuit_logic(self, features):
         return logistic_regression_inference(self.weights, self.bias, features)
@@ -185,10 +187,12 @@ class FHELinearRegression(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, weights, bias):
+    def __init__(self, weights, bias, *, input_scale = 1, output_scale = 1):
         super().__init__()
         self.weights = weights
         self.bias = bias
+        self.input_scale = input_scale
+        self.output_scale = output_scale
 
     def _circuit_logic(self, features):
         return linear_regression_inference(self.weights, self.bias, features)

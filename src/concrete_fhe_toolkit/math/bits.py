@@ -424,7 +424,7 @@ def multiply_bits(
         row = [bit_and(left_value,right_value) for left_value in new_padded_left]
         rows.append(row)
 
-    product = rows[0]
+    product = tuple(rows[0])
     for i in range(1,len(rows)):
         product = twos_complement_add_bits(rows[i],product,width)
 

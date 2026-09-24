@@ -18,9 +18,6 @@ data.
 
 from __future__ import annotations
 
-from .._utils import client_side_helper
-
-
 import math as _pymath
 from typing import Any, List, Optional
 
@@ -163,8 +160,7 @@ class FHELinearRegressionTrainer(FHETrainer):
 
         weights = [int(round(value * self.weight_scale)) for value in solution[:-1]]
         bias = int(round(solution[-1] * self.weight_scale))
-        model = FHELinearRegression(weights, bias)
-        model.output_scale = self.weight_scale
+        model = FHELinearRegression(weights, bias, output_scale=self.weight_scale)
         return model
 
 

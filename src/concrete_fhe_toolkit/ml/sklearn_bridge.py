@@ -81,12 +81,16 @@ def from_sklearn_linear(
 
     is_classifier = hasattr(model, "classes_")
     if is_classifier:
-        converted = FHELogisticRegression(weights, bias)
-    else:
-        converted = FHELinearRegression(weights, bias)
-        converted.output_scale = normalized_scale * source_scale
-    converted.input_scale = source_scale
-    return converted
+        return FHELogisticRegression(
+            weights, bias, 
+            input_scale=source_scale, 
+            output_scale=normalized_scale * source_scale
+        )
+    return FHELinearRegression(
+        weights, bias, 
+        input_scale=source_scale, 
+        output_scale=normalized_scale * source_scale
+    )
 
 
 @client_side_helper

@@ -652,7 +652,7 @@ def array_cumsum(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[
         print(array_cumsum([1, 2, 3]))  # [1, 3, 6]
         ```
     """
-    sums: Union[np.ndarray, List[Any]] = []
+    sums: List[Any] = []
     running: Any = 0
     for item in array:
         running = running + item
@@ -683,7 +683,7 @@ def array_concat(*arrays: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, Lis
         print(array_concat([1, 2], [3, 4]))  # [1, 2, 3, 4]
         ```
     """
-    combined: Union[np.ndarray, List[Any]] = []
+    combined: List[Any] = []
     for array in arrays:
         combined.extend(list(array))
     return fhe.array(combined)

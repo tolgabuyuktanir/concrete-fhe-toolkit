@@ -8,11 +8,6 @@ from ._compat import fhe
 
 import numpy as np
 
-from concrete_fhe_toolkit.math import (
-    bit_and_many,
-    equal,
-)
-
 from ._utils import (
     array_inputset,
     compile_function,
@@ -595,11 +590,12 @@ def make_array_set(
             print(array_set([10, 20, 30], index=1, value=99))  # [10, 99, 30]
             ```
         """
-        items = list(array)
-        if not items:
+        arr_tensor = fhe.array(array)
+        tensor_size = len(arr_tensor)
+        if tensor_size == 0:
             raise ValueError("array must contain at least one element")
-        arr_tensor = fhe.array(items)
-        positions = np.arange(len(items))
+        
+        positions = np.arange(tensor_size)
         # Use tensor broadcasting to avoid FHE scalar boolean op failures
         mask = (positions == index) * 1
         return mask * value + (1 - mask) * arr_tensor
@@ -826,11 +822,10 @@ def make_array_index_of(
 
     def array_index_of(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Return the first index holding value, or missing_result (default size)."""
-        items = list(array)
-        if not items:
-            raise ValueError("array must contain at least one element")
-        
         tensor = _ensure_tensor(array)
+        tensor_size = len(tensor)
+        if tensor_size == 0:
+            raise ValueError("array must contain at least one element")
         
         # We subtract value first, then compare to 0.
         # This prevents the Zama compiler from creating a multi-input subgraph 
@@ -838,13 +833,13 @@ def make_array_index_of(
         diff = tensor - value
         found_array = (diff == 0)
         
-        argmax_func = make_argmax(len(tensor), 0, 1)
+        argmax_func = make_argmax(tensor_size, 0, 1)
         index = argmax_func(found_array)
     
         # Check if value exists using a single TLU over the sum.
         # This forces a PBS so it doesn't fuse with the select multiplication.
         sum_val = array_sum(found_array)
-        any_found = fhe.LookupTable([0] + [1] * len(tensor))[sum_val]
+        any_found = fhe.LookupTable([0] + [1] * tensor_size)[sum_val]
 
         @fhe.multivariate
         def select_index(a, i):

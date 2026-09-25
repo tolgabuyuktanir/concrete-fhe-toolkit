@@ -3,6 +3,7 @@ import numpy as np
 
 from concrete_fhe_toolkit._utils import validate_integer
 from concrete_fhe_toolkit._compat import fhe
+from concrete_fhe_toolkit.arrays import _ensure_tensor
 
 
 def _matrix_shape(matrix: Union[np.ndarray, List[List[Any]]]) -> tuple:
@@ -35,7 +36,7 @@ def matrix_transpose(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.nda
         ```
     """
     _matrix_shape(matrix)
-    return [list(row) for row in zip(*matrix)]
+    return np.transpose(_ensure_tensor(matrix))
 
 def dot_product(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the dot product of two encrypted arrays (vectors).
@@ -216,13 +217,7 @@ def matrix_flatten(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarr
         # vec = matrix_flatten(enc_matrix)
         ```
     """
-    flatten_list = []
-
-    for row in matrix:
-        for value in row:
-            flatten_list.append(value)
-
-    return flatten_list        
+    return _ensure_tensor(matrix).flatten()       
 
 def tensor_flatten(tensor: Union[np.ndarray, List[List[List[Any]]]]) -> Union[np.ndarray, List[Any]]:
     """Flatten a 3D encrypted tensor into a 1D encrypted array.
@@ -235,11 +230,4 @@ def tensor_flatten(tensor: Union[np.ndarray, List[List[List[Any]]]]) -> Union[np
         # vec = tensor_flatten(enc_3d_tensor)
         ```
     """
-    flatten_list = []
-    
-    for channel in tensor:
-        for row in channel:
-            for value in row:
-                flatten_list.append(value)
-
-    return flatten_list
+    return _ensure_tensor(tensor).flatten()

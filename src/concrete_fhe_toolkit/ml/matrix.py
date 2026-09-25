@@ -155,8 +155,8 @@ def matrix_exp(matrix: Union[np.ndarray, List[List[Any]]], exponent: int) -> Uni
     if size == 0 or columns != size:
         raise ValueError("Matrix should be a nonempty square matrix for exponentiation")
     exponent = validate_integer("exponent", exponent, minimum=0)
-    result = [[int(i == j) for j in range(size)] for i in range(size)]
-    base = matrix
+    result = np.identity(size, dtype=np.int64)
+    base = _ensure_tensor(matrix)
     while exponent:
         if exponent % 2:
             result = matrix_multiply(result, base)
@@ -203,7 +203,7 @@ def covariance_matrix(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.nd
     # Tensor arithmetic keeps diagonal and off-diagonal entries at a common
     # signed integer width in Concrete, including tiny covariances.
     covariance = numerators // denominator
-    return [[covariance[i][j] for j in range(n_features)] for i in range(n_features)]
+    return covariance
 
 
 def matrix_flatten(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[Any]]: 

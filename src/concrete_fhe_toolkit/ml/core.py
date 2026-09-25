@@ -315,14 +315,12 @@ def make_cross_entropy_loss(
     log_func = make_log(min_input, max_input, input_scale=input_scale, output_scale=output_scale, invalid_result=-999)
 
     def cross_entropy_loss(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
-        losses = []
-        for pred, true in zip(y_preds, y_trues):
-            pred_log = log_func(pred)
-            minus_pred_log = log_func(input_scale - pred)
-            loss = -(true * pred_log + (1 - true) * minus_pred_log)
-            losses.append(loss)
-
-        return array_sum(losses) // len(y_trues)
+        preds_tensor = _ensure_tensor(y_preds)
+        trues_tensor = _ensure_tensor(y_trues)
+        preds_log = log_func(preds_tensor)
+        minus_preds_log = log_func(input_scale - preds_tensor)
+        loss_tensor = -(trues_tensor * preds_log + (1 - trues_tensor) * minus_preds_log)
+        return array_sum(loss_tensor) // len(y_trues)
         
     return cross_entropy_loss 
 
@@ -462,7 +460,6 @@ def r2_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, L
     divide = make_floor_divide(zero_result=100)
     ss_res = euclidean_distance_squared(y_preds, y_trues)
     mean_true = array_sum(y_trues) // len(y_trues)
-    ss_tot: Any = 0
-    for value in y_trues:
-        ss_tot = ss_tot + (value - mean_true) * (value - mean_true)
+    y_trues_tensor = _ensure_tensor(y_trues)
+    ss_tot = np.sum((y_trues_tensor - mean_true) ** 2)
     return 100 - divide(100 * ss_res, ss_tot)

@@ -51,7 +51,7 @@ def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[An
 
     return fhe.array(feature_counts), fhe.array(class_counts)    
 
-def make_raw_naive_bayes_training(thresholds: List[Any]):
+def make_raw_naive_bayes_training(thresholds: List[Any]) -> Any:
     """Create a training function that first binarizes raw features before applying Naive Bayes.
     
     Example:

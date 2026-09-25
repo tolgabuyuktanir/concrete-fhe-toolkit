@@ -54,7 +54,7 @@ class FHETrainer:
         self.configuration = configuration
         self.circuit = None
 
-    def _run_circuit(self, function, parameter_encryption, inputset, args):
+    def _run_circuit(self, function: Any, parameter_encryption: Any, inputset: Any, args: Any) -> Any:
         compiler = fhe.Compiler(function, parameter_encryption)
         if self.configuration is None:
             self.circuit = compiler.compile(inputset)
@@ -64,7 +64,7 @@ class FHETrainer:
             return self.circuit.simulate(*args)
         return self.circuit.encrypt_run_decrypt(*args)
 
-    def fit_encrypted(self, *args, **kwargs):
+    def fit_encrypted(self, *args, **kwargs) -> Any:
         raise NotImplementedError("fit_encrypted must be implemented by subclasses")
 
 
@@ -124,7 +124,7 @@ class FHELinearRegressionTrainer(FHETrainer):
         super().__init__(simulate=simulate, configuration=configuration)
         self.weight_scale = validate_integer("weight_scale", weight_scale, minimum=1)
 
-    def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]):
+    def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]) -> Any:
         n_samples = len(X_train)
         if n_samples == 0:
             raise ValueError("X_train must contain at least one sample")
@@ -134,7 +134,7 @@ class FHELinearRegressionTrainer(FHETrainer):
         if len(y_train) != n_samples:
             raise ValueError("X_train and y_train must have the same length")
 
-        def training_circuit(X_train, y_train):
+        def training_circuit(X_train: Any, y_train: Any) -> Any:
             return linear_regression_training(X_train, y_train, n_samples, n_features)
 
         X_array = np.array(X_train, dtype=np.int64)
@@ -219,7 +219,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
             "min_samples_leaf", min_samples_leaf, minimum=1
         )
 
-    def _sample_mask(self, X_train, row: int, path) -> Any:
+    def _sample_mask(self, X_train: Any, row: int, path: Any) -> Any:
         mask: Any = 1
         for feature, threshold, side in path:
             comparison = greater_equal(X_train[row][feature], threshold)
@@ -229,11 +229,11 @@ class FHEDecisionTreeTrainer(FHETrainer):
                 mask = mask * (1 - comparison)
         return mask
 
-    def _level_circuit(self, paths, n_samples: int, with_candidates: bool):
+    def _level_circuit(self, paths: Any, n_samples: int, with_candidates: bool) -> Any:
         candidates = self.candidate_thresholds
         num_classes = self.num_classes
 
-        def level_counts(X_train, y_train):
+        def level_counts(X_train: Any, y_train: Any) -> Any:
             outputs = []
             for path in paths:
                 masks = [
@@ -268,7 +268,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
 
         return level_counts
 
-    def _choose_split(self, node_counts, candidate_counts):
+    def _choose_split(self, node_counts: Any, candidate_counts: Any) -> Any:
         best = None
         node_total = sum(node_counts)
         for (feature, threshold), left_counts in candidate_counts:
@@ -284,7 +284,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
                 best = (score, feature, threshold)
         return best
 
-    def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]):
+    def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]) -> Any:
         n_samples = len(X_train)
         if n_samples == 0:
             raise ValueError("X_train must contain at least one sample")
@@ -406,11 +406,11 @@ class FHEKMeansTrainer(FHETrainer):
         self.minimum, self.maximum = validate_bounds(min_value, max_value)
         self.n_iterations = validate_integer("n_iterations", n_iterations, minimum=1)
 
-    def _step_circuit(self, centroids, n_samples: int, n_features: int, max_distance: int):
+    def _step_circuit(self, centroids: Any, n_samples: int, n_features: int, max_distance: int) -> Any:
         n_clusters = len(centroids)
         arg_min = make_argmin(n_clusters, 0, max_distance)
 
-        def assign_and_aggregate(X_train):
+        def assign_and_aggregate(X_train: Any) -> Any:
             flags = []
             for row in range(n_samples):
                 sample = [X_train[row][column] for column in range(n_features)]
@@ -439,7 +439,7 @@ class FHEKMeansTrainer(FHETrainer):
 
         return assign_and_aggregate
 
-    def fit_encrypted(self, X_train: List[List[int]]):
+    def fit_encrypted(self, X_train: List[List[int]]) -> Any:
         n_samples = len(X_train)
         if n_samples == 0:
             raise ValueError("X_train must contain at least one sample")

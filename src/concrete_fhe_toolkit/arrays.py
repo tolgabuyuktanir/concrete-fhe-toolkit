@@ -842,7 +842,7 @@ def make_array_index_of(
         any_found = fhe.LookupTable([0] + [1] * tensor_size)[sum_val]
 
         @fhe.multivariate
-        def select_index(a, i):
+        def select_index(a: Any, i: Any) -> Any:
             return i if a else missing
             
         return select_index(any_found, index)

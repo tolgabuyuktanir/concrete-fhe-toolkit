@@ -20,7 +20,7 @@ class FHEXGBoostRegressor(FHEXGBoost):
     Tree leaves must already incorporate any training-time learning rate.
     """
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return sum(decision_tree_inference(features, tree) for tree in self.trees)
 
 __all__ = [

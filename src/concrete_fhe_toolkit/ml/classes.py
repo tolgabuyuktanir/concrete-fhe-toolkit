@@ -1,6 +1,7 @@
 from .._compat import fhe
 import math
 import numpy as np
+from typing import Any
 from .._utils import validate_integer
 from concrete_fhe_toolkit.ml import (
     logistic_regression_inference, linear_regression_inference,
@@ -20,18 +21,18 @@ class FHEModel:
         self._batched = False
         self._sample_shape = None
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         raise NotImplementedError("Subclasses must implement _circuit_logic")
 
-    def _batch_circuit_logic(self, features_batch):
+    def _batch_circuit_logic(self, features_batch: Any) -> Any:
         return fhe.array([self._circuit_logic(sample) for sample in features_batch])
 
-    def _single_circuit_logic(self, features):
+    def _single_circuit_logic(self, features: Any) -> Any:
         result = self._circuit_logic(features)
         return fhe.array(result) if isinstance(result, (list, tuple)) else result
 
     @staticmethod
-    def _integer_array(value):
+    def _integer_array(value: Any) -> Any:
         array = np.asarray(value)
         if array.size == 0:
             raise ValueError("samples must not be empty")
@@ -41,8 +42,8 @@ class FHEModel:
             raise ValueError("samples must fit in signed 64-bit integers")
         return array.astype(np.int64)
 
-    def compile(self, inputset, batch_size=None, *, inputset_is_batched=None,
-                configuration=None):
+    def compile(self, inputset: Any, batch_size: Any=None, *, inputset_is_batched: Any=None,
+                configuration: Any=None) -> Any:
         """Compile representative integer samples.
 
         By default, each inputset item is one sample and the circuit accepts
@@ -104,15 +105,15 @@ class FHEModel:
         self._batched = batched
         self._sample_shape = sample_shape
 
-    def predict(self, features):
+    def predict(self, features: Any) -> Any:
         """Encrypt one sample, evaluate it, and decrypt its prediction."""
         return self.predict_many([features])[0]
 
-    def simulate(self, features):
+    def simulate(self, features: Any) -> Any:
         """Simulate one sample without encryption; compile the model first."""
         return self.simulate_many([features])[0]
 
-    def _run_many(self, samples, method):
+    def _run_many(self, samples: Any, method: Any) -> Any:
         if self.circuit is None:
             raise ValueError("The model should be compiled before prediction")
         items = [self._integer_array(sample) for sample in samples]
@@ -133,7 +134,7 @@ class FHEModel:
             results.extend(run(np.stack(batch))[:count])
         return results
 
-    def predict_many(self, samples):
+    def predict_many(self, samples: Any) -> Any:
         """Predict samples using the compiled circuit and its existing keys.
 
         Partial batches repeat the final sample for padding; padded predictions
@@ -141,7 +142,7 @@ class FHEModel:
         """
         return self._run_many(samples, "encrypt_run_decrypt")
 
-    def simulate_many(self, samples):
+    def simulate_many(self, samples: Any) -> Any:
         """Simulate samples with the same batching rules as ``predict_many``."""
         return self._run_many(samples, "simulate")
 
@@ -161,14 +162,14 @@ class FHELogisticRegression(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, weights, bias, *, input_scale = 1, output_scale = 1):
+    def __init__(self, weights: Any, bias: Any, *, input_scale: Any = 1, output_scale: Any = 1):
         super().__init__()
         self.weights = weights
         self.bias = bias
         self.input_scale = input_scale
         self.output_scale = output_scale
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return logistic_regression_inference(self.weights, self.bias, features)
         
 
@@ -187,14 +188,14 @@ class FHELinearRegression(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, weights, bias, *, input_scale = 1, output_scale = 1):
+    def __init__(self, weights: Any, bias: Any, *, input_scale: Any = 1, output_scale: Any = 1):
         super().__init__()
         self.weights = weights
         self.bias = bias
         self.input_scale = input_scale
         self.output_scale = output_scale
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return linear_regression_inference(self.weights, self.bias, features)
 
 
@@ -212,11 +213,11 @@ class FHEDecisionTree(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self,tree):
+    def __init__(self,tree: Any):
         super().__init__()
         self.tree = tree
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return decision_tree_inference(features, self.tree)
 
 
@@ -235,12 +236,12 @@ class FHEPCA(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, means, components):
+    def __init__(self, means: Any, components: Any):
         super().__init__()
         self.means = means
         self.components = components
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return pca_inference(features, self.means, self.components)
 
 
@@ -259,12 +260,12 @@ class FHECNN(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """        
-    def __init__(self, filters, bias):
+    def __init__(self, filters: Any, bias: Any):
         super().__init__()
         self.filters = filters
         self.bias = bias
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return cnn_inference(self.filters, self.bias, image = features)
 
 
@@ -282,11 +283,11 @@ class FHERandomForest(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, trees):
+    def __init__(self, trees: Any):
         super().__init__()
         self.trees = trees
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return random_forest_inference(features,self.trees)    
 
 
@@ -304,11 +305,11 @@ class FHEXGBoost(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, trees):
+    def __init__(self, trees: Any):
         super().__init__() 
         self.trees = trees   
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return xgboost_inference(features, self.trees)    
 
 class FHESVM(FHEModel):
@@ -326,12 +327,12 @@ class FHESVM(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, weights, bias):
+    def __init__(self, weights: Any, bias: Any):
         super().__init__()
         self.weights = weights
         self.bias = bias
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return svm_inference(self.weights, self.bias, features)
 
 class FHEKNN(FHEModel):
@@ -350,13 +351,13 @@ class FHEKNN(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, X_train, y_train, k):
+    def __init__(self, X_train: Any, y_train: Any, k: Any):
         super().__init__()
         self.X_train = X_train
         self.y_train = y_train
         self.k = k
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return knn_inference(features, self.X_train, self.y_train, k=self.k)
 
 
@@ -374,11 +375,11 @@ class FHEMLP(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, mlp_layers):
+    def __init__(self, mlp_layers: Any):
         super().__init__()
         self.mlp_layers = mlp_layers
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return mlp_inference(features,self.mlp_layers)    
 
 
@@ -400,12 +401,12 @@ class FHENaiveBayes(FHEModel):
         prediction = model.predict([1, 0, 1, 1])
         ```
     """
-    def __init__(self, log_prob_tables, priors):
+    def __init__(self, log_prob_tables: Any, priors: Any):
         super().__init__()
         self.log_prob_tables = log_prob_tables
         self.priors = priors
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return naive_bayes_inference(features,self.log_prob_tables,self.priors)
 
 
@@ -441,7 +442,7 @@ class FHENaiveBayesTrainer:
         self.circuit = None
         self.compiler = None
 
-    def prepare_trainer(self, num_samples: int, num_features: int, num_classes: int, max_bit_width=8, thresholds=None):
+    def prepare_trainer(self, num_samples: int, num_features: int, num_classes: int, max_bit_width: Any=8, thresholds: Any=None) -> Any:
         if(max_bit_width > 16):
             raise ValueError("The maximum supported bit width is 16")
         if(max_bit_width > 8):
@@ -462,19 +463,19 @@ class FHENaiveBayesTrainer:
         self.circuit = self.compiler.compile([(dummy_X, dummy_y)])
         return self.circuit
 
-    def encrypt_data(self, X_train, y_train):
+    def encrypt_data(self, X_train: Any, y_train: Any) -> Any:
         if self.circuit is None:
             raise ValueError("Circuit is not compiled. Call compile_trainer first.")
         
         return self.circuit.encrypt(X_train, y_train)
 
-    def train_encrypted(self, encrypted_X, encrypted_y):
+    def train_encrypted(self, encrypted_X: Any, encrypted_y: Any) -> Any:
         if self.circuit is None:
             raise ValueError("Circuit is not compiled on server.")
             
         return self.circuit.run(encrypted_X, encrypted_y)
 
-    def decrypt_and_finalize_model(self, encrypted_results, max_bit_width=8, * ,epsilon = None):
+    def decrypt_and_finalize_model(self, encrypted_results: Any, max_bit_width: Any=8, * ,epsilon: Any = None) -> Any:
         raw_feature_counts, priors = self.circuit.decrypt(*encrypted_results)
         if epsilon is not None:
             noisy_feature_counts = []
@@ -486,7 +487,7 @@ class FHENaiveBayesTrainer:
         return self._finalize_model(raw_feature_counts, priors, max_bit_width)
 
     @staticmethod
-    def _finalize_model(raw_feature_counts, priors, max_bit_width):
+    def _finalize_model(raw_feature_counts: Any, priors: Any, max_bit_width: Any) -> Any:
         formatted_tables = []
         formatted_priors = []
         total_samples = sum(priors)
@@ -533,7 +534,7 @@ class FHENaiveBayesTrainer:
         model.scale = SCALE
         return model
 
-    def fit_encrypted(self, X_train, y_train, * ,max_bit_width = 8, thresholds=None, epsilon=None):
+    def fit_encrypted(self, X_train: Any, y_train: Any, * ,max_bit_width: Any = 8, thresholds: Any=None, epsilon: Any=None) -> Any:
         if(max_bit_width > 16):
             raise ValueError("The maximum supported bit width is 16")
         if(max_bit_width > 8):
@@ -578,7 +579,7 @@ class FHEKMeans(FHEModel):
         ```
     """
 
-    def __init__(self, centroids, *, max_distance):
+    def __init__(self, centroids: Any, *, max_distance: Any):
         super().__init__()
         from .models import nearest_centroid_inference
 
@@ -586,7 +587,7 @@ class FHEKMeans(FHEModel):
         self.centroids = [list(centroid) for centroid in centroids]
         self.max_distance = max_distance
 
-    def _circuit_logic(self, features):
+    def _circuit_logic(self, features: Any) -> Any:
         return self._nearest_centroid_inference(
             features,
             self.centroids,

@@ -58,9 +58,13 @@ def test_covariance_floors_only_final_result():
     for values in product(range(-2, 3), repeat=4):
         data = [list(values[:2]), list(values[2:])]
         actual = mm.covariance_matrix(data)
+        if hasattr(actual, "tolist"): actual = actual.tolist()
         assert actual == _covariance_reference(data)
         assert actual[0][1] == actual[1][0]
-    assert mm.covariance_matrix([[1, 1], [2, 3]]) == [[0, 1], [1, 2]]
+    
+    cov = mm.covariance_matrix([[1, 1], [2, 3]])
+    if hasattr(cov, "tolist"): cov = cov.tolist()
+    assert cov == [[0, 1], [1, 2]]
 
 
 def test_covariance_compiles_and_simulates():

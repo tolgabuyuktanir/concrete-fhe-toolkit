@@ -1,3 +1,4 @@
+from typing import Any
 """Regression task namespace: models, trainers, and metrics.
 
 sklearn-style entry point — every class here predicts a numeric value from

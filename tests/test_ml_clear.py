@@ -50,7 +50,7 @@ def test_matrix_operations_clear():
     matrix2 = [[5, 6], [7, 8]]
 
     assert int(ml.dot_product([1, 2, 3], [4, 5, 6])) == 32
-    assert ml.matrix_transpose(matrix1) == [[1, 3], [2, 4]]
+    assert ml.matrix_transpose(matrix1).tolist() == [[1, 3], [2, 4]]
     assert ml.matrix_add(matrix1, matrix2).tolist() == [[6, 8], [10, 12]]
     assert ml.matrix_subtract(matrix2, matrix1).tolist() == [[4, 4], [4, 4]]
 

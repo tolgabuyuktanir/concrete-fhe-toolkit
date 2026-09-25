@@ -13,26 +13,69 @@ from concrete_fhe_toolkit.privacy import dp_release
 import warnings
 
 class FHEModel:
-    """Base class for models with single-sample or fixed-batch circuits."""
+    """Base class for models with single-sample or fixed-batch circuits.
+    
+    Example:
+        ```python
+        model = FHEModel()
+        ```
+    """
 
     def __init__(self):
+        """Initializes the FHEModel.
+        
+        Returns:
+            None
+        """
         self.circuit = None
         self.batch_size = 1
         self._batched = False
         self._sample_shape = None
 
     def _circuit_logic(self, features: Any) -> Any:
+        """Core circuit logic to be implemented by subclasses.
+        
+        Args:
+            features (Any): The input features for the circuit.
+            
+        Returns:
+            Any: The result of the circuit computation.
+        """
         raise NotImplementedError("Subclasses must implement _circuit_logic")
 
     def _batch_circuit_logic(self, features_batch: Any) -> Any:
+        """Executes the circuit logic on a batch of features.
+        
+        Args:
+            features_batch (Any): A batch of input features.
+            
+        Returns:
+            Any: An array of results from the circuit logic.
+        """
         return fhe.array([self._circuit_logic(sample) for sample in features_batch])
 
     def _single_circuit_logic(self, features: Any) -> Any:
+        """Executes the circuit logic on a single sample.
+        
+        Args:
+            features (Any): A single input sample.
+            
+        Returns:
+            Any: The result of the circuit logic.
+        """
         result = self._circuit_logic(features)
         return fhe.array(result) if isinstance(result, (list, tuple)) else result
 
     @staticmethod
     def _integer_array(value: Any) -> Any:
+        """Converts a value to an integer numpy array safely.
+        
+        Args:
+            value (Any): The input value.
+            
+        Returns:
+            Any: The resulting integer numpy array.
+        """
         array = np.asarray(value)
         if array.size == 0:
             raise ValueError("samples must not be empty")
@@ -55,6 +98,15 @@ class FHEModel:
         ``inputset_is_batched=True`` can infer batch size from the first item.
         All batches must have the same shape and size. Runtime samples must
         remain within the public bounds represented by the inputset.
+
+        Args:
+            inputset (Any): The calibration dataset.
+            batch_size (Any, optional): The batch size. Defaults to None.
+            inputset_is_batched (Any, optional): Whether the inputset is batched. Defaults to None.
+            configuration (Any, optional): Optional compiler configuration. Defaults to None.
+            
+        Returns:
+            Any: The compiled circuit or None.
 
         Example:
             ```python
@@ -106,14 +158,37 @@ class FHEModel:
         self._sample_shape = sample_shape
 
     def predict(self, features: Any) -> Any:
-        """Encrypt one sample, evaluate it, and decrypt its prediction."""
+        """Encrypt one sample, evaluate it, and decrypt its prediction.
+        
+        Args:
+            features (Any): The input features to predict on.
+            
+        Returns:
+            Any: The prediction result.
+        """
         return self.predict_many([features])[0]
 
     def simulate(self, features: Any) -> Any:
-        """Simulate one sample without encryption; compile the model first."""
+        """Simulate one sample without encryption; compile the model first.
+        
+        Args:
+            features (Any): The input features to simulate on.
+            
+        Returns:
+            Any: The simulation result.
+        """
         return self.simulate_many([features])[0]
 
     def _run_many(self, samples: Any, method: Any) -> Any:
+        """Helper to run a method over multiple samples.
+        
+        Args:
+            samples (Any): The list of samples.
+            method (Any): The name of the method to call on the circuit.
+            
+        Returns:
+            Any: A list of results.
+        """
         if self.circuit is None:
             raise ValueError("The model should be compiled before prediction")
         items = [self._integer_array(sample) for sample in samples]
@@ -139,11 +214,24 @@ class FHEModel:
 
         Partial batches repeat the final sample for padding; padded predictions
         are discarded. Single-sample circuits execute once per input sample.
+        
+        Args:
+            samples (Any): The list of samples to predict on.
+            
+        Returns:
+            Any: The list of predictions.
         """
         return self._run_many(samples, "encrypt_run_decrypt")
 
     def simulate_many(self, samples: Any) -> Any:
-        """Simulate samples with the same batching rules as ``predict_many``."""
+        """Simulate samples with the same batching rules as ``predict_many``.
+        
+        Args:
+            samples (Any): The list of samples to simulate on.
+            
+        Returns:
+            Any: The list of simulation results.
+        """
         return self._run_many(samples, "simulate")
 
 
@@ -164,6 +252,7 @@ class FHELogisticRegression(FHEModel):
     """
     def __init__(self, weights: Any, bias: Any, *, input_scale: Any = 1, output_scale: Any = 1):
         super().__init__()
+        """Initialize the object."""
         self.weights = weights
         self.bias = bias
         self.input_scale = input_scale
@@ -190,6 +279,7 @@ class FHELinearRegression(FHEModel):
     """
     def __init__(self, weights: Any, bias: Any, *, input_scale: Any = 1, output_scale: Any = 1):
         super().__init__()
+        """Initialize the object."""
         self.weights = weights
         self.bias = bias
         self.input_scale = input_scale
@@ -215,6 +305,7 @@ class FHEDecisionTree(FHEModel):
     """
     def __init__(self,tree: Any):
         super().__init__()
+        """Initialize the object."""
         self.tree = tree
 
     def _circuit_logic(self, features: Any) -> Any:
@@ -238,6 +329,7 @@ class FHEPCA(FHEModel):
     """
     def __init__(self, means: Any, components: Any):
         super().__init__()
+        """Initialize the object."""
         self.means = means
         self.components = components
 
@@ -262,6 +354,7 @@ class FHECNN(FHEModel):
     """        
     def __init__(self, filters: Any, bias: Any):
         super().__init__()
+        """Initialize the object."""
         self.filters = filters
         self.bias = bias
 
@@ -285,6 +378,7 @@ class FHERandomForest(FHEModel):
     """
     def __init__(self, trees: Any):
         super().__init__()
+        """Initialize the object."""
         self.trees = trees
 
     def _circuit_logic(self, features: Any) -> Any:
@@ -307,6 +401,7 @@ class FHEXGBoost(FHEModel):
     """
     def __init__(self, trees: Any):
         super().__init__() 
+        """Initialize the object."""
         self.trees = trees   
 
     def _circuit_logic(self, features: Any) -> Any:
@@ -329,6 +424,7 @@ class FHESVM(FHEModel):
     """
     def __init__(self, weights: Any, bias: Any):
         super().__init__()
+        """Initialize the object."""
         self.weights = weights
         self.bias = bias
 
@@ -353,6 +449,7 @@ class FHEKNN(FHEModel):
     """
     def __init__(self, X_train: Any, y_train: Any, k: Any):
         super().__init__()
+        """Initialize the object."""
         self.X_train = X_train
         self.y_train = y_train
         self.k = k
@@ -377,6 +474,7 @@ class FHEMLP(FHEModel):
     """
     def __init__(self, mlp_layers: Any):
         super().__init__()
+        """Initialize the object."""
         self.mlp_layers = mlp_layers
 
     def _circuit_logic(self, features: Any) -> Any:
@@ -403,6 +501,7 @@ class FHENaiveBayes(FHEModel):
     """
     def __init__(self, log_prob_tables: Any, priors: Any):
         super().__init__()
+        """Initialize the object."""
         self.log_prob_tables = log_prob_tables
         self.priors = priors
 
@@ -439,10 +538,32 @@ class FHENaiveBayesTrainer:
         ```
     """
     def __init__(self):
+        """Initializes the FHENaiveBayesTrainer.
+        
+        Returns:
+            None
+        """
         self.circuit = None
         self.compiler = None
 
     def prepare_trainer(self, num_samples: int, num_features: int, num_classes: int, max_bit_width: Any=8, thresholds: Any=None) -> Any:
+        """Prepares and compiles the trainer circuit.
+        
+        Args:
+            num_samples (int): Number of training samples.
+            num_features (int): Number of features per sample.
+            num_classes (int): Number of classes.
+            max_bit_width (Any, optional): Maximum bit width for the circuit. Defaults to 8.
+            thresholds (Any, optional): Thresholds for training. Defaults to None.
+            
+        Returns:
+            Any: The compiled FHE circuit.
+            
+        Example:
+            ```python
+            trainer.prepare_trainer(100, 10, 2)
+            ```
+        """
         if(max_bit_width > 16):
             raise ValueError("The maximum supported bit width is 16")
         if(max_bit_width > 8):
@@ -464,18 +585,46 @@ class FHENaiveBayesTrainer:
         return self.circuit
 
     def encrypt_data(self, X_train: Any, y_train: Any) -> Any:
+        """Encrypts the training data.
+        
+        Args:
+            X_train (Any): The training features.
+            y_train (Any): The training labels.
+            
+        Returns:
+            Any: The encrypted data tuple.
+        """
         if self.circuit is None:
             raise ValueError("Circuit is not compiled. Call compile_trainer first.")
         
         return self.circuit.encrypt(X_train, y_train)
 
     def train_encrypted(self, encrypted_X: Any, encrypted_y: Any) -> Any:
+        """Trains the model on the server using encrypted data.
+        
+        Args:
+            encrypted_X (Any): Encrypted training features.
+            encrypted_y (Any): Encrypted training labels.
+            
+        Returns:
+            Any: Encrypted results of the training circuit.
+        """
         if self.circuit is None:
             raise ValueError("Circuit is not compiled on server.")
             
         return self.circuit.run(encrypted_X, encrypted_y)
 
     def decrypt_and_finalize_model(self, encrypted_results: Any, max_bit_width: Any=8, * ,epsilon: Any = None) -> Any:
+        """Decrypts the results and finalizes the Naive Bayes model.
+        
+        Args:
+            encrypted_results (Any): The encrypted results from the server.
+            max_bit_width (Any, optional): Maximum bit width for the circuit. Defaults to 8.
+            epsilon (Any, optional): Epsilon for differential privacy. Defaults to None.
+            
+        Returns:
+            Any: The finalized FHENaiveBayes model.
+        """
         raw_feature_counts, priors = self.circuit.decrypt(*encrypted_results)
         if epsilon is not None:
             noisy_feature_counts = []
@@ -535,6 +684,18 @@ class FHENaiveBayesTrainer:
         return model
 
     def fit_encrypted(self, X_train: Any, y_train: Any, * ,max_bit_width: Any = 8, thresholds: Any=None, epsilon: Any=None) -> Any:
+        """Fits the model securely on encrypted training data.
+        
+        Args:
+            X_train (Any): The training features.
+            y_train (Any): The training labels.
+            max_bit_width (Any, optional): Maximum bit width for the circuit. Defaults to 8.
+            thresholds (Any, optional): Thresholds for training. Defaults to None.
+            epsilon (Any, optional): Epsilon for differential privacy. Defaults to None.
+            
+        Returns:
+            Any: The trained FHENaiveBayes model.
+        """
         if(max_bit_width > 16):
             raise ValueError("The maximum supported bit width is 16")
         if(max_bit_width > 8):
@@ -581,6 +742,7 @@ class FHEKMeans(FHEModel):
 
     def __init__(self, centroids: Any, *, max_distance: Any):
         super().__init__()
+        """Initialize the object."""
         from .models import nearest_centroid_inference
 
         self._nearest_centroid_inference = nearest_centroid_inference

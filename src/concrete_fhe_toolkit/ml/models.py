@@ -20,6 +20,14 @@ import numpy as np
 def linear_regression_inference(weights: Union[np.ndarray, List[Any]], bias: Any, features: Union[np.ndarray, List[Any]]) -> Any:
     """Evaluate a linear regression model (dot product of weights and features plus bias).
     
+    Args:
+        weights: The model weights.
+        bias: The model bias.
+        features: The encrypted feature vector.
+        
+    Returns:
+        The encrypted evaluation result.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import linear_regression_inference
@@ -50,6 +58,15 @@ def logistic_regression_inference(
     Quantize weights and features to integers before calling. Bias and any
     nonzero threshold must use the product of the weight and feature scales.
     
+    Args:
+        weights: The model weights.
+        bias: The model bias.
+        features: The encrypted feature vector.
+        threshold: The threshold for classification. Defaults to 0.
+        
+    Returns:
+        The binary class prediction.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import logistic_regression_inference
@@ -70,6 +87,15 @@ def decision_tree_node(feature_val: Any, threshold: Any, left_branch: Any, right
     Returns ``left_branch`` when ``feature_val >= threshold``, otherwise
     ``right_branch``. Branch values may be arbitrary bounded integers.
     
+    Args:
+        feature_val: The feature value to compare.
+        threshold: The threshold to compare against.
+        left_branch: The value to return if feature_val >= threshold.
+        right_branch: The value to return if feature_val < threshold.
+        
+    Returns:
+        The selected branch value.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import decision_tree_node
@@ -85,6 +111,12 @@ def decision_tree_node(feature_val: Any, threshold: Any, left_branch: Any, right
 def majority_votes(predictions: Union[np.ndarray, List[Any]]) -> Any:
     """Perform majority voting for an ensemble of binary predictions.
     
+    Args:
+        predictions: A list or array of binary predictions.
+        
+    Returns:
+        The majority vote result (1 if sum > len/2 else 0).
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import majority_votes
@@ -120,6 +152,16 @@ def knn_inference(
     The k > 1 path runs k argmin rounds, masking each selected neighbor with
     a distance penalty, so circuit cost grows linearly with ``k``.
     
+    Args:
+        test_sample: The encrypted test sample to classify.
+        train_samples: The public training samples.
+        train_labels: The public training labels.
+        k: The number of nearest neighbors to consider. Defaults to 1.
+        max_distance: An upper bound on the squared Euclidean distance. Defaults to 15.
+        
+    Returns:
+        The predicted label for the test sample.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import knn_inference
@@ -187,6 +229,13 @@ def decision_tree_inference(features: Union[np.ndarray, List[Any]], tree: Any) -
     Every path of the tree is evaluated obliviously, so the visited path is
     never revealed — circuit cost grows with the total number of nodes.
     
+    Args:
+        features: The encrypted feature vector.
+        tree: The public decision tree structure.
+        
+    Returns:
+        The predicted value or label from the decision tree.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import decision_tree_inference
@@ -229,6 +278,14 @@ def compile_decision_tree_node(
 ) -> fhe.Circuit:
     """Compile a single encrypted decision tree node.
     
+    Args:
+        min_value: The minimum possible value for features and branches. Defaults to -15.
+        max_value: The maximum possible value for features and branches. Defaults to 15.
+        configuration: Optional FHE compilation configuration.
+        
+    Returns:
+        The compiled FHE circuit.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import compile_decision_tree_node
@@ -263,6 +320,13 @@ def random_forest_inference(features: Union[np.ndarray, List[Any]], trees: Union
     :func:`decision_tree_inference`. Use an odd number of trees to avoid
     ties (a tie resolves to 0).
     
+    Args:
+        features: The encrypted feature vector.
+        trees: A list of public decision trees.
+        
+    Returns:
+        The predicted label from the random forest via majority voting.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import random_forest_inference
@@ -287,6 +351,13 @@ def mlp_inference(features: Union[np.ndarray, List[Any]], layers: Union[np.ndarr
     scale; note that every layer multiplies scales together, so keep the
     network shallow or rescale between layers.
     
+    Args:
+        features: The encrypted feature vector.
+        layers: A list of (weights, biases) tuples for each layer.
+        
+    Returns:
+        The output scores from the network.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import mlp_inference
@@ -323,6 +394,15 @@ def nearest_centroid_inference(
     Returns the centroid index, or the matching label when ``labels`` is
     given. ``max_distance`` must bound the squared distance to any centroid.
     
+    Args:
+        sample: The encrypted sample.
+        centroids: A list of public centroids.
+        labels: Optional labels for each centroid.
+        max_distance: An upper bound on the squared distance. Defaults to 15.
+        
+    Returns:
+        The index of the nearest centroid, or its corresponding label.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import nearest_centroid_inference
@@ -358,6 +438,14 @@ def nearest_centroid_inference(
 def argmax_inference(scores: Union[np.ndarray, List[Any]], min_score: int, max_score: int) -> Any:
     """Return the index of the highest class score (multi-class head).
     
+    Args:
+        scores: A list of scores to find the argmax of.
+        min_score: The minimum possible score value.
+        max_score: The maximum possible score value.
+        
+    Returns:
+        The index of the maximum score.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import argmax_inference
@@ -388,6 +476,15 @@ def naive_bayes_inference(
     the best class. Score bounds for the final argmax are derived from the
     public tables.
     
+    Args:
+        features: The encrypted feature vector.
+        log_prob_tables: The lookup tables for log probabilities.
+        priors: The prior probabilities for each class.
+        min_feature: The minimum value of features for offsetting the table. Defaults to 0.
+        
+    Returns:
+        The predicted class index.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import naive_bayes_inference
@@ -432,6 +529,14 @@ def svm_inference(weights: Union[np.ndarray, List[Any]], bias: Any, features: Un
     Returns 1 if the sample is on the positive side of the hyperplane,
     -1 if it's on the negative side, and 0 if it lies exactly on the boundary.
     
+    Args:
+        weights: The SVM weights.
+        bias: The SVM bias.
+        features: The encrypted feature vector.
+        
+    Returns:
+        The predicted sign (-1, 0, or 1).
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import svm_inference
@@ -448,7 +553,7 @@ def pca_inference(features: Union[np.ndarray,List[Any]], means: Union[np.ndarray
 
     Args:
         features: The encrypted feature vector (list of encrypted integers).
-        mean: The public mean vector (list of integers).
+        means: The public mean vector (list of integers).
         components: The public principal components matrix (list of lists of integers).
 
     Returns:
@@ -490,6 +595,14 @@ def xgboost_inference(features: Union[np.ndarray, List[Any]],trees: Union[np.nda
 def cnn_inference(filters: Union[np.ndarray, List[List[List[Any]]]], bias: Union[np.ndarray, List[Any]], image: Union[np.ndarray, List[List[List[Any]]]]) -> Any:
     """Apply a 2D convolutional layer (CNN) to an encrypted image.
     
+    Args:
+        filters: The convolutional filters.
+        bias: The bias vector for the convolution.
+        image: The encrypted input image tensor.
+        
+    Returns:
+        The flattened output feature map.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import cnn_inference
@@ -506,6 +619,12 @@ def cnn_inference(filters: Union[np.ndarray, List[List[List[Any]]]], bias: Union
 def max_pooling_2d(image: Union[np.ndarray, List[List[List[Any]]]]) -> Any:
     """Apply 2D max pooling (2x2 kernel, stride 2) to an encrypted feature map.
     
+    Args:
+        image: The encrypted input image or feature map.
+        
+    Returns:
+        The flattened pooled output feature map.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import max_pooling_2d
@@ -521,6 +640,12 @@ def max_pooling_2d(image: Union[np.ndarray, List[List[List[Any]]]]) -> Any:
 def avg_pooling_2d(image: Union[np.ndarray, List[List[List[Any]]]]) -> Any:
     """Apply 2D average pooling (2x2 kernel, stride 2) to an encrypted feature map.
     
+    Args:
+        image: The encrypted input image or feature map.
+        
+    Returns:
+        The flattened pooled output feature map.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import avg_pooling_2d
@@ -540,6 +665,15 @@ def auto_quantizer(images: Union[np.ndarray, List[List[List[List[Any]]]]], filte
     
     This helps keep intermediate multiplications within the FHE bit-width limit.
     
+    Args:
+        images: A list of input images.
+        filters: The convolutional filters.
+        model: The trained ML model.
+        mode: The quantization mode, either "optimal" or "worst_case". Defaults to "optimal".
+        
+    Returns:
+        The optimal scaling factor as an integer.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.ml.models import auto_quantizer

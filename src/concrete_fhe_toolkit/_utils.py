@@ -10,7 +10,20 @@ from ._compat import fhe
 
 
 def validate_integer(name: str, value: int, minimum: Optional[int] = None) -> int:
-    """Validate and normalize an integer argument."""
+    """Validate and normalize an integer argument.
+    
+    Args:
+        name (str): The name of the argument.
+        value (int): The value to validate.
+        minimum (Optional[int], optional): The minimum allowed value. Defaults to None.
+        
+    Returns:
+        int: The normalized integer value.
+        
+    Raises:
+        TypeError: If the value is not an integer.
+        ValueError: If the value is less than the minimum.
+    """
     if isinstance(value, bool) or not isinstance(value, Integral):
         raise TypeError(f"{name} must be an integer")
 
@@ -21,7 +34,18 @@ def validate_integer(name: str, value: int, minimum: Optional[int] = None) -> in
 
 
 def validate_bounds(min_value: int, max_value: int) -> Tuple[int, int]:
-    """Validate inclusive integer bounds."""
+    """Validate inclusive integer bounds.
+    
+    Args:
+        min_value (int): The minimum value bound.
+        max_value (int): The maximum value bound.
+        
+    Returns:
+        Tuple[int, int]: A tuple containing the validated minimum and maximum bounds.
+        
+    Raises:
+        ValueError: If min_value is greater than max_value.
+    """
     minimum = validate_integer("min_value", min_value)
     maximum = validate_integer("max_value", max_value)
     if minimum > maximum:
@@ -30,7 +54,18 @@ def validate_bounds(min_value: int, max_value: int) -> Tuple[int, int]:
 
 
 def validate_size(size: int, *, power_of_two: bool = False) -> int:
-    """Validate a fixed circuit input size."""
+    """Validate a fixed circuit input size.
+    
+    Args:
+        size (int): The size to validate.
+        power_of_two (bool, optional): Whether the size must be a power of two. Defaults to False.
+        
+    Returns:
+        int: The validated size.
+        
+    Raises:
+        ValueError: If power_of_two is True and size is not a power of two.
+    """
     normalized = validate_integer("size", size, minimum=1)
     if power_of_two and normalized & (normalized - 1):
         raise ValueError("size must be a power of two")
@@ -38,7 +73,14 @@ def validate_size(size: int, *, power_of_two: bool = False) -> int:
 
 
 def positive_difference_lut(span: int) -> fhe.LookupTable:
-    """Return a LUT for max(value, 0), where value is in [-span, span]."""
+    """Return a LUT for max(value, 0), where value is in [-span, span].
+    
+    Args:
+        span (int): The maximum absolute value of the input.
+        
+    Returns:
+        fhe.LookupTable: The lookup table for the positive difference.
+    """
     span = validate_integer("span", span, minimum=1)
     required_length = 2 * span + 1
     table_length = 1 << (required_length - 1).bit_length()
@@ -50,7 +92,16 @@ def positive_difference_lut(span: int) -> fhe.LookupTable:
 
 
 def array_inputset(size: int, min_value: int, max_value: int) -> List[np.ndarray]:
-    """Create a compact inputset that includes all important array boundaries."""
+    """Create a compact inputset that includes all important array boundaries.
+    
+    Args:
+        size (int): The size of the arrays.
+        min_value (int): The minimum value in the arrays.
+        max_value (int): The maximum value in the arrays.
+        
+    Returns:
+        List[np.ndarray]: A list of numpy arrays representing the inputset.
+    """
     low = np.full(size, min_value, dtype=np.int64)
     high = np.full(size, max_value, dtype=np.int64)
     probes = []
@@ -86,7 +137,17 @@ def compile_function(
     inputset: list,
     configuration: Optional[fhe.Configuration],
 ) -> fhe.Circuit:
-    """Compile a function while keeping configuration optional."""
+    """Compile a function while keeping configuration optional.
+    
+    Args:
+        function (Any): The function to compile.
+        parameter_encryption (dict): The encryption configuration for parameters.
+        inputset (list): The inputset for compilation.
+        configuration (Optional[fhe.Configuration]): Optional compilation configuration.
+        
+    Returns:
+        fhe.Circuit: The compiled FHE circuit.
+    """
     compiler = fhe.Compiler(function, parameter_encryption)
     if configuration is None:
         return compiler.compile(inputset)
@@ -94,5 +155,13 @@ def compile_function(
 
 
 def client_side_helper(function: Any) -> Callable:
+    """Mark a function as a client-side helper.
+    
+    Args:
+        function (Any): The function to mark.
+        
+    Returns:
+        Callable: The marked function.
+    """
     function.is_helper = True
     return function

@@ -46,6 +46,12 @@ def _fibonacci_values(max_n: int) -> list[int]:
 def make_factorial(max_n: int) -> UnaryFunction:
     """Create n! for an encrypted n in [0, max_n].
     
+    Args:
+        max_n (int): The maximum value for the encrypted integer n.
+        
+    Returns:
+        UnaryFunction: A unary function that computes the factorial.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import make_factorial
@@ -66,6 +72,14 @@ def compile_factorial(
 ) -> fhe.Circuit:
     """Compile n! for an encrypted n in [0, max_n].
     
+    Args:
+        max_n (int): The maximum value for the encrypted integer n.
+        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
+        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        
+    Returns:
+        fhe.Circuit: The compiled FHE circuit for factorial computation.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import compile_factorial
@@ -90,6 +104,12 @@ def compile_factorial(
 def make_fibonacci(max_n: int) -> UnaryFunction:
     """Create the nth Fibonacci number for encrypted n in [0, max_n].
     
+    Args:
+        max_n (int): The maximum value for the encrypted integer n.
+        
+    Returns:
+        UnaryFunction: A unary function that computes the nth Fibonacci number.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import make_fibonacci
@@ -110,6 +130,14 @@ def compile_fibonacci(
 ) -> fhe.Circuit:
     """Compile the nth Fibonacci number for encrypted n in [0, max_n].
     
+    Args:
+        max_n (int): The maximum value for the encrypted integer n.
+        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
+        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        
+    Returns:
+        fhe.Circuit: The compiled FHE circuit for Fibonacci computation.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import compile_fibonacci
@@ -134,6 +162,13 @@ def compile_fibonacci(
 def make_power(base: int, max_exponent: int) -> UnaryFunction:
     """Create public-base exponentiation for an encrypted exponent.
     
+    Args:
+        base (int): The base to raise to the power of the exponent.
+        max_exponent (int): The maximum value for the encrypted exponent.
+        
+    Returns:
+        UnaryFunction: A unary function that computes base**exponent.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import make_power
@@ -157,6 +192,15 @@ def compile_power(
 ) -> fhe.Circuit:
     """Compile public-base exponentiation for an encrypted exponent.
     
+    Args:
+        base (int): The base to raise to the power of the exponent.
+        max_exponent (int): The maximum value for the encrypted exponent.
+        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
+        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        
+    Returns:
+        fhe.Circuit: The compiled FHE circuit for exponentiation.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import compile_power
@@ -207,6 +251,13 @@ def _make_n_r_lookup(
 def make_comb(max_n: int, *, invalid_result: int = 0) -> BinaryFunction:
     """Create math.comb(n, r), returning invalid_result when r > n.
     
+    Args:
+        max_n (int): The maximum value for the encrypted integers n and r.
+        invalid_result (int): The result to return when r > n. Defaults to 0.
+        
+    Returns:
+        BinaryFunction: A binary function that computes math.comb(n, r).
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import make_comb
@@ -227,6 +278,15 @@ def compile_comb(
 ) -> fhe.Circuit:
     """Compile math.comb(n, r) for encrypted n and r in [0, max_n].
     
+    Args:
+        max_n (int): The maximum value for the encrypted integers n and r.
+        invalid_result (int): The result to return when r > n. Defaults to 0.
+        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
+        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        
+    Returns:
+        fhe.Circuit: The compiled FHE circuit for combinations.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import compile_comb
@@ -265,6 +325,13 @@ def compile_comb(
 def make_perm(max_n: int, *, invalid_result: int = 0) -> BinaryFunction:
     """Create math.perm(n, r), returning invalid_result when r > n.
     
+    Args:
+        max_n (int): The maximum value for the encrypted integers n and r.
+        invalid_result (int): The result to return when r > n. Defaults to 0.
+        
+    Returns:
+        BinaryFunction: A binary function that computes math.perm(n, r).
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import make_perm
@@ -285,6 +352,15 @@ def compile_perm(
 ) -> fhe.Circuit:
     """Compile math.perm(n, r) for encrypted n and r in [0, max_n].
     
+    Args:
+        max_n (int): The maximum value for the encrypted integers n and r.
+        invalid_result (int): The result to return when r > n. Defaults to 0.
+        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
+        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        
+    Returns:
+        fhe.Circuit: The compiled FHE circuit for permutations.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import compile_perm
@@ -335,6 +411,14 @@ def make_powmod(base: int, modulus: int, max_exponent: int) -> UnaryFunction:
     stays below the modulus, so the output bit width is small even for
     large exponents.
     
+    Args:
+        base (int): The base to raise to the power of the exponent.
+        modulus (int): The modulus for the operation.
+        max_exponent (int): The maximum value for the encrypted exponent.
+        
+    Returns:
+        UnaryFunction: A unary function that computes pow(base, exponent, modulus).
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import make_powmod
@@ -363,6 +447,16 @@ def compile_powmod(
 ) -> fhe.Circuit:
     """Compile pow(base, exponent, modulus) with a public base and modulus.
     
+    Args:
+        base (int): The base to raise to the power of the exponent.
+        modulus (int): The modulus for the operation.
+        max_exponent (int): The maximum value for the encrypted exponent.
+        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
+        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        
+    Returns:
+        fhe.Circuit: The compiled FHE circuit for modular exponentiation.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.combinatorics import compile_powmod

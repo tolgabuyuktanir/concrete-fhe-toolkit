@@ -18,6 +18,12 @@ def relu(value: Any) -> Any:
     Useful for introducing non-linearity in neural networks while preserving 
     positive values exactly.
 
+    Args:
+        value (Any): The encrypted value or tensor to apply ReLU on.
+
+    Returns:
+        Any: The transformed value where negative inputs are set to 0.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.activations import relu
@@ -37,6 +43,13 @@ def leaky_relu(value: Any, alpha: float = 0.01) -> Any:
     
     Unlike standard ReLU, this avoids "dead neurons" by allowing a small,
     non-zero gradient when the unit is not active.
+
+    Args:
+        value (Any): The encrypted input value.
+        alpha (float): The slope for negative inputs. Defaults to 0.01.
+
+    Returns:
+        Any: The modified value after applying Leaky ReLU.
 
     Example:
         ```python
@@ -62,6 +75,12 @@ def unit_step(value: Any) -> Any:
     
     Often used in simple perceptrons or binary classification layers.
 
+    Args:
+        value (Any): The encrypted input value.
+
+    Returns:
+        Any: 1 if value >= 0 else 0.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.activations import unit_step
@@ -77,6 +96,13 @@ def threshold_activation(value: Any, threshold: Any) -> Any:
     """Return 1 when value >= threshold, otherwise 0.
     
     Useful for custom decision boundaries in threshold-based models.
+
+    Args:
+        value (Any): The encrypted input value.
+        threshold (Any): The threshold to compare against.
+
+    Returns:
+        Any: 1 if value >= threshold else 0.
 
     Example:
         ```python
@@ -96,12 +122,21 @@ def make_softmax(
     output_scale: int = 100,
     probability_scale: int = 100,
 ) -> Callable[[List[Any]], List[Any]]:
-    """
-Create a scaled softmax function for a list of encrypted scores.
+    """Create a scaled softmax function for a list of encrypted scores.
     
     This function uses an exponential approximation and floor division to calculate
     probabilities as integer percentages. The output is scaled by `probability_scale`.
     
+    Args:
+        min_input (int): The minimum expected input value. Defaults to -127.
+        max_input (int): The maximum expected input value. Defaults to 127.
+        input_scale (int): Scale factor of the inputs. Defaults to 10.
+        output_scale (int): Scale factor for the exponential output. Defaults to 100.
+        probability_scale (int): Scale for the final probability percentages. Defaults to 100.
+
+    Returns:
+        Callable[[List[Any]], List[Any]]: A function that applies scaled softmax to a list of scores.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.activations import make_softmax
@@ -124,6 +159,14 @@ Create a scaled softmax function for a list of encrypted scores.
     div_func = make_floor_divide(zero_result=0)
     
     def softmax(values: List[Any]) -> List[Any]:
+        """Apply softmax to a list of values.
+        
+        Args:
+            values (List[Any]): List of values to apply softmax on.
+            
+        Returns:
+            List[Any]: Softmax probabilities.
+        """
         total: Any = 0
         exp_values = []
         shifted_values = np.subtract(values, np.max(_ensure_tensor(values)))
@@ -151,6 +194,12 @@ def client_softmax(scores: Union[np.ndarray, List[Any]]) -> np.ndarray:
     This function avoids FHE 16-bit limitations by performing the Softmax division 
     and scaling on the cleartext outputs decrypted by the client.
     
+    Args:
+        scores (Union[np.ndarray, List[Any]]): The decrypted scores from the FHE model.
+
+    Returns:
+        np.ndarray: The array of softmax probabilities.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.activations import client_softmax
@@ -177,6 +226,14 @@ def compile_relu(
     
     Compiles the ReLU function into a concrete-python FHE circuit.
     
+    Args:
+        min_value (int): Minimum input bound. Defaults to -15.
+        max_value (int): Maximum input bound. Defaults to 15.
+        configuration (Optional[fhe.Configuration]): FHE compiler configuration. Defaults to None.
+
+    Returns:
+        fhe.Circuit: Compiled ReLU circuit.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.activations import compile_relu
@@ -206,6 +263,15 @@ def compile_leaky_relu(
     Compiles the Leaky ReLU function into an FHE circuit, keeping a non-zero
     slope for negative inputs.
     
+    Args:
+        min_value (int): Minimum input bound. Defaults to -15.
+        max_value (int): Maximum input bound. Defaults to 15.
+        alpha (float): Slope for negative values. Defaults to 0.01.
+        configuration (Optional[fhe.Configuration]): FHE compiler configuration. Defaults to None.
+
+    Returns:
+        fhe.Circuit: Compiled Leaky ReLU circuit.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.activations import compile_leaky_relu
@@ -217,6 +283,14 @@ def compile_leaky_relu(
     minimum, maximum = validate_bounds(min_value, max_value)
 
     def bound_leaky_relu(value: Any) -> Any:
+        """Apply leaky ReLU with the bound alpha.
+        
+        Args:
+            value (Any): The encrypted input value.
+            
+        Returns:
+            Any: The modified value.
+        """
         return leaky_relu(value, alpha)
 
     return compile_function(
@@ -237,6 +311,14 @@ def compile_unit_step(
     
     Compiles the Heaviside step function into an FHE circuit.
     
+    Args:
+        min_value (int): Minimum input bound. Defaults to -15.
+        max_value (int): Maximum input bound. Defaults to 15.
+        configuration (Optional[fhe.Configuration]): FHE compiler configuration. Defaults to None.
+
+    Returns:
+        fhe.Circuit: Compiled Unit Step circuit.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.activations import compile_unit_step
@@ -263,6 +345,14 @@ def compile_threshold_activation(
 ) -> fhe.Circuit:
     """Compile encrypted threshold activation over two encrypted inputs.
     
+    Args:
+        min_value (int): Minimum input bound. Defaults to -15.
+        max_value (int): Maximum input bound. Defaults to 15.
+        configuration (Optional[fhe.Configuration]): FHE compiler configuration. Defaults to None.
+
+    Returns:
+        fhe.Circuit: Compiled Threshold Activation circuit.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.activations import compile_threshold_activation
@@ -291,12 +381,20 @@ def compile_softmax(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-Compile an FHE circuit for the softmax function over an array of fixed size.
+    """Compile an FHE circuit for the softmax function over an array of fixed size.
     
     Since FHE circuits require fixed dimensions, the `size` of the input array 
     must be specified at compile time.
     
+    Args:
+        size (int): Size of the input array.
+        min_value (int): Minimum score expected. Defaults to -127.
+        max_value (int): Maximum score expected. Defaults to 127.
+        configuration (Optional[fhe.Configuration]): FHE compiler configuration. Defaults to None.
+
+    Returns:
+        fhe.Circuit: Compiled Softmax circuit.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.activations import compile_softmax

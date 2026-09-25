@@ -15,16 +15,49 @@ BinaryFunction = Callable[[Any, Any], Any]
 
 
 class FHECostWarning(UserWarning):
-    """Warn that a lookup circuit may require substantial FHE resources."""
+    """Warn that a lookup circuit may require substantial FHE resources.
+    
+    Args:
+        UserWarning: The base class.
+        
+    Returns:
+        None
+        
+    Example:
+        >>> raise FHECostWarning("Warning message")
+    """
 
 
 class LookupResourceError(ValueError):
-    """Raised when a lookup requires explicit large-resource opt-in."""
+    """Raised when a lookup requires explicit large-resource opt-in.
+    
+    Args:
+        ValueError: The base class.
+        
+    Returns:
+        None
+        
+    Example:
+        >>> raise LookupResourceError("Error message")
+    """
 
 
 @dataclass(frozen=True)
 class LookupCost:
-    """Static size indicators for a bounded lookup operation."""
+    """Static size indicators for a bounded lookup operation.
+    
+    Args:
+        domain_size: Number of elements in the domain.
+        input_bit_width: The bit width of the input.
+        output_bit_width: The bit width of the output.
+        level: The cost level (small, moderate, large, very-large).
+        
+    Returns:
+        None
+        
+    Example:
+        >>> cost = LookupCost(10, 4, 4, "small")
+    """
 
     domain_size: int
     input_bit_width: int

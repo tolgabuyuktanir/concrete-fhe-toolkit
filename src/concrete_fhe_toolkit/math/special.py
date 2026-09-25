@@ -149,15 +149,24 @@ def make_sin(
     angle_unit: AngleUnit = "radians",
 ) -> UnaryFunction:
     """Create scaled sin for encrypted fixed-point angles.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        angle_unit: The angle_unit parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_sin
-        
-        sin_fn = make_sin(min_input=0, max_input=628)
-        # Use `sin_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_sin
+
+    sin_fn = make_sin(min_input=0, max_input=628)
+    # Use `sin_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_sin",
         lambda value: math.sin(_angle(value, angle_unit)),
@@ -179,15 +188,26 @@ def compile_sin(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled sin for encrypted fixed-point angles.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        angle_unit: The angle_unit parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_sin
-        
-        circuit = compile_sin(min_input=0, max_input=628)
-        print(circuit.encrypt_run_decrypt(314))  # ~sin(pi) scaled
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_sin
+
+    circuit = compile_sin(min_input=0, max_input=628)
+    print(circuit.encrypt_run_decrypt(314))  # ~sin(pi) scaled
+    ```"""
     return _compile_scaled_unary(
         "compile_sin",
         lambda value: math.sin(_angle(value, angle_unit)),
@@ -211,15 +231,24 @@ def make_cos(
     angle_unit: AngleUnit = "radians",
 ) -> UnaryFunction:
     """Create scaled cos for encrypted fixed-point angles.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        angle_unit: The angle_unit parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_cos
-        
-        cos_fn = make_cos(min_input=0, max_input=628)
-        # Use `cos_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_cos
+
+    cos_fn = make_cos(min_input=0, max_input=628)
+    # Use `cos_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_cos",
         lambda value: math.cos(_angle(value, angle_unit)),
@@ -241,15 +270,26 @@ def compile_cos(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled cos for encrypted fixed-point angles.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        angle_unit: The angle_unit parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_cos
-        
-        circuit = compile_cos(min_input=0, max_input=628)
-        print(circuit.encrypt_run_decrypt(0))  # 1000 (scaled cos(0))
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_cos
+
+    circuit = compile_cos(min_input=0, max_input=628)
+    print(circuit.encrypt_run_decrypt(0))  # 1000 (scaled cos(0))
+    ```"""
     return _compile_scaled_unary(
         "compile_cos",
         lambda value: math.cos(_angle(value, angle_unit)),
@@ -273,15 +313,24 @@ def make_tan(
     angle_unit: AngleUnit = "radians",
 ) -> UnaryFunction:
     """Create scaled tan for encrypted fixed-point angles.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        angle_unit: The angle_unit parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_tan
-        
-        tan_fn = make_tan(min_input=-100, max_input=100)
-        # Use `tan_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_tan
+
+    tan_fn = make_tan(min_input=-100, max_input=100)
+    # Use `tan_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_tan",
         lambda value: math.tan(_angle(value, angle_unit)),
@@ -303,15 +352,26 @@ def compile_tan(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled tan for encrypted fixed-point angles.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        angle_unit: The angle_unit parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_tan
-        
-        circuit = compile_tan(min_input=-100, max_input=100)
-        print(circuit.encrypt_run_decrypt(0))  # 0
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_tan
+
+    circuit = compile_tan(min_input=-100, max_input=100)
+    print(circuit.encrypt_run_decrypt(0))  # 0
+    ```"""
     return _compile_scaled_unary(
         "compile_tan",
         lambda value: math.tan(_angle(value, angle_unit)),
@@ -334,15 +394,23 @@ def make_exp(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled exp for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_exp
-        
-        exp_fn = make_exp(min_input=-50, max_input=50)
-        # Use `exp_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_exp
+
+    exp_fn = make_exp(min_input=-50, max_input=50)
+    # Use `exp_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_exp",
         math.exp,
@@ -363,15 +431,25 @@ def compile_exp(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled exp for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_exp
-        
-        circuit = compile_exp(min_input=-50, max_input=50)
-        print(circuit.encrypt_run_decrypt(0))  # 100 (scaled exp(0))
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_exp
+
+    circuit = compile_exp(min_input=-50, max_input=50)
+    print(circuit.encrypt_run_decrypt(0))  # 100 (scaled exp(0))
+    ```"""
     return _compile_scaled_unary(
         "compile_exp",
         math.exp,
@@ -394,15 +472,23 @@ def make_expm1(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled expm1 for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_expm1
-        
-        expm1_fn = make_expm1(min_input=-50, max_input=50)
-        # Use `expm1_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_expm1
+
+    expm1_fn = make_expm1(min_input=-50, max_input=50)
+    # Use `expm1_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_expm1",
         math.expm1,
@@ -423,15 +509,25 @@ def compile_expm1(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled expm1 for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_expm1
-        
-        circuit = compile_expm1(min_input=-50, max_input=50)
-        print(circuit.encrypt_run_decrypt(0))  # 0
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_expm1
+
+    circuit = compile_expm1(min_input=-50, max_input=50)
+    print(circuit.encrypt_run_decrypt(0))  # 0
+    ```"""
     return _compile_scaled_unary(
         "compile_expm1",
         math.expm1,
@@ -464,15 +560,25 @@ def make_log(
     base: Optional[float] = None,
 ) -> UnaryFunction:
     """Create scaled log (natural by default, or any base); invalid_result handles x <= 0.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        base: The base parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_log
-        
-        log_fn = make_log(min_input=1, max_input=1000)
-        # Use `log_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_log
+
+    log_fn = make_log(min_input=1, max_input=1000)
+    # Use `log_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_log",
         _validate_log_base(base),
@@ -497,15 +603,27 @@ def compile_log(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled log (natural by default, or any base); invalid_result handles x <= 0.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        base: The base parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_log
-        
-        circuit = compile_log(min_input=1, max_input=1000)
-        print(circuit.encrypt_run_decrypt(100))  # scaled ln(1.0)
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_log
+
+    circuit = compile_log(min_input=1, max_input=1000)
+    print(circuit.encrypt_run_decrypt(100))  # scaled ln(1.0)
+    ```"""
     return _compile_scaled_unary(
         "compile_log",
         _validate_log_base(base),
@@ -529,15 +647,24 @@ def make_log2(
     invalid_result: Optional[int] = None,
 ) -> UnaryFunction:
     """Create scaled log2; invalid_result handles x <= 0 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_log2
-        
-        log2_fn = make_log2(min_input=1, max_input=1024)
-        # Use `log2_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_log2
+
+    log2_fn = make_log2(min_input=1, max_input=1024)
+    # Use `log2_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_log2",
         math.log2,
@@ -561,15 +688,26 @@ def compile_log2(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled log2; invalid_result handles x <= 0 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_log2
-        
-        circuit = compile_log2(min_input=1, max_input=1024)
-        print(circuit.encrypt_run_decrypt(4))  # 200 (scaled log2(4))
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_log2
+
+    circuit = compile_log2(min_input=1, max_input=1024)
+    print(circuit.encrypt_run_decrypt(4))  # 200 (scaled log2(4))
+    ```"""
     return _compile_scaled_unary(
         "compile_log2",
         math.log2,
@@ -593,15 +731,24 @@ def make_log10(
     invalid_result: Optional[int] = None,
 ) -> UnaryFunction:
     """Create scaled log10; invalid_result handles x <= 0 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_log10
-        
-        log10_fn = make_log10(min_input=1, max_input=1000)
-        # Use `log10_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_log10
+
+    log10_fn = make_log10(min_input=1, max_input=1000)
+    # Use `log10_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_log10",
         math.log10,
@@ -625,15 +772,26 @@ def compile_log10(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled log10; invalid_result handles x <= 0 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_log10
-        
-        circuit = compile_log10(min_input=1, max_input=1000)
-        print(circuit.encrypt_run_decrypt(100))  # 200 (scaled log10(100))
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_log10
+
+    circuit = compile_log10(min_input=1, max_input=1000)
+    print(circuit.encrypt_run_decrypt(100))  # 200 (scaled log10(100))
+    ```"""
     return _compile_scaled_unary(
         "compile_log10",
         math.log10,
@@ -657,15 +815,24 @@ def make_log1p(
     invalid_result: Optional[int] = None,
 ) -> UnaryFunction:
     """Create scaled log1p; invalid_result handles x <= -1 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_log1p
-        
-        log1p_fn = make_log1p(min_input=0, max_input=1000)
-        # Use `log1p_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_log1p
+
+    log1p_fn = make_log1p(min_input=0, max_input=1000)
+    # Use `log1p_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_log1p",
         math.log1p,
@@ -689,15 +856,26 @@ def compile_log1p(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled log1p; invalid_result handles x <= -1 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_log1p
-        
-        circuit = compile_log1p(min_input=0, max_input=1000)
-        print(circuit.encrypt_run_decrypt(0))  # 0 (scaled log1p(0))
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_log1p
+
+    circuit = compile_log1p(min_input=0, max_input=1000)
+    print(circuit.encrypt_run_decrypt(0))  # 0 (scaled log1p(0))
+    ```"""
     return _compile_scaled_unary(
         "compile_log1p",
         math.log1p,
@@ -721,15 +899,24 @@ def make_sqrt(
     invalid_result: Optional[int] = None,
 ) -> UnaryFunction:
     """Create scaled square root; invalid_result handles x < 0 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_sqrt
-        
-        sqrt_fn = make_sqrt(min_input=0, max_input=1000)
-        # Use `sqrt_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_sqrt
+
+    sqrt_fn = make_sqrt(min_input=0, max_input=1000)
+    # Use `sqrt_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_sqrt",
         math.sqrt,
@@ -753,15 +940,26 @@ def compile_sqrt(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled square root; invalid_result handles x < 0 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_sqrt
-        
-        circuit = compile_sqrt(min_input=0, max_input=1000)
-        print(circuit.encrypt_run_decrypt(400))  # 200 (scaled sqrt(4.0))
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_sqrt
+
+    circuit = compile_sqrt(min_input=0, max_input=1000)
+    print(circuit.encrypt_run_decrypt(400))  # 200 (scaled sqrt(4.0))
+    ```"""
     return _compile_scaled_unary(
         "compile_sqrt",
         math.sqrt,
@@ -784,15 +982,23 @@ def make_erf(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled erf for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_erf
-        
-        erf_fn = make_erf(min_input=-30, max_input=30)
-        # Use `erf_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_erf
+
+    erf_fn = make_erf(min_input=-30, max_input=30)
+    # Use `erf_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_erf",
         math.erf,
@@ -813,15 +1019,25 @@ def compile_erf(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled erf for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_erf
-        
-        circuit = compile_erf(min_input=-30, max_input=30)
-        print(circuit.encrypt_run_decrypt(0))  # 0
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_erf
+
+    circuit = compile_erf(min_input=-30, max_input=30)
+    print(circuit.encrypt_run_decrypt(0))  # 0
+    ```"""
     return _compile_scaled_unary(
         "compile_erf",
         math.erf,
@@ -844,15 +1060,23 @@ def make_erfc(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled erfc for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_erfc
-        
-        erfc_fn = make_erfc(min_input=-30, max_input=30)
-        # Use `erfc_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_erfc
+
+    erfc_fn = make_erfc(min_input=-30, max_input=30)
+    # Use `erfc_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_erfc",
         math.erfc,
@@ -873,15 +1097,25 @@ def compile_erfc(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled erfc for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_erfc
-        
-        circuit = compile_erfc(min_input=-30, max_input=30)
-        print(circuit.encrypt_run_decrypt(0))  # 100 (scaled erfc(0))
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_erfc
+
+    circuit = compile_erfc(min_input=-30, max_input=30)
+    print(circuit.encrypt_run_decrypt(0))  # 100 (scaled erfc(0))
+    ```"""
     return _compile_scaled_unary(
         "compile_erfc",
         math.erfc,
@@ -904,15 +1138,23 @@ def make_tanh(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled tanh for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_tanh
-        
-        tanh_fn = make_tanh(min_input=-40, max_input=40)
-        # Use `tanh_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_tanh
+
+    tanh_fn = make_tanh(min_input=-40, max_input=40)
+    # Use `tanh_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_tanh",
         math.tanh,
@@ -933,15 +1175,25 @@ def compile_tanh(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled tanh for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_tanh
-        
-        circuit = compile_tanh(min_input=-40, max_input=40)
-        print(circuit.encrypt_run_decrypt(0))  # 0
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_tanh
+
+    circuit = compile_tanh(min_input=-40, max_input=40)
+    print(circuit.encrypt_run_decrypt(0))  # 0
+    ```"""
     return _compile_scaled_unary(
         "compile_tanh",
         math.tanh,
@@ -964,15 +1216,23 @@ def make_sinh(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled sinh for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_sinh
-        
-        sinh_fn = make_sinh(min_input=-30, max_input=30)
-        # Use `sinh_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_sinh
+
+    sinh_fn = make_sinh(min_input=-30, max_input=30)
+    # Use `sinh_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_sinh",
         math.sinh,
@@ -993,15 +1253,25 @@ def compile_sinh(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled sinh for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_sinh
-        
-        circuit = compile_sinh(min_input=-30, max_input=30)
-        print(circuit.encrypt_run_decrypt(0))  # 0
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_sinh
+
+    circuit = compile_sinh(min_input=-30, max_input=30)
+    print(circuit.encrypt_run_decrypt(0))  # 0
+    ```"""
     return _compile_scaled_unary(
         "compile_sinh",
         math.sinh,
@@ -1024,15 +1294,23 @@ def make_cosh(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled cosh for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_cosh
-        
-        cosh_fn = make_cosh(min_input=-30, max_input=30)
-        # Use `cosh_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_cosh
+
+    cosh_fn = make_cosh(min_input=-30, max_input=30)
+    # Use `cosh_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_cosh",
         math.cosh,
@@ -1053,15 +1331,25 @@ def compile_cosh(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled cosh for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_cosh
-        
-        circuit = compile_cosh(min_input=-30, max_input=30)
-        print(circuit.encrypt_run_decrypt(0))  # 100 (scaled cosh(0))
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_cosh
+
+    circuit = compile_cosh(min_input=-30, max_input=30)
+    print(circuit.encrypt_run_decrypt(0))  # 100 (scaled cosh(0))
+    ```"""
     return _compile_scaled_unary(
         "compile_cosh",
         math.cosh,
@@ -1084,15 +1372,23 @@ def make_sigmoid(
     output_scale: int = 1000,
 ) -> UnaryFunction:
     """Create scaled logistic sigmoid for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_sigmoid
-        
-        sigmoid_fn = make_sigmoid(min_input=-60, max_input=60)
-        # Use `sigmoid_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_sigmoid
+
+    sigmoid_fn = make_sigmoid(min_input=-60, max_input=60)
+    # Use `sigmoid_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_sigmoid",
         lambda value: 1 / (1 + math.exp(-value)),
@@ -1113,15 +1409,25 @@ def compile_sigmoid(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled logistic sigmoid for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_sigmoid
-        
-        circuit = compile_sigmoid(min_input=-60, max_input=60)
-        print(circuit.encrypt_run_decrypt(0))  # 500 (scaled sigmoid(0)=0.5)
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_sigmoid
+
+    circuit = compile_sigmoid(min_input=-60, max_input=60)
+    print(circuit.encrypt_run_decrypt(0))  # 500 (scaled sigmoid(0)=0.5)
+    ```"""
     return _compile_scaled_unary(
         "compile_sigmoid",
         lambda value: 1 / (1 + math.exp(-value)),
@@ -1149,15 +1455,24 @@ def make_asin(
     invalid_result: Optional[int] = None,
 ) -> UnaryFunction:
     """Create scaled arcsine (radians); invalid_result handles |x| > 1 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_asin
-        
-        asin_fn = make_asin(min_input=-100, max_input=100)
-        # Use `asin_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_asin
+
+    asin_fn = make_asin(min_input=-100, max_input=100)
+    # Use `asin_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_asin",
         math.asin,
@@ -1181,15 +1496,26 @@ def compile_asin(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled arcsine (radians); invalid_result handles |x| > 1 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_asin
-        
-        circuit = compile_asin(min_input=-100, max_input=100)
-        print(circuit.encrypt_run_decrypt(0))  # 0
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_asin
+
+    circuit = compile_asin(min_input=-100, max_input=100)
+    print(circuit.encrypt_run_decrypt(0))  # 0
+    ```"""
     return _compile_scaled_unary(
         "compile_asin",
         math.asin,
@@ -1213,15 +1539,24 @@ def make_acos(
     invalid_result: Optional[int] = None,
 ) -> UnaryFunction:
     """Create scaled arccosine (radians); invalid_result handles |x| > 1 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_acos
-        
-        acos_fn = make_acos(min_input=-100, max_input=100)
-        # Use `acos_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_acos
+
+    acos_fn = make_acos(min_input=-100, max_input=100)
+    # Use `acos_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_acos",
         math.acos,
@@ -1245,15 +1580,26 @@ def compile_acos(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled arccosine (radians); invalid_result handles |x| > 1 if needed.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_acos
-        
-        circuit = compile_acos(min_input=-100, max_input=100)
-        print(circuit.encrypt_run_decrypt(100))  # 0 (scaled acos(1.0))
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_acos
+
+    circuit = compile_acos(min_input=-100, max_input=100)
+    print(circuit.encrypt_run_decrypt(100))  # 0 (scaled acos(1.0))
+    ```"""
     return _compile_scaled_unary(
         "compile_acos",
         math.acos,
@@ -1276,15 +1622,23 @@ def make_atan(
     output_scale: int = 1000,
 ) -> UnaryFunction:
     """Create scaled arctangent (radians) for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_atan
-        
-        atan_fn = make_atan(min_input=-500, max_input=500)
-        # Use `atan_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_atan
+
+    atan_fn = make_atan(min_input=-500, max_input=500)
+    # Use `atan_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_atan",
         math.atan,
@@ -1305,15 +1659,25 @@ def compile_atan(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled arctangent (radians) for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_atan
-        
-        circuit = compile_atan(min_input=-500, max_input=500)
-        print(circuit.encrypt_run_decrypt(0))  # 0
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_atan
+
+    circuit = compile_atan(min_input=-500, max_input=500)
+    print(circuit.encrypt_run_decrypt(0))  # 0
+    ```"""
     return _compile_scaled_unary(
         "compile_atan",
         math.atan,
@@ -1336,15 +1700,23 @@ def make_cbrt(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled cube root (sign-preserving) for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_cbrt
-        
-        cbrt_fn = make_cbrt(min_input=-1000, max_input=1000)
-        # Use `cbrt_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_cbrt
+
+    cbrt_fn = make_cbrt(min_input=-1000, max_input=1000)
+    # Use `cbrt_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_cbrt",
         _cbrt,
@@ -1365,15 +1737,25 @@ def compile_cbrt(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled cube root (sign-preserving) for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_cbrt
-        
-        circuit = compile_cbrt(min_input=-1000, max_input=1000)
-        print(circuit.encrypt_run_decrypt(8))  # 200 (scaled cbrt(8)=2.0)
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_cbrt
+
+    circuit = compile_cbrt(min_input=-1000, max_input=1000)
+    print(circuit.encrypt_run_decrypt(8))  # 200 (scaled cbrt(8)=2.0)
+    ```"""
     return _compile_scaled_unary(
         "compile_cbrt",
         _cbrt,
@@ -1396,15 +1778,23 @@ def make_degrees(
     output_scale: int = 1,
 ) -> UnaryFunction:
     """Create scaled radians-to-degrees conversion for encrypted inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_degrees
-        
-        deg_fn = make_degrees(min_input=-628, max_input=628)
-        # Use `deg_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_degrees
+
+    deg_fn = make_degrees(min_input=-628, max_input=628)
+    # Use `deg_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_degrees",
         math.degrees,
@@ -1425,15 +1815,25 @@ def compile_degrees(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled radians-to-degrees conversion for encrypted inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_degrees
-        
-        circuit = compile_degrees(min_input=-628, max_input=628)
-        print(circuit.encrypt_run_decrypt(314))  # 180 (degrees)
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_degrees
+
+    circuit = compile_degrees(min_input=-628, max_input=628)
+    print(circuit.encrypt_run_decrypt(314))  # 180 (degrees)
+    ```"""
     return _compile_scaled_unary(
         "compile_degrees",
         math.degrees,
@@ -1456,15 +1856,23 @@ def make_radians(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled degrees-to-radians conversion for encrypted inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_radians
-        
-        rad_fn = make_radians(min_input=-360, max_input=360)
-        # Use `rad_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_radians
+
+    rad_fn = make_radians(min_input=-360, max_input=360)
+    # Use `rad_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_radians",
         math.radians,
@@ -1485,15 +1893,25 @@ def compile_radians(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled degrees-to-radians conversion for encrypted inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_radians
-        
-        circuit = compile_radians(min_input=-360, max_input=360)
-        print(circuit.encrypt_run_decrypt(180))  # 314 (scaled radians)
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_radians
+
+    circuit = compile_radians(min_input=-360, max_input=360)
+    print(circuit.encrypt_run_decrypt(180))  # 314 (scaled radians)
+    ```"""
     return _compile_scaled_unary(
         "compile_radians",
         math.radians,
@@ -1521,15 +1939,24 @@ def make_gamma(
     invalid_result: Optional[int] = None,
 ) -> UnaryFunction:
     """Create scaled gamma; invalid_result handles the non-positive-integer poles.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_gamma
-        
-        gamma_fn = make_gamma(min_input=1, max_input=50)
-        # Use `gamma_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_gamma
+
+    gamma_fn = make_gamma(min_input=1, max_input=50)
+    # Use `gamma_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_gamma",
         math.gamma,
@@ -1553,15 +1980,26 @@ def compile_gamma(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled gamma; invalid_result handles the non-positive-integer poles.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_gamma
-        
-        circuit = compile_gamma(min_input=1, max_input=50)
-        print(circuit.encrypt_run_decrypt(50))  # scaled gamma(5)
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_gamma
+
+    circuit = compile_gamma(min_input=1, max_input=50)
+    print(circuit.encrypt_run_decrypt(50))  # scaled gamma(5)
+    ```"""
     return _compile_scaled_unary(
         "compile_gamma",
         math.gamma,
@@ -1585,15 +2023,24 @@ def make_lgamma(
     invalid_result: Optional[int] = None,
 ) -> UnaryFunction:
     """Create scaled log-gamma; invalid_result handles the non-positive-integer poles.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_lgamma
-        
-        lgamma_fn = make_lgamma(min_input=1, max_input=100)
-        # Use `lgamma_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_lgamma
+
+    lgamma_fn = make_lgamma(min_input=1, max_input=100)
+    # Use `lgamma_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_lgamma",
         math.lgamma,
@@ -1617,15 +2064,26 @@ def compile_lgamma(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled log-gamma; invalid_result handles the non-positive-integer poles.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_lgamma
-        
-        circuit = compile_lgamma(min_input=1, max_input=100)
-        print(circuit.encrypt_run_decrypt(50))  # scaled lgamma(5)
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_lgamma
+
+    circuit = compile_lgamma(min_input=1, max_input=100)
+    print(circuit.encrypt_run_decrypt(50))  # scaled lgamma(5)
+    ```"""
     return _compile_scaled_unary(
         "compile_lgamma",
         math.lgamma,
@@ -1665,15 +2123,23 @@ def make_atan2(
     output_scale: int = 1000,
 ) -> BinaryFunction:
     """Create scaled quadrant-aware atan2(y, x) for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_atan2
-        
-        atan2_fn = make_atan2(min_input=-100, max_input=100)
-        # Use `atan2_fn(y, x)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_atan2
+
+    atan2_fn = make_atan2(min_input=-100, max_input=100)
+    # Use `atan2_fn(y, x)` inside an FHE program compilation
+    ```"""
     minimum, maximum = validate_bounds(min_input, max_input)
     values = _atan2_values(minimum, maximum, input_scale, output_scale)
     return make_binary_lookup(values, minimum, minimum, maximum - minimum + 1)
@@ -1689,15 +2155,25 @@ def compile_atan2(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled quadrant-aware atan2(y, x) for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_atan2
-        
-        circuit = compile_atan2(min_input=-100, max_input=100)
-        print(circuit.encrypt_run_decrypt(100, 100))  # ~785 (scaled pi/4)
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_atan2
+
+    circuit = compile_atan2(min_input=-100, max_input=100)
+    print(circuit.encrypt_run_decrypt(100, 100))  # ~785 (scaled pi/4)
+    ```"""
     check_lookup_domain(
         "compile_atan2",
         (min_input, max_input),
@@ -1726,15 +2202,23 @@ def make_asinh(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled inverse hyperbolic sine for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_asinh
-        
-        asinh_fn = make_asinh(min_input=-500, max_input=500)
-        # Use `asinh_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_asinh
+
+    asinh_fn = make_asinh(min_input=-500, max_input=500)
+    # Use `asinh_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_asinh",
         math.asinh,
@@ -1755,15 +2239,25 @@ def compile_asinh(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled inverse hyperbolic sine for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_asinh
-        
-        circuit = compile_asinh(min_input=-500, max_input=500)
-        print(circuit.encrypt_run_decrypt(0))  # 0
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_asinh
+
+    circuit = compile_asinh(min_input=-500, max_input=500)
+    print(circuit.encrypt_run_decrypt(0))  # 0
+    ```"""
     return _compile_scaled_unary(
         "compile_asinh",
         math.asinh,
@@ -1787,15 +2281,24 @@ def make_acosh(
     invalid_result: Optional[int] = None,
 ) -> UnaryFunction:
     """Create scaled inverse hyperbolic cosine; invalid_result handles x < 1.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_acosh
-        
-        acosh_fn = make_acosh(min_input=100, max_input=1000)
-        # Use `acosh_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_acosh
+
+    acosh_fn = make_acosh(min_input=100, max_input=1000)
+    # Use `acosh_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_acosh",
         math.acosh,
@@ -1819,15 +2322,26 @@ def compile_acosh(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled inverse hyperbolic cosine; invalid_result handles x < 1.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_acosh
-        
-        circuit = compile_acosh(min_input=100, max_input=1000)
-        print(circuit.encrypt_run_decrypt(100))  # 0 (scaled acosh(1.0))
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_acosh
+
+    circuit = compile_acosh(min_input=100, max_input=1000)
+    print(circuit.encrypt_run_decrypt(100))  # 0 (scaled acosh(1.0))
+    ```"""
     return _compile_scaled_unary(
         "compile_acosh",
         math.acosh,
@@ -1851,15 +2365,24 @@ def make_atanh(
     invalid_result: Optional[int] = None,
 ) -> UnaryFunction:
     """Create scaled inverse hyperbolic tangent; invalid_result handles |x| >= 1.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_atanh
-        
-        atanh_fn = make_atanh(min_input=-99, max_input=99)
-        # Use `atanh_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_atanh
+
+    atanh_fn = make_atanh(min_input=-99, max_input=99)
+    # Use `atanh_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_atanh",
         math.atanh,
@@ -1883,15 +2406,26 @@ def compile_atanh(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled inverse hyperbolic tangent; invalid_result handles |x| >= 1.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        invalid_result: The invalid_result parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_atanh
-        
-        circuit = compile_atanh(min_input=-99, max_input=99)
-        print(circuit.encrypt_run_decrypt(0))  # 0
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_atanh
+
+    circuit = compile_atanh(min_input=-99, max_input=99)
+    print(circuit.encrypt_run_decrypt(0))  # 0
+    ```"""
     return _compile_scaled_unary(
         "compile_atanh",
         math.atanh,
@@ -1914,15 +2448,23 @@ def make_exp2(
     output_scale: int = 100,
 ) -> UnaryFunction:
     """Create scaled 2**x for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import make_exp2
-        
-        exp2_fn = make_exp2(min_input=-50, max_input=50)
-        # Use `exp2_fn(val)` inside an FHE program compilation
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import make_exp2
+
+    exp2_fn = make_exp2(min_input=-50, max_input=50)
+    # Use `exp2_fn(val)` inside an FHE program compilation
+    ```"""
     return _make_scaled_unary(
         "make_exp2",
         lambda value: 2.0**value,
@@ -1943,15 +2485,25 @@ def compile_exp2(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile scaled 2**x for encrypted fixed-point inputs.
-    
+
+    Args:
+        min_input: The min_input parameter.
+        max_input: The max_input parameter.
+        input_scale: The input_scale parameter.
+        output_scale: The output_scale parameter.
+        allow_large_lookup: The allow_large_lookup parameter.
+        configuration: The configuration parameter.
+
+    Returns:
+        The computed value or circuit.
+
     Example:
-        ```python
-        from concrete_fhe_toolkit.math.special import compile_exp2
-        
-        circuit = compile_exp2(min_input=-50, max_input=50)
-        print(circuit.encrypt_run_decrypt(10))  # 200 (scaled 2**1.0)
-        ```
-    """
+    ```python
+    from concrete_fhe_toolkit.math.special import compile_exp2
+
+    circuit = compile_exp2(min_input=-50, max_input=50)
+    print(circuit.encrypt_run_decrypt(10))  # 200 (scaled 2**1.0)
+    ```"""
     return _compile_scaled_unary(
         "compile_exp2",
         lambda value: 2.0**value,

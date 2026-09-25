@@ -95,6 +95,17 @@ def from_sklearn_linear(
 
 @client_side_helper
 def _convert_tree_node(tree: Any, node: int, *, scale: int, leaf_scale: int) -> Any:
+    """[Client-Side Helper] Recursively convert a tree node.
+
+    Args:
+        tree (Any): The scikit-learn tree object.
+        node (int): The current node index.
+        scale (int): Integer factor used to quantize the thresholds.
+        leaf_scale (int): Factor for quantizing leaf values.
+
+    Returns:
+        Any: A dictionary representing the converted node or an integer for a leaf.
+    """
     left = tree.children_left[node]
     right = tree.children_right[node]
     if left == -1:  # leaf
@@ -127,6 +138,17 @@ def from_sklearn_tree(model: Any, *, scale: int = 1, leaf_scale: int = 1) -> Any
     quantized by ``scale`` — quantize inference features with the same
     factor.
 
+    Args:
+        model (Any): A fitted sklearn decision tree model.
+        scale (int, optional): Integer factor used to quantize thresholds. Defaults to 1.
+        leaf_scale (int, optional): Factor for quantizing leaf values. Defaults to 1.
+
+    Returns:
+        Any: A ready-to-compile FHEDecisionTree model.
+
+    Raises:
+        ValueError: If model is not a fitted sklearn decision tree.
+
     Example:
         ```python
         from sklearn.tree import DecisionTreeClassifier
@@ -151,6 +173,16 @@ def from_sklearn_tree(model: Any, *, scale: int = 1, leaf_scale: int = 1) -> Any
 def from_sklearn_forest(model: Any, *, scale: int = 1) -> Any:
     """[Client-Side Helper] Convert a fitted sklearn random-forest classifier into an
     :class:`FHERandomForest` (binary labels, majority vote).
+
+    Args:
+        model (Any): A fitted sklearn random forest model.
+        scale (int, optional): Integer factor used to quantize thresholds. Defaults to 1.
+
+    Returns:
+        Any: A ready-to-compile FHERandomForest model.
+
+    Raises:
+        ValueError: If model is not a fitted sklearn forest.
 
     Example:
         ```python

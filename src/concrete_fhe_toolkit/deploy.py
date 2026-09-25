@@ -53,6 +53,9 @@ def save_deployment(circuit: "fhe.Circuit", directory: str) -> None:
         circuit: A compiled ``fhe.Circuit`` (for a toolkit model, compile
             it first and pass ``model.circuit``).
         directory: Destination directory for the two artifacts.
+        
+    Returns:
+        None
 
     Example:
         ```python
@@ -72,6 +75,12 @@ def load_server(directory: str) -> "fhe.Server":
 
     Safe to run on untrusted infrastructure — the server can only compute
     on ciphertexts and never sees keys or plaintexts.
+    
+    Args:
+        directory (str): The directory containing the server artifact.
+        
+    Returns:
+        fhe.Server: The loaded FHE server object.
 
     Example:
         ```python
@@ -91,6 +100,12 @@ def load_client(directory: str) -> "fhe.Client":
     Generate keys locally with ``client.keys.generate()`` before the first
     ``encrypt``; keys never leave the client except the public evaluation
     keys passed to ``server.run``.
+    
+    Args:
+        directory (str): The directory containing the client artifact.
+        
+    Returns:
+        fhe.Client: The loaded FHE client object.
 
     Example:
         ```python
@@ -116,6 +131,9 @@ def save_client_keys(client: fhe.Client, directory: str) -> None:
     Args:
         client (fhe.Client): The FHE client object with keys generated.
         directory (str): The directory where the keys should be saved.
+
+    Returns:
+        None
 
     Raises:
         ValueError: If the client does not have generated keys.
@@ -155,6 +173,9 @@ def load_client_keys(client: fhe.Client, directory: str) -> None:
     Args:
         client (fhe.Client): The FHE client object to inject keys into.
         directory (str): The directory containing the saved keys.
+
+    Returns:
+        None
 
     Raises:
         ValueError: If the keys file cannot be found in the directory.

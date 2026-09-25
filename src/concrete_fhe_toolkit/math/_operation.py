@@ -16,6 +16,20 @@ class BoundedOperation:
         *,
         description: str,
     ) -> None:
+        """Initialize the BoundedOperation.
+        
+        Args:
+            name: The name of the operation.
+            make_function: Builder function.
+            compile_function: Compiler function.
+            description: Description of the operation.
+            
+        Returns:
+            None
+            
+        Example:
+            >>> op = BoundedOperation("test", make_fn, compile_fn, description="test")
+        """
         self.make = make_function
         self.compile = compile_function
         self.__name__ = name
@@ -28,8 +42,27 @@ class BoundedOperation:
         )
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
-        """Compile the operation using the same arguments as `.compile(...)`."""
+        """Compile the operation using the same arguments as `.compile(...)`.
+        
+        Args:
+            *args: Positional arguments for the compiler.
+            **kwargs: Keyword arguments for the compiler.
+            
+        Returns:
+            Any: The compiled operation.
+            
+        Example:
+            >>> op(1, 2)
+        """
         return self.compile(*args, **kwargs)
 
     def __repr__(self) -> str:
+        """Return a string representation of the operation.
+        
+        Returns:
+            str: The string representation.
+            
+        Example:
+            >>> repr(op)
+        """
         return f"<BoundedOperation {self.__name__}>"

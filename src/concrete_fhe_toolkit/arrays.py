@@ -23,6 +23,12 @@ BinaryScalarFunction = Callable[[Any, Any], Any]
 def array_sum(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the sum of all elements in an encrypted array using a tournament reduction.
     
+    Args:
+        elements (Union[np.ndarray, List[Any]]): Description for elements.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import array_sum
@@ -41,6 +47,13 @@ def _ensure_tensor(arr: Any) -> Any:
 def array_scale(array: Union[np.ndarray, List[Any]],factor: int) -> Union[np.ndarray, List[Any]]:
     """Multiply every element of an encrypted array by a scalar constant.
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+        factor (int): Description for factor.
+
+    Returns:
+        Union[np.ndarray, List[Any]]: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import array_scale
@@ -53,6 +66,13 @@ def array_scale(array: Union[np.ndarray, List[Any]],factor: int) -> Union[np.nda
 def array_add(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, List[Any]]) -> Any:
     """Perform element-wise addition of two encrypted arrays.
     
+    Args:
+        array1 (Union[np.ndarray, List[Any]]): Description for array1.
+        array2 (Union[np.ndarray, List[Any]]): Description for array2.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import array_add
@@ -65,6 +85,13 @@ def array_add(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, Lis
 def array_sub(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, List[Any]]) -> Any:
     """Perform element-wise subtraction of two encrypted arrays.
     
+    Args:
+        array1 (Union[np.ndarray, List[Any]]): Description for array1.
+        array2 (Union[np.ndarray, List[Any]]): Description for array2.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import array_sub
@@ -77,6 +104,13 @@ def array_sub(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, Lis
 def array_multiply(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, List[Any]]) -> Any:
     """Perform element-wise multiplication of two encrypted arrays.
     
+    Args:
+        array1 (Union[np.ndarray, List[Any]]): Description for array1.
+        array2 (Union[np.ndarray, List[Any]]): Description for array2.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import array_multiply
@@ -91,6 +125,14 @@ def array_multiply(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray
 def array_slice(array: Union[np.ndarray, List[Any]], begin_index: Any, end_index: Any) -> Any:
     """Slice an encrypted array (return elements from begin_index to end_index - 1).
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+        begin_index (Any): Description for begin_index.
+        end_index (Any): Description for end_index.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import array_slice
@@ -112,6 +154,13 @@ def array_slice(array: Union[np.ndarray, List[Any]], begin_index: Any, end_index
 def array_all_equal(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Check if two encrypted arrays are identical (returns 1 or 0).
     
+    Args:
+        array1 (Union[np.ndarray, List[Any]]): Description for array1.
+        array2 (Union[np.ndarray, List[Any]]): Description for array2.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import array_all_equal
@@ -130,6 +179,13 @@ def make_compare_swap(
 ) -> BinaryScalarFunction:
     """Create an ascending compare-swap function for bounded encrypted integers.
     
+    Args:
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        BinaryScalarFunction: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_compare_swap
@@ -165,6 +221,15 @@ def make_sort(
 ) -> UnaryArrayFunction:
     """Create a fixed-size bitonic sorting network.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        descending (bool): Description for descending.
+
+    Returns:
+        UnaryArrayFunction: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_sort
@@ -251,6 +316,14 @@ def make_minimum(
 ) -> UnaryArrayFunction:
     """Create a tournament reduction that returns the minimum value.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        UnaryArrayFunction: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_minimum
@@ -269,6 +342,14 @@ def make_maximum(
 ) -> UnaryArrayFunction:
     """Create a tournament reduction that returns the maximum value.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        UnaryArrayFunction: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_maximum
@@ -355,6 +436,15 @@ def make_argmin(
 ) -> UnaryArrayFunction:
     """Create an argmin reduction with deterministic tie handling.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        tie_break (TieBreak): Description for tie_break.
+
+    Returns:
+        UnaryArrayFunction: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_argmin
@@ -375,6 +465,15 @@ def make_argmax(
 ) -> UnaryArrayFunction:
     """Create an argmax reduction with deterministic tie handling.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        tie_break (TieBreak): Description for tie_break.
+
+    Returns:
+        UnaryArrayFunction: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_argmax
@@ -394,6 +493,14 @@ def compile_compare_swap(
 ) -> fhe.Circuit:
     """Compile an ascending compare-swap circuit.
     
+    Args:
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_compare_swap
@@ -439,6 +546,16 @@ def compile_sort(
 ) -> fhe.Circuit:
     """Compile a fixed-size bitonic sorting circuit.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        descending (bool): Description for descending.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_sort
@@ -467,6 +584,15 @@ def compile_minimum(
 ) -> fhe.Circuit:
     """Compile a minimum reduction circuit.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_minimum
@@ -490,6 +616,15 @@ def compile_maximum(
 ) -> fhe.Circuit:
     """Compile a maximum reduction circuit.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_maximum
@@ -514,6 +649,16 @@ def compile_argmin(
 ) -> fhe.Circuit:
     """Compile an argmin reduction circuit.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        tie_break (TieBreak): Description for tie_break.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_argmin
@@ -543,6 +688,16 @@ def compile_argmax(
 ) -> fhe.Circuit:
     """Compile an argmax reduction circuit.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        tie_break (TieBreak): Description for tie_break.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_argmax
@@ -569,6 +724,14 @@ def make_array_set(
 ) -> Callable:
     """Create a function for oblivious array writing.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        Callable: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.arrays import make_array_set
@@ -583,6 +746,14 @@ def make_array_set(
     def array_set(array: Union[np.ndarray, List[Any]], index: Any, value: Any) -> Union[np.ndarray, List[Any]]:
         """Oblivious write: return a copy with array[index] replaced by value.
         
+        Args:
+            array (Union[np.ndarray, List[Any]]): Description for array.
+            index (Any): Description for index.
+            value (Any): Description for value.
+
+        Returns:
+            Union[np.ndarray, List[Any]]: The return value.
+
         Example:
             ```python
             from concrete_fhe_toolkit import array_set
@@ -611,6 +782,15 @@ def compile_array_set(
 ) -> fhe.Circuit:
     """Compile an FHE circuit for oblivious array writing.
     
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.arrays import compile_array_set
@@ -638,6 +818,12 @@ def compile_array_set(
 def array_cumsum(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[Any]]:
     """Return the running prefix sums of an encrypted array.
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+
+    Returns:
+        Union[np.ndarray, List[Any]]: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import array_cumsum
@@ -656,6 +842,12 @@ def array_cumsum(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[
 def array_reverse(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[Any]]:
     """Return the array with its (public) element order reversed.
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+
+    Returns:
+        Union[np.ndarray, List[Any]]: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import array_reverse
@@ -669,6 +861,12 @@ def array_reverse(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List
 def array_concat(*arrays: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[Any]]:
     """Concatenate encrypted arrays along their public length.
     
+    Args:
+        *arrays (Union[np.ndarray, List[Any]]): Description for arrays.
+
+    Returns:
+        Union[np.ndarray, List[Any]]: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import array_concat
@@ -697,6 +895,16 @@ def make_top_k(
     
     Note: Requires `size` to be a power of two (2, 4, 8...) due to the underlying sort.
     
+    Args:
+        size (int): Description for size.
+        k (int): Description for k.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        largest (bool): Description for largest.
+
+    Returns:
+        UnaryArrayFunction: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_top_k
@@ -732,6 +940,17 @@ def compile_top_k(
 ) -> fhe.Circuit:
     """Compile a top-k reduction circuit.
     
+    Args:
+        size (int): Description for size.
+        k (int): Description for k.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        largest (bool): Description for largest.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_top_k
@@ -754,6 +973,15 @@ def make_array_pad(
 ) -> Callable:
     """Create a fixed-size array padding function.
 
+    Args:
+        size (int): Description for size.
+        target_size (int): Description for target_size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        Callable: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_array_pad
@@ -769,7 +997,14 @@ def make_array_pad(
         raise ValueError("target_size must be at least the array size")
 
     def array_pad(array: Union[np.ndarray, List[Any]]) -> Any:
-        """Pad an encrypted array with zeros up to the specified target size."""
+        """Pad an encrypted array with zeros up to the specified target size.
+        Args:
+            array (Union[np.ndarray, List[Any]]): Description for array.
+
+        Returns:
+            Any: The return value.
+
+        """
         raw_list = list(array)
         padded_list = raw_list + [0] * (target_size - len(raw_list))
         return fhe.array(padded_list)
@@ -785,6 +1020,16 @@ def compile_array_pad(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile a fixed-size array padding circuit.
+
+    Args:
+        size (int): Description for size.
+        target_size (int): Description for target_size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
 
     Example:
         ```python
@@ -808,6 +1053,15 @@ def make_array_index_of(
 ) -> Callable:
     """Create a first-index-of search function for bounded encrypted arrays.
 
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        missing_result (Optional[int]): Description for missing_result.
+
+    Returns:
+        Callable: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_array_index_of
@@ -821,7 +1075,15 @@ def make_array_index_of(
     missing = size if missing_result is None else int(missing_result)
 
     def array_index_of(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
-        """Return the first index holding value, or missing_result (default size)."""
+        """Return the first index holding value, or missing_result (default size).
+        Args:
+            array (Union[np.ndarray, List[Any]]): Description for array.
+            value (Any): Description for value.
+
+        Returns:
+            Any: The return value.
+
+        """
         tensor = _ensure_tensor(array)
         tensor_size = len(tensor)
         if tensor_size == 0:
@@ -859,6 +1121,16 @@ def compile_array_index_of(
 ) -> fhe.Circuit:
     """Compile a first-index-of search circuit.
 
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        missing_result (Optional[int]): Description for missing_result.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_array_index_of
@@ -885,6 +1157,14 @@ def make_array_count(
 ) -> Callable:
     """Create a value-counting function for bounded encrypted arrays.
 
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        Callable: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_array_count
@@ -897,7 +1177,15 @@ def make_array_count(
     minimum, maximum = validate_bounds(min_value, max_value)
 
     def array_count(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
-        """Count occurrences of a specific value in an encrypted array."""
+        """Count occurrences of a specific value in an encrypted array.
+        Args:
+            array (Union[np.ndarray, List[Any]]): Description for array.
+            value (Any): Description for value.
+
+        Returns:
+            Any: The return value.
+
+        """
         count = np.sum(_ensure_tensor(array) == value)
         return count
 
@@ -911,6 +1199,15 @@ def compile_array_count(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile a value-counting circuit.
+
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
 
     Example:
         ```python
@@ -938,6 +1235,14 @@ def make_array_contains(
 ) -> Callable:
     """Create a membership-test function for bounded encrypted arrays.
 
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        Callable: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_array_contains
@@ -950,7 +1255,15 @@ def make_array_contains(
     minimum, maximum = validate_bounds(min_value, max_value)
 
     def array_contains(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
-        """Check if an encrypted array contains a specific target value (returns 1 or 0)."""
+        """Check if an encrypted array contains a specific target value (returns 1 or 0).
+        Args:
+            array (Union[np.ndarray, List[Any]]): Description for array.
+            value (Any): Description for value.
+
+        Returns:
+            Any: The return value.
+
+        """
         contains = np.max(_ensure_tensor(array) == value)
         return contains
     
@@ -964,6 +1277,15 @@ def compile_array_contains(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile a membership-test circuit.
+
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
 
     Example:
         ```python
@@ -991,6 +1313,14 @@ def make_array_index(
 ) -> Callable:
     """Create an oblivious-read function for bounded encrypted arrays.
 
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        Callable: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_array_index
@@ -1003,7 +1333,15 @@ def make_array_index(
     minimum, maximum = validate_bounds(min_value, max_value)
 
     def array_index(array: Union[np.ndarray, List[Any]], index: Any) -> Any:
-        """Oblivious read: return array[index] without revealing the encrypted index."""
+        """Oblivious read: return array[index] without revealing the encrypted index.
+        Args:
+            array (Union[np.ndarray, List[Any]]): Description for array.
+            index (Any): Description for index.
+
+        Returns:
+            Any: The return value.
+
+        """
         tensor = _ensure_tensor(array)
         if len(tensor) == 0:
             raise ValueError("array must contain at least one element")
@@ -1022,6 +1360,15 @@ def compile_array_index(
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
     """Compile an oblivious-read circuit.
+
+    Args:
+        size (int): Description for size.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+        configuration (Optional[fhe.Configuration]): Description for configuration.
+
+    Returns:
+        fhe.Circuit: The return value.
 
     Example:
         ```python

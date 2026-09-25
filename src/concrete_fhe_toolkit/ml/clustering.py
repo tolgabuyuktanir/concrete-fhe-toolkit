@@ -22,6 +22,17 @@ def inertia(
 
     The standard k-means quality metric (lower is better). ``max_distance``
     must bound the squared distance from any sample to any centroid.
+
+    Args:
+        samples (List[List[Any]]): The encrypted samples to evaluate.
+        centroids (List[List[int]]): The centroids to compute distance against.
+        max_distance (int): The maximum squared distance bound.
+
+    Returns:
+        Any: The sum of squared distances (inertia).
+
+    Raises:
+        ValueError: If centroids is empty.
     
     Example:
         ```python

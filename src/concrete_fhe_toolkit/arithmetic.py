@@ -16,6 +16,13 @@ TernaryFunction = Callable[[Any, Any, Any], Any]
 def compare(x: Any, y: Any) -> Any:
     """Return 1 when x > y, 0 when equal, and -1 when x < y.
     
+    Args:
+        x: left number in comparison.
+        y: right number in comparison.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compare
@@ -36,6 +43,14 @@ def compile_compare(
 ) -> fhe.Circuit:
     """Compile a sign-comparison circuit with inclusive input bounds.
     
+    Args:
+        min_value (int): minimum value you can send to circuit.
+        max_value (int): maximum value you can send to circuit.
+        configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_compare
@@ -61,6 +76,12 @@ def compile_compare(
 def sign(x: Any) -> Any:
     """Return the sign of a number (1 if positive, -1 if negative, 0 if zero).
     
+    Args:
+        x (Any): Description for x.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import sign
@@ -78,6 +99,14 @@ def compile_sign(
 ) -> fhe.Circuit:
     """Compile a circuit returning the sign (-1, 0, or 1) of one encrypted input.
     
+    Args:
+        min_value (int): minimum value you can send to circuit.
+        max_value (int): maximum value you can send to circuit.
+        configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_sign
@@ -100,6 +129,12 @@ def compile_sign(
 def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
     """Create exact encrypted floor division using a multivariate table lookup.
     
+    Args:
+        zero_result (int): the result of zero division.
+
+    Returns:
+        BinaryFunction: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_floor_divide
@@ -129,6 +164,12 @@ def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
 def make_floor_divide_by_product(*, zero_result: int = 0) -> TernaryFunction:
     """Create numerator // (left * right) using a multivariate table lookup.
     
+    Args:
+        zero_result (int): the result of zero division.
+
+    Returns:
+        TernaryFunction: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import make_floor_divide_by_product
@@ -158,6 +199,15 @@ def compile_floor_divide(
 ) -> fhe.Circuit:
     """Compile floor division for nonnegative bounded encrypted inputs.
     
+    Args:
+        max_numerator (int): maximum numerator value you can send to circuit.
+        max_denominator (int): maximum denominator value you can send to circuit.
+        zero_result (int): the result of zero division.
+        configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_floor_divide
@@ -203,6 +253,16 @@ def compile_floor_divide_by_product(
 ) -> fhe.Circuit:
     """Compile numerator // (left * right) for nonnegative bounded inputs.
     
+    Args:
+        max_numerator (int): Description for max_numerator.
+        max_left (int): maximum left number value you can send to circuit.
+        max_right (int): maximum right number value you can send to circuit.
+        zero_result (int): the result of zero division.
+        configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
+
+    Returns:
+        fhe.Circuit: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit import compile_floor_divide_by_product

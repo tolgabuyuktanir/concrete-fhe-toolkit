@@ -16,7 +16,22 @@ RATE_SCALE = 100
 
 
 def _scaled_rate(rate: float) -> int:
-    """Convert a public float rate into an exact integer at RATE_SCALE."""
+    """Convert a public float rate into an exact integer at RATE_SCALE.
+    
+    Args:
+        rate (float): The public float rate.
+        
+    Returns:
+        int: The exact integer representation of the rate at RATE_SCALE.
+        
+    Raises:
+        ValueError: If the rate has more than two decimal digits.
+        
+    Example:
+        ```python
+        scaled = _scaled_rate(0.05)
+        ```
+    """
     scaled = round(rate * RATE_SCALE)
     if abs(rate * RATE_SCALE - scaled) > 1e-6:
         raise ValueError(
@@ -31,6 +46,13 @@ def apply_rate(amount: Any, rate: float) -> Any:
 
     The result is scaled by ``RATE_SCALE``; decode with
     :func:`return_actual_value` after decryption.
+    
+    Args:
+        amount (Any): The encrypted amount.
+        rate (float): The public rate to multiply by.
+        
+    Returns:
+        Any: The encrypted result scaled by RATE_SCALE.
     
     Example:
         ```python
@@ -47,6 +69,12 @@ def apply_rate(amount: Any, rate: float) -> Any:
 def return_actual_value(value: Any) -> float:
     """Decode a RATE_SCALE-scaled cleartext result back to its real value.
     
+    Args:
+        value (Any): The cleartext value scaled by RATE_SCALE.
+        
+    Returns:
+        float: The actual real value.
+    
     Example:
         ```python
         from concrete_fhe_toolkit.finance.core import return_actual_value
@@ -60,6 +88,13 @@ def return_actual_value(value: Any) -> float:
 
 def calculate_tax(amount: Any, rate: float) -> Any:
     """Calculate the tax amount at RATE_SCALE scaling.
+    
+    Args:
+        amount (Any): The encrypted amount.
+        rate (float): The tax rate.
+        
+    Returns:
+        Any: The encrypted tax amount scaled by RATE_SCALE.
     
     Example:
         ```python
@@ -75,6 +110,13 @@ def calculate_tax(amount: Any, rate: float) -> Any:
 def discount(amount: Any, rate: float) -> Any:
     """Calculate the discounted amount at RATE_SCALE scaling.
     
+    Args:
+        amount (Any): The encrypted original amount.
+        rate (float): The discount rate.
+        
+    Returns:
+        Any: The encrypted discounted amount scaled by RATE_SCALE.
+    
     Example:
         ```python
         from concrete_fhe_toolkit.finance.core import discount
@@ -88,6 +130,14 @@ def discount(amount: Any, rate: float) -> Any:
 
 def simple_interest(amount: Any, rate: float, time_period: Any) -> Any:
     """Calculate simple interest (amount * rate * time) at RATE_SCALE scaling.
+    
+    Args:
+        amount (Any): The encrypted principal amount.
+        rate (float): The interest rate.
+        time_period (Any): The encrypted or plaintext time period.
+        
+    Returns:
+        Any: The encrypted simple interest scaled by RATE_SCALE.
     
     Example:
         ```python

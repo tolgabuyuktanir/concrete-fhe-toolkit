@@ -39,9 +39,14 @@ class FHETrainer:
     compile and execute one aggregate circuit over the encrypted inputs.
 
     Args:
-        simulate: When True, run circuits in simulation instead of real
+        simulate (bool): When True, run circuits in simulation instead of real
             encrypted execution (fast; for prototyping and tests only).
-        configuration: Optional ``fhe.Configuration`` forwarded to compile.
+        configuration (Optional[fhe.Configuration]): Optional ``fhe.Configuration`` forwarded to compile.
+
+    Example:
+        ```python
+        trainer = FHETrainer(simulate=True)
+        ```
     """
 
     def __init__(
@@ -51,10 +56,22 @@ class FHETrainer:
         configuration: Optional[fhe.Configuration] = None,
     ) -> None:
         self.simulate = simulate
+        """Initialize the object."""
         self.configuration = configuration
         self.circuit = None
 
     def _run_circuit(self, function: Any, parameter_encryption: Any, inputset: Any, args: Any) -> Any:
+        """Compiles and runs a circuit.
+        
+        Args:
+            function (Any): The circuit function.
+            parameter_encryption (Any): The encryption parameter dictionary.
+            inputset (Any): The inputset for compilation.
+            args (Any): The arguments to run or simulate.
+            
+        Returns:
+            Any: The execution result.
+        """
         compiler = fhe.Compiler(function, parameter_encryption)
         if self.configuration is None:
             self.circuit = compiler.compile(inputset)
@@ -65,6 +82,15 @@ class FHETrainer:
         return self.circuit.encrypt_run_decrypt(*args)
 
     def fit_encrypted(self, *args, **kwargs) -> Any:
+        """Fits the model securely on encrypted training data.
+        
+        Args:
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
+            
+        Returns:
+            Any: The trained model.
+        """
         raise NotImplementedError("fit_encrypted must be implemented by subclasses")
 
 
@@ -79,6 +105,15 @@ def linear_regression_training(
     Computes the flattened ``A^T A`` and ``A^T y`` aggregates over the
     encrypted design matrix ``A = [X | 1]`` (intercept column appended).
     The normal equations are solved clear-side after decryption.
+    
+    Args:
+        X_train (Any): Encrypted design matrix features.
+        y_train (Any): Encrypted targets.
+        n_samples (int): Number of samples.
+        n_features (int): Number of features.
+        
+    Returns:
+        Any: Flattened sufficient statistics array.
     
     Example:
         ```python
@@ -112,6 +147,16 @@ class FHELinearRegressionTrainer(FHETrainer):
     The returned :class:`FHELinearRegression` carries integer weights scaled
     by ``weight_scale``, so its predictions are ``weight_scale`` times the
     real value — decode with ``prediction / weight_scale``.
+    
+    Args:
+        weight_scale (int): Scaling factor for weights.
+        simulate (bool): Run circuits in simulation.
+        configuration (Optional[fhe.Configuration]): Configuration for compile.
+
+    Example:
+        ```python
+        trainer = FHELinearRegressionTrainer(weight_scale=100)
+        ```
     """
 
     def __init__(
@@ -122,9 +167,19 @@ class FHELinearRegressionTrainer(FHETrainer):
         configuration: Optional[fhe.Configuration] = None,
     ) -> None:
         super().__init__(simulate=simulate, configuration=configuration)
+        """Initialize the object."""
         self.weight_scale = validate_integer("weight_scale", weight_scale, minimum=1)
 
     def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]) -> Any:
+        """Fits the model securely on encrypted training data.
+        
+        Args:
+            X_train (List[List[int]]): Encrypted training features.
+            y_train (List[int]): Encrypted training targets.
+            
+        Returns:
+            Any: The trained FHELinearRegression model.
+        """
         n_samples = len(X_train)
         if n_samples == 0:
             raise ValueError("X_train must contain at least one sample")
@@ -165,6 +220,19 @@ class FHELinearRegressionTrainer(FHETrainer):
 
 
 def _gini(class_counts: List[int]) -> float:
+    """Calculate the Gini impurity for a set of class counts.
+    
+    Args:
+        class_counts (List[int]): Class counts.
+        
+    Returns:
+        float: Gini impurity score.
+        
+    Example:
+        ```python
+        score = _gini([10, 10])
+        ```
+    """
     total = sum(class_counts)
     if total == 0:
         return 0.0
@@ -183,13 +251,20 @@ class FHEDecisionTreeTrainer(FHETrainer):
     ``FHENaiveBayesTrainer``'s decrypted counts).
 
     Args:
-        candidate_thresholds: Per feature, the public list of candidate
+        candidate_thresholds (List[List[int]]): Per feature, the public list of candidate
             thresholds (splits test ``feature >= threshold``). Keep these
             lists short — cost grows with nodes x candidates x samples.
-        max_depth: Maximum tree depth (levels of splits).
-        num_classes: Number of label classes (labels are 0..num_classes-1).
-        min_samples_leaf: A split is rejected when either side would hold
+        max_depth (int): Maximum tree depth (levels of splits).
+        num_classes (int): Number of label classes (labels are 0..num_classes-1).
+        min_samples_leaf (int): A split is rejected when either side would hold
             fewer samples than this.
+        simulate (bool): Run circuits in simulation.
+        configuration (Optional[fhe.Configuration]): Configuration for compile.
+        
+    Example:
+        ```python
+        trainer = FHEDecisionTreeTrainer(candidate_thresholds=[[1]])
+        ```
     """
 
     def __init__(
@@ -203,6 +278,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
         configuration: Optional[fhe.Configuration] = None,
     ) -> None:
         super().__init__(simulate=simulate, configuration=configuration)
+        """Initialize the object."""
         if not candidate_thresholds or any(
             not isinstance(row, (list, tuple)) for row in candidate_thresholds
         ):
@@ -285,6 +361,15 @@ class FHEDecisionTreeTrainer(FHETrainer):
         return best
 
     def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]) -> Any:
+        """Fits the model securely on encrypted training data.
+        
+        Args:
+            X_train (List[List[int]]): Encrypted training features.
+            y_train (List[int]): Encrypted training targets.
+            
+        Returns:
+            Any: The trained FHEDecisionTree model.
+        """
         n_samples = len(X_train)
         if n_samples == 0:
             raise ValueError("X_train must contain at least one sample")
@@ -383,10 +468,17 @@ class FHEKMeansTrainer(FHETrainer):
     become the next iteration's public constants.
 
     Args:
-        initial_centroids: Public, data-independent starting centroids.
-        min_value: Inclusive lower bound of every feature value.
-        max_value: Inclusive upper bound of every feature value.
-        n_iterations: Fixed number of Lloyd iterations.
+        initial_centroids (List[List[int]]): Public, data-independent starting centroids.
+        min_value (int): Inclusive lower bound of every feature value.
+        max_value (int): Inclusive upper bound of every feature value.
+        n_iterations (int): Fixed number of Lloyd iterations.
+        simulate (bool): Run circuits in simulation.
+        configuration (Optional[fhe.Configuration]): Configuration for compile.
+
+    Example:
+        ```python
+        trainer = FHEKMeansTrainer(initial_centroids=[[0, 0]], min_value=0, max_value=1)
+        ```
     """
 
     def __init__(
@@ -400,6 +492,7 @@ class FHEKMeansTrainer(FHETrainer):
         configuration: Optional[fhe.Configuration] = None,
     ) -> None:
         super().__init__(simulate=simulate, configuration=configuration)
+        """Initialize the object."""
         if not initial_centroids:
             raise ValueError("initial_centroids must contain at least one centroid")
         self.initial_centroids = [list(centroid) for centroid in initial_centroids]
@@ -440,6 +533,14 @@ class FHEKMeansTrainer(FHETrainer):
         return assign_and_aggregate
 
     def fit_encrypted(self, X_train: List[List[int]]) -> Any:
+        """Fits the model securely on encrypted training data.
+        
+        Args:
+            X_train (List[List[int]]): Encrypted training features.
+            
+        Returns:
+            Any: The trained FHEKMeans model.
+        """
         n_samples = len(X_train)
         if n_samples == 0:
             raise ValueError("X_train must contain at least one sample")

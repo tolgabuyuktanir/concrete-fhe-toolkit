@@ -19,14 +19,40 @@ from .bits import (
 
 
 def _validate_width(name: str, value: int) -> int:
+    """Execute _validate_width.
+    
+    Args:
+        name: The name parameter.
+        value: The value parameter.
+    
+    Returns:
+        The result.
+    """
     return validate_integer(name, value, minimum=1)
 
 
 def _validate_fractional_bits(value: int) -> int:
+    """Execute _validate_fractional_bits.
+    
+    Args:
+        value: The value parameter.
+    
+    Returns:
+        The result.
+    """
     return validate_integer("fractional_bits", value, minimum=0)
 
 
 def _validate_zero_result(zero_result: int, quotient_width: int) -> int:
+    """Execute _validate_zero_result.
+    
+    Args:
+        zero_result: The zero_result parameter.
+        quotient_width: The quotient_width parameter.
+    
+    Returns:
+        The result.
+    """
     normalized = validate_integer("zero_result", zero_result, minimum=0)
     if normalized >= (1 << quotient_width):
         raise ValueError("zero_result does not fit in quotient_width bits")
@@ -34,6 +60,15 @@ def _validate_zero_result(zero_result: int, quotient_width: int) -> int:
 
 
 def _as_nonempty_bits(name: str, bits: Iterable[Any]) -> tuple[Any, ...]:
+    """Execute _as_nonempty_bits.
+    
+    Args:
+        name: The name parameter.
+        bits: The bits parameter.
+    
+    Returns:
+        The result.
+    """
     normalized = tuple(bits)
     if not normalized:
         raise ValueError(f"{name} must contain at least one bit")
@@ -45,6 +80,16 @@ def _restoring_divide_bits(
     denominator_bits: tuple[Any, ...],
     quotient_width: int,
 ) -> tuple[tuple[Any, ...], tuple[Any, ...]]:
+    """Execute _restoring_divide_bits.
+    
+    Args:
+        numerator_bits: The numerator_bits parameter.
+        denominator_bits: The denominator_bits parameter.
+        quotient_width: The quotient_width parameter.
+    
+    Returns:
+        The result.
+    """
     remainder_width = max(quotient_width + 1, len(denominator_bits))
     remainder: list[Any] = [0] * (remainder_width)
     quotient: list[Any] = [0] * quotient_width
@@ -185,6 +230,15 @@ def make_unsigned_floor_divide(
     zero = _validate_zero_result(zero_result, q_width)
 
     def divide(numerator: Any, denominator: Any) -> Any:
+        """Execute divide.
+        
+        Args:
+            numerator: The numerator parameter.
+            denominator: The denominator parameter.
+        
+        Returns:
+            The result.
+        """
         numerator_bits = integer_to_bits(numerator, n_width)
         denominator_bits = integer_to_bits(denominator, d_width)
         quotient_bits = unsigned_divide_bits(
@@ -232,6 +286,15 @@ def make_fixed_point_divide(
     zero = _validate_zero_result(zero_result, q_width)
 
     def divide(numerator: Any, denominator: Any) -> Any:
+        """Execute divide.
+        
+        Args:
+            numerator: The numerator parameter.
+            denominator: The denominator parameter.
+        
+        Returns:
+            The result.
+        """
         numerator_bits = integer_to_bits(numerator, n_width)
         denominator_bits = integer_to_bits(denominator, d_width)
         quotient_bits = fixed_point_divide_bits(
@@ -250,6 +313,15 @@ def _division_inputset(
     numerator_width: int,
     denominator_width: int,
 ) -> list[tuple[int, int]]:
+    """Execute _division_inputset.
+    
+    Args:
+        numerator_width: The numerator_width parameter.
+        denominator_width: The denominator_width parameter.
+    
+    Returns:
+        The result.
+    """
     numerator_maximum = (1 << numerator_width) - 1
     denominator_maximum = (1 << denominator_width) - 1
     samples: set[tuple[int, int]] = {
@@ -398,6 +470,15 @@ def make_unsigned_mod(
     zero = _validate_zero_result(zero_result, d_width)
 
     def modulo(numerator: Any, denominator: Any) -> Any:
+        """Execute modulo.
+        
+        Args:
+            numerator: The numerator parameter.
+            denominator: The denominator parameter.
+        
+        Returns:
+            The result.
+        """
         numerator_bits = integer_to_bits(numerator, n_width)
         denominator_bits = integer_to_bits(denominator, d_width)
         remainder_bits = unsigned_mod_bits(

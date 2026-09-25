@@ -7,7 +7,19 @@ from concrete_fhe_toolkit.arrays import _ensure_tensor
 
 
 def _matrix_shape(matrix: Union[np.ndarray, List[List[Any]]]) -> tuple:
-    """Validate public matrix dimensions without inspecting encrypted values."""
+    """Validate public matrix dimensions without inspecting encrypted values.
+    
+    Args:
+        matrix (Union[np.ndarray, List[List[Any]]]): The matrix to validate.
+
+    Returns:
+        tuple: A tuple containing (rows, columns).
+
+    Example:
+        ```python
+        rows, cols = _matrix_shape([[1, 2], [3, 4]])
+        ```
+    """
     rows = len(matrix)
     if rows == 0:
         return 0, 0
@@ -18,6 +30,23 @@ def _matrix_shape(matrix: Union[np.ndarray, List[List[Any]]]) -> tuple:
 
 
 def _same_matrix_shape(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> tuple:
+    """Check if two matrices have the same shape.
+
+    Args:
+        matrix1 (Union[np.ndarray, List[List[Any]]]): The first matrix.
+        matrix2 (Union[np.ndarray, List[List[Any]]]): The second matrix.
+
+    Returns:
+        tuple: The shared shape (rows, columns).
+        
+    Raises:
+        ValueError: If matrix sizes are not equal.
+
+    Example:
+        ```python
+        shape = _same_matrix_shape([[1]], [[2]])
+        ```
+    """
     shape = _matrix_shape(matrix1)
     if shape != _matrix_shape(matrix2):
         raise ValueError("Matrix sizes should be equal")
@@ -27,6 +56,12 @@ def _same_matrix_shape(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Uni
 def matrix_transpose(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
     """Transpose an encrypted 2D matrix (swap rows and columns).
     
+    Args:
+        matrix (Union[np.ndarray, List[List[Any]]]): The matrix to transpose.
+
+    Returns:
+        Union[np.ndarray, List[List[Any]]]: Transposed matrix.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.matrix import matrix_transpose
@@ -43,6 +78,13 @@ def dot_product(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, 
     
     This is the fundamental operation for linear layers and convolution.
     
+    Args:
+        array1 (Union[np.ndarray, List[Any]]): First encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): Second encrypted array.
+
+    Returns:
+        Any: The scalar dot product.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.matrix import dot_product
@@ -56,6 +98,13 @@ def dot_product(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, 
 def matrix_add(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
     """Perform element-wise addition of two encrypted matrices of the same dimensions.
     
+    Args:
+        matrix1 (Union[np.ndarray, List[List[Any]]]): The first matrix.
+        matrix2 (Union[np.ndarray, List[List[Any]]]): The second matrix.
+
+    Returns:
+        Union[np.ndarray, List[List[Any]]]: The resulting matrix.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.matrix import matrix_add
@@ -70,6 +119,13 @@ def matrix_add(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.nd
 def matrix_subtract(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
     """Perform element-wise subtraction of two encrypted matrices of the same dimensions.
     
+    Args:
+        matrix1 (Union[np.ndarray, List[List[Any]]]): The matrix to subtract from.
+        matrix2 (Union[np.ndarray, List[List[Any]]]): The matrix to subtract.
+
+    Returns:
+        Union[np.ndarray, List[List[Any]]]: The resulting matrix.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.matrix import matrix_subtract
@@ -87,6 +143,13 @@ def matrix_multiply(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[
     Note: Matrix multiplication involves many multiplications and additions, 
     so the resulting FHE circuit may be deep. Use with appropriately scaled values.
     
+    Args:
+        matrix1 (Union[np.ndarray, List[List[Any]]]): The left-hand side matrix.
+        matrix2 (Union[np.ndarray, List[List[Any]]]): The right-hand side matrix.
+
+    Returns:
+        Union[np.ndarray, List[List[Any]]]: The multiplied matrix.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.matrix import matrix_multiply
@@ -100,6 +163,13 @@ def matrix_multiply(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[
 def matrix_elementwise_multiply(matrix1: Union[np.ndarray, List[List[Any]]], matrix2: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[List[Any]]]:
     """Perform Hadamard (element-wise) multiplication of two encrypted matrices.
     
+    Args:
+        matrix1 (Union[np.ndarray, List[List[Any]]]): The first matrix.
+        matrix2 (Union[np.ndarray, List[List[Any]]]): The second matrix.
+
+    Returns:
+        Union[np.ndarray, List[List[Any]]]: The resulting matrix.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.matrix import matrix_elementwise_multiply
@@ -117,6 +187,13 @@ def matrix_vector_multiply(matrix: Union[np.ndarray, List[List[Any]]], array: Un
     
     Often used to evaluate a linear layer: output = W * input.
     
+    Args:
+        matrix (Union[np.ndarray, List[List[Any]]]): The encrypted matrix.
+        array (Union[np.ndarray, List[Any]]): The encrypted vector.
+
+    Returns:
+        Union[np.ndarray, List[Any]]: The resulting vector.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.matrix import matrix_vector_multiply
@@ -209,6 +286,12 @@ def covariance_matrix(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.nd
 def matrix_flatten(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarray, List[Any]]: 
     """Flatten a 2D encrypted matrix into a 1D encrypted array.
     
+    Args:
+        matrix (Union[np.ndarray, List[List[Any]]]): The 2D encrypted matrix.
+
+    Returns:
+        Union[np.ndarray, List[Any]]: The 1D flattened array.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.matrix import matrix_flatten
@@ -222,6 +305,12 @@ def matrix_flatten(matrix: Union[np.ndarray, List[List[Any]]]) -> Union[np.ndarr
 def tensor_flatten(tensor: Union[np.ndarray, List[List[List[Any]]]]) -> Union[np.ndarray, List[Any]]:
     """Flatten a 3D encrypted tensor into a 1D encrypted array.
     
+    Args:
+        tensor (Union[np.ndarray, List[List[List[Any]]]]): The 3D encrypted tensor.
+
+    Returns:
+        Union[np.ndarray, List[Any]]: The 1D flattened array.
+
     Example:
         ```python
         from concrete_fhe_toolkit.ml.matrix import tensor_flatten

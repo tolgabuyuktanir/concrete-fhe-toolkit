@@ -29,12 +29,26 @@ BIT_SELECT_LUT = fhe.LookupTable([0, 1, 0, 1, 0, 0, 1, 1])
 
 
 def _bit_width(width: int) -> int:
+    """Validate and normalize a bit width.
+    
+    Args:
+        width (int): The bit width to validate.
+        
+    Returns:
+        int: The validated bit width.
+    """
     return validate_integer("width", width, minimum=1)
 
 
 def bit_not(bit: Any) -> Any:
     """Return NOT(bit) for a bit expression.
     
+    Args:
+        bit (Any): The bit expression to negate.
+        
+    Returns:
+        Any: The negated bit expression.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import bit_not
@@ -48,6 +62,13 @@ def bit_not(bit: Any) -> Any:
 def bit_and(left: Any, right: Any) -> Any:
     """Return left AND right for bit expressions.
     
+    Args:
+        left (Any): The left bit expression.
+        right (Any): The right bit expression.
+        
+    Returns:
+        Any: The result of left AND right.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import bit_and
@@ -61,6 +82,13 @@ def bit_and(left: Any, right: Any) -> Any:
 def bit_or(left: Any, right: Any) -> Any:
     """Return left OR right for bit expressions.
     
+    Args:
+        left (Any): The left bit expression.
+        right (Any): The right bit expression.
+        
+    Returns:
+        Any: The result of left OR right.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import bit_or
@@ -74,6 +102,13 @@ def bit_or(left: Any, right: Any) -> Any:
 def bit_xor(left: Any, right: Any) -> Any:
     """Return left XOR right for bit expressions.
     
+    Args:
+        left (Any): The left bit expression.
+        right (Any): The right bit expression.
+        
+    Returns:
+        Any: The result of left XOR right.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import bit_xor
@@ -87,6 +122,14 @@ def bit_xor(left: Any, right: Any) -> Any:
 def bit_select(control: Any, when_one: Any, when_zero: Any) -> Any:
     """Return when_one if control is 1, otherwise when_zero.
     
+    Args:
+        control (Any): The control bit.
+        when_one (Any): The value to return if control is 1.
+        when_zero (Any): The value to return if control is 0.
+        
+    Returns:
+        Any: The selected value.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import bit_select
@@ -100,6 +143,14 @@ def bit_select(control: Any, when_one: Any, when_zero: Any) -> Any:
 def full_adder_bit(left: Any, right: Any, carry_in: Any) -> tuple[Any, Any]:
     """Return (sum_bit, carry_out) for one full-adder stage.
     
+    Args:
+        left (Any): The left bit.
+        right (Any): The right bit.
+        carry_in (Any): The carry-in bit.
+        
+    Returns:
+        tuple[Any, Any]: A tuple containing the sum bit and the carry-out bit.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import full_adder_bit
@@ -114,6 +165,14 @@ def full_adder_bit(left: Any, right: Any, carry_in: Any) -> tuple[Any, Any]:
 def full_subtractor_bit(left: Any, right: Any, borrow_in: Any) -> tuple[Any, Any]:
     """Return (difference_bit, borrow_out) for one full-subtractor stage.
     
+    Args:
+        left (Any): The left bit.
+        right (Any): The right bit.
+        borrow_in (Any): The borrow-in bit.
+        
+    Returns:
+        tuple[Any, Any]: A tuple containing the difference bit and the borrow-out bit.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import full_subtractor_bit
@@ -128,6 +187,13 @@ def full_subtractor_bit(left: Any, right: Any, borrow_in: Any) -> tuple[Any, Any
 def _bit_op_many(bits: Iterable[Any] , function: Callable[[Any,Any],Any]) -> Any:
     """Return the bitwise-operation-reduction of a bit iterable with higher performance.
     
+    Args:
+        bits (Iterable[Any]): The bits to reduce.
+        function (Callable[[Any, Any], Any]): The bitwise operation to apply.
+        
+    Returns:
+        Any: The reduced bit.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import _bit_op_many, bit_and
@@ -156,6 +222,12 @@ def _bit_op_many(bits: Iterable[Any] , function: Callable[[Any,Any],Any]) -> Any
 def bit_or_many(bits: Iterable[Any]) -> Any:
     """Return the OR-reduction of a bit iterable with higher performance.
     
+    Args:
+        bits (Iterable[Any]): The bits to OR-reduce.
+        
+    Returns:
+        Any: The result of the OR-reduction.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import bit_or_many
@@ -169,6 +241,12 @@ def bit_or_many(bits: Iterable[Any]) -> Any:
 def bit_and_many(bits: Iterable[Any]) -> Any:
     """Return the AND-reduction of a bit iterable with higher performance.
     
+    Args:
+        bits (Iterable[Any]): The bits to AND-reduce.
+        
+    Returns:
+        Any: The result of the AND-reduction.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import bit_and_many
@@ -182,6 +260,12 @@ def bit_and_many(bits: Iterable[Any]) -> Any:
 def bit_xor_many(bits: Iterable[Any]) -> Any:
     """Return the XOR-reduction of a bit iterable with higher performance.
     
+    Args:
+        bits (Iterable[Any]): The bits to XOR-reduce.
+        
+    Returns:
+        Any: The result of the XOR-reduction.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import bit_xor_many
@@ -196,6 +280,13 @@ def bit_xor_many(bits: Iterable[Any]) -> Any:
 def integer_to_bits(value: Any, width: int) -> tuple[Any, ...]:
     """Return little-endian bits of an unsigned integer expression.
     
+    Args:
+        value (Any): The unsigned integer expression.
+        width (int): The bit width.
+        
+    Returns:
+        tuple[Any, ...]: The little-endian bits.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import integer_to_bits
@@ -210,6 +301,12 @@ def integer_to_bits(value: Any, width: int) -> tuple[Any, ...]:
 def bits_to_unsigned(bits: Iterable[Any]) -> Any:
     """Convert little-endian bits to an unsigned integer expression.
     
+    Args:
+        bits (Iterable[Any]): The little-endian bits.
+        
+    Returns:
+        Any: The unsigned integer expression.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import bits_to_unsigned
@@ -227,6 +324,13 @@ def bits_to_unsigned(bits: Iterable[Any]) -> Any:
 def unsigned_to_bits(value: int, width: int) -> tuple[int, ...]:
     """Return little-endian bits of a clear unsigned integer constant.
     
+    Args:
+        value (int): The unsigned integer constant.
+        width (int): The bit width.
+        
+    Returns:
+        tuple[int, ...]: The little-endian bits.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import unsigned_to_bits
@@ -245,6 +349,13 @@ def unsigned_to_bits(value: int, width: int) -> tuple[int, ...]:
 def twos_complement_bits(value: int, width: int) -> tuple[int, ...]:
     """Return little-endian two's-complement bits for a clear signed integer.
     
+    Args:
+        value (int): The signed integer constant.
+        width (int): The bit width.
+        
+    Returns:
+        tuple[int, ...]: The little-endian bits.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import twos_complement_bits
@@ -273,6 +384,14 @@ def sign_magnitude_to_twos_complement_bits(
     The output width is one bit wider than the magnitude width so the sign can
     be represented safely.
     
+    Args:
+        magnitude_bits (Iterable[Any]): The magnitude bits.
+        sign_bit (Any): The sign bit.
+        width (int | None, optional): The target width. Defaults to None.
+        
+    Returns:
+        tuple[Any, ...]: The two's-complement bits.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import sign_magnitude_to_twos_complement_bits
@@ -308,6 +427,14 @@ def twos_complement_add_bits(
 ) -> tuple[Any, ...]:
     """Add two two's-complement bit lists modulo 2**width.
     
+    Args:
+        left_bits (Iterable[Any]): The first two's-complement bit list.
+        right_bits (Iterable[Any]): The second two's-complement bit list.
+        width (int): The bit width.
+        
+    Returns:
+        tuple[Any, ...]: The sum as a two's-complement bit list.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import twos_complement_add_bits
@@ -362,6 +489,14 @@ def twos_complement_multiply_by_constant_bits(
 ) -> tuple[Any, ...]:
     """Multiply two's-complement bits by a nonnegative clear integer.
     
+    Args:
+        signed_bits (Iterable[Any]): The two's-complement bit list.
+        multiplier (int): The nonnegative clear integer multiplier.
+        output_width (int): The output bit width.
+        
+    Returns:
+        tuple[Any, ...]: The product as a two's-complement bit list.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import twos_complement_multiply_by_constant_bits
@@ -402,6 +537,14 @@ def multiply_bits(
 )-> tuple[Any]:
     """Multiply two two's-complement bit lists.
     
+    Args:
+        left_bits (Iterable[Any]): The first two's-complement bit list.
+        right_bits (Iterable[Any]): The second two's-complement bit list.
+        width (int): The bit width.
+        
+    Returns:
+        tuple[Any]: The product as a two's-complement bit list.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import multiply_bits
@@ -444,6 +587,13 @@ fsub_bit = full_subtractor_bit
 def shift_left_bits(bits: Iterable[Any], amount: int) -> tuple:
     """Logical left shift by a public amount; output keeps the input width.
     
+    Args:
+        bits (Iterable[Any]): The bits to shift.
+        amount (int): The shift amount.
+        
+    Returns:
+        tuple: The shifted bits.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import shift_left_bits
@@ -467,6 +617,14 @@ def shift_right_bits(
 ) -> tuple:
     """Right shift by a public amount; arithmetic=True sign-extends from the MSB.
     
+    Args:
+        bits (Iterable[Any]): The bits to shift.
+        amount (int): The shift amount.
+        arithmetic (bool, optional): Whether to sign-extend. Defaults to False.
+        
+    Returns:
+        tuple: The shifted bits.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import shift_right_bits
@@ -486,6 +644,13 @@ def shift_right_bits(
 def rotate_left_bits(bits: Iterable[Any], amount: int) -> tuple:
     """Rotate toward the MSB by a public amount (little-endian bit lists).
     
+    Args:
+        bits (Iterable[Any]): The bits to rotate.
+        amount (int): The rotation amount.
+        
+    Returns:
+        tuple: The rotated bits.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import rotate_left_bits
@@ -506,6 +671,13 @@ def rotate_left_bits(bits: Iterable[Any], amount: int) -> tuple:
 def rotate_right_bits(bits: Iterable[Any], amount: int) -> tuple:
     """Rotate toward the LSB by a public amount (little-endian bit lists).
     
+    Args:
+        bits (Iterable[Any]): The bits to rotate.
+        amount (int): The rotation amount.
+        
+    Returns:
+        tuple: The rotated bits.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import rotate_right_bits
@@ -526,6 +698,12 @@ def rotate_right_bits(bits: Iterable[Any], amount: int) -> tuple:
 def popcount_bits(bits: Iterable[Any]) -> Any:
     """Return the number of set bits as an integer expression (tournament sum).
     
+    Args:
+        bits (Iterable[Any]): The bit list.
+        
+    Returns:
+        Any: The number of set bits.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import popcount_bits
@@ -549,6 +727,12 @@ def popcount_bits(bits: Iterable[Any]) -> Any:
 def parity_bits(bits: Iterable[Any]) -> Any:
     """Return the XOR-parity (1 when an odd number of bits are set).
     
+    Args:
+        bits (Iterable[Any]): The bit list.
+        
+    Returns:
+        Any: The parity bit.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import parity_bits
@@ -562,6 +746,12 @@ def parity_bits(bits: Iterable[Any]) -> Any:
 def bit_length_bits(bits: Iterable[Any]) -> Any:
     """Return the bit length (index of the highest set bit plus one, 0 for zero).
     
+    Args:
+        bits (Iterable[Any]): The bit list.
+        
+    Returns:
+        Any: The bit length.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import bit_length_bits
@@ -586,6 +776,13 @@ def unsigned_compare_bits(
 ) -> tuple:
     """Return (is_less, is_equal) bits for two little-endian unsigned bit lists.
     
+    Args:
+        left_bits (Iterable[Any]): The left bit list.
+        right_bits (Iterable[Any]): The right bit list.
+        
+    Returns:
+        tuple: A tuple containing the is_less and is_equal bits.
+        
     Example:
         ```python
         from concrete_fhe_toolkit.math.bits import unsigned_compare_bits

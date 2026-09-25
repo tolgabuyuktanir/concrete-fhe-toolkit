@@ -19,7 +19,10 @@ class FHEPipeline(FHEModel):
     never leave the encrypted domain.
 
     Args:
-        steps: Ordered list of transformers followed by exactly one model.
+        steps (List[Any]): Ordered list of transformers followed by exactly one model.
+
+    Raises:
+        ValueError: If steps is empty, intermediate steps lack `_transform_logic`, or final step lacks `_circuit_logic`.
 
     Example:
         ```python
@@ -40,6 +43,7 @@ class FHEPipeline(FHEModel):
 
     def __init__(self, steps: List[Any]) -> None:
         super().__init__()
+        """Initialize the object."""
         if not steps:
             raise ValueError("steps must contain at least a final model")
         *transformers, model = steps
@@ -57,6 +61,14 @@ class FHEPipeline(FHEModel):
         self.steps = list(steps)
 
     def _circuit_logic(self, features: Any) -> Any:
+        """Execute the pipeline's circuit logic.
+        
+        Args:
+            features (Any): The input features.
+            
+        Returns:
+            Any: The pipeline's output.
+        """
         *transformers, model = self.steps
         current = features
         for step in transformers:

@@ -25,12 +25,12 @@ def bin_feature(value: Any, bin_edges: List[int]) -> Any:
     one without revealing the value.
 
     Args:
-        value: The encrypted value to discretize.
-        bin_edges: Public, ascending list of bucket boundaries. A value
+        value (Any): The encrypted value to discretize.
+        bin_edges (List[int]): Public, ascending list of bucket boundaries. A value
             lands in bucket ``i`` when ``bin_edges[i-1] <= value < bin_edges[i]``.
 
     Returns:
-        The encrypted bucket index in ``[0, len(bin_edges)]``.
+        Any: The encrypted bucket index in ``[0, len(bin_edges)]``.
 
     Example:
         ```python
@@ -53,7 +53,7 @@ class FHEBinner:
     """Discretize every feature into ordinal buckets (scorecard binning).
 
     Args:
-        bin_edges: Per feature, the public ascending list of bucket
+        bin_edges (List[List[int]]): Per feature, the public ascending list of bucket
             boundaries used by :func:`bin_feature`.
 
     Example:
@@ -69,10 +69,24 @@ class FHEBinner:
 
     def __init__(self, bin_edges: List[List[int]]) -> None:
         if not bin_edges:
+        """Initialize the object."""
             raise ValueError("bin_edges must describe at least one feature")
         self.bin_edges = [list(edges) for edges in bin_edges]
 
     def _transform_logic(self, features: Any) -> List[Any]:
+        """Apply the binner logic to a set of features.
+        
+        Args:
+            features (Any): The input features to be transformed.
+
+        Returns:
+            List[Any]: A list containing transformed (binned) features.
+
+        Example:
+            ```python
+            transformed = binner._transform_logic(features)
+            ```
+        """
         if isinstance(features, (list, tuple)) and len(features) != len(self.bin_edges):
             raise ValueError("expected one bin-edge list per feature")
         return [
@@ -89,9 +103,9 @@ class FHEStandardScaler:
     with sklearn's ``StandardScaler``) and round them to integers.
 
     Args:
-        means: Public per-feature integer means.
-        stds: Public per-feature integer standard deviations (must be >= 1).
-        scale: Output scale of the z-scores (default 10, so ``13`` means 1.3).
+        means (List[int]): Public per-feature integer means.
+        stds (List[int]): Public per-feature integer standard deviations (must be >= 1).
+        scale (int): Output scale of the z-scores (default 10, so ``13`` means 1.3).
 
     Example:
         ```python
@@ -104,12 +118,26 @@ class FHEStandardScaler:
 
     def __init__(self, means: List[int], stds: List[int], *, scale: int = 10) -> None:
         if len(means) != len(stds):
+        """Initialize the object."""
             raise ValueError("means and stds must have the same length")
         self.means = [validate_integer("mean", value) for value in means]
         self.stds = [validate_integer("std", value, minimum=1) for value in stds]
         self.scale = validate_integer("scale", scale, minimum=1)
 
     def _transform_logic(self, features: Any) -> List[Any]:
+        """Apply the standard scaling logic to a set of features.
+        
+        Args:
+            features (Any): The input features to be scaled.
+
+        Returns:
+            List[Any]: A list containing scaled features.
+
+        Example:
+            ```python
+            scaled_features = scaler._transform_logic(features)
+            ```
+        """
         if isinstance(features, (list, tuple)) and len(features) != len(self.means):
             raise ValueError("expected one feature per fitted mean")
         return [
@@ -124,9 +152,9 @@ class FHEMinMaxScaler:
     Computes ``((x - minimum) * scale) // (maximum - minimum)`` per feature.
 
     Args:
-        minimums: Public per-feature lower bounds.
-        maximums: Public per-feature upper bounds (strictly greater).
-        scale: Upper end of the output range (default 100).
+        minimums (List[int]): Public per-feature lower bounds.
+        maximums (List[int]): Public per-feature upper bounds (strictly greater).
+        scale (int): Upper end of the output range (default 100).
 
     Example:
         ```python
@@ -145,6 +173,7 @@ class FHEMinMaxScaler:
         scale: int = 100,
     ) -> None:
         if len(minimums) != len(maximums):
+        """Initialize the object."""
             raise ValueError("minimums and maximums must have the same length")
         self.minimums = [validate_integer("minimum", value) for value in minimums]
         self.maximums = [validate_integer("maximum", value) for value in maximums]
@@ -154,6 +183,19 @@ class FHEMinMaxScaler:
         self.scale = validate_integer("scale", scale, minimum=1)
 
     def _transform_logic(self, features: Any) -> List[Any]:
+        """Apply the min-max scaling logic to a set of features.
+        
+        Args:
+            features (Any): The input features to be scaled.
+
+        Returns:
+            List[Any]: A list containing scaled features.
+
+        Example:
+            ```python
+            scaled_features = scaler._transform_logic(features)
+            ```
+        """
         if isinstance(features, (list, tuple)) and len(features) != len(self.minimums):
             raise ValueError("expected one feature per fitted bound")
         return [

@@ -8,6 +8,14 @@ def transfer(sender_balance: Any, receiver_balance: Any, amount: Any) -> tuple[A
     transfer is silently cancelled (amount becomes 0) without leaking 
     information about the failure.
     
+    Args:
+        sender_balance (Any): The encrypted balance of the sender.
+        receiver_balance (Any): The encrypted balance of the receiver.
+        amount (Any): The encrypted amount to transfer.
+        
+    Returns:
+        tuple[Any, Any]: A tuple containing the new encrypted sender balance and receiver balance.
+    
     Example:
         ```python
         from concrete_fhe_toolkit.finance.transactions import transfer

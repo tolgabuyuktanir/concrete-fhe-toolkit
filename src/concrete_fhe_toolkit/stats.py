@@ -19,6 +19,12 @@ import numpy as np
 def array_mean(array: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the floor mean of an encrypted array.
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_mean
@@ -32,6 +38,12 @@ def array_mean(array: Union[np.ndarray, List[Any]]) -> Any:
 def array_variance(array: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the floor variance of an encrypted array.
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_variance
@@ -52,6 +64,14 @@ def array_std(array: Union[np.ndarray, List[Any]], min_value: int, max_value: in
     ``min_value`` / ``max_value`` bound the array elements; the isqrt lookup
     is built over the worst-case variance for that range.
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_std
@@ -72,6 +92,13 @@ def array_std(array: Union[np.ndarray, List[Any]], min_value: int, max_value: in
 def array_covariance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the floor covariance of two encrypted arrays.
     
+    Args:
+        array1 (Union[np.ndarray, List[Any]]): Description for array1.
+        array2 (Union[np.ndarray, List[Any]]): Description for array2.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_covariance
@@ -92,6 +119,12 @@ def array_covariance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndar
 def array_max(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Find the maximum value in an encrypted array using a tournament reduction.
     
+    Args:
+        elements (Union[np.ndarray, List[Any]]): Description for elements.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_max
@@ -105,6 +138,12 @@ def array_max(elements: Union[np.ndarray, List[Any]]) -> Any:
 def array_min(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Find the minimum value in an encrypted array using a tournament reduction.
     
+    Args:
+        elements (Union[np.ndarray, List[Any]]): Description for elements.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_min
@@ -119,6 +158,12 @@ def array_min(elements: Union[np.ndarray, List[Any]]) -> Any:
 def array_range(array: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the range (max - min) of an encrypted array.
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_range
@@ -132,6 +177,13 @@ def array_range(array: Union[np.ndarray, List[Any]]) -> Any:
 def array_count_greater(array: Union[np.ndarray, List[Any]], threshold: Any) -> Any:
     """Count how many elements are strictly greater than a threshold.
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+        threshold (Any): Description for threshold.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_count_greater
@@ -148,6 +200,14 @@ def array_median(array: Union[np.ndarray, List[Any]], min_value: int, max_value:
     Uses the bitonic sorting network, so the array length must be a power
     of two.
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_median
@@ -173,6 +233,15 @@ def array_percentile(array: Union[np.ndarray, List[Any]], q: int, min_value: int
     Uses the bitonic sorting network, so the array length must be a power
     of two.
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+        q (int): Description for q.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_percentile
@@ -196,6 +265,14 @@ def array_percentile(array: Union[np.ndarray, List[Any]], q: int, min_value: int
 def array_histogram(array: Union[np.ndarray, List[Any]], min_value: int, max_value: int) -> Union[np.ndarray, List[Any]]:
     """Count occurrences of every value in [min_value, max_value] (bincount).
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        Union[np.ndarray, List[Any]]: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_histogram
@@ -218,6 +295,14 @@ def array_histogram(array: Union[np.ndarray, List[Any]], min_value: int, max_val
 def array_mode(array: Union[np.ndarray, List[Any]], min_value: int, max_value: int) -> Any:
     """Return the most frequent value (smallest value wins ties).
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+        min_value (int): Description for min_value.
+        max_value (int): Description for max_value.
+
+    Returns:
+        Any: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_mode
@@ -237,6 +322,14 @@ def array_mode(array: Union[np.ndarray, List[Any]], min_value: int, max_value: i
 def array_normalize(array: Union[np.ndarray, List[Any]], mean: Any, scale: int) -> Union[np.ndarray, List[Any]]:
     """Return (x - mean) * scale for every element (z-score style affine transform).
     
+    Args:
+        array (Union[np.ndarray, List[Any]]): Description for array.
+        mean (Any): Description for mean.
+        scale (int): Description for scale.
+
+    Returns:
+        Union[np.ndarray, List[Any]]: The return value.
+
     Example:
         ```python
         from concrete_fhe_toolkit.stats import array_normalize

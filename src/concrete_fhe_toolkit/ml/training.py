@@ -53,6 +53,12 @@ def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[An
 
 def make_raw_naive_bayes_training(thresholds: List[Any]) -> Any:
     """Create a training function that first binarizes raw features before applying Naive Bayes.
+
+    Args:
+        thresholds (List[Any]): List of thresholds to binarize each feature.
+
+    Returns:
+        Any: A training function that takes raw features and one-hot encoded labels.
     
     Example:
         ```python
@@ -66,6 +72,15 @@ def make_raw_naive_bayes_training(thresholds: List[Any]) -> Any:
     from concrete_fhe_toolkit.math.basic import greater
     
     def raw_naive_bayes_training(X_train_raw: List[List[Any]], y_train_one_hot: List[List[Any]]) -> tuple[List[List[Any]],List[Any]]:
+        """Binarize raw features and apply Naive Bayes training.
+        
+        Args:
+            X_train_raw (List[List[Any]]): The raw feature matrix.
+            y_train_one_hot (List[List[Any]]): The one-hot encoded labels.
+            
+        Returns:
+            tuple[List[List[Any]],List[Any]]: (feature_counts, class_counts) as encrypted arrays.
+        """
         X_train_binary = []
         for row in X_train_raw:
             binary_row = []

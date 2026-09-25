@@ -26,6 +26,13 @@ def manhattan_distance(array1: Union[np.ndarray, List[Any]], array2: Union[np.nd
         # Inside an FHE circuit
         # dist = manhattan_distance([enc_x1, enc_y1], [enc_x2, enc_y2])
         ```
+    
+    Args:
+        array1 (Union[np.ndarray, List[Any]]): First array.
+        array2 (Union[np.ndarray, List[Any]]): Second array.
+    
+    Returns:
+        Any: The Manhattan distance.
     """
     if(len(array1) != len(array2)):
         raise ValueError("The array sizes must be equal")
@@ -44,6 +51,13 @@ def hamming_distance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndar
         # Inside an FHE circuit
         # dist = hamming_distance([enc_a1, enc_b1], [enc_a2, enc_b2])
         ```
+    
+    Args:
+        array1 (Union[np.ndarray, List[Any]]): First array.
+        array2 (Union[np.ndarray, List[Any]]): Second array.
+    
+    Returns:
+        Any: The Hamming distance.
     """
     if(len(array1) != len(array2)):
         raise ValueError("The array sizes must be equal")
@@ -63,6 +77,13 @@ def euclidean_distance_squared(array1: Union[np.ndarray, List[Any]], array2: Uni
         # Inside an FHE circuit
         # dist_sq = euclidean_distance_squared(enc_point_1, enc_point_2)
         ```
+    
+    Args:
+        array1 (Union[np.ndarray, List[Any]]): First array.
+        array2 (Union[np.ndarray, List[Any]]): Second array.
+    
+    Returns:
+        Any: The squared Euclidean distance.
     """
     if(len(array1) != len(array2)):
         raise ValueError("The array sizes must be equal")
@@ -82,6 +103,13 @@ def mean_squared_error(array1: Union[np.ndarray, List[Any]], array2: Union[np.nd
         # Inside an FHE circuit
         # mse = mean_squared_error(enc_predictions, enc_true_values)
         ```
+    
+    Args:
+        array1 (Union[np.ndarray, List[Any]]): First array.
+        array2 (Union[np.ndarray, List[Any]]): Second array.
+    
+    Returns:
+        Any: The Mean Squared Error.
     """
     if(len(array1) != len(array2)):
             raise ValueError("The array sizes must be equal")
@@ -99,6 +127,13 @@ def mean_absolute_error(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np
         # Inside an FHE circuit
         # mae = mean_absolute_error(enc_predictions, enc_true_values)
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        Any: The Mean Absolute Error.
     """
     distance = manhattan_distance(y_preds,y_trues)
     return distance // len(y_trues)
@@ -121,6 +156,13 @@ def accuracy_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndar
         # Inside an FHE circuit
         # acc_pct = accuracy_score(enc_predictions, enc_labels)
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        Any: The accuracy score percentage.
     """
     if(len(y_preds) != len(y_trues)):
         raise ValueError("The array sizes must be equal")
@@ -141,6 +183,13 @@ def true_positives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndar
         # Inside an FHE circuit
         # tp = true_positives(enc_binary_preds, enc_binary_labels)
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        int: The number of true positives.
     """
     if(len(y_preds) != len(y_trues)):
         raise ValueError("The array sizes must be equal")
@@ -161,6 +210,13 @@ def true_negatives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndar
         # Inside an FHE circuit
         # tn = true_negatives(enc_binary_preds, enc_binary_labels)
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        int: The number of true negatives.
     """
     if(len(y_preds) != len(y_trues)):
         raise ValueError("The array sizes must be equal")
@@ -178,6 +234,13 @@ def false_negatives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.nda
         # Inside an FHE circuit
         # fn = false_negatives(enc_binary_preds, enc_binary_labels)
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        int: The number of false negatives.
     """
     num_of_positives = array_sum(y_trues)
     return num_of_positives - true_positives(y_preds, y_trues)
@@ -192,6 +255,13 @@ def false_positives(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.nda
         # Inside an FHE circuit
         # fp = false_positives(enc_binary_preds, enc_binary_labels)
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        int: The number of false positives.
     """
     num_of_negatives = len(y_trues) - array_sum(y_trues)
     return num_of_negatives - true_negatives(y_preds, y_trues)
@@ -217,6 +287,13 @@ def confusion_matrix(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.nd
         # tn, fp = matrix[0]
         # fn, tp = matrix[1]
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        Union[np.ndarray, List[List[Any]]]: The confusion matrix [[TN, FP], [FN, TP]].
     """
     tp = true_positives(y_preds,y_trues)
     tn = true_negatives(y_preds,y_trues)
@@ -238,6 +315,13 @@ def hinge_loss(y_pred: Any, y_true: Any) -> Any:
         # Inside an FHE circuit
         # loss = hinge_loss(enc_pred_score, enc_true_label)
         ```
+    
+    Args:
+        y_pred (Any): Prediction.
+        y_true (Any): True value.
+    
+    Returns:
+        Any: The Hinge Loss.
     """
     return maximum(0, 1-(y_true*y_pred))
 
@@ -250,6 +334,12 @@ def l1_norm(array: Union[np.ndarray, List[Any]]) -> Any:
         
         # In FHE circuit: l1_norm([-1, 5, -10]) -> 16
         ```
+    
+    Args:
+        array (Union[np.ndarray, List[Any]]): The array.
+    
+    Returns:
+        Any: The L1 norm.
     """
     total = np.sum(np.absolute(_ensure_tensor(array)))
     return total
@@ -272,6 +362,14 @@ def compile_hinge_loss(
         circuit = compile_hinge_loss(min_value=-10, max_value=10)
         # Calculates max(0, 1 - (y_true * y_pred)) under encryption
         ```
+    
+    Args:
+        min_value (int): Minimum value.
+        max_value (int): Maximum value.
+        configuration (Optional[fhe.Configuration]): FHE configuration.
+    
+    Returns:
+        fhe.Circuit: The compiled circuit.
     """
     minimum_val, maximum_val = validate_bounds(min_value, max_value)
     return compile_function(
@@ -306,6 +404,15 @@ def make_cross_entropy_loss(
         # Inside an FHE circuit
         # loss = cross_entropy(enc_preds, enc_labels)
         ```
+    
+    Args:
+        min_input (int): Min input.
+        max_input (int): Max input.
+        input_scale (int): Input scale.
+        output_scale (int): Output scale.
+    
+    Returns:
+        Callable: The cross entropy loss function.
     """
     warnings.warn(
             "Cross Entropy requires >16-bit TLUs and will likely fail to compile "
@@ -315,6 +422,15 @@ def make_cross_entropy_loss(
     log_func = make_log(min_input, max_input, input_scale=input_scale, output_scale=output_scale, invalid_result=-999)
 
     def cross_entropy_loss(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
+        """Calculate the cross-entropy loss.
+        
+        Args:
+            y_preds (Union[np.ndarray, List[Any]]): Predictions.
+            y_trues (Union[np.ndarray, List[Any]]): True values.
+            
+        Returns:
+            Any: The computed loss.
+        """
         preds_tensor = _ensure_tensor(y_preds)
         trues_tensor = _ensure_tensor(y_trues)
         preds_log = log_func(preds_tensor)
@@ -341,6 +457,17 @@ def compile_cross_entropy_loss(
         
         circuit = compile_cross_entropy_loss(array_size=2)
         ```
+    
+    Args:
+        array_size (int): Size of array.
+        min_value (int): Min value.
+        max_value (int): Max value.
+        input_scale (int): Input scale.
+        output_scale (int): Output scale.
+        configuration (Optional[fhe.Configuration]): FHE configuration.
+    
+    Returns:
+        fhe.Circuit: The compiled circuit.
     """
     warnings.warn(
         "compile_cross_entropy_loss requires >16-bit TLUs and will likely fail to compile "
@@ -382,6 +509,13 @@ def precision_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.nda
         # Inside an FHE circuit
         # precision_pct = precision_score(enc_binary_preds, enc_binary_labels)
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        Any: Precision score.
     """
     divide = make_floor_divide(zero_result=0)
     tp = true_positives(y_preds, y_trues)
@@ -404,6 +538,13 @@ def recall_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarra
         # Inside an FHE circuit
         # recall_pct = recall_score(enc_binary_preds, enc_binary_labels)
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        Any: Recall score.
     """
     divide = make_floor_divide(zero_result=0)
     tp = true_positives(y_preds, y_trues)
@@ -429,6 +570,13 @@ def f1_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, L
         # Inside an FHE circuit
         # f1_pct = f1_score(enc_binary_preds, enc_binary_labels)
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        Any: F1 score.
     """
     divide = make_floor_divide(zero_result=0)
     precision = precision_score(y_preds, y_trues)
@@ -456,6 +604,13 @@ def r2_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, L
         # After decrypting test results
         score = r2_score([3, 5, 8], [3, 4, 9])
         ```
+    
+    Args:
+        y_preds (Union[np.ndarray, List[Any]]): Predictions.
+        y_trues (Union[np.ndarray, List[Any]]): True values.
+    
+    Returns:
+        Any: R2 score.
     """
     divide = make_floor_divide(zero_result=100)
     ss_res = euclidean_distance_squared(y_preds, y_trues)

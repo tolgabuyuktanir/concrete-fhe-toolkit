@@ -21,7 +21,7 @@ def compare(x: Any, y: Any) -> Any:
         y: right number in comparison.
 
     Returns:
-        Any: The return value.
+        Any: 1 if x > y, 0 if x == y, and -1 if x < y.
 
     Example:
         ```python
@@ -49,7 +49,7 @@ def compile_compare(
         configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled FHE circuit for sign-comparison.
 
     Example:
         ```python
@@ -77,10 +77,10 @@ def sign(x: Any) -> Any:
     """Return the sign of a number (1 if positive, -1 if negative, 0 if zero).
     
     Args:
-        x (Any): Description for x.
+        x (Any): The number to evaluate the sign of.
 
     Returns:
-        Any: The return value.
+        Any: 1 if positive, -1 if negative, 0 if zero.
 
     Example:
         ```python
@@ -105,7 +105,7 @@ def compile_sign(
         configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled FHE circuit returning the sign of the input.
 
     Example:
         ```python
@@ -133,7 +133,7 @@ def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
         zero_result (int): the result of zero division.
 
     Returns:
-        BinaryFunction: The return value.
+        BinaryFunction: A function that performs encrypted floor division.
 
     Example:
         ```python
@@ -168,7 +168,7 @@ def make_floor_divide_by_product(*, zero_result: int = 0) -> TernaryFunction:
         zero_result (int): the result of zero division.
 
     Returns:
-        TernaryFunction: The return value.
+        TernaryFunction: A function that computes numerator // (left * right).
 
     Example:
         ```python
@@ -206,7 +206,7 @@ def compile_floor_divide(
         configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled FHE circuit for floor division.
 
     Example:
         ```python
@@ -254,14 +254,14 @@ def compile_floor_divide_by_product(
     """Compile numerator // (left * right) for nonnegative bounded inputs.
     
     Args:
-        max_numerator (int): Description for max_numerator.
+        max_numerator (int): maximum numerator value you can send to circuit.
         max_left (int): maximum left number value you can send to circuit.
         max_right (int): maximum right number value you can send to circuit.
         zero_result (int): the result of zero division.
         configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled FHE circuit for floor division by product.
 
     Example:
         ```python

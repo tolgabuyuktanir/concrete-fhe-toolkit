@@ -24,10 +24,10 @@ def array_sum(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the sum of all elements in an encrypted array using a tournament reduction.
     
     Args:
-        elements (Union[np.ndarray, List[Any]]): Description for elements.
+        elements (Union[np.ndarray, List[Any]]): The input array or list of encrypted integers to sum.
 
     Returns:
-        Any: The return value.
+        Any: The computed encrypted sum of all elements in the array.
 
     Example:
         ```python
@@ -48,11 +48,11 @@ def array_scale(array: Union[np.ndarray, List[Any]],factor: int) -> Union[np.nda
     """Multiply every element of an encrypted array by a scalar constant.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
-        factor (int): Description for factor.
+        array (Union[np.ndarray, List[Any]]): The input array to scale.
+        factor (int): The scalar constant to multiply by.
 
     Returns:
-        Union[np.ndarray, List[Any]]: The return value.
+        Union[np.ndarray, List[Any]]: The scaled array.
 
     Example:
         ```python
@@ -67,11 +67,11 @@ def array_add(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, Lis
     """Perform element-wise addition of two encrypted arrays.
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): Description for array1.
-        array2 (Union[np.ndarray, List[Any]]): Description for array2.
+        array1 (Union[np.ndarray, List[Any]]): The first array.
+        array2 (Union[np.ndarray, List[Any]]): The second array.
 
     Returns:
-        Any: The return value.
+        Any: The element-wise sum of the two arrays.
 
     Example:
         ```python
@@ -86,11 +86,11 @@ def array_sub(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, Lis
     """Perform element-wise subtraction of two encrypted arrays.
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): Description for array1.
-        array2 (Union[np.ndarray, List[Any]]): Description for array2.
+        array1 (Union[np.ndarray, List[Any]]): The first array (minuend).
+        array2 (Union[np.ndarray, List[Any]]): The second array (subtrahend).
 
     Returns:
-        Any: The return value.
+        Any: The element-wise difference between the two arrays.
 
     Example:
         ```python
@@ -105,11 +105,11 @@ def array_multiply(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray
     """Perform element-wise multiplication of two encrypted arrays.
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): Description for array1.
-        array2 (Union[np.ndarray, List[Any]]): Description for array2.
+        array1 (Union[np.ndarray, List[Any]]): The first array.
+        array2 (Union[np.ndarray, List[Any]]): The second array.
 
     Returns:
-        Any: The return value.
+        Any: The element-wise product of the two arrays.
 
     Example:
         ```python
@@ -126,12 +126,12 @@ def array_slice(array: Union[np.ndarray, List[Any]], begin_index: Any, end_index
     """Slice an encrypted array (return elements from begin_index to end_index - 1).
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
-        begin_index (Any): Description for begin_index.
-        end_index (Any): Description for end_index.
+        array (Union[np.ndarray, List[Any]]): The array to slice.
+        begin_index (Any): The starting index (inclusive).
+        end_index (Any): The ending index (exclusive).
 
     Returns:
-        Any: The return value.
+        Any: The sliced array.
 
     Example:
         ```python
@@ -155,11 +155,11 @@ def array_all_equal(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarr
     """Check if two encrypted arrays are identical (returns 1 or 0).
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): Description for array1.
-        array2 (Union[np.ndarray, List[Any]]): Description for array2.
+        array1 (Union[np.ndarray, List[Any]]): The first array to compare.
+        array2 (Union[np.ndarray, List[Any]]): The second array to compare.
 
     Returns:
-        Any: The return value.
+        Any: 1 if all elements are equal, 0 otherwise.
 
     Example:
         ```python
@@ -180,11 +180,11 @@ def make_compare_swap(
     """Create an ascending compare-swap function for bounded encrypted integers.
     
     Args:
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
 
     Returns:
-        BinaryScalarFunction: The return value.
+        BinaryScalarFunction: A function that sorts two encrypted values.
 
     Example:
         ```python
@@ -222,13 +222,13 @@ def make_sort(
     """Create a fixed-size bitonic sorting network.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        descending (bool): Description for descending.
+        size (int): The number of elements to sort. Must be a power of two.
+        min_value (int): The minimum value possible in the array.
+        max_value (int): The maximum value possible in the array.
+        descending (bool): Whether to sort in descending order instead of ascending.
 
     Returns:
-        UnaryArrayFunction: The return value.
+        UnaryArrayFunction: A function that sorts the input array.
 
     Example:
         ```python
@@ -317,12 +317,12 @@ def make_minimum(
     """Create a tournament reduction that returns the minimum value.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
 
     Returns:
-        UnaryArrayFunction: The return value.
+        UnaryArrayFunction: A function that returns the minimum value.
 
     Example:
         ```python
@@ -343,12 +343,12 @@ def make_maximum(
     """Create a tournament reduction that returns the maximum value.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
 
     Returns:
-        UnaryArrayFunction: The return value.
+        UnaryArrayFunction: A function that returns the maximum value.
 
     Example:
         ```python
@@ -437,13 +437,13 @@ def make_argmin(
     """Create an argmin reduction with deterministic tie handling.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        tie_break (TieBreak): Description for tie_break.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        tie_break (TieBreak): Which index to return if multiple elements are equal to the minimum.
 
     Returns:
-        UnaryArrayFunction: The return value.
+        UnaryArrayFunction: A function that returns the index of the minimum value.
 
     Example:
         ```python
@@ -466,13 +466,13 @@ def make_argmax(
     """Create an argmax reduction with deterministic tie handling.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        tie_break (TieBreak): Description for tie_break.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        tie_break (TieBreak): Which index to return if multiple elements are equal to the maximum.
 
     Returns:
-        UnaryArrayFunction: The return value.
+        UnaryArrayFunction: A function that returns the index of the maximum value.
 
     Example:
         ```python
@@ -494,12 +494,12 @@ def compile_compare_swap(
     """Compile an ascending compare-swap circuit.
     
     Args:
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        min_value (int): The minimum possible value.
+        max_value (int): The maximum possible value.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled compare-swap circuit.
 
     Example:
         ```python
@@ -547,14 +547,14 @@ def compile_sort(
     """Compile a fixed-size bitonic sorting circuit.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        descending (bool): Description for descending.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements to sort. Must be a power of two.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        descending (bool): Whether to sort in descending order.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled sorting circuit.
 
     Example:
         ```python
@@ -585,13 +585,13 @@ def compile_minimum(
     """Compile a minimum reduction circuit.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled minimum reduction circuit.
 
     Example:
         ```python
@@ -617,13 +617,13 @@ def compile_maximum(
     """Compile a maximum reduction circuit.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled maximum reduction circuit.
 
     Example:
         ```python
@@ -650,14 +650,14 @@ def compile_argmin(
     """Compile an argmin reduction circuit.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        tie_break (TieBreak): Description for tie_break.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        tie_break (TieBreak): Which index to return if multiple elements are equal to the minimum.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled argmin reduction circuit.
 
     Example:
         ```python
@@ -689,14 +689,14 @@ def compile_argmax(
     """Compile an argmax reduction circuit.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        tie_break (TieBreak): Description for tie_break.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        tie_break (TieBreak): Which index to return if multiple elements are equal to the maximum.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled argmax reduction circuit.
 
     Example:
         ```python
@@ -725,12 +725,12 @@ def make_array_set(
     """Create a function for oblivious array writing.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
 
     Returns:
-        Callable: The return value.
+        Callable: A function that updates an element in the encrypted array obliviously.
 
     Example:
         ```python
@@ -747,12 +747,12 @@ def make_array_set(
         """Oblivious write: return a copy with array[index] replaced by value.
         
         Args:
-            array (Union[np.ndarray, List[Any]]): Description for array.
-            index (Any): Description for index.
-            value (Any): Description for value.
+            array (Union[np.ndarray, List[Any]]): The input array.
+            index (Any): The encrypted index to update.
+            value (Any): The new encrypted value to write.
 
         Returns:
-            Union[np.ndarray, List[Any]]: The return value.
+            Union[np.ndarray, List[Any]]: The updated array.
 
         Example:
             ```python
@@ -783,13 +783,13 @@ def compile_array_set(
     """Compile an FHE circuit for oblivious array writing.
     
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled circuit for oblivious array writing.
 
     Example:
         ```python
@@ -819,10 +819,10 @@ def array_cumsum(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[
     """Return the running prefix sums of an encrypted array.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
+        array (Union[np.ndarray, List[Any]]): The input array to compute prefix sums over.
 
     Returns:
-        Union[np.ndarray, List[Any]]: The return value.
+        Union[np.ndarray, List[Any]]: The array of prefix sums.
 
     Example:
         ```python
@@ -843,10 +843,10 @@ def array_reverse(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List
     """Return the array with its (public) element order reversed.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
+        array (Union[np.ndarray, List[Any]]): The input array to reverse.
 
     Returns:
-        Union[np.ndarray, List[Any]]: The return value.
+        Union[np.ndarray, List[Any]]: The reversed array.
 
     Example:
         ```python
@@ -862,10 +862,10 @@ def array_concat(*arrays: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, Lis
     """Concatenate encrypted arrays along their public length.
     
     Args:
-        *arrays (Union[np.ndarray, List[Any]]): Description for arrays.
+        *arrays (Union[np.ndarray, List[Any]]): A variable number of arrays to concatenate.
 
     Returns:
-        Union[np.ndarray, List[Any]]: The return value.
+        Union[np.ndarray, List[Any]]: The concatenated array.
 
     Example:
         ```python
@@ -896,14 +896,14 @@ def make_top_k(
     Note: Requires `size` to be a power of two (2, 4, 8...) due to the underlying sort.
     
     Args:
-        size (int): Description for size.
-        k (int): Description for k.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        largest (bool): Description for largest.
+        size (int): The number of elements in the array. Must be a power of two.
+        k (int): The number of top elements to return.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        largest (bool): Whether to return the largest values (True) or smallest values (False).
 
     Returns:
-        UnaryArrayFunction: The return value.
+        UnaryArrayFunction: A function that returns the top k values of the input array.
 
     Example:
         ```python
@@ -941,15 +941,15 @@ def compile_top_k(
     """Compile a top-k reduction circuit.
     
     Args:
-        size (int): Description for size.
-        k (int): Description for k.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        largest (bool): Description for largest.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements in the array. Must be a power of two.
+        k (int): The number of top elements to return.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        largest (bool): Whether to return the largest values (True) or smallest values (False).
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled top-k reduction circuit.
 
     Example:
         ```python
@@ -974,13 +974,13 @@ def make_array_pad(
     """Create a fixed-size array padding function.
 
     Args:
-        size (int): Description for size.
-        target_size (int): Description for target_size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        size (int): The initial number of elements in the array.
+        target_size (int): The desired size of the array after padding.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
 
     Returns:
-        Callable: The return value.
+        Callable: A function that pads the input array with zeros.
 
     Example:
         ```python
@@ -999,10 +999,10 @@ def make_array_pad(
     def array_pad(array: Union[np.ndarray, List[Any]]) -> Any:
         """Pad an encrypted array with zeros up to the specified target size.
         Args:
-            array (Union[np.ndarray, List[Any]]): Description for array.
+            array (Union[np.ndarray, List[Any]]): The input array to pad.
 
         Returns:
-            Any: The return value.
+            Any: The zero-padded array.
 
         """
         raw_list = list(array)
@@ -1022,14 +1022,14 @@ def compile_array_pad(
     """Compile a fixed-size array padding circuit.
 
     Args:
-        size (int): Description for size.
-        target_size (int): Description for target_size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The initial number of elements in the array.
+        target_size (int): The desired size of the array after padding.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled padding circuit.
 
     Example:
         ```python
@@ -1054,13 +1054,13 @@ def make_array_index_of(
     """Create a first-index-of search function for bounded encrypted arrays.
 
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        missing_result (Optional[int]): Description for missing_result.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        missing_result (Optional[int]): The value to return if the target is not found (default: size).
 
     Returns:
-        Callable: The return value.
+        Callable: A function that returns the index of a specified value.
 
     Example:
         ```python
@@ -1077,11 +1077,11 @@ def make_array_index_of(
     def array_index_of(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Return the first index holding value, or missing_result (default size).
         Args:
-            array (Union[np.ndarray, List[Any]]): Description for array.
-            value (Any): Description for value.
+            array (Union[np.ndarray, List[Any]]): The input array to search.
+            value (Any): The target value to find.
 
         Returns:
-            Any: The return value.
+            Any: The encrypted index of the target value.
 
         """
         tensor = _ensure_tensor(array)
@@ -1122,14 +1122,14 @@ def compile_array_index_of(
     """Compile a first-index-of search circuit.
 
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        missing_result (Optional[int]): Description for missing_result.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        missing_result (Optional[int]): The value to return if the target is not found (default: size).
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled search circuit.
 
     Example:
         ```python
@@ -1158,12 +1158,12 @@ def make_array_count(
     """Create a value-counting function for bounded encrypted arrays.
 
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
 
     Returns:
-        Callable: The return value.
+        Callable: A function that counts occurrences of a value.
 
     Example:
         ```python
@@ -1179,11 +1179,11 @@ def make_array_count(
     def array_count(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Count occurrences of a specific value in an encrypted array.
         Args:
-            array (Union[np.ndarray, List[Any]]): Description for array.
-            value (Any): Description for value.
+            array (Union[np.ndarray, List[Any]]): The input array.
+            value (Any): The value to count.
 
         Returns:
-            Any: The return value.
+            Any: The encrypted count of occurrences.
 
         """
         count = np.sum(_ensure_tensor(array) == value)
@@ -1201,13 +1201,13 @@ def compile_array_count(
     """Compile a value-counting circuit.
 
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled counting circuit.
 
     Example:
         ```python
@@ -1236,12 +1236,12 @@ def make_array_contains(
     """Create a membership-test function for bounded encrypted arrays.
 
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
 
     Returns:
-        Callable: The return value.
+        Callable: A function that tests whether a value exists in the array.
 
     Example:
         ```python
@@ -1257,11 +1257,11 @@ def make_array_contains(
     def array_contains(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Check if an encrypted array contains a specific target value (returns 1 or 0).
         Args:
-            array (Union[np.ndarray, List[Any]]): Description for array.
-            value (Any): Description for value.
+            array (Union[np.ndarray, List[Any]]): The input array to search.
+            value (Any): The target value to search for.
 
         Returns:
-            Any: The return value.
+            Any: 1 if the value exists in the array, 0 otherwise.
 
         """
         contains = np.max(_ensure_tensor(array) == value)
@@ -1279,13 +1279,13 @@ def compile_array_contains(
     """Compile a membership-test circuit.
 
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled membership-test circuit.
 
     Example:
         ```python
@@ -1314,12 +1314,12 @@ def make_array_index(
     """Create an oblivious-read function for bounded encrypted arrays.
 
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
 
     Returns:
-        Callable: The return value.
+        Callable: A function that obliviously reads an element from the array at a given index.
 
     Example:
         ```python
@@ -1335,11 +1335,11 @@ def make_array_index(
     def array_index(array: Union[np.ndarray, List[Any]], index: Any) -> Any:
         """Oblivious read: return array[index] without revealing the encrypted index.
         Args:
-            array (Union[np.ndarray, List[Any]]): Description for array.
-            index (Any): Description for index.
+            array (Union[np.ndarray, List[Any]]): The input array to read from.
+            index (Any): The encrypted index to read.
 
         Returns:
-            Any: The return value.
+            Any: The encrypted value at the given index.
 
         """
         tensor = _ensure_tensor(array)
@@ -1362,13 +1362,13 @@ def compile_array_index(
     """Compile an oblivious-read circuit.
 
     Args:
-        size (int): Description for size.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
-        configuration (Optional[fhe.Configuration]): Description for configuration.
+        size (int): The number of elements in the array.
+        min_value (int): The minimum possible value in the array.
+        max_value (int): The maximum possible value in the array.
+        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
 
     Returns:
-        fhe.Circuit: The return value.
+        fhe.Circuit: The compiled oblivious-read circuit.
 
     Example:
         ```python

@@ -63,12 +63,12 @@ def make_floor(
     """Create floor(value / scale) for encrypted scaled integers.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python
@@ -93,14 +93,14 @@ def compile_floor(
     """Compile floor(value / scale) for encrypted scaled integers.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
+        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
+        configuration: Optional Concrete FHE configuration to use during compilation.
 
     Returns:
-        The computed value or circuit.
+        A compiled Concrete FHE circuit that performs the operation.
 
     Example:
         ```python
@@ -135,12 +135,12 @@ def make_ceil(
     """Create ceil(value / scale) for encrypted scaled integers.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python
@@ -165,14 +165,14 @@ def compile_ceil(
     """Compile ceil(value / scale) for encrypted scaled integers.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
+        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
+        configuration: Optional Concrete FHE configuration to use during compilation.
 
     Returns:
-        The computed value or circuit.
+        A compiled Concrete FHE circuit that performs the operation.
 
     Example:
         ```python
@@ -207,12 +207,12 @@ def make_trunc(
     """Create trunc(value / scale) toward zero for encrypted scaled integers.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python
@@ -237,14 +237,14 @@ def compile_trunc(
     """Compile trunc(value / scale) toward zero for encrypted scaled integers.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
+        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
+        configuration: Optional Concrete FHE configuration to use during compilation.
 
     Returns:
-        The computed value or circuit.
+        A compiled Concrete FHE circuit that performs the operation.
 
     Example:
         ```python
@@ -279,12 +279,12 @@ def make_round(
     """Create round(value / scale) using Python's ties-to-even rule.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python
@@ -309,14 +309,14 @@ def compile_round(
     """Compile round(value / scale) using Python's ties-to-even rule.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
+        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
+        configuration: Optional Concrete FHE configuration to use during compilation.
 
     Returns:
-        The computed value or circuit.
+        A compiled Concrete FHE circuit that performs the operation.
 
     Example:
         ```python
@@ -351,12 +351,12 @@ def make_floor_ceil(
     """Create a function returning both floor and ceil for a scaled integer.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python
@@ -388,14 +388,14 @@ def compile_floor_ceil(
     """Compile a circuit returning both floor and ceil for a scaled integer.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
+        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
+        configuration: Optional Concrete FHE configuration to use during compilation.
 
     Returns:
-        The computed value or circuit.
+        A compiled Concrete FHE circuit that performs the operation.
 
     Example:
         ```python
@@ -443,14 +443,14 @@ def make_rescale(
     """Create rescaling from one fixed-point scale to another.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        rounding: The rounding parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        input_scale: The fixed-point scaling factor of the input.
+        output_scale: The desired fixed-point scaling factor for the output.
+        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python
@@ -484,16 +484,16 @@ def compile_rescale(
     """Compile rescaling from one fixed-point scale to another.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        rounding: The rounding parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        input_scale: The fixed-point scaling factor of the input.
+        output_scale: The desired fixed-point scaling factor for the output.
+        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
+        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
+        configuration: Optional Concrete FHE configuration to use during compilation.
 
     Returns:
-        The computed value or circuit.
+        A compiled Concrete FHE circuit that performs the operation.
 
     Example:
         ```python
@@ -536,13 +536,13 @@ def make_round_to_multiple(
     """Create quantization of an encrypted integer to the nearest multiple of step.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        step: The step parameter.
-        rounding: The rounding parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        step: The integer step size to which the input will be quantized.
+        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python
@@ -577,15 +577,15 @@ def compile_round_to_multiple(
     """Compile quantization of an encrypted integer to the nearest multiple of step.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        step: The step parameter.
-        rounding: The rounding parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        step: The integer step size to which the input will be quantized.
+        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
+        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
+        configuration: Optional Concrete FHE configuration to use during compilation.
 
     Returns:
-        The computed value or circuit.
+        A compiled Concrete FHE circuit that performs the operation.
 
     Example:
         ```python
@@ -633,12 +633,12 @@ def make_modf(
     yields (-7, -3)).
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python
@@ -675,14 +675,14 @@ def compile_modf(
     """Compile a circuit returning (fractional_part, integer_part) like math.modf.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
+        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
+        configuration: Optional Concrete FHE configuration to use during compilation.
 
     Returns:
-        The computed value or circuit.
+        A compiled Concrete FHE circuit that performs the operation.
 
     Example:
         ```python
@@ -737,11 +737,11 @@ def make_fixed_point_multiply(
     primitive for chaining fixed-point math without scale growth.
 
     Args:
-        scale: The scale parameter.
-        rounding: The rounding parameter.
+        scale: The scaling factor applied to the fixed-point representation.
+        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python
@@ -778,14 +778,14 @@ def compile_fixed_point_multiply(
     """Compile rescaled multiplication of two scaled encrypted values.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        scale: The scale parameter.
-        rounding: The rounding parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum expected value in the input domain.
+        max_input: The maximum expected value in the input domain.
+        scale: The scaling factor applied to the fixed-point representation.
+        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
+        configuration: Optional Concrete FHE configuration to use during compilation.
 
     Returns:
-        The computed value or circuit.
+        A compiled Concrete FHE circuit that performs the operation.
 
     Example:
         ```python
@@ -816,10 +816,10 @@ def make_encode_fixed_point(scale: int = 10) -> Callable[[float], int]:
     """Create a client-side helper to encode a clear real value as a scaled integer.
 
     Args:
-        scale: The scale parameter.
+        scale: The scaling factor applied to the fixed-point representation.
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python
@@ -841,10 +841,10 @@ def make_decode_fixed_point(scale: int = 10) -> Callable[[float], int]:
     """Create a client-side helper to decode a decrypted scaled integer back to a real value.
 
     Args:
-        scale: The scale parameter.
+        scale: The scaling factor applied to the fixed-point representation.
 
     Returns:
-        The computed value or circuit.
+        A callable function that computes the operation over the given domain.
 
     Example:
         ```python

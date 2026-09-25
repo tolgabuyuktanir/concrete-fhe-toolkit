@@ -19,39 +19,39 @@ from .bits import (
 
 
 def _validate_width(name: str, value: int) -> int:
-    """Execute _validate_width.
+    """Validate that the given width is a positive integer.
     
     Args:
-        name: The name parameter.
-        value: The value parameter.
+        name: The name of the width parameter being validated.
+        value: The width value to be validated.
     
     Returns:
-        The result.
+        The validated integer width, constrained to be at least 1.
     """
     return validate_integer(name, value, minimum=1)
 
 
 def _validate_fractional_bits(value: int) -> int:
-    """Execute _validate_fractional_bits.
+    """Validate that the number of fractional bits is a non-negative integer.
     
     Args:
-        value: The value parameter.
+        value: The number of fractional bits to validate.
     
     Returns:
-        The result.
+        The validated integer number of fractional bits, constrained to be at least 0.
     """
     return validate_integer("fractional_bits", value, minimum=0)
 
 
 def _validate_zero_result(zero_result: int, quotient_width: int) -> int:
-    """Execute _validate_zero_result.
+    """Validate that the zero fallback result fits in the specified quotient width.
     
     Args:
-        zero_result: The zero_result parameter.
-        quotient_width: The quotient_width parameter.
+        zero_result: The clear fallback value to return when dividing by zero.
+        quotient_width: The bit width of the quotient.
     
     Returns:
-        The result.
+        The validated integer zero result.
     """
     normalized = validate_integer("zero_result", zero_result, minimum=0)
     if normalized >= (1 << quotient_width):
@@ -60,14 +60,14 @@ def _validate_zero_result(zero_result: int, quotient_width: int) -> int:
 
 
 def _as_nonempty_bits(name: str, bits: Iterable[Any]) -> tuple[Any, ...]:
-    """Execute _as_nonempty_bits.
+    """Convert an iterable of bits to a non-empty tuple.
     
     Args:
-        name: The name parameter.
-        bits: The bits parameter.
+        name: The name of the parameter being converted, used for error messages.
+        bits: An iterable containing the sequence of bits.
     
     Returns:
-        The result.
+        A tuple of bits guaranteed to contain at least one element.
     """
     normalized = tuple(bits)
     if not normalized:
@@ -80,15 +80,15 @@ def _restoring_divide_bits(
     denominator_bits: tuple[Any, ...],
     quotient_width: int,
 ) -> tuple[tuple[Any, ...], tuple[Any, ...]]:
-    """Execute _restoring_divide_bits.
+    """Perform restoring division on binary represented values.
     
     Args:
-        numerator_bits: The numerator_bits parameter.
-        denominator_bits: The denominator_bits parameter.
-        quotient_width: The quotient_width parameter.
+        numerator_bits: The bits of the numerator in little-endian order.
+        denominator_bits: The bits of the denominator in little-endian order.
+        quotient_width: The bit width of the output quotient.
     
     Returns:
-        The result.
+        A tuple containing the quotient bits and remainder bits respectively.
     """
     remainder_width = max(quotient_width + 1, len(denominator_bits))
     remainder: list[Any] = [0] * (remainder_width)
@@ -230,14 +230,14 @@ def make_unsigned_floor_divide(
     zero = _validate_zero_result(zero_result, q_width)
 
     def divide(numerator: Any, denominator: Any) -> Any:
-        """Execute divide.
+        """Execute the unsigned floor division circuit on inputs.
         
         Args:
-            numerator: The numerator parameter.
-            denominator: The denominator parameter.
+            numerator: The scalar integer numerator input to be divided.
+            denominator: The scalar integer denominator input to divide by.
         
         Returns:
-            The result.
+            The unsigned integer result of the floor division.
         """
         numerator_bits = integer_to_bits(numerator, n_width)
         denominator_bits = integer_to_bits(denominator, d_width)
@@ -286,14 +286,14 @@ def make_fixed_point_divide(
     zero = _validate_zero_result(zero_result, q_width)
 
     def divide(numerator: Any, denominator: Any) -> Any:
-        """Execute divide.
+        """Execute the fixed-point division circuit on inputs.
         
         Args:
-            numerator: The numerator parameter.
-            denominator: The denominator parameter.
+            numerator: The scalar integer numerator input to be divided.
+            denominator: The scalar integer denominator input to divide by.
         
         Returns:
-            The result.
+            The unsigned integer fixed-point division result.
         """
         numerator_bits = integer_to_bits(numerator, n_width)
         denominator_bits = integer_to_bits(denominator, d_width)
@@ -313,14 +313,14 @@ def _division_inputset(
     numerator_width: int,
     denominator_width: int,
 ) -> list[tuple[int, int]]:
-    """Execute _division_inputset.
+    """Generate a representative input set for division compilation.
     
     Args:
-        numerator_width: The numerator_width parameter.
-        denominator_width: The denominator_width parameter.
+        numerator_width: The bit width of the numerator.
+        denominator_width: The bit width of the denominator.
     
     Returns:
-        The result.
+        A sorted list of numerator and denominator tuples for use as an input set.
     """
     numerator_maximum = (1 << numerator_width) - 1
     denominator_maximum = (1 << denominator_width) - 1
@@ -470,14 +470,14 @@ def make_unsigned_mod(
     zero = _validate_zero_result(zero_result, d_width)
 
     def modulo(numerator: Any, denominator: Any) -> Any:
-        """Execute modulo.
+        """Execute the unsigned modulo circuit on inputs.
         
         Args:
-            numerator: The numerator parameter.
-            denominator: The denominator parameter.
+            numerator: The scalar integer numerator input.
+            denominator: The scalar integer denominator input to divide by.
         
         Returns:
-            The result.
+            The remainder of the unsigned division.
         """
         numerator_bits = integer_to_bits(numerator, n_width)
         denominator_bits = integer_to_bits(denominator, d_width)

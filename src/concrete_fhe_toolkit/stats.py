@@ -20,10 +20,10 @@ def array_mean(array: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the floor mean of an encrypted array.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements to average.
 
     Returns:
-        Any: The return value.
+        Any: The integer floor mean of the elements.
 
     Example:
         ```python
@@ -39,10 +39,10 @@ def array_variance(array: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the floor variance of an encrypted array.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
 
     Returns:
-        Any: The return value.
+        Any: The integer floor variance of the elements.
 
     Example:
         ```python
@@ -65,12 +65,12 @@ def array_std(array: Union[np.ndarray, List[Any]], min_value: int, max_value: in
     is built over the worst-case variance for that range.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
+        min_value (int): The lower bound of the array elements.
+        max_value (int): The upper bound of the array elements.
 
     Returns:
-        Any: The return value.
+        Any: The integer standard deviation of the elements.
 
     Example:
         ```python
@@ -93,11 +93,11 @@ def array_covariance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndar
     """Calculate the floor covariance of two encrypted arrays.
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): Description for array1.
-        array2 (Union[np.ndarray, List[Any]]): Description for array2.
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array or list of elements.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array or list of elements.
 
     Returns:
-        Any: The return value.
+        Any: The integer floor covariance of the two arrays.
 
     Example:
         ```python
@@ -120,10 +120,10 @@ def array_max(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Find the maximum value in an encrypted array using a tournament reduction.
     
     Args:
-        elements (Union[np.ndarray, List[Any]]): Description for elements.
+        elements (Union[np.ndarray, List[Any]]): The encrypted array or list of elements to find the maximum of.
 
     Returns:
-        Any: The return value.
+        Any: The maximum value found in the array.
 
     Example:
         ```python
@@ -139,10 +139,10 @@ def array_min(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Find the minimum value in an encrypted array using a tournament reduction.
     
     Args:
-        elements (Union[np.ndarray, List[Any]]): Description for elements.
+        elements (Union[np.ndarray, List[Any]]): The encrypted array or list of elements to find the minimum of.
 
     Returns:
-        Any: The return value.
+        Any: The minimum value found in the array.
 
     Example:
         ```python
@@ -159,10 +159,10 @@ def array_range(array: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the range (max - min) of an encrypted array.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
 
     Returns:
-        Any: The return value.
+        Any: The difference between the maximum and minimum values in the array.
 
     Example:
         ```python
@@ -178,11 +178,11 @@ def array_count_greater(array: Union[np.ndarray, List[Any]], threshold: Any) -> 
     """Count how many elements are strictly greater than a threshold.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
-        threshold (Any): Description for threshold.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements to check.
+        threshold (Any): The value to compare each element against.
 
     Returns:
-        Any: The return value.
+        Any: The count of elements that are strictly greater than the threshold.
 
     Example:
         ```python
@@ -201,12 +201,12 @@ def array_median(array: Union[np.ndarray, List[Any]], min_value: int, max_value:
     of two.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
+        min_value (int): The lower bound of the array elements.
+        max_value (int): The upper bound of the array elements.
 
     Returns:
-        Any: The return value.
+        Any: The median value of the array.
 
     Example:
         ```python
@@ -234,13 +234,13 @@ def array_percentile(array: Union[np.ndarray, List[Any]], q: int, min_value: int
     of two.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
-        q (int): Description for q.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
+        q (int): The percentile to compute, between 0 and 100 inclusive.
+        min_value (int): The lower bound of the array elements.
+        max_value (int): The upper bound of the array elements.
 
     Returns:
-        Any: The return value.
+        Any: The value at the q-th percentile.
 
     Example:
         ```python
@@ -266,12 +266,12 @@ def array_histogram(array: Union[np.ndarray, List[Any]], min_value: int, max_val
     """Count occurrences of every value in [min_value, max_value] (bincount).
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
+        min_value (int): The lower bound of the array elements.
+        max_value (int): The upper bound of the array elements.
 
     Returns:
-        Union[np.ndarray, List[Any]]: The return value.
+        Union[np.ndarray, List[Any]]: An array containing the count of occurrences for each value from min_value to max_value.
 
     Example:
         ```python
@@ -296,12 +296,12 @@ def array_mode(array: Union[np.ndarray, List[Any]], min_value: int, max_value: i
     """Return the most frequent value (smallest value wins ties).
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
-        min_value (int): Description for min_value.
-        max_value (int): Description for max_value.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
+        min_value (int): The lower bound of the array elements.
+        max_value (int): The upper bound of the array elements.
 
     Returns:
-        Any: The return value.
+        Any: The most frequent value in the array.
 
     Example:
         ```python
@@ -323,12 +323,12 @@ def array_normalize(array: Union[np.ndarray, List[Any]], mean: Any, scale: int) 
     """Return (x - mean) * scale for every element (z-score style affine transform).
     
     Args:
-        array (Union[np.ndarray, List[Any]]): Description for array.
-        mean (Any): Description for mean.
-        scale (int): Description for scale.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements to normalize.
+        mean (Any): The mean value to subtract from each element.
+        scale (int): The scaling factor to multiply each centered element by.
 
     Returns:
-        Union[np.ndarray, List[Any]]: The return value.
+        Union[np.ndarray, List[Any]]: A new array containing the normalized elements.
 
     Example:
         ```python

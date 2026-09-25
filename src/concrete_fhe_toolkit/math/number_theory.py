@@ -47,11 +47,11 @@ def make_gcd(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
     """Create math.gcd for two encrypted bounded integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -74,13 +74,13 @@ def compile_gcd(
     """Compile math.gcd for two encrypted bounded integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -114,11 +114,11 @@ def make_lcm(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
     """Create math.lcm for two encrypted bounded integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -141,13 +141,13 @@ def compile_lcm(
     """Compile math.lcm for two encrypted bounded integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -184,11 +184,11 @@ def make_is_coprime(
     """Create a predicate returning 1 when gcd(left, right) == 1.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -215,13 +215,13 @@ def compile_is_coprime(
     """Compile a predicate returning 1 for coprime encrypted integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -266,14 +266,14 @@ def make_is_divisible(
     """Create divisibility testing with explicit denominator-zero behavior.
 
     Args:
-        min_numerator: The min_numerator parameter.
-        max_numerator: The max_numerator parameter.
-        min_denominator: The min_denominator parameter.
-        max_denominator: The max_denominator parameter.
-        zero_result: The zero_result parameter.
+        min_numerator: The lower bound for the numerator.
+        max_numerator: The upper bound for the numerator.
+        min_denominator: The lower bound for the denominator.
+        max_denominator: The upper bound for the denominator.
+        zero_result: The value to return when the denominator is zero.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -318,16 +318,16 @@ def compile_is_divisible(
     """Compile encrypted divisibility testing.
 
     Args:
-        min_numerator: The min_numerator parameter.
-        max_numerator: The max_numerator parameter.
-        min_denominator: The min_denominator parameter.
-        max_denominator: The max_denominator parameter.
-        zero_result: The zero_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_numerator: The lower bound for the numerator.
+        max_numerator: The upper bound for the numerator.
+        min_denominator: The lower bound for the denominator.
+        max_denominator: The upper bound for the denominator.
+        zero_result: The value to return when the denominator is zero.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -369,10 +369,10 @@ def make_isqrt(max_value: int) -> UnaryFunction:
     """Create math.isqrt for encrypted input in [0, max_value].
 
     Args:
-        max_value: The max_value parameter.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -396,12 +396,12 @@ def compile_isqrt(
     """Compile math.isqrt for encrypted input in [0, max_value].
 
     Args:
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -428,11 +428,11 @@ def make_is_even(min_value: int = 0, max_value: int = 15) -> UnaryFunction:
     """Create a predicate returning 1 for even encrypted integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -457,13 +457,13 @@ def compile_is_even(
     """Compile a predicate returning 1 for even encrypted integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -494,11 +494,11 @@ def make_is_odd(min_value: int = 0, max_value: int = 15) -> UnaryFunction:
     """Create a predicate returning 1 for odd encrypted integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -523,13 +523,13 @@ def compile_is_odd(
     """Compile a predicate returning 1 for odd encrypted integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -574,11 +574,11 @@ def make_is_prime(min_value: int = 0, max_value: int = 100) -> UnaryFunction:
     """Create a predicate returning 1 for prime encrypted integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -603,13 +603,13 @@ def compile_is_prime(
     """Compile a predicate returning 1 for prime encrypted integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -657,11 +657,11 @@ def make_totient(min_value: int = 0, max_value: int = 100) -> UnaryFunction:
     """Create Euler's totient for encrypted bounded integers (0 for n <= 0).
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -686,13 +686,13 @@ def compile_totient(
     """Compile Euler's totient for encrypted bounded integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -730,11 +730,11 @@ def make_next_prime(min_value: int = 0, max_value: int = 100) -> UnaryFunction:
     """Create the smallest prime strictly greater than an encrypted integer.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -759,13 +759,13 @@ def compile_next_prime(
     """Compile the smallest prime strictly greater than an encrypted integer.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -810,12 +810,12 @@ def make_mod_inverse(
     the value is not coprime with the modulus.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        invalid_result: The invalid_result parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        invalid_result: The value to return when the result is mathematically undefined.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -844,14 +844,14 @@ def compile_mod_inverse(
     """Compile the modular inverse of value mod modulus for encrypted inputs.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        invalid_result: The value to return when the result is mathematically undefined.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -890,11 +890,11 @@ def make_hypot(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
     """Create round(hypot(x, y)) for two encrypted bounded integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -921,13 +921,13 @@ def compile_hypot(
     """Compile round(hypot(x, y)) for two encrypted bounded integers.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -970,12 +970,12 @@ def make_ilogb(
     """Create floor(log2(|x|)) for encrypted integers; invalid_result handles x == 0.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        invalid_result: The invalid_result parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        invalid_result: The value to return when the result is mathematically undefined.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -1006,14 +1006,14 @@ def compile_ilogb(
     """Compile floor(log2(|x|)) for encrypted integers; invalid_result handles x == 0.
 
     Args:
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        invalid_result: The value to return when the result is mathematically undefined.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -1053,12 +1053,12 @@ def make_dist(size: int, min_value: int = 0, max_value: int = 15) -> BinaryFunct
     worst-case squared distance for those bounds.
 
     Args:
-        size: The size parameter.
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
+        size: The number of dimensions or coordinates.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -1110,14 +1110,14 @@ def compile_dist(
     """Compile round(Euclidean distance) between two encrypted coordinate arrays.
 
     Args:
-        size: The size parameter.
-        min_value: The min_value parameter.
-        max_value: The max_value parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        size: The number of dimensions or coordinates.
+        min_value: The lower bound of the input domain.
+        max_value: The upper bound of the input domain.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -1182,12 +1182,12 @@ def make_pow(
     require ``allow_large_lookup=True`` beyond small bounds.
 
     Args:
-        min_base: The min_base parameter.
-        max_base: The max_base parameter.
-        max_exponent: The max_exponent parameter.
+        min_base: The lower bound for the base.
+        max_base: The upper bound for the base.
+        max_exponent: The maximum possible exponent value.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python
@@ -1220,14 +1220,14 @@ def compile_pow(
     """Compile base**exponent for an encrypted base and encrypted exponent.
 
     Args:
-        min_base: The min_base parameter.
-        max_base: The max_base parameter.
-        max_exponent: The max_exponent parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_base: The lower bound for the base.
+        max_base: The upper bound for the base.
+        max_exponent: The maximum possible exponent value.
+        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
+        configuration: The compiler configuration for the FHE circuit.
 
     Returns:
-        The computed value or circuit.
+        The compiled FHE circuit or a callable function.
 
     Example:
         ```python

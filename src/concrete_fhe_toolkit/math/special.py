@@ -151,14 +151,14 @@ def make_sin(
     """Create scaled sin for encrypted fixed-point angles.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        angle_unit: The angle_unit parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        angle_unit: The unit of the angle, either 'radians' or 'degrees'.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -190,16 +190,16 @@ def compile_sin(
     """Compile scaled sin for encrypted fixed-point angles.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        angle_unit: The angle_unit parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        angle_unit: The unit of the angle, either 'radians' or 'degrees'.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -233,14 +233,14 @@ def make_cos(
     """Create scaled cos for encrypted fixed-point angles.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        angle_unit: The angle_unit parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        angle_unit: The unit of the angle, either 'radians' or 'degrees'.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -272,16 +272,16 @@ def compile_cos(
     """Compile scaled cos for encrypted fixed-point angles.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        angle_unit: The angle_unit parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        angle_unit: The unit of the angle, either 'radians' or 'degrees'.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -315,14 +315,14 @@ def make_tan(
     """Create scaled tan for encrypted fixed-point angles.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        angle_unit: The angle_unit parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        angle_unit: The unit of the angle, either 'radians' or 'degrees'.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -354,16 +354,16 @@ def compile_tan(
     """Compile scaled tan for encrypted fixed-point angles.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        angle_unit: The angle_unit parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        angle_unit: The unit of the angle, either 'radians' or 'degrees'.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -396,13 +396,13 @@ def make_exp(
     """Create scaled exp for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -433,15 +433,15 @@ def compile_exp(
     """Compile scaled exp for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -474,13 +474,13 @@ def make_expm1(
     """Create scaled expm1 for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -511,15 +511,15 @@ def compile_expm1(
     """Compile scaled expm1 for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -562,15 +562,15 @@ def make_log(
     """Create scaled log (natural by default, or any base); invalid_result handles x <= 0.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        base: The base parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        base: The logarithmic base (uses natural logarithm if None).
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -605,17 +605,17 @@ def compile_log(
     """Compile scaled log (natural by default, or any base); invalid_result handles x <= 0.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        base: The base parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        base: The logarithmic base (uses natural logarithm if None).
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -649,14 +649,14 @@ def make_log2(
     """Create scaled log2; invalid_result handles x <= 0 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -690,16 +690,16 @@ def compile_log2(
     """Compile scaled log2; invalid_result handles x <= 0 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -733,14 +733,14 @@ def make_log10(
     """Create scaled log10; invalid_result handles x <= 0 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -774,16 +774,16 @@ def compile_log10(
     """Compile scaled log10; invalid_result handles x <= 0 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -817,14 +817,14 @@ def make_log1p(
     """Create scaled log1p; invalid_result handles x <= -1 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -858,16 +858,16 @@ def compile_log1p(
     """Compile scaled log1p; invalid_result handles x <= -1 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -901,14 +901,14 @@ def make_sqrt(
     """Create scaled square root; invalid_result handles x < 0 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -942,16 +942,16 @@ def compile_sqrt(
     """Compile scaled square root; invalid_result handles x < 0 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -984,13 +984,13 @@ def make_erf(
     """Create scaled erf for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1021,15 +1021,15 @@ def compile_erf(
     """Compile scaled erf for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1062,13 +1062,13 @@ def make_erfc(
     """Create scaled erfc for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1099,15 +1099,15 @@ def compile_erfc(
     """Compile scaled erfc for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1140,13 +1140,13 @@ def make_tanh(
     """Create scaled tanh for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1177,15 +1177,15 @@ def compile_tanh(
     """Compile scaled tanh for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1218,13 +1218,13 @@ def make_sinh(
     """Create scaled sinh for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1255,15 +1255,15 @@ def compile_sinh(
     """Compile scaled sinh for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1296,13 +1296,13 @@ def make_cosh(
     """Create scaled cosh for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1333,15 +1333,15 @@ def compile_cosh(
     """Compile scaled cosh for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1374,13 +1374,13 @@ def make_sigmoid(
     """Create scaled logistic sigmoid for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1411,15 +1411,15 @@ def compile_sigmoid(
     """Compile scaled logistic sigmoid for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1457,14 +1457,14 @@ def make_asin(
     """Create scaled arcsine (radians); invalid_result handles |x| > 1 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1498,16 +1498,16 @@ def compile_asin(
     """Compile scaled arcsine (radians); invalid_result handles |x| > 1 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1541,14 +1541,14 @@ def make_acos(
     """Create scaled arccosine (radians); invalid_result handles |x| > 1 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1582,16 +1582,16 @@ def compile_acos(
     """Compile scaled arccosine (radians); invalid_result handles |x| > 1 if needed.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1624,13 +1624,13 @@ def make_atan(
     """Create scaled arctangent (radians) for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1661,15 +1661,15 @@ def compile_atan(
     """Compile scaled arctangent (radians) for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1702,13 +1702,13 @@ def make_cbrt(
     """Create scaled cube root (sign-preserving) for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1739,15 +1739,15 @@ def compile_cbrt(
     """Compile scaled cube root (sign-preserving) for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1780,13 +1780,13 @@ def make_degrees(
     """Create scaled radians-to-degrees conversion for encrypted inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1817,15 +1817,15 @@ def compile_degrees(
     """Compile scaled radians-to-degrees conversion for encrypted inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1858,13 +1858,13 @@ def make_radians(
     """Create scaled degrees-to-radians conversion for encrypted inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1895,15 +1895,15 @@ def compile_radians(
     """Compile scaled degrees-to-radians conversion for encrypted inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1941,14 +1941,14 @@ def make_gamma(
     """Create scaled gamma; invalid_result handles the non-positive-integer poles.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -1982,16 +1982,16 @@ def compile_gamma(
     """Compile scaled gamma; invalid_result handles the non-positive-integer poles.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2025,14 +2025,14 @@ def make_lgamma(
     """Create scaled log-gamma; invalid_result handles the non-positive-integer poles.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2066,16 +2066,16 @@ def compile_lgamma(
     """Compile scaled log-gamma; invalid_result handles the non-positive-integer poles.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2125,13 +2125,13 @@ def make_atan2(
     """Create scaled quadrant-aware atan2(y, x) for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2157,15 +2157,15 @@ def compile_atan2(
     """Compile scaled quadrant-aware atan2(y, x) for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2204,13 +2204,13 @@ def make_asinh(
     """Create scaled inverse hyperbolic sine for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2241,15 +2241,15 @@ def compile_asinh(
     """Compile scaled inverse hyperbolic sine for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2283,14 +2283,14 @@ def make_acosh(
     """Create scaled inverse hyperbolic cosine; invalid_result handles x < 1.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2324,16 +2324,16 @@ def compile_acosh(
     """Compile scaled inverse hyperbolic cosine; invalid_result handles x < 1.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2367,14 +2367,14 @@ def make_atanh(
     """Create scaled inverse hyperbolic tangent; invalid_result handles |x| >= 1.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2408,16 +2408,16 @@ def compile_atanh(
     """Compile scaled inverse hyperbolic tangent; invalid_result handles |x| >= 1.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        invalid_result: The invalid_result parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        invalid_result: The encoded integer value to return for out-of-domain inputs.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2450,13 +2450,13 @@ def make_exp2(
     """Create scaled 2**x for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python
@@ -2487,15 +2487,15 @@ def compile_exp2(
     """Compile scaled 2**x for encrypted fixed-point inputs.
 
     Args:
-        min_input: The min_input parameter.
-        max_input: The max_input parameter.
-        input_scale: The input_scale parameter.
-        output_scale: The output_scale parameter.
-        allow_large_lookup: The allow_large_lookup parameter.
-        configuration: The configuration parameter.
+        min_input: The minimum encoded integer input value.
+        max_input: The maximum encoded integer input value.
+        input_scale: The scaling factor applied to the input value.
+        output_scale: The scaling factor applied to the output value.
+        allow_large_lookup: Whether to allow lookup tables exceeding the default size limit.
+        configuration: The FHE compiler configuration to use for circuit generation.
 
     Returns:
-        The computed value or circuit.
+        The generated lookup table function or compiled FHE circuit evaluating the function.
 
     Example:
     ```python

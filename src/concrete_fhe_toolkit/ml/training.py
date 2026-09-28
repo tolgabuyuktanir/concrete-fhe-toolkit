@@ -1,3 +1,4 @@
+"""Encrypted training and model updating utilities."""
 
 from typing import List, Any
 from concrete_fhe_toolkit.ml import matrix_transpose, dot_product

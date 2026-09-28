@@ -1,3 +1,5 @@
+"""Financial components for Concrete FHE toolkit."""
+
 from .core import (
     apply_rate,
     calculate_tax,

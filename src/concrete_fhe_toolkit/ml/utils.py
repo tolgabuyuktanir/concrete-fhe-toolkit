@@ -1,3 +1,5 @@
+"""Helper utilities for the machine learning module."""
+
 from .._compat import fhe
 from typing import List, Any, Union
 import numpy as np

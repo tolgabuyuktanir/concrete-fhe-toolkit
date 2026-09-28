@@ -1,3 +1,5 @@
+"""Core routines and execution logic for encrypted ML."""
+
 from .._utils import client_side_helper
 
 from typing import Any, List, Optional, Callable, Union

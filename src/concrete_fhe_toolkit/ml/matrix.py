@@ -1,3 +1,5 @@
+"""Encrypted matrix operations and linear algebra."""
+
 from typing import Any, List, Union
 import numpy as np
 

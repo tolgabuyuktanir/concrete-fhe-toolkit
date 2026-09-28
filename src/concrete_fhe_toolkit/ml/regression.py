@@ -1,3 +1,5 @@
+"""Linear and logistic regression implementations over FHE."""
+
 from typing import Any
 """Regression task namespace: models, trainers, and metrics.
 

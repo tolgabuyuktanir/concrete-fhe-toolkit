@@ -1,3 +1,5 @@
+"""Encrypted transaction processing and settlement logic."""
+
 from typing import Any
 from concrete_fhe_toolkit.math import greater_equal
 

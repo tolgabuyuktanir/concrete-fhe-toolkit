@@ -1,3 +1,5 @@
+"""Core data structures and definitions for encrypted ML."""
+
 from .._compat import fhe
 import math
 import numpy as np

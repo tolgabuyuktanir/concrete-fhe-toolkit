@@ -23,89 +23,219 @@ UnaryFunction = Callable[[Any], Any]
 
 
 def add(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the add of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return left + right
 
 
 def subtract(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the subtract of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return left - right
 
 
 def multiply(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the multiply of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return left * right
 
 
 def negate(value: Any) -> Any:
-    """value: Any"""
+    """Compute the negate of the inputs.
+
+        Args:
+            value (Any): The encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return -value
 
 
 def square(value: Any) -> Any:
-    """value: Any"""
+    """Compute the square of the inputs.
+
+        Args:
+            value (Any): The encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return value * value
 
 
 def cube(value: Any) -> Any:
-    """value: Any"""
+    """Compute the cube of the inputs.
+
+        Args:
+            value (Any): The encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return value * value * value
 
 
 def equal(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the equal of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return (left == right) * 1
 
 def not_equal(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the not equal of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return (left != right) * 1
 
 def less(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the less of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return (left < right) * 1
 
 def less_equal(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the less equal of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return (left <= right) * 1
 
 def greater(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the greater of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return (left > right) * 1
 
 def greater_equal(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the greater equal of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return (left >= right) * 1
 
 def is_zero(value: Any) -> Any:
-    """value: Any"""
+    """Compute the is zero of the inputs.
+
+        Args:
+            value (Any): The encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return (value == 0) * 1
 
 
 def maximum(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the maximum of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return ((left+right)+abs(left-right))//2
 
 
 def minimum(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+    """Compute the minimum of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return ((left+right)-abs(left-right))//2
 
 
 
 
 def make_scalar_multiply(multiplier: int) -> UnaryFunction:
-    """multiplier: int"""
+    """Create a scalar multiply function.
+
+        Args:
+            multiplier (int): The cleartext multiplier.
+
+        Returns:
+            UnaryFunction: The generated function.
+        """
     normalized = validate_integer("multiplier", multiplier)
 
     def scalar_multiply(value: Any) -> Any:
-        """value: Any"""
+        """Compute the scalar_multiply operation."""
         return value * normalized
 
     return scalar_multiply
 
 
 def make_is_close(absolute_tolerance: int) -> BinaryFunction:
-    """absolute_tolerance: int"""
+    """Create a is close function.
+
+        Args:
+            absolute_tolerance (int): The absolute_tolerance.
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     tolerance = validate_integer(
         "absolute_tolerance",
         absolute_tolerance,
@@ -113,7 +243,7 @@ def make_is_close(absolute_tolerance: int) -> BinaryFunction:
     )
 
     def is_close(left: Any, right: Any) -> Any:
-        """left: Any, right: Any"""
+        """Compute the is_close operation."""
         difference = left - right
         return (difference >= -tolerance) * (difference <= tolerance)
 
@@ -126,12 +256,17 @@ def _binary_inputset(
     min_right: int,
     max_right: int,
 ) -> list[tuple[int, int]]:
-    """
-    min_left: int,
-    max_left: int,
-    min_right: int,
-    max_right: int,
-"""
+    """Compute the  binary inputset of the inputs.
+
+        Args:
+            min_left (int): The lower bound for the left encrypted operand.
+            max_left (int): The upper bound for the left encrypted operand.
+            min_right (int): The lower bound for the right encrypted operand.
+            max_right (int): The upper bound for the right encrypted operand.
+
+        Returns:
+            list[tuple[int, int]]: The result of the operation.
+        """
     left_minimum, left_maximum = validate_bounds(min_left, max_left)
     right_minimum, right_maximum = validate_bounds(min_right, max_right)
     return [
@@ -150,14 +285,19 @@ def _compile_binary_native(
     max_right: int,
     configuration: Optional[fhe.Configuration],
 ) -> fhe.Circuit:
-    """
-    function: BinaryFunction,
-    min_left: int,
-    max_left: int,
-    min_right: int,
-    max_right: int,
-    configuration: Optional[fhe.Configuration],
-"""
+    """Compute the  compile binary native of the inputs.
+
+        Args:
+            function (BinaryFunction): The function.
+            min_left (int): The lower bound for the left encrypted operand.
+            max_left (int): The upper bound for the left encrypted operand.
+            min_right (int): The lower bound for the right encrypted operand.
+            max_right (int): The upper bound for the right encrypted operand.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     inputset = _binary_inputset(min_left, max_left, min_right, max_right)
     return compile_function(
         function,
@@ -175,14 +315,18 @@ def compile_add(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_left: int = 0,
-    max_left: int = 15,
-    min_right: int = 0,
-    max_right: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for add.
+
+        Args:
+            min_left (int): The lower bound for the left encrypted operand.
+            max_left (int): The upper bound for the left encrypted operand.
+            min_right (int): The lower bound for the right encrypted operand.
+            max_right (int): The upper bound for the right encrypted operand.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_binary_native(
         add,
         min_left,
@@ -201,14 +345,18 @@ def compile_subtract(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_left: int = 0,
-    max_left: int = 15,
-    min_right: int = 0,
-    max_right: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for subtract.
+
+        Args:
+            min_left (int): The lower bound for the left encrypted operand.
+            max_left (int): The upper bound for the left encrypted operand.
+            min_right (int): The lower bound for the right encrypted operand.
+            max_right (int): The upper bound for the right encrypted operand.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_binary_native(
         subtract,
         min_left,
@@ -227,14 +375,18 @@ def compile_multiply(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_left: int = 0,
-    max_left: int = 15,
-    min_right: int = 0,
-    max_right: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for multiply.
+
+        Args:
+            min_left (int): The lower bound for the left encrypted operand.
+            max_left (int): The upper bound for the left encrypted operand.
+            min_right (int): The lower bound for the right encrypted operand.
+            max_right (int): The upper bound for the right encrypted operand.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_binary_native(
         multiply,
         min_left,
@@ -251,12 +403,16 @@ def compile_negate(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for negate.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(
         negate,
@@ -272,12 +428,16 @@ def compile_square(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for square.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     inputset = [minimum, maximum]
     if minimum <= 0 <= maximum:
@@ -295,12 +455,16 @@ def compile_cube(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for cube.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     inputset = [minimum, maximum]
     if minimum <= 0 <= maximum:
@@ -320,13 +484,17 @@ def compile_scalar_multiply(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int,
-    max_value: int,
-    multiplier: int,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for scalar multiply.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            multiplier (int): The cleartext multiplier.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     function = make_scalar_multiply(multiplier)
     return compile_function(
@@ -343,12 +511,17 @@ def _compile_predicate(
     max_value: int,
     configuration: Optional[fhe.Configuration],
 ) -> fhe.Circuit:
-    """
-    function: BinaryFunction,
-    min_value: int,
-    max_value: int,
-    configuration: Optional[fhe.Configuration],
-"""
+    """Compute the  compile predicate of the inputs.
+
+        Args:
+            function (BinaryFunction): The function.
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     inputset = [
         (minimum, minimum),
@@ -372,12 +545,16 @@ def compile_equal(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for equal.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_predicate(equal, min_value, max_value, configuration)
 
 
@@ -387,12 +564,16 @@ def compile_not_equal(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for not equal.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_predicate(not_equal, min_value, max_value, configuration)
 
 
@@ -402,12 +583,16 @@ def compile_less(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for less.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_predicate(less, min_value, max_value, configuration)
 
 
@@ -417,12 +602,16 @@ def compile_less_equal(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for less equal.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_predicate(less_equal, min_value, max_value, configuration)
 
 
@@ -432,12 +621,16 @@ def compile_greater(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for greater.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_predicate(greater, min_value, max_value, configuration)
 
 
@@ -447,12 +640,16 @@ def compile_greater_equal(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for greater equal.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_predicate(greater_equal, min_value, max_value, configuration)
 
 
@@ -462,12 +659,16 @@ def compile_is_zero(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for is zero.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     return compile_function(
         is_zero,
@@ -485,14 +686,18 @@ def compile_maximum(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_left: int = 0,
-    max_left: int = 15,
-    min_right: int = 0,
-    max_right: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for maximum.
+
+        Args:
+            min_left (int): The lower bound for the left encrypted operand.
+            max_left (int): The upper bound for the left encrypted operand.
+            min_right (int): The lower bound for the right encrypted operand.
+            max_right (int): The upper bound for the right encrypted operand.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_binary_native(
         maximum,
         min_left,
@@ -511,14 +716,18 @@ def compile_minimum(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_left: int = 0,
-    max_left: int = 15,
-    min_right: int = 0,
-    max_right: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for minimum.
+
+        Args:
+            min_left (int): The lower bound for the left encrypted operand.
+            max_left (int): The upper bound for the left encrypted operand.
+            min_right (int): The lower bound for the right encrypted operand.
+            max_right (int): The upper bound for the right encrypted operand.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_binary_native(
         minimum,
         min_left,
@@ -536,19 +745,31 @@ def compile_is_close(
     absolute_tolerance: int,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int,
-    max_value: int,
-    *,
-    absolute_tolerance: int,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for is close.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            absolute_tolerance (int): The absolute_tolerance.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     function = make_is_close(absolute_tolerance)
     return _compile_predicate(function, min_value, max_value, configuration)
 
 
 def make_absolute(min_value: int, max_value: int) -> UnaryFunction:
-    """min_value: int, max_value: int"""
+    """Create a absolute function.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+
+        Returns:
+            UnaryFunction: The generated function.
+        """
     values = unary_values(abs, min_value, max_value)
     return make_unary_lookup(values, min_value)
 
@@ -560,13 +781,17 @@ def compile_absolute(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int,
-    max_value: int,
-    *,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for absolute.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     check_lookup_domain(
         "compile_absolute",
         (min_value, max_value),
@@ -588,12 +813,17 @@ def make_clamp(
     min_value: int,
     max_value: int,
 ) -> UnaryFunction:
-    """
-    min_input: int,
-    max_input: int,
-    min_value: int,
-    max_value: int,
-"""
+    """Create a clamp function.
+
+        Args:
+            min_input (int): The min_input.
+            max_input (int): The max_input.
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+
+        Returns:
+            UnaryFunction: The generated function.
+        """
     input_minimum, input_maximum = validate_bounds(min_input, max_input)
     clamp_minimum, clamp_maximum = validate_bounds(min_value, max_value)
     values = unary_values(
@@ -612,15 +842,19 @@ def compile_clamp(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_input: int,
-    max_input: int,
-    min_value: int,
-    max_value: int,
-    *,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for clamp.
+
+        Args:
+            min_input (int): The min_input.
+            max_input (int): The max_input.
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     check_lookup_domain(
         "compile_clamp",
         (min_input, max_input),
@@ -650,14 +884,18 @@ def make_modulo(
     *,
     zero_result: int = 0,
 ) -> BinaryFunction:
-    """
-    min_numerator: int,
-    max_numerator: int,
-    min_denominator: int,
-    max_denominator: int,
-    *,
-    zero_result: int = 0,
-"""
+    """Create a modulo function.
+
+        Args:
+            min_numerator (int): The lower bound for the encrypted numerator.
+            max_numerator (int): The upper bound for the encrypted numerator.
+            min_denominator (int): The lower bound for the encrypted denominator.
+            max_denominator (int): The upper bound for the encrypted denominator.
+            zero_result (int): Result to return when the operation is undefined (e.g., division by zero).
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     zero = validate_integer("zero_result", zero_result)
     values = binary_values(
         lambda numerator, denominator: (
@@ -690,16 +928,20 @@ def compile_modulo(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_numerator: int,
-    max_numerator: int,
-    min_denominator: int,
-    max_denominator: int,
-    *,
-    zero_result: int = 0,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for modulo.
+
+        Args:
+            min_numerator (int): The lower bound for the encrypted numerator.
+            max_numerator (int): The upper bound for the encrypted numerator.
+            min_denominator (int): The lower bound for the encrypted denominator.
+            max_denominator (int): The upper bound for the encrypted denominator.
+            zero_result (int): Result to return when the operation is undefined (e.g., division by zero).
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     check_lookup_domain(
         "compile_modulo",
         (min_numerator, max_numerator),
@@ -737,15 +979,19 @@ def make_divmod(
     zero_quotient: int = 0,
     zero_remainder: int = 0,
 ) -> BinaryFunction:
-    """
-    min_numerator: int,
-    max_numerator: int,
-    min_denominator: int,
-    max_denominator: int,
-    *,
-    zero_quotient: int = 0,
-    zero_remainder: int = 0,
-"""
+    """Create a divmod function.
+
+        Args:
+            min_numerator (int): The lower bound for the encrypted numerator.
+            max_numerator (int): The upper bound for the encrypted numerator.
+            min_denominator (int): The lower bound for the encrypted denominator.
+            max_denominator (int): The upper bound for the encrypted denominator.
+            zero_quotient (int): Result to return for quotient when division by zero.
+            zero_remainder (int): Result to return for remainder when division by zero.
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     zero_q = validate_integer("zero_quotient", zero_quotient)
     zero_r = validate_integer("zero_remainder", zero_remainder)
     denominator_minimum, denominator_maximum = validate_bounds(
@@ -785,7 +1031,7 @@ def make_divmod(
     )
 
     def quotient_and_remainder(numerator: Any, denominator: Any) -> Any:
-        """numerator: Any, denominator: Any"""
+        """Compute the quotient and remainder operations."""
         return quotient(numerator, denominator), remainder(numerator, denominator)
 
     return quotient_and_remainder
@@ -802,17 +1048,21 @@ def compile_divmod(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_numerator: int,
-    max_numerator: int,
-    min_denominator: int,
-    max_denominator: int,
-    *,
-    zero_quotient: int = 0,
-    zero_remainder: int = 0,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for divmod.
+
+        Args:
+            min_numerator (int): The lower bound for the encrypted numerator.
+            max_numerator (int): The upper bound for the encrypted numerator.
+            min_denominator (int): The lower bound for the encrypted denominator.
+            max_denominator (int): The upper bound for the encrypted denominator.
+            zero_quotient (int): Result to return for quotient when division by zero.
+            zero_remainder (int): Result to return for remainder when division by zero.
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     check_lookup_domain(
         "compile_divmod",
         (min_numerator, max_numerator),
@@ -889,7 +1139,16 @@ compile_scalar_mul = compile_scalar_multiply
 
 
 def select(control: Any, when_true: Any, when_false: Any) -> Any:
-    """control: Any, when_true: Any, when_false: Any"""
+    """Compute the select of the inputs.
+
+        Args:
+            control (Any): The control.
+            when_true (Any): The when_true.
+            when_false (Any): The when_false.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return control * (when_true - when_false) + when_false
 
 
@@ -899,12 +1158,16 @@ def compile_select(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for select.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     inputset = [
         (0, minimum, minimum),
@@ -927,13 +1190,21 @@ def compile_select(
 
 
 def make_abs_diff(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
-    """min_value: int = 0, max_value: int = 15"""
+    """Create a abs diff function.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     span = maximum - minimum
 
     if span == 0:
         def constant_abs_diff(left: Any, right: Any) -> Any:
-            """left: Any, right: Any"""
+            """Compute the constant_abs_diff operation."""
             return left - right
 
         return constant_abs_diff
@@ -942,7 +1213,7 @@ def make_abs_diff(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
     lookup = make_unary_lookup(values, -span)
 
     def abs_diff(left: Any, right: Any) -> Any:
-        """left: Any, right: Any"""
+        """Compute the abs_diff operation."""
         return lookup(left - right)
 
     return abs_diff
@@ -955,13 +1226,17 @@ def compile_abs_diff(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = 0,
-    max_value: int = 15,
-    *,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for abs diff.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     low, high = validate_bounds(min_value, max_value)
     check_lookup_domain(
         "compile_abs_diff",
@@ -992,12 +1267,20 @@ def compile_abs_diff(
 
 
 def make_copysign(min_value: int = -15, max_value: int = 15) -> BinaryFunction:
-    """min_value: int = -15, max_value: int = 15"""
+    """Create a copysign function.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     absolute = make_absolute(minimum, maximum)
 
     def copysign(x: Any, y: Any) -> Any:
-        """x: Any, y: Any"""
+        """Compute the copysign operation."""
         sign_factor = (y >= 0) * 2 - 1
         return absolute(x) * sign_factor
 
@@ -1011,13 +1294,17 @@ def compile_copysign(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for copysign.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     check_lookup_domain(
         "compile_copysign",
         (min_value, max_value),
@@ -1045,7 +1332,16 @@ def compile_copysign(
 
 
 def _saturating_output_range(operation: str, minimum: int, maximum: int) -> tuple:
-    """operation: str, minimum: int, maximum: int"""
+    """Compute the  saturating output range of the inputs.
+
+        Args:
+            operation (str): The operation.
+            minimum (int): The minimum.
+            maximum (int): The maximum.
+
+        Returns:
+            tuple: The result of the operation.
+        """
     if operation == "add":
         return 2 * minimum, 2 * maximum
     if operation == "subtract":
@@ -1060,39 +1356,72 @@ def _saturating_output_range(operation: str, minimum: int, maximum: int) -> tupl
 
 
 def _make_saturating(operation: str, min_value: int, max_value: int) -> BinaryFunction:
-    """operation: str, min_value: int, max_value: int"""
+    """Compute the  make saturating of the inputs.
+
+        Args:
+            operation (str): The operation.
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     low, high = _saturating_output_range(operation, minimum, maximum)
     clamp_result = make_clamp(low, high, minimum, maximum)
 
     if operation == "add":
         def saturating(left: Any, right: Any) -> Any:
-            """left: Any, right: Any"""
+            """Compute the saturating operation."""
             return clamp_result(left + right)
     elif operation == "subtract":
         def saturating(left: Any, right: Any) -> Any:
-            """left: Any, right: Any"""
+            """Compute the saturating operation."""
             return clamp_result(left - right)
     else:
         def saturating(left: Any, right: Any) -> Any:
-            """left: Any, right: Any"""
+            """Compute the saturating operation."""
             return clamp_result(left * right)
 
     return saturating
 
 
 def make_saturating_add(min_value: int = -15, max_value: int = 15) -> BinaryFunction:
-    """min_value: int = -15, max_value: int = 15"""
+    """Create a saturating add function.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     return _make_saturating("add", min_value, max_value)
 
 
 def make_saturating_subtract(min_value: int = -15, max_value: int = 15) -> BinaryFunction:
-    """min_value: int = -15, max_value: int = 15"""
+    """Create a saturating subtract function.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     return _make_saturating("subtract", min_value, max_value)
 
 
 def make_saturating_multiply(min_value: int = -15, max_value: int = 15) -> BinaryFunction:
-    """min_value: int = -15, max_value: int = 15"""
+    """Create a saturating multiply function.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     return _make_saturating("multiply", min_value, max_value)
 
 
@@ -1103,13 +1432,18 @@ def _compile_saturating(
     allow_large_lookup: bool,
     configuration: Optional[fhe.Configuration],
 ) -> fhe.Circuit:
-    """
-    operation: str,
-    min_value: int,
-    max_value: int,
-    allow_large_lookup: bool,
-    configuration: Optional[fhe.Configuration],
-"""
+    """Compute the  compile saturating of the inputs.
+
+        Args:
+            operation (str): The operation.
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     low, high = _saturating_output_range(operation, minimum, maximum)
     check_lookup_domain('_compile_saturating', (low, high), allow_large_lookup=allow_large_lookup)
@@ -1144,13 +1478,17 @@ def compile_saturating_add(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for saturating add.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_saturating("add", min_value, max_value, allow_large_lookup, configuration)
 
 
@@ -1161,13 +1499,17 @@ def compile_saturating_subtract(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for saturating subtract.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_saturating(
         "subtract", min_value, max_value, allow_large_lookup, configuration
     )
@@ -1180,26 +1522,38 @@ def compile_saturating_multiply(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for saturating multiply.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     return _compile_saturating(
         "multiply", min_value, max_value, allow_large_lookup, configuration
     )
 
 
 def make_fdim(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
-    """min_value: int = 0, max_value: int = 15"""
+    """Create a fdim function.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     span = maximum - minimum
 
     if span == 0:
         def constant_fdim(left: Any, right: Any) -> Any:
-            """left: Any, right: Any"""
+            """Compute the constant_fdim operation."""
             return left - right
 
         return constant_fdim
@@ -1208,7 +1562,7 @@ def make_fdim(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
     lookup = make_unary_lookup(values, -span)
 
     def fdim(left: Any, right: Any) -> Any:
-        """left: Any, right: Any"""
+        """Compute the fdim operation."""
         return lookup(left - right)
 
     return fdim
@@ -1221,13 +1575,17 @@ def compile_fdim(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = 0,
-    max_value: int = 15,
-    *,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for fdim.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     low, high = validate_bounds(min_value, max_value)
     check_lookup_domain(
         "compile_fdim",
@@ -1258,7 +1616,16 @@ def compile_fdim(
 
 
 def fma(left: Any, right: Any, addend: Any) -> Any:
-    """left: Any, right: Any, addend: Any"""
+    """Compute the fma of the inputs.
+
+        Args:
+            left (Any): The left encrypted operand.
+            right (Any): The right encrypted operand.
+            addend (Any): The addend.
+
+        Returns:
+            Any: The result of the operation.
+        """
     return left * right + addend
 
 
@@ -1268,12 +1635,16 @@ def compile_fma(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int = -15,
-    max_value: int = 15,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for fma.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     inputset = [
         (minimum, minimum, minimum),
@@ -1299,14 +1670,18 @@ def make_remainder(
     *,
     zero_result: int = 0,
 ) -> BinaryFunction:
-    """
-    min_numerator: int,
-    max_numerator: int,
-    min_denominator: int,
-    max_denominator: int,
-    *,
-    zero_result: int = 0,
-"""
+    """Create a remainder function.
+
+        Args:
+            min_numerator (int): The lower bound for the encrypted numerator.
+            max_numerator (int): The upper bound for the encrypted numerator.
+            min_denominator (int): The lower bound for the encrypted denominator.
+            max_denominator (int): The upper bound for the encrypted denominator.
+            zero_result (int): Result to return when the operation is undefined (e.g., division by zero).
+
+        Returns:
+            BinaryFunction: The generated function.
+        """
     from fractions import Fraction
 
     zero = validate_integer("zero_result", zero_result)
@@ -1343,16 +1718,20 @@ def compile_remainder(
     allow_large_lookup: bool = False,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_numerator: int,
-    max_numerator: int,
-    min_denominator: int,
-    max_denominator: int,
-    *,
-    zero_result: int = 0,
-    allow_large_lookup: bool = False,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for remainder.
+
+        Args:
+            min_numerator (int): The lower bound for the encrypted numerator.
+            max_numerator (int): The upper bound for the encrypted numerator.
+            min_denominator (int): The lower bound for the encrypted denominator.
+            max_denominator (int): The upper bound for the encrypted denominator.
+            zero_result (int): Result to return when the operation is undefined (e.g., division by zero).
+            allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     check_lookup_domain(
         "compile_remainder",
         (min_numerator, max_numerator),
@@ -1386,13 +1765,20 @@ def compile_remainder(
 
 
 def make_ldexp(exponent: int) -> UnaryFunction:
-    """exponent: int"""
+    """Create a ldexp function.
+
+        Args:
+            exponent (int): The exponent.
+
+        Returns:
+            UnaryFunction: The generated function.
+        """
     normalized = validate_integer("exponent", exponent)
     if normalized >= 0:
         factor = 1 << normalized
 
         def scale_up(value: Any) -> Any:
-            """value: Any"""
+            """Compute the scale_up operation."""
             return value * factor
 
         return scale_up
@@ -1400,7 +1786,7 @@ def make_ldexp(exponent: int) -> UnaryFunction:
     divisor = 1 << (-normalized)
 
     def scale_down(value: Any) -> Any:
-        """value: Any"""
+        """Compute the scale_down operation."""
         return value // divisor
 
     return scale_down
@@ -1413,13 +1799,17 @@ def compile_ldexp(
     *,
     configuration: Optional[fhe.Configuration] = None,
 ) -> fhe.Circuit:
-    """
-    min_value: int,
-    max_value: int,
-    exponent: int,
-    *,
-    configuration: Optional[fhe.Configuration] = None,
-"""
+    """Compile an FHE circuit for ldexp.
+
+        Args:
+            min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+            max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+            exponent (int): The exponent.
+            configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+
+        Returns:
+            fhe.Circuit: The compiled FHE circuit.
+        """
     minimum, maximum = validate_bounds(min_value, max_value)
     function = make_ldexp(exponent)
     return compile_function(
@@ -1436,7 +1826,14 @@ compile_scalbn = compile_ldexp
 
 
 def fsum(values: Any) -> Any:
-    """values: Any"""
+    """Compute the fsum of the inputs.
+
+        Args:
+            values (Any): The values.
+
+        Returns:
+            Any: The result of the operation.
+        """
     items = list(values)
     if not items:
         return 0
@@ -1451,7 +1848,15 @@ def fsum(values: Any) -> Any:
 
 
 def prod(values: Any, start: int = 1) -> Any:
-    """values: Any, start: int = 1"""
+    """Compute the prod of the inputs.
+
+        Args:
+            values (Any): The values.
+            start (int): The start.
+
+        Returns:
+            Any: The result of the operation.
+        """
     normalized_start = validate_integer("start", start)
     items = list(values)
     if not items:
@@ -1467,7 +1872,15 @@ def prod(values: Any, start: int = 1) -> Any:
 
 
 def sumprod(p: Any, q: Any) -> Any:
-    """p: Any, q: Any"""
+    """Compute the sumprod of the inputs.
+
+        Args:
+            p (Any): The p.
+            q (Any): The q.
+
+        Returns:
+            Any: The result of the operation.
+        """
     left = list(p)
     right = list(q)
     if len(left) != len(right):

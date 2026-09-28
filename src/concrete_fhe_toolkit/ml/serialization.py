@@ -89,6 +89,9 @@ def save_model(model: Any, path: str) -> None:
         model = trainer.fit_encrypted(X_train, y_train)
         save_model(model, "scorecard.json")
         ```
+
+    Returns:
+        None: This function does not return a value.
     """
     name = type(model).__name__
     if name not in _REGISTRY:

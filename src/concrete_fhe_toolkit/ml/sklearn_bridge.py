@@ -42,8 +42,8 @@ def from_sklearn_linear(
 
     Args:
         model: A fitted sklearn estimator with ``coef_`` and ``intercept_``.
-        scale: Integer factor used to quantize the float weights.
-        input_scale: Factor for encoding training-space feature values at
+        scale: The scaling factor applied to the fixed-point representation.
+        input_scale: The fixed-point scaling factor of the input.
             inference. Bias and output scale account for both factors.
 
     Returns:
@@ -100,7 +100,7 @@ def _convert_tree_node(tree: Any, node: int, *, scale: int, leaf_scale: int) -> 
     Args:
         tree (Any): The scikit-learn tree object.
         node (int): The current node index.
-        scale (int): Integer factor used to quantize the thresholds.
+        scale (int): The scaling factor applied to the fixed-point representation.
         leaf_scale (int): Factor for quantizing leaf values.
 
     Returns:
@@ -140,7 +140,7 @@ def from_sklearn_tree(model: Any, *, scale: int = 1, leaf_scale: int = 1) -> Any
 
     Args:
         model (Any): A fitted sklearn decision tree model.
-        scale (int, optional): Integer factor used to quantize thresholds. Defaults to 1.
+        scale (int, optional): The scaling factor applied to the fixed-point representation.
         leaf_scale (int, optional): Factor for quantizing leaf values. Defaults to 1.
 
     Returns:
@@ -176,7 +176,7 @@ def from_sklearn_forest(model: Any, *, scale: int = 1) -> Any:
 
     Args:
         model (Any): A fitted sklearn random forest model.
-        scale (int, optional): Integer factor used to quantize thresholds. Defaults to 1.
+        scale (int, optional): The scaling factor applied to the fixed-point representation.
 
     Returns:
         Any: A ready-to-compile FHERandomForest model.

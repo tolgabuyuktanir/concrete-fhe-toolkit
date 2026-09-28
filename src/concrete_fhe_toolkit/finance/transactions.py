@@ -11,7 +11,7 @@ def transfer(sender_balance: Any, receiver_balance: Any, amount: Any) -> tuple[A
     Args:
         sender_balance (Any): The encrypted balance of the sender.
         receiver_balance (Any): The encrypted balance of the receiver.
-        amount (Any): The encrypted amount to transfer.
+        amount (Any): The encrypted integer amount to be processed.
         
     Returns:
         tuple[Any, Any]: A tuple containing the new encrypted sender balance and receiver balance.

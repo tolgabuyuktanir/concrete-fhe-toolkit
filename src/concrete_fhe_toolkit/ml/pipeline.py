@@ -64,7 +64,7 @@ class FHEPipeline(FHEModel):
         """Execute the pipeline's circuit logic.
         
         Args:
-            features (Any): The input features.
+            features (Any): The encrypted 2D feature matrix containing input samples.
             
         Returns:
             Any: The pipeline's output.

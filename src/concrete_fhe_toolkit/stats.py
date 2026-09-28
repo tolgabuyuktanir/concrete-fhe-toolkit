@@ -20,7 +20,7 @@ def array_mean(array: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the floor mean of an encrypted array.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements to average.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
 
     Returns:
         Any: The integer floor mean of the elements.
@@ -66,8 +66,8 @@ def array_std(array: Union[np.ndarray, List[Any]], min_value: int, max_value: in
     
     Args:
         array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
-        min_value (int): The lower bound of the array elements.
-        max_value (int): The upper bound of the array elements.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         Any: The integer standard deviation of the elements.
@@ -93,8 +93,8 @@ def array_covariance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndar
     """Calculate the floor covariance of two encrypted arrays.
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): The first encrypted array or list of elements.
-        array2 (Union[np.ndarray, List[Any]]): The second encrypted array or list of elements.
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.
 
     Returns:
         Any: The integer floor covariance of the two arrays.
@@ -120,7 +120,7 @@ def array_max(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Find the maximum value in an encrypted array using a tournament reduction.
     
     Args:
-        elements (Union[np.ndarray, List[Any]]): The encrypted array or list of elements to find the maximum of.
+        elements (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
 
     Returns:
         Any: The maximum value found in the array.
@@ -139,7 +139,7 @@ def array_min(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Find the minimum value in an encrypted array using a tournament reduction.
     
     Args:
-        elements (Union[np.ndarray, List[Any]]): The encrypted array or list of elements to find the minimum of.
+        elements (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
 
     Returns:
         Any: The minimum value found in the array.
@@ -178,7 +178,7 @@ def array_count_greater(array: Union[np.ndarray, List[Any]], threshold: Any) -> 
     """Count how many elements are strictly greater than a threshold.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements to check.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
         threshold (Any): The value to compare each element against.
 
     Returns:
@@ -202,8 +202,8 @@ def array_median(array: Union[np.ndarray, List[Any]], min_value: int, max_value:
     
     Args:
         array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
-        min_value (int): The lower bound of the array elements.
-        max_value (int): The upper bound of the array elements.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         Any: The median value of the array.
@@ -236,8 +236,8 @@ def array_percentile(array: Union[np.ndarray, List[Any]], q: int, min_value: int
     Args:
         array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
         q (int): The percentile to compute, between 0 and 100 inclusive.
-        min_value (int): The lower bound of the array elements.
-        max_value (int): The upper bound of the array elements.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         Any: The value at the q-th percentile.
@@ -267,8 +267,8 @@ def array_histogram(array: Union[np.ndarray, List[Any]], min_value: int, max_val
     
     Args:
         array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
-        min_value (int): The lower bound of the array elements.
-        max_value (int): The upper bound of the array elements.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         Union[np.ndarray, List[Any]]: An array containing the count of occurrences for each value from min_value to max_value.
@@ -297,8 +297,8 @@ def array_mode(array: Union[np.ndarray, List[Any]], min_value: int, max_value: i
     
     Args:
         array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
-        min_value (int): The lower bound of the array elements.
-        max_value (int): The upper bound of the array elements.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         Any: The most frequent value in the array.
@@ -323,9 +323,9 @@ def array_normalize(array: Union[np.ndarray, List[Any]], mean: Any, scale: int) 
     """Return (x - mean) * scale for every element (z-score style affine transform).
     
     Args:
-        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements to normalize.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
         mean (Any): The mean value to subtract from each element.
-        scale (int): The scaling factor to multiply each centered element by.
+        scale (int): The scaling factor applied to the fixed-point representation.
 
     Returns:
         Union[np.ndarray, List[Any]]: A new array containing the normalized elements.

@@ -21,9 +21,9 @@ def linear_regression_inference(weights: Union[np.ndarray, List[Any]], bias: Any
     """Evaluate a linear regression model (dot product of weights and features plus bias).
     
     Args:
-        weights: The model weights.
-        bias: The model bias.
-        features: The encrypted feature vector.
+        weights: The pre-trained cleartext model weights used for inference.
+        bias: The pre-trained cleartext model bias used for inference.
+        features: The encrypted 2D feature matrix containing input samples.
         
     Returns:
         The encrypted evaluation result.
@@ -59,9 +59,9 @@ def logistic_regression_inference(
     nonzero threshold must use the product of the weight and feature scales.
     
     Args:
-        weights: The model weights.
-        bias: The model bias.
-        features: The encrypted feature vector.
+        weights: The pre-trained cleartext model weights used for inference.
+        bias: The pre-trained cleartext model bias used for inference.
+        features: The encrypted 2D feature matrix containing input samples.
         threshold: The threshold for classification. Defaults to 0.
         
     Returns:
@@ -230,7 +230,7 @@ def decision_tree_inference(features: Union[np.ndarray, List[Any]], tree: Any) -
     never revealed — circuit cost grows with the total number of nodes.
     
     Args:
-        features: The encrypted feature vector.
+        features: The encrypted 2D feature matrix containing input samples.
         tree: The public decision tree structure.
         
     Returns:
@@ -279,9 +279,9 @@ def compile_decision_tree_node(
     """Compile a single encrypted decision tree node.
     
     Args:
-        min_value: The minimum possible value for features and branches. Defaults to -15.
-        max_value: The maximum possible value for features and branches. Defaults to 15.
-        configuration: Optional FHE compilation configuration.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration: Optional FHE compiler configuration object.
         
     Returns:
         The compiled FHE circuit.
@@ -321,7 +321,7 @@ def random_forest_inference(features: Union[np.ndarray, List[Any]], trees: Union
     ties (a tie resolves to 0).
     
     Args:
-        features: The encrypted feature vector.
+        features: The encrypted 2D feature matrix containing input samples.
         trees: A list of public decision trees.
         
     Returns:
@@ -352,7 +352,7 @@ def mlp_inference(features: Union[np.ndarray, List[Any]], layers: Union[np.ndarr
     network shallow or rescale between layers.
     
     Args:
-        features: The encrypted feature vector.
+        features: The encrypted 2D feature matrix containing input samples.
         layers: A list of (weights, biases) tuples for each layer.
         
     Returns:
@@ -477,7 +477,7 @@ def naive_bayes_inference(
     public tables.
     
     Args:
-        features: The encrypted feature vector.
+        features: The encrypted 2D feature matrix containing input samples.
         log_prob_tables: The lookup tables for log probabilities.
         priors: The prior probabilities for each class.
         min_feature: The minimum value of features for offsetting the table. Defaults to 0.
@@ -530,9 +530,9 @@ def svm_inference(weights: Union[np.ndarray, List[Any]], bias: Any, features: Un
     -1 if it's on the negative side, and 0 if it lies exactly on the boundary.
     
     Args:
-        weights: The SVM weights.
-        bias: The SVM bias.
-        features: The encrypted feature vector.
+        weights: The pre-trained cleartext model weights used for inference.
+        bias: The pre-trained cleartext model bias used for inference.
+        features: The encrypted 2D feature matrix containing input samples.
         
     Returns:
         The predicted sign (-1, 0, or 1).
@@ -552,7 +552,7 @@ def pca_inference(features: Union[np.ndarray,List[Any]], means: Union[np.ndarray
     """Apply Principal Component Analysis (PCA) to reduce dimensionality of encrypted data.
 
     Args:
-        features: The encrypted feature vector (list of encrypted integers).
+        features: The encrypted 2D feature matrix containing input samples.
         means: The public mean vector (list of integers).
         components: The public principal components matrix (list of lists of integers).
 
@@ -575,7 +575,7 @@ def xgboost_inference(features: Union[np.ndarray, List[Any]],trees: Union[np.nda
     Evaluate a XGBoost classifier on encrypted features.
 
     Args:
-        features: The encrypted feature vector (list of encrypted integers).
+        features: The encrypted 2D feature matrix containing input samples.
         trees: The list of encrypted decision trees.
 
     Returns:
@@ -597,7 +597,7 @@ def cnn_inference(filters: Union[np.ndarray, List[List[List[Any]]]], bias: Union
     
     Args:
         filters: The convolutional filters.
-        bias: The bias vector for the convolution.
+        bias: The pre-trained cleartext model bias used for inference.
         image: The encrypted input image tensor.
         
     Returns:

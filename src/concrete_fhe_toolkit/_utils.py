@@ -13,8 +13,8 @@ def validate_integer(name: str, value: int, minimum: Optional[int] = None) -> in
     """Validate and normalize an integer argument.
     
     Args:
-        name (str): The name of the argument.
-        value (int): The value to validate.
+        name (str): The string name of the parameter being validated, used for formatting error messages.
+        value (int): The encrypted value to process or validate.
         minimum (Optional[int], optional): The minimum allowed value. Defaults to None.
         
     Returns:
@@ -37,8 +37,8 @@ def validate_bounds(min_value: int, max_value: int) -> Tuple[int, int]:
     """Validate inclusive integer bounds.
     
     Args:
-        min_value (int): The minimum value bound.
-        max_value (int): The maximum value bound.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         
     Returns:
         Tuple[int, int]: A tuple containing the validated minimum and maximum bounds.
@@ -57,7 +57,7 @@ def validate_size(size: int, *, power_of_two: bool = False) -> int:
     """Validate a fixed circuit input size.
     
     Args:
-        size (int): The size to validate.
+        size (int): The fixed size of the input array, must be known at compile time.
         power_of_two (bool, optional): Whether the size must be a power of two. Defaults to False.
         
     Returns:
@@ -95,9 +95,9 @@ def array_inputset(size: int, min_value: int, max_value: int) -> List[np.ndarray
     """Create a compact inputset that includes all important array boundaries.
     
     Args:
-        size (int): The size of the arrays.
-        min_value (int): The minimum value in the arrays.
-        max_value (int): The maximum value in the arrays.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         
     Returns:
         List[np.ndarray]: A list of numpy arrays representing the inputset.
@@ -143,7 +143,7 @@ def compile_function(
         function (Any): The function to compile.
         parameter_encryption (dict): The encryption configuration for parameters.
         inputset (list): The inputset for compilation.
-        configuration (Optional[fhe.Configuration]): Optional compilation configuration.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
         
     Returns:
         fhe.Circuit: The compiled FHE circuit.

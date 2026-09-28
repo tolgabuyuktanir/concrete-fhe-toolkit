@@ -41,7 +41,7 @@ class FHETrainer:
     Args:
         simulate (bool): When True, run circuits in simulation instead of real
             encrypted execution (fast; for prototyping and tests only).
-        configuration (Optional[fhe.Configuration]): Optional ``fhe.Configuration`` forwarded to compile.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Example:
         ```python
@@ -151,7 +151,7 @@ class FHELinearRegressionTrainer(FHETrainer):
     Args:
         weight_scale (int): Scaling factor for weights.
         simulate (bool): Run circuits in simulation.
-        configuration (Optional[fhe.Configuration]): Configuration for compile.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Example:
         ```python
@@ -260,7 +260,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
         min_samples_leaf (int): A split is rejected when either side would hold
             fewer samples than this.
         simulate (bool): Run circuits in simulation.
-        configuration (Optional[fhe.Configuration]): Configuration for compile.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
         
     Example:
         ```python
@@ -471,11 +471,11 @@ class FHEKMeansTrainer(FHETrainer):
 
     Args:
         initial_centroids (List[List[int]]): Public, data-independent starting centroids.
-        min_value (int): Inclusive lower bound of every feature value.
-        max_value (int): Inclusive upper bound of every feature value.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         n_iterations (int): Fixed number of Lloyd iterations.
         simulate (bool): Run circuits in simulation.
-        configuration (Optional[fhe.Configuration]): Configuration for compile.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Example:
         ```python

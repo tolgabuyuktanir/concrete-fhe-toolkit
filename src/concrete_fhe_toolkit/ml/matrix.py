@@ -79,8 +79,8 @@ def dot_product(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarray, 
     This is the fundamental operation for linear layers and convolution.
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): First encrypted array.
-        array2 (Union[np.ndarray, List[Any]]): Second encrypted array.
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.
 
     Returns:
         Any: The scalar dot product.
@@ -189,7 +189,7 @@ def matrix_vector_multiply(matrix: Union[np.ndarray, List[List[Any]]], array: Un
     
     Args:
         matrix (Union[np.ndarray, List[List[Any]]]): The encrypted matrix.
-        array (Union[np.ndarray, List[Any]]): The encrypted vector.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
 
     Returns:
         Union[np.ndarray, List[Any]]: The resulting vector.

@@ -22,8 +22,8 @@ def _validate_width(name: str, value: int) -> int:
     """Validate that the given width is a positive integer.
     
     Args:
-        name: The name of the width parameter being validated.
-        value: The width value to be validated.
+        name: The string name of the parameter being validated, used for formatting error messages.
+        value: The encrypted value to process or validate.
     
     Returns:
         The validated integer width, constrained to be at least 1.
@@ -35,7 +35,7 @@ def _validate_fractional_bits(value: int) -> int:
     """Validate that the number of fractional bits is a non-negative integer.
     
     Args:
-        value: The number of fractional bits to validate.
+        value: The encrypted value to process or validate.
     
     Returns:
         The validated integer number of fractional bits, constrained to be at least 0.
@@ -47,8 +47,8 @@ def _validate_zero_result(zero_result: int, quotient_width: int) -> int:
     """Validate that the zero fallback result fits in the specified quotient width.
     
     Args:
-        zero_result: The clear fallback value to return when dividing by zero.
-        quotient_width: The bit width of the quotient.
+        zero_result: Result to return when the operation is undefined (e.g., division by zero).
+        quotient_width: The fixed bit width of the quotient.
     
     Returns:
         The validated integer zero result.
@@ -63,7 +63,7 @@ def _as_nonempty_bits(name: str, bits: Iterable[Any]) -> tuple[Any, ...]:
     """Convert an iterable of bits to a non-empty tuple.
     
     Args:
-        name: The name of the parameter being converted, used for error messages.
+        name: The string name of the parameter being validated, used for formatting error messages.
         bits: An iterable containing the sequence of bits.
     
     Returns:
@@ -83,9 +83,9 @@ def _restoring_divide_bits(
     """Perform restoring division on binary represented values.
     
     Args:
-        numerator_bits: The bits of the numerator in little-endian order.
-        denominator_bits: The bits of the denominator in little-endian order.
-        quotient_width: The bit width of the output quotient.
+        numerator_bits: An iterable of encrypted or cleartext bits representing the numerator in little-endian format.
+        denominator_bits: An iterable of encrypted or cleartext bits representing the denominator in little-endian format.
+        quotient_width: The fixed bit width of the quotient.
     
     Returns:
         A tuple containing the quotient bits and remainder bits respectively.
@@ -134,8 +134,8 @@ def unsigned_divide_bits(
     Division by zero returns the clear fallback encoded by `zero_result`.
     
     Args:
-        numerator_bits (Iterable[...]): The bits of the numerator.
-        denominator_bits (Iterable[...]): The bits of the denominator.
+        numerator_bits (Iterable[...]): An iterable of encrypted or cleartext bits representing the numerator in little-endian format.
+        denominator_bits (Iterable[...]): An iterable of encrypted or cleartext bits representing the denominator in little-endian format.
     
     Returns:
         tuple[...]: The resulting value.
@@ -180,8 +180,8 @@ def fixed_point_divide_bits(
     """Return quotient bits for floor((numerator << fractional_bits) / denominator).
     
     Args:
-        numerator_bits (Iterable[...]): The bits of the numerator.
-        denominator_bits (Iterable[...]): The bits of the denominator.
+        numerator_bits (Iterable[...]): An iterable of encrypted or cleartext bits representing the numerator in little-endian format.
+        denominator_bits (Iterable[...]): An iterable of encrypted or cleartext bits representing the denominator in little-endian format.
     
     Returns:
         tuple[...]: The resulting value.
@@ -254,8 +254,8 @@ def make_unsigned_floor_divide(
         """Execute the unsigned floor division circuit on inputs.
         
         Args:
-            numerator: The scalar integer numerator input to be divided.
-            denominator: The scalar integer denominator input to divide by.
+            numerator: The encrypted dividend/numerator.
+            denominator: The encrypted divisor/denominator.
         
         Returns:
             The unsigned integer result of the floor division.
@@ -317,8 +317,8 @@ def make_fixed_point_divide(
         """Execute the fixed-point division circuit on inputs.
         
         Args:
-            numerator: The scalar integer numerator input to be divided.
-            denominator: The scalar integer denominator input to divide by.
+            numerator: The encrypted dividend/numerator.
+            denominator: The encrypted divisor/denominator.
         
         Returns:
             The unsigned integer fixed-point division result.
@@ -469,8 +469,8 @@ def unsigned_mod_bits(
     zero returns the clear fallback encoded by ``zero_result``.
     
     Args:
-        numerator_bits (Iterable[...]): The bits of the numerator.
-        denominator_bits (Iterable[...]): The bits of the denominator.
+        numerator_bits (Iterable[...]): An iterable of encrypted or cleartext bits representing the numerator in little-endian format.
+        denominator_bits (Iterable[...]): An iterable of encrypted or cleartext bits representing the denominator in little-endian format.
     
     Returns:
         tuple[...]: The resulting value.
@@ -529,8 +529,8 @@ def make_unsigned_mod(
         """Execute the unsigned modulo circuit on inputs.
         
         Args:
-            numerator: The scalar integer numerator input.
-            denominator: The scalar integer denominator input to divide by.
+            numerator: The encrypted dividend/numerator.
+            denominator: The encrypted divisor/denominator.
         
         Returns:
             The remainder of the unsigned division.

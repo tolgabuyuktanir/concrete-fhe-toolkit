@@ -25,7 +25,7 @@ def bin_feature(value: Any, bin_edges: List[int]) -> Any:
     one without revealing the value.
 
     Args:
-        value (Any): The encrypted value to discretize.
+        value (Any): The encrypted value to process or validate.
         bin_edges (List[int]): Public, ascending list of bucket boundaries. A value
             lands in bucket ``i`` when ``bin_edges[i-1] <= value < bin_edges[i]``.
 
@@ -68,8 +68,8 @@ class FHEBinner:
     """
 
     def __init__(self, bin_edges: List[List[int]]) -> None:
-        if not bin_edges:
         """Initialize the object."""
+        if not bin_edges:
             raise ValueError("bin_edges must describe at least one feature")
         self.bin_edges = [list(edges) for edges in bin_edges]
 
@@ -77,7 +77,7 @@ class FHEBinner:
         """Apply the binner logic to a set of features.
         
         Args:
-            features (Any): The input features to be transformed.
+            features (Any): The encrypted 2D feature matrix containing input samples.
 
         Returns:
             List[Any]: A list containing transformed (binned) features.
@@ -105,7 +105,7 @@ class FHEStandardScaler:
     Args:
         means (List[int]): Public per-feature integer means.
         stds (List[int]): Public per-feature integer standard deviations (must be >= 1).
-        scale (int): Output scale of the z-scores (default 10, so ``13`` means 1.3).
+        scale (int): The scaling factor applied to the fixed-point representation.
 
     Example:
         ```python
@@ -117,8 +117,8 @@ class FHEStandardScaler:
     """
 
     def __init__(self, means: List[int], stds: List[int], *, scale: int = 10) -> None:
-        if len(means) != len(stds):
         """Initialize the object."""
+        if len(means) != len(stds):
             raise ValueError("means and stds must have the same length")
         self.means = [validate_integer("mean", value) for value in means]
         self.stds = [validate_integer("std", value, minimum=1) for value in stds]
@@ -128,7 +128,7 @@ class FHEStandardScaler:
         """Apply the standard scaling logic to a set of features.
         
         Args:
-            features (Any): The input features to be scaled.
+            features (Any): The encrypted 2D feature matrix containing input samples.
 
         Returns:
             List[Any]: A list containing scaled features.
@@ -154,7 +154,7 @@ class FHEMinMaxScaler:
     Args:
         minimums (List[int]): Public per-feature lower bounds.
         maximums (List[int]): Public per-feature upper bounds (strictly greater).
-        scale (int): Upper end of the output range (default 100).
+        scale (int): The scaling factor applied to the fixed-point representation.
 
     Example:
         ```python
@@ -172,8 +172,8 @@ class FHEMinMaxScaler:
         *,
         scale: int = 100,
     ) -> None:
-        if len(minimums) != len(maximums):
         """Initialize the object."""
+        if len(minimums) != len(maximums):
             raise ValueError("minimums and maximums must have the same length")
         self.minimums = [validate_integer("minimum", value) for value in minimums]
         self.maximums = [validate_integer("maximum", value) for value in maximums]
@@ -186,7 +186,7 @@ class FHEMinMaxScaler:
         """Apply the min-max scaling logic to a set of features.
         
         Args:
-            features (Any): The input features to be scaled.
+            features (Any): The encrypted 2D feature matrix containing input samples.
 
         Returns:
             List[Any]: A list containing scaled features.

@@ -19,7 +19,7 @@ class BoundedOperation:
         """Initialize the BoundedOperation.
         
         Args:
-            name: The name of the operation.
+            name: The string name of the parameter being validated, used for formatting error messages.
             make_function: Builder function.
             compile_function: Compiler function.
             description: Description of the operation.

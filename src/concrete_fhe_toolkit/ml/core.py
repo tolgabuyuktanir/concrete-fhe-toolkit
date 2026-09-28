@@ -28,8 +28,8 @@ def manhattan_distance(array1: Union[np.ndarray, List[Any]], array2: Union[np.nd
         ```
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): First array.
-        array2 (Union[np.ndarray, List[Any]]): Second array.
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.
     
     Returns:
         Any: The Manhattan distance.
@@ -53,8 +53,8 @@ def hamming_distance(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndar
         ```
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): First array.
-        array2 (Union[np.ndarray, List[Any]]): Second array.
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.
     
     Returns:
         Any: The Hamming distance.
@@ -79,8 +79,8 @@ def euclidean_distance_squared(array1: Union[np.ndarray, List[Any]], array2: Uni
         ```
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): First array.
-        array2 (Union[np.ndarray, List[Any]]): Second array.
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.
     
     Returns:
         Any: The squared Euclidean distance.
@@ -105,8 +105,8 @@ def mean_squared_error(array1: Union[np.ndarray, List[Any]], array2: Union[np.nd
         ```
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): First array.
-        array2 (Union[np.ndarray, List[Any]]): Second array.
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.
     
     Returns:
         Any: The Mean Squared Error.
@@ -336,7 +336,7 @@ def l1_norm(array: Union[np.ndarray, List[Any]]) -> Any:
         ```
     
     Args:
-        array (Union[np.ndarray, List[Any]]): The array.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
     
     Returns:
         Any: The L1 norm.
@@ -364,9 +364,9 @@ def compile_hinge_loss(
         ```
     
     Args:
-        min_value (int): Minimum value.
-        max_value (int): Maximum value.
-        configuration (Optional[fhe.Configuration]): FHE configuration.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
     
     Returns:
         fhe.Circuit: The compiled circuit.
@@ -406,10 +406,10 @@ def make_cross_entropy_loss(
         ```
     
     Args:
-        min_input (int): Min input.
-        max_input (int): Max input.
-        input_scale (int): Input scale.
-        output_scale (int): Output scale.
+        min_input (int): The minimum expected value in the input domain.
+        max_input (int): The maximum expected value in the input domain.
+        input_scale (int): The fixed-point scaling factor of the input.
+        output_scale (int): The desired fixed-point scaling factor for the output.
     
     Returns:
         Callable: The cross entropy loss function.
@@ -460,11 +460,11 @@ def compile_cross_entropy_loss(
     
     Args:
         array_size (int): Size of array.
-        min_value (int): Min value.
-        max_value (int): Max value.
-        input_scale (int): Input scale.
-        output_scale (int): Output scale.
-        configuration (Optional[fhe.Configuration]): FHE configuration.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        input_scale (int): The fixed-point scaling factor of the input.
+        output_scale (int): The desired fixed-point scaling factor for the output.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
     
     Returns:
         fhe.Circuit: The compiled circuit.

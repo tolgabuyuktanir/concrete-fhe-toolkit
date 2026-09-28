@@ -36,7 +36,7 @@ class FHEModel:
         """Core circuit logic to be implemented by subclasses.
         
         Args:
-            features (Any): The input features for the circuit.
+            features (Any): The encrypted 2D feature matrix containing input samples.
             
         Returns:
             Any: The result of the circuit computation.
@@ -58,7 +58,7 @@ class FHEModel:
         """Executes the circuit logic on a single sample.
         
         Args:
-            features (Any): A single input sample.
+            features (Any): The encrypted 2D feature matrix containing input samples.
             
         Returns:
             Any: The result of the circuit logic.
@@ -71,7 +71,7 @@ class FHEModel:
         """Converts a value to an integer numpy array safely.
         
         Args:
-            value (Any): The input value.
+            value (Any): The encrypted value to process or validate.
             
         Returns:
             Any: The resulting integer numpy array.
@@ -103,7 +103,7 @@ class FHEModel:
             inputset (Any): The calibration dataset.
             batch_size (Any, optional): The batch size. Defaults to None.
             inputset_is_batched (Any, optional): Whether the inputset is batched. Defaults to None.
-            configuration (Any, optional): Optional compiler configuration. Defaults to None.
+            configuration (Any, optional): Optional FHE compiler configuration object.
             
         Returns:
             Any: The compiled circuit or None.
@@ -161,7 +161,7 @@ class FHEModel:
         """Encrypt one sample, evaluate it, and decrypt its prediction.
         
         Args:
-            features (Any): The input features to predict on.
+            features (Any): The encrypted 2D feature matrix containing input samples.
             
         Returns:
             Any: The prediction result.
@@ -172,7 +172,7 @@ class FHEModel:
         """Simulate one sample without encryption; compile the model first.
         
         Args:
-            features (Any): The input features to simulate on.
+            features (Any): The encrypted 2D feature matrix containing input samples.
             
         Returns:
             Any: The simulation result.
@@ -241,8 +241,8 @@ class FHELogisticRegression(FHEModel):
     Evaluates a logistic regression model over encrypted features.
     
     Args:
-        weights: The public list of weights for the regression.
-        bias: The public bias term.
+        weights: The pre-trained cleartext model weights used for inference.
+        bias: The pre-trained cleartext model bias used for inference.
         
     Example:
         ```python
@@ -268,8 +268,8 @@ class FHELinearRegression(FHEModel):
     Evaluates a linear regression model over encrypted features.
     
     Args:
-        weights: The public list of weights for the regression.
-        bias: The public bias term.
+        weights: The pre-trained cleartext model weights used for inference.
+        bias: The pre-trained cleartext model bias used for inference.
         
     Example:
         ```python
@@ -344,7 +344,7 @@ class FHECNN(FHEModel):
     
     Args:
         filters: The public 2D or 3D list of convolutional filters.
-        bias: The public list of bias terms for the filters.
+        bias: The pre-trained cleartext model bias used for inference.
         
     Example:
         ```python
@@ -413,8 +413,8 @@ class FHESVM(FHEModel):
     Evaluates a linear SVM over encrypted features.
     
     Args:
-        weights: The public list of support vector weights (dual_coef/coef).
-        bias: The public bias or intercept term.
+        weights: The pre-trained cleartext model weights used for inference.
+        bias: The pre-trained cleartext model bias used for inference.
         
     Example:
         ```python

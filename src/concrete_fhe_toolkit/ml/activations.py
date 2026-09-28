@@ -19,7 +19,7 @@ def relu(value: Any) -> Any:
     positive values exactly.
 
     Args:
-        value (Any): The encrypted value or tensor to apply ReLU on.
+        value (Any): The encrypted value to process or validate.
 
     Returns:
         Any: The transformed value where negative inputs are set to 0.
@@ -45,7 +45,7 @@ def leaky_relu(value: Any, alpha: float = 0.01) -> Any:
     non-zero gradient when the unit is not active.
 
     Args:
-        value (Any): The encrypted input value.
+        value (Any): The encrypted value to process or validate.
         alpha (float): The slope for negative inputs. Defaults to 0.01.
 
     Returns:
@@ -76,7 +76,7 @@ def unit_step(value: Any) -> Any:
     Often used in simple perceptrons or binary classification layers.
 
     Args:
-        value (Any): The encrypted input value.
+        value (Any): The encrypted value to process or validate.
 
     Returns:
         Any: 1 if value >= 0 else 0.
@@ -98,7 +98,7 @@ def threshold_activation(value: Any, threshold: Any) -> Any:
     Useful for custom decision boundaries in threshold-based models.
 
     Args:
-        value (Any): The encrypted input value.
+        value (Any): The encrypted value to process or validate.
         threshold (Any): The threshold to compare against.
 
     Returns:
@@ -128,10 +128,10 @@ def make_softmax(
     probabilities as integer percentages. The output is scaled by `probability_scale`.
     
     Args:
-        min_input (int): The minimum expected input value. Defaults to -127.
-        max_input (int): The maximum expected input value. Defaults to 127.
-        input_scale (int): Scale factor of the inputs. Defaults to 10.
-        output_scale (int): Scale factor for the exponential output. Defaults to 100.
+        min_input (int): The minimum expected value in the input domain.
+        max_input (int): The maximum expected value in the input domain.
+        input_scale (int): The fixed-point scaling factor of the input.
+        output_scale (int): The desired fixed-point scaling factor for the output.
         probability_scale (int): Scale for the final probability percentages. Defaults to 100.
 
     Returns:
@@ -227,9 +227,9 @@ def compile_relu(
     Compiles the ReLU function into a concrete-python FHE circuit.
     
     Args:
-        min_value (int): Minimum input bound. Defaults to -15.
-        max_value (int): Maximum input bound. Defaults to 15.
-        configuration (Optional[fhe.Configuration]): FHE compiler configuration. Defaults to None.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: Compiled ReLU circuit.
@@ -264,10 +264,10 @@ def compile_leaky_relu(
     slope for negative inputs.
     
     Args:
-        min_value (int): Minimum input bound. Defaults to -15.
-        max_value (int): Maximum input bound. Defaults to 15.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         alpha (float): Slope for negative values. Defaults to 0.01.
-        configuration (Optional[fhe.Configuration]): FHE compiler configuration. Defaults to None.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: Compiled Leaky ReLU circuit.
@@ -286,7 +286,7 @@ def compile_leaky_relu(
         """Apply leaky ReLU with the bound alpha.
         
         Args:
-            value (Any): The encrypted input value.
+            value (Any): The encrypted value to process or validate.
             
         Returns:
             Any: The modified value.
@@ -312,9 +312,9 @@ def compile_unit_step(
     Compiles the Heaviside step function into an FHE circuit.
     
     Args:
-        min_value (int): Minimum input bound. Defaults to -15.
-        max_value (int): Maximum input bound. Defaults to 15.
-        configuration (Optional[fhe.Configuration]): FHE compiler configuration. Defaults to None.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: Compiled Unit Step circuit.
@@ -346,9 +346,9 @@ def compile_threshold_activation(
     """Compile encrypted threshold activation over two encrypted inputs.
     
     Args:
-        min_value (int): Minimum input bound. Defaults to -15.
-        max_value (int): Maximum input bound. Defaults to 15.
-        configuration (Optional[fhe.Configuration]): FHE compiler configuration. Defaults to None.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: Compiled Threshold Activation circuit.
@@ -387,10 +387,10 @@ def compile_softmax(
     must be specified at compile time.
     
     Args:
-        size (int): Size of the input array.
-        min_value (int): Minimum score expected. Defaults to -127.
-        max_value (int): Maximum score expected. Defaults to 127.
-        configuration (Optional[fhe.Configuration]): FHE compiler configuration. Defaults to None.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: Compiled Softmax circuit.

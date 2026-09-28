@@ -17,8 +17,8 @@ def compare(x: Any, y: Any) -> Any:
     """Return 1 when x > y, 0 when equal, and -1 when x < y.
     
     Args:
-        x: left number in comparison.
-        y: right number in comparison.
+        x: The first encrypted operand.
+        y: The second encrypted operand.
 
     Returns:
         Any: 1 if x > y, 0 if x == y, and -1 if x < y.
@@ -44,9 +44,9 @@ def compile_compare(
     """Compile a sign-comparison circuit with inclusive input bounds.
     
     Args:
-        min_value (int): minimum value you can send to circuit.
-        max_value (int): maximum value you can send to circuit.
-        configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled FHE circuit for sign-comparison.
@@ -77,7 +77,7 @@ def sign(x: Any) -> Any:
     """Return the sign of a number (1 if positive, -1 if negative, 0 if zero).
     
     Args:
-        x (Any): The number to evaluate the sign of.
+        x (Any): The encrypted operand.
 
     Returns:
         Any: 1 if positive, -1 if negative, 0 if zero.
@@ -100,9 +100,9 @@ def compile_sign(
     """Compile a circuit returning the sign (-1, 0, or 1) of one encrypted input.
     
     Args:
-        min_value (int): minimum value you can send to circuit.
-        max_value (int): maximum value you can send to circuit.
-        configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled FHE circuit returning the sign of the input.
@@ -130,7 +130,7 @@ def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
     """Create exact encrypted floor division using a multivariate table lookup.
     
     Args:
-        zero_result (int): the result of zero division.
+        zero_result (int): Result to return when the operation is undefined (e.g., division by zero).
 
     Returns:
         BinaryFunction: A function that performs encrypted floor division.
@@ -149,8 +149,8 @@ def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
         """Perform floor division with zero-handling fallback.
         
         Args:
-            numerator: The dividend.
-            denominator: The divisor.
+            numerator: The encrypted dividend/numerator.
+            denominator: The encrypted divisor/denominator.
             
         Returns:
             The quotient or the zero fallback result.
@@ -168,8 +168,8 @@ def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
         """Perform encrypted floor division.
         
         Args:
-            numerator: Encrypted dividend.
-            denominator: Encrypted divisor.
+            numerator: The encrypted dividend/numerator.
+            denominator: The encrypted divisor/denominator.
             
         Returns:
             Encrypted quotient.
@@ -183,7 +183,7 @@ def make_floor_divide_by_product(*, zero_result: int = 0) -> TernaryFunction:
     """Create numerator // (left * right) using a multivariate table lookup.
     
     Args:
-        zero_result (int): the result of zero division.
+        zero_result (int): Result to return when the operation is undefined (e.g., division by zero).
 
     Returns:
         TernaryFunction: A function that computes numerator // (left * right).
@@ -206,9 +206,9 @@ def make_floor_divide_by_product(*, zero_result: int = 0) -> TernaryFunction:
         """Perform encrypted division by a product of two numbers.
         
         Args:
-            numerator: Encrypted dividend.
-            left: Encrypted left multiplier.
-            right: Encrypted right multiplier.
+            numerator: The encrypted dividend/numerator.
+            left: The left encrypted operand.
+            right: The right encrypted operand.
             
         Returns:
             Encrypted quotient.
@@ -228,10 +228,10 @@ def compile_floor_divide(
     """Compile floor division for nonnegative bounded encrypted inputs.
     
     Args:
-        max_numerator (int): maximum numerator value you can send to circuit.
-        max_denominator (int): maximum denominator value you can send to circuit.
-        zero_result (int): the result of zero division.
-        configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
+        max_numerator (int): The upper bound for the encrypted numerator.
+        max_denominator (int): The upper bound for the encrypted denominator.
+        zero_result (int): Result to return when the operation is undefined (e.g., division by zero).
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled FHE circuit for floor division.
@@ -282,11 +282,11 @@ def compile_floor_divide_by_product(
     """Compile numerator // (left * right) for nonnegative bounded inputs.
     
     Args:
-        max_numerator (int): maximum numerator value you can send to circuit.
-        max_left (int): maximum left number value you can send to circuit.
-        max_right (int): maximum right number value you can send to circuit.
-        zero_result (int): the result of zero division.
-        configuration (Optional[fhe.Configuration]): configuration of fhe.Compiler.
+        max_numerator (int): The upper bound for the encrypted numerator.
+        max_left (int): The upper bound for the left encrypted operand.
+        max_right (int): The upper bound for the right encrypted operand.
+        zero_result (int): Result to return when the operation is undefined (e.g., division by zero).
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled FHE circuit for floor division by product.

@@ -24,7 +24,7 @@ def array_sum(elements: Union[np.ndarray, List[Any]]) -> Any:
     """Calculate the sum of all elements in an encrypted array using a tournament reduction.
     
     Args:
-        elements (Union[np.ndarray, List[Any]]): The input array or list of encrypted integers to sum.
+        elements (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
 
     Returns:
         Any: The computed encrypted sum of all elements in the array.
@@ -48,7 +48,7 @@ def array_scale(array: Union[np.ndarray, List[Any]],factor: int) -> Union[np.nda
     """Multiply every element of an encrypted array by a scalar constant.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): The input array to scale.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
         factor (int): The scalar constant to multiply by.
 
     Returns:
@@ -67,8 +67,8 @@ def array_add(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, Lis
     """Perform element-wise addition of two encrypted arrays.
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): The first array.
-        array2 (Union[np.ndarray, List[Any]]): The second array.
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.
 
     Returns:
         Any: The element-wise sum of the two arrays.
@@ -86,8 +86,8 @@ def array_sub(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray, Lis
     """Perform element-wise subtraction of two encrypted arrays.
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): The first array (minuend).
-        array2 (Union[np.ndarray, List[Any]]): The second array (subtrahend).
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.
 
     Returns:
         Any: The element-wise difference between the two arrays.
@@ -105,8 +105,8 @@ def array_multiply(array1: Union[np.ndarray, List[Any]],array2: Union[np.ndarray
     """Perform element-wise multiplication of two encrypted arrays.
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): The first array.
-        array2 (Union[np.ndarray, List[Any]]): The second array.
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.
 
     Returns:
         Any: The element-wise product of the two arrays.
@@ -126,7 +126,7 @@ def array_slice(array: Union[np.ndarray, List[Any]], begin_index: Any, end_index
     """Slice an encrypted array (return elements from begin_index to end_index - 1).
     
     Args:
-        array (Union[np.ndarray, List[Any]]): The array to slice.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
         begin_index (Any): The starting index (inclusive).
         end_index (Any): The ending index (exclusive).
 
@@ -155,8 +155,8 @@ def array_all_equal(array1: Union[np.ndarray, List[Any]], array2: Union[np.ndarr
     """Check if two encrypted arrays are identical (returns 1 or 0).
     
     Args:
-        array1 (Union[np.ndarray, List[Any]]): The first array to compare.
-        array2 (Union[np.ndarray, List[Any]]): The second array to compare.
+        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.
+        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.
 
     Returns:
         Any: 1 if all elements are equal, 0 otherwise.
@@ -180,8 +180,8 @@ def make_compare_swap(
     """Create an ascending compare-swap function for bounded encrypted integers.
     
     Args:
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         BinaryScalarFunction: A function that sorts two encrypted values.
@@ -224,9 +224,9 @@ def make_sort(
     """Create a fixed-size bitonic sorting network.
     
     Args:
-        size (int): The number of elements to sort. Must be a power of two.
-        min_value (int): The minimum value possible in the array.
-        max_value (int): The maximum value possible in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         descending (bool): Whether to sort in descending order instead of ascending.
 
     Returns:
@@ -322,9 +322,9 @@ def make_array_minimum(
     """Create a tournament reduction that returns the minimum value.
     
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         UnaryArrayFunction: A function that returns the minimum value.
@@ -348,9 +348,9 @@ def make_array_maximum(
     """Create a tournament reduction that returns the maximum value.
     
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         UnaryArrayFunction: A function that returns the maximum value.
@@ -444,9 +444,9 @@ def make_argmin(
     """Create an argmin reduction with deterministic tie handling.
     
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         tie_break (TieBreak): Which index to return if multiple elements are equal to the minimum.
 
     Returns:
@@ -473,9 +473,9 @@ def make_argmax(
     """Create an argmax reduction with deterministic tie handling.
     
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         tie_break (TieBreak): Which index to return if multiple elements are equal to the maximum.
 
     Returns:
@@ -501,9 +501,9 @@ def compile_compare_swap(
     """Compile an ascending compare-swap circuit.
     
     Args:
-        min_value (int): The minimum possible value.
-        max_value (int): The maximum possible value.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled compare-swap circuit.
@@ -554,11 +554,11 @@ def compile_sort(
     """Compile a fixed-size bitonic sorting circuit.
     
     Args:
-        size (int): The number of elements to sort. Must be a power of two.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         descending (bool): Whether to sort in descending order.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled sorting circuit.
@@ -592,10 +592,10 @@ def compile_array_minimum(
     """Compile a minimum reduction circuit.
     
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled minimum reduction circuit.
@@ -624,10 +624,10 @@ def compile_array_maximum(
     """Compile a maximum reduction circuit.
     
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled maximum reduction circuit.
@@ -657,11 +657,11 @@ def compile_argmin(
     """Compile an argmin reduction circuit.
     
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         tie_break (TieBreak): Which index to return if multiple elements are equal to the minimum.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled argmin reduction circuit.
@@ -696,11 +696,11 @@ def compile_argmax(
     """Compile an argmax reduction circuit.
     
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         tie_break (TieBreak): Which index to return if multiple elements are equal to the maximum.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled argmax reduction circuit.
@@ -732,9 +732,9 @@ def make_array_set(
     """Create a function for oblivious array writing.
     
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         Callable: A function that updates an element in the encrypted array obliviously.
@@ -754,9 +754,9 @@ def make_array_set(
         """Oblivious write: return a copy with array[index] replaced by value.
         
         Args:
-            array (Union[np.ndarray, List[Any]]): The input array.
+            array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
             index (Any): The encrypted index to update.
-            value (Any): The new encrypted value to write.
+            value (Any): The encrypted value to process or validate.
 
         Returns:
             Union[np.ndarray, List[Any]]: The updated array.
@@ -790,10 +790,10 @@ def compile_array_set(
     """Compile an FHE circuit for oblivious array writing.
     
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled circuit for oblivious array writing.
@@ -826,7 +826,7 @@ def array_cumsum(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List[
     """Return the running prefix sums of an encrypted array.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): The input array to compute prefix sums over.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
 
     Returns:
         Union[np.ndarray, List[Any]]: The array of prefix sums.
@@ -850,7 +850,7 @@ def array_reverse(array: Union[np.ndarray, List[Any]]) -> Union[np.ndarray, List
     """Return the array with its (public) element order reversed.
     
     Args:
-        array (Union[np.ndarray, List[Any]]): The input array to reverse.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
 
     Returns:
         Union[np.ndarray, List[Any]]: The reversed array.
@@ -903,10 +903,10 @@ def make_top_k(
     Note: Requires `size` to be a power of two (2, 4, 8...) due to the underlying sort.
     
     Args:
-        size (int): The number of elements in the array. Must be a power of two.
+        size (int): The fixed size of the input array, must be known at compile time.
         k (int): The number of top elements to return.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         largest (bool): Whether to return the largest values (True) or smallest values (False).
 
     Returns:
@@ -949,12 +949,12 @@ def compile_top_k(
     """Compile a top-k reduction circuit.
     
     Args:
-        size (int): The number of elements in the array. Must be a power of two.
+        size (int): The fixed size of the input array, must be known at compile time.
         k (int): The number of top elements to return.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         largest (bool): Whether to return the largest values (True) or smallest values (False).
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled top-k reduction circuit.
@@ -982,10 +982,10 @@ def make_array_pad(
     """Create a fixed-size array padding function.
 
     Args:
-        size (int): The initial number of elements in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
         target_size (int): The desired size of the array after padding.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         Callable: A function that pads the input array with zeros.
@@ -1007,7 +1007,7 @@ def make_array_pad(
     def array_pad(array: Union[np.ndarray, List[Any]]) -> Any:
         """Pad an encrypted array with zeros up to the specified target size.
         Args:
-            array (Union[np.ndarray, List[Any]]): The input array to pad.
+            array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
 
         Returns:
             Any: The zero-padded array.
@@ -1030,11 +1030,11 @@ def compile_array_pad(
     """Compile a fixed-size array padding circuit.
 
     Args:
-        size (int): The initial number of elements in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
         target_size (int): The desired size of the array after padding.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled padding circuit.
@@ -1062,9 +1062,9 @@ def make_array_index_of(
     """Create a first-index-of search function for bounded encrypted arrays.
 
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         missing_result (Optional[int]): The value to return if the target is not found (default: size).
 
     Returns:
@@ -1085,8 +1085,8 @@ def make_array_index_of(
     def array_index_of(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Return the first index holding value, or missing_result (default size).
         Args:
-            array (Union[np.ndarray, List[Any]]): The input array to search.
-            value (Any): The target value to find.
+            array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
+            value (Any): The encrypted value to process or validate.
 
         Returns:
             Any: The encrypted index of the target value.
@@ -1131,11 +1131,11 @@ def compile_array_index_of(
     """Compile a first-index-of search circuit.
 
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         missing_result (Optional[int]): The value to return if the target is not found (default: size).
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled search circuit.
@@ -1167,9 +1167,9 @@ def make_array_count(
     """Create a value-counting function for bounded encrypted arrays.
 
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         Callable: A function that counts occurrences of a value.
@@ -1188,8 +1188,8 @@ def make_array_count(
     def array_count(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Count occurrences of a specific value in an encrypted array.
         Args:
-            array (Union[np.ndarray, List[Any]]): The input array.
-            value (Any): The value to count.
+            array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
+            value (Any): The encrypted value to process or validate.
 
         Returns:
             Any: The encrypted count of occurrences.
@@ -1210,10 +1210,10 @@ def compile_array_count(
     """Compile a value-counting circuit.
 
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled counting circuit.
@@ -1245,9 +1245,9 @@ def make_array_contains(
     """Create a membership-test function for bounded encrypted arrays.
 
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         Callable: A function that tests whether a value exists in the array.
@@ -1266,8 +1266,8 @@ def make_array_contains(
     def array_contains(array: Union[np.ndarray, List[Any]], value: Any) -> Any:
         """Check if an encrypted array contains a specific target value (returns 1 or 0).
         Args:
-            array (Union[np.ndarray, List[Any]]): The input array to search.
-            value (Any): The target value to search for.
+            array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
+            value (Any): The encrypted value to process or validate.
 
         Returns:
             Any: 1 if the value exists in the array, 0 otherwise.
@@ -1288,10 +1288,10 @@ def compile_array_contains(
     """Compile a membership-test circuit.
 
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled membership-test circuit.
@@ -1323,9 +1323,9 @@ def make_array_index(
     """Create an oblivious-read function for bounded encrypted arrays.
 
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         Callable: A function that obliviously reads an element from the array at a given index.
@@ -1344,7 +1344,7 @@ def make_array_index(
     def array_index(array: Union[np.ndarray, List[Any]], index: Any) -> Any:
         """Oblivious read: return array[index] without revealing the encrypted index.
         Args:
-            array (Union[np.ndarray, List[Any]]): The input array to read from.
+            array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
             index (Any): The encrypted index to read.
 
         Returns:
@@ -1371,10 +1371,10 @@ def compile_array_index(
     """Compile an oblivious-read circuit.
 
     Args:
-        size (int): The number of elements in the array.
-        min_value (int): The minimum possible value in the array.
-        max_value (int): The maximum possible value in the array.
-        configuration (Optional[fhe.Configuration]): The optional FHE compilation configuration.
+        size (int): The fixed size of the input array, must be known at compile time.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
 
     Returns:
         fhe.Circuit: The compiled oblivious-read circuit.

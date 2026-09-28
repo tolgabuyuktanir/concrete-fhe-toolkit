@@ -47,8 +47,8 @@ def make_gcd(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
     """Create math.gcd for two encrypted bounded integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -74,10 +74,10 @@ def compile_gcd(
     """Compile math.gcd for two encrypted bounded integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -114,8 +114,8 @@ def make_lcm(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
     """Create math.lcm for two encrypted bounded integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -141,10 +141,10 @@ def compile_lcm(
     """Compile math.lcm for two encrypted bounded integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -184,8 +184,8 @@ def make_is_coprime(
     """Create a predicate returning 1 when gcd(left, right) == 1.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -215,10 +215,10 @@ def compile_is_coprime(
     """Compile a predicate returning 1 for coprime encrypted integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -266,11 +266,11 @@ def make_is_divisible(
     """Create divisibility testing with explicit denominator-zero behavior.
 
     Args:
-        min_numerator: The lower bound for the numerator.
-        max_numerator: The upper bound for the numerator.
-        min_denominator: The lower bound for the denominator.
-        max_denominator: The upper bound for the denominator.
-        zero_result: The value to return when the denominator is zero.
+        min_numerator: The lower bound for the encrypted numerator.
+        max_numerator: The upper bound for the encrypted numerator.
+        min_denominator: The lower bound for the encrypted denominator.
+        max_denominator: The upper bound for the encrypted denominator.
+        zero_result: Result to return when the operation is undefined (e.g., division by zero).
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -318,13 +318,13 @@ def compile_is_divisible(
     """Compile encrypted divisibility testing.
 
     Args:
-        min_numerator: The lower bound for the numerator.
-        max_numerator: The upper bound for the numerator.
-        min_denominator: The lower bound for the denominator.
-        max_denominator: The upper bound for the denominator.
-        zero_result: The value to return when the denominator is zero.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        min_numerator: The lower bound for the encrypted numerator.
+        max_numerator: The upper bound for the encrypted numerator.
+        min_denominator: The lower bound for the encrypted denominator.
+        max_denominator: The upper bound for the encrypted denominator.
+        zero_result: Result to return when the operation is undefined (e.g., division by zero).
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -369,7 +369,7 @@ def make_isqrt(max_value: int) -> UnaryFunction:
     """Create math.isqrt for encrypted input in [0, max_value].
 
     Args:
-        max_value: The upper bound of the input domain.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -396,9 +396,9 @@ def compile_isqrt(
     """Compile math.isqrt for encrypted input in [0, max_value].
 
     Args:
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -428,8 +428,8 @@ def make_is_even(min_value: int = 0, max_value: int = 15) -> UnaryFunction:
     """Create a predicate returning 1 for even encrypted integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -457,10 +457,10 @@ def compile_is_even(
     """Compile a predicate returning 1 for even encrypted integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -494,8 +494,8 @@ def make_is_odd(min_value: int = 0, max_value: int = 15) -> UnaryFunction:
     """Create a predicate returning 1 for odd encrypted integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -523,10 +523,10 @@ def compile_is_odd(
     """Compile a predicate returning 1 for odd encrypted integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -574,8 +574,8 @@ def make_is_prime(min_value: int = 0, max_value: int = 100) -> UnaryFunction:
     """Create a predicate returning 1 for prime encrypted integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -603,10 +603,10 @@ def compile_is_prime(
     """Compile a predicate returning 1 for prime encrypted integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -657,8 +657,8 @@ def make_totient(min_value: int = 0, max_value: int = 100) -> UnaryFunction:
     """Create Euler's totient for encrypted bounded integers (0 for n <= 0).
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -686,10 +686,10 @@ def compile_totient(
     """Compile Euler's totient for encrypted bounded integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -730,8 +730,8 @@ def make_next_prime(min_value: int = 0, max_value: int = 100) -> UnaryFunction:
     """Create the smallest prime strictly greater than an encrypted integer.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -759,10 +759,10 @@ def compile_next_prime(
     """Compile the smallest prime strictly greater than an encrypted integer.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -810,8 +810,8 @@ def make_mod_inverse(
     the value is not coprime with the modulus.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         invalid_result: The value to return when the result is mathematically undefined.
 
     Returns:
@@ -844,11 +844,11 @@ def compile_mod_inverse(
     """Compile the modular inverse of value mod modulus for encrypted inputs.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         invalid_result: The value to return when the result is mathematically undefined.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -890,8 +890,8 @@ def make_hypot(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
     """Create round(hypot(x, y)) for two encrypted bounded integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -921,10 +921,10 @@ def compile_hypot(
     """Compile round(hypot(x, y)) for two encrypted bounded integers.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -970,8 +970,8 @@ def make_ilogb(
     """Create floor(log2(|x|)) for encrypted integers; invalid_result handles x == 0.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         invalid_result: The value to return when the result is mathematically undefined.
 
     Returns:
@@ -1006,11 +1006,11 @@ def compile_ilogb(
     """Compile floor(log2(|x|)) for encrypted integers; invalid_result handles x == 0.
 
     Args:
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
         invalid_result: The value to return when the result is mathematically undefined.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -1053,9 +1053,9 @@ def make_dist(size: int, min_value: int = 0, max_value: int = 15) -> BinaryFunct
     worst-case squared distance for those bounds.
 
     Args:
-        size: The number of dimensions or coordinates.
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
+        size: The fixed size of the input array, must be known at compile time.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -1112,11 +1112,11 @@ def compile_dist(
     """Compile round(Euclidean distance) between two encrypted coordinate arrays.
 
     Args:
-        size: The number of dimensions or coordinates.
-        min_value: The lower bound of the input domain.
-        max_value: The upper bound of the input domain.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        size: The fixed size of the input array, must be known at compile time.
+        min_value: The lower bound for the encrypted inputs, used to dimension the FHE circuit.
+        max_value: The upper bound for the encrypted inputs, used to dimension the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.
@@ -1225,8 +1225,8 @@ def compile_pow(
         min_base: The lower bound for the base.
         max_base: The upper bound for the base.
         max_exponent: The maximum possible exponent value.
-        allow_large_lookup: Whether to allow lookup tables exceeding default size limits.
-        configuration: The compiler configuration for the FHE circuit.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         The compiled FHE circuit or a callable function.

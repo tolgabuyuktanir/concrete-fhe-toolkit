@@ -19,7 +19,7 @@ def _scaled_rate(rate: float) -> int:
     """Convert a public float rate into an exact integer at RATE_SCALE.
     
     Args:
-        rate (float): The public float rate.
+        rate (float): A public floating point rate (e.g., 0.05 for 5%).
         
     Returns:
         int: The exact integer representation of the rate at RATE_SCALE.
@@ -48,8 +48,8 @@ def apply_rate(amount: Any, rate: float) -> Any:
     :func:`return_actual_value` after decryption.
     
     Args:
-        amount (Any): The encrypted amount.
-        rate (float): The public rate to multiply by.
+        amount (Any): The encrypted integer amount to be processed.
+        rate (float): A public floating point rate (e.g., 0.05 for 5%).
         
     Returns:
         Any: The encrypted result scaled by RATE_SCALE.
@@ -70,7 +70,7 @@ def return_actual_value(value: Any) -> float:
     """Decode a RATE_SCALE-scaled cleartext result back to its real value.
     
     Args:
-        value (Any): The cleartext value scaled by RATE_SCALE.
+        value (Any): The encrypted value to process or validate.
         
     Returns:
         float: The actual real value.
@@ -90,8 +90,8 @@ def calculate_tax(amount: Any, rate: float) -> Any:
     """Calculate the tax amount at RATE_SCALE scaling.
     
     Args:
-        amount (Any): The encrypted amount.
-        rate (float): The tax rate.
+        amount (Any): The encrypted integer amount to be processed.
+        rate (float): A public floating point rate (e.g., 0.05 for 5%).
         
     Returns:
         Any: The encrypted tax amount scaled by RATE_SCALE.
@@ -111,8 +111,8 @@ def discount(amount: Any, rate: float) -> Any:
     """Calculate the discounted amount at RATE_SCALE scaling.
     
     Args:
-        amount (Any): The encrypted original amount.
-        rate (float): The discount rate.
+        amount (Any): The encrypted integer amount to be processed.
+        rate (float): A public floating point rate (e.g., 0.05 for 5%).
         
     Returns:
         Any: The encrypted discounted amount scaled by RATE_SCALE.
@@ -132,8 +132,8 @@ def simple_interest(amount: Any, rate: float, time_period: Any) -> Any:
     """Calculate simple interest (amount * rate * time) at RATE_SCALE scaling.
     
     Args:
-        amount (Any): The encrypted principal amount.
-        rate (float): The interest rate.
+        amount (Any): The encrypted integer amount to be processed.
+        rate (float): A public floating point rate (e.g., 0.05 for 5%).
         time_period (Any): The encrypted or plaintext time period.
         
     Returns:

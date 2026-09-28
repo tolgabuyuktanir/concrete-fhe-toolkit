@@ -96,8 +96,8 @@ def compile_floor(
         min_input: The minimum expected value in the input domain.
         max_input: The maximum expected value in the input domain.
         scale: The scaling factor applied to the fixed-point representation.
-        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
-        configuration: Optional Concrete FHE configuration to use during compilation.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         A compiled Concrete FHE circuit that performs the operation.
@@ -168,8 +168,8 @@ def compile_ceil(
         min_input: The minimum expected value in the input domain.
         max_input: The maximum expected value in the input domain.
         scale: The scaling factor applied to the fixed-point representation.
-        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
-        configuration: Optional Concrete FHE configuration to use during compilation.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         A compiled Concrete FHE circuit that performs the operation.
@@ -240,8 +240,8 @@ def compile_trunc(
         min_input: The minimum expected value in the input domain.
         max_input: The maximum expected value in the input domain.
         scale: The scaling factor applied to the fixed-point representation.
-        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
-        configuration: Optional Concrete FHE configuration to use during compilation.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         A compiled Concrete FHE circuit that performs the operation.
@@ -312,8 +312,8 @@ def compile_round(
         min_input: The minimum expected value in the input domain.
         max_input: The maximum expected value in the input domain.
         scale: The scaling factor applied to the fixed-point representation.
-        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
-        configuration: Optional Concrete FHE configuration to use during compilation.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         A compiled Concrete FHE circuit that performs the operation.
@@ -392,8 +392,8 @@ def compile_floor_ceil(
         min_input: The minimum expected value in the input domain.
         max_input: The maximum expected value in the input domain.
         scale: The scaling factor applied to the fixed-point representation.
-        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
-        configuration: Optional Concrete FHE configuration to use during compilation.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         A compiled Concrete FHE circuit that performs the operation.
@@ -448,7 +448,7 @@ def make_rescale(
         max_input: The maximum expected value in the input domain.
         input_scale: The fixed-point scaling factor of the input.
         output_scale: The desired fixed-point scaling factor for the output.
-        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
+        rounding: The rounding mode to use (e.g., floor, ceil, trunc, nearest).
 
     Returns:
         A callable function that computes the operation over the given domain.
@@ -489,9 +489,9 @@ def compile_rescale(
         max_input: The maximum expected value in the input domain.
         input_scale: The fixed-point scaling factor of the input.
         output_scale: The desired fixed-point scaling factor for the output.
-        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
-        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
-        configuration: Optional Concrete FHE configuration to use during compilation.
+        rounding: The rounding mode to use (e.g., floor, ceil, trunc, nearest).
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         A compiled Concrete FHE circuit that performs the operation.
@@ -540,7 +540,7 @@ def make_round_to_multiple(
         min_input: The minimum expected value in the input domain.
         max_input: The maximum expected value in the input domain.
         step: The integer step size to which the input will be quantized.
-        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
+        rounding: The rounding mode to use (e.g., floor, ceil, trunc, nearest).
 
     Returns:
         A callable function that computes the operation over the given domain.
@@ -581,9 +581,9 @@ def compile_round_to_multiple(
         min_input: The minimum expected value in the input domain.
         max_input: The maximum expected value in the input domain.
         step: The integer step size to which the input will be quantized.
-        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
-        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
-        configuration: Optional Concrete FHE configuration to use during compilation.
+        rounding: The rounding mode to use (e.g., floor, ceil, trunc, nearest).
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         A compiled Concrete FHE circuit that performs the operation.
@@ -680,8 +680,8 @@ def compile_modf(
         min_input: The minimum expected value in the input domain.
         max_input: The maximum expected value in the input domain.
         scale: The scaling factor applied to the fixed-point representation.
-        allow_large_lookup: If True, allows the creation of large lookup tables, which may be slow.
-        configuration: Optional Concrete FHE configuration to use during compilation.
+        allow_large_lookup: Whether to allow large table lookups (may be slow).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         A compiled Concrete FHE circuit that performs the operation.
@@ -740,7 +740,7 @@ def make_fixed_point_multiply(
 
     Args:
         scale: The scaling factor applied to the fixed-point representation.
-        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
+        rounding: The rounding mode to use (e.g., floor, ceil, trunc, nearest).
 
     Returns:
         A callable function that computes the operation over the given domain.
@@ -785,8 +785,8 @@ def compile_fixed_point_multiply(
         min_input: The minimum expected value in the input domain.
         max_input: The maximum expected value in the input domain.
         scale: The scaling factor applied to the fixed-point representation.
-        rounding: The rounding mode to use (e.g., 'floor', 'ceil', 'trunc', 'nearest').
-        configuration: Optional Concrete FHE configuration to use during compilation.
+        rounding: The rounding mode to use (e.g., floor, ceil, trunc, nearest).
+        configuration: Optional FHE compiler configuration object.
 
     Returns:
         A compiled Concrete FHE circuit that performs the operation.

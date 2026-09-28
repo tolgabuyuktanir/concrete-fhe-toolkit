@@ -242,7 +242,7 @@ def make_unary_lookup(
     
     Args:
         values (Sequence[...]): The values.
-        min_value (int): The minimum value.
+        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.
     
     Returns:
         UnaryFunction: The resulting value.

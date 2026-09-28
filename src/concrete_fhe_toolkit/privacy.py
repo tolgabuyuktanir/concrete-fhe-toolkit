@@ -41,8 +41,8 @@ def laplace_mechanism(
     when one individual's data changes (1 for a simple count).
 
     Args:
-        value: The decrypted aggregate to release.
-        sensitivity: L1 sensitivity of the aggregate.
+        value: The encrypted value to process or validate.
+        sensitivity: The L1/L2 sensitivity of the aggregate function for differential privacy.
         epsilon: Privacy budget for this release (smaller = more private).
         rng: Optional ``numpy.random.Generator`` for reproducible noise.
 
@@ -84,8 +84,8 @@ def gaussian_mechanism(
     many values are released together, since Gaussian noise composes better.
 
     Args:
-        value: The decrypted aggregate to release.
-        sensitivity: L2 sensitivity of the aggregate.
+        value: The encrypted value to process or validate.
+        sensitivity: The L1/L2 sensitivity of the aggregate function for differential privacy.
         epsilon: Privacy budget (must be in ``(0, 1]`` for this calibration).
         delta: Failure probability (for example ``1e-5``).
         rng: Optional ``numpy.random.Generator`` for reproducible noise.
@@ -142,7 +142,7 @@ def dp_release(
 
     Args:
         values: The decrypted aggregates to release together.
-        sensitivity: Per-value sensitivity to one individual's change.
+        sensitivity: The L1/L2 sensitivity of the aggregate function for differential privacy.
         epsilon: Total privacy budget for the whole vector.
         mechanism: ``"laplace"`` (pure epsilon-DP) or ``"gaussian"``
             (requires ``delta``).

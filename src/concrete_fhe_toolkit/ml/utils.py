@@ -27,7 +27,7 @@ def binarize(array: Union[np.ndarray, List[Any]], threshold: Any) -> Union[np.nd
     """Binarize an encrypted array based on a threshold.
 
     Args:
-        array (Union[np.ndarray, List[Any]]): The encrypted array to binarize.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
         threshold (Any): The threshold to compare against.
 
     Returns:
@@ -48,7 +48,7 @@ def clip_array(array: Union[np.ndarray, List[Any]], min_val: Any, max_val: Any) 
     """Clip values in an encrypted array to a minimum and maximum range.
 
     Args:
-        array (Union[np.ndarray, List[Any]]): The encrypted array to clip.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
         min_val (Any): The minimum value to clip to.
         max_val (Any): The maximum value to clip to.
 
@@ -70,7 +70,7 @@ def normalize_array(array: Union[np.ndarray, List[Any]], divisor: int) -> Union[
     """Normalize an encrypted array by floor dividing by a constant scalar divisor.
 
     Args:
-        array (Union[np.ndarray, List[Any]]): The encrypted array to normalize.
+        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.
         divisor (int): The integer value to divide elements by.
 
     Returns:

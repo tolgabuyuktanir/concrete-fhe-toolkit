@@ -32,7 +32,7 @@ def _bit_width(width: int) -> int:
     """Validate and normalize a bit width.
     
     Args:
-        width (int): The bit width to validate.
+        width (int): The fixed bit width.
         
     Returns:
         int: The validated bit width.
@@ -63,8 +63,8 @@ def bit_and(left: Any, right: Any) -> Any:
     """Return left AND right for bit expressions.
     
     Args:
-        left (Any): The left bit expression.
-        right (Any): The right bit expression.
+        left (Any): The left encrypted operand.
+        right (Any): The right encrypted operand.
         
     Returns:
         Any: The result of left AND right.
@@ -83,8 +83,8 @@ def bit_or(left: Any, right: Any) -> Any:
     """Return left OR right for bit expressions.
     
     Args:
-        left (Any): The left bit expression.
-        right (Any): The right bit expression.
+        left (Any): The left encrypted operand.
+        right (Any): The right encrypted operand.
         
     Returns:
         Any: The result of left OR right.
@@ -103,8 +103,8 @@ def bit_xor(left: Any, right: Any) -> Any:
     """Return left XOR right for bit expressions.
     
     Args:
-        left (Any): The left bit expression.
-        right (Any): The right bit expression.
+        left (Any): The left encrypted operand.
+        right (Any): The right encrypted operand.
         
     Returns:
         Any: The result of left XOR right.
@@ -144,8 +144,8 @@ def full_adder_bit(left: Any, right: Any, carry_in: Any) -> tuple[Any, Any]:
     """Return (sum_bit, carry_out) for one full-adder stage.
     
     Args:
-        left (Any): The left bit.
-        right (Any): The right bit.
+        left (Any): The left encrypted operand.
+        right (Any): The right encrypted operand.
         carry_in (Any): The carry-in bit.
         
     Returns:
@@ -166,8 +166,8 @@ def full_subtractor_bit(left: Any, right: Any, borrow_in: Any) -> tuple[Any, Any
     """Return (difference_bit, borrow_out) for one full-subtractor stage.
     
     Args:
-        left (Any): The left bit.
-        right (Any): The right bit.
+        left (Any): The left encrypted operand.
+        right (Any): The right encrypted operand.
         borrow_in (Any): The borrow-in bit.
         
     Returns:
@@ -281,8 +281,8 @@ def integer_to_bits(value: Any, width: int) -> tuple[Any, ...]:
     """Return little-endian bits of an unsigned integer expression.
     
     Args:
-        value (Any): The unsigned integer expression.
-        width (int): The bit width.
+        value (Any): The encrypted value to process or validate.
+        width (int): The fixed bit width.
         
     Returns:
         tuple[Any, ...]: The little-endian bits.
@@ -325,8 +325,8 @@ def unsigned_to_bits(value: int, width: int) -> tuple[int, ...]:
     """Return little-endian bits of a clear unsigned integer constant.
     
     Args:
-        value (int): The unsigned integer constant.
-        width (int): The bit width.
+        value (int): The encrypted value to process or validate.
+        width (int): The fixed bit width.
         
     Returns:
         tuple[int, ...]: The little-endian bits.
@@ -350,8 +350,8 @@ def twos_complement_bits(value: int, width: int) -> tuple[int, ...]:
     """Return little-endian two's-complement bits for a clear signed integer.
     
     Args:
-        value (int): The signed integer constant.
-        width (int): The bit width.
+        value (int): The encrypted value to process or validate.
+        width (int): The fixed bit width.
         
     Returns:
         tuple[int, ...]: The little-endian bits.
@@ -387,7 +387,7 @@ def sign_magnitude_to_twos_complement_bits(
     Args:
         magnitude_bits (Iterable[Any]): The magnitude bits.
         sign_bit (Any): The sign bit.
-        width (int | None, optional): The target width. Defaults to None.
+        width (int | None, optional): The fixed bit width.
         
     Returns:
         tuple[Any, ...]: The two's-complement bits.
@@ -430,7 +430,7 @@ def twos_complement_add_bits(
     Args:
         left_bits (Iterable[Any]): The first two's-complement bit list.
         right_bits (Iterable[Any]): The second two's-complement bit list.
-        width (int): The bit width.
+        width (int): The fixed bit width.
         
     Returns:
         tuple[Any, ...]: The sum as a two's-complement bit list.
@@ -540,7 +540,7 @@ def multiply_bits(
     Args:
         left_bits (Iterable[Any]): The first two's-complement bit list.
         right_bits (Iterable[Any]): The second two's-complement bit list.
-        width (int): The bit width.
+        width (int): The fixed bit width.
         
     Returns:
         tuple[Any]: The product as a two's-complement bit list.
@@ -589,7 +589,7 @@ def shift_left_bits(bits: Iterable[Any], amount: int) -> tuple:
     
     Args:
         bits (Iterable[Any]): The bits to shift.
-        amount (int): The shift amount.
+        amount (int): The encrypted integer amount to be processed.
         
     Returns:
         tuple: The shifted bits.
@@ -619,7 +619,7 @@ def shift_right_bits(
     
     Args:
         bits (Iterable[Any]): The bits to shift.
-        amount (int): The shift amount.
+        amount (int): The encrypted integer amount to be processed.
         arithmetic (bool, optional): Whether to sign-extend. Defaults to False.
         
     Returns:
@@ -646,7 +646,7 @@ def rotate_left_bits(bits: Iterable[Any], amount: int) -> tuple:
     
     Args:
         bits (Iterable[Any]): The bits to rotate.
-        amount (int): The rotation amount.
+        amount (int): The encrypted integer amount to be processed.
         
     Returns:
         tuple: The rotated bits.
@@ -673,7 +673,7 @@ def rotate_right_bits(bits: Iterable[Any], amount: int) -> tuple:
     
     Args:
         bits (Iterable[Any]): The bits to rotate.
-        amount (int): The rotation amount.
+        amount (int): The encrypted integer amount to be processed.
         
     Returns:
         tuple: The rotated bits.

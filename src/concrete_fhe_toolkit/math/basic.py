@@ -98,7 +98,7 @@ def make_scalar_multiply(multiplier: int) -> UnaryFunction:
     normalized = validate_integer("multiplier", multiplier)
 
     def scalar_multiply(value: Any) -> Any:
-    """value: Any"""
+        """value: Any"""
         return value * normalized
 
     return scalar_multiply
@@ -113,7 +113,7 @@ def make_is_close(absolute_tolerance: int) -> BinaryFunction:
     )
 
     def is_close(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+        """left: Any, right: Any"""
         difference = left - right
         return (difference >= -tolerance) * (difference <= tolerance)
 
@@ -785,7 +785,7 @@ def make_divmod(
     )
 
     def quotient_and_remainder(numerator: Any, denominator: Any) -> Any:
-    """numerator: Any, denominator: Any"""
+        """numerator: Any, denominator: Any"""
         return quotient(numerator, denominator), remainder(numerator, denominator)
 
     return quotient_and_remainder
@@ -933,7 +933,7 @@ def make_abs_diff(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
 
     if span == 0:
         def constant_abs_diff(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+            """left: Any, right: Any"""
             return left - right
 
         return constant_abs_diff
@@ -942,7 +942,7 @@ def make_abs_diff(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
     lookup = make_unary_lookup(values, -span)
 
     def abs_diff(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+        """left: Any, right: Any"""
         return lookup(left - right)
 
     return abs_diff
@@ -997,7 +997,7 @@ def make_copysign(min_value: int = -15, max_value: int = 15) -> BinaryFunction:
     absolute = make_absolute(minimum, maximum)
 
     def copysign(x: Any, y: Any) -> Any:
-    """x: Any, y: Any"""
+        """x: Any, y: Any"""
         sign_factor = (y >= 0) * 2 - 1
         return absolute(x) * sign_factor
 
@@ -1067,15 +1067,15 @@ def _make_saturating(operation: str, min_value: int, max_value: int) -> BinaryFu
 
     if operation == "add":
         def saturating(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+            """left: Any, right: Any"""
             return clamp_result(left + right)
     elif operation == "subtract":
         def saturating(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+            """left: Any, right: Any"""
             return clamp_result(left - right)
     else:
         def saturating(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+            """left: Any, right: Any"""
             return clamp_result(left * right)
 
     return saturating
@@ -1199,7 +1199,7 @@ def make_fdim(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
 
     if span == 0:
         def constant_fdim(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+            """left: Any, right: Any"""
             return left - right
 
         return constant_fdim
@@ -1208,7 +1208,7 @@ def make_fdim(min_value: int = 0, max_value: int = 15) -> BinaryFunction:
     lookup = make_unary_lookup(values, -span)
 
     def fdim(left: Any, right: Any) -> Any:
-    """left: Any, right: Any"""
+        """left: Any, right: Any"""
         return lookup(left - right)
 
     return fdim
@@ -1392,7 +1392,7 @@ def make_ldexp(exponent: int) -> UnaryFunction:
         factor = 1 << normalized
 
         def scale_up(value: Any) -> Any:
-    """value: Any"""
+            """value: Any"""
             return value * factor
 
         return scale_up
@@ -1400,7 +1400,7 @@ def make_ldexp(exponent: int) -> UnaryFunction:
     divisor = 1 << (-normalized)
 
     def scale_down(value: Any) -> Any:
-    """value: Any"""
+        """value: Any"""
         return value // divisor
 
     return scale_down

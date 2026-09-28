@@ -74,8 +74,8 @@ def compile_factorial(
     
     Args:
         max_n (int): The maximum value for the encrypted integer n.
-        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
-        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
         
     Returns:
         fhe.Circuit: The compiled FHE circuit for factorial computation.
@@ -132,8 +132,8 @@ def compile_fibonacci(
     
     Args:
         max_n (int): The maximum value for the encrypted integer n.
-        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
-        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
         
     Returns:
         fhe.Circuit: The compiled FHE circuit for Fibonacci computation.
@@ -195,8 +195,8 @@ def compile_power(
     Args:
         base (int): The base to raise to the power of the exponent.
         max_exponent (int): The maximum value for the encrypted exponent.
-        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
-        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
         
     Returns:
         fhe.Circuit: The compiled FHE circuit for exponentiation.
@@ -281,8 +281,8 @@ def compile_comb(
     Args:
         max_n (int): The maximum value for the encrypted integers n and r.
         invalid_result (int): The result to return when r > n. Defaults to 0.
-        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
-        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
         
     Returns:
         fhe.Circuit: The compiled FHE circuit for combinations.
@@ -355,8 +355,8 @@ def compile_perm(
     Args:
         max_n (int): The maximum value for the encrypted integers n and r.
         invalid_result (int): The result to return when r > n. Defaults to 0.
-        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
-        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
         
     Returns:
         fhe.Circuit: The compiled FHE circuit for permutations.
@@ -451,8 +451,8 @@ def compile_powmod(
         base (int): The base to raise to the power of the exponent.
         modulus (int): The modulus for the operation.
         max_exponent (int): The maximum value for the encrypted exponent.
-        allow_large_lookup (bool): Whether to allow large table lookups. Defaults to False.
-        configuration (Optional[fhe.Configuration]): The FHE compiler configuration. Defaults to None.
+        allow_large_lookup (bool): Whether to allow large table lookups (may be slow).
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
         
     Returns:
         fhe.Circuit: The compiled FHE circuit for modular exponentiation.

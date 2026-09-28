@@ -80,7 +80,16 @@ def estimate_lookup_cost(
     min_output: int,
     max_output: int,
 ) -> LookupCost:
-    """Estimate lookup pressure from input-domain and output bit widths."""
+    """Estimate lookup pressure from input-domain and output bit widths.
+    
+        Args:
+        domain_size (int): The domain size.
+        min_output (int): The min output.
+        max_output (int): The max output.
+    
+    Returns:
+        LookupCost: The resulting value.
+    """
     size = validate_integer("domain_size", domain_size, minimum=1)
     minimum, maximum = validate_bounds(min_output, max_output)
     input_bits = max(1, (size - 1).bit_length())
@@ -100,9 +109,16 @@ def estimate_lookup_cost(
 
 def check_lookup_domain(name: str, *bounds: tuple[int, int], allow_large_lookup: bool) -> None:
     """Reject excessive indexing domains before evaluating any table values.
-
+    
     Output-width checks still run after evaluation. Builders (make_*) remain
     available for composition; compiler opt-in only controls compile_* calls.
+    
+        Args:
+        name (str): The name.
+        *bounds: variable arguments.
+    
+    Returns:
+        Any: The resulting value.
     """
     size = 1
     for low, high in bounds:
@@ -122,7 +138,15 @@ def check_lookup_cost(
     *,
     allow_large_lookup: bool,
 ) -> LookupCost:
-    """Validate lookup outputs and require opt-in for very large circuits."""
+    """Validate lookup outputs and require opt-in for very large circuits.
+    
+        Args:
+        name (str): The name.
+        values (Sequence[...]): The values.
+    
+    Returns:
+        LookupCost: The resulting value.
+    """
     if not values:
         raise ValueError("lookup table must contain at least one value")
 
@@ -155,7 +179,16 @@ def unary_values(
     min_value: int,
     max_value: int,
 ) -> list[int]:
-    """Evaluate an integer function over an inclusive bounded domain."""
+    """Evaluate an integer function over an inclusive bounded domain.
+    
+        Args:
+        function (Callable[...]): The function to evaluate.
+        min_value (int): The minimum value.
+        max_value (int): The maximum value.
+    
+    Returns:
+        list[...]: The resulting value.
+    """
     minimum, maximum = validate_bounds(min_value, max_value)
     return [
         validate_integer("lookup output", function(value))
@@ -170,7 +203,18 @@ def binary_values(
     min_right: int,
     max_right: int,
 ) -> list[int]:
-    """Flatten a bounded two-input integer function into row-major values."""
+    """Flatten a bounded two-input integer function into row-major values.
+    
+        Args:
+        function (Callable[...]): The function to evaluate.
+        min_left (int): The min left.
+        max_left (int): The max left.
+        min_right (int): The min right.
+        max_right (int): The max right.
+    
+    Returns:
+        list[...]: The resulting value.
+    """
     left_minimum, left_maximum = validate_bounds(min_left, max_left)
     right_minimum, right_maximum = validate_bounds(min_right, max_right)
     return [
@@ -187,7 +231,7 @@ def make_unary_lookup(
     precision: Optional[int] = None,
 ) -> UnaryFunction:
     """Create a traceable unary lookup over values starting at min_value.
-
+    
     ``precision`` is the rounded-TLU speed knob: when set to fewer bits than
     the table needs, the lookup index is rounded with Concrete's
     ``round_bit_pattern`` before indexing, which lets the compiler evaluate
@@ -195,11 +239,18 @@ def make_unary_lookup(
     ``2**(input_bits - precision)`` steps. Use it for large, smooth tables
     (sigmoid, exp, sin) where a coarser input grid is acceptable — never for
     exact functions such as gcd or parity.
-
+    
+    Args:
+        values (Sequence[...]): The values.
+        min_value (int): The minimum value.
+    
+    Returns:
+        UnaryFunction: The resulting value.
+    
     Example:
         ```python
         from concrete_fhe_toolkit.math._lookup import make_unary_lookup
-
+    
         table = [round((v / 100) ** 2 * 100) for v in range(1024)]
         fast_square = make_unary_lookup(table, 0, precision=6)
         # 10-bit domain evaluated through a 6-bit rounded lookup.
@@ -249,7 +300,17 @@ def make_binary_lookup(
     min_right: int,
     right_width: int,
 ) -> BinaryFunction:
-    """Create a row-major traceable two-input lookup."""
+    """Create a row-major traceable two-input lookup.
+    
+        Args:
+        values (Sequence[...]): The values.
+        min_left (int): The min left.
+        min_right (int): The min right.
+        right_width (int): The right width.
+    
+    Returns:
+        BinaryFunction: The resulting value.
+    """
     left_minimum = validate_integer("min_left", min_left)
     right_minimum = validate_integer("min_right", min_right)
     width = validate_integer("right_width", right_width, minimum=1)
@@ -273,9 +334,18 @@ def compile_unary_lookup(
     precision: Optional[int] = None,
 ) -> fhe.Circuit:
     """Compile a bounded unary lookup with resource checks.
-
+    
     ``precision`` enables the rounded-TLU speed knob documented on
     :func:`make_unary_lookup`.
+    
+        Args:
+        name (str): The name.
+        values (Sequence[...]): The values.
+        min_value (int): The minimum value.
+        max_value (int): The maximum value.
+    
+    Returns:
+        Any: The resulting value.
     """
     minimum, maximum = validate_bounds(min_value, max_value)
     check_lookup_cost(name, values, allow_large_lookup=allow_large_lookup)
@@ -299,7 +369,19 @@ def compile_binary_lookup(
     allow_large_lookup: bool,
     configuration: Optional[fhe.Configuration],
 ) -> fhe.Circuit:
-    """Compile a bounded row-major two-input lookup with resource checks."""
+    """Compile a bounded row-major two-input lookup with resource checks.
+    
+        Args:
+        name (str): The name.
+        values (Sequence[...]): The values.
+        min_left (int): The min left.
+        max_left (int): The max left.
+        min_right (int): The min right.
+        max_right (int): The max right.
+    
+    Returns:
+        Any: The resulting value.
+    """
     left_minimum, left_maximum = validate_bounds(min_left, max_left)
     right_minimum, right_maximum = validate_bounds(min_right, max_right)
     width = right_maximum - right_minimum + 1
@@ -324,5 +406,12 @@ def compile_binary_lookup(
 
 
 def combined_lookup_values(*tables: Iterable[int]) -> list[int]:
-    """Combine output tables for one conservative resource-cost check."""
+    """Combine output tables for one conservative resource-cost check.
+    
+        Args:
+        *tables: variable arguments.
+    
+    Returns:
+        list[...]: The resulting value.
+    """
     return [validate_integer("lookup output", value) for table in tables for value in table]

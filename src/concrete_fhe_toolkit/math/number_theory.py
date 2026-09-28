@@ -1075,6 +1075,7 @@ def make_dist(size: int, min_value: int = 0, max_value: int = 15) -> BinaryFunct
 
     if max_squared == 0:
         def zero_dist(p: Any, q: Any) -> Any:
+            """Calculate the distance to zero."""
             total = 0
             for index in range(normalized_size):
                 total = total + (p[index] - q[index])
@@ -1090,6 +1091,7 @@ def make_dist(size: int, min_value: int = 0, max_value: int = 15) -> BinaryFunct
     root = make_unary_lookup(values, 0)
 
     def dist(p: Any, q: Any) -> Any:
+        """Calculate the distance between two points."""
         squared = 0
         for index in range(normalized_size):
             difference = p[index] - q[index]

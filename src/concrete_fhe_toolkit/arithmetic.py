@@ -146,6 +146,15 @@ def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
     zero_result = validate_integer("zero_result", zero_result)
 
     def clear_floor_divide(numerator: Any, denominator: Any) -> Any:
+        """Perform floor division with zero-handling fallback.
+        
+        Args:
+            numerator: The dividend.
+            denominator: The divisor.
+            
+        Returns:
+            The quotient or the zero fallback result.
+        """
         safe_denominator = np.where(denominator == 0, 1, denominator)
         quotient = np.floor_divide(numerator, safe_denominator)
         return np.asarray(
@@ -156,6 +165,15 @@ def make_floor_divide(*, zero_result: int = 0) -> BinaryFunction:
     operation = fhe.multivariate(clear_floor_divide)
 
     def floor_divide(numerator: Any, denominator: Any) -> Any:
+        """Perform encrypted floor division.
+        
+        Args:
+            numerator: Encrypted dividend.
+            denominator: Encrypted divisor.
+            
+        Returns:
+            Encrypted quotient.
+        """
         return operation(numerator, denominator)
 
     return floor_divide
@@ -185,6 +203,16 @@ def make_floor_divide_by_product(*, zero_result: int = 0) -> TernaryFunction:
         left: Any,
         right: Any,
     ) -> Any:
+        """Perform encrypted division by a product of two numbers.
+        
+        Args:
+            numerator: Encrypted dividend.
+            left: Encrypted left multiplier.
+            right: Encrypted right multiplier.
+            
+        Returns:
+            Encrypted quotient.
+        """
         return floor_divide(numerator, left * right)
 
     return floor_divide_by_product

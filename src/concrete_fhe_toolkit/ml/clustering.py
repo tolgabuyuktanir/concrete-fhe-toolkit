@@ -5,7 +5,7 @@ sklearn-style entry point for unsupervised grouping of encrypted samples.
 
 from typing import Any, List
 
-from ..arrays import make_minimum
+from ..arrays import make_array_minimum
 from .classes import FHEKMeans
 from .core import euclidean_distance_squared
 from .models import nearest_centroid_inference
@@ -44,7 +44,7 @@ def inertia(
     """
     if not centroids:
         raise ValueError("centroids must contain at least one centroid")
-    nearest = make_minimum(len(centroids), 0, max_distance)
+    nearest = make_array_minimum(len(centroids), 0, max_distance)
     total: Any = 0
     for sample in samples:
         distances = [

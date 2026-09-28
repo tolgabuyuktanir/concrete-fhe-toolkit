@@ -55,6 +55,7 @@ def _scaled_values(
         invalid = None
 
     def compute(encoded: int) -> int:
+        """Compute the function value."""
         real_input = encoded / source
         if domain is not None and not domain(real_input):
             if invalid is None:

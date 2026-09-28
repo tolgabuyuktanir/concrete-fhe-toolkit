@@ -372,6 +372,7 @@ def make_floor_ceil(
     ceil_lookup = make_unary_lookup(ceil_values, min_input)
 
     def floor_and_ceil(value: Any) -> Any:
+        """Compute both floor and ceil."""
         return floor_lookup(value), ceil_lookup(value)
 
     return floor_and_ceil
@@ -659,6 +660,7 @@ def make_modf(
     fractional_lookup = make_unary_lookup(fractional_values, minimum)
 
     def modf(value: Any) -> Any:
+        """Return the fractional and integer parts."""
         return fractional_lookup(value), integer_lookup(value)
 
     return modf
@@ -754,6 +756,7 @@ def make_fixed_point_multiply(
     normalized_scale = _validate_scale("scale", scale)
     if rounding == "floor":
         def multiply_floor(left: Any, right: Any) -> Any:
+            """Multiply and return the floor."""
             return (left * right) // normalized_scale
 
         return multiply_floor
@@ -761,6 +764,7 @@ def make_fixed_point_multiply(
         offset = normalized_scale // 2
 
         def multiply_nearest(left: Any, right: Any) -> Any:
+            """Multiply and return the nearest integer."""
             return (left * right + offset) // normalized_scale
 
         return multiply_nearest
@@ -831,6 +835,7 @@ def make_encode_fixed_point(scale: int = 10) -> Callable[[float], int]:
 """
     normalized_scale = _validate_scale("scale", scale)
     def encode_fixed_point(value: float) -> int:
+        """Encode a float into integer."""
         return int(round(value * normalized_scale))
 
     return encode_fixed_point
@@ -856,6 +861,7 @@ def make_decode_fixed_point(scale: int = 10) -> Callable[[float], int]:
 """
     normalized_scale = _validate_scale("scale", scale)
     def decode_fixed_point(value: Any) -> float:
+        """Decode fixed-point into float."""
         return value / normalized_scale
 
     return decode_fixed_point

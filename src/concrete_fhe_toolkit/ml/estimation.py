@@ -60,7 +60,15 @@ def _tree_stats(tree: Any) -> tuple:
 
 @client_side_helper
 def _arg_extreme_cost(size: int, value_span: int) -> tuple:
-    """(lookups, input_bits) of one argmin/argmax reduction."""
+    """(lookups, input_bits) of one argmin/argmax reduction.
+    
+        Args:
+        size (int): The size of the array.
+        value_span (int): The value span.
+    
+    Returns:
+        tuple: The resulting value.
+    """
     encoded_span = value_span * size + size - 1
     return size, _bits(2 * encoded_span + 1)
 

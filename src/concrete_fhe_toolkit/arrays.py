@@ -199,6 +199,7 @@ def make_compare_swap(
 
     if span == 0:
         def compare_equal(x: Any, y: Any) -> Any:
+            """Compare two equal elements."""
             return x, y
 
         return compare_equal
@@ -206,6 +207,7 @@ def make_compare_swap(
     positive_difference = positive_difference_lut(span)
 
     def compare_swap(x: Any, y: Any) -> Any:
+        """Compare and swap two elements."""
         positive = positive_difference[x - y + span]
         return x - positive, y + positive
 
@@ -243,6 +245,7 @@ def make_sort(
     compare_swap = make_compare_swap(minimum, maximum)
 
     def sort_values(x: Any) -> Any:
+        """Sort an array of elements."""
         values = [x[index] for index in range(size)]
         width = 2
 
@@ -281,6 +284,7 @@ def _make_extreme(
 
     if span == 0:
         def constant_extreme(x: Any) -> Any:
+            """Return the extreme value for a constant zero-span."""
             return x[0]
 
         return constant_extreme
@@ -288,6 +292,7 @@ def _make_extreme(
     positive_difference = positive_difference_lut(span)
 
     def extreme(x: Any) -> Any:
+        """Find the extreme value in an array."""
         layer = [x[index] for index in range(size)]
         while len(layer) > 1:
             next_layer = []
@@ -309,7 +314,7 @@ def _make_extreme(
     return extreme
 
 
-def make_minimum(
+def make_array_minimum(
     size: int,
     min_value: int = 0,
     max_value: int = 15,
@@ -335,7 +340,7 @@ def make_minimum(
     return _make_extreme("min", size, min_value, max_value)
 
 
-def make_maximum(
+def make_array_maximum(
     size: int,
     min_value: int = 0,
     max_value: int = 15,
@@ -380,6 +385,7 @@ def _make_arg_extreme(
 
     if size == 1:
         def only_index(x: Any) -> Any:
+            """Return the only index when array size is 1."""
             return x[0] - x[0]
 
         return only_index
@@ -401,6 +407,7 @@ def _make_arg_extreme(
     extract_index = fhe.LookupTable(extraction_values)
 
     def arg_extreme(x: Any) -> Any:
+        """Find the index of the extreme value in an array."""
         layer = []
         for index in range(size):
             rank = index if direct_rank else size - 1 - index
@@ -575,7 +582,7 @@ def compile_sort(
     return _compile_array_function(function, size, minimum, maximum, configuration)
 
 
-def compile_minimum(
+def compile_array_minimum(
     size: int,
     min_value: int = 0,
     max_value: int = 15,
@@ -607,7 +614,7 @@ def compile_minimum(
     return _compile_array_function(function, size, minimum, maximum, configuration)
 
 
-def compile_maximum(
+def compile_array_maximum(
     size: int,
     min_value: int = 0,
     max_value: int = 15,
@@ -923,6 +930,7 @@ def make_top_k(
     sort_fn = make_sort(size, minimum, maximum, descending=largest)
 
     def top_k(x: Any) -> Any:
+        """Find the top k elements in an array."""
         sorted_arr = sort_fn(x)
         return sorted_arr[:k]
 
@@ -1105,6 +1113,7 @@ def make_array_index_of(
 
         @fhe.multivariate
         def select_index(a: Any, i: Any) -> Any:
+            """Select element at the specified index from array."""
             return i if a else missing
             
         return select_index(any_found, index)

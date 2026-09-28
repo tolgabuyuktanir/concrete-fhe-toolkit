@@ -190,6 +190,7 @@ class FHELinearRegressionTrainer(FHETrainer):
             raise ValueError("X_train and y_train must have the same length")
 
         def training_circuit(X_train: Any, y_train: Any) -> Any:
+            """Compile and run the training circuit."""
             return linear_regression_training(X_train, y_train, n_samples, n_features)
 
         X_array = np.array(X_train, dtype=np.int64)
@@ -310,6 +311,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
         num_classes = self.num_classes
 
         def level_counts(X_train: Any, y_train: Any) -> Any:
+            """Return the count per level."""
             outputs = []
             for path in paths:
                 masks = [
@@ -504,6 +506,7 @@ class FHEKMeansTrainer(FHETrainer):
         arg_min = make_argmin(n_clusters, 0, max_distance)
 
         def assign_and_aggregate(X_train: Any) -> Any:
+            """Assign and aggregate values."""
             flags = []
             for row in range(n_samples):
                 sample = [X_train[row][column] for column in range(n_features)]

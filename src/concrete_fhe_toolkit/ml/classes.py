@@ -34,6 +34,50 @@ class FHEModel:
         self._batched = False
         self._sample_shape = None
 
+    def _repr_html_(self):
+        model_name = self.__class__.__name__
+        
+        # Status configurations
+        c_color = "#10B981" if self.circuit is not None else "#EF4444"
+        c_text = "Compiled" if self.circuit is not None else "Not Compiled"
+        c_icon = "✓" if self.circuit is not None else "✕"
+        
+        b_color = "#3B82F6" if self._batched else "#6B7280"
+        b_text = "Batched" if self._batched else "Not Batched"
+        
+        html = f"""
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; border: 1px solid #E5E7EB; border-radius: 12px; padding: 20px; background: linear-gradient(to bottom right, #ffffff, #f8fafc); width: 320px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);">
+            <div style="display: flex; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #E5E7EB; padding-bottom: 12px;">
+                <div style="background-color: #1F2937; color: white; border-radius: 8px; padding: 6px 10px; font-size: 16px; margin-right: 12px;">🤖</div>
+                <h3 style="color: #111827; margin: 0; font-size: 18px; font-weight: 600;">{model_name}</h3>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #4B5563; font-size: 14px; font-weight: 500;">Compilation</span>
+                    <span style="background-color: {c_color}15; color: {c_color}; padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                        <span>{c_icon}</span> {c_text}
+                    </span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #4B5563; font-size: 14px; font-weight: 500;">Batch State</span>
+                    <span style="background-color: {b_color}15; color: {b_color}; padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600;">
+                        {b_text}
+                    </span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #E5E7EB; padding-top: 12px; margin-top: 4px;">
+                    <span style="color: #4B5563; font-size: 14px; font-weight: 500;">Batch Size</span>
+                    <span style="color: #111827; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 14px; font-weight: 600; background-color: #F3F4F6; padding: 2px 8px; border-radius: 6px;">
+                        {self.batch_size}
+                    </span>
+                </div>
+            </div>
+        </div>
+        """
+        return html
+
     def _circuit_logic(self, features: Any) -> Any:
         """Core circuit logic to be implemented by subclasses.
         

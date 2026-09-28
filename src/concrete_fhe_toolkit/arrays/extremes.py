@@ -77,9 +77,9 @@ def make_array_minimum(
 
     Example:
         ```python
-        from concrete_fhe_toolkit import make_minimum
+        from concrete_fhe_toolkit import make_array_minimum
         
-        min_fn = make_minimum(size=4, min_value=0, max_value=10)
+        min_fn = make_array_minimum(size=4, min_value=0, max_value=10)
         # Use `min_fn(array)` inside an FHE program compilation
         ```
     """
@@ -106,15 +106,15 @@ def compile_array_minimum(
 
     Example:
         ```python
-        from concrete_fhe_toolkit import compile_minimum
+        from concrete_fhe_toolkit import compile_array_minimum
         
-        circuit = compile_minimum(size=4, min_value=0, max_value=10)
+        circuit = compile_array_minimum(size=4, min_value=0, max_value=10)
         print(circuit.encrypt_run_decrypt([4, 1, 3, 2]))  # 1
         ```
     """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
-    function = make_minimum(size, minimum, maximum)
+    function = make_array_minimum(size, minimum, maximum)
     return _compile_array_function(function, size, minimum, maximum, configuration)
 
 
@@ -135,9 +135,9 @@ def make_array_maximum(
 
     Example:
         ```python
-        from concrete_fhe_toolkit import make_maximum
+        from concrete_fhe_toolkit import make_array_maximum
         
-        max_fn = make_maximum(size=4, min_value=0, max_value=10)
+        max_fn = make_array_maximum(size=4, min_value=0, max_value=10)
         # Use `max_fn(array)` inside an FHE program compilation
         ```
     """
@@ -164,15 +164,15 @@ def compile_array_maximum(
 
     Example:
         ```python
-        from concrete_fhe_toolkit import compile_maximum
+        from concrete_fhe_toolkit import compile_array_maximum
         
-        circuit = compile_maximum(size=4, min_value=0, max_value=10)
+        circuit = compile_array_maximum(size=4, min_value=0, max_value=10)
         print(circuit.encrypt_run_decrypt([4, 1, 3, 2]))  # 4
         ```
     """
     size = validate_size(size)
     minimum, maximum = validate_bounds(min_value, max_value)
-    function = make_maximum(size, minimum, maximum)
+    function = make_array_maximum(size, minimum, maximum)
     return _compile_array_function(function, size, minimum, maximum, configuration)
 
 

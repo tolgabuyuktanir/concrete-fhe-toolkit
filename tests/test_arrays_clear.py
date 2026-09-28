@@ -7,10 +7,13 @@ from concrete_fhe_toolkit import (
     make_argmax,
     make_argmin,
     make_compare_swap,
-    make_maximum,
-    make_minimum,
+    make_array_maximum,
+    make_array_minimum,
     make_sort,
 )
+from concrete_fhe_toolkit.arrays.arithmetic import array_sum, array_scale, array_add, array_sub, array_multiply
+from concrete_fhe_toolkit.arrays.manipulation import array_slice, array_all_equal, array_pad
+from concrete_fhe_toolkit.arrays.search import array_contains, select_index
 
 
 def test_compare_swap_exhaustive():
@@ -36,8 +39,8 @@ def test_sort_exhaustive(descending):
 def test_minimum_and_maximum_support_odd_sizes():
     values = np.array([3, -2, 7, -2, 4], dtype=np.int64)
 
-    assert int(make_minimum(5, -2, 7)(values)) == -2
-    assert int(make_maximum(5, -2, 7)(values)) == 7
+    assert int(make_array_minimum(5, -2, 7)(values)) == -2
+    assert int(make_array_maximum(5, -2, 7)(values)) == 7
 
 
 @pytest.mark.parametrize(
@@ -68,7 +71,43 @@ def test_invalid_arguments_are_rejected():
         make_sort(3)
 
     with pytest.raises(ValueError, match="min_value"):
-        make_minimum(4, 3, 2)
+        make_array_minimum(4, 3, 2)
 
     with pytest.raises(ValueError, match="tie_break"):
         make_argmin(4, tie_break="middle")
+
+
+def test_array_arithmetic_functions():
+    sample1 = np.array([1, 2, 3], dtype=np.int64)
+    sample2 = np.array([4, 5, 6], dtype=np.int64)
+    
+    assert int(array_sum(sample1)) == 6
+    assert np.array_equal(array_scale(sample1, 2), [2, 4, 6])
+    assert np.array_equal(array_add(sample1, sample2), [5, 7, 9])
+    assert np.array_equal(array_sub(sample1, sample2), [-3, -3, -3])
+    assert np.array_equal(array_multiply(sample1, sample2), [4, 10, 18])
+
+
+def test_array_manipulation_functions():
+    sample = np.array([1, 2, 3, 4, 5], dtype=np.int64)
+    
+    # Slice
+    sliced = array_slice(sample, 1, 4)
+    assert np.array_equal(sliced, [2, 3, 4])
+    
+    # Pad
+    padded = array_pad(sample, target_length=7, pad_value=9)
+    assert np.array_equal(padded, [1, 2, 3, 4, 5, 9, 9])
+    
+    # All equal
+    assert array_all_equal(np.array([1, 1, 1], dtype=np.int64)) == 1
+    assert array_all_equal(sample) == 0
+
+
+def test_array_search_functions():
+    sample = np.array([1, 2, 3, 2, 4], dtype=np.int64)
+    
+    assert int(array_contains(sample, 2)) == 1
+    assert int(array_contains(sample, 9)) == 0
+    
+    assert int(select_index(sample, 2)) == 3

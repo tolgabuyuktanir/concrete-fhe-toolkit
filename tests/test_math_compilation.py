@@ -250,3 +250,22 @@ def test_large_lookup_requires_explicit_opt_in():
 
     with pytest.warns(FHECostWarning):
         fhe_math.compile_factorial(10)
+
+
+def test_missing_compilation_helpers():
+    circuit_cube = fhe_math.compile_cube(-3, 3)
+    circuit_is_zero = fhe_math.compile_is_zero(-3, 3)
+    circuit_max = fhe_math.compile_maximum(-3, 3)
+    circuit_min = fhe_math.compile_minimum(-3, 3)
+    circuit_abs_diff = fhe_math.compile_abs_diff(-3, 3)
+    circuit_copysign = fhe_math.compile_copysign(-3, 3)
+    circuit_fdim = fhe_math.compile_fdim(-3, 3)
+    
+    assert int(circuit_cube.simulate(2)) == 8
+    assert int(circuit_is_zero.simulate(0)) == 1
+    assert int(circuit_max.simulate(2, 3)) == 3
+    assert int(circuit_min.simulate(2, 3)) == 2
+    assert int(circuit_abs_diff.simulate(2, -1)) == 3
+    assert int(circuit_copysign.simulate(2, -1)) == -2
+    assert int(circuit_fdim.simulate(3, 1)) == 2
+

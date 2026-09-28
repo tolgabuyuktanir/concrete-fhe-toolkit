@@ -88,3 +88,23 @@ def test_task_namespaces():
     assert issubclass(ml.FHELinearRegressionTrainer, ml.FHETrainer)
     assert issubclass(ml.FHEDecisionTreeTrainer, ml.FHETrainer)
     assert issubclass(ml.FHEKMeansTrainer, ml.FHETrainer)
+    assert issubclass(ml.FHENaiveBayesTrainer, ml.FHETrainer)
+
+
+def test_naive_bayes_trainer_fit_encrypted():
+    trainer = classification.FHENaiveBayesTrainer(
+        num_classes=2, 
+        num_features=2, 
+        min_feature=0, 
+        max_feature=5, 
+        simulate=True, 
+        configuration=TIGHT
+    )
+    X = [[1, 2], [1, 2], [4, 5], [4, 5]]
+    y = [0, 0, 1, 1]
+    
+    model = trainer.fit_encrypted(X, y)
+    
+    assert model.priors is not None
+    assert len(model.log_prob_tables) == 2
+

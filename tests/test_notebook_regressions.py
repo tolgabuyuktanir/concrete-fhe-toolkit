@@ -7,8 +7,8 @@ from concrete_fhe_toolkit import (
     compile_argmax,
     compile_argmin,
     compile_floor_divide_by_product,
-    compile_maximum,
-    compile_minimum,
+    compile_array_maximum,
+    compile_array_minimum,
     compile_sort,
 )
 
@@ -32,8 +32,8 @@ def test_notebook_sized_encrypted_sort():
 
 def test_notebook_sized_encrypted_extrema():
     extrema_values = np.array([12, 5, 7, 1, 15, 9, 4, 14], dtype=np.int64)
-    minimum_circuit = compile_minimum(8, 0, 15)
-    maximum_circuit = compile_maximum(8, 0, 15)
+    minimum_circuit = compile_array_minimum(8, 0, 15)
+    maximum_circuit = compile_array_maximum(8, 0, 15)
     assert int(minimum_circuit.encrypt_run_decrypt(extrema_values)) == 1
     assert int(maximum_circuit.encrypt_run_decrypt(extrema_values)) == 15
 

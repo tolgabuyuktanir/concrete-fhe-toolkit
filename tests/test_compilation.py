@@ -7,8 +7,8 @@ from concrete_fhe_toolkit import (
     compile_compare_swap,
     compile_floor_divide,
     compile_floor_divide_by_product,
-    compile_maximum,
-    compile_minimum,
+    compile_array_maximum,
+    compile_array_minimum,
     compile_sign,
     compile_sort,
 )
@@ -57,8 +57,8 @@ def test_sort_compiles_and_simulates():
 def test_reductions_compile_and_simulate():
     sample = np.array([2, -1, 3, -1, 0], dtype=np.int64)
 
-    minimum = compile_minimum(5, -1, 3)
-    maximum = compile_maximum(5, -1, 3)
+    minimum = compile_array_minimum(5, -1, 3)
+    maximum = compile_array_maximum(5, -1, 3)
     argmin = compile_argmin(5, -1, 3)
     argmax = compile_argmax(5, -1, 3)
     last_argmin = compile_argmin(5, -1, 3, tie_break="last")

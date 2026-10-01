@@ -57,7 +57,7 @@ class FHEModel:
             attribute_name = "Number of Weights"
             attribute_value = len(self.weights)
         elif hasattr(self, "k"):
-            attribute_name = "Number of Classes(k)"
+            attribute_name = "Number of Neighbors (k)"
             attribute_value = self.k
         elif hasattr(self, "mlp_layers"):
             attribute_name = "Number of Layers"

@@ -278,6 +278,13 @@ class FHEDecisionTreeTrainer(FHETrainer):
         simulate: bool = False,
         configuration: Optional[fhe.Configuration] = None,
     ) -> None:
+        if configuration is None:
+            configuration = fhe.Configuration(
+                p_error = 0.01,
+                loop_parallelize = True,
+                dataflow_parallelize = True
+            )
+
         super().__init__(simulate=simulate, configuration=configuration)
         """Initialize the object."""
         if not candidate_thresholds or any(

@@ -29,7 +29,7 @@ from ..math import equal, greater_equal
 from .core import euclidean_distance_squared
 from .matrix import matrix_multiply, matrix_transpose, matrix_vector_multiply
 from ..arrays import make_argmin
-from .classes import FHEDecisionTree, FHEKMeans, FHELinearRegression
+from .classes import FHEDecisionTree, FHEKMeans, FHELinearRegression, FHERandomForest
 
 
 class FHETrainer:
@@ -282,7 +282,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
             configuration = fhe.Configuration(
                 p_error = 0.01,
                 loop_parallelize = True,
-                dataflow_parallelize = True
+                # dataflow_parallelize = True
             )
 
         super().__init__(simulate=simulate, configuration=configuration)
@@ -466,6 +466,63 @@ class FHEDecisionTreeTrainer(FHETrainer):
 
         return FHEDecisionTree(container["root"])
 
+class FHERandomForestTrainer(FHETrainer):
+    def __init__(
+        self,
+        n_estimators: int,
+        candidate_thresholds: List[List[int]],
+        *,
+        max_depth: int = 2,
+        num_classes: int = 2,
+        min_samples_leaf: int = 1,
+        simulate: bool = False,
+        configuration: Optional[fhe.Configuration] = None,
+    ) -> None:
+        if configuration is None:
+            configuration = fhe.Configuration(
+                p_error = 0.01,
+                loop_parallelize = True,
+                # dataflow_parallelize = True
+            )
+
+        super().__init__(simulate=simulate, configuration=configuration)
+        """Initialize the object."""
+        if not candidate_thresholds or any(
+            not isinstance(row, (list, tuple)) for row in candidate_thresholds
+        ):
+            raise ValueError(
+                "candidate_thresholds must be a per-feature list of threshold lists"
+            )
+        self.candidate_thresholds = [
+            [validate_integer("threshold", value) for value in row]
+            for row in candidate_thresholds
+        ]
+        self.max_depth = validate_integer("max_depth", max_depth, minimum=1)
+        self.num_classes = validate_integer("num_classes", num_classes, minimum=2)
+        self.min_samples_leaf = validate_integer(
+            "min_samples_leaf", min_samples_leaf, minimum=1
+        )
+        self.n_estimators = validate_integer("n_estimators", n_estimators, minimum=1)
+
+    def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]) -> Any:
+        trained_trees = []
+        n_samples = len(X_train)
+        
+        for i in range(self.n_estimators):
+            indices = np.random.choice(n_samples, size=n_samples, replace=True)
+            X_subset = [X_train[idx] for idx in indices]
+            y_subset = [y_train[idx] for idx in indices]
+
+            decision_tree = FHEDecisionTreeTrainer(candidate_thresholds=self.candidate_thresholds,
+                                                    max_depth=self.max_depth,
+                                                    num_classes=self.num_classes,
+                                                    min_samples_leaf=self.min_samples_leaf,
+                                                    simulate=self.simulate,
+                                                    configuration=self.configuration)
+            trained_model = decision_tree.fit_encrypted(X_subset, y_subset)
+            trained_trees.append(trained_model.tree)
+
+        return FHERandomForest(trees=trained_trees)                                            
 
 class FHEKMeansTrainer(FHETrainer):
     """Hybrid encrypted k-means training (fixed iterations).

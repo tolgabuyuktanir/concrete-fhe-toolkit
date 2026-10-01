@@ -243,7 +243,8 @@ class FHEModel:
         parameter = "features_batch" if batched else "features"
         compiler = fhe.Compiler(function, {parameter: "encrypted"})
         if configuration is None:
-            circuit = compiler.compile(calibration)
+            # Force extremely tight error bounds to avoid FHE noise non-determinism
+            circuit = compiler.compile(calibration, configuration=fhe.Configuration(global_p_error=1e-5))
         else:
             circuit = compiler.compile(calibration, configuration=configuration)
         # Commit state only after successful compilation.

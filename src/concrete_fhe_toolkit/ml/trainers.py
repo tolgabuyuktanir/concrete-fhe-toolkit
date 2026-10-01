@@ -74,7 +74,8 @@ class FHETrainer:
         """
         compiler = fhe.Compiler(function, parameter_encryption)
         if self.configuration is None:
-            self.circuit = compiler.compile(inputset)
+            # Force extremely tight error bounds to avoid FHE noise non-determinism
+            self.circuit = compiler.compile(inputset, configuration=fhe.Configuration(global_p_error=1e-5))
         else:
             self.circuit = compiler.compile(inputset, configuration=self.configuration)
         if self.simulate:
@@ -280,7 +281,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
     ) -> None:
         if configuration is None:
             configuration = fhe.Configuration(
-                p_error = 0.01,
+                global_p_error = 1e-5,
                 loop_parallelize = True,
                 # dataflow_parallelize = True
             )
@@ -303,10 +304,10 @@ class FHEDecisionTreeTrainer(FHETrainer):
             "min_samples_leaf", min_samples_leaf, minimum=1
         )
 
-    def _sample_mask(self, X_train: Any, row: int, path: Any) -> Any:
+    def _sample_mask(self, X_train: Any, path: Any) -> Any:
         mask: Any = 1
         for feature, threshold, side in path:
-            comparison = greater_equal(X_train[row][feature], threshold)
+            comparison = greater_equal(X_train[:, feature], threshold)
             if side == "ge":
                 mask = mask * comparison
             else:
@@ -320,34 +321,26 @@ class FHEDecisionTreeTrainer(FHETrainer):
         def level_counts(X_train: Any, y_train: Any) -> Any:
             """Return the count per level."""
             outputs = []
+            all_flag_array = [equal(y_train, label) for label in range(num_classes)]
+
             for path in paths:
-                masks = [
-                    self._sample_mask(X_train, row, path)
-                    for row in range(n_samples)
-                ]
-                class_flags = [
-                    [equal(y_train[row], label) for label in range(num_classes)]
-                    for row in range(n_samples)
-                ]
+                mask_array = self._sample_mask(X_train, path)
+                
+                # Precompute mask * flag_array to save FHE multiplications!
+                masked_flags = []
                 for label in range(num_classes):
-                    total: Any = 0
-                    for row in range(n_samples):
-                        total = total + masks[row] * class_flags[row][label]
+                    masked_flag = mask_array * all_flag_array[label]
+                    masked_flags.append(masked_flag)
+                    total = np.sum(masked_flag)
                     outputs.append(total)
+                    
                 if with_candidates:
                     for feature, thresholds in enumerate(candidates):
                         for threshold in thresholds:
+                            goes_left_array = greater_equal(X_train[:, feature], threshold)
                             for label in range(num_classes):
-                                total = 0
-                                for row in range(n_samples):
-                                    goes_left = greater_equal(
-                                        X_train[row][feature], threshold
-                                    )
-                                    total = total + (
-                                        masks[row]
-                                        * goes_left
-                                        * class_flags[row][label]
-                                    )
+                                # Instead of mask * flag * left, just do masked_flag * left
+                                total = np.sum(masked_flags[label] * goes_left_array)
                                 outputs.append(total)
             return fhe.array(outputs)
 
@@ -369,7 +362,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
                 best = (score, feature, threshold)
         return best
 
-    def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]) -> Any:
+    def fit_encrypted(self, X_train: Union[np.ndarray, List[List[int]]], y_train: Union[np.ndarray,List[int]]) -> Any:
         """Fits the model securely on encrypted training data.
         
         Args:
@@ -480,7 +473,7 @@ class FHERandomForestTrainer(FHETrainer):
     ) -> None:
         if configuration is None:
             configuration = fhe.Configuration(
-                p_error = 0.01,
+                global_p_error = 1e-5,
                 loop_parallelize = True,
                 # dataflow_parallelize = True
             )

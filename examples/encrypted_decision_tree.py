@@ -69,7 +69,7 @@ y_pred = fhe_model.predict_many(X_test_list)
 
 # Calculate accuracy
 acc = accuracy_score(y_pred, y_test_list)
-print(f"\nEncrypted Decision Tree Accuracy: {acc * 100:.2f}%\n")
+print(f"\nEncrypted Decision Tree Accuracy: {acc:.2f}%\n")
 
 # Get flower names (Setosa, Versicolor, Virginica)
 flower_names = iris.target_names

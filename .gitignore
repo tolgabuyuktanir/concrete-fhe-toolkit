@@ -28,6 +28,7 @@ try_privacy.py
 /benchmarks
 /scratch
 /.agents
+*.log
 args_analysis.txt
 weak_args_utf8.txt
 weak_args.txt

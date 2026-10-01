@@ -244,7 +244,7 @@ class FHEModel:
         compiler = fhe.Compiler(function, {parameter: "encrypted"})
         if configuration is None:
             # Force extremely tight error bounds to avoid FHE noise non-determinism
-            circuit = compiler.compile(calibration, configuration=fhe.Configuration(global_p_error=1e-5))
+            circuit = compiler.compile(calibration, configuration=fhe.Configuration(global_p_error=0.01))
         else:
             circuit = compiler.compile(calibration, configuration=configuration)
         # Commit state only after successful compilation.

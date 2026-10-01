@@ -281,7 +281,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
     ) -> None:
         if configuration is None:
             configuration = fhe.Configuration(
-                global_p_error = 1e-5,
+                global_p_error = 0.01,
                 loop_parallelize = True,
                 # dataflow_parallelize = True
             )
@@ -473,7 +473,7 @@ class FHERandomForestTrainer(FHETrainer):
     ) -> None:
         if configuration is None:
             configuration = fhe.Configuration(
-                global_p_error = 1e-5,
+                global_p_error = 0.01,
                 loop_parallelize = True,
                 # dataflow_parallelize = True
             )

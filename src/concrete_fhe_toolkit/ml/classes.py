@@ -44,7 +44,56 @@ class FHEModel:
         
         b_color = "#3B82F6" if self._batched else "#6B7280"
         b_text = "Batched" if self._batched else "Not Batched"
-        
+
+        attribute_name = ""
+        attribute_value = None
+        if hasattr(self, "trees"):
+            attribute_name = "Number of Trees"
+            attribute_value =  len(self.trees)
+        elif hasattr(self, "filters"):
+            attribute_name = "Number of Filters"
+            attribute_value = len(self.filters)
+        elif hasattr(self, "weights"):
+            attribute_name = "Number of Weights"
+            attribute_value = len(self.weights)
+        elif hasattr(self, "k"):
+            attribute_name = "Number of Classes(k)"
+            attribute_value = self.k
+        elif hasattr(self, "mlp_layers"):
+            attribute_name = "Number of Layers"
+            attribute_value = len(self.mlp_layers)
+        elif hasattr(self, "centroids"):
+            attribute_name = "Number of Centroids"
+            attribute_value = len(self.centroids)
+        elif hasattr(self, "components"):
+            attribute_name = "Number of Components"
+            attribute_value = len(self.components) 
+        elif hasattr(self, "priors"):
+            attribute_name = "Number of Classes"
+            attribute_value = len(self.priors)
+        elif hasattr(self, "tree"):
+            attribute_name = "Tree Depth"
+
+            def tree_depth(node):
+                if not isinstance(node, dict):
+                    return 0
+
+                depth = 1 + max(tree_depth(node.get("left")), tree_depth(node.get("right")))
+                return depth
+
+            attribute_value = tree_depth(self.tree)                          
+
+        extra_html = ""
+        if attribute_name != "":
+            extra_html = f"""
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #E5E7EB; padding-top: 12px; margin-top: 4px;">
+                    <span style="color: #4B5563; font-size: 14px; font-weight: 500;">{attribute_name}</span>
+                    <span style="color: #111827; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 14px; font-weight: 600; background-color: #F3F4F6; padding: 2px 8px; border-radius: 6px;">
+                        {attribute_value}
+                    </span>
+                </div>
+            """
+
         html = f"""
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; border: 1px solid #E5E7EB; border-radius: 12px; padding: 20px; background: linear-gradient(to bottom right, #ffffff, #f8fafc); width: 320px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);">
             <div style="display: flex; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #E5E7EB; padding-bottom: 12px;">
@@ -73,6 +122,7 @@ class FHEModel:
                         {self.batch_size}
                     </span>
                 </div>
+                {extra_html}
             </div>
         </div>
         """
@@ -202,6 +252,7 @@ class FHEModel:
         self.batch_size = size
         self._batched = batched
         self._sample_shape = sample_shape
+        return self
 
     def predict(self, features: Any) -> Any:
         """Encrypt one sample, evaluate it, and decrypt its prediction.

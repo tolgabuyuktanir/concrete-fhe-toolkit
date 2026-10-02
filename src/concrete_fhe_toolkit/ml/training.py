@@ -2,7 +2,7 @@
 
 from typing import List, Any
 from concrete_fhe_toolkit.ml import matrix_transpose, dot_product
-from concrete import fhe
+from .._compat import fhe
 
 def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[Any]]) -> tuple[List[List[Any]],List[Any]]:
     """Encrypted training logic for Bernoulli Naive Bayes.

@@ -1,17 +1,17 @@
 from __future__ import annotations
-from typing import Any, Callable, Literal, Optional, List, Union
+from typing import Any, Callable, Optional, List, Union
 from .._compat import fhe
 import numpy as np
 from .._utils import (
     array_inputset,
     compile_function,
-    positive_difference_lut,
     validate_bounds,
     validate_size,
 )
 
-from ._utils import _ensure_tensor, _compile_array_function
-
+from ._utils import _ensure_tensor
+from .extremes import make_argmax
+from .arithmetic import array_sum
 def make_array_index_of(
     size: int,
     min_value: int = -15,

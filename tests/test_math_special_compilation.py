@@ -1,6 +1,4 @@
-import pytest
 import numpy as np
-from itertools import product
 
 from concrete_fhe_toolkit.math.special import (
     compile_exp,

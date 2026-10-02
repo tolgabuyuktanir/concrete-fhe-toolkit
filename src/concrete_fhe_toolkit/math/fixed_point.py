@@ -842,7 +842,7 @@ def make_encode_fixed_point(scale: int = 10) -> Callable[[float], int]:
 
 
 @client_side_helper
-def make_decode_fixed_point(scale: int = 10) -> Callable[[float], int]:
+def make_decode_fixed_point(scale: int = 10) -> Callable[[int], float]:
     """Create a client-side helper to decode a decrypted scaled integer back to a real value.
 
     Args:

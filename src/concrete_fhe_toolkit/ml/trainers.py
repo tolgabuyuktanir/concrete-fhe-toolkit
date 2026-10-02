@@ -19,7 +19,7 @@ data.
 from __future__ import annotations
 
 import math as _pymath
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Union
 
 import numpy as np
 import gc

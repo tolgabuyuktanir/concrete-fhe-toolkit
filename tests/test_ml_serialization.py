@@ -1,11 +1,9 @@
-import os
 import json
 import pytest
 
 from concrete_fhe_toolkit.ml import (
     FHELogisticRegression,
-    FHEKMeans,
-    FHEDecisionTree
+    FHEKMeans
 )
 from concrete_fhe_toolkit.ml.serialization import save_model, load_model
 

@@ -1,5 +1,8 @@
 """Linear and logistic regression implementations over FHE."""
-
+from .classes import FHEDecisionTree, FHELinearRegression, FHEMLP, FHEXGBoost
+from .core import mean_absolute_error, mean_squared_error, r2_score
+from .models import decision_tree_inference
+from .trainers import FHELinearRegressionTrainer, linear_regression_training
 from typing import Any
 """Regression task namespace: models, trainers, and metrics.
 
@@ -8,10 +11,6 @@ encrypted features. Tree and MLP outputs are interpreted as scaled numeric
 values. The boosting regressor sums tree leaves without a classification threshold.
 """
 
-from .classes import FHEDecisionTree, FHELinearRegression, FHEMLP, FHEXGBoost
-from .core import mean_absolute_error, mean_squared_error, r2_score
-from .models import decision_tree_inference
-from .trainers import FHELinearRegressionTrainer, linear_regression_training
 
 FHEDecisionTreeRegressor = FHEDecisionTree
 FHEMLPRegressor = FHEMLP

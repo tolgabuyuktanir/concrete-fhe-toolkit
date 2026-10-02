@@ -234,7 +234,7 @@ def matrix_exp(matrix: Union[np.ndarray, List[List[Any]]], exponent: int) -> Uni
     if size == 0 or columns != size:
         raise ValueError("Matrix should be a nonempty square matrix for exponentiation")
     exponent = validate_integer("exponent", exponent, minimum=0)
-    result = np.identity(size, dtype=np.int64)
+    result: Any = np.identity(size, dtype=np.int64)
     base = _ensure_tensor(matrix)
     while exponent:
         if exponent % 2:

@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 
 from concrete_fhe_toolkit.arrays import (
     compile_array_pad,

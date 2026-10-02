@@ -1,14 +1,6 @@
 from __future__ import annotations
-from typing import Any, Callable, Literal, Optional, List, Union
-from .._compat import fhe
+from typing import Any, List, Union
 import numpy as np
-from .._utils import (
-    array_inputset,
-    compile_function,
-    positive_difference_lut,
-    validate_bounds,
-    validate_size,
-)
 
 from ._utils import _ensure_tensor
 

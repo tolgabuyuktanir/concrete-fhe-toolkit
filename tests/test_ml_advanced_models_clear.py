@@ -1,4 +1,3 @@
-import pytest
 import numpy as np
 
 from concrete_fhe_toolkit.ml import models

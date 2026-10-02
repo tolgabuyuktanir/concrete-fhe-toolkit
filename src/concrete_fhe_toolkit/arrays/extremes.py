@@ -1,16 +1,13 @@
 from __future__ import annotations
-from typing import Any, Callable, Literal, Optional, List, Union
+from typing import Any, Literal, Optional
 from .._compat import fhe
-import numpy as np
 from .._utils import (
-    array_inputset,
-    compile_function,
     positive_difference_lut,
     validate_bounds,
     validate_size,
 )
 
-from ._utils import _ensure_tensor, _compile_array_function, TieBreak, UnaryArrayFunction
+from ._utils import _compile_array_function, TieBreak, UnaryArrayFunction
 
 def _validate_tie_break(tie_break: str) -> TieBreak:
     if tie_break not in {"first", "last"}:

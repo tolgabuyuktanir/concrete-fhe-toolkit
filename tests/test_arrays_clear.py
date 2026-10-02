@@ -12,8 +12,8 @@ from concrete_fhe_toolkit import (
     make_sort,
 )
 from concrete_fhe_toolkit.arrays.arithmetic import array_sum, array_scale, array_add, array_sub, array_multiply
-from concrete_fhe_toolkit.arrays.manipulation import array_slice, array_all_equal, array_pad
-from concrete_fhe_toolkit.arrays.search import array_contains, select_index
+from concrete_fhe_toolkit.arrays.manipulation import array_slice, array_all_equal, make_array_pad
+from concrete_fhe_toolkit.arrays.search import make_array_contains, make_array_index_of
 
 
 def test_compare_swap_exhaustive():
@@ -96,18 +96,21 @@ def test_array_manipulation_functions():
     assert np.array_equal(sliced, [2, 3, 4])
     
     # Pad
-    padded = array_pad(sample, target_length=7, pad_value=9)
-    assert np.array_equal(padded, [1, 2, 3, 4, 5, 9, 9])
+    pad_fn = make_array_pad(size=5, target_size=7, min_value=1, max_value=9)
+    padded = pad_fn(sample)
+    assert np.array_equal(padded, [1, 2, 3, 4, 5, 0, 0])
     
     # All equal
-    assert array_all_equal(np.array([1, 1, 1], dtype=np.int64)) == 1
-    assert array_all_equal(sample) == 0
+    assert array_all_equal(np.array([1, 1, 1], dtype=np.int64), np.array([1, 1, 1], dtype=np.int64)) == 1
+    assert array_all_equal(sample, np.array([1, 1, 1, 1, 1], dtype=np.int64)) == 0
 
 
 def test_array_search_functions():
     sample = np.array([1, 2, 3, 2, 4], dtype=np.int64)
     
-    assert int(array_contains(sample, 2)) == 1
-    assert int(array_contains(sample, 9)) == 0
+    contains_fn = make_array_contains(size=5, min_value=1, max_value=9)
+    assert int(contains_fn(sample, 2)) == 1
+    assert int(contains_fn(sample, 9)) == 0
     
-    assert int(select_index(sample, 2)) == 3
+    index_of_fn = make_array_index_of(size=5, min_value=1, max_value=4)
+    assert int(index_of_fn(sample, 2)) == 1

@@ -8,7 +8,7 @@ here instead of in every file.
 from __future__ import annotations
 
 try:
-    from concrete import fhe
+    from concrete import fhe  # type: ignore
 except ImportError as error:  # pragma: no cover - depends on environment
     raise ImportError(
         "concrete-fhe-toolkit requires concrete-python. "

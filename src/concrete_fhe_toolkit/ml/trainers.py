@@ -79,6 +79,7 @@ class FHETrainer:
             self.circuit = compiler.compile(inputset, configuration=fhe.Configuration(global_p_error=1e-5))
         else:
             self.circuit = compiler.compile(inputset, configuration=self.configuration)
+        assert self.circuit is not None, "Circuit must be compiled first"
         if self.simulate:
             return self.circuit.simulate(*args)
         return self.circuit.encrypt_run_decrypt(*args)
@@ -433,7 +434,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
                     best = self._choose_split(node_counts, candidate_counts)
 
                 if best is None:
-                    parent[key] = majority
+                    parent[key] = majority  # type: ignore
                     continue
 
                 _, feature, threshold = best
@@ -443,16 +444,16 @@ class FHEDecisionTreeTrainer(FHETrainer):
                     "left": None,
                     "right": None,
                 }
-                parent[key] = subtree
+                parent[key] = subtree  # type: ignore
                 next_frontier.append(
                     {
-                        "path": node["path"] + [(feature, threshold, "ge")],
+                        "path": node["path"] + [(feature, threshold, "ge")],  # type: ignore
                         "attach": (subtree, "left"),
                     }
                 )
                 next_frontier.append(
                     {
-                        "path": node["path"] + [(feature, threshold, "lt")],
+                        "path": node["path"] + [(feature, threshold, "lt")],  # type: ignore
                         "attach": (subtree, "right"),
                     }
                 )

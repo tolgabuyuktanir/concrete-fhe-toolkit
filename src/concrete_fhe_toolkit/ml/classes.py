@@ -3,7 +3,7 @@
 from .._compat import fhe
 import math
 import numpy as np
-from typing import Any
+from typing import Any, Optional
 from .._utils import validate_integer
 from concrete_fhe_toolkit.ml import (
     logistic_regression_inference, linear_regression_inference,
@@ -234,6 +234,7 @@ class FHEModel:
         elif batched:
             sample_shape = shape
             # Every lane observes every calibration sample and its bounds.
+            assert size is not None
             calibration = [np.stack([item] * size) for item in items]
         else:
             size = 1
@@ -602,6 +603,7 @@ class FHENaiveBayes(FHEModel):
         """Initialize the object."""
         self.log_prob_tables = log_prob_tables
         self.priors = priors
+        self.scale: Optional[int] = None
 
     def _circuit_logic(self, features: Any) -> Any:
         return naive_bayes_inference(features,self.log_prob_tables,self.priors)
@@ -739,7 +741,7 @@ class FHENaiveBayesTrainer:
         formatted_priors = []
         total_samples = sum(priors)
 
-        max_abs_score = 0
+        max_abs_score = 0.0
         num_features = len(raw_feature_counts[0])
         for prior in priors:
             class_total = int(prior)

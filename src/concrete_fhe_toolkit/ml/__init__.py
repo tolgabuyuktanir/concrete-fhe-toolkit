@@ -85,6 +85,7 @@ from .trainers import (
     FHEDecisionTreeTrainer,
     FHEKMeansTrainer,
     FHELinearRegressionTrainer,
+    FHERandomForestTrainer,
     FHETrainer,
     linear_regression_training,
 )
@@ -195,6 +196,7 @@ __all__ = [
     "FHEKMeansTrainer",
     "FHELinearRegressionTrainer",
     "FHENaiveBayesTrainer",
+    "FHERandomForestTrainer",
     "FHEModel",
     "FHELogisticRegression",
     "FHELinearRegression",

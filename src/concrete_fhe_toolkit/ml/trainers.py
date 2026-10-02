@@ -22,6 +22,7 @@ import math as _pymath
 from typing import Any, List, Optional
 
 import numpy as np
+import gc
 
 from .._compat import fhe
 from .._utils import validate_bounds, validate_integer
@@ -468,6 +469,7 @@ class FHERandomForestTrainer(FHETrainer):
         max_depth: int = 2,
         num_classes: int = 2,
         min_samples_leaf: int = 1,
+        max_features: Optional[int] = None,
         simulate: bool = False,
         configuration: Optional[fhe.Configuration] = None,
     ) -> None:
@@ -496,17 +498,33 @@ class FHERandomForestTrainer(FHETrainer):
             "min_samples_leaf", min_samples_leaf, minimum=1
         )
         self.n_estimators = validate_integer("n_estimators", n_estimators, minimum=1)
+        if max_features is not None:
+            self.max_features = validate_integer("max_features", max_features, minimum=1)
+        else:
+            self.max_features = len(self.candidate_thresholds)
 
     def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]) -> Any:
         trained_trees = []
         n_samples = len(X_train)
+        n_features = len(self.candidate_thresholds)
         
         for i in range(self.n_estimators):
             indices = np.random.choice(n_samples, size=n_samples, replace=True)
             X_subset = [X_train[idx] for idx in indices]
             y_subset = [y_train[idx] for idx in indices]
 
-            decision_tree = FHEDecisionTreeTrainer(candidate_thresholds=self.candidate_thresholds,
+            tree_candidates = []
+            if self.max_features < n_features:
+                selected_features = np.random.choice(n_features, size=self.max_features, replace=False)
+                for f_idx in range(n_features):
+                    if f_idx in selected_features:
+                        tree_candidates.append(self.candidate_thresholds[f_idx])
+                    else:
+                        tree_candidates.append([])
+            else:
+                tree_candidates = self.candidate_thresholds
+
+            decision_tree = FHEDecisionTreeTrainer(candidate_thresholds=tree_candidates,
                                                     max_depth=self.max_depth,
                                                     num_classes=self.num_classes,
                                                     min_samples_leaf=self.min_samples_leaf,
@@ -514,6 +532,8 @@ class FHERandomForestTrainer(FHETrainer):
                                                     configuration=self.configuration)
             trained_model = decision_tree.fit_encrypted(X_subset, y_subset)
             trained_trees.append(trained_model.tree)
+            print(f"Tree {i+1} structure: {trained_model.tree}\n")
+            gc.collect()
 
         return FHERandomForest(trees=trained_trees)                                            
 

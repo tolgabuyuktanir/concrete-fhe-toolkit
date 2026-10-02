@@ -292,22 +292,17 @@ Scalar arithmetic:
 - `make_floor_divide_by_product(zero_result=0)`
 - `compile_floor_divide_by_product(max_numerator, max_left, max_right, zero_result=0, configuration=None)`
 
-Array operations:
+Arrays subpackage:
 
-- `make_compare_swap(min_value=0, max_value=15)`
-- `compile_compare_swap(min_value=0, max_value=15, configuration=None)`
-- `make_sort(size, min_value=0, max_value=15, descending=False)`
-- `compile_sort(size, min_value=0, max_value=15, descending=False, configuration=None)`
-- `make_minimum(size, min_value=0, max_value=15)`
-- `compile_minimum(size, min_value=0, max_value=15, configuration=None)`
-- `make_maximum(size, min_value=0, max_value=15)`
-- `compile_maximum(size, min_value=0, max_value=15, configuration=None)`
-- `make_argmin(size, min_value=0, max_value=15, tie_break="first")`
-- `compile_argmin(size, min_value=0, max_value=15, tie_break="first", configuration=None)`
-- `make_argmax(size, min_value=0, max_value=15, tie_break="first")`
-- `compile_argmax(size, min_value=0, max_value=15, tie_break="first", configuration=None)`
-- Array math: `array_add`, `array_sub`, `array_multiply`, `array_scale`, `array_sum`
-- Array utilities: `array_all_equal`, `array_contains`, `array_count`, `array_pad`, `array_slice`
+```python
+from concrete_fhe_toolkit import arrays
+```
+
+- **Extremes & Indexing**: `make_array_minimum`, `make_array_maximum`, `make_argmin`, `make_argmax`, `make_array_index`, `make_array_set` (and their `compile_*` equivalents)
+- **Sorting & Top-K**: `make_sort`, `make_compare_swap`, `make_top_k` (and their `compile_*` equivalents)
+- **Search**: `make_array_contains`, `make_array_count`, `make_array_index_of` (and their `compile_*` equivalents)
+- **Math**: `array_add`, `array_sub`, `array_multiply`, `array_scale`, `array_sum`
+- **Manipulation**: `array_concat`, `array_cumsum`, `array_reverse`, `array_all_equal`, `array_pad`, `array_slice`
 
 Machine Learning (ML) subpackage:
 
@@ -380,6 +375,7 @@ Basic integer operations:
 - lookup helpers: `make_absolute`, `compile_absolute`, `make_clamp`,
   `compile_clamp`, `make_modulo`, `compile_modulo`, `make_divmod`,
   `compile_divmod`, `make_is_close`, `compile_is_close`
+- saturating & advanced: `make_saturating_add`, `make_saturating_subtract`, `make_saturating_multiply`, `make_copysign`, `make_remainder`, `make_fdim`, `make_ldexp` (and their `compile_*` equivalents)
 
 Combinatorics:
 
@@ -399,6 +395,13 @@ Number theory:
 - `make_is_even`, `compile_is_even`
 - `make_is_odd`, `compile_is_odd`
 - `make_is_prime`, `compile_is_prime`
+- `make_totient`, `compile_totient`
+- `make_next_prime`, `compile_next_prime`
+- `make_mod_inverse`, `compile_mod_inverse`
+- `make_hypot`, `compile_hypot`
+- `make_dist`, `compile_dist`
+- `make_pow`, `compile_pow`
+- `make_ilogb`, `compile_ilogb`
 
 Fixed-point helpers:
 
@@ -413,19 +416,23 @@ Special fixed-point helpers:
 
 - trigonometric: `make_sin`, `compile_sin`, `make_cos`, `compile_cos`,
   `make_tan`, `compile_tan`
+- inverse & hyperbolic trig: `make_asin`, `make_acos`, `make_atan`, `make_atan2`, `make_asinh`, `make_acosh`, `make_atanh` (and their `compile_*` equivalents)
 - exponential/logarithmic: `make_exp`, `compile_exp`, `make_expm1`,
-  `compile_expm1`, `make_log`, `compile_log`, `make_log1p`,
+  `compile_expm1`, `make_exp2`, `compile_exp2`, `make_log`, `compile_log`, `make_log1p`,
   `compile_log1p`, `make_log2`, `compile_log2`, `make_log10`,
   `compile_log10`
-- roots/special activations: `make_sqrt`, `compile_sqrt`, `make_erf`,
+- roots/special activations: `make_sqrt`, `compile_sqrt`, `make_cbrt`, `compile_cbrt`, `make_erf`,
   `compile_erf`, `make_erfc`, `compile_erfc`, `make_tanh`, `compile_tanh`,
   `make_sinh`, `compile_sinh`, `make_cosh`, `compile_cosh`,
   `make_sigmoid`, `compile_sigmoid`
+- conversions: `make_degrees`, `make_radians` (and their `compile_*` equivalents)
 
 Bit-level arithmetic helpers:
 
 - bit primitives: `bit_not`, `bit_and`, `bit_or`, `bit_xor`, `bit_select`,
-  `full_adder_bit`, `full_subtractor_bit`
+  `full_adder_bit`, `full_subtractor_bit`, `bit_and_many`, `bit_or_many`, `bit_xor_many`
+- shift & rotate: `shift_left_bits`, `shift_right_bits`, `rotate_left_bits`, `rotate_right_bits`
+- bit stats & advanced: `bit_length_bits`, `parity_bits`, `popcount_bits`, `multiply_bits`, `unsigned_compare_bits`
 - conversion helpers: `integer_to_bits`, `bits_to_unsigned`,
   `unsigned_to_bits`, `twos_complement_bits`
 - signed bit helpers: `sign_magnitude_to_twos_complement_bits`,

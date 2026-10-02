@@ -2,10 +2,9 @@
 
 # 🔐 concrete-fhe-toolkit
 
-**Bounded math helpers for compiling common [Zama Concrete](https://docs.zama.ai/concrete) FHE circuits.**
+**End-to-End Privacy-Preserving Machine Learning Framework & Bounded math helpers for compiling common [Zama Concrete](https://docs.zama.ai/concrete) FHE circuits.**
 
-Compare, sort, and run real math — GCD, factorial, `sin`, `sqrt`, division — directly
-on **encrypted** integers, without ever decrypting them.
+Train Decision Trees, Random Forests, and K-Means directly on **encrypted** data, and compare, sort, and run real math — GCD, factorial, `sin`, `sqrt`, division — directly on **encrypted** integers, without ever decrypting them.
 
 <!-- Badges -->
 [![PyPI version](https://img.shields.io/pypi/v/concrete-fhe-toolkit?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/concrete-fhe-toolkit/)
@@ -20,6 +19,7 @@ on **encrypted** integers, without ever decrypting them.
 [Quick Start](#quick-start) ·
 [Documentation](https://github.com/tolgabuyuktanir/concrete-fhe-toolkit/tree/main/docs) ·
 [Examples](#examples) ·
+[Supported Models](#supported-models) ·
 [Public API](#public-api)
 
 </div>
@@ -28,12 +28,12 @@ on **encrypted** integers, without ever decrypting them.
 
 > [!NOTE]
 > `concrete-fhe-toolkit` is an **unofficial** helper package for
-> [Zama Concrete](https://docs.zama.ai/concrete). It provides reusable circuit
-> builders for common bounded math operations on encrypted Concrete inputs.
+> [Zama Concrete](https://docs.zama.ai/concrete). It provides reusable circuit builders for common bounded math operations and fully encrypted ML algorithms on Concrete inputs.
 > This project is not affiliated with or endorsed by Zama.
 
 ## ✨ Highlights
 
+- **Fully Encrypted ML Training** — Train Decision Trees, Random Forests, and K-Means clustering natively in FHE. The toolkit overcomes Concrete's multiplicative depth limits using optimal FHE configurations and numpy tensor vectorization, making encrypted training practical and fast.
 - **Privacy-Preserving Machine Learning** — built-in support for encrypted Linear Regression, KNN, Decision Trees, and ML metrics (accuracy, confusion matrix).
 - **Batteries-included math** — arithmetic, comparisons, GCD/LCM, factorial,
   primality, `isqrt`, and combinatorics on encrypted integers.
@@ -57,6 +57,7 @@ on **encrypted** integers, without ever decrypting them.
 - [Documentation](#documentation)
 - [Public API](#public-api)
 - [Examples](#examples)
+- [Supported Models](#supported-models)
 - [Bounds and Limitations](#bounds-and-limitations)
 - [Notebook provenance and examples](#notebook-provenance-and-examples)
 - [License and Concrete Terms](#license-and-concrete-terms)
@@ -68,6 +69,7 @@ on **encrypted** integers, without ever decrypting them.
 
 The package focuses on explicit, bounded FHE circuits:
 
+- **train Machine Learning models (Decision Trees, Random Forests, K-Means) securely over encrypted training data**
 - compare two encrypted integers
 - add, subtract, multiply, negate, square, and compare encrypted integers
 - compute encrypted integer math such as `abs`, clamp, modulo, GCD, LCM,
@@ -184,6 +186,42 @@ Common bound parameters:
 | `fractional_bits` | Number of binary fractional bits in fixed-point division output |
 
 ## Quick Start
+
+### Fully Encrypted ML Training (Decision Tree)
+
+Unlike traditional libraries that only perform encrypted inference, this toolkit can **build a Decision Tree over encrypted training data**. The server receives encrypted features and labels, computes the optimal splits entirely in the dark, and returns the compiled model back to the user.
+
+```python
+import numpy as np
+from concrete_fhe_toolkit.ml import FHEDecisionTreeTrainer
+
+# 1. Define Candidate Thresholds (e.g., quantizing features 0-9)
+candidates = [
+    [1, 3, 5, 7], # Feature 0 thresholds
+    [2, 4, 6, 8], # Feature 1 thresholds
+    [1, 5, 7, 9], # Feature 2 thresholds
+]
+
+# 2. Initialize the FHE Trainer (Max Depth 2)
+trainer = FHEDecisionTreeTrainer(
+    candidate_thresholds=candidates,
+    max_depth=2,
+    num_classes=2
+)
+
+# 3. Fit on Encrypted Data
+X_train_enc = [...] # Encrypted training samples
+y_train_enc = [...] # Encrypted labels
+
+# Training happens ENTIRELY inside the FHE circuit!
+model = trainer.fit_encrypted(X_train_enc, y_train_enc)
+
+# 4. View the extracted (and decrypted) optimal tree structure
+print(model.tree)
+# {'feature': 2, 'threshold': 5, 'left': {'feature': 0, 'threshold': 3, ...}}
+```
+
+### Array Math and Circuits
 
 ```python
 import numpy as np
@@ -361,6 +399,17 @@ Bit-level arithmetic helpers:
 - binary division: `unsigned_divide_bits`, `fixed_point_divide_bits`,
   `make_unsigned_floor_divide`, `compile_unsigned_floor_divide`,
   `make_fixed_point_divide`, `compile_fixed_point_divide`
+
+## Supported Models
+
+| Model | Encrypted Inference (Prediction) | Encrypted Training (Fit) |
+| :--- | :---: | :---: |
+| **Logistic Regression** | ✅ Supported | ❌ (WIP) |
+| **K-Nearest Neighbors (KNN)** | ✅ Supported | N/A |
+| **Naive Bayes** | ✅ Supported | ✅ Supported |
+| **Decision Tree** | ✅ Supported | ✅ Supported |
+| **Random Forest** | ✅ Supported | ✅ Supported |
+| **K-Means Clustering** | ✅ Supported | ✅ Supported |
 
 ## Examples
 

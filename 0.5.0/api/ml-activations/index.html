@@ -2384,6 +2384,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.activations.client_softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        client_softmax
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#concrete_fhe_toolkit.ml.activations.compile_relu" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2736,6 +2747,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.activations.client_softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        client_softmax
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#concrete_fhe_toolkit.ml.activations.compile_relu" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2870,6 +2892,60 @@
 positive values exactly.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>value</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted value to process or validate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The transformed value where negative inputs are set to 0.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
 <details class="example" open>
   <summary>Example</summary>
   <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">relu</span>
@@ -2880,10 +2956,8 @@ positive values exactly.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
@@ -2895,11 +2969,25 @@ positive values exactly.</p>
 <span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
-<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">relu</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">relu</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Return max(0, value).</span>
 
 <span class="sd">    Useful for introducing non-linearity in neural networks while preserving </span>
 <span class="sd">    positive values exactly.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        value (Any): The encrypted value to process or validate.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The transformed value where negative inputs are set to 0.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -2936,6 +3024,76 @@ positive values exactly.</p>
 non-zero gradient when the unit is not active.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>value</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted value to process or validate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>alpha</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The slope for negative inputs. Defaults to 0.01.</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.01</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The modified value after applying Leaky ReLU.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
 <details class="example" open>
   <summary>Example</summary>
   <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">leaky_relu</span>
@@ -2946,16 +3104,8 @@ non-zero gradient when the unit is not active.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
@@ -2972,7 +3122,22 @@ non-zero gradient when the unit is not active.</p>
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">leaky_relu</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">leaky_relu</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Return value when positive, otherwise alpha * value truncated toward zero.</span>
 
 <span class="sd">    ``alpha`` must be the reciprocal of a positive integer (for example 0.01,</span>
@@ -2980,6 +3145,13 @@ non-zero gradient when the unit is not active.</p>
 
 <span class="sd">    Unlike standard ReLU, this avoids "dead neurons" by allowing a small,</span>
 <span class="sd">    non-zero gradient when the unit is not active.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        value (Any): The encrypted value to process or validate.</span>
+<span class="sd">        alpha (float): The slope for negative inputs. Defaults to 0.01.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The modified value after applying Leaky ReLU.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3021,6 +3193,60 @@ non-zero gradient when the unit is not active.</p>
 <p>Often used in simple perceptrons or binary classification layers.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>value</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted value to process or validate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>1 if value &gt;= 0 else 0.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
 <details class="example" open>
   <summary>Example</summary>
   <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">unit_step</span>
@@ -3031,24 +3257,36 @@ non-zero gradient when the unit is not active.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">unit_step</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">unit_step</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Return the Heaviside step of a number: 0 when value &lt; 0, otherwise 1.</span>
 
 <span class="sd">    Often used in simple perceptrons or binary classification layers.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        value (Any): The encrypted value to process or validate.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: 1 if value &gt;= 0 else 0.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3082,6 +3320,76 @@ non-zero gradient when the unit is not active.</p>
 <p>Useful for custom decision boundaries in threshold-based models.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>value</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted value to process or validate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>threshold</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The threshold to compare against.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>1 if value &gt;= threshold else 0.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
 <details class="example" open>
   <summary>Example</summary>
   <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">threshold_activation</span>
@@ -3092,24 +3400,38 @@ non-zero gradient when the unit is not active.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">threshold_activation</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">threshold_activation</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Return 1 when value &gt;= threshold, otherwise 0.</span>
 
 <span class="sd">    Useful for custom decision boundaries in threshold-based models.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        value (Any): The encrypted value to process or validate.</span>
+<span class="sd">        threshold (Any): The threshold to compare against.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: 1 if value &gt;= threshold else 0.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3140,53 +3462,143 @@ non-zero gradient when the unit is not active.</p>
     <div class="doc doc-contents ">
 
         <p>Create a scaled softmax function for a list of encrypted scores.</p>
-<div class="highlight"><pre><span></span><code>This function uses an exponential approximation and floor division to calculate
-probabilities as integer percentages. The output is scaled by `probability_scale`.
+<p>This function uses an exponential approximation and floor division to calculate
+probabilities as integer percentages. The output is scaled by <code>probability_scale</code>.</p>
 
-Example:
-    ```python
-    from concrete_fhe_toolkit.ml.activations import make_softmax
 
-    # Create a softmax function for inputs scaled by 10
-    softmax = make_softmax(min_input=-50, max_input=50, input_scale=10)
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_input</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The minimum expected value in the input domain.</p>
+              </div>
+            </td>
+            <td>
+                  <code>-127</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_input</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The maximum expected value in the input domain.</p>
+              </div>
+            </td>
+            <td>
+                  <code>127</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>input_scale</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The fixed-point scaling factor of the input.</p>
+              </div>
+            </td>
+            <td>
+                  <code>10</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output_scale</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The desired fixed-point scaling factor for the output.</p>
+              </div>
+            </td>
+            <td>
+                  <code>100</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>probability_scale</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Scale for the final probability percentages. Defaults to 100.</p>
+              </div>
+            </td>
+            <td>
+                  <code>100</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
-    # Inside an FHE circuit
-    # enc_probs = softmax(enc_scores)
-    ```
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.Callable">Callable</span>[[<span title="typing.List">List</span>[<span title="typing.Any">Any</span>]], <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Callable[[List[Any]], List[Any]]: A function that applies scaled softmax to a list of scores.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_softmax</span>
+
+<span class="c1"># Create a softmax function for inputs scaled by 10</span>
+<span class="n">softmax</span> <span class="o">=</span> <span class="n">make_softmax</span><span class="p">(</span><span class="n">min_input</span><span class="o">=-</span><span class="mi">50</span><span class="p">,</span> <span class="n">max_input</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Inside an FHE circuit</span>
+<span class="c1"># enc_probs = softmax(enc_scores)</span>
 </code></pre></div>
-
+</details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span>
 <span class="normal">120</span>
@@ -3209,93 +3621,9 @@ Example:
 <span class="normal">137</span>
 <span class="normal">138</span>
 <span class="normal">139</span>
-<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_softmax</span><span class="p">(</span>
-    <span class="n">min_input</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">127</span><span class="p">,</span> 
-    <span class="n">max_input</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">127</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">input_scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="n">output_scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="n">probability_scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">Create a scaled softmax function for a list of encrypted scores.</span>
-
-<span class="sd">    This function uses an exponential approximation and floor division to calculate</span>
-<span class="sd">    probabilities as integer percentages. The output is scaled by `probability_scale`.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        ```python</span>
-<span class="sd">        from concrete_fhe_toolkit.ml.activations import make_softmax</span>
-
-<span class="sd">        # Create a softmax function for inputs scaled by 10</span>
-<span class="sd">        softmax = make_softmax(min_input=-50, max_input=50, input_scale=10)</span>
-
-<span class="sd">        # Inside an FHE circuit</span>
-<span class="sd">        # enc_probs = softmax(enc_scores)</span>
-<span class="sd">        ```</span>
-<span class="sd">    """</span>
-
-    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-        <span class="s2">"Softmax requires &gt;16-bit TLUs for encrypted division and will likely fail to compile "</span>
-        <span class="s2">"in the current version of Concrete. Consider using `argmax` or client-side Softmax instead."</span><span class="p">,</span>
-        <span class="ne">UserWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span>
-    <span class="p">)</span>
-
-    <span class="n">exp_func</span> <span class="o">=</span> <span class="n">make_exp</span><span class="p">(</span><span class="n">min_input</span><span class="p">,</span> <span class="n">max_input</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="n">input_scale</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="n">output_scale</span><span class="p">)</span>
-    <span class="n">div_func</span> <span class="o">=</span> <span class="n">make_floor_divide</span><span class="p">(</span><span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">softmax</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-        <span class="n">total</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">exp_values</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
-            <span class="c1"># make_exp already handles dividing by input_scale and multiplying by output_scale internally</span>
-            <span class="n">exp_value</span> <span class="o">=</span> <span class="n">exp_func</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-            <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">exp_value</span>
-            <span class="n">exp_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exp_value</span><span class="p">)</span>
-
-        <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">exp_values</span><span class="p">:</span>
-            <span class="c1"># We multiply by probability_scale before dividing so the output is an integer percentage</span>
-            <span class="n">probabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">div_func</span><span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="n">probability_scale</span><span class="p">,</span> <span class="n">total</span><span class="p">))</span>  
-
-        <span class="k">return</span> <span class="n">probabilities</span>
-
-    <span class="k">return</span> <span class="n">softmax</span>     
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="concrete_fhe_toolkit.ml.activations.compile_relu" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">compile_relu</span>
-
-
-<a href="#concrete_fhe_toolkit.ml.activations.compile_relu" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">compile_relu</span><span class="p">(</span><span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Compile encrypted ReLU.</p>
-<p>Compiles the ReLU function into a concrete-python FHE circuit.</p>
-
-
-<details class="example" open>
-  <summary>Example</summary>
-  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_relu</span>
-
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_relu</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="c1"># circuit.encrypt_run_decrypt(-5) -&gt; 0</span>
-</code></pre></div>
-</details>
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">142</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
 <span class="normal">143</span>
 <span class="normal">144</span>
 <span class="normal">145</span>
@@ -3319,7 +3647,396 @@ Example:
 <span class="normal">163</span>
 <span class="normal">164</span>
 <span class="normal">165</span>
-<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_relu</span><span class="p">(</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">make_softmax</span><span class="p">(</span>
+    <span class="n">min_input</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">127</span><span class="p">,</span> 
+    <span class="n">max_input</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">127</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">input_scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">output_scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">probability_scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Create a scaled softmax function for a list of encrypted scores.</span>
+
+<span class="sd">    This function uses an exponential approximation and floor division to calculate</span>
+<span class="sd">    probabilities as integer percentages. The output is scaled by `probability_scale`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        min_input (int): The minimum expected value in the input domain.</span>
+<span class="sd">        max_input (int): The maximum expected value in the input domain.</span>
+<span class="sd">        input_scale (int): The fixed-point scaling factor of the input.</span>
+<span class="sd">        output_scale (int): The desired fixed-point scaling factor for the output.</span>
+<span class="sd">        probability_scale (int): Scale for the final probability percentages. Defaults to 100.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Callable[[List[Any]], List[Any]]: A function that applies scaled softmax to a list of scores.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.activations import make_softmax</span>
+
+<span class="sd">        # Create a softmax function for inputs scaled by 10</span>
+<span class="sd">        softmax = make_softmax(min_input=-50, max_input=50, input_scale=10)</span>
+
+<span class="sd">        # Inside an FHE circuit</span>
+<span class="sd">        # enc_probs = softmax(enc_scores)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
+
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">"Softmax requires &gt;16-bit TLUs for encrypted division and will likely fail to compile "</span>
+        <span class="s2">"in the current version of Concrete. Consider using `argmax` or client-side Softmax instead."</span><span class="p">,</span>
+        <span class="ne">UserWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+
+    <span class="n">exp_func</span> <span class="o">=</span> <span class="n">make_exp</span><span class="p">(</span><span class="n">min_input</span> <span class="o">-</span> <span class="n">max_input</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">input_scale</span><span class="o">=</span><span class="n">input_scale</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="n">output_scale</span><span class="p">)</span>
+    <span class="n">div_func</span> <span class="o">=</span> <span class="n">make_floor_divide</span><span class="p">(</span><span class="n">zero_result</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">softmax</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Apply softmax to a list of values.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            values (List[Any]): List of values to apply softmax on.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Any]: Softmax probabilities.</span>
+<span class="sd">        """</span>
+        <span class="n">total</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">exp_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">shifted_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">_ensure_tensor</span><span class="p">(</span><span class="n">values</span><span class="p">)))</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">shifted_values</span><span class="p">:</span>
+            <span class="c1"># make_exp already handles dividing by input_scale and multiplying by output_scale internally</span>
+            <span class="n">exp_value</span> <span class="o">=</span> <span class="n">exp_func</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">exp_value</span>
+            <span class="n">exp_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exp_value</span><span class="p">)</span>
+
+        <span class="n">probabilities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">exp_values</span><span class="p">:</span>
+            <span class="c1"># We multiply by probability_scale before dividing so the output is an integer percentage</span>
+            <span class="n">probabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">div_func</span><span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="n">probability_scale</span><span class="p">,</span> <span class="n">total</span><span class="p">))</span>  
+
+        <span class="k">return</span> <span class="n">_ensure_tensor</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">softmax</span>  
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.activations.client_softmax" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">client_softmax</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.activations.client_softmax" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">client_softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Calculate mathematically perfect Softmax on the client side after decryption.</p>
+<p>This function avoids FHE 16-bit limitations by performing the Softmax division 
+and scaling on the cleartext outputs decrypted by the client.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>scores</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The decrypted scores from the FHE model.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>np.ndarray: The array of softmax probabilities.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">client_softmax</span>
+
+<span class="c1"># After decrypting the raw scores (logits) from the FHE model</span>
+<span class="n">decrypted_scores</span> <span class="o">=</span> <span class="p">[</span><span class="mf">12.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">14.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+<span class="n">probabilities</span> <span class="o">=</span> <span class="n">client_softmax</span><span class="p">(</span><span class="n">decrypted_scores</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@client_side_helper</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">client_softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate mathematically perfect Softmax on the client side after decryption.</span>
+
+<span class="sd">    This function avoids FHE 16-bit limitations by performing the Softmax division </span>
+<span class="sd">    and scaling on the cleartext outputs decrypted by the client.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        scores (Union[np.ndarray, List[Any]]): The decrypted scores from the FHE model.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: The array of softmax probabilities.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.activations import client_softmax</span>
+
+<span class="sd">        # After decrypting the raw scores (logits) from the FHE model</span>
+<span class="sd">        decrypted_scores = [12.4, -5.1, 14.8, 0.2]</span>
+<span class="sd">        probabilities = client_softmax(decrypted_scores)</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
+    <span class="n">tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">shifted_tensor</span> <span class="o">=</span> <span class="n">tensor</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span> <span class="c1"># Max-trick</span>
+    <span class="n">exp_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">shifted_tensor</span><span class="p">)</span>
+
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="p">(</span><span class="n">exp_values</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp_values</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="k">return</span> <span class="n">probabilities</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.activations.compile_relu" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">compile_relu</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.activations.compile_relu" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">compile_relu</span><span class="p">(</span><span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Compile encrypted ReLU.</p>
+<p>Compiles the ReLU function into a concrete-python FHE circuit.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                  <code>-15</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                  <code>15</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>configuration</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="concrete_fhe_toolkit._compat.fhe.Configuration">Configuration</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional FHE compiler configuration object.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="concrete_fhe_toolkit._compat.fhe.Circuit">Circuit</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>fhe.Circuit: Compiled ReLU circuit.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_relu</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_relu</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># circuit.encrypt_run_decrypt(-5) -&gt; 0</span>
+</code></pre></div>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_relu</span><span class="p">(</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
@@ -3328,6 +4045,14 @@ Example:
 <span class="w">    </span><span class="sd">"""Compile encrypted ReLU.</span>
 
 <span class="sd">    Compiles the ReLU function into a concrete-python FHE circuit.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        fhe.Circuit: Compiled ReLU circuit.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3368,6 +4093,108 @@ Example:
 slope for negative inputs.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                  <code>-15</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                  <code>15</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>alpha</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Slope for negative values. Defaults to 0.01.</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.01</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>configuration</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="concrete_fhe_toolkit._compat.fhe.Configuration">Configuration</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional FHE compiler configuration object.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="concrete_fhe_toolkit._compat.fhe.Circuit">Circuit</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>fhe.Circuit: Compiled Leaky ReLU circuit.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
 <details class="example" open>
   <summary>Example</summary>
   <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_leaky_relu</span>
@@ -3378,281 +4205,13 @@ slope for negative inputs.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_leaky_relu</span><span class="p">(</span>
-    <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
-    <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
-    <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile encrypted leaky ReLU.</span>
-
-<span class="sd">    Compiles the Leaky ReLU function into an FHE circuit, keeping a non-zero</span>
-<span class="sd">    slope for negative inputs.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        ```python</span>
-<span class="sd">        from concrete_fhe_toolkit.ml.activations import compile_leaky_relu</span>
-
-<span class="sd">        circuit = compile_leaky_relu(min_value=-10, max_value=10, alpha=0.1)</span>
-<span class="sd">        # circuit.encrypt_run_decrypt(-10) -&gt; -1</span>
-<span class="sd">        ```</span>
-<span class="sd">    """</span>
-    <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span> <span class="o">=</span> <span class="n">validate_bounds</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">bound_leaky_relu</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">leaky_relu</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">compile_function</span><span class="p">(</span>
-        <span class="n">bound_leaky_relu</span><span class="p">,</span>
-        <span class="p">{</span><span class="s2">"value"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">},</span>
-        <span class="p">[</span><span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">],</span>
-        <span class="n">configuration</span><span class="p">,</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="concrete_fhe_toolkit.ml.activations.compile_unit_step" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">compile_unit_step</span>
-
-
-<a href="#concrete_fhe_toolkit.ml.activations.compile_unit_step" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">compile_unit_step</span><span class="p">(</span><span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Compile encrypted unit step.</p>
-<p>Compiles the Heaviside step function into an FHE circuit.</p>
-
-
-<details class="example" open>
-  <summary>Example</summary>
-  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_unit_step</span>
-
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_unit_step</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="c1"># circuit.encrypt_run_decrypt(5) -&gt; 1</span>
-<span class="c1"># circuit.encrypt_run_decrypt(-3) -&gt; 0</span>
-</code></pre></div>
-</details>
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_unit_step</span><span class="p">(</span>
-    <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
-    <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile encrypted unit step.</span>
-
-<span class="sd">    Compiles the Heaviside step function into an FHE circuit.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        ```python</span>
-<span class="sd">        from concrete_fhe_toolkit.ml.activations import compile_unit_step</span>
-
-<span class="sd">        circuit = compile_unit_step(min_value=-10, max_value=10)</span>
-<span class="sd">        # circuit.encrypt_run_decrypt(5) -&gt; 1</span>
-<span class="sd">        # circuit.encrypt_run_decrypt(-3) -&gt; 0</span>
-<span class="sd">        ```</span>
-<span class="sd">    """</span>
-    <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span> <span class="o">=</span> <span class="n">validate_bounds</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">compile_function</span><span class="p">(</span>
-        <span class="n">unit_step</span><span class="p">,</span>
-        <span class="p">{</span><span class="s2">"value"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">},</span>
-        <span class="p">[</span><span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">],</span>
-        <span class="n">configuration</span><span class="p">,</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="concrete_fhe_toolkit.ml.activations.compile_threshold_activation" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">compile_threshold_activation</span>
-
-
-<a href="#concrete_fhe_toolkit.ml.activations.compile_threshold_activation" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">compile_threshold_activation</span><span class="p">(</span><span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Compile encrypted threshold activation over two encrypted inputs.</p>
-
-
-<details class="example" open>
-  <summary>Example</summary>
-  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_threshold_activation</span>
-
-<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_threshold_activation</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="c1"># Evaluates (value &gt;= threshold) fully obliviously</span>
-</code></pre></div>
-</details>
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">254</span>
 <span class="normal">255</span>
 <span class="normal">256</span>
-<span class="normal">257</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_threshold_activation</span><span class="p">(</span>
-    <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
-    <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Compile encrypted threshold activation over two encrypted inputs.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        ```python</span>
-<span class="sd">        from concrete_fhe_toolkit.ml.activations import compile_threshold_activation</span>
-
-<span class="sd">        circuit = compile_threshold_activation(min_value=-10, max_value=10)</span>
-<span class="sd">        # Evaluates (value &gt;= threshold) fully obliviously</span>
-<span class="sd">        ```</span>
-<span class="sd">    """</span>
-    <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span> <span class="o">=</span> <span class="n">validate_bounds</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">compile_function</span><span class="p">(</span>
-        <span class="n">threshold_activation</span><span class="p">,</span>
-        <span class="p">{</span><span class="s2">"value"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">,</span> <span class="s2">"threshold"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">},</span>
-        <span class="p">[</span>
-            <span class="p">(</span><span class="n">minimum</span><span class="p">,</span> <span class="n">minimum</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">maximum</span><span class="p">,</span> <span class="n">minimum</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">maximum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">),</span>
-        <span class="p">],</span>
-        <span class="n">configuration</span><span class="p">,</span>
-    <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="concrete_fhe_toolkit.ml.activations.compile_softmax" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">compile_softmax</span>
-
-
-<a href="#concrete_fhe_toolkit.ml.activations.compile_softmax" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">compile_softmax</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">127</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">127</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Compile an FHE circuit for the softmax function over an array of fixed size.</p>
-<div class="highlight"><pre><span></span><code>Since FHE circuits require fixed dimensions, the `size` of the input array 
-must be specified at compile time.
-
-Example:
-    ```python
-    from concrete_fhe_toolkit.ml.activations import compile_softmax
-
-    # Compile softmax for a 3-class model
-    circuit = compile_softmax(size=3, min_value=-50, max_value=50)
-
-    # Run it (inputs should be scaled!)
-    # probs = circuit.encrypt_run_decrypt([20, -10, 5])
-    ```
-</code></pre></div>
-
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/activations.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">259</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
 <span class="normal">260</span>
 <span class="normal">261</span>
 <span class="normal">262</span>
@@ -3694,18 +4253,642 @@ Example:
 <span class="normal">298</span>
 <span class="normal">299</span>
 <span class="normal">300</span>
-<span class="normal">301</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_softmax</span><span class="p">(</span>
+<span class="normal">301</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_leaky_relu</span><span class="p">(</span>
+    <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Compile encrypted leaky ReLU.</span>
+
+<span class="sd">    Compiles the Leaky ReLU function into an FHE circuit, keeping a non-zero</span>
+<span class="sd">    slope for negative inputs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        alpha (float): Slope for negative values. Defaults to 0.01.</span>
+<span class="sd">        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        fhe.Circuit: Compiled Leaky ReLU circuit.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.activations import compile_leaky_relu</span>
+
+<span class="sd">        circuit = compile_leaky_relu(min_value=-10, max_value=10, alpha=0.1)</span>
+<span class="sd">        # circuit.encrypt_run_decrypt(-10) -&gt; -1</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
+    <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span> <span class="o">=</span> <span class="n">validate_bounds</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">bound_leaky_relu</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Apply leaky ReLU with the bound alpha.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value (Any): The encrypted value to process or validate.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Any: The modified value.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="n">leaky_relu</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">compile_function</span><span class="p">(</span>
+        <span class="n">bound_leaky_relu</span><span class="p">,</span>
+        <span class="p">{</span><span class="s2">"value"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">},</span>
+        <span class="p">[</span><span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">],</span>
+        <span class="n">configuration</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.activations.compile_unit_step" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">compile_unit_step</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.activations.compile_unit_step" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">compile_unit_step</span><span class="p">(</span><span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Compile encrypted unit step.</p>
+<p>Compiles the Heaviside step function into an FHE circuit.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                  <code>-15</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                  <code>15</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>configuration</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="concrete_fhe_toolkit._compat.fhe.Configuration">Configuration</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional FHE compiler configuration object.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="concrete_fhe_toolkit._compat.fhe.Circuit">Circuit</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>fhe.Circuit: Compiled Unit Step circuit.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_unit_step</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_unit_step</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># circuit.encrypt_run_decrypt(5) -&gt; 1</span>
+<span class="c1"># circuit.encrypt_run_decrypt(-3) -&gt; 0</span>
+</code></pre></div>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_unit_step</span><span class="p">(</span>
+    <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Compile encrypted unit step.</span>
+
+<span class="sd">    Compiles the Heaviside step function into an FHE circuit.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        fhe.Circuit: Compiled Unit Step circuit.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.activations import compile_unit_step</span>
+
+<span class="sd">        circuit = compile_unit_step(min_value=-10, max_value=10)</span>
+<span class="sd">        # circuit.encrypt_run_decrypt(5) -&gt; 1</span>
+<span class="sd">        # circuit.encrypt_run_decrypt(-3) -&gt; 0</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
+    <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span> <span class="o">=</span> <span class="n">validate_bounds</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">compile_function</span><span class="p">(</span>
+        <span class="n">unit_step</span><span class="p">,</span>
+        <span class="p">{</span><span class="s2">"value"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">},</span>
+        <span class="p">[</span><span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">],</span>
+        <span class="n">configuration</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.activations.compile_threshold_activation" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">compile_threshold_activation</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.activations.compile_threshold_activation" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">compile_threshold_activation</span><span class="p">(</span><span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Compile encrypted threshold activation over two encrypted inputs.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                  <code>-15</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                  <code>15</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>configuration</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="concrete_fhe_toolkit._compat.fhe.Configuration">Configuration</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional FHE compiler configuration object.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="concrete_fhe_toolkit._compat.fhe.Circuit">Circuit</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>fhe.Circuit: Compiled Threshold Activation circuit.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_threshold_activation</span>
+
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_threshold_activation</span><span class="p">(</span><span class="n">min_value</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Evaluates (value &gt;= threshold) fully obliviously</span>
+</code></pre></div>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_threshold_activation</span><span class="p">(</span>
+    <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Compile encrypted threshold activation over two encrypted inputs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        fhe.Circuit: Compiled Threshold Activation circuit.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.activations import compile_threshold_activation</span>
+
+<span class="sd">        circuit = compile_threshold_activation(min_value=-10, max_value=10)</span>
+<span class="sd">        # Evaluates (value &gt;= threshold) fully obliviously</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
+    <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span> <span class="o">=</span> <span class="n">validate_bounds</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">compile_function</span><span class="p">(</span>
+        <span class="n">threshold_activation</span><span class="p">,</span>
+        <span class="p">{</span><span class="s2">"value"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">,</span> <span class="s2">"threshold"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">},</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">minimum</span><span class="p">,</span> <span class="n">minimum</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">maximum</span><span class="p">,</span> <span class="n">minimum</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">maximum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">),</span>
+        <span class="p">],</span>
+        <span class="n">configuration</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.ml.activations.compile_softmax" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">compile_softmax</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.activations.compile_softmax" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">compile_softmax</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">127</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">127</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Compile an FHE circuit for the softmax function over an array of fixed size.</p>
+<p>Since FHE circuits require fixed dimensions, the <code>size</code> of the input array 
+must be specified at compile time.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>size</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The fixed size of the input array, must be known at compile time.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                  <code>-127</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                  <code>127</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>configuration</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="concrete_fhe_toolkit._compat.fhe.Configuration">Configuration</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional FHE compiler configuration object.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="concrete_fhe_toolkit._compat.fhe.Circuit">Circuit</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>fhe.Circuit: Compiled Softmax circuit.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_softmax</span>
+
+<span class="c1"># Compile softmax for a 3-class model</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compile_softmax</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=-</span><span class="mi">50</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Run it (inputs should be scaled!)</span>
+<span class="c1"># probs = circuit.encrypt_run_decrypt([20, -10, 5])</span>
+</code></pre></div>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\activations.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compile_softmax</span><span class="p">(</span>
     <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">127</span><span class="p">,</span>
     <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">127</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Circuit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">Compile an FHE circuit for the softmax function over an array of fixed size.</span>
+<span class="w">    </span><span class="sd">"""Compile an FHE circuit for the softmax function over an array of fixed size.</span>
 
 <span class="sd">    Since FHE circuits require fixed dimensions, the `size` of the input array </span>
 <span class="sd">    must be specified at compile time.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        size (int): The fixed size of the input array, must be known at compile time.</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        fhe.Circuit: Compiled Softmax circuit.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>

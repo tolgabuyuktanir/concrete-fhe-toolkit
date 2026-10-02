@@ -2792,7 +2792,7 @@ boundaries used by :func:<code>bin_feature</code>.</p>
 
 
               <details class="mkdocstrings-source">
-                <summary>Source code in <code>src/concrete_fhe_toolkit/ml/preprocessing.py</code></summary>
+                <summary>Source code in <code>src\concrete_fhe_toolkit\ml\preprocessing.py</code></summary>
                 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
@@ -2822,11 +2822,25 @@ boundaries used by :func:<code>bin_feature</code>.</p>
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEBinner</span><span class="p">:</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEBinner</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Discretize every feature into ordinal buckets (scorecard binning).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        bin_edges: Per feature, the public ascending list of bucket</span>
+<span class="sd">        bin_edges (List[List[int]]): Per feature, the public ascending list of bucket</span>
 <span class="sd">            boundaries used by :func:`bin_feature`.</span>
 
 <span class="sd">    Example:</span>
@@ -2841,11 +2855,25 @@ boundaries used by :func:<code>bin_feature</code>.</p>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bin_edges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Initialize the object."""</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">bin_edges</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"bin_edges must describe at least one feature"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bin_edges</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span> <span class="k">for</span> <span class="n">edges</span> <span class="ow">in</span> <span class="n">bin_edges</span><span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_transform_logic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Apply the binner logic to a set of features.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            features (Any): The encrypted 2D feature matrix containing input samples.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Any]: A list containing transformed (binned) features.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            ```python</span>
+<span class="sd">            transformed = binner._transform_logic(features)</span>
+<span class="sd">            ```</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bin_edges</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"expected one bin-edge list per feature"</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span>
@@ -2949,7 +2977,7 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Output scale of the z-scores (default 10, so <code>13</code> means 1.3).</p>
+                <p>The scaling factor applied to the fixed-point representation.</p>
               </div>
             </td>
             <td>
@@ -2976,22 +3004,8 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
 
 
               <details class="mkdocstrings-source">
-                <summary>Source code in <code>src/concrete_fhe_toolkit/ml/preprocessing.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
+                <summary>Source code in <code>src\concrete_fhe_toolkit\ml\preprocessing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span>
@@ -3011,7 +3025,35 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
 <span class="normal">115</span>
 <span class="normal">116</span>
 <span class="normal">117</span>
-<span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEStandardScaler</span><span class="p">:</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEStandardScaler</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Standardize features with public means and standard deviations.</span>
 
 <span class="sd">    Computes ``((x - mean) * scale) // std`` per feature, i.e. the z-score</span>
@@ -3019,9 +3061,9 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
 <span class="sd">    with sklearn's ``StandardScaler``) and round them to integers.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        means: Public per-feature integer means.</span>
-<span class="sd">        stds: Public per-feature integer standard deviations (must be &gt;= 1).</span>
-<span class="sd">        scale: Output scale of the z-scores (default 10, so ``13`` means 1.3).</span>
+<span class="sd">        means (List[int]): Public per-feature integer means.</span>
+<span class="sd">        stds (List[int]): Public per-feature integer standard deviations (must be &gt;= 1).</span>
+<span class="sd">        scale (int): The scaling factor applied to the fixed-point representation.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3033,6 +3075,7 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">means</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">stds</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Initialize the object."""</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">means</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">stds</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"means and stds must have the same length"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">validate_integer</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">means</span><span class="p">]</span>
@@ -3040,6 +3083,19 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"scale"</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_transform_logic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Apply the standard scaling logic to a set of features.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            features (Any): The encrypted 2D feature matrix containing input samples.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Any]: A list containing scaled features.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            ```python</span>
+<span class="sd">            scaled_features = scaler._transform_logic(features)</span>
+<span class="sd">            ```</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"expected one feature per fitted mean"</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span>
@@ -3141,7 +3197,7 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Upper end of the output range (default 100).</p>
+                <p>The scaling factor applied to the fixed-point representation.</p>
               </div>
             </td>
             <td>
@@ -3168,36 +3224,8 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
 
 
               <details class="mkdocstrings-source">
-                <summary>Source code in <code>src/concrete_fhe_toolkit/ml/preprocessing.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
+                <summary>Source code in <code>src\concrete_fhe_toolkit\ml\preprocessing.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
 <span class="normal">150</span>
 <span class="normal">151</span>
 <span class="normal">152</span>
@@ -3210,15 +3238,57 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
 <span class="normal">159</span>
 <span class="normal">160</span>
 <span class="normal">161</span>
-<span class="normal">162</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEMinMaxScaler</span><span class="p">:</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEMinMaxScaler</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Rescale features into ``[0, scale]`` with public min/max bounds.</span>
 
 <span class="sd">    Computes ``((x - minimum) * scale) // (maximum - minimum)`` per feature.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        minimums: Public per-feature lower bounds.</span>
-<span class="sd">        maximums: Public per-feature upper bounds (strictly greater).</span>
-<span class="sd">        scale: Upper end of the output range (default 100).</span>
+<span class="sd">        minimums (List[int]): Public per-feature lower bounds.</span>
+<span class="sd">        maximums (List[int]): Public per-feature upper bounds (strictly greater).</span>
+<span class="sd">        scale (int): The scaling factor applied to the fixed-point representation.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3236,6 +3306,7 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Initialize the object."""</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">minimums</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maximums</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"minimums and maximums must have the same length"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minimums</span> <span class="o">=</span> <span class="p">[</span><span class="n">validate_integer</span><span class="p">(</span><span class="s2">"minimum"</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">minimums</span><span class="p">]</span>
@@ -3246,6 +3317,19 @@ with sklearn's <code>StandardScaler</code>) and round them to integers.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"scale"</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_transform_logic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Apply the min-max scaling logic to a set of features.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            features (Any): The encrypted 2D feature matrix containing input samples.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Any]: A list containing scaled features.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            ```python</span>
+<span class="sd">            scaled_features = scaler._transform_logic(features)</span>
+<span class="sd">            ```</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minimums</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"expected one feature per fitted bound"</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span>
@@ -3318,7 +3402,7 @@ one without revealing the value.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The encrypted value to discretize.</p>
+                <p>The encrypted value to process or validate.</p>
               </div>
             </td>
             <td>
@@ -3350,13 +3434,13 @@ lands in bucket <code>i</code> when <code>bin_edges[i-1] &lt;= value &lt; bin_ed
     <table>
       <thead>
         <tr>
-          <th>Type</th>
+<th>Name</th>          <th>Type</th>
           <th>Description</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td>
+<td><code>Any</code></td>            <td>
                   <code><span title="typing.Any">Any</span></code>
             </td>
             <td>
@@ -3380,7 +3464,7 @@ lands in bucket <code>i</code> when <code>bin_edges[i-1] &lt;= value &lt; bin_ed
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/preprocessing.py</code></summary>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\preprocessing.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
@@ -3422,12 +3506,12 @@ lands in bucket <code>i</code> when <code>bin_edges[i-1] &lt;= value &lt; bin_ed
 <span class="sd">    one without revealing the value.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        value: The encrypted value to discretize.</span>
-<span class="sd">        bin_edges: Public, ascending list of bucket boundaries. A value</span>
+<span class="sd">        value (Any): The encrypted value to process or validate.</span>
+<span class="sd">        bin_edges (List[int]): Public, ascending list of bucket boundaries. A value</span>
 <span class="sd">            lands in bucket ``i`` when ``bin_edges[i-1] &lt;= value &lt; bin_edges[i]``.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        The encrypted bucket index in ``[0, len(bin_edges)]``.</span>
+<span class="sd">        Any: The encrypted bucket index in ``[0, len(bin_edges)]``.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>

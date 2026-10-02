@@ -2630,6 +2630,8 @@
 
     <div class="doc doc-contents first">
 
+        <p>Encrypted transaction processing and settlement logic.</p>
+
 
 
 
@@ -2669,6 +2671,92 @@ transfer is silently cancelled (amount becomes 0) without leaking
 information about the failure.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>sender_balance</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted balance of the sender.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>receiver_balance</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted balance of the receiver.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>amount</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted integer amount to be processed.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="tuple">tuple</span>[<span title="typing.Any">Any</span>, <span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>tuple[Any, Any]: A tuple containing the new encrypted sender balance and receiver balance.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
 <details class="example" open>
   <summary>Example</summary>
   <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.finance.transactions</span><span class="w"> </span><span class="kn">import</span> <span class="n">transfer</span>
@@ -2681,10 +2769,8 @@ information about the failure.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/finance/transactions.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\finance\transactions.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
@@ -2701,12 +2787,30 @@ information about the failure.</p>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">transfer</span><span class="p">(</span><span class="n">sender_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">receiver_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span><span class="n">Any</span><span class="p">]:</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">transfer</span><span class="p">(</span><span class="n">sender_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">receiver_balance</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span><span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""Transfers an amount from one account to another securely under encryption.</span>
 
 <span class="sd">    If the amount is negative or the sender has insufficient balance, the</span>
 <span class="sd">    transfer is silently cancelled (amount becomes 0) without leaking </span>
 <span class="sd">    information about the failure.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sender_balance (Any): The encrypted balance of the sender.</span>
+<span class="sd">        receiver_balance (Any): The encrypted balance of the receiver.</span>
+<span class="sd">        amount (Any): The encrypted integer amount to be processed.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple[Any, Any]: A tuple containing the new encrypted sender balance and receiver balance.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>

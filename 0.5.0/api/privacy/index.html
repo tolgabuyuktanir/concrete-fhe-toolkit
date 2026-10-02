@@ -2747,7 +2747,7 @@ when one individual's data changes (1 for a simple count).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The decrypted aggregate to release.</p>
+                <p>The encrypted value to process or validate.</p>
               </div>
             </td>
             <td>
@@ -2763,7 +2763,7 @@ when one individual's data changes (1 for a simple count).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>L1 sensitivity of the aggregate.</p>
+                <p>The L1/L2 sensitivity of the aggregate function for differential privacy.</p>
               </div>
             </td>
             <td>
@@ -2844,7 +2844,7 @@ when one individual's data changes (1 for a simple count).</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/privacy.py</code></summary>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\privacy.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
@@ -2898,8 +2898,8 @@ when one individual's data changes (1 for a simple count).</p>
 <span class="sd">    when one individual's data changes (1 for a simple count).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        value: The decrypted aggregate to release.</span>
-<span class="sd">        sensitivity: L1 sensitivity of the aggregate.</span>
+<span class="sd">        value: The encrypted value to process or validate.</span>
+<span class="sd">        sensitivity: The L1/L2 sensitivity of the aggregate function for differential privacy.</span>
 <span class="sd">        epsilon: Privacy budget for this release (smaller = more private).</span>
 <span class="sd">        rng: Optional ``numpy.random.Generator`` for reproducible noise.</span>
 
@@ -2969,7 +2969,7 @@ many values are released together, since Gaussian noise composes better.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The decrypted aggregate to release.</p>
+                <p>The encrypted value to process or validate.</p>
               </div>
             </td>
             <td>
@@ -2985,7 +2985,7 @@ many values are released together, since Gaussian noise composes better.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>L2 sensitivity of the aggregate.</p>
+                <p>The L1/L2 sensitivity of the aggregate function for differential privacy.</p>
               </div>
             </td>
             <td>
@@ -3080,7 +3080,7 @@ many values are released together, since Gaussian noise composes better.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/privacy.py</code></summary>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\privacy.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 72</span>
 <span class="normal"> 73</span>
 <span class="normal"> 74</span>
@@ -3143,8 +3143,8 @@ many values are released together, since Gaussian noise composes better.</p>
 <span class="sd">    many values are released together, since Gaussian noise composes better.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        value: The decrypted aggregate to release.</span>
-<span class="sd">        sensitivity: L2 sensitivity of the aggregate.</span>
+<span class="sd">        value: The encrypted value to process or validate.</span>
+<span class="sd">        sensitivity: The L1/L2 sensitivity of the aggregate function for differential privacy.</span>
 <span class="sd">        epsilon: Privacy budget (must be in ``(0, 1]`` for this calibration).</span>
 <span class="sd">        delta: Failure probability (for example ``1e-5``).</span>
 <span class="sd">        rng: Optional ``numpy.random.Generator`` for reproducible noise.</span>
@@ -3190,7 +3190,7 @@ many values are released together, since Gaussian noise composes better.</p>
 
 
 <a href="#concrete_fhe_toolkit.privacy.dp_release" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">dp_release</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">sensitivity</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mechanism</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'laplace'</span><span class="p">,</span> <span class="n">delta</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Generator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">dp_release</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">sensitivity</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mechanism</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'laplace'</span><span class="p">,</span> <span class="n">delta</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Generator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3243,7 +3243,7 @@ noise. Use the decrypted aggregate vectors (counts, sums, ...) as input.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Per-value sensitivity to one individual's change.</p>
+                <p>The L1/L2 sensitivity of the aggregate function for differential privacy.</p>
               </div>
             </td>
             <td>
@@ -3330,7 +3330,7 @@ noise. Use the decrypted aggregate vectors (counts, sums, ...) as input.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="typing.List">List</span>[<span title="int">int</span>]</code>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="int">int</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3358,7 +3358,7 @@ noise. Use the decrypted aggregate vectors (counts, sums, ...) as input.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/privacy.py</code></summary>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\privacy.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">122</span>
 <span class="normal">123</span>
 <span class="normal">124</span>
@@ -3453,7 +3453,7 @@ noise. Use the decrypted aggregate vectors (counts, sums, ...) as input.</p>
     <span class="n">mechanism</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"laplace"</span><span class="p">,</span>
     <span class="n">delta</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">rng</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">"""Noise a whole vector of decrypted aggregates with one shared budget.</span>
 
 <span class="sd">    The given ``epsilon`` is the budget for the *entire* release: it is</span>
@@ -3468,7 +3468,7 @@ noise. Use the decrypted aggregate vectors (counts, sums, ...) as input.</p>
 
 <span class="sd">    Args:</span>
 <span class="sd">        values: The decrypted aggregates to release together.</span>
-<span class="sd">        sensitivity: Per-value sensitivity to one individual's change.</span>
+<span class="sd">        sensitivity: The L1/L2 sensitivity of the aggregate function for differential privacy.</span>
 <span class="sd">        epsilon: Total privacy budget for the whole vector.</span>
 <span class="sd">        mechanism: ``"laplace"`` (pure epsilon-DP) or ``"gaussian"``</span>
 <span class="sd">            (requires ``delta``).</span>

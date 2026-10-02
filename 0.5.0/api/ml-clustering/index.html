@@ -2292,6 +2292,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="FHEKMeansTrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.clustering.FHEKMeansTrainer.fit_encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit_encrypted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2634,6 +2651,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="FHEKMeansTrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.clustering.FHEKMeansTrainer.fit_encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit_encrypted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2804,39 +2838,40 @@ sample to any centroid (sizes the argmin reduction).</p>
 
 
               <details class="mkdocstrings-source">
-                <summary>Source code in <code>src/concrete_fhe_toolkit/ml/classes.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">546</span>
-<span class="normal">547</span>
-<span class="normal">548</span>
-<span class="normal">549</span>
-<span class="normal">550</span>
-<span class="normal">551</span>
-<span class="normal">552</span>
-<span class="normal">553</span>
-<span class="normal">554</span>
-<span class="normal">555</span>
-<span class="normal">556</span>
-<span class="normal">557</span>
-<span class="normal">558</span>
-<span class="normal">559</span>
-<span class="normal">560</span>
-<span class="normal">561</span>
-<span class="normal">562</span>
-<span class="normal">563</span>
-<span class="normal">564</span>
-<span class="normal">565</span>
-<span class="normal">566</span>
-<span class="normal">567</span>
-<span class="normal">568</span>
-<span class="normal">569</span>
-<span class="normal">570</span>
-<span class="normal">571</span>
-<span class="normal">572</span>
-<span class="normal">573</span>
-<span class="normal">574</span>
-<span class="normal">575</span>
-<span class="normal">576</span>
-<span class="normal">577</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEKMeans</span><span class="p">(</span><span class="n">FHEModel</span><span class="p">):</span>
+                <summary>Source code in <code>src\concrete_fhe_toolkit\ml\classes.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">823</span>
+<span class="normal">824</span>
+<span class="normal">825</span>
+<span class="normal">826</span>
+<span class="normal">827</span>
+<span class="normal">828</span>
+<span class="normal">829</span>
+<span class="normal">830</span>
+<span class="normal">831</span>
+<span class="normal">832</span>
+<span class="normal">833</span>
+<span class="normal">834</span>
+<span class="normal">835</span>
+<span class="normal">836</span>
+<span class="normal">837</span>
+<span class="normal">838</span>
+<span class="normal">839</span>
+<span class="normal">840</span>
+<span class="normal">841</span>
+<span class="normal">842</span>
+<span class="normal">843</span>
+<span class="normal">844</span>
+<span class="normal">845</span>
+<span class="normal">846</span>
+<span class="normal">847</span>
+<span class="normal">848</span>
+<span class="normal">849</span>
+<span class="normal">850</span>
+<span class="normal">851</span>
+<span class="normal">852</span>
+<span class="normal">853</span>
+<span class="normal">854</span>
+<span class="normal">855</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEKMeans</span><span class="p">(</span><span class="n">FHEModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Encrypted K-Means Inference Model (cluster assignment).</span>
 
 <span class="sd">    Assigns encrypted samples to the nearest public centroid. Train with</span>
@@ -2854,15 +2889,16 @@ sample to any centroid (sizes the argmin reduction).</p>
 <span class="sd">        ```</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">centroids</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">centroids</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="w">        </span><span class="sd">"""Initialize the object."""</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">nearest_centroid_inference</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_nearest_centroid_inference</span> <span class="o">=</span> <span class="n">nearest_centroid_inference</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">centroids</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">centroid</span><span class="p">)</span> <span class="k">for</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="n">centroids</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_distance</span> <span class="o">=</span> <span class="n">max_distance</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_circuit_logic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_circuit_logic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nearest_centroid_inference</span><span class="p">(</span>
             <span class="n">features</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">centroids</span><span class="p">,</span>
@@ -2953,7 +2989,7 @@ become the next iteration's public constants.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Inclusive lower bound of every feature value.</p>
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
               </div>
             </td>
             <td>
@@ -2969,7 +3005,7 @@ become the next iteration's public constants.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Inclusive upper bound of every feature value.</p>
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
               </div>
             </td>
             <td>
@@ -2992,9 +3028,47 @@ become the next iteration's public constants.</p>
                   <code>5</code>
             </td>
           </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>simulate</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Run circuits in simulation.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>configuration</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="concrete_fhe_toolkit._compat.fhe.Configuration">Configuration</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional FHE compiler configuration object.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
       </tbody>
     </table>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="n">trainer</span> <span class="o">=</span> <span class="n">FHEKMeansTrainer</span><span class="p">(</span><span class="n">initial_centroids</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+</details>
 
 
 
@@ -3003,121 +3077,138 @@ become the next iteration's public constants.</p>
 
 
               <details class="mkdocstrings-source">
-                <summary>Source code in <code>src/concrete_fhe_toolkit/ml/trainers.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">373</span>
-<span class="normal">374</span>
-<span class="normal">375</span>
-<span class="normal">376</span>
-<span class="normal">377</span>
-<span class="normal">378</span>
-<span class="normal">379</span>
-<span class="normal">380</span>
-<span class="normal">381</span>
-<span class="normal">382</span>
-<span class="normal">383</span>
-<span class="normal">384</span>
-<span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span>
-<span class="normal">392</span>
-<span class="normal">393</span>
-<span class="normal">394</span>
-<span class="normal">395</span>
-<span class="normal">396</span>
-<span class="normal">397</span>
-<span class="normal">398</span>
-<span class="normal">399</span>
-<span class="normal">400</span>
-<span class="normal">401</span>
-<span class="normal">402</span>
-<span class="normal">403</span>
-<span class="normal">404</span>
-<span class="normal">405</span>
-<span class="normal">406</span>
-<span class="normal">407</span>
-<span class="normal">408</span>
-<span class="normal">409</span>
-<span class="normal">410</span>
-<span class="normal">411</span>
-<span class="normal">412</span>
-<span class="normal">413</span>
-<span class="normal">414</span>
-<span class="normal">415</span>
-<span class="normal">416</span>
-<span class="normal">417</span>
-<span class="normal">418</span>
-<span class="normal">419</span>
-<span class="normal">420</span>
-<span class="normal">421</span>
-<span class="normal">422</span>
-<span class="normal">423</span>
-<span class="normal">424</span>
-<span class="normal">425</span>
-<span class="normal">426</span>
-<span class="normal">427</span>
-<span class="normal">428</span>
-<span class="normal">429</span>
-<span class="normal">430</span>
-<span class="normal">431</span>
-<span class="normal">432</span>
-<span class="normal">433</span>
-<span class="normal">434</span>
-<span class="normal">435</span>
-<span class="normal">436</span>
-<span class="normal">437</span>
-<span class="normal">438</span>
-<span class="normal">439</span>
-<span class="normal">440</span>
-<span class="normal">441</span>
-<span class="normal">442</span>
-<span class="normal">443</span>
-<span class="normal">444</span>
-<span class="normal">445</span>
-<span class="normal">446</span>
-<span class="normal">447</span>
-<span class="normal">448</span>
-<span class="normal">449</span>
-<span class="normal">450</span>
-<span class="normal">451</span>
-<span class="normal">452</span>
-<span class="normal">453</span>
-<span class="normal">454</span>
-<span class="normal">455</span>
-<span class="normal">456</span>
-<span class="normal">457</span>
-<span class="normal">458</span>
-<span class="normal">459</span>
-<span class="normal">460</span>
-<span class="normal">461</span>
-<span class="normal">462</span>
-<span class="normal">463</span>
-<span class="normal">464</span>
-<span class="normal">465</span>
-<span class="normal">466</span>
-<span class="normal">467</span>
-<span class="normal">468</span>
-<span class="normal">469</span>
-<span class="normal">470</span>
-<span class="normal">471</span>
-<span class="normal">472</span>
-<span class="normal">473</span>
-<span class="normal">474</span>
-<span class="normal">475</span>
-<span class="normal">476</span>
-<span class="normal">477</span>
-<span class="normal">478</span>
-<span class="normal">479</span>
-<span class="normal">480</span>
-<span class="normal">481</span>
-<span class="normal">482</span>
-<span class="normal">483</span>
-<span class="normal">484</span>
-<span class="normal">485</span>
-<span class="normal">486</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEKMeansTrainer</span><span class="p">(</span><span class="n">FHETrainer</span><span class="p">):</span>
+                <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span>
+<span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span>
+<span class="normal">581</span>
+<span class="normal">582</span>
+<span class="normal">583</span>
+<span class="normal">584</span>
+<span class="normal">585</span>
+<span class="normal">586</span>
+<span class="normal">587</span>
+<span class="normal">588</span>
+<span class="normal">589</span>
+<span class="normal">590</span>
+<span class="normal">591</span>
+<span class="normal">592</span>
+<span class="normal">593</span>
+<span class="normal">594</span>
+<span class="normal">595</span>
+<span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span>
+<span class="normal">601</span>
+<span class="normal">602</span>
+<span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span>
+<span class="normal">616</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span>
+<span class="normal">621</span>
+<span class="normal">622</span>
+<span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span>
+<span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span>
+<span class="normal">650</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEKMeansTrainer</span><span class="p">(</span><span class="n">FHETrainer</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Hybrid encrypted k-means training (fixed iterations).</span>
 
 <span class="sd">    Each iteration compiles one circuit with the current public centroids:</span>
@@ -3127,10 +3218,17 @@ become the next iteration's public constants.</p>
 <span class="sd">    become the next iteration's public constants.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        initial_centroids: Public, data-independent starting centroids.</span>
-<span class="sd">        min_value: Inclusive lower bound of every feature value.</span>
-<span class="sd">        max_value: Inclusive upper bound of every feature value.</span>
-<span class="sd">        n_iterations: Fixed number of Lloyd iterations.</span>
+<span class="sd">        initial_centroids (List[List[int]]): Public, data-independent starting centroids.</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        n_iterations (int): Fixed number of Lloyd iterations.</span>
+<span class="sd">        simulate (bool): Run circuits in simulation.</span>
+<span class="sd">        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        trainer = FHEKMeansTrainer(initial_centroids=[[0, 0]], min_value=0, max_value=1)</span>
+<span class="sd">        ```</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -3144,17 +3242,19 @@ become the next iteration's public constants.</p>
         <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">simulate</span><span class="o">=</span><span class="n">simulate</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Initialize the object."""</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">initial_centroids</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"initial_centroids must contain at least one centroid"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initial_centroids</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">centroid</span><span class="p">)</span> <span class="k">for</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="n">initial_centroids</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minimum</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximum</span> <span class="o">=</span> <span class="n">validate_bounds</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_iterations</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"n_iterations"</span><span class="p">,</span> <span class="n">n_iterations</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_step_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">centroids</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_step_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">centroids</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="n">n_clusters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">centroids</span><span class="p">)</span>
         <span class="n">arg_min</span> <span class="o">=</span> <span class="n">make_argmin</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">)</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">assign_and_aggregate</span><span class="p">(</span><span class="n">X_train</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">assign_and_aggregate</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""Assign and aggregate values."""</span>
             <span class="n">flags</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
                 <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">X_train</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">column</span><span class="p">]</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_features</span><span class="p">)]</span>
@@ -3183,7 +3283,15 @@ become the next iteration's public constants.</p>
 
         <span class="k">return</span> <span class="n">assign_and_aggregate</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Fits the model securely on encrypted training data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X_train (List[List[int]]): Encrypted training features.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Any: The trained FHEKMeans model.</span>
+<span class="sd">        """</span>
         <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n_samples</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train must contain at least one sample"</span><span class="p">)</span>
@@ -3247,6 +3355,195 @@ become the next iteration's public constants.</p>
 
 
 
+<div class="doc doc-object doc-function">
+
+
+<h4 id="concrete_fhe_toolkit.ml.clustering.FHEKMeansTrainer.fit_encrypted" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fit_encrypted</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.clustering.FHEKMeansTrainer.fit_encrypted" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">fit_encrypted</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Fits the model securely on encrypted training data.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>X_train</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Encrypted training features.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The trained FHEKMeans model.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">595</span>
+<span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span>
+<span class="normal">601</span>
+<span class="normal">602</span>
+<span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span>
+<span class="normal">616</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span>
+<span class="normal">621</span>
+<span class="normal">622</span>
+<span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span>
+<span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span>
+<span class="normal">650</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Fits the model securely on encrypted training data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X_train (List[List[int]]): Encrypted training features.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The trained FHEKMeans model.</span>
+<span class="sd">    """</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_samples</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train must contain at least one sample"</span><span class="p">)</span>
+    <span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">span</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximum</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum</span>
+    <span class="n">max_distance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">*</span> <span class="n">span</span> <span class="o">*</span> <span class="n">span</span><span class="p">)</span>
+    <span class="n">X_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="n">centroids</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">centroid</span><span class="p">)</span> <span class="k">for</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_centroids</span><span class="p">]</span>
+    <span class="n">n_clusters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">centroids</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_iterations</span><span class="p">):</span>
+        <span class="n">circuit_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_circuit</span><span class="p">(</span>
+            <span class="n">centroids</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">max_distance</span>
+        <span class="p">)</span>
+        <span class="n">flat</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_run_circuit</span><span class="p">(</span>
+                    <span class="n">circuit_fn</span><span class="p">,</span>
+                    <span class="p">{</span><span class="s2">"X_train"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">},</span>
+                    <span class="p">[</span><span class="n">X_array</span><span class="p">],</span>
+                    <span class="p">(</span><span class="n">X_array</span><span class="p">,),</span>
+                <span class="p">)</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">flat</span><span class="p">[:</span><span class="n">n_clusters</span><span class="p">]</span>
+        <span class="n">sums</span> <span class="o">=</span> <span class="n">flat</span><span class="p">[</span><span class="n">n_clusters</span><span class="p">:]</span>
+        <span class="n">new_centroids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">counts</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">new_centroids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">centroids</span><span class="p">[</span><span class="n">cluster</span><span class="p">]))</span>
+                <span class="k">continue</span>
+            <span class="n">new_centroids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="nb">int</span><span class="p">(</span>
+                        <span class="n">_pymath</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span>
+                            <span class="n">sums</span><span class="p">[</span><span class="n">cluster</span> <span class="o">*</span> <span class="n">n_features</span> <span class="o">+</span> <span class="n">column</span><span class="p">]</span>
+                            <span class="o">/</span> <span class="n">counts</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span>
+                            <span class="o">+</span> <span class="mf">0.5</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_features</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="n">centroids</span> <span class="o">=</span> <span class="n">new_centroids</span>
+
+    <span class="k">return</span> <span class="n">FHEKMeans</span><span class="p">(</span><span class="n">centroids</span><span class="p">,</span> <span class="n">max_distance</span><span class="o">=</span><span class="n">max_distance</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
 
 
   </div>
@@ -3264,7 +3561,7 @@ become the next iteration's public constants.</p>
 
 
 <a href="#concrete_fhe_toolkit.ml.clustering.nearest_centroid_inference" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">nearest_centroid_inference</span><span class="p">(</span><span class="n">sample</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">centroids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">nearest_centroid_inference</span><span class="p">(</span><span class="n">sample</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">centroids</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]],</span> <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3272,6 +3569,108 @@ become the next iteration's public constants.</p>
         <p>Assign an encrypted sample to the nearest public centroid (k-means step).</p>
 <p>Returns the centroid index, or the matching label when <code>labels</code> is
 given. <code>max_distance</code> must bound the squared distance to any centroid.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>sample</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted sample.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>centroids</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A list of public centroids.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>labels</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional labels for each centroid.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_distance</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An upper bound on the squared distance. Defaults to 15.</p>
+              </div>
+            </td>
+            <td>
+                  <code>15</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The index of the nearest centroid, or its corresponding label.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3286,52 +3685,61 @@ given. <code>max_distance</code> must bound the squared distance to any centroid
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/models.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span>
-<span class="normal">331</span>
-<span class="normal">332</span>
-<span class="normal">333</span>
-<span class="normal">334</span>
-<span class="normal">335</span>
-<span class="normal">336</span>
-<span class="normal">337</span>
-<span class="normal">338</span>
-<span class="normal">339</span>
-<span class="normal">340</span>
-<span class="normal">341</span>
-<span class="normal">342</span>
-<span class="normal">343</span>
-<span class="normal">344</span>
-<span class="normal">345</span>
-<span class="normal">346</span>
-<span class="normal">347</span>
-<span class="normal">348</span>
-<span class="normal">349</span>
-<span class="normal">350</span>
-<span class="normal">351</span>
-<span class="normal">352</span>
-<span class="normal">353</span>
-<span class="normal">354</span>
-<span class="normal">355</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">nearest_centroid_inference</span><span class="p">(</span>
-    <span class="n">sample</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
-    <span class="n">centroids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
-    <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">nearest_centroid_inference</span><span class="p">(</span>
+    <span class="n">sample</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+    <span class="n">centroids</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]],</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
@@ -3339,6 +3747,15 @@ given. <code>max_distance</code> must bound the squared distance to any centroid
 
 <span class="sd">    Returns the centroid index, or the matching label when ``labels`` is</span>
 <span class="sd">    given. ``max_distance`` must bound the squared distance to any centroid.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sample: The encrypted sample.</span>
+<span class="sd">        centroids: A list of public centroids.</span>
+<span class="sd">        labels: Optional labels for each centroid.</span>
+<span class="sd">        max_distance: An upper bound on the squared distance. Defaults to 15.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The index of the nearest centroid, or its corresponding label.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3394,8 +3811,126 @@ given. <code>max_distance</code> must bound the squared distance to any centroid
 must bound the squared distance from any sample to any centroid.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>samples</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted samples to evaluate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>centroids</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The centroids to compute distance against.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_distance</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The maximum squared distance bound.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The sum of squared distances (inertia).</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="ValueError">ValueError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If centroids is empty.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.clustering</span><span class="w"> </span><span class="kn">import</span> <span class="n">inertia</span>
+
+<span class="c1"># Calculate inertia for two encrypted samples</span>
+<span class="n">enc_inertia</span> <span class="o">=</span> <span class="n">inertia</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span> <span class="n">centroids</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="n">max_distance</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/clustering.py</code></summary>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\clustering.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
@@ -3417,7 +3952,26 @@ must bound the squared distance from any sample to any centroid.</p>
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">inertia</span><span class="p">(</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">inertia</span><span class="p">(</span>
     <span class="n">samples</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
     <span class="n">centroids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
     <span class="o">*</span><span class="p">,</span>
@@ -3427,10 +3981,29 @@ must bound the squared distance from any sample to any centroid.</p>
 
 <span class="sd">    The standard k-means quality metric (lower is better). ``max_distance``</span>
 <span class="sd">    must bound the squared distance from any sample to any centroid.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        samples (List[List[Any]]): The encrypted samples to evaluate.</span>
+<span class="sd">        centroids (List[List[int]]): The centroids to compute distance against.</span>
+<span class="sd">        max_distance (int): The maximum squared distance bound.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The sum of squared distances (inertia).</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If centroids is empty.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.clustering import inertia</span>
+
+<span class="sd">        # Calculate inertia for two encrypted samples</span>
+<span class="sd">        enc_inertia = inertia([[1, 2], [5, 5]], centroids=[[1, 1], [4, 4]], max_distance=100)</span>
+<span class="sd">        ```</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">centroids</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"centroids must contain at least one centroid"</span><span class="p">)</span>
-    <span class="n">nearest</span> <span class="o">=</span> <span class="n">make_minimum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centroids</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">)</span>
+    <span class="n">nearest</span> <span class="o">=</span> <span class="n">make_array_minimum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centroids</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">)</span>
     <span class="n">total</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">:</span>
         <span class="n">distances</span> <span class="o">=</span> <span class="p">[</span>

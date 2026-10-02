@@ -2930,12 +2930,66 @@ lookup tables take explicit <code>min_value</code> / <code>max_value</code> boun
 
 
 <a href="#concrete_fhe_toolkit.stats.array_mean" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_mean</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_mean</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
         <p>Calculate the floor mean of an encrypted array.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The integer floor mean of the elements.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -2947,8 +3001,9 @@ lookup tables take explicit <code>min_value</code> / <code>max_value</code> boun
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+<span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
@@ -2958,8 +3013,19 @@ lookup tables take explicit <code>min_value</code> / <code>max_value</code> boun
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_mean</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_mean</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Calculate the floor mean of an encrypted array.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The integer floor mean of the elements.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -2983,12 +3049,66 @@ lookup tables take explicit <code>min_value</code> / <code>max_value</code> boun
 
 
 <a href="#concrete_fhe_toolkit.stats.array_variance" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_variance</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_variance</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
         <p>Calculate the floor variance of an encrypted array.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The integer floor variance of the elements.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3000,13 +3120,8 @@ lookup tables take explicit <code>min_value</code> / <code>max_value</code> boun
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
@@ -3015,8 +3130,25 @@ lookup tables take explicit <code>min_value</code> / <code>max_value</code> boun
 <span class="normal">44</span>
 <span class="normal">45</span>
 <span class="normal">46</span>
-<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_variance</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_variance</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Calculate the floor variance of an encrypted array.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The integer floor variance of the elements.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3025,10 +3157,10 @@ lookup tables take explicit <code>min_value</code> / <code>max_value</code> boun
 <span class="sd">        print(array_variance([2, 4, 6]))  # 2</span>
 <span class="sd">        ```</span>
 <span class="sd">    """</span>
-    <span class="n">mean_value</span> <span class="o">=</span> <span class="n">array_mean</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-    <span class="n">diff_sum</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-        <span class="n">diff_sum</span> <span class="o">=</span> <span class="n">diff_sum</span> <span class="o">+</span> <span class="p">(</span><span class="n">item</span> <span class="o">-</span> <span class="n">mean_value</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">item</span> <span class="o">-</span> <span class="n">mean_value</span><span class="p">)</span>
+    <span class="n">tensor</span> <span class="o">=</span> <span class="n">_ensure_tensor</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="n">mean_value</span> <span class="o">=</span> <span class="n">array_mean</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
+    <span class="n">diffs</span> <span class="o">=</span> <span class="n">tensor</span> <span class="o">-</span> <span class="n">mean_value</span>
+    <span class="n">diff_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diffs</span> <span class="o">*</span> <span class="n">diffs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">diff_sum</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -3044,7 +3176,7 @@ lookup tables take explicit <code>min_value</code> / <code>max_value</code> boun
 
 
 <a href="#concrete_fhe_toolkit.stats.array_std" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_std</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_std</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3052,6 +3184,92 @@ lookup tables take explicit <code>min_value</code> / <code>max_value</code> boun
         <p>Calculate the integer standard deviation (isqrt of the variance).</p>
 <p><code>min_value</code> / <code>max_value</code> bound the array elements; the isqrt lookup
 is built over the worst-case variance for that range.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The integer standard deviation of the elements.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3064,19 +3282,8 @@ is built over the worst-case variance for that range.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
@@ -3085,11 +3292,38 @@ is built over the worst-case variance for that range.</p>
 <span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_std</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_std</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Calculate the integer standard deviation (isqrt of the variance).</span>
 
 <span class="sd">    ``min_value`` / ``max_value`` bound the array elements; the isqrt lookup</span>
 <span class="sd">    is built over the worst-case variance for that range.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The integer standard deviation of the elements.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3120,12 +3354,82 @@ is built over the worst-case variance for that range.</p>
 
 
 <a href="#concrete_fhe_toolkit.stats.array_covariance" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_covariance</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_covariance</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
         <p>Calculate the floor covariance of two encrypted arrays.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array1</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The first encrypted array.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>array2</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The second encrypted array.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The integer floor covariance of the two arrays.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3137,75 +3441,9 @@ is built over the worst-case variance for that range.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_covariance</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculate the floor covariance of two encrypted arrays.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        ```python</span>
-<span class="sd">        from concrete_fhe_toolkit.stats import array_covariance</span>
-
-<span class="sd">        print(array_covariance([1, 2, 3], [1, 2, 3]))  # 0</span>
-<span class="sd">        ```</span>
-<span class="sd">    """</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array2</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The array sizes must be equal"</span><span class="p">)</span>
-    <span class="n">mean1</span> <span class="o">=</span> <span class="n">array_mean</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
-    <span class="n">mean2</span> <span class="o">=</span> <span class="n">array_mean</span><span class="p">(</span><span class="n">array2</span><span class="p">)</span>
-    <span class="n">product_sum</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">item1</span><span class="p">,</span> <span class="n">item2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">array2</span><span class="p">):</span>
-        <span class="n">product_sum</span> <span class="o">=</span> <span class="n">product_sum</span> <span class="o">+</span> <span class="p">(</span><span class="n">item1</span> <span class="o">-</span> <span class="n">mean1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">item2</span> <span class="o">-</span> <span class="n">mean2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">product_sum</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="concrete_fhe_toolkit.stats.array_max" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">array_max</span>
-
-
-<a href="#concrete_fhe_toolkit.stats.array_max" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_max</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Find the maximum value in an encrypted array using a tournament reduction.</p>
-
-
-<details class="example" open>
-  <summary>Example</summary>
-  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">array_max</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">array_max</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>  <span class="c1"># 5</span>
-</code></pre></div>
-</details>
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 93</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 92</span>
+<span class="normal"> 93</span>
 <span class="normal"> 94</span>
 <span class="normal"> 95</span>
 <span class="normal"> 96</span>
@@ -3225,27 +3463,34 @@ is built over the worst-case variance for that range.</p>
 <span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
-<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_max</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Find the maximum value in an encrypted array using a tournament reduction.</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_covariance</span><span class="p">(</span><span class="n">array1</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">array2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the floor covariance of two encrypted arrays.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array1 (Union[np.ndarray, List[Any]]): The first encrypted array.</span>
+<span class="sd">        array2 (Union[np.ndarray, List[Any]]): The second encrypted array.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The integer floor covariance of the two arrays.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
-<span class="sd">        from concrete_fhe_toolkit.stats import array_max</span>
+<span class="sd">        from concrete_fhe_toolkit.stats import array_covariance</span>
 
-<span class="sd">        print(array_max([1, 5, 3]))  # 5</span>
+<span class="sd">        print(array_covariance([1, 2, 3], [1, 2, 3]))  # 0</span>
 <span class="sd">        ```</span>
 <span class="sd">    """</span>
-    <span class="n">current_round</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_round</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_round</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">next_round</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_round</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-            <span class="n">next_round</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maximum</span><span class="p">(</span><span class="n">current_round</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">current_round</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_round</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">next_round</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_round</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="n">current_round</span> <span class="o">=</span> <span class="n">next_round</span>
-    <span class="k">return</span> <span class="n">current_round</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array2</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The array sizes must be equal"</span><span class="p">)</span>
+    <span class="n">tensor1</span> <span class="o">=</span> <span class="n">_ensure_tensor</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
+    <span class="n">tensor2</span> <span class="o">=</span> <span class="n">_ensure_tensor</span><span class="p">(</span><span class="n">array2</span><span class="p">)</span>
+    <span class="n">mean1</span> <span class="o">=</span> <span class="n">array_mean</span><span class="p">(</span><span class="n">tensor1</span><span class="p">)</span>
+    <span class="n">mean2</span> <span class="o">=</span> <span class="n">array_mean</span><span class="p">(</span><span class="n">tensor2</span><span class="p">)</span>
+    <span class="n">product_sum</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">tensor1</span> <span class="o">-</span> <span class="n">mean1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">tensor2</span> <span class="o">-</span> <span class="n">mean2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">product_sum</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">array1</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -3255,33 +3500,84 @@ is built over the worst-case variance for that range.</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="concrete_fhe_toolkit.stats.array_min" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">array_min</span>
+<h3 id="concrete_fhe_toolkit.stats.array_max" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">array_max</span>
 
 
-<a href="#concrete_fhe_toolkit.stats.array_min" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_min</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<a href="#concrete_fhe_toolkit.stats.array_max" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_max</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Find the minimum value in an encrypted array using a tournament reduction.</p>
+        <p>Find the maximum value in an encrypted array using a tournament reduction.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>elements</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The maximum value found in the array.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
   <summary>Example</summary>
-  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">array_min</span>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">array_max</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">array_min</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>  <span class="c1"># 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">array_max</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>  <span class="c1"># 5</span>
 </code></pre></div>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
 <span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span>
@@ -3298,8 +3594,135 @@ is built over the worst-case variance for that range.</p>
 <span class="normal">133</span>
 <span class="normal">134</span>
 <span class="normal">135</span>
-<span class="normal">136</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_min</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">136</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_max</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Find the maximum value in an encrypted array using a tournament reduction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        elements (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The maximum value found in the array.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.stats import array_max</span>
+
+<span class="sd">        print(array_max([1, 5, 3]))  # 5</span>
+<span class="sd">        ```</span>
+<span class="sd">    """</span>
+    <span class="n">max_item</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">_ensure_tensor</span><span class="p">(</span><span class="n">elements</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">max_item</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="concrete_fhe_toolkit.stats.array_min" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">array_min</span>
+
+
+<a href="#concrete_fhe_toolkit.stats.array_min" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_min</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Find the minimum value in an encrypted array using a tournament reduction.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>elements</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The minimum value found in the array.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">array_min</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">array_min</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>  <span class="c1"># 1</span>
+</code></pre></div>
+</details>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_min</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Find the minimum value in an encrypted array using a tournament reduction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        elements (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The minimum value found in the array.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3308,17 +3731,8 @@ is built over the worst-case variance for that range.</p>
 <span class="sd">        print(array_min([1, 5, 3]))  # 1</span>
 <span class="sd">        ```</span>
 <span class="sd">    """</span>
-    <span class="n">current_round</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_round</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_round</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">next_round</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_round</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-            <span class="n">next_round</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">minimum</span><span class="p">(</span><span class="n">current_round</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">current_round</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_round</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">next_round</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_round</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="n">current_round</span> <span class="o">=</span> <span class="n">next_round</span>
-    <span class="k">return</span> <span class="n">current_round</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">min_item</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">_ensure_tensor</span><span class="p">(</span><span class="n">elements</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">min_item</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -3333,12 +3747,66 @@ is built over the worst-case variance for that range.</p>
 
 
 <a href="#concrete_fhe_toolkit.stats.array_range" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_range</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_range</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
         <p>Calculate the range (max - min) of an encrypted array.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The difference between the maximum and minimum values in the array.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3350,19 +3818,31 @@ is built over the worst-case variance for that range.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_range</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_range</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Calculate the range (max - min) of an encrypted array.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The difference between the maximum and minimum values in the array.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3386,12 +3866,82 @@ is built over the worst-case variance for that range.</p>
 
 
 <a href="#concrete_fhe_toolkit.stats.array_count_greater" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_count_greater</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_count_greater</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
         <p>Count how many elements are strictly greater than a threshold.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>threshold</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The value to compare each element against.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The count of elements that are strictly greater than the threshold.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3403,22 +3953,33 @@ is built over the worst-case variance for that range.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_count_greater</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_count_greater</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Count how many elements are strictly greater than a threshold.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+<span class="sd">        threshold (Any): The value to compare each element against.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The count of elements that are strictly greater than the threshold.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3427,10 +3988,7 @@ is built over the worst-case variance for that range.</p>
 <span class="sd">        print(array_count_greater([1, 5, 3], threshold=2))  # 2</span>
 <span class="sd">        ```</span>
 <span class="sd">    """</span>
-    <span class="n">count</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-        <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="n">greater</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">count</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">_ensure_tensor</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -3445,7 +4003,7 @@ is built over the worst-case variance for that range.</p>
 
 
 <a href="#concrete_fhe_toolkit.stats.array_median" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_median</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_median</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3453,6 +4011,92 @@ is built over the worst-case variance for that range.</p>
         <p>Return the median of an encrypted array (floor average of the middle pair).</p>
 <p>Uses the bitonic sorting network, so the array length must be a power
 of two.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The median value of the array.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3465,34 +4109,50 @@ of two.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_median</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_median</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Return the median of an encrypted array (floor average of the middle pair).</span>
 
 <span class="sd">    Uses the bitonic sorting network, so the array length must be a power</span>
 <span class="sd">    of two.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The median value of the array.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3525,7 +4185,7 @@ of two.</p>
 
 
 <a href="#concrete_fhe_toolkit.stats.array_percentile" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_percentile</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_percentile</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3533,6 +4193,108 @@ of two.</p>
         <p>Return the nearest-rank q-th percentile (0..100) of an encrypted array.</p>
 <p>Uses the bitonic sorting network, so the array length must be a power
 of two.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>q</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The percentile to compute, between 0 and 100 inclusive.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The value at the q-th percentile.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3545,35 +4307,53 @@ of two.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_percentile</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_percentile</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Return the nearest-rank q-th percentile (0..100) of an encrypted array.</span>
 
 <span class="sd">    Uses the bitonic sorting network, so the array length must be a power</span>
 <span class="sd">    of two.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+<span class="sd">        q (int): The percentile to compute, between 0 and 100 inclusive.</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The value at the q-th percentile.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3607,12 +4387,98 @@ of two.</p>
 
 
 <a href="#concrete_fhe_toolkit.stats.array_histogram" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_histogram</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_histogram</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
         <p>Count occurrences of every value in [min_value, max_value] (bincount).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Union[np.ndarray, List[Any]]: An array containing the count of occurrences for each value from min_value to max_value.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3624,28 +4490,44 @@ of two.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_histogram</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_histogram</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">"""Count occurrences of every value in [min_value, max_value] (bincount).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Union[np.ndarray, List[Any]]: An array containing the count of occurrences for each value from min_value to max_value.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3678,12 +4560,98 @@ of two.</p>
 
 
 <a href="#concrete_fhe_toolkit.stats.array_mode" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_mode</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_mode</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
         <p>Return the most frequent value (smallest value wins ties).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The most frequent value in the array.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3696,25 +4664,41 @@ of two.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_mode</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_mode</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">min_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Return the most frequent value (smallest value wins ties).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The most frequent value in the array.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
@@ -3744,12 +4728,98 @@ of two.</p>
 
 
 <a href="#concrete_fhe_toolkit.stats.array_normalize" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_normalize</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">mean</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">array_normalize</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">mean</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
         <p>Return (x - mean) * scale for every element (z-score style affine transform).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>array</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The encrypted array or list of elements.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>mean</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The mean value to subtract from each element.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>scale</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The scaling factor applied to the fixed-point representation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[<span title="typing.Any">Any</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Union[np.ndarray, List[Any]]: A new array containing the normalized elements.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 <details class="example" open>
@@ -3761,22 +4831,38 @@ of two.</p>
 </details>
 
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/stats.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_normalize</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">mean</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\stats.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">array_normalize</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">mean</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">"""Return (x - mean) * scale for every element (z-score style affine transform).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (Union[np.ndarray, List[Any]]): The encrypted array or list of elements.</span>
+<span class="sd">        mean (Any): The mean value to subtract from each element.</span>
+<span class="sd">        scale (int): The scaling factor applied to the fixed-point representation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Union[np.ndarray, List[Any]]: A new array containing the normalized elements.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>

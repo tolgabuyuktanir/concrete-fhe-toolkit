@@ -2113,6 +2113,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="FHETrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.trainers.FHETrainer.simulate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        simulate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.trainers.FHETrainer.fit_encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit_encrypted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2123,6 +2151,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="FHELinearRegressionTrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.trainers.FHELinearRegressionTrainer.fit_encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit_encrypted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2135,6 +2180,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="FHEDecisionTreeTrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.trainers.FHEDecisionTreeTrainer.fit_encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit_encrypted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2145,6 +2207,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="FHEKMeansTrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.trainers.FHEKMeansTrainer.fit_encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit_encrypted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2634,6 +2713,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="FHETrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.trainers.FHETrainer.simulate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        simulate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.trainers.FHETrainer.fit_encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit_encrypted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2644,6 +2751,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="FHELinearRegressionTrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.trainers.FHELinearRegressionTrainer.fit_encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit_encrypted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2656,6 +2780,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="FHEDecisionTreeTrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.trainers.FHEDecisionTreeTrainer.fit_encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit_encrypted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2666,6 +2807,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="FHEKMeansTrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concrete_fhe_toolkit.ml.trainers.FHEKMeansTrainer.fit_encrypted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fit_encrypted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2812,7 +2970,7 @@ encrypted execution (fast; for prototyping and tests only).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Optional <code>fhe.Configuration</code> forwarded to compile.</p>
+                <p>Optional FHE compiler configuration object.</p>
               </div>
             </td>
             <td>
@@ -2823,6 +2981,12 @@ encrypted execution (fast; for prototyping and tests only).</p>
     </table>
 
 
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="n">trainer</span> <span class="o">=</span> <span class="n">FHETrainer</span><span class="p">(</span><span class="n">simulate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
 
 
 
@@ -2830,8 +2994,11 @@ encrypted execution (fast; for prototyping and tests only).</p>
 
 
               <details class="mkdocstrings-source">
-                <summary>Source code in <code>src/concrete_fhe_toolkit/ml/trainers.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
+                <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
@@ -2864,16 +3031,45 @@ encrypted execution (fast; for prototyping and tests only).</p>
 <span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span>
-<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHETrainer</span><span class="p">:</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHETrainer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Base class for encrypted trainers (aggregate-decrypt pattern).</span>
 
 <span class="sd">    Subclasses implement ``fit_encrypted(...)``, using ``_run_circuit`` to</span>
 <span class="sd">    compile and execute one aggregate circuit over the encrypted inputs.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        simulate: When True, run circuits in simulation instead of real</span>
+<span class="sd">        simulate (bool): When True, run circuits in simulation instead of real</span>
 <span class="sd">            encrypted execution (fast; for prototyping and tests only).</span>
-<span class="sd">        configuration: Optional ``fhe.Configuration`` forwarded to compile.</span>
+<span class="sd">        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        trainer = FHETrainer(simulate=True)</span>
+<span class="sd">        ```</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -2883,20 +3079,42 @@ encrypted execution (fast; for prototyping and tests only).</p>
         <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulate</span> <span class="o">=</span> <span class="n">simulate</span>
+<span class="w">        </span><span class="sd">"""Initialize the object."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="n">configuration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_run_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">parameter_encryption</span><span class="p">,</span> <span class="n">inputset</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_run_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">parameter_encryption</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">inputset</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Compiles and runs a circuit.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            function (Any): The circuit function.</span>
+<span class="sd">            parameter_encryption (Any): The encryption parameter dictionary.</span>
+<span class="sd">            inputset (Any): The inputset for compilation.</span>
+<span class="sd">            args (Any): The arguments to run or simulate.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Any: The execution result.</span>
+<span class="sd">        """</span>
         <span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">parameter_encryption</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
+            <span class="c1"># Force extremely tight error bounds to avoid FHE noise non-determinism</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">global_p_error</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulate</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Fits the model securely on encrypted training data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            *args: Variable length argument list.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Any: The trained model.</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"fit_encrypted must be implemented by subclasses"</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -2911,8 +3129,145 @@ encrypted execution (fast; for prototyping and tests only).</p>
 
 
 
+<div class="doc doc-object doc-attribute">
 
 
+
+<h4 id="concrete_fhe_toolkit.ml.trainers.FHETrainer.simulate" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">simulate</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#concrete_fhe_toolkit.ml.trainers.FHETrainer.simulate" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">simulate</span> <span class="o">=</span> <span class="n">simulate</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Initialize the object.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="concrete_fhe_toolkit.ml.trainers.FHETrainer.fit_encrypted" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fit_encrypted</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.trainers.FHETrainer.fit_encrypted" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">fit_encrypted</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Fits the model securely on encrypted training data.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>*args</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Variable length argument list.</p>
+              </div>
+            </td>
+            <td>
+                  <code>()</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>**kwargs</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Arbitrary keyword arguments.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The trained model.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Fits the model securely on encrypted training data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *args: Variable length argument list.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The trained model.</span>
+<span class="sd">    """</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"fit_encrypted must be implemented by subclasses"</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
 
 
 
@@ -2948,6 +3303,75 @@ by <code>weight_scale</code>, so its predictions are <code>weight_scale</code> t
 real value — decode with <code>prediction / weight_scale</code>.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>weight_scale</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Scaling factor for weights.</p>
+              </div>
+            </td>
+            <td>
+                  <code>100</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>simulate</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Run circuits in simulation.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>configuration</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="concrete_fhe_toolkit._compat.fhe.Configuration">Configuration</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional FHE compiler configuration object.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="n">trainer</span> <span class="o">=</span> <span class="n">FHELinearRegressionTrainer</span><span class="p">(</span><span class="n">weight_scale</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
 
 
 
@@ -2955,48 +3379,8 @@ real value — decode with <code>prediction / weight_scale</code>.</p>
 
 
               <details class="mkdocstrings-source">
-                <summary>Source code in <code>src/concrete_fhe_toolkit/ml/trainers.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
+                <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">141</span>
 <span class="normal">142</span>
 <span class="normal">143</span>
 <span class="normal">144</span>
@@ -3016,7 +3400,67 @@ real value — decode with <code>prediction / weight_scale</code>.</p>
 <span class="normal">158</span>
 <span class="normal">159</span>
 <span class="normal">160</span>
-<span class="normal">161</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHELinearRegressionTrainer</span><span class="p">(</span><span class="n">FHETrainer</span><span class="p">):</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHELinearRegressionTrainer</span><span class="p">(</span><span class="n">FHETrainer</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Encrypted linear regression training via sufficient statistics.</span>
 
 <span class="sd">    One circuit computes ``A^T A`` and ``A^T y`` (with an intercept column)</span>
@@ -3026,6 +3470,16 @@ real value — decode with <code>prediction / weight_scale</code>.</p>
 <span class="sd">    The returned :class:`FHELinearRegression` carries integer weights scaled</span>
 <span class="sd">    by ``weight_scale``, so its predictions are ``weight_scale`` times the</span>
 <span class="sd">    real value — decode with ``prediction / weight_scale``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        weight_scale (int): Scaling factor for weights.</span>
+<span class="sd">        simulate (bool): Run circuits in simulation.</span>
+<span class="sd">        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        trainer = FHELinearRegressionTrainer(weight_scale=100)</span>
+<span class="sd">        ```</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -3036,9 +3490,19 @@ real value — decode with <code>prediction / weight_scale</code>.</p>
         <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">simulate</span><span class="o">=</span><span class="n">simulate</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Initialize the object."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weight_scale</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"weight_scale"</span><span class="p">,</span> <span class="n">weight_scale</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Fits the model securely on encrypted training data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X_train (List[List[int]]): Encrypted training features.</span>
+<span class="sd">            y_train (List[int]): Encrypted training targets.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Any: The trained FHELinearRegression model.</span>
+<span class="sd">        """</span>
         <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n_samples</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train must contain at least one sample"</span><span class="p">)</span>
@@ -3048,7 +3512,8 @@ real value — decode with <code>prediction / weight_scale</code>.</p>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_samples</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train and y_train must have the same length"</span><span class="p">)</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">training_circuit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">training_circuit</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""Compile and run the training circuit."""</span>
             <span class="k">return</span> <span class="n">linear_regression_training</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
 
         <span class="n">X_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
@@ -3074,8 +3539,7 @@ real value — decode with <code>prediction / weight_scale</code>.</p>
 
         <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_scale</span><span class="p">))</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">solution</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
         <span class="n">bias</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">solution</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_scale</span><span class="p">))</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">FHELinearRegression</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">output_scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_scale</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">FHELinearRegression</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weight_scale</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">model</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -3092,6 +3556,195 @@ real value — decode with <code>prediction / weight_scale</code>.</p>
 
 
 
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="concrete_fhe_toolkit.ml.trainers.FHELinearRegressionTrainer.fit_encrypted" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fit_encrypted</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.trainers.FHELinearRegressionTrainer.fit_encrypted" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">fit_encrypted</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Fits the model securely on encrypted training data.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>X_train</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Encrypted training features.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>y_train</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="int">int</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Encrypted training targets.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The trained FHELinearRegression model.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Fits the model securely on encrypted training data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X_train (List[List[int]]): Encrypted training features.</span>
+<span class="sd">        y_train (List[int]): Encrypted training targets.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The trained FHELinearRegression model.</span>
+<span class="sd">    """</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_samples</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train must contain at least one sample"</span><span class="p">)</span>
+    <span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_features</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">X_train</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"every sample must have the same number of features"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_samples</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train and y_train must have the same length"</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">training_circuit</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Compile and run the training circuit."""</span>
+        <span class="k">return</span> <span class="n">linear_regression_training</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+
+    <span class="n">X_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">y_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run_circuit</span><span class="p">(</span>
+            <span class="n">training_circuit</span><span class="p">,</span>
+            <span class="p">{</span><span class="s2">"X_train"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">,</span> <span class="s2">"y_train"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">},</span>
+            <span class="p">[(</span><span class="n">X_array</span><span class="p">,</span> <span class="n">y_array</span><span class="p">)],</span>
+            <span class="p">(</span><span class="n">X_array</span><span class="p">,</span> <span class="n">y_array</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">dimension</span> <span class="o">=</span> <span class="n">n_features</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">xtx</span> <span class="o">=</span> <span class="n">flat</span><span class="p">[:</span> <span class="n">dimension</span> <span class="o">*</span> <span class="n">dimension</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="n">dimension</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">xty</span> <span class="o">=</span> <span class="n">flat</span><span class="p">[</span><span class="n">dimension</span> <span class="o">*</span> <span class="n">dimension</span><span class="p">:]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">xtx</span><span class="p">,</span> <span class="n">xty</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"normal equations are singular; provide more varied training samples"</span>
+        <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
+
+    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_scale</span><span class="p">))</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">solution</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">bias</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">solution</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_scale</span><span class="p">))</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">FHELinearRegression</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">output_scale</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weight_scale</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
 
 
 
@@ -3206,9 +3859,47 @@ fewer samples than this.</p>
                   <code>1</code>
             </td>
           </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>simulate</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Run circuits in simulation.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>configuration</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="concrete_fhe_toolkit._compat.fhe.Configuration">Configuration</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional FHE compiler configuration object.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
       </tbody>
     </table>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="n">trainer</span> <span class="o">=</span> <span class="n">FHEDecisionTreeTrainer</span><span class="p">(</span><span class="n">candidate_thresholds</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">]])</span>
+</code></pre></div>
+</details>
 
 
 
@@ -3217,81 +3908,8 @@ fewer samples than this.</p>
 
 
               <details class="mkdocstrings-source">
-                <summary>Source code in <code>src/concrete_fhe_toolkit/ml/trainers.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
+                <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">244</span>
 <span class="normal">245</span>
 <span class="normal">246</span>
 <span class="normal">247</span>
@@ -3417,7 +4035,97 @@ fewer samples than this.</p>
 <span class="normal">367</span>
 <span class="normal">368</span>
 <span class="normal">369</span>
-<span class="normal">370</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEDecisionTreeTrainer</span><span class="p">(</span><span class="n">FHETrainer</span><span class="p">):</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEDecisionTreeTrainer</span><span class="p">(</span><span class="n">FHETrainer</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Hybrid encrypted decision-tree training (level-wise aggregate counting).</span>
 
 <span class="sd">    For each tree level, one circuit computes — under encryption — the</span>
@@ -3429,13 +4137,20 @@ fewer samples than this.</p>
 <span class="sd">    ``FHENaiveBayesTrainer``'s decrypted counts).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        candidate_thresholds: Per feature, the public list of candidate</span>
+<span class="sd">        candidate_thresholds (List[List[int]]): Per feature, the public list of candidate</span>
 <span class="sd">            thresholds (splits test ``feature &gt;= threshold``). Keep these</span>
 <span class="sd">            lists short — cost grows with nodes x candidates x samples.</span>
-<span class="sd">        max_depth: Maximum tree depth (levels of splits).</span>
-<span class="sd">        num_classes: Number of label classes (labels are 0..num_classes-1).</span>
-<span class="sd">        min_samples_leaf: A split is rejected when either side would hold</span>
+<span class="sd">        max_depth (int): Maximum tree depth (levels of splits).</span>
+<span class="sd">        num_classes (int): Number of label classes (labels are 0..num_classes-1).</span>
+<span class="sd">        min_samples_leaf (int): A split is rejected when either side would hold</span>
 <span class="sd">            fewer samples than this.</span>
+<span class="sd">        simulate (bool): Run circuits in simulation.</span>
+<span class="sd">        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        trainer = FHEDecisionTreeTrainer(candidate_thresholds=[[1]])</span>
+<span class="sd">        ```</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -3448,7 +4163,15 @@ fewer samples than this.</p>
         <span class="n">simulate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">configuration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">configuration</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+                <span class="n">global_p_error</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+                <span class="n">loop_parallelize</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="c1"># dataflow_parallelize = True</span>
+            <span class="p">)</span>
+
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">simulate</span><span class="o">=</span><span class="n">simulate</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Initialize the object."""</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">candidate_thresholds</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span>
             <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">candidate_thresholds</span>
         <span class="p">):</span>
@@ -3465,56 +4188,49 @@ fewer samples than this.</p>
             <span class="s2">"min_samples_leaf"</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span>
         <span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_sample_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_sample_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="n">mask</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">feature</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">side</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
-            <span class="n">comparison</span> <span class="o">=</span> <span class="n">greater_equal</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">feature</span><span class="p">],</span> <span class="n">threshold</span><span class="p">)</span>
+            <span class="n">comparison</span> <span class="o">=</span> <span class="n">greater_equal</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">],</span> <span class="n">threshold</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">side</span> <span class="o">==</span> <span class="s2">"ge"</span><span class="p">:</span>
                 <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">*</span> <span class="n">comparison</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">comparison</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mask</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_level_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">with_candidates</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_level_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">paths</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">with_candidates</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidate_thresholds</span>
         <span class="n">num_classes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">level_counts</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">level_counts</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""Return the count per level."""</span>
             <span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">all_flag_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">equal</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)]</span>
+
             <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
-                <span class="n">masks</span> <span class="o">=</span> <span class="p">[</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_sample_mask</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
-                <span class="p">]</span>
-                <span class="n">class_flags</span> <span class="o">=</span> <span class="p">[</span>
-                    <span class="p">[</span><span class="n">equal</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">row</span><span class="p">],</span> <span class="n">label</span><span class="p">)</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)]</span>
-                    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
-                <span class="p">]</span>
+                <span class="n">mask_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_mask</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+
+                <span class="c1"># Precompute mask * flag_array to save FHE multiplications!</span>
+                <span class="n">masked_flags</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_classes</span><span class="p">):</span>
-                    <span class="n">total</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="mi">0</span>
-                    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
-                        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">masks</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">*</span> <span class="n">class_flags</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">label</span><span class="p">]</span>
+                    <span class="n">masked_flag</span> <span class="o">=</span> <span class="n">mask_array</span> <span class="o">*</span> <span class="n">all_flag_array</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+                    <span class="n">masked_flags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">masked_flag</span><span class="p">)</span>
+                    <span class="n">total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">masked_flag</span><span class="p">)</span>
                     <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+
                 <span class="k">if</span> <span class="n">with_candidates</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">feature</span><span class="p">,</span> <span class="n">thresholds</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">candidates</span><span class="p">):</span>
                         <span class="k">for</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">:</span>
+                            <span class="n">goes_left_array</span> <span class="o">=</span> <span class="n">greater_equal</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">],</span> <span class="n">threshold</span><span class="p">)</span>
                             <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_classes</span><span class="p">):</span>
-                                <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-                                <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
-                                    <span class="n">goes_left</span> <span class="o">=</span> <span class="n">greater_equal</span><span class="p">(</span>
-                                        <span class="n">X_train</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">feature</span><span class="p">],</span> <span class="n">threshold</span>
-                                    <span class="p">)</span>
-                                    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="p">(</span>
-                                        <span class="n">masks</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
-                                        <span class="o">*</span> <span class="n">goes_left</span>
-                                        <span class="o">*</span> <span class="n">class_flags</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">label</span><span class="p">]</span>
-                                    <span class="p">)</span>
+                                <span class="c1"># Instead of mask * flag * left, just do masked_flag * left</span>
+                                <span class="n">total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">masked_flags</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">*</span> <span class="n">goes_left_array</span><span class="p">)</span>
                                 <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">fhe</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">level_counts</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_choose_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_counts</span><span class="p">,</span> <span class="n">candidate_counts</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_choose_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_counts</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">candidate_counts</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="n">best</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">node_total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">node_counts</span><span class="p">)</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">threshold</span><span class="p">),</span> <span class="n">left_counts</span> <span class="ow">in</span> <span class="n">candidate_counts</span><span class="p">:</span>
@@ -3530,7 +4246,16 @@ fewer samples than this.</p>
                 <span class="n">best</span> <span class="o">=</span> <span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">best</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]],</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Fits the model securely on encrypted training data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X_train (List[List[int]]): Encrypted training features.</span>
+<span class="sd">            y_train (List[int]): Encrypted training targets.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Any: The trained FHEDecisionTree model.</span>
+<span class="sd">        """</span>
         <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n_samples</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train must contain at least one sample"</span><span class="p">)</span>
@@ -3633,37 +4358,20 @@ fewer samples than this.</p>
 
 
 
+<div class="doc doc-object doc-function">
 
 
-  </div>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-class">
+<h4 id="concrete_fhe_toolkit.ml.trainers.FHEDecisionTreeTrainer.fit_encrypted" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fit_encrypted</span>
 
 
-
-<h3 id="concrete_fhe_toolkit.ml.trainers.FHEKMeansTrainer" class="doc doc-heading">
-            <span class="doc doc-object-name doc-class-name">FHEKMeansTrainer</span>
-
-
-<a href="#concrete_fhe_toolkit.ml.trainers.FHEKMeansTrainer" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<a href="#concrete_fhe_toolkit.ml.trainers.FHEDecisionTreeTrainer.fit_encrypted" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">fit_encrypted</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]],</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
 
     <div class="doc doc-contents ">
-            <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="FHETrainer (concrete_fhe_toolkit.ml.trainers.FHETrainer)" href="#concrete_fhe_toolkit.ml.trainers.FHETrainer">FHETrainer</a></code></p>
 
-
-
-        <p>Hybrid encrypted k-means training (fixed iterations).</p>
-<p>Each iteration compiles one circuit with the current public centroids:
-it assigns every encrypted sample to its nearest centroid and returns
-per-cluster sums and counts. Only those aggregates are decrypted; the
-centroid update (division) happens clear-side, and the new centroids
-become the next iteration's public constants.</p>
+        <p>Fits the model securely on encrypted training data.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -3679,14 +4387,14 @@ become the next iteration's public constants.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                <code>initial_centroids</code>
+                <code>X_train</code>
             </td>
             <td>
                   <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Public, data-independent starting centroids.</p>
+                <p>Encrypted training features.</p>
               </div>
             </td>
             <td>
@@ -3695,65 +4403,58 @@ become the next iteration's public constants.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>min_value</code>
+                <code>y_train</code>
             </td>
             <td>
-                  <code><span title="int">int</span></code>
+                  <code><span title="typing.List">List</span>[<span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Inclusive lower bound of every feature value.</p>
+                <p>Encrypted training targets.</p>
               </div>
             </td>
             <td>
                 <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>max_value</code>
-            </td>
-            <td>
-                  <code><span title="int">int</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Inclusive upper bound of every feature value.</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>n_iterations</code>
-            </td>
-            <td>
-                  <code><span title="int">int</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Fixed number of Lloyd iterations.</p>
-              </div>
-            </td>
-            <td>
-                  <code>5</code>
             </td>
           </tr>
       </tbody>
     </table>
 
 
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The trained FHEDecisionTree model.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
-
-
-
-
-              <details class="mkdocstrings-source">
-                <summary>Source code in <code>src/concrete_fhe_toolkit/ml/trainers.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">373</span>
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
 <span class="normal">374</span>
 <span class="normal">375</span>
 <span class="normal">376</span>
@@ -3840,33 +4541,397 @@ become the next iteration's public constants.</p>
 <span class="normal">457</span>
 <span class="normal">458</span>
 <span class="normal">459</span>
-<span class="normal">460</span>
-<span class="normal">461</span>
-<span class="normal">462</span>
-<span class="normal">463</span>
-<span class="normal">464</span>
-<span class="normal">465</span>
-<span class="normal">466</span>
-<span class="normal">467</span>
-<span class="normal">468</span>
-<span class="normal">469</span>
-<span class="normal">470</span>
-<span class="normal">471</span>
-<span class="normal">472</span>
-<span class="normal">473</span>
-<span class="normal">474</span>
-<span class="normal">475</span>
-<span class="normal">476</span>
-<span class="normal">477</span>
-<span class="normal">478</span>
-<span class="normal">479</span>
-<span class="normal">480</span>
-<span class="normal">481</span>
-<span class="normal">482</span>
-<span class="normal">483</span>
-<span class="normal">484</span>
-<span class="normal">485</span>
-<span class="normal">486</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEKMeansTrainer</span><span class="p">(</span><span class="n">FHETrainer</span><span class="p">):</span>
+<span class="normal">460</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]],</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Fits the model securely on encrypted training data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X_train (List[List[int]]): Encrypted training features.</span>
+<span class="sd">        y_train (List[int]): Encrypted training targets.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The trained FHEDecisionTree model.</span>
+<span class="sd">    """</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_samples</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train must contain at least one sample"</span><span class="p">)</span>
+    <span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">candidate_thresholds</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_features</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"candidate_thresholds must list thresholds per feature"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_samples</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train and y_train must have the same length"</span><span class="p">)</span>
+
+    <span class="n">X_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">y_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="n">candidate_keys</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">feature</span><span class="p">,</span> <span class="n">thresholds</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">candidate_thresholds</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="n">thresholds</span>
+    <span class="p">]</span>
+
+    <span class="n">container</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">frontier</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">"path"</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">"attach"</span><span class="p">:</span> <span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="s2">"root"</span><span class="p">)}]</span>
+
+    <span class="k">for</span> <span class="n">depth</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">frontier</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">with_candidates</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s2">"path"</span><span class="p">]</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">frontier</span><span class="p">]</span>
+        <span class="n">circuit_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_level_circuit</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">with_candidates</span><span class="p">)</span>
+        <span class="n">flat</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_run_circuit</span><span class="p">(</span>
+                    <span class="n">circuit_fn</span><span class="p">,</span>
+                    <span class="p">{</span><span class="s2">"X_train"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">,</span> <span class="s2">"y_train"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">},</span>
+                    <span class="p">[(</span><span class="n">X_array</span><span class="p">,</span> <span class="n">y_array</span><span class="p">)],</span>
+                    <span class="p">(</span><span class="n">X_array</span><span class="p">,</span> <span class="n">y_array</span><span class="p">),</span>
+                <span class="p">)</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">per_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">candidate_keys</span><span class="p">)</span> <span class="k">if</span> <span class="n">with_candidates</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">next_frontier</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">frontier</span><span class="p">):</span>
+            <span class="n">chunk</span> <span class="o">=</span> <span class="n">flat</span><span class="p">[</span><span class="n">index</span> <span class="o">*</span> <span class="n">per_node</span><span class="p">:</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">per_node</span><span class="p">]</span>
+            <span class="n">node_counts</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="p">]</span>
+            <span class="n">parent</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s2">"attach"</span><span class="p">]</span>
+
+            <span class="n">majority</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">node_counts</span><span class="p">))</span>
+            <span class="n">is_pure</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">node_counts</span> <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span>
+            <span class="n">best</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">with_candidates</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_pure</span><span class="p">:</span>
+                <span class="n">candidate_counts</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">c_index</span><span class="p">,</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">candidate_keys</span><span class="p">):</span>
+                    <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">c_index</span><span class="p">)</span>
+                    <span class="n">candidate_counts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="p">(</span><span class="n">candidate</span><span class="p">,</span> <span class="n">chunk</span><span class="p">[</span><span class="n">offset</span><span class="p">:</span> <span class="n">offset</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="p">])</span>
+                    <span class="p">)</span>
+                <span class="n">best</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_choose_split</span><span class="p">(</span><span class="n">node_counts</span><span class="p">,</span> <span class="n">candidate_counts</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">best</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">parent</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">majority</span>
+                <span class="k">continue</span>
+
+            <span class="n">_</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="n">best</span>
+            <span class="n">subtree</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"feature"</span><span class="p">:</span> <span class="n">feature</span><span class="p">,</span>
+                <span class="s2">"threshold"</span><span class="p">:</span> <span class="n">threshold</span><span class="p">,</span>
+                <span class="s2">"left"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">"right"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">parent</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">subtree</span>
+            <span class="n">next_frontier</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">"path"</span><span class="p">:</span> <span class="n">node</span><span class="p">[</span><span class="s2">"path"</span><span class="p">]</span> <span class="o">+</span> <span class="p">[(</span><span class="n">feature</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="s2">"ge"</span><span class="p">)],</span>
+                    <span class="s2">"attach"</span><span class="p">:</span> <span class="p">(</span><span class="n">subtree</span><span class="p">,</span> <span class="s2">"left"</span><span class="p">),</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+            <span class="n">next_frontier</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">"path"</span><span class="p">:</span> <span class="n">node</span><span class="p">[</span><span class="s2">"path"</span><span class="p">]</span> <span class="o">+</span> <span class="p">[(</span><span class="n">feature</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="s2">"lt"</span><span class="p">)],</span>
+                    <span class="s2">"attach"</span><span class="p">:</span> <span class="p">(</span><span class="n">subtree</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">),</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="n">frontier</span> <span class="o">=</span> <span class="n">next_frontier</span>
+
+    <span class="k">return</span> <span class="n">FHEDecisionTree</span><span class="p">(</span><span class="n">container</span><span class="p">[</span><span class="s2">"root"</span><span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="concrete_fhe_toolkit.ml.trainers.FHEKMeansTrainer" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">FHEKMeansTrainer</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.trainers.FHEKMeansTrainer" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="FHETrainer (concrete_fhe_toolkit.ml.trainers.FHETrainer)" href="#concrete_fhe_toolkit.ml.trainers.FHETrainer">FHETrainer</a></code></p>
+
+
+
+        <p>Hybrid encrypted k-means training (fixed iterations).</p>
+<p>Each iteration compiles one circuit with the current public centroids:
+it assigns every encrypted sample to its nearest centroid and returns
+per-cluster sums and counts. Only those aggregates are decrypted; the
+centroid update (division) happens clear-side, and the new centroids
+become the next iteration's public constants.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>initial_centroids</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Public, data-independent starting centroids.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>min_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The lower bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_value</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The upper bound for the encrypted inputs, used to dimension the FHE circuit.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>n_iterations</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Fixed number of Lloyd iterations.</p>
+              </div>
+            </td>
+            <td>
+                  <code>5</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>simulate</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Run circuits in simulation.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>configuration</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="concrete_fhe_toolkit._compat.fhe.Configuration">Configuration</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional FHE compiler configuration object.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="n">trainer</span> <span class="o">=</span> <span class="n">FHEKMeansTrainer</span><span class="p">(</span><span class="n">initial_centroids</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
+                <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span>
+<span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span>
+<span class="normal">581</span>
+<span class="normal">582</span>
+<span class="normal">583</span>
+<span class="normal">584</span>
+<span class="normal">585</span>
+<span class="normal">586</span>
+<span class="normal">587</span>
+<span class="normal">588</span>
+<span class="normal">589</span>
+<span class="normal">590</span>
+<span class="normal">591</span>
+<span class="normal">592</span>
+<span class="normal">593</span>
+<span class="normal">594</span>
+<span class="normal">595</span>
+<span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span>
+<span class="normal">601</span>
+<span class="normal">602</span>
+<span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span>
+<span class="normal">616</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span>
+<span class="normal">621</span>
+<span class="normal">622</span>
+<span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span>
+<span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span>
+<span class="normal">650</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FHEKMeansTrainer</span><span class="p">(</span><span class="n">FHETrainer</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Hybrid encrypted k-means training (fixed iterations).</span>
 
 <span class="sd">    Each iteration compiles one circuit with the current public centroids:</span>
@@ -3876,10 +4941,17 @@ become the next iteration's public constants.</p>
 <span class="sd">    become the next iteration's public constants.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        initial_centroids: Public, data-independent starting centroids.</span>
-<span class="sd">        min_value: Inclusive lower bound of every feature value.</span>
-<span class="sd">        max_value: Inclusive upper bound of every feature value.</span>
-<span class="sd">        n_iterations: Fixed number of Lloyd iterations.</span>
+<span class="sd">        initial_centroids (List[List[int]]): Public, data-independent starting centroids.</span>
+<span class="sd">        min_value (int): The lower bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        max_value (int): The upper bound for the encrypted inputs, used to dimension the FHE circuit.</span>
+<span class="sd">        n_iterations (int): Fixed number of Lloyd iterations.</span>
+<span class="sd">        simulate (bool): Run circuits in simulation.</span>
+<span class="sd">        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        trainer = FHEKMeansTrainer(initial_centroids=[[0, 0]], min_value=0, max_value=1)</span>
+<span class="sd">        ```</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -3893,17 +4965,19 @@ become the next iteration's public constants.</p>
         <span class="n">configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fhe</span><span class="o">.</span><span class="n">Configuration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">simulate</span><span class="o">=</span><span class="n">simulate</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Initialize the object."""</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">initial_centroids</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"initial_centroids must contain at least one centroid"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initial_centroids</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">centroid</span><span class="p">)</span> <span class="k">for</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="n">initial_centroids</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">minimum</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximum</span> <span class="o">=</span> <span class="n">validate_bounds</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_iterations</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">"n_iterations"</span><span class="p">,</span> <span class="n">n_iterations</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_step_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">centroids</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_step_circuit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">centroids</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="n">n_clusters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">centroids</span><span class="p">)</span>
         <span class="n">arg_min</span> <span class="o">=</span> <span class="n">make_argmin</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">)</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">assign_and_aggregate</span><span class="p">(</span><span class="n">X_train</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">assign_and_aggregate</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""Assign and aggregate values."""</span>
             <span class="n">flags</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
                 <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">X_train</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">column</span><span class="p">]</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_features</span><span class="p">)]</span>
@@ -3932,7 +5006,15 @@ become the next iteration's public constants.</p>
 
         <span class="k">return</span> <span class="n">assign_and_aggregate</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Fits the model securely on encrypted training data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X_train (List[List[int]]): Encrypted training features.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Any: The trained FHEKMeans model.</span>
+<span class="sd">        """</span>
         <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n_samples</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train must contain at least one sample"</span><span class="p">)</span>
@@ -3996,6 +5078,195 @@ become the next iteration's public constants.</p>
 
 
 
+<div class="doc doc-object doc-function">
+
+
+<h4 id="concrete_fhe_toolkit.ml.trainers.FHEKMeansTrainer.fit_encrypted" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fit_encrypted</span>
+
+
+<a href="#concrete_fhe_toolkit.ml.trainers.FHEKMeansTrainer.fit_encrypted" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">fit_encrypted</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Fits the model securely on encrypted training data.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>X_train</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Encrypted training features.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The trained FHEKMeans model.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">595</span>
+<span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span>
+<span class="normal">601</span>
+<span class="normal">602</span>
+<span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span>
+<span class="normal">616</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span>
+<span class="normal">621</span>
+<span class="normal">622</span>
+<span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span>
+<span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span>
+<span class="normal">650</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fit_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Fits the model securely on encrypted training data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X_train (List[List[int]]): Encrypted training features.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: The trained FHEKMeans model.</span>
+<span class="sd">    """</span>
+    <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_samples</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"X_train must contain at least one sample"</span><span class="p">)</span>
+    <span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">span</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximum</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum</span>
+    <span class="n">max_distance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">*</span> <span class="n">span</span> <span class="o">*</span> <span class="n">span</span><span class="p">)</span>
+    <span class="n">X_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="n">centroids</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">centroid</span><span class="p">)</span> <span class="k">for</span> <span class="n">centroid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_centroids</span><span class="p">]</span>
+    <span class="n">n_clusters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">centroids</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_iterations</span><span class="p">):</span>
+        <span class="n">circuit_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_circuit</span><span class="p">(</span>
+            <span class="n">centroids</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">max_distance</span>
+        <span class="p">)</span>
+        <span class="n">flat</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_run_circuit</span><span class="p">(</span>
+                    <span class="n">circuit_fn</span><span class="p">,</span>
+                    <span class="p">{</span><span class="s2">"X_train"</span><span class="p">:</span> <span class="s2">"encrypted"</span><span class="p">},</span>
+                    <span class="p">[</span><span class="n">X_array</span><span class="p">],</span>
+                    <span class="p">(</span><span class="n">X_array</span><span class="p">,),</span>
+                <span class="p">)</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">flat</span><span class="p">[:</span><span class="n">n_clusters</span><span class="p">]</span>
+        <span class="n">sums</span> <span class="o">=</span> <span class="n">flat</span><span class="p">[</span><span class="n">n_clusters</span><span class="p">:]</span>
+        <span class="n">new_centroids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">counts</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">new_centroids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">centroids</span><span class="p">[</span><span class="n">cluster</span><span class="p">]))</span>
+                <span class="k">continue</span>
+            <span class="n">new_centroids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="nb">int</span><span class="p">(</span>
+                        <span class="n">_pymath</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span>
+                            <span class="n">sums</span><span class="p">[</span><span class="n">cluster</span> <span class="o">*</span> <span class="n">n_features</span> <span class="o">+</span> <span class="n">column</span><span class="p">]</span>
+                            <span class="o">/</span> <span class="n">counts</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span>
+                            <span class="o">+</span> <span class="mf">0.5</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_features</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="n">centroids</span> <span class="o">=</span> <span class="n">new_centroids</span>
+
+    <span class="k">return</span> <span class="n">FHEKMeans</span><span class="p">(</span><span class="n">centroids</span><span class="p">,</span> <span class="n">max_distance</span><span class="o">=</span><span class="n">max_distance</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
 
 
   </div>
@@ -4018,50 +5289,193 @@ become the next iteration's public constants.</p>
 
     <div class="doc doc-contents ">
 
-        <p>[Client-Side Helper] Traceable sufficient statistics for linear regression.</p>
+        <p>Traceable sufficient statistics for linear regression.</p>
 <p>Computes the flattened <code>A^T A</code> and <code>A^T y</code> aggregates over the
 encrypted design matrix <code>A = [X | 1]</code> (intercept column appended).
 The normal equations are solved clear-side after decryption.</p>
 
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>X_train</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Encrypted design matrix features.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>y_train</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Encrypted targets.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>n_samples</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of samples.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>n_features</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of features.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Any</code></td>            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Flattened sufficient statistics array.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.trainers</span><span class="w"> </span><span class="kn">import</span> <span class="n">linear_regression_training</span>
+
+<span class="c1"># Calculate sufficient statistics securely</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">linear_regression_training</span><span class="p">(</span><span class="n">enc_X</span><span class="p">,</span> <span class="n">enc_y</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
             <details class="mkdocstrings-source">
-              <summary>Source code in <code>src/concrete_fhe_toolkit/ml/trainers.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span>
-<span class="normal">95</span>
-<span class="normal">96</span>
-<span class="normal">97</span>
-<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@client_side_helper</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">linear_regression_training</span><span class="p">(</span>
+              <summary>Source code in <code>src\concrete_fhe_toolkit\ml\trainers.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">linear_regression_training</span><span class="p">(</span>
     <span class="n">X_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">y_train</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">n_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""[Client-Side Helper] Traceable sufficient statistics for linear regression.</span>
+<span class="w">    </span><span class="sd">"""Traceable sufficient statistics for linear regression.</span>
 
 <span class="sd">    Computes the flattened ``A^T A`` and ``A^T y`` aggregates over the</span>
 <span class="sd">    encrypted design matrix ``A = [X | 1]`` (intercept column appended).</span>
 <span class="sd">    The normal equations are solved clear-side after decryption.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X_train (Any): Encrypted design matrix features.</span>
+<span class="sd">        y_train (Any): Encrypted targets.</span>
+<span class="sd">        n_samples (int): Number of samples.</span>
+<span class="sd">        n_features (int): Number of features.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: Flattened sufficient statistics array.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from concrete_fhe_toolkit.ml.trainers import linear_regression_training</span>
+
+<span class="sd">        # Calculate sufficient statistics securely</span>
+<span class="sd">        stats = linear_regression_training(enc_X, enc_y, n_samples=100, n_features=5)</span>
+<span class="sd">        ```</span>
 <span class="sd">    """</span>
     <span class="n">augmented</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">[</span><span class="n">X_train</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">column</span><span class="p">]</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_features</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>

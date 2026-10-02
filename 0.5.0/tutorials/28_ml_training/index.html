@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#naive_bayes_training-helper" class="md-skip">
+        <a href="#naive_bayes_training" class="md-skip">
           Skip to content
         </a>
       
@@ -1343,10 +1343,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#naive_bayes_training-helper" class="md-nav__link">
+  <a href="#naive_bayes_training" class="md-nav__link">
     <span class="md-ellipsis">
       
-        naive_bayes_training() (Helper)
+        naive_bayes_training()
       
     </span>
   </a>
@@ -2544,10 +2544,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#naive_bayes_training-helper" class="md-nav__link">
+  <a href="#naive_bayes_training" class="md-nav__link">
     <span class="md-ellipsis">
       
-        naive_bayes_training() (Helper)
+        naive_bayes_training()
       
     </span>
   </a>
@@ -3308,18 +3308,18 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=108cdd8d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0650e491">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="naive_bayes_training-helper">naive_bayes_training() (Helper)<a class="anchor-link" href="#naive_bayes_training-helper">¶</a></h3><p>Demonstrates the <code>naive_bayes_training</code> function. This is a client-side (cleartext) helper function. It is <strong>not</strong> an FHE circuit and cannot be compiled with <code>fhe.Compiler</code>.</p>
+<h3 id="naive_bayes_training">naive_bayes_training()<a class="anchor-link" href="#naive_bayes_training">¶</a></h3><p>Demonstrates the <code>naive_bayes_training</code> function. This is the core FHE circuit logic used by <code>FHENaiveBayesTrainer</code> to calculate feature counts and class priors directly on encrypted data.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cbdb2576">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5d7eb84e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3337,27 +3337,33 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.training</span><span class="w"> </span><span class="kn">import</span> <span class="n">naive_bayes_training</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">fhe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concrete_fhe_toolkit.ml.training</span><span class="w"> </span><span class="kn">import</span> <span class="n">naive_bayes_training</span>
 
+<span class="n">compiler</span> <span class="o">=</span> <span class="n">fhe</span><span class="o">.</span><span class="n">Compiler</span><span class="p">(</span><span class="n">naive_bayes_training</span><span class="p">,</span> <span class="p">{</span><span class="s1">'X_train'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">,</span> <span class="s1">'y_train_one_hot'</span><span class="p">:</span> <span class="s1">'encrypted'</span><span class="p">})</span>
 <span class="n">inputset</span> <span class="o">=</span> <span class="p">[([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])]</span>
-<span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inputset</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="n">naive_bayes_training</span><span class="p">(</span><span class="o">*</span><span class="n">inp</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Helper output: </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Skipping </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'naive_bayes_training helper executed successfully!'</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-1">from concrete_fhe_toolkit.ml.training import naive_bayes_training
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">inputset</span><span class="p">)</span>
 
+<span class="n">expected</span> <span class="o">=</span> <span class="n">naive_bayes_training</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">circuit</span><span class="o">.</span><span class="n">encrypt_run_decrypt</span><span class="p">(</span><span class="o">*</span><span class="n">inputset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">expected</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">expected</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'naive_bayes_training compiled and executed successfully!'</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-1">from concrete import fhe
+from concrete_fhe_toolkit.ml.training import naive_bayes_training
+
+compiler = fhe.Compiler(naive_bayes_training, {'X_train': 'encrypted', 'y_train_one_hot': 'encrypted'})
 inputset = [([[1, 0]], [[1, 0]])]
-for inp in inputset:
-    try:
-        expected = naive_bayes_training(*inp)
-        print(f'Helper output: {expected}')
-    except Exception as e:
-        print(f'Skipping {inp}: {e}')
-print('naive_bayes_training helper executed successfully!')
+circuit = compiler.compile(inputset)
+
+expected = naive_bayes_training(*inputset[0])
+result = circuit.encrypt_run_decrypt(*inputset[0])
+import numpy as np
+np.testing.assert_array_equal(result[0], expected[0])
+np.testing.assert_array_equal(result[1], expected[1])
+print('naive_bayes_training compiled and executed successfully!')
 </div>
 </div>
 </div>
@@ -3365,7 +3371,7 @@ print('naive_bayes_training helper executed successfully!')
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ad9185c4">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a6a8a4b4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3377,7 +3383,7 @@ print('naive_bayes_training helper executed successfully!')
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e68a0b10">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a88a3b03">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

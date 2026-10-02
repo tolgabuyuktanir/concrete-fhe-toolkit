@@ -84,6 +84,8 @@ The package focuses on explicit, bounded FHE circuits:
 - perform bounded `numerator // (left * right)`
 - run machine learning models (Linear Regression, KNN) and metrics directly on encrypted data
 - perform matrix and array algebra (dot products, matrix multiplication, array addition) on encrypted tensors
+- calculate encrypted statistics and apply differential privacy (Laplace/Gaussian) to decrypted aggregates
+- deploy compiled FHE models securely using a decoupled Client/Server architecture
 
 ## Installation
 
@@ -313,9 +315,41 @@ Machine Learning (ML) subpackage:
 from concrete_fhe_toolkit import ml
 ```
 
-- **Metrics & Data**: `accuracy_score`, `confusion_matrix`, `mean_squared_error`, `mean_absolute_error`, `one_hot_encode`, `binarize`
-- **Models**: `linear_regression_inference`, `decision_tree_node`, `knn_inference`, `majority_votes`
-- **Matrix Operations**: `matrix_multiply`, `matrix_vector_multiply`, `matrix_add`, `matrix_subtract`, `matrix_transpose`, `dot_product`
+- **Metrics & Losses**: `accuracy_score`, `precision_score`, `recall_score`, `f1_score`, `confusion_matrix`, `mean_squared_error`, `mean_absolute_error`, `hinge_loss`, `cross_entropy_loss`, `r2_score`
+- **Trainers (Encrypted Training)**: `FHEDecisionTreeTrainer`, `FHEKMeansTrainer`, `FHENaiveBayesTrainer`, `FHELinearRegressionTrainer`
+- **Models (Encrypted Inference)**: `FHELinearRegression`, `FHELogisticRegression`, `FHEDecisionTree`, `FHERandomForest`, `FHEXGBoost`, `FHEKMeans`, `FHEKNN`, `FHESVM`, `FHENaiveBayes`, `FHEPCA`, `FHECNN`, `FHEMLP`
+- **Neural Net Ops & Activations**: `relu`, `leaky_relu`, `sigmoid`, `tanh`, `softmax`, `max_pooling_2d`, `avg_pooling_2d`
+- **Preprocessing & Pipelines**: `FHEStandardScaler`, `FHEMinMaxScaler`, `FHEBinner`, `FHEPipeline`, `one_hot_encode`, `binarize`
+- **Scikit-Learn Integration**: `from_sklearn_linear`, `from_sklearn_tree`, `from_sklearn_forest`
+- **Matrix & Tensor Math**: `matrix_multiply`, `matrix_add`, `matrix_transpose`, `matrix_exp`, `covariance_matrix`, `dot_product`, `tensor_flatten`
+- **Serialization & Utilities**: `save_model`, `load_model`, `estimate_model_cost`, `auto_quantizer`, `clip_array`
+
+Finance module:
+
+```python
+from concrete_fhe_toolkit import finance
+```
+
+- **Core Operations**: `apply_rate`, `calculate_tax`, `discount`, `simple_interest`, `return_actual_value`
+- **Secure Transactions**: `transfer` (securely transfers encrypted amounts without leaking failures)
+
+Statistics & Privacy modules:
+
+```python
+from concrete_fhe_toolkit import stats, privacy
+```
+
+- **Encrypted Statistics**: `array_mean`, `array_variance`, `array_std`, `array_covariance`, `array_median`, `array_percentile`, `array_histogram`, `array_mode`, `array_normalize`
+- **Differential Privacy (Clear-side)**: `laplace_mechanism`, `gaussian_mechanism`, `dp_release`
+
+Deployment module:
+
+```python
+from concrete_fhe_toolkit import deploy
+```
+
+- **Client/Server Export**: `save_deployment`, `load_server`, `load_client`
+- **Key Management**: `save_client_keys`, `load_client_keys`
 
 Math subpackage:
 
@@ -412,6 +446,33 @@ Bit-level arithmetic helpers:
 | **K-Means Clustering** | ✅ Supported | ✅ Supported |
 
 ## Examples
+
+### Client/Server Model Deployment (FHE Architecture)
+
+FHE separates the data owner (Client) from the compute infrastructure (Server). The `deploy` module makes it trivial to save and load these decoupled components.
+
+```python
+from concrete_fhe_toolkit import deploy
+
+# --- Offline: Export the compiled model ---
+# deploy.save_deployment(model.circuit, "deployment/")
+
+# --- Server Side (Untrusted Cloud) ---
+server = deploy.load_server("deployment/")
+
+# --- Client Side (Data Owner) ---
+client = deploy.load_client("deployment/")
+client.keys.generate() # Generate private keys locally
+
+# Client encrypts data
+encrypted_args = client.encrypt(X_test_int[0])
+
+# Server evaluates securely in the dark
+encrypted_result = server.run(encrypted_args, evaluation_keys=client.evaluation_keys)
+
+# Client decrypts the result
+print(client.decrypt(encrypted_result))
+```
 
 ### Privacy-Preserving Breast Cancer Diagnosis (ML Subpackage)
 

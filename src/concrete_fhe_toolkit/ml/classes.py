@@ -403,11 +403,10 @@ class FHEDecisionTree(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self,tree: Any, full_encryption: bool = False):
+    def __init__(self,tree: Any):
         super().__init__()
         """Initialize the object."""
         self.tree = tree
-        self.full_encryption = full_encryption
 
     def _tree_depth(self, node):
         if not isinstance(node, dict):
@@ -442,11 +441,8 @@ class FHEDecisionTree(FHEModel):
         return enc_thresholds, enc_feature_indices, enc_leaf_values
 
     def _circuit_logic(self, features: Any) -> Any:
-        if not self.full_encryption:
-            return decision_tree_inference(features, self.tree)
-
         enc_thresholds, enc_feature_indices, enc_leaf_values = self._flatten_tree()    
-        return universal_decision_tree_inference(features, enc_thresholds, enc_feature_indices, enc_leaf_values, len(features))
+        return decision_tree_inference(features, enc_thresholds, enc_feature_indices, enc_leaf_values, len(features))
 
     def export_graphviz(self, feature_names = None, class_names = None) -> graphviz.Digraph:
         node_id = 0

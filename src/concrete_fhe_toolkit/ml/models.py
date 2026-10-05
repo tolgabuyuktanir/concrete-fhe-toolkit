@@ -216,60 +216,7 @@ def knn_inference(
 
     return majority_votes(votes)
 
-
-def decision_tree_inference(features: Union[np.ndarray, List[Any]], tree: Any) -> Any:
-    """Evaluate a full decision tree on encrypted features.
-
-    ``tree`` is a public structure. An internal node is a dict with keys
-    ``"feature"`` (index into ``features``), ``"threshold"`` (public
-    integer), ``"left"``, and ``"right"`` (subtrees); a leaf is a plain
-    integer label or value. The left branch is taken when
-    ``features[feature] >= threshold``.
-
-    Every path of the tree is evaluated obliviously, so the visited path is
-    never revealed — circuit cost grows with the total number of nodes.
-    
-    Args:
-        features: The encrypted 2D feature matrix containing input samples.
-        tree: The public decision tree structure.
-        
-    Returns:
-        The predicted value or label from the decision tree.
-        
-    Example:
-        ```python
-        from concrete_fhe_toolkit.ml.models import decision_tree_inference
-        
-        # Public tree definition (trained offline)
-        tree = {
-            "feature": 0, "threshold": 5, 
-            "left": 1, "right": 0
-        }
-        
-        # Inside an FHE circuit
-        # label = decision_tree_inference(enc_features, tree)
-        ```
-    """
-    if not isinstance(tree, dict):
-        return validate_integer("leaf value", tree)
-
-    missing = {"feature", "threshold", "left", "right"} - tree.keys()
-    if missing:
-        raise ValueError(
-            f"tree node is missing keys: {', '.join(sorted(missing))}"
-        )
-
-    feature_index = validate_integer("feature", tree["feature"], minimum=0)
-    if feature_index >= len(features):
-        raise ValueError("tree feature index is out of range for the feature vector")
-    threshold = validate_integer("threshold", tree["threshold"])
-
-    control = greater_equal(features[feature_index], threshold)
-    left_value = decision_tree_inference(features, tree["left"])
-    right_value = decision_tree_inference(features, tree["right"])
-    return select(control, left_value, right_value)
-
-def universal_decision_tree_inference(features: Any, enc_thresholds: Any, enc_feature_indices: Any, enc_leaf_values: Any, num_feature: int) -> Any:
+def decision_tree_inference(features: Any, enc_thresholds: Any, enc_feature_indices: Any, enc_leaf_values: Any, num_feature: int) -> Any:
     c = []
     for i in range(len(enc_thresholds)):
         chosen_value = 0

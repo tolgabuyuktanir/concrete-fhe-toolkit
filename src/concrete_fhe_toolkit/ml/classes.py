@@ -413,7 +413,6 @@ class FHEDecisionTree(FHEModel):
 
     def export_graphviz(self):
         node_id = 0
-        node_text = ""
         tree_graph = graphviz.Digraph()
         def recurse(node):
             nonlocal node_id
@@ -437,7 +436,11 @@ class FHEDecisionTree(FHEModel):
 
     def show_tree(self):
         tree_graph = self.export_graphviz()
-        tree_graph.view(cleanup=True)
+        
+        try:
+            tree_graph.view(cleanup=True)
+        except Exception as e:
+            print(f"Tree could not plotted, there can be an error with Graphviz or GUI in your system. Error:{e}")    
 
 class FHEPCA(FHEModel):
     """Encrypted Principal Component Analysis (PCA) Inference Model.

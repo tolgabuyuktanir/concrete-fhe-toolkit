@@ -58,7 +58,15 @@ elapsed_time = end_time - start_time
 
 print(f"\nTraining completed! Internal structure of the built tree:")
 # Ağacı çizdirip PDF olarak kaydetmeyi dene
-fhe_model.show_tree()
+# Kullanıcı (Örn: Siz) kendi örneğinde şöyle yazar:
+dot_graph = fhe_model.export_graphviz()
+try:
+    dot_graph.render("decision_tree_plot", format="png", cleanup=True)
+    print("✅ Tree visualization saved as 'decision_tree_plot.png')
+except Exception as e:
+    print(f"⚠️ Tree could not convertod to a image:{e}")
+    print(dot_graph.source)
+
 print(f"⏱️ TOTAL FHE TRAINING TIME: {elapsed_time:.2f} seconds ({elapsed_time/60:.2f} minutes)\n")
 
 print("Compiling model inference circuit...")

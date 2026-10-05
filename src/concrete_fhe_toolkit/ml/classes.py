@@ -551,8 +551,48 @@ class FHERandomForest(FHEModel):
         """Initialize the object."""
         self.trees = trees
 
+    def _flatten_forest(self):
+        enc_thresholds_list = []
+        enc_feature_indices_list = []
+        enc_leaf_values_list = []
+        
+        def tree_depth(node):
+            if not isinstance(node, dict):
+                return 0
+            return 1 + max(tree_depth(node["left"]), tree_depth(node["right"]))
+            
+        for tree in self.trees:
+            depth = tree_depth(tree)
+            leaf_start_idx = 2**depth - 1
+            enc_thresholds = [0] * leaf_start_idx
+            enc_feature_indices = [0] * leaf_start_idx
+            enc_leaf_values = [0] * (2**depth)
+            
+            def recurse(node, idx):
+                if isinstance(node, dict):
+                    enc_thresholds[idx] = node["threshold"]
+                    enc_feature_indices[idx] = node["feature"]
+                    recurse(node["left"], 2 * idx + 1)
+                    recurse(node["right"], 2 * idx + 2)
+                else:
+                    if idx >= leaf_start_idx:
+                        enc_leaf_values[idx - leaf_start_idx] = node
+                    else:
+                        enc_thresholds[idx] = 0
+                        enc_feature_indices[idx] = 0
+                        recurse(node, 2 * idx + 1)
+                        recurse(node, 2 * idx + 2)
+                        
+            recurse(tree, 0)
+            enc_thresholds_list.append(enc_thresholds)
+            enc_feature_indices_list.append(enc_feature_indices)
+            enc_leaf_values_list.append(enc_leaf_values)
+            
+        return enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list
+
     def _circuit_logic(self, features: Any) -> Any:
-        return random_forest_inference(features,self.trees)    
+        enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list = self._flatten_forest()
+        return random_forest_inference(features, enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list, len(features))    
 
 
 class FHEXGBoost(FHEModel):
@@ -574,8 +614,48 @@ class FHEXGBoost(FHEModel):
         """Initialize the object."""
         self.trees = trees   
 
+    def _flatten_forest(self):
+        enc_thresholds_list = []
+        enc_feature_indices_list = []
+        enc_leaf_values_list = []
+        
+        def tree_depth(node):
+            if not isinstance(node, dict):
+                return 0
+            return 1 + max(tree_depth(node["left"]), tree_depth(node["right"]))
+            
+        for tree in self.trees:
+            depth = tree_depth(tree)
+            leaf_start_idx = 2**depth - 1
+            enc_thresholds = [0] * leaf_start_idx
+            enc_feature_indices = [0] * leaf_start_idx
+            enc_leaf_values = [0] * (2**depth)
+            
+            def recurse(node, idx, enc_t, enc_f, enc_l):
+                if isinstance(node, dict):
+                    enc_t[idx] = node["threshold"]
+                    enc_f[idx] = node["feature"]
+                    recurse(node["left"], 2 * idx + 1, enc_t, enc_f, enc_l)
+                    recurse(node["right"], 2 * idx + 2, enc_t, enc_f, enc_l)
+                else:
+                    if idx >= leaf_start_idx:
+                        enc_l[idx - leaf_start_idx] = node
+                    else:
+                        enc_t[idx] = 0
+                        enc_f[idx] = 0
+                        recurse(node, 2 * idx + 1, enc_t, enc_f, enc_l)
+                        recurse(node, 2 * idx + 2, enc_t, enc_f, enc_l)
+                        
+            recurse(tree, 0, enc_thresholds, enc_feature_indices, enc_leaf_values)
+            enc_thresholds_list.append(enc_thresholds)
+            enc_feature_indices_list.append(enc_feature_indices)
+            enc_leaf_values_list.append(enc_leaf_values)
+            
+        return enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list
+
     def _circuit_logic(self, features: Any) -> Any:
-        return xgboost_inference(features, self.trees)    
+        enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list = self._flatten_forest()
+        return xgboost_inference(features, enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list, len(features))    
 
 class FHESVM(FHEModel):
     """Encrypted Support Vector Machine (SVM) Inference Model.

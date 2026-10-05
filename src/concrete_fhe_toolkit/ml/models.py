@@ -269,6 +269,25 @@ def decision_tree_inference(features: Union[np.ndarray, List[Any]], tree: Any) -
     right_value = decision_tree_inference(features, tree["right"])
     return select(control, left_value, right_value)
 
+def universal_decision_tree_inference(features: Any, enc_thresholds: Any, enc_feature_indices: Any, enc_leaf_values: Any, num_feature: int) -> Any:
+    c = []
+    for i in range(len(enc_thresholds)):
+        chosen_value = 0
+        for f in range(num_feature):
+            match_value = equal(enc_feature_indices[i], f)
+            chosen_value = chosen_value + (match_value * features[f])
+
+        comparison = greater_equal(chosen_value, enc_thresholds[i])
+        c.append(comparison)
+
+    values = [0] * len(enc_thresholds) + list(enc_leaf_values)
+    for i in range(len(enc_thresholds)-1, -1, -1):
+        left_index = 2 * i + 1
+        right_index =2 * i + 2
+
+        values[i] = select(c[i], values[left_index], values[right_index])
+
+    return values[0]                
 
 def compile_decision_tree_node(
     min_value: int = -15,

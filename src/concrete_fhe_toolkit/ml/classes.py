@@ -403,13 +403,50 @@ class FHEDecisionTree(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self,tree: Any):
+    def __init__(self,tree: Any, full_encryption: bool = False):
         super().__init__()
         """Initialize the object."""
         self.tree = tree
+        self.full_encryption = full_encryption
+
+    def _tree_depth(self, node):
+        if not isinstance(node, dict):
+            return 0 #leaf
+        left_depth = self._tree_depth(node["left"])
+        right_depth = self._tree_depth(node["right"])
+        return 1 + max(left_depth, right_depth)
+
+    def _flatten_tree(self):
+        depth_tree = self._tree_depth(self.tree)
+        enc_thresholds = [0,] * (2**depth_tree-1)
+        enc_feature_indices = [0,] * (2**depth_tree-1)
+        enc_leaf_values = [0,] * (2**depth_tree)
+        
+        leaf_start_idx = 2**depth_tree-1
+        def recurse(node, idx):
+            if isinstance(node, dict):
+                enc_thresholds[idx] = node["threshold"]
+                enc_feature_indices[idx] = node["feature"]
+                recurse(node["left"], 2 * idx + 1)
+                recurse(node["right"], 2 * idx + 2)
+            else:
+                if idx >= leaf_start_idx:
+                    enc_leaf_values[idx - leaf_start_idx] = node
+                else:
+                    enc_thresholds[idx] = 0
+                    enc_feature_indices[idx] = 0
+                    recurse(node, 2 * idx + 1)
+                    recurse(node, 2 * idx + 2) 
+        recurse(self.tree, 0)
+
+        return enc_thresholds, enc_feature_indices, enc_leaf_values
 
     def _circuit_logic(self, features: Any) -> Any:
-        return decision_tree_inference(features, self.tree)
+        if not self.full_encryption:
+            return decision_tree_inference(features, self.tree)
+
+        enc_thresholds, enc_feature_indices, enc_leaf_values = self._flatten_tree()    
+        return universal_decision_tree_inference(features, enc_thresholds, enc_feature_indices, enc_leaf_values, len(features))
 
     def export_graphviz(self, feature_names = None, class_names = None) -> graphviz.Digraph:
         node_id = 0

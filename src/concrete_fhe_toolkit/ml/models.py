@@ -279,16 +279,24 @@ def compile_decision_tree_node(
     )
 
 
-def random_forest_inference(features: Union[np.ndarray, List[Any]], trees: Union[np.ndarray, List[Any]]) -> Any:
+def random_forest_inference(
+    features: Union[np.ndarray, List[Any]], 
+    enc_thresholds_list: Union[np.ndarray, List[Any]],
+    enc_feature_indices_list: Union[np.ndarray, List[Any]],
+    enc_leaf_values_list: Union[np.ndarray, List[Any]],
+    num_features: int
+) -> Any:
     """Evaluate a random forest with binary (0/1) leaves via majority vote.
 
-    Each tree uses the public dict structure accepted by
-    :func:`decision_tree_inference`. Use an odd number of trees to avoid
-    ties (a tie resolves to 0).
+    Each tree is represented by its flattened universal circuit arrays.
+    Use an odd number of trees to avoid ties (a tie resolves to 0).
     
     Args:
         features: The encrypted 2D feature matrix containing input samples.
-        trees: A list of public decision trees.
+        enc_thresholds_list: A list of encrypted thresholds arrays for each tree.
+        enc_feature_indices_list: A list of encrypted feature indices arrays for each tree.
+        enc_leaf_values_list: A list of encrypted leaf values arrays for each tree.
+        num_features: The number of features in the dataset.
         
     Returns:
         The predicted label from the random forest via majority voting.
@@ -297,14 +305,24 @@ def random_forest_inference(features: Union[np.ndarray, List[Any]], trees: Union
         ```python
         from concrete_fhe_toolkit.ml.models import random_forest_inference
         
-        # public_trees is a list of tree dictionaries
         # Inside an FHE circuit
-        # label = random_forest_inference(enc_features, public_trees)
+        # label = random_forest_inference(enc_features, thresholds_list, feature_idx_list, leaf_values_list, 4)
         ```
     """
-    if not trees:
-        raise ValueError("trees must contain at least one tree")
-    predictions = [decision_tree_inference(features, tree) for tree in trees]
+    if not enc_thresholds_list:
+        raise ValueError("The forest must contain at least one tree")
+    
+    predictions = []
+    for i in range(len(enc_thresholds_list)):
+        pred = decision_tree_inference(
+            features, 
+            enc_thresholds_list[i], 
+            enc_feature_indices_list[i], 
+            enc_leaf_values_list[i], 
+            num_features
+        )
+        predictions.append(pred)
+        
     return majority_votes(predictions)
 
 
@@ -536,13 +554,22 @@ def pca_inference(features: Union[np.ndarray,List[Any]], means: Union[np.ndarray
     diffs = np.subtract(features,means)
     return np.matmul(components,diffs)
 
-def xgboost_inference(features: Union[np.ndarray, List[Any]],trees: Union[np.ndarray, List[Any]]) -> Any:
+def xgboost_inference(
+    features: Union[np.ndarray, List[Any]],
+    enc_thresholds_list: Union[np.ndarray, List[Any]],
+    enc_feature_indices_list: Union[np.ndarray, List[Any]],
+    enc_leaf_values_list: Union[np.ndarray, List[Any]],
+    num_features: int
+) -> Any:
     """
     Evaluate a XGBoost classifier on encrypted features.
 
     Args:
         features: The encrypted 2D feature matrix containing input samples.
-        trees: The list of encrypted decision trees.
+        enc_thresholds_list: A list of encrypted thresholds arrays for each tree.
+        enc_feature_indices_list: A list of encrypted feature indices arrays for each tree.
+        enc_leaf_values_list: A list of encrypted leaf values arrays for each tree.
+        num_features: The number of features in the dataset.
 
     Returns:
         The encrypted prediction of the XGBoost classifier.
@@ -552,11 +579,25 @@ def xgboost_inference(features: Union[np.ndarray, List[Any]],trees: Union[np.nda
         from concrete_fhe_toolkit.ml.models import xgboost_inference
         
         # Inside an FHE circuit
-        # pred = xgboost_inference(enc_features, public_trees)
+        # pred = xgboost_inference(enc_features, thresholds_list, feature_idx_list, leaf_values_list, 4)
         ```
     """
-    tree_sum = array_sum([decision_tree_inference(features, tree) for tree in trees])
-    return greater(tree_sum,0)
+    if not enc_thresholds_list:
+        raise ValueError("The xgboost ensemble must contain at least one tree")
+
+    predictions = []
+    for i in range(len(enc_thresholds_list)):
+        pred = decision_tree_inference(
+            features, 
+            enc_thresholds_list[i], 
+            enc_feature_indices_list[i], 
+            enc_leaf_values_list[i], 
+            num_features
+        )
+        predictions.append(pred)
+
+    tree_sum = array_sum(predictions)
+    return greater(tree_sum, 0)
 
 def cnn_inference(filters: Union[np.ndarray, List[List[List[Any]]]], bias: Union[np.ndarray, List[Any]], image: Union[np.ndarray, List[List[List[Any]]]]) -> Any:
     """Apply a 2D convolutional layer (CNN) to an encrypted image.

@@ -411,16 +411,22 @@ class FHEDecisionTree(FHEModel):
     def _circuit_logic(self, features: Any) -> Any:
         return decision_tree_inference(features, self.tree)
 
-    def export_graphviz(self):
+    def export_graphviz(self, feature_names = None, class_names = None) -> graphviz.Digraph:
         node_id = 0
-        tree_graph = graphviz.Digraph()
+        tree_graph = graphviz.Digraph(node_attr={'shape': 'box', 'style': 'filled, rounded', 'fontname': 'helvetica', 'fillcolor': 'white'})
+        
         def recurse(node):
             nonlocal node_id
             node_id_str = str(node_id)
             node_id += 1
 
             if isinstance(node, dict):
-                node_text = f"{node.get('feature')} >= {node.get('threshold')}"
+                feat_name = feature_names[node.get('feature')] if feature_names else f"Feature {node.get('feature')}"
+                node_text = f"{feat_name} >= {node.get('threshold')}"
+                if "gini" in node and "samples" in node:
+                    node_text += f"\nGini: {node.get('gini'):.3f}"
+                    node_text += f"\nSamples: {node.get('samples')}"
+
                 tree_graph.node(node_id_str, label=node_text)
                 left_child_id = recurse(node["left"])
                 tree_graph.edge(node_id_str, left_child_id)
@@ -428,13 +434,14 @@ class FHEDecisionTree(FHEModel):
                 tree_graph.edge(node_id_str, right_child_id)
                 return node_id_str
             else:
-                tree_graph.node(node_id_str, label=f"Class: {node}") 
+                class_value = class_names[node] if class_names else node
+                tree_graph.node(node_id_str, label=f"Class: {class_value}") 
             return node_id_str
 
         recurse(self.tree)
         return tree_graph       
 
-    def show_tree(self):
+    def show_tree(self) -> None:
         tree_graph = self.export_graphviz()
         
         try:

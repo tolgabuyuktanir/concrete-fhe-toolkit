@@ -57,12 +57,14 @@ end_time = time.time()
 elapsed_time = end_time - start_time
 
 print(f"\nTraining completed! Internal structure of the built tree:")
-# Ağacı çizdirip PDF olarak kaydetmeyi dene
-# Kullanıcı (Örn: Siz) kendi örneğinde şöyle yazar:
-dot_graph = fhe_model.export_graphviz()
+# plot the tree
+flower_features = iris.feature_names
+flower_classes = iris.target_names.tolist()
+
+dot_graph = fhe_model.export_graphviz(feature_names=flower_features, class_names=flower_classes)
 try:
     dot_graph.render("decision_tree_plot", format="png", cleanup=True)
-    print("✅ Tree visualization saved as 'decision_tree_plot.png')
+    print("✅ Tree visualization saved as 'decision_tree_plot.png'")
 except Exception as e:
     print(f"⚠️ Tree could not convertod to a image:{e}")
     print(dot_graph.source)

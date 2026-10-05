@@ -419,6 +419,8 @@ class FHEDecisionTreeTrainer(FHETrainer):
             for index, node in enumerate(frontier):
                 chunk = flat[index * per_node: (index + 1) * per_node]
                 node_counts = chunk[: self.num_classes]
+                num_samples = np.sum(node_counts)
+                node_gini = _gini(node_counts)
                 parent, key = node["attach"]
 
                 majority = int(np.argmax(node_counts))
@@ -443,6 +445,8 @@ class FHEDecisionTreeTrainer(FHETrainer):
                     "threshold": threshold,
                     "left": None,
                     "right": None,
+                    "samples": num_samples,
+                    "gini": node_gini
                 }
                 parent[key] = subtree  # type: ignore
                 next_frontier.append(

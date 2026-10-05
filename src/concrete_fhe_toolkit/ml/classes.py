@@ -13,6 +13,7 @@ from concrete_fhe_toolkit.ml import (
     )
 from concrete_fhe_toolkit.privacy import dp_release
 import warnings
+import graphviz
 
 class FHEModel:
     """Base class for models with single-sample or fixed-batch circuits.
@@ -410,6 +411,33 @@ class FHEDecisionTree(FHEModel):
     def _circuit_logic(self, features: Any) -> Any:
         return decision_tree_inference(features, self.tree)
 
+    def export_graphviz(self):
+        node_id = 0
+        node_text = ""
+        tree_graph = graphviz.Digraph()
+        def recurse(node):
+            nonlocal node_id
+            node_id_str = str(node_id)
+            node_id += 1
+
+            if isinstance(node, dict):
+                node_text = f"{node.get('feature')} >= {node.get('threshold')}"
+                tree_graph.node(node_id_str, label=node_text)
+                left_child_id = recurse(node["left"])
+                tree_graph.edge(node_id_str, left_child_id)
+                right_child_id = recurse(node["right"])
+                tree_graph.edge(node_id_str, right_child_id)
+                return node_id_str
+            else:
+                tree_graph.node(node_id_str, label=f"Class: {node}") 
+            return node_id_str
+
+        recurse(self.tree)
+        return tree_graph       
+
+    def show_tree(self):
+        tree_graph = self.export_graphviz()
+        tree_graph.view(cleanup=True)
 
 class FHEPCA(FHEModel):
     """Encrypted Principal Component Analysis (PCA) Inference Model.

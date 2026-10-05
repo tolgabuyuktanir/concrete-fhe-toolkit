@@ -57,7 +57,8 @@ end_time = time.time()
 elapsed_time = end_time - start_time
 
 print(f"\nTraining completed! Internal structure of the built tree:")
-print(fhe_model.tree)
+# Ağacı çizdirip PDF olarak kaydetmeyi dene
+fhe_model.show_tree()
 print(f"⏱️ TOTAL FHE TRAINING TIME: {elapsed_time:.2f} seconds ({elapsed_time/60:.2f} minutes)\n")
 
 print("Compiling model inference circuit...")

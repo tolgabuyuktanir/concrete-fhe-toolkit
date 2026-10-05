@@ -9,7 +9,7 @@ from concrete_fhe_toolkit.ml import (
     logistic_regression_inference, linear_regression_inference,
     decision_tree_inference, pca_inference, cnn_inference,
     random_forest_inference, xgboost_inference, svm_inference,
-    knn_inference, naive_bayes_inference, mlp_inference, naive_bayes_training
+    knn_inference, naive_bayes_inference, mlp_inference, naive_bayes_training, universal_decision_tree_inference
     )
 from concrete_fhe_toolkit.privacy import dp_release
 import warnings

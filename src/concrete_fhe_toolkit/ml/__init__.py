@@ -45,6 +45,7 @@ from .models import (
     cnn_inference,
     compile_decision_tree_node,
     decision_tree_inference,
+    universal_decision_tree_inference,
     decision_tree_node,
     knn_inference,
     linear_regression_inference,
@@ -141,6 +142,7 @@ __all__ = [
     "logistic_regression_inference",
     "majority_votes",
     "decision_tree_inference",
+    "universal_decision_tree_inference"
     "decision_tree_node",
     "manhattan_distance",
     "matrix_add",

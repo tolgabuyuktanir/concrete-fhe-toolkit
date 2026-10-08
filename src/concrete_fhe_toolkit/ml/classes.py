@@ -244,7 +244,7 @@ class FHEModel:
         parameter = "features_batch" if batched else "features"
         compiler = fhe.Compiler(function, {parameter: "encrypted"})
         if configuration is None:
-            # Force extremely tight error bounds to avoid FHE noise non-determinism
+            # Force tight error bounds to avoid FHE noise non-determinism
             circuit = compiler.compile(calibration, configuration=fhe.Configuration(global_p_error=0.01))
         else:
             circuit = compiler.compile(calibration, configuration=configuration)
@@ -439,15 +439,99 @@ class FHEDecisionTree(FHEModel):
 
         return enc_thresholds, enc_feature_indices, enc_leaf_values
 
-    def _circuit_logic(self, features: Any) -> Any:
-        enc_thresholds, enc_feature_indices, enc_leaf_values = self._flatten_tree()    
-        return decision_tree_inference(features, enc_thresholds, enc_feature_indices, enc_leaf_values, len(features))
+    def compile(self, inputset: Any, batch_size: Any=None, *, inputset_is_batched: Any=None, configuration: Any=None) -> Any:
+        if inputset_is_batched is not None and not isinstance(inputset_is_batched, bool):
+            raise TypeError("inputset_is_batched must be a boolean or None")
+        size = None if batch_size is None else validate_integer("batch_size", batch_size, 1)
+        prebatched = size is not None if inputset_is_batched is None else inputset_is_batched
+        
+        items = [self._integer_array(item) for item in inputset]
+        if not items:
+            raise ValueError("inputset must contain at least one sample")
+        shape = items[0].shape
+        if any(item.shape != shape for item in items):
+            raise ValueError("all inputset items must have the same shape")
+            
+        batched = prebatched or size is not None
+        
+        enc_t, enc_f, enc_l = self._flatten_tree()
+        self._enc_t = np.array(enc_t, dtype=np.int64)
+        self._enc_f = np.array(enc_f, dtype=np.int64)
+        self._enc_l = np.array(enc_l, dtype=np.int64)
+        
+        if prebatched:
+            size = shape[0] if size is None else size
+            sample_shape = shape[1:]
+            calibration = [(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+        elif batched:
+            sample_shape = shape
+            assert size is not None
+            calibration = [(np.stack([item] * size), self._enc_t, self._enc_f, self._enc_l) for item in items]
+        else:
+            size = 1
+            sample_shape = shape
+            calibration = [(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+
+        num_feat = sample_shape[0]
+            
+        def _single_logic(features, t, f, l):
+            return decision_tree_inference(features, t, f, l, num_feat)
+            
+        def _batch_logic(features_batch, t, f, l):
+            return fhe.array([_single_logic(sample, t, f, l) for sample in features_batch])
+            
+        function = _batch_logic if batched else _single_logic
+        parameter = "features_batch" if batched else "features"
+        
+        compiler = fhe.Compiler(
+            function, 
+            {
+                parameter: "encrypted",
+                "t": "encrypted",
+                "f": "encrypted",
+                "l": "encrypted"
+            }
+        )
+        
+        if configuration is None:
+            circuit = compiler.compile(calibration, configuration=fhe.Configuration(global_p_error=0.01))
+        else:
+            circuit = compiler.compile(calibration, configuration=configuration)
+            
+        self.compiler = compiler
+        self.circuit = circuit
+        self.batch_size = size
+        self._batched = batched
+        self._sample_shape = sample_shape
+        return self
+
+    def _run_many(self, samples: Any, method: Any) -> Any:
+        if self.circuit is None:
+            raise ValueError("The model should be compiled before prediction")
+        items = [self._integer_array(sample) for sample in samples]
+        if not items:
+            return []
+        expected_shape = self._sample_shape if self._sample_shape is not None else items[0].shape
+        if any(item.shape != expected_shape for item in items):
+            raise ValueError("sample shape does not match the compiled model")
+            
+        run = getattr(self.circuit, method)
+        if not self._batched:
+            return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+            
+        results = []
+        for start in range(0, len(items), self.batch_size):
+            batch = items[start:start + self.batch_size]
+            count = len(batch)
+            batch = batch + [batch[-1]] * (self.batch_size - count)
+            results.extend(run(np.stack(batch), self._enc_t, self._enc_f, self._enc_l)[:count])
+        return results
 
     def export_graphviz(self, feature_names = None, class_names = None):
         try:
             import graphviz
-        except ImportError:
-            raise ImportError("Please install graphviz to use this feature.")
+        except ImportError as e:
+            raise ImportError("Please install graphviz to use this feature.") from e
             
         node_id = 0
         tree_graph = graphviz.Digraph(node_attr={'shape': 'box', 'style': 'filled, rounded', 'fontname': 'helvetica', 'fillcolor': 'white'})
@@ -580,12 +664,13 @@ class FHERandomForest(FHEModel):
                     recurse(node, 2 * idx + 1, enc_t, enc_f, enc_l, leaf_start_idx)
                     recurse(node, 2 * idx + 2, enc_t, enc_f, enc_l, leaf_start_idx)
                     
+        max_d = max([tree_depth(t) for t in self.trees]) if self.trees else 0
+        leaf_start_idx = 2**max_d - 1
+        
         for tree in self.trees:
-            depth = tree_depth(tree)
-            leaf_start_idx = 2**depth - 1
             enc_thresholds = [0] * leaf_start_idx
             enc_feature_indices = [0] * leaf_start_idx
-            enc_leaf_values = [0] * (2**depth)
+            enc_leaf_values = [0] * (2**max_d)
             
             recurse(tree, 0, enc_thresholds, enc_feature_indices, enc_leaf_values, leaf_start_idx)
 
@@ -595,9 +680,93 @@ class FHERandomForest(FHEModel):
             
         return enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list
 
-    def _circuit_logic(self, features: Any) -> Any:
-        enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list = self._flatten_forest()
-        return random_forest_inference(features, enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list, len(features))    
+    def compile(self, inputset: Any, batch_size: Any=None, *, inputset_is_batched: Any=None, configuration: Any=None) -> Any:
+        if inputset_is_batched is not None and not isinstance(inputset_is_batched, bool):
+            raise TypeError("inputset_is_batched must be a boolean or None")
+        size = None if batch_size is None else validate_integer("batch_size", batch_size, 1)
+        prebatched = size is not None if inputset_is_batched is None else inputset_is_batched
+        
+        items = [self._integer_array(item) for item in inputset]
+        if not items:
+            raise ValueError("inputset must contain at least one sample")
+        shape = items[0].shape
+        if any(item.shape != shape for item in items):
+            raise ValueError("all inputset items must have the same shape")
+            
+        batched = prebatched or size is not None
+        
+        enc_t_list, enc_f_list, enc_l_list = self._flatten_forest()
+        self._enc_t = np.array(enc_t_list, dtype=np.int64)
+        self._enc_f = np.array(enc_f_list, dtype=np.int64)
+        self._enc_l = np.array(enc_l_list, dtype=np.int64)
+        
+        if prebatched:
+            size = shape[0] if size is None else size
+            sample_shape = shape[1:]
+            calibration = [(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+        elif batched:
+            sample_shape = shape
+            assert size is not None
+            calibration = [(np.stack([item] * size), self._enc_t, self._enc_f, self._enc_l) for item in items]
+        else:
+            size = 1
+            sample_shape = shape
+            calibration = [(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+
+        num_feat = sample_shape[0]
+            
+        def _single_logic(features, t, f, l):
+            return random_forest_inference(features, t, f, l, num_feat)
+            
+        def _batch_logic(features_batch, t, f, l):
+            return fhe.array([_single_logic(sample, t, f, l) for sample in features_batch])
+            
+        function = _batch_logic if batched else _single_logic
+        parameter = "features_batch" if batched else "features"
+        
+        compiler = fhe.Compiler(
+            function, 
+            {
+                parameter: "encrypted",
+                "t": "encrypted",
+                "f": "encrypted",
+                "l": "encrypted"
+            }
+        )
+        
+        if configuration is None:
+            circuit = compiler.compile(calibration, configuration=fhe.Configuration(global_p_error=0.01))
+        else:
+            circuit = compiler.compile(calibration, configuration=configuration)
+            
+        self.compiler = compiler
+        self.circuit = circuit
+        self.batch_size = size
+        self._batched = batched
+        self._sample_shape = sample_shape
+        return self
+
+    def _run_many(self, samples: Any, method: Any) -> Any:
+        if self.circuit is None:
+            raise ValueError("The model should be compiled before prediction")
+        items = [self._integer_array(sample) for sample in samples]
+        if not items:
+            return []
+        expected_shape = self._sample_shape if self._sample_shape is not None else items[0].shape
+        if any(item.shape != expected_shape for item in items):
+            raise ValueError("sample shape does not match the compiled model")
+            
+        run = getattr(self.circuit, method)
+        if not self._batched:
+            return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+            
+        results = []
+        for start in range(0, len(items), self.batch_size):
+            batch = items[start:start + self.batch_size]
+            count = len(batch)
+            batch = batch + [batch[-1]] * (self.batch_size - count)
+            results.extend(run(np.stack(batch), self._enc_t, self._enc_f, self._enc_l)[:count])
+        return results
 
 
 class FHEXGBoost(FHEModel):
@@ -644,12 +813,13 @@ class FHEXGBoost(FHEModel):
                     recurse(node, 2 * idx + 1, enc_t, enc_f, enc_l, leaf_start_idx)
                     recurse(node, 2 * idx + 2, enc_t, enc_f, enc_l, leaf_start_idx)
                     
+        max_d = max([tree_depth(t) for t in self.trees]) if self.trees else 0
+        leaf_start_idx = 2**max_d - 1
+        
         for tree in self.trees:
-            depth = tree_depth(tree)
-            leaf_start_idx = 2**depth - 1
             enc_thresholds = [0] * leaf_start_idx
             enc_feature_indices = [0] * leaf_start_idx
-            enc_leaf_values = [0] * (2**depth)
+            enc_leaf_values = [0] * (2**max_d)
             
             recurse(tree, 0, enc_thresholds, enc_feature_indices, enc_leaf_values, leaf_start_idx)
 
@@ -659,9 +829,93 @@ class FHEXGBoost(FHEModel):
             
         return enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list
 
-    def _circuit_logic(self, features: Any) -> Any:
-        enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list = self._flatten_forest()
-        return xgboost_inference(features, enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list, len(features))    
+    def compile(self, inputset: Any, batch_size: Any=None, *, inputset_is_batched: Any=None, configuration: Any=None) -> Any:
+        if inputset_is_batched is not None and not isinstance(inputset_is_batched, bool):
+            raise TypeError("inputset_is_batched must be a boolean or None")
+        size = None if batch_size is None else validate_integer("batch_size", batch_size, 1)
+        prebatched = size is not None if inputset_is_batched is None else inputset_is_batched
+        
+        items = [self._integer_array(item) for item in inputset]
+        if not items:
+            raise ValueError("inputset must contain at least one sample")
+        shape = items[0].shape
+        if any(item.shape != shape for item in items):
+            raise ValueError("all inputset items must have the same shape")
+            
+        batched = prebatched or size is not None
+        
+        enc_t_list, enc_f_list, enc_l_list = self._flatten_forest()
+        self._enc_t = np.array(enc_t_list, dtype=np.int64)
+        self._enc_f = np.array(enc_f_list, dtype=np.int64)
+        self._enc_l = np.array(enc_l_list, dtype=np.int64)
+        
+        if prebatched:
+            size = shape[0] if size is None else size
+            sample_shape = shape[1:]
+            calibration = [(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+        elif batched:
+            sample_shape = shape
+            assert size is not None
+            calibration = [(np.stack([item] * size), self._enc_t, self._enc_f, self._enc_l) for item in items]
+        else:
+            size = 1
+            sample_shape = shape
+            calibration = [(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+
+        num_feat = sample_shape[0]
+            
+        def _single_logic(features, t, f, l):
+            return xgboost_inference(features, t, f, l, num_feat)
+            
+        def _batch_logic(features_batch, t, f, l):
+            return fhe.array([_single_logic(sample, t, f, l) for sample in features_batch])
+            
+        function = _batch_logic if batched else _single_logic
+        parameter = "features_batch" if batched else "features"
+        
+        compiler = fhe.Compiler(
+            function, 
+            {
+                parameter: "encrypted",
+                "t": "encrypted",
+                "f": "encrypted",
+                "l": "encrypted"
+            }
+        )
+        
+        if configuration is None:
+            circuit = compiler.compile(calibration, configuration=fhe.Configuration(global_p_error=0.01))
+        else:
+            circuit = compiler.compile(calibration, configuration=configuration)
+            
+        self.compiler = compiler
+        self.circuit = circuit
+        self.batch_size = size
+        self._batched = batched
+        self._sample_shape = sample_shape
+        return self
+
+    def _run_many(self, samples: Any, method: Any) -> Any:
+        if self.circuit is None:
+            raise ValueError("The model should be compiled before prediction")
+        items = [self._integer_array(sample) for sample in samples]
+        if not items:
+            return []
+        expected_shape = self._sample_shape if self._sample_shape is not None else items[0].shape
+        if any(item.shape != expected_shape for item in items):
+            raise ValueError("sample shape does not match the compiled model")
+            
+        run = getattr(self.circuit, method)
+        if not self._batched:
+            return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+            
+        results = []
+        for start in range(0, len(items), self.batch_size):
+            batch = items[start:start + self.batch_size]
+            count = len(batch)
+            batch = batch + [batch[-1]] * (self.batch_size - count)
+            results.extend(run(np.stack(batch), self._enc_t, self._enc_f, self._enc_l)[:count])
+        return results
 
 class FHESVM(FHEModel):
     """Encrypted Support Vector Machine (SVM) Inference Model.

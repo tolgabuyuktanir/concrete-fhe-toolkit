@@ -13,7 +13,6 @@ from concrete_fhe_toolkit.ml import (
     )
 from concrete_fhe_toolkit.privacy import dp_release
 import warnings
-import graphviz
 
 class FHEModel:
     """Base class for models with single-sample or fixed-batch circuits.
@@ -444,7 +443,12 @@ class FHEDecisionTree(FHEModel):
         enc_thresholds, enc_feature_indices, enc_leaf_values = self._flatten_tree()    
         return decision_tree_inference(features, enc_thresholds, enc_feature_indices, enc_leaf_values, len(features))
 
-    def export_graphviz(self, feature_names = None, class_names = None) -> graphviz.Digraph:
+    def export_graphviz(self, feature_names = None, class_names = None):
+        try:
+            import graphviz
+        except ImportError:
+            raise ImportError("Please install graphviz to use this feature.")
+            
         node_id = 0
         tree_graph = graphviz.Digraph(node_attr={'shape': 'box', 'style': 'filled, rounded', 'fontname': 'helvetica', 'fillcolor': 'white'})
         
@@ -561,6 +565,21 @@ class FHERandomForest(FHEModel):
                 return 0
             return 1 + max(tree_depth(node["left"]), tree_depth(node["right"]))
             
+        def recurse(node, idx, enc_t, enc_f, enc_l, leaf_start_idx):
+            if isinstance(node, dict):
+                enc_t[idx] = node["threshold"]
+                enc_f[idx] = node["feature"]
+                recurse(node["left"], 2 * idx + 1, enc_t, enc_f, enc_l, leaf_start_idx)
+                recurse(node["right"], 2 * idx + 2, enc_t, enc_f, enc_l, leaf_start_idx)
+            else:
+                if idx >= leaf_start_idx:
+                    enc_l[idx - leaf_start_idx] = node
+                else:
+                    enc_t[idx] = 0
+                    enc_f[idx] = 0
+                    recurse(node, 2 * idx + 1, enc_t, enc_f, enc_l, leaf_start_idx)
+                    recurse(node, 2 * idx + 2, enc_t, enc_f, enc_l, leaf_start_idx)
+                    
         for tree in self.trees:
             depth = tree_depth(tree)
             leaf_start_idx = 2**depth - 1
@@ -568,22 +587,8 @@ class FHERandomForest(FHEModel):
             enc_feature_indices = [0] * leaf_start_idx
             enc_leaf_values = [0] * (2**depth)
             
-            def recurse(node, idx):
-                if isinstance(node, dict):
-                    enc_thresholds[idx] = node["threshold"]
-                    enc_feature_indices[idx] = node["feature"]
-                    recurse(node["left"], 2 * idx + 1)
-                    recurse(node["right"], 2 * idx + 2)
-                else:
-                    if idx >= leaf_start_idx:
-                        enc_leaf_values[idx - leaf_start_idx] = node
-                    else:
-                        enc_thresholds[idx] = 0
-                        enc_feature_indices[idx] = 0
-                        recurse(node, 2 * idx + 1)
-                        recurse(node, 2 * idx + 2)
-                        
-            recurse(tree, 0)
+            recurse(tree, 0, enc_thresholds, enc_feature_indices, enc_leaf_values, leaf_start_idx)
+
             enc_thresholds_list.append(enc_thresholds)
             enc_feature_indices_list.append(enc_feature_indices)
             enc_leaf_values_list.append(enc_leaf_values)
@@ -624,6 +629,21 @@ class FHEXGBoost(FHEModel):
                 return 0
             return 1 + max(tree_depth(node["left"]), tree_depth(node["right"]))
             
+        def recurse(node, idx, enc_t, enc_f, enc_l, leaf_start_idx):
+            if isinstance(node, dict):
+                enc_t[idx] = node["threshold"]
+                enc_f[idx] = node["feature"]
+                recurse(node["left"], 2 * idx + 1, enc_t, enc_f, enc_l, leaf_start_idx)
+                recurse(node["right"], 2 * idx + 2, enc_t, enc_f, enc_l, leaf_start_idx)
+            else:
+                if idx >= leaf_start_idx:
+                    enc_l[idx - leaf_start_idx] = node
+                else:
+                    enc_t[idx] = 0
+                    enc_f[idx] = 0
+                    recurse(node, 2 * idx + 1, enc_t, enc_f, enc_l, leaf_start_idx)
+                    recurse(node, 2 * idx + 2, enc_t, enc_f, enc_l, leaf_start_idx)
+                    
         for tree in self.trees:
             depth = tree_depth(tree)
             leaf_start_idx = 2**depth - 1
@@ -631,22 +651,8 @@ class FHEXGBoost(FHEModel):
             enc_feature_indices = [0] * leaf_start_idx
             enc_leaf_values = [0] * (2**depth)
             
-            def recurse(node, idx, enc_t, enc_f, enc_l):
-                if isinstance(node, dict):
-                    enc_t[idx] = node["threshold"]
-                    enc_f[idx] = node["feature"]
-                    recurse(node["left"], 2 * idx + 1, enc_t, enc_f, enc_l)
-                    recurse(node["right"], 2 * idx + 2, enc_t, enc_f, enc_l)
-                else:
-                    if idx >= leaf_start_idx:
-                        enc_l[idx - leaf_start_idx] = node
-                    else:
-                        enc_t[idx] = 0
-                        enc_f[idx] = 0
-                        recurse(node, 2 * idx + 1, enc_t, enc_f, enc_l)
-                        recurse(node, 2 * idx + 2, enc_t, enc_f, enc_l)
-                        
-            recurse(tree, 0, enc_thresholds, enc_feature_indices, enc_leaf_values)
+            recurse(tree, 0, enc_thresholds, enc_feature_indices, enc_leaf_values, leaf_start_idx)
+
             enc_thresholds_list.append(enc_thresholds)
             enc_feature_indices_list.append(enc_feature_indices)
             enc_leaf_values_list.append(enc_leaf_values)

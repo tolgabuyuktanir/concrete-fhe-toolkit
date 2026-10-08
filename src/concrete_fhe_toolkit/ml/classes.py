@@ -299,7 +299,7 @@ class FHEModel:
             raise ValueError("sample shape does not match the compiled model")
         run = getattr(self.circuit, method)
         if not self._batched:
-            return [run(item) for item in items]
+            return [run(item) for item in _get_progress_bar(items, "predicting...", verbose)]
         results = []
         for start in _get_progress_bar(range(0, len(items), self.batch_size), "predicting...", verbose):
             batch = items[start:start + self.batch_size]
@@ -518,7 +518,7 @@ class FHEDecisionTree(FHEModel):
             
         run = getattr(self.circuit, method)
         if not self._batched:
-            return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+            return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in _get_progress_bar(items, "predicting...", verbose)]
             
         results = []
         for start in _get_progress_bar(range(0, len(items), self.batch_size), "tree prediction...", verbose):
@@ -759,7 +759,7 @@ class FHERandomForest(FHEModel):
             
         run = getattr(self.circuit, method)
         if not self._batched:
-            return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+            return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in _get_progress_bar(items, "predicting...", verbose)]
             
         results = []
         for start in _get_progress_bar(range(0, len(items), self.batch_size), "forest prediction...", verbose):
@@ -908,7 +908,7 @@ class FHEXGBoost(FHEModel):
             
         run = getattr(self.circuit, method)
         if not self._batched:
-            return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
+            return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in _get_progress_bar(items, "predicting...", verbose)]
             
         results = []
         for start in _get_progress_bar(range(0, len(items), self.batch_size), "xgboost prediction...", verbose):

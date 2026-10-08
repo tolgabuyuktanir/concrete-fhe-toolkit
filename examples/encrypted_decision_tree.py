@@ -41,7 +41,8 @@ trainer = FHEDecisionTreeTrainer(
     max_depth=2,       # Keeping the tree shallow to avoid slow FHE circuits
     num_classes=3,     # There are 3 different flower types in the Iris dataset
     min_samples_leaf=1,
-    simulate=False     # Disabled simulation mode for full FHE compilation
+    simulate=False,     # Disabled simulation mode for full FHE compilation
+    verbose=True
 )
 
 print("Building the tree over encrypted data... Please wait.")
@@ -76,7 +77,7 @@ fhe_model.compile(X_test_list)
 
 print("Making predictions using Real FHE Encryption...")
 # No need for a loop, we predict all test data at once!
-y_pred = fhe_model.predict_many(X_test_list)
+y_pred = fhe_model.predict_many(X_test_list, verbose=True)
 
 # Calculate accuracy
 acc = accuracy_score(y_pred, y_test_list)

@@ -1,7 +1,7 @@
 """Helper utilities for the machine learning module."""
 
 from .._compat import fhe
-from typing import List, Any, Union
+from typing import List, Any, Union, Iterable
 import numpy as np
 
 def one_hot_encode(label: Any, num_classes: int) -> Union[np.ndarray, List[Any]]:
@@ -87,3 +87,15 @@ def normalize_array(array: Union[np.ndarray, List[Any]], divisor: int) -> Union[
     """
     tensor = fhe.array(array)
     return tensor // divisor
+
+
+def _get_progress_bar(data: Iterable[Any], desc: str, verbose: bool):
+    if not verbose:
+        return data
+
+    try:
+        from tqdm import tqdm
+        return tqdm(data, desc=desc, colour="green")
+    except ImportError:
+        print("Please install tqdm to use progress bar: -> pip install tqdm, otherwise just use verbose=False")
+        return data     

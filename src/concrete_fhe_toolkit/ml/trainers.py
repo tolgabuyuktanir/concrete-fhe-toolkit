@@ -31,6 +31,7 @@ from .core import euclidean_distance_squared
 from .matrix import matrix_multiply, matrix_transpose, matrix_vector_multiply
 from ..arrays import make_argmin
 from .classes import FHEDecisionTree, FHEKMeans, FHELinearRegression, FHERandomForest
+from .utils import _get_progress_bar
 
 
 class FHETrainer:
@@ -55,10 +56,12 @@ class FHETrainer:
         *,
         simulate: bool = False,
         configuration: Optional[fhe.Configuration] = None,
+        verbose: bool = False
     ) -> None:
-        self.simulate = simulate
         """Initialize the object."""
+        self.simulate = simulate
         self.configuration = configuration
+        self.verbose = verbose
         self.circuit = None
 
     def _run_circuit(self, function: Any, parameter_encryption: Any, inputset: Any, args: Any) -> Any:
@@ -75,8 +78,8 @@ class FHETrainer:
         """
         compiler = fhe.Compiler(function, parameter_encryption)
         if self.configuration is None:
-            # Force extremely tight error bounds to avoid FHE noise non-determinism
-            self.circuit = compiler.compile(inputset, configuration=fhe.Configuration(global_p_error=1e-5))
+            # Force tight error bounds to avoid FHE noise non-determinism
+            self.circuit = compiler.compile(inputset, configuration=fhe.Configuration(global_p_error=0.01))
         else:
             self.circuit = compiler.compile(inputset, configuration=self.configuration)
         assert self.circuit is not None, "Circuit must be compiled first"
@@ -280,6 +283,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
         min_samples_leaf: int = 1,
         simulate: bool = False,
         configuration: Optional[fhe.Configuration] = None,
+        verbose: bool = False,
     ) -> None:
         if configuration is None:
             configuration = fhe.Configuration(
@@ -288,7 +292,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
                 # dataflow_parallelize = True
             )
 
-        super().__init__(simulate=simulate, configuration=configuration)
+        super().__init__(simulate=simulate, configuration=configuration, verbose=verbose)
         """Initialize the object."""
         if not candidate_thresholds or any(
             not isinstance(row, (list, tuple)) for row in candidate_thresholds
@@ -395,7 +399,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
         container: dict = {}
         frontier = [{"path": [], "attach": (container, "root")}]
 
-        for depth in range(self.max_depth + 1):
+        for depth in _get_progress_bar(range(self.max_depth + 1), "training tree...", self.verbose):
             if not frontier:
                 break
             with_candidates = depth < self.max_depth
@@ -477,6 +481,7 @@ class FHERandomForestTrainer(FHETrainer):
         max_features: Optional[int] = None,
         simulate: bool = False,
         configuration: Optional[fhe.Configuration] = None,
+        verbose: bool = False,
     ) -> None:
         if configuration is None:
             configuration = fhe.Configuration(
@@ -485,7 +490,7 @@ class FHERandomForestTrainer(FHETrainer):
                 # dataflow_parallelize = True
             )
 
-        super().__init__(simulate=simulate, configuration=configuration)
+        super().__init__(simulate=simulate, configuration=configuration, verbose=verbose)
         """Initialize the object."""
         if not candidate_thresholds or any(
             not isinstance(row, (list, tuple)) for row in candidate_thresholds
@@ -513,7 +518,7 @@ class FHERandomForestTrainer(FHETrainer):
         n_samples = len(X_train)
         n_features = len(self.candidate_thresholds)
         
-        for i in range(self.n_estimators):
+        for i in _get_progress_bar(range(self.n_estimators), "training forest...", self.verbose):
             indices = np.random.choice(n_samples, size=n_samples, replace=True)
             X_subset = [X_train[idx] for idx in indices]
             y_subset = [y_train[idx] for idx in indices]

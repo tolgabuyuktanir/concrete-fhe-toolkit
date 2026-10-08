@@ -12,6 +12,7 @@ from concrete_fhe_toolkit.ml import (
     knn_inference, naive_bayes_inference, mlp_inference, naive_bayes_training
     )
 from concrete_fhe_toolkit.privacy import dp_release
+from .utils import _get_progress_bar
 import warnings
 
 class FHEModel:
@@ -278,7 +279,7 @@ class FHEModel:
         """
         return self.simulate_many([features])[0]
 
-    def _run_many(self, samples: Any, method: Any) -> Any:
+    def _run_many(self, samples: Any, method: Any, verbose: bool=False) -> Any:
         """Helper to run a method over multiple samples.
         
         Args:
@@ -300,7 +301,7 @@ class FHEModel:
         if not self._batched:
             return [run(item) for item in items]
         results = []
-        for start in range(0, len(items), self.batch_size):
+        for start in _get_progress_bar(range(0, len(items), self.batch_size), "predicting...", verbose):
             batch = items[start:start + self.batch_size]
             count = len(batch)
             # Repeat an in-domain sample, preserving arbitrary tensor shape.
@@ -308,7 +309,7 @@ class FHEModel:
             results.extend(run(np.stack(batch))[:count])
         return results
 
-    def predict_many(self, samples: Any) -> Any:
+    def predict_many(self, samples: Any, verbose: bool=False) -> Any:
         """Predict samples using the compiled circuit and its existing keys.
 
         Partial batches repeat the final sample for padding; padded predictions
@@ -320,9 +321,9 @@ class FHEModel:
         Returns:
             Any: The list of predictions.
         """
-        return self._run_many(samples, "encrypt_run_decrypt")
+        return self._run_many(samples, "encrypt_run_decrypt", verbose)
 
-    def simulate_many(self, samples: Any) -> Any:
+    def simulate_many(self, samples: Any, verbose: bool = False) -> Any:
         """Simulate samples with the same batching rules as ``predict_many``.
         
         Args:
@@ -331,7 +332,7 @@ class FHEModel:
         Returns:
             Any: The list of simulation results.
         """
-        return self._run_many(samples, "simulate")
+        return self._run_many(samples, "simulate", verbose)
 
 
 class FHELogisticRegression(FHEModel):
@@ -505,7 +506,7 @@ class FHEDecisionTree(FHEModel):
         self._sample_shape = sample_shape
         return self
 
-    def _run_many(self, samples: Any, method: Any) -> Any:
+    def _run_many(self, samples: Any, method: Any, verbose: bool=False) -> Any:
         if self.circuit is None:
             raise ValueError("The model should be compiled before prediction")
         items = [self._integer_array(sample) for sample in samples]
@@ -520,7 +521,7 @@ class FHEDecisionTree(FHEModel):
             return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
             
         results = []
-        for start in range(0, len(items), self.batch_size):
+        for start in _get_progress_bar(range(0, len(items), self.batch_size), "tree prediction...", verbose):
             batch = items[start:start + self.batch_size]
             count = len(batch)
             batch = batch + [batch[-1]] * (self.batch_size - count)
@@ -746,7 +747,7 @@ class FHERandomForest(FHEModel):
         self._sample_shape = sample_shape
         return self
 
-    def _run_many(self, samples: Any, method: Any) -> Any:
+    def _run_many(self, samples: Any, method: Any, verbose: bool=False) -> Any:
         if self.circuit is None:
             raise ValueError("The model should be compiled before prediction")
         items = [self._integer_array(sample) for sample in samples]
@@ -761,7 +762,7 @@ class FHERandomForest(FHEModel):
             return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
             
         results = []
-        for start in range(0, len(items), self.batch_size):
+        for start in _get_progress_bar(range(0, len(items), self.batch_size), "forest prediction...", verbose):
             batch = items[start:start + self.batch_size]
             count = len(batch)
             batch = batch + [batch[-1]] * (self.batch_size - count)
@@ -895,7 +896,7 @@ class FHEXGBoost(FHEModel):
         self._sample_shape = sample_shape
         return self
 
-    def _run_many(self, samples: Any, method: Any) -> Any:
+    def _run_many(self, samples: Any, method: Any, verbose: bool=False) -> Any:
         if self.circuit is None:
             raise ValueError("The model should be compiled before prediction")
         items = [self._integer_array(sample) for sample in samples]
@@ -910,7 +911,7 @@ class FHEXGBoost(FHEModel):
             return [run(item, self._enc_t, self._enc_f, self._enc_l) for item in items]
             
         results = []
-        for start in range(0, len(items), self.batch_size):
+        for start in _get_progress_bar(range(0, len(items), self.batch_size), "xgboost prediction...", verbose):
             batch = items[start:start + self.batch_size]
             count = len(batch)
             batch = batch + [batch[-1]] * (self.batch_size - count)

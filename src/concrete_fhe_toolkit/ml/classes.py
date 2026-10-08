@@ -682,6 +682,8 @@ class FHERandomForest(FHEModel):
         return enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list
 
     def compile(self, inputset: Any, batch_size: Any=None, *, inputset_is_batched: Any=None, configuration: Any=None) -> Any:
+        if not self.trees:
+            raise ValueError("The forest must contain at least one tree")
         if inputset_is_batched is not None and not isinstance(inputset_is_batched, bool):
             raise TypeError("inputset_is_batched must be a boolean or None")
         size = None if batch_size is None else validate_integer("batch_size", batch_size, 1)
@@ -831,6 +833,8 @@ class FHEXGBoost(FHEModel):
         return enc_thresholds_list, enc_feature_indices_list, enc_leaf_values_list
 
     def compile(self, inputset: Any, batch_size: Any=None, *, inputset_is_batched: Any=None, configuration: Any=None) -> Any:
+        if not self.trees:
+            raise ValueError("The xgboost ensemble must contain at least one tree")
         if inputset_is_batched is not None and not isinstance(inputset_is_batched, bool):
             raise TypeError("inputset_is_batched must be a boolean or None")
         size = None if batch_size is None else validate_integer("batch_size", batch_size, 1)

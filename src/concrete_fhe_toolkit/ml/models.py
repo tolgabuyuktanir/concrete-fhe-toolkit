@@ -309,8 +309,6 @@ def random_forest_inference(
         # label = random_forest_inference(enc_features, thresholds_list, feature_idx_list, leaf_values_list, 4)
         ```
     """
-    if not enc_thresholds_list:
-        raise ValueError("The forest must contain at least one tree")
     
     predictions = []
     for i in range(len(enc_thresholds_list)):
@@ -582,8 +580,6 @@ def xgboost_inference(
         # pred = xgboost_inference(enc_features, thresholds_list, feature_idx_list, leaf_values_list, 4)
         ```
     """
-    if not enc_thresholds_list:
-        raise ValueError("The xgboost ensemble must contain at least one tree")
 
     predictions = []
     for i in range(len(enc_thresholds_list)):

@@ -466,6 +466,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
                     }
                 )
             frontier = next_frontier
+            gc.collect()
 
         return FHEDecisionTree(container["root"])
 
@@ -676,5 +677,6 @@ class FHEKMeansTrainer(FHETrainer):
                     ]
                 )
             centroids = new_centroids
+            gc.collect()
 
         return FHEKMeans(centroids, max_distance=max_distance)

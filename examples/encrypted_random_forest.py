@@ -70,15 +70,15 @@ def main():
     
     print("Building Random Forest with 5 trees (each using 5 random features)...")
     
-    # Kütüphaneye eklediğimiz max_features destekli trainer
     trainer = FHERandomForestTrainer(
         n_estimators=5,
         candidate_thresholds=ALL_CANDIDATES,
         max_depth=2,
         num_classes=2,
         min_samples_leaf=1,
-        max_features=5,    # Natively supported!
-        simulate=False
+        max_features=5,    # number of features per tree
+        simulate=False,
+        verbose = True
     )
     
     rf_model = trainer.fit_encrypted(X_train_list, y_train_list)

@@ -474,11 +474,11 @@ class FHEDecisionTree(FHEModel):
 
         num_feat = sample_shape[0]
             
-        def _single_logic(features, t, f, l):
-            return decision_tree_inference(features, t, f, l, num_feat)
+        def _single_logic(features, enc_t, enc_f, enc_l):
+            return decision_tree_inference(features, enc_t, enc_f, enc_l, num_feat)
             
-        def _batch_logic(features_batch, t, f, l):
-            return fhe.array([_single_logic(sample, t, f, l) for sample in features_batch])
+        def _batch_logic(features_batch, enc_t, enc_f, enc_l):
+            return fhe.array([_single_logic(sample, enc_t, enc_f, enc_l) for sample in features_batch])
             
         function = _batch_logic if batched else _single_logic
         parameter = "features_batch" if batched else "features"
@@ -487,9 +487,9 @@ class FHEDecisionTree(FHEModel):
             function, 
             {
                 parameter: "encrypted",
-                "t": "encrypted",
-                "f": "encrypted",
-                "l": "encrypted"
+                "enc_t": "encrypted",
+                "enc_f": "encrypted",
+                "enc_l": "encrypted"
             }
         )
         
@@ -715,11 +715,11 @@ class FHERandomForest(FHEModel):
 
         num_feat = sample_shape[0]
             
-        def _single_logic(features, t, f, l):
-            return random_forest_inference(features, t, f, l, num_feat)
+        def _single_logic(features, enc_t, enc_f, enc_l):
+            return random_forest_inference(features, enc_t, enc_f, enc_l, num_feat)
             
-        def _batch_logic(features_batch, t, f, l):
-            return fhe.array([_single_logic(sample, t, f, l) for sample in features_batch])
+        def _batch_logic(features_batch, enc_t, enc_f, enc_l):
+            return fhe.array([_single_logic(sample, enc_t, enc_f, enc_l) for sample in features_batch])
             
         function = _batch_logic if batched else _single_logic
         parameter = "features_batch" if batched else "features"
@@ -728,9 +728,9 @@ class FHERandomForest(FHEModel):
             function, 
             {
                 parameter: "encrypted",
-                "t": "encrypted",
-                "f": "encrypted",
-                "l": "encrypted"
+                "enc_t": "encrypted",
+                "enc_f": "encrypted",
+                "enc_l": "encrypted"
             }
         )
         
@@ -864,11 +864,11 @@ class FHEXGBoost(FHEModel):
 
         num_feat = sample_shape[0]
             
-        def _single_logic(features, t, f, l):
-            return xgboost_inference(features, t, f, l, num_feat)
+        def _single_logic(features, enc_t, enc_f, enc_l):
+            return xgboost_inference(features, enc_t, enc_f, enc_l, num_feat)
             
-        def _batch_logic(features_batch, t, f, l):
-            return fhe.array([_single_logic(sample, t, f, l) for sample in features_batch])
+        def _batch_logic(features_batch, enc_t, enc_f, enc_l):
+            return fhe.array([_single_logic(sample, enc_t, enc_f, enc_l) for sample in features_batch])
             
         function = _batch_logic if batched else _single_logic
         parameter = "features_batch" if batched else "features"
@@ -877,9 +877,9 @@ class FHEXGBoost(FHEModel):
             function, 
             {
                 parameter: "encrypted",
-                "t": "encrypted",
-                "f": "encrypted",
-                "l": "encrypted"
+                "enc_t": "encrypted",
+                "enc_f": "encrypted",
+                "enc_l": "encrypted"
             }
         )
         

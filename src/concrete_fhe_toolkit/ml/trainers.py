@@ -23,6 +23,7 @@ from typing import Any, List, Optional, Union
 
 import numpy as np
 import gc
+import warnings
 
 from .._compat import fhe
 from .._utils import validate_bounds, validate_integer
@@ -30,9 +31,10 @@ from ..math import equal, greater_equal
 from .core import euclidean_distance_squared
 from .matrix import matrix_multiply, matrix_transpose, matrix_vector_multiply
 from ..arrays import make_argmin
-from .classes import FHEDecisionTree, FHEKMeans, FHELinearRegression, FHERandomForest
+from .classes import FHEDecisionTree, FHEKMeans, FHELinearRegression, FHERandomForest, FHENaiveBayes
 from .utils import _get_progress_bar
 from .training import naive_bayes_training
+from concrete_fhe_toolkit.privacy import dp_release
 
 
 class FHETrainer:
@@ -878,7 +880,7 @@ class FHENaiveBayesTrainer:
             prior_prob = class_total / total_samples
             min_feature_prob = 1 / (class_total + 2)
             
-            score_abs = abs(math.log(prior_prob)) + (num_features * abs(math.log(min_feature_prob)))
+            score_abs = abs(_pymath.log(prior_prob)) + (num_features * abs(_pymath.log(min_feature_prob)))
             max_abs_score = max(max_abs_score, score_abs)
 
         centered_max = max_abs_score / 2.0
@@ -891,7 +893,7 @@ class FHENaiveBayesTrainer:
             
             # Prior Log Prob
             prior_prob = class_total / total_samples
-            unscaled_prior = math.log(prior_prob) + centered_max 
+            unscaled_prior = _pymath.log(prior_prob) + centered_max 
             formatted_priors.append(int(round(unscaled_prior * SCALE)))
             
             class_tables = []
@@ -903,8 +905,8 @@ class FHENaiveBayesTrainer:
                 prob_0 = (count_of_zeros + 1) / (class_total + 2)
                 prob_1 = (count_of_ones + 1) / (class_total + 2)
                 
-                log_prob_0 = int(round(math.log(prob_0) * SCALE))
-                log_prob_1 = int(round(math.log(prob_1) * SCALE))
+                log_prob_0 = int(round(_pymath.log(prob_0) * SCALE))
+                log_prob_1 = int(round(_pymath.log(prob_1) * SCALE))
                 
                 class_tables.append([log_prob_0, log_prob_1])
             formatted_tables.append(class_tables)

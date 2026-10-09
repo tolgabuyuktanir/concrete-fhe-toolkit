@@ -1,7 +1,6 @@
 """Core data structures and definitions for encrypted ML."""
 
 from .._compat import fhe
-import math
 import numpy as np
 from typing import Any, Optional
 from .._utils import validate_integer
@@ -9,11 +8,9 @@ from concrete_fhe_toolkit.ml import (
     logistic_regression_inference, linear_regression_inference,
     decision_tree_inference, pca_inference, cnn_inference,
     random_forest_inference, xgboost_inference, svm_inference,
-    knn_inference, naive_bayes_inference, mlp_inference, naive_bayes_training
+    knn_inference, naive_bayes_inference, mlp_inference
     )
-from concrete_fhe_toolkit.privacy import dp_release
 from .utils import _get_progress_bar
-import warnings
 
 class FHEModel:
     """Base class for models with single-sample or fixed-batch circuits.

@@ -77,7 +77,6 @@ from .classes import (
     FHEKNN,
     FHEKMeans,
     FHENaiveBayes,
-    FHENaiveBayesTrainer,
     FHEMLP,
 )
 from .core import r2_score
@@ -88,6 +87,7 @@ from .trainers import (
     FHERandomForestTrainer,
     FHETrainer,
     linear_regression_training,
+    FHENaiveBayesTrainer,
 )
 from .pipeline import FHEPipeline
 from .estimation import ModelCostEstimate, estimate_model_cost

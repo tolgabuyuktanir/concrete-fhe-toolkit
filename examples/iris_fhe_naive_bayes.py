@@ -109,7 +109,7 @@ print(f"Testing samples: {len(X_test)}")
 # In[15]:
 
 
-from concrete_fhe_toolkit.ml.classes import FHENaiveBayesTrainer
+from concrete_fhe_toolkit.ml.trainers import FHENaiveBayesTrainer
 
 trainer = FHENaiveBayesTrainer()
 

@@ -12,7 +12,6 @@ from .classes import (
     FHELogisticRegression,
     FHEMLP,
     FHENaiveBayes,
-    FHENaiveBayesTrainer,
     FHERandomForest,
     FHESVM,
     FHEXGBoost,
@@ -25,7 +24,7 @@ from .core import (
     precision_score,
     recall_score,
 )
-from .trainers import FHEDecisionTreeTrainer
+from .trainers import FHEDecisionTreeTrainer, FHENaiveBayesTrainer
 
 FHEDecisionTreeClassifier = FHEDecisionTree
 FHERandomForestClassifier = FHERandomForest

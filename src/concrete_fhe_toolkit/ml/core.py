@@ -114,7 +114,7 @@ def mean_squared_error(array1: Union[np.ndarray, List[Any]], array2: Union[np.nd
         Any: The Mean Squared Error.
     """
     if(len(array1) != len(array2)):
-            raise ValueError("The array sizes must be equal")
+        raise ValueError("The array sizes must be equal")
     return euclidean_distance_squared(array1,array2) // len(array1)
 
 def mean_absolute_error(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
@@ -494,8 +494,6 @@ def compile_cross_entropy_loss(
 def precision_score(y_preds: Union[np.ndarray, List[Any]], y_trues: Union[np.ndarray, List[Any]]) -> Any:
     """
     [Client-Side Helper] This function is intended for cleartext evaluation only.
-    Do not compile it with FHE due to Table Lookup limits or list return types.
-
     Do not compile it with FHE due to Table Lookup limits or list return types.
 
     Integer percent precision: TP * 100 // (TP + FP), 0 with no positive predictions.

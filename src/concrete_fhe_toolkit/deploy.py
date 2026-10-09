@@ -146,21 +146,21 @@ def save_client_keys(client: fhe.Client, directory: str) -> None:
         ```
     """
     if not client.keys:
-        raise ValueError("You should generate a key firstly")
+        raise ValueError("Client keys have not been generated yet; call client.keys.generate() first.")
 
     os.makedirs(directory, exist_ok=True)
     path = os.path.join(directory, KEYS_FILENAME)
     if os.path.exists(path):
-        user_respond = input("This operation will overwrite your existing key, Do you want to continue?(y/n)")
+        user_respond = input("This operation will overwrite your existing key. Do you want to continue? (y/n) ")
         user_respond = user_respond.lower().strip()
         if user_respond in ["y", "yes"]:
             os.remove(path)
             client.keys.save(path)
         else:
-            print("operation cancelled")
+            print("Operation cancelled.")
             return
     else:
-        client.keys.save(path)        
+        client.keys.save(path)
 
 
 def load_client_keys(client: fhe.Client, directory: str) -> None:
@@ -191,7 +191,7 @@ def load_client_keys(client: fhe.Client, directory: str) -> None:
     """
     path = os.path.join(directory, KEYS_FILENAME)
     if not os.path.exists(path):
-        raise ValueError("Keys could not found in this directory, you should save your keys before loading")
+        raise FileNotFoundError(f"No keys file found in {directory!r}; save your keys with save_client_keys() first.")
 
     client.keys.load(path)
 

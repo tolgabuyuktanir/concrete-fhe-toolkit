@@ -281,7 +281,7 @@ def integer_to_bits(value: Any, width: int) -> tuple[Any, ...]:
     """Return little-endian bits of an unsigned integer expression.
     
     Args:
-        value (Any): The encrypted value to process or validate.
+        value (Any): The integer expression whose bits to extract.
         width (int): The fixed bit width.
         
     Returns:
@@ -325,7 +325,7 @@ def unsigned_to_bits(value: int, width: int) -> tuple[int, ...]:
     """Return little-endian bits of a clear unsigned integer constant.
     
     Args:
-        value (int): The encrypted value to process or validate.
+        value (int): The clear nonnegative integer to convert to bits.
         width (int): The fixed bit width.
         
     Returns:
@@ -350,7 +350,7 @@ def twos_complement_bits(value: int, width: int) -> tuple[int, ...]:
     """Return little-endian two's-complement bits for a clear signed integer.
     
     Args:
-        value (int): The encrypted value to process or validate.
+        value (int): The clear signed integer to represent in two's complement.
         width (int): The fixed bit width.
         
     Returns:
@@ -589,7 +589,7 @@ def shift_left_bits(bits: Iterable[Any], amount: int) -> tuple:
     
     Args:
         bits (Iterable[Any]): The bits to shift.
-        amount (int): The encrypted integer amount to be processed.
+        amount (int): The public (cleartext) number of positions to shift left.
         
     Returns:
         tuple: The shifted bits.
@@ -619,7 +619,7 @@ def shift_right_bits(
     
     Args:
         bits (Iterable[Any]): The bits to shift.
-        amount (int): The encrypted integer amount to be processed.
+        amount (int): The public (cleartext) number of positions to shift right.
         arithmetic (bool, optional): Whether to sign-extend. Defaults to False.
         
     Returns:
@@ -646,7 +646,7 @@ def rotate_left_bits(bits: Iterable[Any], amount: int) -> tuple:
     
     Args:
         bits (Iterable[Any]): The bits to rotate.
-        amount (int): The encrypted integer amount to be processed.
+        amount (int): The public (cleartext) number of positions to rotate left.
         
     Returns:
         tuple: The rotated bits.
@@ -673,7 +673,7 @@ def rotate_right_bits(bits: Iterable[Any], amount: int) -> tuple:
     
     Args:
         bits (Iterable[Any]): The bits to rotate.
-        amount (int): The encrypted integer amount to be processed.
+        amount (int): The public (cleartext) number of positions to rotate right.
         
     Returns:
         tuple: The rotated bits.

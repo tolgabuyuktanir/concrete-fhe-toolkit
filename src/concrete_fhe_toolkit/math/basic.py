@@ -23,7 +23,7 @@ UnaryFunction = Callable[[Any], Any]
 
 
 def add(left: Any, right: Any) -> Any:
-    """Compute the add of the inputs.
+    """Return the sum of two encrypted operands (left + right).
 
         Args:
             left (Any): The left encrypted operand.
@@ -36,7 +36,7 @@ def add(left: Any, right: Any) -> Any:
 
 
 def subtract(left: Any, right: Any) -> Any:
-    """Compute the subtract of the inputs.
+    """Return the difference of two encrypted operands (left - right).
 
         Args:
             left (Any): The left encrypted operand.
@@ -49,7 +49,7 @@ def subtract(left: Any, right: Any) -> Any:
 
 
 def multiply(left: Any, right: Any) -> Any:
-    """Compute the multiply of the inputs.
+    """Return the product of two encrypted operands (left * right).
 
         Args:
             left (Any): The left encrypted operand.
@@ -62,7 +62,7 @@ def multiply(left: Any, right: Any) -> Any:
 
 
 def negate(value: Any) -> Any:
-    """Compute the negate of the inputs.
+    """Return the negation of an encrypted operand (-value).
 
         Args:
             value (Any): The encrypted operand.
@@ -74,7 +74,7 @@ def negate(value: Any) -> Any:
 
 
 def square(value: Any) -> Any:
-    """Compute the square of the inputs.
+    """Return the square of an encrypted operand (value ** 2).
 
         Args:
             value (Any): The encrypted operand.
@@ -86,7 +86,7 @@ def square(value: Any) -> Any:
 
 
 def cube(value: Any) -> Any:
-    """Compute the cube of the inputs.
+    """Return the cube of an encrypted operand (value ** 3).
 
         Args:
             value (Any): The encrypted operand.
@@ -98,7 +98,7 @@ def cube(value: Any) -> Any:
 
 
 def equal(left: Any, right: Any) -> Any:
-    """Compute the equal of the inputs.
+    """Return 1 if left == right, else 0.
 
         Args:
             left (Any): The left encrypted operand.
@@ -110,7 +110,7 @@ def equal(left: Any, right: Any) -> Any:
     return (left == right) * 1
 
 def not_equal(left: Any, right: Any) -> Any:
-    """Compute the not equal of the inputs.
+    """Return 1 if left != right, else 0.
 
         Args:
             left (Any): The left encrypted operand.
@@ -122,7 +122,7 @@ def not_equal(left: Any, right: Any) -> Any:
     return (left != right) * 1
 
 def less(left: Any, right: Any) -> Any:
-    """Compute the less of the inputs.
+    """Return 1 if left < right, else 0.
 
         Args:
             left (Any): The left encrypted operand.
@@ -134,7 +134,7 @@ def less(left: Any, right: Any) -> Any:
     return (left < right) * 1
 
 def less_equal(left: Any, right: Any) -> Any:
-    """Compute the less equal of the inputs.
+    """Return 1 if left <= right, else 0.
 
         Args:
             left (Any): The left encrypted operand.
@@ -146,7 +146,7 @@ def less_equal(left: Any, right: Any) -> Any:
     return (left <= right) * 1
 
 def greater(left: Any, right: Any) -> Any:
-    """Compute the greater of the inputs.
+    """Return 1 if left > right, else 0.
 
         Args:
             left (Any): The left encrypted operand.
@@ -158,7 +158,7 @@ def greater(left: Any, right: Any) -> Any:
     return (left > right) * 1
 
 def greater_equal(left: Any, right: Any) -> Any:
-    """Compute the greater equal of the inputs.
+    """Return 1 if left >= right, else 0.
 
         Args:
             left (Any): The left encrypted operand.
@@ -170,7 +170,7 @@ def greater_equal(left: Any, right: Any) -> Any:
     return (left >= right) * 1
 
 def is_zero(value: Any) -> Any:
-    """Compute the is zero of the inputs.
+    """Return 1 if value == 0, else 0.
 
         Args:
             value (Any): The encrypted operand.
@@ -182,7 +182,7 @@ def is_zero(value: Any) -> Any:
 
 
 def maximum(left: Any, right: Any) -> Any:
-    """Compute the maximum of the inputs.
+    """Return the larger of two encrypted operands.
 
         Args:
             left (Any): The left encrypted operand.
@@ -195,7 +195,7 @@ def maximum(left: Any, right: Any) -> Any:
 
 
 def minimum(left: Any, right: Any) -> Any:
-    """Compute the minimum of the inputs.
+    """Return the smaller of two encrypted operands.
 
         Args:
             left (Any): The left encrypted operand.

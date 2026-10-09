@@ -41,10 +41,10 @@ def naive_bayes_training(X_train: List[List[Any]], y_train_one_hot: List[List[An
             class_counts[i] += row[i]
 
     X_train_transpose = matrix_transpose(X_train)
-    y_train_tranpose = matrix_transpose(y_train_one_hot)
+    y_train_transpose = matrix_transpose(y_train_one_hot)
 
     feature_counts = []
-    for row_y in y_train_tranpose:
+    for row_y in y_train_transpose:
         class_features = []
         for row_x in X_train_transpose:
             class_features.append(dot_product(row_x,row_y))

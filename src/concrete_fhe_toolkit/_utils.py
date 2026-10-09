@@ -14,7 +14,7 @@ def validate_integer(name: str, value: int, minimum: Optional[int] = None) -> in
     
     Args:
         name (str): The string name of the parameter being validated, used for formatting error messages.
-        value (int): The encrypted value to process or validate.
+        value (int): The integer value to validate and normalize.
         minimum (Optional[int], optional): The minimum allowed value. Defaults to None.
         
     Returns:

@@ -42,8 +42,8 @@ class FHEPipeline(FHEModel):
     """
 
     def __init__(self, steps: List[Any]) -> None:
+        """Initialize the FHEPipeline with a list of transformers and a final model."""
         super().__init__()
-        """Initialize the object."""
         if not steps:
             raise ValueError("steps must contain at least a final model")
         *transformers, model = steps

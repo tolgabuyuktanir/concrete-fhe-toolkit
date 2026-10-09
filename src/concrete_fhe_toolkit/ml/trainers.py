@@ -58,7 +58,7 @@ class FHETrainer:
         configuration: Optional[fhe.Configuration] = None,
         verbose: bool = False
     ) -> None:
-        """Initialize the object."""
+        """Initialize the FHETrainer base with simulation and configuration options."""
         self.simulate = simulate
         self.configuration = configuration
         self.verbose = verbose
@@ -172,8 +172,8 @@ class FHELinearRegressionTrainer(FHETrainer):
         simulate: bool = False,
         configuration: Optional[fhe.Configuration] = None,
     ) -> None:
+        """Initialize FHELinearRegressionTrainer with the given weight_scale and trainer options."""
         super().__init__(simulate=simulate, configuration=configuration)
-        """Initialize the object."""
         self.weight_scale = validate_integer("weight_scale", weight_scale, minimum=1)
 
     def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]) -> Any:
@@ -293,7 +293,7 @@ class FHEDecisionTreeTrainer(FHETrainer):
             )
 
         super().__init__(simulate=simulate, configuration=configuration, verbose=verbose)
-        """Initialize the object."""
+        """Initialize FHEDecisionTreeTrainer with candidate thresholds and tree hyperparameters."""
         if not candidate_thresholds or any(
             not isinstance(row, (list, tuple)) for row in candidate_thresholds
         ):
@@ -311,6 +311,21 @@ class FHEDecisionTreeTrainer(FHETrainer):
         )
 
     def _sample_mask(self, X_train: Any, path: Any) -> Any:
+        """Compute a per-sample binary mask for the samples that reach the given tree path.
+
+        For each (feature, threshold, side) triple in ``path``, multiplies a comparison
+        result into the running mask so that only samples satisfying every split are 1.
+
+        Args:
+            X_train (Any): The encrypted training feature matrix.
+            path (Any): List of ``(feature_index, threshold, side)`` tuples defining the
+                path from root to the current node. ``side`` is ``"ge"`` (left child) or
+                ``"lt"`` (right child).
+
+        Returns:
+            Any: An encrypted per-sample binary array; element ``i`` is 1 iff sample ``i``
+                reaches this node, 0 otherwise.
+        """
         mask: Any = 1
         for feature, threshold, side in path:
             comparison = greater_equal(X_train[:, feature], threshold)
@@ -353,6 +368,18 @@ class FHEDecisionTreeTrainer(FHETrainer):
         return level_counts
 
     def _choose_split(self, node_counts: Any, candidate_counts: Any) -> Any:
+        """Select the best (feature, threshold) split for a node using weighted Gini impurity.
+
+        Args:
+            node_counts (Any): Per-class sample counts for this node.
+            candidate_counts (Any): List of ``((feature, threshold), left_counts)`` pairs
+                produced by ``_level_circuit``.
+
+        Returns:
+            Optional[Tuple]: ``(score, feature, threshold)`` for the best valid split,
+                or ``None`` if no valid split exists (e.g., all splits violate
+                ``min_samples_leaf``).
+        """
         best = None
         node_total = sum(node_counts)
         for (feature, threshold), left_counts in candidate_counts:
@@ -508,7 +535,7 @@ class FHERandomForestTrainer(FHETrainer):
             )
 
         super().__init__(simulate=simulate, configuration=configuration, verbose=verbose)
-        """Initialize the object."""
+        """Initialize FHERandomForestTrainer with the number of estimators and tree hyperparameters."""
         if not candidate_thresholds or any(
             not isinstance(row, (list, tuple)) for row in candidate_thresholds
         ):
@@ -531,6 +558,18 @@ class FHERandomForestTrainer(FHETrainer):
             self.max_features = len(self.candidate_thresholds)
 
     def fit_encrypted(self, X_train: List[List[int]], y_train: List[int]) -> Any:
+        """Fit the random forest securely on encrypted training data.
+
+        Trains ``n_estimators`` decision trees, each on a bootstrap sample of the
+        training data and using a random subset of ``max_features`` features.
+
+        Args:
+            X_train (List[List[int]]): Encrypted training features.
+            y_train (List[int]): Encrypted training targets (integer class labels).
+
+        Returns:
+            FHERandomForest: The trained random forest model.
+        """
         trained_trees = []
         n_samples = len(X_train)
         n_features = len(self.candidate_thresholds)
@@ -597,8 +636,8 @@ class FHEKMeansTrainer(FHETrainer):
         simulate: bool = False,
         configuration: Optional[fhe.Configuration] = None,
     ) -> None:
+        """Initialize FHEKMeansTrainer with initial centroids and value bounds."""
         super().__init__(simulate=simulate, configuration=configuration)
-        """Initialize the object."""
         if not initial_centroids:
             raise ValueError("initial_centroids must contain at least one centroid")
         self.initial_centroids = [list(centroid) for centroid in initial_centroids]

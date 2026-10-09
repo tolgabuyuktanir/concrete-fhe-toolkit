@@ -471,6 +471,22 @@ class FHEDecisionTreeTrainer(FHETrainer):
         return FHEDecisionTree(container["root"])
 
 class FHERandomForestTrainer(FHETrainer):
+    """Hybrid encrypted random forest training.
+    
+    Trains an ensemble of decision trees where each tree is built on a 
+    bootstrap sample of the training data and uses a random subset of features.
+    
+    Args:
+        n_estimators (int): The number of trees in the forest.
+        candidate_thresholds (List[List[int]]): Per feature, the public list of candidate thresholds.
+        max_depth (int): Maximum tree depth.
+        num_classes (int): Number of label classes.
+        min_samples_leaf (int): Minimum samples required to be at a leaf node.
+        max_features (Optional[int]): Number of features to consider when looking for the best split.
+        simulate (bool): Run circuits in simulation.
+        configuration (Optional[fhe.Configuration]): Optional FHE compiler configuration object.
+        verbose (bool): If True, outputs a progress bar during training. Defaults to False.
+    """
     def __init__(
         self,
         n_estimators: int,

@@ -403,9 +403,13 @@ class FHEDecisionTree(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self,tree: Any):
+    def __init__(self,tree: Any) -> None:
+        """Initialize the encrypted decision tree model.
+        
+        Args:
+            tree (Any): The dictionary representation of the trained tree.
+        """
         super().__init__()
-        """Initialize the object."""
         self.tree = tree
 
     def _tree_depth(self, node):
@@ -635,9 +639,13 @@ class FHERandomForest(FHEModel):
         model.compile(dummy_inputset, batch_size=1)
         ```
     """
-    def __init__(self, trees: Any):
+    def __init__(self, trees: Any) -> None:
+        """Initialize the encrypted random forest model.
+        
+        Args:
+            trees (Any): The list of dictionary representations of the trained trees.
+        """
         super().__init__()
-        """Initialize the object."""
         self.trees = trees
 
     def _flatten_forest(self):

@@ -89,7 +89,17 @@ def normalize_array(array: Union[np.ndarray, List[Any]], divisor: int) -> Union[
     return tensor // divisor
 
 
-def _get_progress_bar(data: Iterable[Any], desc: str, verbose: bool):
+def _get_progress_bar(data: Iterable[Any], desc: str, verbose: bool) -> Iterable[Any]:
+    """Wrap an iterable with a progress bar if verbose is True.
+    
+    Args:
+        data (Iterable[Any]): The iterable data to wrap.
+        desc (str): The description text for the progress bar.
+        verbose (bool): Whether to show the progress bar.
+        
+    Returns:
+        Iterable[Any]: The original iterable or a tqdm-wrapped iterable.
+    """
     if not verbose:
         return data
 
